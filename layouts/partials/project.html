@@ -1,0 +1,44 @@
+{{ if .Site.Data.homepage.testimonial.enable }}
+<section id="projects" class="section rad-animation-group section--border-bottom">
+    <div class="container">
+        <h2 class="rad-fade-down">{{ .Site.Data.homepage.testimonial.title }}</h2>
+        <div class="row row--padded mb-0 rad-fade-down">
+            {{ range .Site.Data.homepage.testimonial.items }}
+            <div class="col-12 mb-5">
+                <div class="project">
+                    {{ $img := resources.Get .image.x }}
+                    {{ $img2x := resources.Get .image._2x }}
+                    {{ $imgWebp := $img.Resize "400x" }}
+                    {{ $img2xWebp := $img2x.Resize "800x" }}
+
+                    <picture>
+                        <source srcset="{{ $imgWebp.RelPermalink }} 1x, {{ $img2xWebp.RelPermalink }} 2x"
+                            type="image/webp" />
+                        <source srcset="{{ $img.RelPermalink }} 1x, {{ $img2x.RelPermalink }} 2x" type="image/webp">
+                        <img width="{{ $img.Width }}" height="{{ $img.Height }}" class="lozad img-responsive"
+                            src="data:image/gif;base64,R0lGODlhBwACAIAAAP///wAAACH5BAEAAAEALAAAAAAHAAIAAAIDjI9YADs="
+                            srcset="{{ $img.RelPermalink }} 1x, {{ $img2x.RelPermalink }} 2x"
+                            data-src="{{ $img.RelPermalink }}"
+                            data-srcset="{{ $img.RelPermalink }} 1x, {{ $img2x.RelPermalink }} 2x" alt="{{ .name }}" />
+                    </picture>
+
+                    <div class="project__info">
+                        <h4>{{ .name }}</h4>
+                        <span>{{ .position }}</span>
+                        <p>{{ .content }}</p>
+                        <div class="project__buttons">
+                            <a href="{{ .github }}" class="btn btn-primary btn-social" target="_blank">
+                                <i class="icon-github-line"></i> Code
+                            </a>
+                            <a href="{{ .google_scholar }}" class="btn btn-primary btn-social" target="_blank">
+                                <i class="icon-profile-fill"></i> Paper
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{ end }}
+        </div>
+    </div>
+</section>
+{{ end }}
