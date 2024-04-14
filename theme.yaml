@@ -52,14 +52,15 @@ about:
   enable: true
   title: "Who am I?"
   content: '<p class="lead">
-    I am back, after a few days of vacationing with family. Weather was awesome, the beach was
-    full of nasty jelly-fish, yuk! All-in-all, life has been good. I hope life has been as
-    good for all of you.
+    Here you can add some information about you. A small excerpt that describes 
+    your experience, for example.   
     </p>
     <p class="lead">
-    My area of focus lies in designing web and mobile products, user research as well as
-    leading of design & front-end teams. I enjoy designing and coding the UI as much as
-    talking with users to iterate and improve the experiences that reach business goals.
+    You explain something about your academic/study background, as well as your
+    preferred areas of work. Think of this area as context-setting for the experience
+    that you will describe below: why did you change jobs? What drove you to take a 
+    new gig? Even if you are not looking for a job, it's a good way to hint about
+    what kind of projects you are interested in.
     </p>'
   button:
     icon: "icon-smile-fill"
@@ -74,11 +75,11 @@ education:
   enable: true
   title: "Education"
   items:
-    - university: "University of Waterloo"
+    - university: "University of Life"
       year: "2012-2017"
       degree: "Bachelor of Applied Science (BASc), Electrical Engineering"
 
-    - university: "Sir John A Macdonald CI"
+    - university: "High School of Hard Knocks"
       year: "2009-2012"
       degree: "High School Diploma, Sciences, Math, Computer & Business Studies"
 
@@ -86,7 +87,8 @@ education:
 experience:
   enable: true
   title: "Experience"
-  description: "Over 15+ years of experience working with companies from all over the world. I design & develop digital products to help businesses and improve people's lives."
+  description: >
+    Over 15+ years of experience working with companies from all over the world. I design & develop digital products to help businesses and improve people's lives.
   button:
     icon: "icon-linkedin-fill"
     btnText: "Linkedin"
@@ -97,16 +99,16 @@ experience:
     URL: "#"
 
   items:
-    - title: "Sr. Front-End Developer"
-      company: "Radity"
+    - title: "Sr. Title"
+      company: "Serious Business, Inc"
       duration: "Feb 2011 - Sep 2019"
 
-    - title: "Sr. Front-End Developer"
-      company: "Textic"
+    - title: "Sr. Title"
+      company: "Fancy Company, Inc"
       duration: "Apr 2010 - Jan 2011"
 
-    - title: "Jr. Front-End Developer"
-      company: "Cyberse"
+    - title: "Jr. Title"
+      company: "Company, Inc"
       duration: "Jun 2009 - Mar 2010"
 
 # Client & Work
@@ -216,13 +218,13 @@ contact:
     message: "Type Your Message Here"
   phone:
     title: "Phone Number"
-    number: "+41 (44) 505 10 99"
+    number: "+555 (11) 123 44 55"
   email:
     title: "Email"
-    email: '<a href="mailto:team@radity.com">team@radity.com</a>'
+    email: '<a href="mailto:mail@example.com">mail@example.com</a>'
   address:
     title: "Address"
-    address: "Radity GmbH<br />Max-Bill-Platz 5, 8050 Zürich"
+    address: "Exact street/neighborhood (you can omit this)<br />Postcode, City"
   button:
     icon: "icon-mail-fill"
     btnText: "Send Message"
