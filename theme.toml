@@ -19,3 +19,9 @@ min_version = "0.123.0"
 [author]
 name = "Adrián Moreno Peña"
 homepage = "https://www.adrianmoreno.info"
+
+# If porting an existing theme
+[original]
+    author = "Raditian"
+    homepage = "https://www.radity.com"
+    repo = "https://github.com/radity/raditian-free-hugo-theme"
