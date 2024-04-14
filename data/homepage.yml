@@ -51,17 +51,18 @@ showcase:
 about:
   enable: true
   title: "Who am I?"
-  content: '<p class="lead">
-    Here you can add some information about you. A small excerpt that describes 
-    your experience, for example.   
-    </p>
+  content: >
     <p class="lead">
-    You explain something about your academic/study background, as well as your
-    preferred areas of work. Think of this area as context-setting for the experience
-    that you will describe below: why did you change jobs? What drove you to take a 
-    new gig? Even if you are not looking for a job, it's a good way to hint about
-    what kind of projects you are interested in.
-    </p>'
+      Here you can add some information about you. A small excerpt that describes 
+      your experience, for example.   
+      </p>
+      <p class="lead">
+      You explain something about your academic/study background, as well as your
+      preferred areas of work. Think of this area as context-setting for the experience
+      that you will describe below. Why did you change jobs? What drove you to take a 
+      new gig? Even if you are not looking for a job, it's a good way to hint about
+      what kind of projects you are interested in.
+    </p>
   button:
     icon: "icon-smile-fill"
     btnText: "About Me"
