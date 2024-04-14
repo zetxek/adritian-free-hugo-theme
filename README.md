@@ -21,7 +21,7 @@ You can see it live at [www.adrianmoreno.info](https://www.adrianmoreno.info) (m
 
 ![adrianmorenoinfo](https://user-images.githubusercontent.com/240085/230632835-74349170-d610-4731-8fac-62c413e6b3f5.png)
 
-You can see the source code for my website [in github too](https://github.com/zetxek/adrianmoreno.info), as well as the [demo site for the theme](https://github.com/zetxek/adrianmoreno.info) (a simpler version of the website).
+You can see the source code for [my website](https://www.adrianmoreno.info) [in github too](https://github.com/zetxek/adrianmoreno.info), as well as the [demo site for the theme, adritian-demo](https://github.com/zetxek/adritian-demo) (a simpler version of the website).
 
 ## Download
 
