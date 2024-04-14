@@ -1,3 +1,4 @@
+## taken from https://stackoverflow.com/a/68213855/570087
 name: Update demo site
 on:
   push:
@@ -12,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with: 
-          repository: org/parent_repository
+          repository: zetxek/adritian-demo
           token: ${{ secrets.PRIVATE_TOKEN_GITHUB }}
           submodules: true
 
