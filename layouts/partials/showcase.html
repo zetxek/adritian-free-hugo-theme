@@ -25,8 +25,8 @@
 
   {{ $img := resources.Get .Site.Data.homepage.showcase.image.x }}
   {{ $img2x := resources.Get .Site.Data.homepage.showcase.image._2x }}
-  {{ $imgWebp := $img.Resize (printf "%dx%d webp q75 Lanczos picture" $img.Height $img.Width) }}
-  {{ $img2xWebp := $img2x.Resize (printf "%dx%d webp q75 Lanczos picture" $img2x.Height $img2x.Width) }}
+  {{ $imgWebp := $img.Resize (printf "%dx%d webp q75 Lanczos picture" $img.Width $img.Height) }}
+  {{ $img2xWebp := $img2x.Resize (printf "%dx%d webp q75 Lanczos picture" $img2x.Width $img2x.Height) }}
 
 
   <picture>
