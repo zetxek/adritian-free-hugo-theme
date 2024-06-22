@@ -9319,10 +9319,18 @@ span a:hover {
 .lead {
     font-size: 16px;
     font-weight: 300;
-    line-height: 1.78;
-    letter-spacing: -0.2px;
+    line-height: 1.2;
+    letter-spacing: -0px;
     color: #000;
 }
+
+br {
+    content: "";
+    margin: 2em;
+    display: block;
+    font-size: 24%;
+}
+
 @media (min-width: 992px) {
     .lead {
         font-size: 18px;

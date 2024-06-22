@@ -81,13 +81,18 @@ ul.book-category-content{
     width: 100%;
 }
 
+
+.book-content .book-header{
+    margin-bottom: 10px;;
+}
+
 .book-content h5,
 .book-content h6{
     display: inline;
-    font-weight: 300;
+    font-weight: 500;
 }
 .book-content h5{
-    margin-right: 2px;
+    margin-right: -2px;
 }
 .book-content .goodreads-link{
     float: right;
@@ -111,6 +116,10 @@ ul.book-category-content {
     left: -5px;
 }
 
+
+li.book-content p{
+    line-height: normal;
+}
 
 .about__profile-picture img{
     object-fit: contain;
