@@ -4,7 +4,7 @@
 name = "Adritian-Free-Hugo-Theme"
 license = "MIT"
 licenselink = "https://github.com/zetxek/adritian-free-hugo-theme/blob/main/LICENSE"
-description = "Minimalistic and clean theme for Hugo, great for Single Page personal websites"
+description = "Minimalistic and clean theme for Hugo, great for Single Page personal websites. Can be easily extended to custom content types and has a simple blog."
 homepage = "https://github.com/zetxek/adritian-free-hugo-theme"
 demosite = "https://zetxek.github.io/adritian-demo/"
 
