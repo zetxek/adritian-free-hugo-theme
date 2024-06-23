@@ -171,8 +171,20 @@ body.home div.experience{
     color: white;
 }
 
+.posts-list{
+    padding-left: 0;
+}
+.posts-list  article.summary{
+    margin-bottom: 20px;
+}
+
+article.post.summary h2{
+    font-size: 24px
+}
+
 #blog-single #meta{
     margin-bottom: 20px;
+    padding-bottom: 10px;
     border-bottom: 1px solid #478079;
 }
 #blog-single #meta section{
