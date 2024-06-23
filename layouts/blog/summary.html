@@ -1,0 +1,12 @@
+<article class="post summary">
+    <header>
+      <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+      <div class="post-meta">{{ .Date.Format "Mon, Jan 2, 2006" }} - {{ .FuzzyWordCount }} Words </div>
+    </header>
+    
+    {{ .Summary }}
+    
+    <footer>
+        <a href='{{ .RelPermalink }}'>Read&nbsp;more&nbsp;&raquo;</a>
+    </footer>
+  </article>

@@ -1,0 +1,28 @@
+<!-- inject:../components/baseHead/baseHeadStart.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {{ partial "head.html" . }} {{ partial "head_custom.html" . }}
+  </head>
+
+  <body>
+    {{ partial "header.html" . }}
+
+    <section
+      id="blog-single-section"
+      class="section section--border-bottom rad-animation-group"
+    >
+      <div class="container">
+        <h1><a href="{{ .RelPermalink }}">{{ .Title }}</a></h1>      
+        <div class="row flex-column-reverse flex-md-row rad-fade-down">
+          <div class="col-12">
+            {{ .Content | safeHTML }}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {{ partial "footer.html" . }} {{ partial "base-foot.html" . }}
+  </body>
+</html>
+<!-- endinject -->
