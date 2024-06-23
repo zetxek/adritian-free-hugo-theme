@@ -171,6 +171,28 @@ body.home div.experience{
     color: white;
 }
 
+#blog-single #meta{
+    margin-bottom: 20px;
+    border-bottom: 1px solid #478079;
+}
+#blog-single #meta section{
+    font-weight: lighter;
+}
+#blog-single #meta h4{
+    font-size: 16px;
+    font-weight: light;
+    display: inline;
+}
+#blog-single #meta h5{
+    font-size: 14px;
+    font-weight: light;
+    display: inline;
+}
+aside.content-browser{
+    margin-top: 20px;
+    padding-top: 10px;
+    border-top: 1px solid #478079;
+}
 @media only screen and (max-width : 768px) {
     .header .navbar-brand{
         margin-top: 10px;
