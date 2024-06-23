@@ -12,12 +12,12 @@
   <main class="blog"> 
     <section class="container section">
       <h1>{{ .Title }}</h1>
-      <ul>
+      <div class="posts-list">
         <!-- Renders the li.html content view for each content/posts/*.md -->
         {{ range .Pages }}
-          {{ .Render "li" }}
+          {{ .Render "summary" }}
         {{ end }}
-      </ul>
+      </div>
     </section>
   </main>
 
