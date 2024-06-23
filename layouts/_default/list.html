@@ -1,0 +1,28 @@
+<!-- inject:../components/baseHead/baseHeadStart.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  {{ partial "head.html" . }} {{ partial "head_custom.html" . }}
+</head>
+
+<body>
+  {{ partial "header.html" . }}
+
+  <main class="list"> 
+    <section class="container section">
+      <h1>{{ .Title }}</h1>
+      <ul>
+        <!-- Renders the li.html content view for each content/posts/*.md -->
+        {{ range .Pages }}
+          {{ .Render "li" }}
+        {{ end }}
+      </ul>
+    </section>
+  </main>
+
+  {{ partial "footer.html" . }} {{ partial "base-foot.html" . }}
+</body>
+
+</html>
+<!-- endinject -->
