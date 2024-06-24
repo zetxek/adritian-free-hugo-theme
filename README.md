@@ -26,7 +26,7 @@ You can see the source code for [my website](https://www.adrianmoreno.info) [in 
 ## Download
 
 - Clone the repo: `git clone https://github.com/zetxek/adritian-free-hugo-theme.git`.
-- [Download from Github](https://github.com/zetxek/adritian-free-hugo-theme/archive/main.zip).
+[Download from ](https://github.com/zetxek/adritian-free-hugo-theme/archive/main.zip)GitHub.
 
 ## Installation
 
@@ -35,10 +35,9 @@ You can see the source code for [my website](https://www.adrianmoreno.info) [in 
 To use `adritian-free-hugo-theme` you need to install Hugo by following https://gohugo.io/getting-started/installing/.
 
 #### Setting up
+As a pre-requirement, you will need Hugo set up and running. You can follow [the official guide for it](https://gohugo.io/categories/installation/).
 
-As a pre-requirement you will need Hugo set up and running. You can follow [the official guide for it](https://gohugo.io/categories/installation/).
-
-Note: the theme has **not** been migrated to Hugo Modules yet. To install it, you need to set it up by copying the theme files (either as a sub-module, or by copying the files). You can follow these [older instructions](https://gohugobrasil.netlify.app/themes/installing-and-using-themes/), or the next ones as help:
+Note: the theme has **not** been migrated to Hugo Modules yet. To install it, you need to set it up by copying the theme files (either as a sub-module or by copying the files). You can follow these [older instructions](https://gohugobrasil.netlify.app/themes/installing-and-using-themes/) or the next ones as help:
 
 - Create a new Hugo site (this will create a new folder): `hugo new site <your website's name>`
 - Enter the newly created folder: `cd <your website's name>/`
@@ -81,8 +80,25 @@ Press Ctrl+C to stop
 
 #### Additional configuration
 
-- _(optional, if you want to use the contact form)_ edit the line 212 in your `homepage.yml` file, to customize your mail address. Sign up in [formspree](https://formspree.io) to redirect mails to your own.
+##### Contact form
+_(optional, if you want to use the contact form)_ edit line 212 in your `homepage.yml` file, to customize your mail address. Sign up in [formspree](https://formspree.io) to redirect mails to your own.
 
+##### Blog
+
+<img width="1449" alt="SCR-20240624-uajc" src="https://github.com/zetxek/adritian-free-hugo-theme/assets/240085/7540f5f0-f753-48f8-bc69-1aa9c715a6d7">
+
+
+To use the blog, you can use the content type "blog", and render it in the URL `/blog`.
+You can add a menu link to it in `hugo.toml`.
+
+The posts will be markdown files stored in the `content/blog` folder.
+
+##### Experience
+
+<img width="1444" alt="SCR-20240624-uaoi" src="https://github.com/zetxek/adritian-free-hugo-theme/assets/240085/9ea86d6a-62c6-4c4f-96ba-8450fa24dd68">
+
+
+It can be used to render job experience of projects. Each experience/project has a duration, job title, company name, location and description/excerpt as well as a longer text. 
 
 ## Troubleshooting
 
