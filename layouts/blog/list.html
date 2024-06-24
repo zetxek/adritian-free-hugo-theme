@@ -11,11 +11,13 @@
 
   <main class="blog"> 
     <section class="container section">
-      <h1>{{ .Title }}</h1>
-      <div class="posts-list">
+      <h1 class="rad-fade-down rad-waiting rad-animate">{{ .Title }}</h1>
+      <div class="posts-list container">
         <!-- Renders the li.html content view for each content/posts/*.md -->
         {{ range .Pages }}
+          <div class="row row--padded rad-animation-group rad-fade-down rad-waiting rad-animate section--border-bottom">
           {{ .Render "summary" }}
+          </div>
         {{ end }}
       </div>
     </section>

@@ -15,7 +15,7 @@
       <div class="container">
         <h1><a href="{{ .RelPermalink }}">{{ .Title }}</a></h1>
 
-        <aside id="meta">
+        <aside id="meta" class="light-border-bottom">
           <div>
             <section>
               Published on
@@ -43,7 +43,7 @@
           <div class="col-12">{{ .Content | safeHTML }}</div>
         </div>
 
-        <aside class="content-browser">
+        <aside class="content-browser light-border-top">
             Continue reading
             <div>
                 {{ with .PrevInSection }}
