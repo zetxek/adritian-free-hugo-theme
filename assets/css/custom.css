@@ -182,14 +182,24 @@ body.home div.experience{
 }
 
 article.post.summary h2{
-    font-size: 24px
+    font-size: 32px
 }
 
 #blog-single #meta{
     margin-bottom: 20px;
     padding-bottom: 10px;
-    border-bottom: 1px solid #478079;
 }
+
+.light-border-bottom::after{
+    content: "";
+    width: 80%;
+    height: 1px;
+    max-width: 1170px;
+    background-color: #adb5bd;
+    display: block;
+    margin-bottom: 20px;
+}
+
 #blog-single #meta section{
     font-weight: lighter;
 }
@@ -206,7 +216,15 @@ article.post.summary h2{
 aside.content-browser{
     margin-top: 20px;
     padding-top: 10px;
-    border-top: 1px solid #478079;
+}
+.light-border-top::before{
+    content: "";
+    width: 80%;
+    height: 1px;
+    max-width: 1170px;
+    background-color: #adb5bd;
+    display: block;
+    margin-top: 20px;
 }
 @media only screen and (max-width : 768px) {
     .header .navbar-brand{
