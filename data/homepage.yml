@@ -167,8 +167,8 @@ client_and_work:
         btnText: "Case Study"
         URL: "#"
       image:
-        x: "images/works/swissfintech.jpg"
-        _2x: "images/works/swissfintech@2x.jpg"
+        x: "images/works/robo-advisor.jpg"
+        _2x: "images/works/robo-advisor@2x.jpg"
       is_even: false
 
     - title: "Robo Advisor"
@@ -178,8 +178,8 @@ client_and_work:
         btnText: "Case Study"
         URL: "#"
       image:
-        x: "images/works/robo-advisor.jpg"
-        _2x: "images/works/robo-advisor@2x.jpg"
+        x: "images/works/radity-finance.jpg"
+        _2x: "images/works/radity-finance@2x.jpg"
       is_even: true
 
 # testimonial
