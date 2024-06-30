@@ -7,7 +7,6 @@ on:
     ## run on push to main or a new semantic tag (ie: v1.2.3)
     branches: 
       - main
-      - update/workflow-checkout-action
     tags:
       - 'v[0-9]+.[0-9]+.[0-9]+'
 
