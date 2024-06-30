@@ -1,13 +1,16 @@
+<!-- if you want to enable google tag manager you can check in your theme toml -->
+{{ if .Site.Params.analytics.google_tag_manager.enabled }}
 <!-- Google Tag Manager (noscript) -->
 <noscript
   ><iframe
-    src="https://www.googletagmanager.com/ns.html?id={{ .Site.Params.googleTagManagerID }}"
+    src="https://www.googletagmanager.com/ns.html?id={{ .Site.Params.analytics.google_tag_manager.id }}"
     height="0"
     width="0"
     style="display: none; visibility: hidden"
   ></iframe
 ></noscript>
 <!-- End Google Tag Manager (noscript) -->
+{{ end }}
 <header class="header fixed-top rad-animation-group" id="header">
   <div class="container rad-fade-in">
     <nav class="navbar navbar-expand-lg navbar-light p-0">

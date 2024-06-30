@@ -2,8 +2,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
 <meta name="theme-color" content="#478079" >
-<link rel="preconnect" href="https://www.googletagmanager.com">
 
+{{ if .Site.Params.analytics.google_tag_manager.enabled }}
+<link rel="preconnect" href="https://www.googletagmanager.com">
+{{ end }}
 <!-- endinject -->
 <title>{{ .Site.Data.homepage.head.title }}</title>
 <meta name="description" content="{{ .Site.Data.homepage.head.description }}">
@@ -50,8 +52,12 @@
     {{- end }}
   />
 </noscript>
+{{ if .Site.Params.analytics.google_tag_manager.enabled }}
 <!-- Google tag (gtag.js), google analytics -->
 <script defer src="https://www.googletagmanager.com/gtag/js?id=UA-465407-4"></script>
-{{ $analytics := resources.Get "js/analytics.js" | resources.Minify }}
+{{ $analytics := resources.Get "js/gtag.js" | resources.Minify }}
 <script defer src="{{ $analytics.Permalink }}"></script>
+{{ else }}
+<!-- no google tag displayed -->
+{{ end }}
 
