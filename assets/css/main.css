@@ -9783,7 +9783,7 @@ html body {
 .experience__company {
     font-size: 14px;
     font-weight: 700;
-    color: #e93e34;
+    color: #AE1B13;
 }
 .clients {
     display: -webkit-box;
@@ -9872,7 +9872,7 @@ html body {
 .testimonial__author-info span {
     font-size: 14px;
     font-weight: 700;
-    color: #e93e34;
+    color: #AE1B13;
 }
 html {
     height: 100%;
@@ -9891,11 +9891,11 @@ html body {
     font-weight: 400;
 }
 html body ::-moz-selection {
-    background-color: #e93e34;
+    background-color: #AE1B13;
     color: #fff;
 }
 html body ::selection {
-    background-color: #e93e34;
+    background-color: #AE1B13;
     color: #fff;
 }
 input[type="text"]:focus,
@@ -10142,7 +10142,7 @@ textarea:focus {
     font-size: 25px;
     font-weight: 900;
     letter-spacing: -1.17px;
-    color: #e93e34;
+    color: #AE1B13;
 }
 @media (min-width: 768px) {
     .header .navbar-brand img {
