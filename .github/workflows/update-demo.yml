@@ -4,9 +4,11 @@
 name: Update demo site
 on:
   push:
+    ## run on push to main or a new semantic tag (ie: v1.2.3)
     branches: 
       - main
-      - update/workflow-add-version
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
 
 jobs:
   update:
