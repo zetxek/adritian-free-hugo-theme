@@ -24,6 +24,18 @@ jobs:
           git submodule update --init --recursive
           git submodule update --recursive --remote
 
+      - name: Print submodule status
+        run: |
+          git submodule status
+      
+      - name: Print submodule diff
+        run: |
+          git diff --submodule=diff
+      
+      - name: Print reference information
+        run: |
+          echo "GITHUB_REF: $GITHUB_REF"
+
       - name: Commit
         run: |
           git config user.email "actions@github.com"
