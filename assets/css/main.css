@@ -9865,7 +9865,7 @@ html body {
     -webkit-box-align: start;
     align-items: flex-start;
 }
-.testimonial__author-info h4 {
+.testimonial__author-info h3 {
     font-size: 16px;
     margin-bottom: 0;
 }
