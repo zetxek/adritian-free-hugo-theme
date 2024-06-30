@@ -1,5 +1,7 @@
+# page title
 head:
-  title: "Adritian - Free Hugo Theme demo site"
+  title: "Demo site for Adritian - a high performance hugo theme by Adrián Moreno"
+  description: "This hugo theme (Adritian) is based on Boostrap and has features that make it suitable for a personal site, a portfolio or other kind of Single Page Applications."
 # showcase
 showcase:
   enable: true
