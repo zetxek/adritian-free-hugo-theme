@@ -1,9 +1,12 @@
+## Updates demo site (https://github.com/zetxek/adritian-demo)
 ## taken from https://stackoverflow.com/a/68213855/570087
+
 name: Update demo site
 on:
   push:
     branches: 
       - main
+      - update/workflow-add-version
 
 jobs:
   update:
@@ -24,7 +27,7 @@ jobs:
       - name: Commit
         run: |
           git config user.email "actions@github.com"
-          git config user.name "GitHub Actions - update submodules"
+          git config user.name "GitHub Actions - update theme submodule"
           git add --all
-          git commit -m "Update submodules" || echo "No changes to commit"
+          git commit -m "Update submodules" -m "Updating demo based on ${{ github.ref_name }}"  || echo "No changes to commit"
           git push
