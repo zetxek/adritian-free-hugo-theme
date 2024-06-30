@@ -24,7 +24,7 @@
         <div id="rad-subscription-fail" class="d-none">
           <p>{{ .Site.Data.homepage.newsletter.error_message }}</p>
         </div>
-        <script src="/js/subscription.js"></script>
+        <script src='{{ "/js/subscription.js" | absURL }}'></script>
       </div>
       <small id="emailHelp" class="form-text text-muted"
         >{{ .Site.Data.homepage.newsletter.note }}</small
