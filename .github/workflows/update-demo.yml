@@ -41,5 +41,5 @@ jobs:
           git config user.email "actions@github.com"
           git config user.name "GitHub Actions - update theme submodule"
           git add --all
-          git commit -m "Update submodules" -m "Updating demo based on ${{ github.ref_name }}"  || echo "No changes to commit"
+          git commit -m "Update submodules" -m "Updating demo based on ${ git submodule status }"  || echo "No changes to commit (status = ${ git submodule status })"
           git push
