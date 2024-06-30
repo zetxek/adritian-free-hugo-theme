@@ -61,8 +61,14 @@ theme = "adritian-free-hugo-theme"
 
   sections = ["showcase", "about", "education", "experience", "client-and-work", "testimonial", "contact", "newsletter"]
 
-  googleTagManagerID = "GTM-000000" # Google Analytics works with Google Tag Manager
   homepageExperienceCount = 6
+
+  [params.google_analytics]
+      code = "UA-XXXXX-Y"
+      enabled = fale
+  [params.google_tag_manager]
+      code = "GTM-XXXXX"
+      enabled = false
   
   [params.logo]
     text1 = "Cool"
