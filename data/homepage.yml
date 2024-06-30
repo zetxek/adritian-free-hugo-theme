@@ -1,3 +1,5 @@
+head:
+  title: "Adritian - Free Hugo Theme demo site"
 # showcase
 showcase:
   enable: true
