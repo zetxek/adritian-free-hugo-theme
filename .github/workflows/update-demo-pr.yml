@@ -1,0 +1,81 @@
+## Updates demo site (https://github.com/zetxek/adritian-demo)
+## taken from https://stackoverflow.com/a/68213855/570087
+
+name: Update demo site
+on:
+  push:
+    ## run on push to main or a new semantic tag (ie: v1.2.3)
+    branches: 
+      - main
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with: 
+          repository: zetxek/adritian-demo
+          token: ${{ secrets.PRIVATE_TOKEN_GITHUB }}
+          submodules: true
+
+      - name: Pull & update submodules recursively
+        run: |
+          git submodule update --init --recursive
+          git submodule update --recursive --remote
+
+      - name: Print submodule status
+        run: |
+          git submodule status
+      
+      - name: Print submodule diff
+        run: |
+          git diff --submodule=diff
+
+      - name: Send pull-request
+        run: |
+          LATEST_TAG=$(git describe --tags --always --abbrev=0)
+          REPOSITORY="zetxek/adritian-demo"
+          FOLDER="bin/$REPOSITORY"
+          BRANCH_NAME="theme-update/update-theme-to-$LATEST_TAG"
+
+          # Clone the remote repository and change working directory to the
+          # folder it was cloned to.
+          git clone \
+            --depth=1 \
+            --branch=main \
+            https://some-user:${{ secrets.PRIVATE_TOKEN_GITHUB }}@github.com/$REPOSITORY \
+            $FOLDER
+
+          cd $FOLDER
+
+          # Setup the committers identity.
+          git config user.email "actions@github.com"
+          git config user.name "GitHub Actions - update theme submodule"
+
+          # Create a new feature branch for the changes.
+          git checkout -b $BRANCH_NAME
+
+          # Update the script files to the latest version.
+          git submodule update --init --recursive
+          git submodule update --recursive --remote
+
+          # Commit the changes and push the feature branch to origin
+          git add --all
+          git commit -m "chore: update scripts to $LATEST_TAG"
+          git push origin $BRANCH_NAME
+
+          # Store the PAT in a file that can be accessed by the
+          # GitHub CLI.
+          echo "${{ secrets.PRIVATE_TOKEN_GITHUB }}" > token.txt
+
+          # Authorize GitHub CLI for the current repository and
+          # create a pull-requests containing the updates.
+          gh auth login --with-token < token.txt
+          gh pr create \
+            --body "" \
+            --title "chore: update theme to $LATEST_TAG" \
+            --head "$BRANCH_NAME" \
+            --base "main"
