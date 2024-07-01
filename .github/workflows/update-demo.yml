@@ -73,7 +73,7 @@ jobs:
           git submodule update --recursive --remote
 
           # Commit the changes and push the feature branch to origin
-          git add -all
+          git add --all
           git commit -m "chore: update scripts to $LATEST_TAG"
           git push origin $BRANCH_NAME
 
