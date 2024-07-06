@@ -2,8 +2,8 @@ const scroll = new SmoothScroll('a[href*="#"]');
 const navLinks = document.querySelectorAll('a.nav-link');
 navLinks.forEach(navLink => {
   navLink.addEventListener('click', (e) => {
-    const navbar = document.querySelectorAll('.navbar-collapse');
-    if (navbar && navbar.hasClass('show')) {
+    const navbar = document.getElementById('navbarSupportedContent');
+    if (navbar && navbar.classList.contains('show')) {
       simulateClick(document.querySelector('.navbar-toggler'));
     }
   });    
