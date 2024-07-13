@@ -24,8 +24,8 @@ jobs:
 
       - name: Pull & update submodules recursively
         run: |
-          git submodule update --init --recursive
-          git submodule update --recursive --remote
+          git pull --recurse-submodules
+          git submodule update --remote --recursive
 
       - name: Print submodule status
         run: |
@@ -45,6 +45,8 @@ jobs:
 
           echo "Latest tag: $LATEST_TAG"
           echo "Latest commit: $LATEST_COMMIT"
+
+          git config --global --add --bool push.autoSetupRemote true
 
           # Clone the remote repository and change working directory to the
           # folder it was cloned to.
@@ -68,9 +70,16 @@ jobs:
           git submodule update --recursive --remote
 
           # Commit the changes and push the feature branch to origin
+          git config --global --add --bool push.autoSetupRemote true
           git add --all
-          git commit -m "chore: update theme to $LATEST_TAG"
-          git commit -m "chore: update theme to $LATEST_TAG"
+          git commit -am "chore: update theme to $LATEST_TAG" && git push || echo "No changes to theme"
+
+          # Copy content
+          cp themes/adritian-free-hugo-theme/exampleSite/hugo.toml hugo.toml
+          # Update URL
+          sed -i -e "s/\"https\:\/\/www\.adrianmoreno\.info\"/\"https\:\/\/adritian-demo\.vercel\.app\/\"/g" hugo.toml
+          git commit -am "chore: update config to $LATEST_TAG from exampleSite"  && git push || echo "No changes to config"
+
           git push origin $BRANCH_NAME
 
           # Store the PAT in a file that can be accessed by the
