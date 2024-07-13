@@ -65,7 +65,7 @@ jobs:
 
           # Commit the changes and push the feature branch to origin
           git add --all
-          git commit -m "chore: update scripts to $LATEST_TAG"
+          git commit -m "chore: update theme to $LATEST_TAG"
           git push origin $BRANCH_NAME
 
           # Store the PAT in a file that can be accessed by the
@@ -78,6 +78,6 @@ jobs:
           gh pr create \
             --body "" \
             --title "chore: update theme to $LATEST_TAG" \
-            --body "This automated PR updates the theme submodule to the latest version: https://github.com/zetxek/adritian-free-hugo-theme/commit/$LATEST_COMMIT\Triggered by https://github.com/zetxek/adritian-free-hugo-theme/actions/workflows/update-demo-pr.yml" \
+            --body "This automated PR updates the theme submodule to the latest version: https://github.com/zetxek/adritian-free-hugo-theme/commit/$LATEST_COMMIT\nTriggered by https://github.com/zetxek/adritian-free-hugo-theme/actions/workflows/update-demo-pr.yml" \
             --head "$BRANCH_NAME" \
             --base "main"
