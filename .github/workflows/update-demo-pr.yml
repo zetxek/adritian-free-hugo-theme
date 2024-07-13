@@ -1,7 +1,7 @@
 ## Updates demo site (https://github.com/zetxek/adritian-demo)
 ## taken from https://stackoverflow.com/a/68213855/570087
 
-name: Update demo site
+name: Update demo site (with PR)
 on:
   push:
     ## run on push to main or a new semantic tag (ie: v1.2.3)
@@ -37,6 +37,7 @@ jobs:
       - name: Send pull-request
         run: |
           LATEST_TAG=$(git describe --tags --always --abbrev=0)
+          LATEST_COMMIT=$(git rev-parse HEAD)
           REPOSITORY="zetxek/adritian-demo"
           FOLDER="bin/$REPOSITORY"
           BRANCH_NAME="theme-update/update-theme-to-$LATEST_TAG"
@@ -77,5 +78,6 @@ jobs:
           gh pr create \
             --body "" \
             --title "chore: update theme to $LATEST_TAG" \
+            --body "This automated PR updates the theme submodule to the latest version: https://github.com/zetxek/adritian-free-hugo-theme/commit/$LATEST_COMMIT\Triggered by https://github.com/zetxek/adritian-free-hugo-theme/actions/workflows/update-demo-pr.yml" \
             --head "$BRANCH_NAME" \
             --base "main"
