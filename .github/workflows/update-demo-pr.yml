@@ -66,6 +66,7 @@ jobs:
           # Commit the changes and push the feature branch to origin
           git add --all
           git commit -m "chore: update theme to $LATEST_TAG"
+          git commit -m "chore: update theme to $LATEST_TAG"
           git push origin $BRANCH_NAME
 
           # Store the PAT in a file that can be accessed by the
