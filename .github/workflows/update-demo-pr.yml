@@ -9,6 +9,7 @@ on:
       - main
     tags:
       - 'v[0-9]+.[0-9]+.[0-9]+'
+  workflow_dispatch:
 
 jobs:
   update:
@@ -41,6 +42,9 @@ jobs:
           REPOSITORY="zetxek/adritian-demo"
           FOLDER="bin/$REPOSITORY"
           BRANCH_NAME="theme-update/update-theme-to-$LATEST_TAG"
+
+          echo "Latest tag: $LATEST_TAG"
+          echo "Latest commit: $LATEST_COMMIT"
 
           # Clone the remote repository and change working directory to the
           # folder it was cloned to.
