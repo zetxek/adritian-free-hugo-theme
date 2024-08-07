@@ -102,6 +102,10 @@ experience:
     icon: "icon-profile-fill"
     btnText: "Download My Resume"
     URL: "#"
+  button3:
+    icon: "icon-arrow-right"
+    btnText: "View All"
+    URL: "/experience"
 
 # Client & Work
 client_and_work:
