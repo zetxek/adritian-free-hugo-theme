@@ -89,7 +89,7 @@ experience:
   enable: true
   title: "Experience"
   description: >
-    Over 15+ years of experience working with companies from all over the world. I design & develop digital products to help businesses and improve people's lives.
+   This is where you can highlight a bit over your experience. Years of total experience, specialization, etc.
   button:
     icon: "icon-linkedin-fill"
     btnText: "Linkedin"
@@ -98,19 +98,6 @@ experience:
     icon: "icon-profile-fill"
     btnText: "Download My Resume"
     URL: "#"
-
-  items:
-    - title: "Sr. Title"
-      company: "Serious Business, Inc"
-      duration: "Feb 2011 - Sep 2019"
-
-    - title: "Sr. Title"
-      company: "Fancy Company, Inc"
-      duration: "Apr 2010 - Jan 2011"
-
-    - title: "Jr. Title"
-      company: "Company, Inc"
-      duration: "Jun 2009 - Mar 2010"
 
 # Client & Work
 client_and_work:
