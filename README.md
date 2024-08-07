@@ -124,6 +124,12 @@ duration: "2022-2024"
 The beginning of a great career. 
 ```
 
+The experience is displayed in several locations:
+
+1. Homepage, with a limited number of experiences (controlled by the config parameter `homepageExperienceCount` in the file `hugo.toml`). The summary is displayed. 
+2. Experience page, in `/experience`, with a list of all experiences (no limit). The summary is displayed for each item.
+3. Individual experience page, where all details are displayed
+
 ## Troubleshooting
 
 This theme is a version of the one found on my website [adriamoreno.info](https://www.adrianmoreno.info). If you run into trouble, [you can check the code on my website](https://github.com/zetxek/adrianmoreno.info) for reference.
