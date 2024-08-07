@@ -11,7 +11,7 @@
                 {{ if not .IsHome }}
                 {{ $totalCount = len $xp }}
                 {{ end }}
-                {{ range first 6 $xp }}
+                {{ range first $totalCount $xp }}
                 <div class="experience">
                     <a href="{{.Permalink}}">
                         {{/* The context, ".", is now each one of the pages as it goes
