@@ -105,6 +105,25 @@ The posts will be markdown files stored in the `content/blog` folder.
 
 It can be used to render job experience of projects. Each experience/project has a duration, job title, company name, location and description/excerpt as well as a longer text. 
 
+The experience is managed through a specific content type (see `content/experience` for an example).
+You should add the following fields to control the content: `title`, `jobTitle`, `company`, `location`, `duration`. The markdown file content will be rendered on the dedicated experience page. 
+
+```
+---
+date: 2007-12-01T00:00:00+01:00
+draft: false
+title: "Job #1"
+jobTitle: "Junior Intern"
+company: "Internet Affairs Inc. "
+location: "Stavanger, Norway"
+duration: "2022-2024"
+
+---
+### Fixing the world, one byte at a time
+
+The beginning of a great career. 
+```
+
 ## Troubleshooting
 
 This theme is a version of the one found on my website [adriamoreno.info](https://www.adrianmoreno.info). If you run into trouble, [you can check the code on my website](https://github.com/zetxek/adrianmoreno.info) for reference.
