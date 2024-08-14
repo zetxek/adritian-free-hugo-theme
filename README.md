@@ -5,28 +5,34 @@ See it live at **[adritian-demo.vercel.app](https://https://adritian-demo.vercel
 
 This free Hugo theme is a fork of [Raditian Theme](https://github.com/radity/raditian-free-hugo-theme) - a great Hugo theme originally created by [Radity](https://github.com/radity). It's called __Adritian__ because I, the author, am called Adrián - and if you shuffle Raditian and Adrián letters you get... Adritian 😅
 
-It focuses on accessibility, high performance and usability.
+It focuses on accessibility, high performance and usability. It's extendable by adding your own styles or content types, with a solid foundation.
 
 The templates are based on Bootstrap (so they're responsive and mobile-first), and the main changes I have made have been upgrades on the web performance and accessibility of the template.
 
 Some of the best applications for the theme are for minimalistic websites, single-page applications, and personal portfolios. It has a contact form you can customize to your mail address without setting up a backend (https://formspree.io).
 
 
-🚀 Improvements on this version:
+🚀 Some of the improvements (vs the original theme):
 
 - removal of jQuery
 - upgrade of Bootstrap from v4 to v5
 - Hugo assets pipeline support
 - some (basic) i18n features
 - added more pages/templates (experience, blog)
-
 - upgrade loading performance (100 score in [Google Page Speed Insights](https://pagespeed.web.dev))
+
+  <img width="1536" alt="SCR-20240814-ihfs" src="https://github.com/user-attachments/assets/38553a02-48d0-48f4-a69a-ed4f7e32e092">
+
+
+## Live demo
 
 You can see it live at [www.adrianmoreno.info](https://www.adrianmoreno.info) (my personal website), as well as in this screenshot for reference:
 
 ![adrianmorenoinfo](https://user-images.githubusercontent.com/240085/230632835-74349170-d610-4731-8fac-62c413e6b3f5.png)
 
-You can see the source code for [my website](https://www.adrianmoreno.info) [in github too](https://github.com/zetxek/adrianmoreno.info), as well as the [demo site for the theme, adritian-demo](https://adritian-demo.vercel.app/) ([and its code](https://github.com/zetxek/adritian-demo)) (a simpler version of the website).
+You have two reference implementations of the theme:
+1. A full-featured site, [my personal website](https://www.adrianmoreno.info) [in github too](https://github.com/zetxek/adrianmoreno.info)
+2. A simpler [demo site for the theme, adritian-demo](https://adritian-demo.vercel.app/) ([and its code](https://github.com/zetxek/adritian-demo)).
 
 ## Download
 
