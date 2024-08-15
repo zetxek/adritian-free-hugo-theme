@@ -79,7 +79,7 @@ jobs:
 
           COMMIT_MSG_THEME='chore: update theme submodule to `'"$LATEST_TAG"'`'
           echo 'Committing theme: '"$COMMIT_MSG_THEME"
-          git commit -am "$COMMIT_MSG_THEME" && git push || echo "No changes to theme"
+          git commit -am "$COMMIT_MSG_THEME" && git push --force || echo "No changes to theme"
 
           # Copy content
           cp themes/adritian-free-hugo-theme/exampleSite/hugo.toml hugo.toml
@@ -88,10 +88,10 @@ jobs:
 
           COMMIT_MSG_CONFIG='chore: update config/content submodule to `'"$LATEST_TAG"'` from https://github.com/zetxek/adritian-free-hugo-theme'
           echo "Committing content/config: $COMMIT_MSG_CONFIG"
-          git commit -am "$COMMIT_MSG_CONFIG"  && git push || echo "No changes to config"
+          git commit -am "$COMMIT_MSG_CONFIG"  && git push --force || echo "No changes to config"
 
           echo "Pushing branch: $BRANCH_NAME"
-          git push origin $BRANCH_NAME
+          git push origin $BRANCH_NAME --force
 
           # Store the PAT in a file that can be accessed by the
           # GitHub CLI.
