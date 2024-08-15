@@ -75,9 +75,8 @@ jobs:
           echo "Committing all changes."
           git add --all
 
-          echo "Committing theme."
           COMMIT_MSG_THEME='chore: update theme submodule to `'"$LATEST_TAG"'`'
-          echo "$COMMIT_MSG_THEME"
+          echo 'Committing theme: '"$COMMIT_MSG_THEME"
           git commit -am '$COMMIT_MSG_THEME' && git push || echo "No changes to theme"
 
           # Copy content
@@ -86,11 +85,10 @@ jobs:
           sed -i -e "s/\"https\:\/\/www\.adrianmoreno\.info\"/\"https\:\/\/adritian-demo\.vercel\.app\/\"/g" hugo.toml
 
           COMMIT_MSG_CONFIG='chore: update config/content submodule to `'"$LATEST_TAG"'` from https://github.com/zetxek/adritian-free-hugo-theme'
-          echo $COMMIT_MSG_CONFIG
-          echo "Committing content/config."
+          echo "Committing content/config: $COMMIT_MSG_CONFIG"
           git commit -am '$COMMIT_MSG_CONFIG'  && git push || echo "No changes to config"
 
-          echo "Pushing branch."
+          echo "Pushing branch: $BRANCH_NAME"
           git push origin $BRANCH_NAME
 
           # Store the PAT in a file that can be accessed by the
