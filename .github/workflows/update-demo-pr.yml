@@ -11,6 +11,7 @@ jobs:
   update:
     env:
       SOURCE_BRANCH_NAME: ${{ github.head_ref || github.ref_name }} # PR branch name
+      PR_NUMBER: ${{ github.event.number }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -38,7 +39,7 @@ jobs:
           LATEST_COMMIT=$(git rev-parse HEAD)
           REPOSITORY="zetxek/adritian-demo"
           FOLDER="bin/$REPOSITORY"
-
+          PR_URL="https://github.com/$REPOSITORY/pull/$PR_NUMBER"
           BRANCH_NAME="theme-update/update-theme-to-$LATEST_TAG"
           BASE_BRANCH="main"
           ASSIGNEE="zetxek"
@@ -46,6 +47,7 @@ jobs:
 
           echo "Latest tag: $LATEST_TAG"
           echo "Latest commit: $LATEST_COMMIT"
+          echo "PR URL: $PR_URL"
 
           git config --global --add --bool push.autoSetupRemote true
 
@@ -110,7 +112,7 @@ jobs:
           PR_TITLE='preview: update theme to `'$SOURCE_BRANCH_NAME'`'
           echo 'PR title: '$PR_TITLE
           PR_BODY="⚠️ The source PR is not merged yet - this is a preview PR.
-          🤖 This automated PR updates the theme submodule to a PR in the source repo: https://github.com/zetxek/adritian-free-hugo-theme/commit/$LATEST_COMMIT.
+          🤖 This automated PR updates the theme submodule to a PR in the source repo: $PR_URL.
           🔗 Triggered by https://github.com/zetxek/adritian-free-hugo-theme/actions/workflows/update-demo-pr.yml"
           echo "PR body: "$PR_BODY
 
