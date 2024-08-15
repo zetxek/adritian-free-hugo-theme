@@ -115,9 +115,10 @@ jobs:
           gh auth login --with-token < token.txt
 
           echo "Creating pull-request..."
-          PR_TITLE='chore: update theme to `'$LATEST_TAG'`'
+          PR_TITLE='preview: update theme to `'$SOURCE_BRANCH_NAME'`'
           echo 'PR title: '$PR_TITLE
-          PR_BODY="🤖 This automated PR updates the theme submodule to the latest version: https://github.com/zetxek/adritian-free-hugo-theme/commit/$LATEST_COMMIT.
+          PR_BODY="⚠️ The source PR is not merged yet - this is a preview PR.
+          🤖 This automated PR updates the theme submodule to a PR in the source repo: https://github.com/zetxek/adritian-free-hugo-theme/commit/$LATEST_COMMIT.
           🔗 Triggered by https://github.com/zetxek/adritian-free-hugo-theme/actions/workflows/update-demo-pr.yml"
           echo "PR body: "$PR_BODY
 
