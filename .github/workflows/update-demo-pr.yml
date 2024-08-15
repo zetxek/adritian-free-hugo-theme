@@ -76,7 +76,7 @@ jobs:
           git add --all
 
           echo "Committing theme."
-          COMMIT_MSG_THEME='chore: update theme submodule to `"$LATEST_TAG"`'
+          COMMIT_MSG_THEME='chore: update theme submodule to `'"$LATEST_TAG"'`'
           echo "$COMMIT_MSG_THEME"
           git commit -am '$COMMIT_MSG_THEME' && git push || echo "No changes to theme"
 
@@ -85,7 +85,7 @@ jobs:
           # Update URL
           sed -i -e "s/\"https\:\/\/www\.adrianmoreno\.info\"/\"https\:\/\/adritian-demo\.vercel\.app\/\"/g" hugo.toml
 
-          COMMIT_MSG_CONFIG='chore: update config/content submodule to `"$LATEST_TAG"` from https://github.com/zetxek/adritian-free-hugo-theme'
+          COMMIT_MSG_CONFIG='chore: update config/content submodule to `'"$LATEST_TAG"'` from https://github.com/zetxek/adritian-free-hugo-theme'
           echo $COMMIT_MSG_CONFIG
           echo "Committing content/config."
           git commit -am '$COMMIT_MSG_CONFIG'  && git push || echo "No changes to config"
