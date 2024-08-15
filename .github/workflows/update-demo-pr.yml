@@ -72,13 +72,13 @@ jobs:
           # Commit the changes and push the feature branch to origin
           git config --global --add --bool push.autoSetupRemote true
           git add --all
-          git commit -am "chore: update theme submodule to `$LATEST_TAG`" && git push || echo "No changes to theme"
+          git commit -am "chore: update theme submodule to \\\`$LATEST_TAG\\\`" && git push || echo "No changes to theme"
 
           # Copy content
           cp themes/adritian-free-hugo-theme/exampleSite/hugo.toml hugo.toml
           # Update URL
           sed -i -e "s/\"https\:\/\/www\.adrianmoreno\.info\"/\"https\:\/\/adritian-demo\.vercel\.app\/\"/g" hugo.toml
-          git commit -am "chore: update config/content to `$LATEST_TAG` from https://github.com/zetxek/adritian-free-hugo-theme"  && git push || echo "No changes to config"
+          git commit -am "chore: update config/content to \\\`$LATEST_TAG\\\` from https://github.com/zetxek/adritian-free-hugo-theme"  && git push || echo "No changes to config"
 
           git push origin $BRANCH_NAME
 
@@ -91,7 +91,7 @@ jobs:
           gh auth login --with-token < token.txt
           gh pr create \
             --body "" \
-            --title "chore: update theme to \`$LATEST_TAG\`" \
+            --title "chore: update theme to \\\`$LATEST_TAG\\\`" \
             --body "🤖 This automated PR updates the theme submodule to the latest version: https://github.com/zetxek/adritian-free-hugo-theme/commit/$LATEST_COMMIT.\n🔗Triggered by https://github.com/zetxek/adritian-free-hugo-theme/actions/workflows/update-demo-pr.yml" \
             --head "$BRANCH_NAME" \
             --base "main"
