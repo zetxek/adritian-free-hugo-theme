@@ -42,6 +42,7 @@ jobs:
           REPOSITORY="zetxek/adritian-demo"
           FOLDER="bin/$REPOSITORY"
           BRANCH_NAME="theme-update/update-theme-to-$LATEST_TAG"
+          BASE_BRANCH="main"
 
           echo "Latest tag: $LATEST_TAG"
           echo "Latest commit: $LATEST_COMMIT"
@@ -100,12 +101,16 @@ jobs:
           echo "Logging in to GitHub CLI."
           gh auth login --with-token < token.txt
 
-          echo "Creating pull-request."
+          echo "Creating pull-request..."
+          $PR_TITLE="chore: update theme to `"$LATEST_TAG"'`'
+          echo "PR title: $PR_TITLE"
+          $PR_BODY="🤖 This automated PR updates the theme submodule to the latest version: https://github.com/zetxek/adritian-free-hugo-theme/commit/$LATEST_COMMIT.\n🔗Triggered by https://github.com/zetxek/adritian-free-hugo-theme/actions/workflows/update-demo-pr.yml"
+          echo "PR body: $PR_BODY"
+
           gh pr create \
-            --body "" \
-            --title "chore: update theme to `"$LATEST_TAG"'`' \
-            --body "🤖 This automated PR updates the theme submodule to the latest version: https://github.com/zetxek/adritian-free-hugo-theme/commit/$LATEST_COMMIT.\n🔗Triggered by https://github.com/zetxek/adritian-free-hugo-theme/actions/workflows/update-demo-pr.yml" \
-            --head "$BRANCH_NAME" \
-            --base "main"
+            --title $PR_TITLE \
+            --body $PR_BODY \
+            --head $BRANCH_NAME \
+            --base $BASE_BRANCH
 
           echo "✅ Pull-request created - done! "
