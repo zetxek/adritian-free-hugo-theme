@@ -4,15 +4,7 @@
 name: PR demo site (on PR
 ## This will open a PR which will open a vercel preview URL in the demo site
 on:
-  push:
-    ## run on push to main or a new semantic tag (ie: v1.2.3)
-    branches: 
-      - main
-      - add/preview-vercel-on-pr
-    tags:
-      - 'v[0-9]+.[0-9]+.[0-9]+'
   pull_request:
-
   workflow_dispatch:
 
 jobs:
