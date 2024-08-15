@@ -196,7 +196,6 @@ article.post.summary h2{
 
 #blog-single #meta{
     margin-bottom: 20px;
-    padding-bottom: 10px;
 }
 
 .light-border-bottom::after{
@@ -206,6 +205,7 @@ article.post.summary h2{
     max-width: 1170px;
     background-color: #adb5bd;
     display: block;
+    margin-top: 10px;
     margin-bottom: 20px;
 }
 
@@ -234,6 +234,7 @@ aside.content-browser{
     background-color: #adb5bd;
     display: block;
     margin-top: 20px;
+    margin-bottom: 10px;;
 }
 @media only screen and (max-width : 768px) {
     .header .navbar-brand{

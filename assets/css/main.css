@@ -9310,10 +9310,11 @@ span a {
     font-weight: 600;
     text-decoration: none;
     border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+    transition: all 0.5s;
 }
 p a:hover,
 span a:hover {
-    color: rgba(0, 0, 0, 0.7);
+    color: #478079;
     text-decoration: none;
 }
 .lead {
@@ -9607,6 +9608,12 @@ textarea {
     border: none;
     border-bottom: 1px solid #dbe0e4;
 }
+
+input[type="text"]:focus, input[type="text"]:active,
+input[type="email"]:focus, input[type="email"]:active,
+textarea:focus, textarea:active {
+    border-bottom: 1px solid black;
+}
 .education__date,
 .experience__date {
     line-height: 1.57;
@@ -9677,16 +9684,18 @@ input[type="email"]::placeholder {
     border-radius: 56px;
     color: #fff;
 }
-.rad-subscription-group input[type="email"]::-webkit-input-placeholder {
-    color: #fff;
+
+.rad-subscription-group:has(input[type="email"]:focus),
+.rad-subscription-group:has(input[type="email"]:active)
+{
+    border: 2px solid rgba(233, 62, 52, 0.5);
 }
-.rad-subscription-group input[type="email"]::-moz-placeholder {
-    color: #fff;
-}
-.rad-subscription-group input[type="email"]::-ms-input-placeholder {
-    color: #fff;
-}
-.rad-subscription-group input[type="email"]::placeholder {
+
+.rad-subscription-group input[type="email"]::-webkit-input-placeholder,
+.rad-subscription-group input[type="email"]::-moz-placeholder,
+.rad-subscription-group input[type="email"]::-ms-input-placeholder,
+.rad-subscription-group input[type="email"]::placeholder 
+{
     color: #fff;
 }
 .rad-subscription-group button {
