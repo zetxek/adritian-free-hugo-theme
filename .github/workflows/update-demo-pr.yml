@@ -8,6 +8,7 @@ on:
     ## run on push to main or a new semantic tag (ie: v1.2.3)
     branches: 
       - main
+      - add/preview-vercel-on-pr
     tags:
       - 'v[0-9]+.[0-9]+.[0-9]+'
   pull_request:
