@@ -44,7 +44,7 @@ jobs:
           FOLDER="bin/$REPOSITORY"
           BRANCH_NAME="theme-update/update-theme-to-$LATEST_TAG"
           BASE_BRANCH="main"
-          ASIGNEE="zetxek"
+          ASSIGNEE="zetxek"
 
           echo "Latest tag: $LATEST_TAG"
           echo "Latest commit: $LATEST_COMMIT"
@@ -115,6 +115,6 @@ jobs:
             --body "$PR_BODY" \
             --head $BRANCH_NAME \
             --base $BASE_BRANCH \
-            --asignee $ASIGNEE
+            --assignee $ASSIGNEE
 
           echo "✅ Pull-request created - done! "
