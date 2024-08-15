@@ -72,9 +72,11 @@ jobs:
           git config user.name "GitHub Actions - update theme submodule"
 
           # Create a new feature branch for the changes.
+          echo "Working branch: $BRANCH_NAME"
           git checkout -b $BRANCH_NAME
 
           # Set branch
+          echo "Submodule branch: $SOURCE_BRANCH_NAME"
           git submodule set-branch $SOURCE_BRANCH_NAME $SUBMODULE_PATH
 
           # Update the script files to the latest version.
