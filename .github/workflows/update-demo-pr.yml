@@ -77,7 +77,7 @@ jobs:
 
           # Set branch
           echo "Submodule branch: $SOURCE_BRANCH_NAME"
-          git submodule set-branch $SOURCE_BRANCH_NAME $SUBMODULE_PATH
+          git submodule set-branch --branch $SOURCE_BRANCH_NAME $SUBMODULE_PATH
 
           # Update the script files to the latest version.
           git submodule update --init --recursive
