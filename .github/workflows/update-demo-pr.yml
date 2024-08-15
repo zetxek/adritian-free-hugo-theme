@@ -76,7 +76,7 @@ jobs:
           git add --all
 
           echo "Committing theme."
-          COMMIT_MSG_THEME="chore: update theme submodule to '`'$LATEST_TAG'`'"
+          COMMIT_MSG_THEME='chore: update theme submodule to `$LATEST_TAG`'
           echo "$COMMIT_MSG_THEME"
           git commit -am "$COMMIT_MSG_THEME" && git push || echo "No changes to theme"
 
