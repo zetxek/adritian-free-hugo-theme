@@ -110,7 +110,7 @@ jobs:
           echo "PR body: "$PR_BODY
 
           gh pr create \
-            --title $PR_TITLE \
+            --title "$PR_TITLE" \
             --body "$PR_BODY" \
             --head $BRANCH_NAME \
             --base $BASE_BRANCH
