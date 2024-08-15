@@ -37,7 +37,7 @@ jobs:
 
       - name: Send pull-request
         run: |
-          LATEST_TAG=$(git describe --tags --always --abbrev=0)
+          LATEST_TAG=$(git describe --tags --always)  
           LATEST_COMMIT=$(git rev-parse HEAD)
           REPOSITORY="zetxek/adritian-demo"
           FOLDER="bin/$REPOSITORY"
@@ -78,7 +78,7 @@ jobs:
           cp themes/adritian-free-hugo-theme/exampleSite/hugo.toml hugo.toml
           # Update URL
           sed -i -e "s/\"https\:\/\/www\.adrianmoreno\.info\"/\"https\:\/\/adritian-demo\.vercel\.app\/\"/g" hugo.toml
-          git commit -am "chore: update config to $LATEST_TAG from exampleSite"  && git push || echo "No changes to config"
+          git commit -am "chore: update theme to `$LATEST_TAG` from https://github.com/zetxek/adritian-free-hugo-theme"  && git push || echo "No changes to config"
 
           git push origin $BRANCH_NAME
 
@@ -91,7 +91,7 @@ jobs:
           gh auth login --with-token < token.txt
           gh pr create \
             --body "" \
-            --title "chore: update theme to $LATEST_TAG" \
+            --title "chore: update theme to `$LATEST_TAG`" \
             --body "This automated PR updates the theme submodule to the latest version: https://github.com/zetxek/adritian-free-hugo-theme/commit/$LATEST_COMMIT. Triggered by https://github.com/zetxek/adritian-free-hugo-theme/actions/workflows/update-demo-pr.yml" \
             --head "$BRANCH_NAME" \
             --base "main"
