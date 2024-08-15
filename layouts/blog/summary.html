@@ -1,12 +1,21 @@
 <article class="post summary col-12">
-    <header>
-      <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
-      <div class="post-meta">{{ .Date.Format "Mon, Jan 2, 2006" }} - {{ .FuzzyWordCount }} Words </div>
-    </header>
-    
-    {{ .Summary }}
-    
-    <footer>
-        <a href='{{ .RelPermalink }}'>Read&nbsp;more&nbsp;&raquo;</a>
-    </footer>
-  </article>
+  <header>
+    <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+    <div class="post-meta">
+      {{ .Date.Format "Mon, Jan 2, 2006" }} - {{ .FuzzyWordCount }} Words
+    </div>
+  </header>
+  <div class="post-summary post-content">
+  {{ .Summary }}
+  </div>
+
+  <footer class="">
+    <div class="row">
+      <div class="col-12 col-lg-4">
+        <a class="btn btn-outline-secondary btn-sm" href="{{ .RelPermalink }}"
+          >Read&nbsp;more&nbsp;&raquo;</a
+        >
+      </div>
+    </div>
+  </footer>
+</article>

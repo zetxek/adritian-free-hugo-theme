@@ -179,10 +179,19 @@ body.home div.experience{
 }
 .posts-list  article.summary{
     margin-bottom: 20px;
+    font-size: 14px;
+    font-weight: 300;
+    color: #333;
+}
+.posts-list  article.summary .post-meta{
+    font-weight: 500;
 }
 
 article.post.summary h2{
-    font-size: 32px
+    font-size: 24px
+}
+.post-content{
+    margin-bottom: 20px;
 }
 
 #blog-single #meta{
