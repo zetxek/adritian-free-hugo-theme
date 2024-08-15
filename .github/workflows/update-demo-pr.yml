@@ -121,6 +121,7 @@ jobs:
             --body "$PR_BODY" \
             --head $BRANCH_NAME \
             --base $BASE_BRANCH \
-            --assignee $ASSIGNEE
+            --assignee $ASSIGNEE \
+            --label preview
 
           echo "✅ Pull-request created - done! "
