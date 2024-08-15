@@ -1,8 +1,7 @@
 ## Updates demo site (https://github.com/zetxek/adritian-demo)
 ## taken from https://stackoverflow.com/a/68213855/570087
 
-name: PR demo site (on PR
-## This will open a PR which will open a vercel preview URL in the demo site
+name: Update demo site (on main update)
 on:
   push:
     ## run on push to main or a new semantic tag (ie: v1.2.3)
@@ -10,15 +9,12 @@ on:
       - main
     tags:
       - 'v[0-9]+.[0-9]+.[0-9]+'
-  pull_request:
-
   workflow_dispatch:
 
 jobs:
   update:
-    env:
-      SOURCE_BRANCH_NAME: ${{ github.head_ref || github.ref_name }} # PR branch name
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
         with: 
@@ -45,11 +41,9 @@ jobs:
           LATEST_COMMIT=$(git rev-parse HEAD)
           REPOSITORY="zetxek/adritian-demo"
           FOLDER="bin/$REPOSITORY"
-
           BRANCH_NAME="theme-update/update-theme-to-$LATEST_TAG"
           BASE_BRANCH="main"
           ASSIGNEE="zetxek"
-          SUBMODULE_PATH="themes/adritian-free-hugo-theme"
 
           echo "Latest tag: $LATEST_TAG"
           echo "Latest commit: $LATEST_COMMIT"
@@ -72,9 +66,6 @@ jobs:
 
           # Create a new feature branch for the changes.
           git checkout -b $BRANCH_NAME
-
-          # Set branch
-          git submodule set-branch $SOURCE_BRANCH_NAME $SUBMODULE_PATH
 
           # Update the script files to the latest version.
           git submodule update --init --recursive
