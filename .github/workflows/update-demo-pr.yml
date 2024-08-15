@@ -68,10 +68,14 @@ jobs:
           # Update the script files to the latest version.
           git submodule update --init --recursive
           git submodule update --recursive --remote
+          echo "Updated submodules. Setting up git."
 
           # Commit the changes and push the feature branch to origin
           git config --global --add --bool push.autoSetupRemote true
+          echo "Committing all changes."
           git add --all
+
+          echo "Committing theme."
           COMMIT_MSG_THEME="chore: update theme submodule to '`'$LATEST_TAG'`'"
           echo "$COMMIT_MSG_THEME"
           git commit -am "$COMMIT_MSG_THEME" && git push || echo "No changes to theme"
@@ -80,10 +84,13 @@ jobs:
           cp themes/adritian-free-hugo-theme/exampleSite/hugo.toml hugo.toml
           # Update URL
           sed -i -e "s/\"https\:\/\/www\.adrianmoreno\.info\"/\"https\:\/\/adritian-demo\.vercel\.app\/\"/g" hugo.toml
+
           COMMIT_MSG_CONFIG="chore: update config/content submodule to '`'$LATEST_TAG'`'' from https://github.com/zetxek/adritian-free-hugo-theme"
           echo $COMMIT_MSG_CONFIG
+          echo "Committing content/config."
           git commit -am "$COMMIT_MSG_CONFIG"  && git push || echo "No changes to config"
 
+          echo "Pushing branch."
           git push origin $BRANCH_NAME
 
           # Store the PAT in a file that can be accessed by the
@@ -92,10 +99,15 @@ jobs:
 
           # Authorize GitHub CLI for the current repository and
           # create a pull-requests containing the updates.
+          echo "Logging in to GitHub CLI."
           gh auth login --with-token < token.txt
+
+          echo "Creating pull-request."
           gh pr create \
             --body "" \
             --title "chore: update theme to '`'$LATEST_TAG'`'" \
             --body "🤖 This automated PR updates the theme submodule to the latest version: https://github.com/zetxek/adritian-free-hugo-theme/commit/$LATEST_COMMIT.\n🔗Triggered by https://github.com/zetxek/adritian-free-hugo-theme/actions/workflows/update-demo-pr.yml" \
             --head "$BRANCH_NAME" \
             --base "main"
+
+          echo "✅ Pull-request created - done! "
