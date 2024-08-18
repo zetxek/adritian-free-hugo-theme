@@ -1,7 +1,7 @@
 # page title
 head:
-  title: "Demo site for Adritian - a high performance hugo theme by Adrián Moreno"
-  description: "This hugo theme (Adritian) is based on Boostrap and has features that make it suitable for a personal site, a portfolio or other kind of Single Page Applications."
+  title: "Slava Kuznetsov"
+  description: "This is a personal page of Slava Kuznetsov"
 # showcase
 showcase:
   enable: true
@@ -57,15 +57,16 @@ about:
   title: "Who am I?"
   content: >
     <p class="lead">
-      Here you can add some information about you. A small excerpt that describes 
-      your experience, for example.   
+      Site Reliability Engineering Manager @ Booking.com.
       </p>
-      <p class="lead">
-      You explain something about your academic/study background, as well as your
-      preferred areas of work. Think of this area as context-setting for the experience
-      that you will describe below. Why did you change jobs? What drove you to take a 
-      new gig? Even if you are not looking for a job, it's a good way to hint about
-      what kind of projects you are interested in.
+    <p class="lead">
+      Ex-Head of IT Operations @ <a href="https://www.ecwid.com/">Ecwid</a>.
+      </p>
+    <p class="lead">
+      Ex-Program committee member <a href="http://devopsconf.io/">DevOpsConf</a> & <a href="https://devoops.ru/en/">DevOops</a> conferences.
+    </p>
+    <p class="lead">
+      I run for health and happiness.
     </p>
   button:
     icon: "icon-smile-fill"
@@ -110,7 +111,7 @@ experience:
 # Client & Work
 client_and_work:
   title: "Clients & Works"
-  enable: true
+  enable: false
 
   clients:
     - logo:
@@ -179,7 +180,7 @@ client_and_work:
 
 # testimonial
 testimonial:
-  enable: true
+  enable: false
   title: "Testimonials"
   items:
     - name: "Daniel Jordan"
@@ -212,22 +213,22 @@ contact:
     full_name: "Full Name"
     email: "Email Address"
     message: "Type Your Message Here"
-  phone:
-    title: "Phone Number"
-    number: "+555 (11) 123 44 55"
+  # phone:
+  #   title: "Phone Number"
+  #   number: "+555 (11) 123 44 55"
   email:
     title: "Email"
-    email: '<a href="mailto:mail@example.com">mail@example.com</a>'
-  address:
-    title: "Address"
-    address: "Exact street/neighborhood (you can omit this)<br />Postcode, City"
+    email: '<a href="mailto:neuron@smith3v.com">neuron@smith3v.com</a>'
+  # address:
+  #   title: "Address"
+  #   address: "Exact street/neighborhood (you can omit this)<br />Postcode, City"
   button:
     icon: "icon-mail-fill"
     btnText: "Send Message"
 
 # newsletter
 newsletter:
-  enable: true
+  enable: false
   title: "Newsletter subscription"
   success_message: "Successfully subscribed"
   error_message: "Error while subscribing."
