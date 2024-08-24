@@ -106,13 +106,18 @@ The posts will be markdown files stored in the `content/blog` folder.
 
 ##### Experience
 
+This functionality and content is especially suited for personal professional sites, showcasing the work experience: 
+
 <img width="1444" alt="SCR-20240624-uaoi" src="https://github.com/zetxek/adritian-free-hugo-theme/assets/240085/9ea86d6a-62c6-4c4f-96ba-8450fa24dd68">
 
-
-It can be used to render job experience of projects. Each experience/project has a duration, job title, company name, location and description/excerpt as well as a longer text. 
+It can be used to render job experience, projects or clients. Each experience/project has a duration, job title, company name, location and description/excerpt as well as a longer text. 
 
 The experience is managed through a specific content type (see `content/experience` for an example).
-You should add the following fields to control the content: `title`, `jobTitle`, `company`, `location`, `duration`. The markdown file content will be rendered on the dedicated experience page. 
+You can use `hugo new experience/experience-name.md` (replacing `experience-name` by the name of the job experience).
+This will create the content in the `content/experience` folder, following the `experience` archetype.
+
+The following fields are used from the file's Front Matter: `title`, `jobTitle`, `company`, `location`, `duration`. 
+You can find a sample experience file content here:
 
 ```
 ---
@@ -138,7 +143,7 @@ The experience is displayed in several locations:
 
 ## Troubleshooting
 
-This theme is a version of the one found on my website [adriamoreno.info](https://www.adrianmoreno.info). If you run into trouble, [you can check the code on my website](https://github.com/zetxek/adrianmoreno.info) for reference.
+This theme is a version of the one found on my website [adrianmoreno.info](https://www.adrianmoreno.info). If you run into trouble, [you can check the code on my website](https://github.com/zetxek/adrianmoreno.info) for reference.
 
 If you have improvements for the theme, you are very welcome to make a PR if you are able 💕. Otherwise - see below for how to get help (and maybe help others with the same problem).
 
