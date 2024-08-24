@@ -37,9 +37,10 @@ jobs:
         run: |
           LATEST_TAG=$(git describe --tags --always)  
           LATEST_COMMIT=$(git rev-parse HEAD)
+          SOURCE_REPOSITORY="zetxek/adritian-free-hugo-theme"
           REPOSITORY="zetxek/adritian-demo"
           FOLDER="bin/$REPOSITORY"
-          PR_URL="https://github.com/$REPOSITORY/pull/$PR_NUMBER"
+          PR_URL="https://github.com/$SOURCE_REPOSITORY/pull/$PR_NUMBER"
           BRANCH_NAME="theme-update/update-theme-to-$LATEST_TAG"
           BASE_BRANCH="main"
           ASSIGNEE="zetxek"
