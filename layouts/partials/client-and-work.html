@@ -60,7 +60,7 @@
       <div class="col-12 col-md-5 mt-4 mt-md-0 my-md-auto even">
         <h3>{{ .Params.title }}</h3>
         <p class="lead">
-          {{ .Params.content }}
+          {{ .Page.Content }}
         </p>
         <a href="{{ .Params.button.URL | absURL }}" class="btn btn-primary"
           >{{ .Params.button.btnText }}<i class="{{ .Params.button.icon }}"></i
@@ -116,7 +116,7 @@
       <div class="col-12 col-md-5 mt-4 mt-md-0 my-md-auto">
         <h3>{{ .Params.title }}</h3>
         <p class="lead">
-          {{ .Params.Content }}
+          {{ .Page.Content }}
         </p>
         <a href="{{ .Params.button.URL | absURL }}" class="btn btn-primary"
           >{{ .Params.button.btnText }}<i class="{{ .Params.button.icon }}"></i
