@@ -1,3 +1,7 @@
+{{/* Used for the Client&Works section in the homepage */}}
+{{/* If some content is missing/not displayed, check the images for the client/work */}}
+
+
 {{ if .Site.Data.homepage.client_and_work.enable }}
 <section id="portfolio" class="section section--border-bottom">
   <div class="container">
@@ -14,21 +18,28 @@
               
               {{ $img := resources.Get .Params.logo_x }}
               {{ $img2x := resources.Get .Params.logo_2x }}
-              {{ $imgWebp := $img.Resize (printf "%dx%d webp q75 Lanczos picture" $img.Width $img.Height) }}
-              {{ $img2xWebp := $img2x.Resize (printf "%dx%d webp q75 Lanczos picture" $img2x.Width $img2x.Height) }}
-            
-              <picture class="picture clients">
-                <source srcset="{{ $imgWebp.RelPermalink }} 1x, {{ $img2xWebp.RelPermalink }} 2x" type="image/webp" />
-                <source srcset="{{ $img.RelPermalink }} 1x, {{ $img2x.RelPermalink }} 2x" type="image/webp">
-                <img
-                  class="portfolio-project img-responsive"
-                  src="data:image/gif;base64,R0lGODlhBwACAIAAAP///wAAACH5BAEAAAEALAAAAAAHAAIAAAIDjI9YADs="
-                  srcset="{{ $img.RelPermalink }} 1x, {{ $img2x.RelPermalink }} 2x"
-                  data-src="{{ $img.RelPermalink }}"
-                  data-srcset="{{ $img.RelPermalink }} 1x, {{ $img2x.RelPermalink }} 2x"
-                  alt="{{ .Params.title }}"
-                />
-              </picture>
+              {{ with $img}}
+              
+              {{/* ⚠️ If the image is not found, it will not be displayed - this whole block will be skipped */}} 
+
+                {{ $imgWebp := $img.Resize (printf "%dx%d webp q75 Lanczos picture" $img.Width $img.Height) }}
+                {{ $img2xWebp := $img2x.Resize (printf "%dx%d webp q75 Lanczos picture" $img2x.Width $img2x.Height) }}
+              
+                <picture class="picture clients">
+                  <source srcset="{{ $imgWebp.RelPermalink }} 1x, {{ $img2xWebp.RelPermalink }} 2x" type="image/webp" />
+                  <source srcset="{{ $img.RelPermalink }} 1x, {{ $img2x.RelPermalink }} 2x" type="image/webp">
+                  <img
+                    class="portfolio-project img-responsive"
+                    src="data:image/gif;base64,R0lGODlhBwACAIAAAP///wAAACH5BAEAAAEALAAAAAAHAAIAAAIDjI9YADs="
+                    srcset="{{ $img.RelPermalink }} 1x, {{ $img2x.RelPermalink }} 2x"
+                    data-src="{{ $img.RelPermalink }}"
+                    data-srcset="{{ $img.RelPermalink }} 1x, {{ $img2x.RelPermalink }} 2x"
+                    alt="{{ .Params.title }}"
+                  />
+                </picture>
+              {{ else }}
+              <!-- missing image for content -->
+              {{ end }}
 
             </a>
           </div>
