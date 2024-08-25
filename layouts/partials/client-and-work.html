@@ -7,12 +7,13 @@
     <div class="row row--padded rad-animation-group rad-fade-down">
       <div class="col-12">
         <div class="clients">
-          {{ range .Site.Data.homepage.client_and_work.clients }}
+          {{ $clients := (where .Site.RegularPages.ByDate.Reverse "Type" "client-work") }}          
+          {{ range $clients }}
           <div class="clients__item">
-            <a href="https://radity.com">
+            <a href="{{ .Params.link }}">
               
-              {{ $img := resources.Get .logo.x }}
-              {{ $img2x := resources.Get .logo._2x }}
+              {{ $img := resources.Get .Params.logo_x }}
+              {{ $img2x := resources.Get .Params.logo_2x }}
               {{ $imgWebp := $img.Resize (printf "%dx%d webp q75 Lanczos picture" $img.Width $img.Height) }}
               {{ $img2xWebp := $img2x.Resize (printf "%dx%d webp q75 Lanczos picture" $img2x.Width $img2x.Height) }}
             
@@ -25,7 +26,7 @@
                   srcset="{{ $img.RelPermalink }} 1x, {{ $img2x.RelPermalink }} 2x"
                   data-src="{{ $img.RelPermalink }}"
                   data-srcset="{{ $img.RelPermalink }} 1x, {{ $img2x.RelPermalink }} 2x"
-                  alt="{{ .alt }}"
+                  alt="{{ .Params.title }}"
                 />
               </picture>
 

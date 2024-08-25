@@ -113,35 +113,6 @@ client_and_work:
   enable: true
 
   clients:
-    - logo:
-        x: "images/clients/asgardia.png"
-        _2x: "images/clients/asgardia@2x.png"
-      alt: "Asgardia"
-
-    - logo:
-        x: "images/clients/earth-2.png"
-        _2x: "images/clients/earth-2@2x.png"
-      alt: "Earth 2.0"
-
-    - logo:
-        x: "images/clients/goldline.png"
-        _2x: "images/clients/goldline@2x.png"
-      alt: "Goldline"
-
-    - logo:
-        x: "images/clients/kanba.png"
-        _2x: "images/clients/kanba@2x.png"
-      alt: "Kanba"
-
-    - logo:
-        x: "images/clients/zoo-tv.png"
-        _2x: "images/clients/zoo-tv@2x.png"
-      alt: "Zoo"
-
-    - logo:
-        x: "images/clients/ztos.png"
-        _2x: "images/clients/ztos@2x.png"
-      alt: "Ztos"
 
   works:
     - title: "Radity Finance - UI Kit"
