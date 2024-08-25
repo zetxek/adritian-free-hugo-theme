@@ -112,8 +112,6 @@ client_and_work:
   title: "Clients & Works"
   enable: true
 
-  clients:
-
   works:
     - title: "Radity Finance - UI Kit"
       description: "We have been receiving a lot of requests for a Finance Kit recently due to the popularity of Fintech."
