@@ -10853,6 +10853,9 @@ aside.content-browser{
     p{
         color: #a6a6a6;
     }
+    .rad-showcase .platform-links [class^="icon-"]{
+        color: #fff;
+    }
     .experience a{
         color: #fff;
     }
