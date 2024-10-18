@@ -89,6 +89,13 @@ Press Ctrl+C to stop
 
 ```
 
+## Dark theme
+
+The theme has a dark mode, that is enabled automatically based on system settings:
+
+![dark-mode](./images/screenshot-dark.png)
+
+
 #### Additional configuration
 
 ##### Contact form
