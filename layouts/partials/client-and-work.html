@@ -4,8 +4,8 @@
 
 {{ if .Site.Data.homepage.client_and_work.enable }}
 <section id="portfolio" class="section section--border-bottom">
-  <div class="container">
-    <h2 class=" rad-animation-group rad-fade-down">
+  <div class="container client-works-container">
+    <h2 class="rad-animation-group rad-fade-down">
       {{ .Site.Data.homepage.client_and_work.title }}
     </h2>
     <div class="row row--padded rad-animation-group rad-fade-down">
@@ -16,8 +16,8 @@
           <div class="clients__item">
             <a href="{{ .Params.link }}">
               
-              {{ $img := resources.Get .Params.logo_x }}
-              {{ $img2x := resources.Get .Params.logo_2x }}
+              {{ $img := resources.Get .Params.logo.x }}
+              {{ $img2x := resources.Get .Params.logo._2x }}
               {{ with $img }}
               {{ with $img2x}}
               
@@ -47,24 +47,31 @@
         </div>
       </div>
     </div>
-    {{ range $index, $element := .Site.Data.homepage.client_and_work.works }}
+    {{/* Projects */}}
+    {{ $projects := (where .Site.RegularPages.ByDate.Reverse "Type" "projects") }}          
+    {{ range $index, $element := $projects }}
+    {{ $is_even := eq (mod $index 2) 0 }}
+    {{ with $element }}
     <div
-      class="row row--padded rad-animation-group rad-fade-down {{ if .is_even }}flex-column-reverse flex-md-row{{ end }}"
+      class="row row--padded rad-animation-group rad-fade-down 
+      {{ if $is_even }}flex-column-reverse flex-md-row even-row{{ else }}uneven-row{{ end }}"
     >
-      {{ if .is_even }}
-      <div class="col-12 col-md-5 mt-4 mt-md-0 my-md-auto">
-        <h3>{{ .title }}</h3>
+      {{ if $is_even }}
+      <div class="col-12 col-md-5 mt-4 mt-md-0 my-md-auto even">
+        <h3>{{ .Params.title }}</h3>
         <p class="lead">
-          {{ .description }}
+          {{ .Page.Content }}
         </p>
-        <a href="{{ .button.URL | absURL }}" class="btn btn-primary"
-          >{{ .button.btnText }}<i class="{{ .button.icon }}"></i
+        <a href="{{ .Params.button.URL | absURL }}" class="btn btn-primary"
+          >{{ .Params.button.btnText }}<i class="{{ .Params.button.icon }}"></i
         ></a>
       </div>
       <div class="col-12 col-md-7 pl-md-0 text-right">
 
-        {{ $img := resources.Get .image.x }}
-        {{ $img2x := resources.Get .image._2x }}
+        {{ $img := resources.Get .Params.image.x }}
+        {{ $img2x := resources.Get .Params.image._2x }}
+        {{ with $img }}
+        {{ with $img2x}}
         {{ $imgWebp := $img.Resize (printf "%dx%d webp q75 Lanczos picture" $img.Width $img.Height) }}
         {{ $img2xWebp := $img2x.Resize (printf "%dx%d webp q75 Lanczos picture" $img2x.Width $img2x.Height) }}
         <picture class="picture-works even">
@@ -76,15 +83,19 @@
             srcset="{{ $img.RelPermalink }} 1x, {{ $img2x.RelPermalink }} 2x"
             data-src="{{ $img.RelPermalink }}"
             data-srcset="{{ $img.RelPermalink }} 1x, {{ $img2x.RelPermalink }} 2x"
-            alt="{{ .title }}"
+            alt="{{ .Params.title }}"
           />
         </picture>
+        {{ end }}
+        {{ end }}
 
       </div>
       {{ else }}
-      <div class="col-12 col-md-7 pl-md-0 text-right">
-        {{ $img := resources.Get .image.x }}
-        {{ $img2x := resources.Get .image._2x }}
+      <div class="col-12 col-md-7 pl-md-0 text-right not-even">
+        {{ $img := resources.Get .Params.image.x }}
+        {{ $img2x := resources.Get .Params.image._2x }}
+        {{ with $img }}
+        {{ with $img2x}}
         {{ $imgWebp := $img.Resize (printf "%dx%d webp q75 Lanczos picture" $img.Width $img.Height) }}
         {{ $img2xWebp := $img2x.Resize (printf "%dx%d webp q75 Lanczos picture" $img2x.Width $img2x.Height) }}
         <picture class="picture-works odd">
@@ -96,21 +107,24 @@
             srcset="{{ $img.RelPermalink }} 1x, {{ $img2x.RelPermalink }} 2x"
             data-src="{{ $img.RelPermalink }}"
             data-srcset="{{ $img.RelPermalink }} 1x, {{ $img2x.RelPermalink }} 2x"
-            alt="{{ .title }}"
+            alt="{{ .Params.title }}"
           />
         </picture>
+        {{ end }}
+        {{ end }}
       </div>
       <div class="col-12 col-md-5 mt-4 mt-md-0 my-md-auto">
-        <h3>{{ .title }}</h3>
+        <h3>{{ .Params.title }}</h3>
         <p class="lead">
-          {{ .description }}
+          {{ .Page.Content }}
         </p>
-        <a href="{{ .button.URL | absURL }}" class="btn btn-primary"
-          >{{ .button.btnText }}<i class="{{ .button.icon }}"></i
+        <a href="{{ .Params.button.URL | absURL }}" class="btn btn-primary"
+          >{{ .Params.button.btnText }}<i class="{{ .Params.button.icon }}"></i
         ></a>
       </div>
       {{ end }}
     </div>
+    {{ end }}
     {{ end }}
   </div>
 </section>
