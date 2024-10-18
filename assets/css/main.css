@@ -10859,6 +10859,10 @@ aside.content-browser{
     .experience a{
         color: #fff;
     }
+    .experience__company{
+        color: #6EAFAA;
+    }
+    
     .education__degree, .experience__date{
         color: #a6a6a6;
     }
@@ -10870,6 +10874,9 @@ aside.content-browser{
     }
     .education::before{
         background-color: #202020;
+    }
+    .testimonial__author-info span{
+        color: #F18983;
     }
     .section--contact .container{
         background-color: #181818;
@@ -10901,6 +10908,9 @@ aside.content-browser{
         color: #fff;
         border-bottom: 1px solid #fff;
         background-color: #181818;
+    }
+    input[type="text"]::placeholder, input[type="email"]::placeholder, textarea::placeholder{
+        color: #6e6e6e;
     }
     input[type="text"]:focus, input[type="text"]:active, input[type="email"]:focus, input[type="email"]:active, textarea:focus, textarea:active{
         border-bottom: 2px solid #fff;
