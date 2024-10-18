@@ -10888,6 +10888,15 @@ aside.content-browser{
         border-color: #fff;
         color: #fff;
     }
+    .btn-frameless{
+        color: #fff;
+        border-color: #fff;
+    }
+    .btn-frameless.disabled, .btn-frameless.focus, .btn-frameless:disabled, .btn-frameless:focus, .btn-frameless:hover, .btn-frameless:not(:disabled):not(.disabled).active, .btn-frameless:not(:disabled):not(.disabled):active, .show > .btn-frameless.dropdown-toggle {
+        background-color: white;
+        border-color: #fff;
+        color: #181818;
+    }
     input[type="text"], input[type="email"], textarea{
         color: #fff;
         border-bottom: 1px solid #fff;
