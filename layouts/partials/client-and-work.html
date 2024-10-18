@@ -14,7 +14,7 @@
           {{ $clients := (where .Site.RegularPages.ByDate.Reverse "Type" "client-work") }}          
           {{ range $clients }}
           <div class="clients__item">
-            <a href="{{ .Params.link }}">
+            <a href="{{ .Params.link }}" aria-label="Link to the client site for {{ .Params.title }} (opens in a new window)" target="_blank">
               
               {{ $img := resources.Get .Params.logo.x }}
               {{ $img2x := resources.Get .Params.logo._2x }}
