@@ -48,6 +48,8 @@ To use `adritian-free-hugo-theme` you need to install Hugo by following https://
 #### Setting up
 As a pre-requirement, you will need Hugo set up and running. You can follow [the official guide for it](https://gohugo.io/categories/installation/).
 
+The theme has been tested with the version `0.136` of Hugo. If you get errors regarding missing functionalities, check if you have the last version of Hugo available.
+
 Note: the theme has **not** been migrated to Hugo Modules yet. To install it, you need to set it up by copying the theme files (either as a sub-module or by copying the files). You can follow these [older instructions](https://gohugobrasil.netlify.app/themes/installing-and-using-themes/) or the next ones as help:
 
 - Create a new Hugo site (this will create a new folder): `hugo new site <your website's name>`
