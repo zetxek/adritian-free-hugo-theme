@@ -10,7 +10,7 @@
 <title>{{ .Site.Data.homepage.head.title }}</title>
 <meta name="description" content="{{ .Site.Data.homepage.head.description }}">
 
-{{ $critical := resources.Get "css/critical.css" | resources.ToCSS | resources.Minify }}
+{{ $critical := resources.Get "css/critical.css" | css.Sass | resources.Minify }}
 <style data-generator="critical-css">
 {{ $critical.Content | safeCSS }}
 </style>
@@ -28,7 +28,7 @@
 
 
 <!-- Purge CSS -->
-{{ $css := $cssBundle | resources.PostCSS }} 
+{{ $css := $cssBundle | css.PostCSS }} 
 {{ if hugo.IsProduction }} 
     {{ $css = $css | minify | fingerprint | resources.PostProcess }} 
 {{ end }}
