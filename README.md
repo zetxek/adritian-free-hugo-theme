@@ -21,6 +21,7 @@ Some of the best applications for the theme are for minimalistic websites, singl
 - added more pages/templates (experience, blog)
 - upgrade loading performance (100 score in [Google Page Speed Insights](https://pagespeed.web.dev))
 - support for [Vercel Speed Insights](https://vercel.com/docs/speed-insights/quickstart) (via the parameter `vercelPageInsights` in `hugo.toml`, disabled by default)
+- support for [Vercel Analytics](https://vercel.com/docs/analytics/quickstart) (via the parameter `vercelAnalytics` in `hugo.toml`, disabled by default)
 
   <img width="1536" alt="SCR-20240814-ihfs" src="https://github.com/user-attachments/assets/38553a02-48d0-48f4-a69a-ed4f7e32e092">
 

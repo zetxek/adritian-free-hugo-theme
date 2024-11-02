@@ -74,6 +74,7 @@ theme = "adritian-free-hugo-theme"
 
   # controls vercel page insights - disabled by default
   vercelPageInsights = false
+  vercelAnalytics = false
   
   [params.google_analytics]
       code = "UA-XXXXX-Y"
