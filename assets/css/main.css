@@ -10838,11 +10838,14 @@ aside.content-browser{
     .header.collapse.show::before, .header.collapsing::before{
         background-color: #181818;
     }
-    .header .navbar .nav-item:first-child{
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
-    }
-    .header .navbar .nav-item{
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    
+    @media only screen and (max-width : 990px) {
+        .header .navbar .nav-item:first-child{
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .header .navbar .nav-item{
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }    
     }
     .header--sticky-triggered{
         background: #181818;
