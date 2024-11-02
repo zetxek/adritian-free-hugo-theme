@@ -72,6 +72,9 @@ theme = "adritian-free-hugo-theme"
 
   homepageExperienceCount = 6
 
+  # controls vercel page insights - disabled by default
+  vercelPageInsights = false
+  
   [params.google_analytics]
       code = "UA-XXXXX-Y"
       enabled = false

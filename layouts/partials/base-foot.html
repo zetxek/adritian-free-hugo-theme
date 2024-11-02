@@ -15,4 +15,12 @@
 <script defer src='{{ "js/library/smooth-scroll.polyfills.min.js" | absURL }}'></script>
 <script defer src='{{ "js/sticky-header.js" | absURL }}'></script>
 <script defer src='{{ "js/smooth-scroll-init.js" | absURL }}'></script>
+<!-- vercel insights -->
+{{ $vercelPageInsights := .Site.Params.vercelPageInsights }}
+{{ if $vercelPageInsights }}
 <script defer src='{{ "js/library/bootstrap.min.js" | absURL }}'></script>
+<script>
+  window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/speed-insights/script.js"></script>
+{{ end }}
