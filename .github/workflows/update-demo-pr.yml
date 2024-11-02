@@ -19,7 +19,9 @@ jobs:
           repository: zetxek/adritian-demo
           token: ${{ secrets.PRIVATE_TOKEN_GITHUB }}
           submodules: true
-
+      - name: Show submodule statuds
+        run: |
+          git submodule status
       - name: Pull & update submodules recursively
         run: |
           git submodule init
