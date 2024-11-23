@@ -67,6 +67,7 @@ education:
       degree: "High School Diploma, Sciences, Math, Computer & Business Studies"
 
 # experience
+## to hiden a button, set the icon to an empty string
 experience:
   enable: true
   button:
