@@ -5,6 +5,12 @@
 - id: continue_reading
   translation: "Continue reading"
 
+## Homepage head title
+- id: head_title
+  translation: "Demo site for Adritian - a high performance hugo theme by Adrián Moreno"
+- id: head_description
+  translation: "This hugo theme (Adritian) is based on Boostrap and has features that make it suitable for a personal site, a portfolio or other kind of Single Page Applications."
+
 ## Homepage showcase
 - id: showcase_title
   translation: "Hello, I’m Cool."

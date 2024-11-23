@@ -1,7 +1,5 @@
-# page title
-head:
-  title: "Demo site for Adritian - a high performance hugo theme by Adrián Moreno"
-  description: "This hugo theme (Adritian) is based on Boostrap and has features that make it suitable for a personal site, a portfolio or other kind of Single Page Applications."
+## Looking for strings? Check the i18n folder.
+
 # showcase
 showcase:
   enable: true
@@ -49,7 +47,6 @@ showcase:
 # about
 about:
   enable: true
-  content: >
   button:
     icon: "icon-smile-fill"
     URL: "https://www.linkedin.com/in/adrianmoreno/"

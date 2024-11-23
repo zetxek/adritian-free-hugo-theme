@@ -7,8 +7,8 @@
 <link rel="preconnect" href="https://www.googletagmanager.com">
 {{ end }}
 <!-- endinject -->
-<title>{{ .Site.Data.homepage.head.title }}</title>
-<meta name="description" content="{{ .Site.Data.homepage.head.description }}">
+<title>{{ i18n "head_title" }}</title>
+<meta name="description" content='{{ i18n "head_description" }}'>
 
 {{ $critical := resources.Get "css/critical.css" | css.Sass | resources.Minify }}
 <style data-generator="critical-css">
