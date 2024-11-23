@@ -48,3 +48,7 @@
   translation: "Download my resume"
 - id: experience_button3
   translation: "View all"
+
+## Homepage client & work
+- id: client_work_title
+  translation: Clients & Work

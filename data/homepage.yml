@@ -87,7 +87,6 @@ experience:
 
 # Client & Work
 client_and_work:
-  title: "Clients & Works"
   enable: true
 
 # testimonial
