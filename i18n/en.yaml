@@ -32,3 +32,13 @@
     </p>
 - id: about_button
   translation: "About Me"
+
+## Homepage education
+- id: education_title
+  translation: Education
+
+## Homepage experience
+- id: experience_title
+  translation: Experience
+- id: experience_description
+  translation: This is where you can highlight a bit over your experience. Years of total experience, specialization, etc.
