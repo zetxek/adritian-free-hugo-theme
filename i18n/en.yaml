@@ -66,3 +66,29 @@
   translation: "An error occurred. Please try again."
 - id: newsletter_note
   translation: "We'll never share your email with anyone else." 
+
+## Homepage contact
+- id: contact_title
+  translation: Contact
+- id: contact_button
+  translation: "Send message"
+- id: contact_form_name
+  translation: "Full Name"
+- id: contact_form_email
+  translation: "Email Address"
+- id: contact_form_message
+  translation: "Type Your Message Here"
+- id: contact_phone_title
+  translation: "Phone Number"
+- id: contact_phone_number
+  translation: "+555 (11) 123 44 55"
+- id: contact_email_title
+  translation: "Email"
+- id: contact_email_email
+  translation: '<a href="mailto:mail@example.com">mail@example.com</a>'
+- id: contact_address_title
+  translation: "Address"
+- id: contact_address_address
+  translation: "Exact street/neighborhood (you can omit this)<br />Postcode, City"
+- id: contact_button
+  translation: "Send Message"

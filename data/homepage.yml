@@ -118,24 +118,10 @@ testimonial:
 # contact
 contact:
   enable: true
-  title: "Contact"
   form:
     action: "#"
-    full_name: "Full Name"
-    email: "Email Address"
-    message: "Type Your Message Here"
-  phone:
-    title: "Phone Number"
-    number: "+555 (11) 123 44 55"
-  email:
-    title: "Email"
-    email: '<a href="mailto:mail@example.com">mail@example.com</a>'
-  address:
-    title: "Address"
-    address: "Exact street/neighborhood (you can omit this)<br />Postcode, City"
   button:
     icon: "icon-mail-fill"
-    btnText: "Send Message"
 
 # newsletter
 newsletter:
