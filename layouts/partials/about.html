@@ -23,15 +23,15 @@
         </picture>
       </div>
       <div class="col-12 col-md-6 my-auto my-auto">
-        <h2>{{ .Site.Data.homepage.about.title }}</h2>
-        {{ .Site.Data.homepage.about.content | safeHTML }}
+        <h2>{{ i18n "about_title" }}</h2>
+        {{ i18n "about_content" | safeHTML }}
         <a
           href="{{ .Site.Data.homepage.about.button.URL | absURL }}"
           target="_blank"
           class="btn btn-primary"
         >
           <i class="{{ .Site.Data.homepage.about.button.icon }}"></i>
-          {{ .Site.Data.homepage.about.button.btnText }}
+          {{ i18n "about_button" }}
         </a>
       </div>
     </div>

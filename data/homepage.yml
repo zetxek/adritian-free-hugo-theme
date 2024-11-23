@@ -5,10 +5,6 @@ head:
 # showcase
 showcase:
   enable: true
-  title: "Hello, I’m Cool."
-  subtitle: "This is my title"
-  description: >
-    This is a good place to start with an introduction about yourself. Maybe a mention to the place <a target='_blank' href='https://www.adrianmoreno.info/'>where you work</a>. You can also mention where you live, your background and what's the purpose of the site. <br>You can download this theme from <a target='_blank' href='https://github.com/zetxek/adritian-free-hugo-theme'>github</a>, and see it live <a target='_blank' href="https://adritian-demo.vercel.app//">as a demo site</a> or <a target='_blank' href="https://www.adrianmoreno.info">a real one</a>.<br>You can find this content to edit in the theme.yaml file.
   image:
     x: "images/showcase/showcase.png"
     _2x: "images/showcase/showcase@2x.png"
@@ -17,7 +13,6 @@ showcase:
 
   button:
     icon: "icon-mail-fill"
-    btnText: "Contact"
     URL: "https://www.adrianmoreno.info/"
 
   socialLinks:
@@ -54,22 +49,9 @@ showcase:
 # about
 about:
   enable: true
-  title: "Who am I?"
   content: >
-    <p class="lead">
-      Here you can add some information about you. A small excerpt that describes 
-      your experience, for example.   
-      </p>
-      <p class="lead">
-      You explain something about your academic/study background, as well as your
-      preferred areas of work. Think of this area as context-setting for the experience
-      that you will describe below. Why did you change jobs? What drove you to take a 
-      new gig? Even if you are not looking for a job, it's a good way to hint about
-      what kind of projects you are interested in.
-    </p>
   button:
     icon: "icon-smile-fill"
-    btnText: "About Me"
     URL: "https://www.linkedin.com/in/adrianmoreno/"
   image:
     x: "images/who-am-i/user-picture.png"

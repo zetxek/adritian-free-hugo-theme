@@ -18,7 +18,7 @@
         <aside id="meta" class="light-border-bottom">
           <div>
             <section>
-              Published on
+              {{ i18n "published_on" }}
               <h4 id="date">{{ .Date.Format "Mon Jan 2, 2006" }}</h4>
               ·
               <h4 id="wordcount">{{ .WordCount }} Words</h4>
@@ -44,7 +44,7 @@
         </div>
 
         <aside class="content-browser light-border-top">
-            Continue reading
+            {{ i18n "continue_reading" }}
             <div>
                 {{ with .PrevInSection }}
                     <a class="previous" href="{{ .RelPermalink }}">↩ {{ .LinkTitle }}</a>
