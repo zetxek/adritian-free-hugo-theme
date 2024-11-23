@@ -1,7 +1,7 @@
 <div class="container-experience">
   <div class="row">
-    <h2>{{ .Site.Data.homepage.experience.title }}</h2>
-    <p class="lead">{{ .Site.Data.homepage.experience.description }}</p>
+    <h2>{{ i18n "experience_title" }}</h2>
+    <p class="lead">{{ i18n "experience_description" }}</p>
   </div>
   <div class="row">
     <div class="col-12 col-lg-4">
@@ -12,7 +12,7 @@
         rel="noopener noreferrer"
       >
         <i class="{{ .Site.Data.homepage.experience.button.icon }}"></i>
-        {{ .Site.Data.homepage.experience.button.btnText }}
+        {{ i18n "experience_button" }}
         <i class="icon-arrow-right"></i
       ></a>
     </div>
@@ -24,7 +24,7 @@
         rel="noopener noreferrer"
       >
         <i class="{{ .Site.Data.homepage.experience.button2.icon }}"></i>
-        {{ .Site.Data.homepage.experience.button2.btnText }}
+        {{ i18n "experience_button2" }}
       </a>
     </div>
     {{ if .Site.Data.homepage.experience.button3.btnText }}
@@ -35,7 +35,7 @@
         rel="noopener noreferrer"
       >
         <i class="{{ .Site.Data.homepage.experience.button3.icon }}"></i>
-        {{ .Site.Data.homepage.experience.button3.btnText }}
+        {{ i18n "experience_button3" }}
       </a>
     </div>
     {{ end }}

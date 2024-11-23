@@ -42,3 +42,9 @@
   translation: Experience
 - id: experience_description
   translation: This is where you can highlight a bit over your experience. Years of total experience, specialization, etc.
+- id: experience_button
+  translation: "LinkedIn" 
+- id: experience_button2
+  translation: "Download my resume"
+- id: experience_button3
+  translation: "View all"

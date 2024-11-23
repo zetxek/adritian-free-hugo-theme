@@ -60,7 +60,6 @@ about:
 # education
 education:
   enable: true
-  title: "Education"
   items:
     - university: "University of Life"
       year: "2012-2017"
@@ -73,9 +72,6 @@ education:
 # experience
 experience:
   enable: true
-  title: "Experience"
-  description: >
-    This is where you can highlight a bit over your experience. Years of total experience, specialization, etc.
   button:
     icon: "icon-linkedin-fill"
     btnText: "Linkedin"
