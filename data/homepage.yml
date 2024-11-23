@@ -71,16 +71,10 @@ experience:
   enable: true
   button:
     icon: "icon-linkedin-fill"
-    btnText: "Linkedin"
-    URL: "https://www.linkedin.com/in/adrianmoreno/"
   button2:
     icon: "icon-profile-fill"
-    btnText: "Download My Resume"
-    URL: "#"
   button3:
     icon: "icon-arrow-right"
-    btnText: "View All"
-    URL: "/experience"
 
 # Client & Work
 client_and_work:

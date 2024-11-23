@@ -18,7 +18,7 @@
     </div>
     <div class="col-12 col-lg-4">
       <a
-        href="{{ .Site.Data.homepage.experience.button2.URL | absURL }}"
+        href='{{ i18n "experience_button2_url" | absURL }}'
         class="btn btn-frameless"
         target="_blank"
         rel="noopener noreferrer"
@@ -27,10 +27,10 @@
         {{ i18n "experience_button2" }}
       </a>
     </div>
-    {{ if .Site.Data.homepage.experience.button3.btnText }}
+    {{ if .Site.Data.homepage.experience.button3.icon }}
     <div class="col-12 col-lg-4">
       <a
-        href="{{ .Site.Data.homepage.experience.button3.URL | absURL }}"
+        href='{{ i18n "experience_button3_url" | absURL }}'
         class="btn btn-frameless"
         rel="noopener noreferrer"
       >

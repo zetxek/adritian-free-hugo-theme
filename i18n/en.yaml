@@ -50,10 +50,16 @@
   translation: This is where you can highlight a bit over your experience. Years of total experience, specialization, etc.
 - id: experience_button
   translation: "LinkedIn" 
+- id: experience_button_url
+  translation: "https://www.linkedin.com/in/adrianmoreno/"
 - id: experience_button2
+  translation: "Download my resume"
+- id: experience_button2_url
   translation: "Download my resume"
 - id: experience_button3
   translation: "View all"
+- id: experience_button3_url
+  translation: "/experience"
 
 ## Homepage client & work
 - id: client_work_title
