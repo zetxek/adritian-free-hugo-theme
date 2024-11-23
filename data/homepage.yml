@@ -92,7 +92,6 @@ client_and_work:
 # testimonial
 testimonial:
   enable: true
-  title: "Testimonials"
   items:
     - name: "Daniel Jordan"
       position: "Phonet, CEO"
