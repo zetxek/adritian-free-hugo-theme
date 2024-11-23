@@ -52,3 +52,17 @@
 ## Homepage client & work
 - id: client_work_title
   translation: Clients & Work
+
+## Homepage newsletter
+- id: newsletter_title
+  translation: Newsletter
+- id: newsletter_button
+  translation: "Subscribe"
+- id: newsletter_placeholder
+  translation: "Your email"
+- id: newsletter_success_message
+  translation: "Thank you for subscribing to my newsletter!"
+- id: newsletter_error_message
+  translation: "An error occurred. Please try again."
+- id: newsletter_note
+  translation: "We'll never share your email with anyone else." 
