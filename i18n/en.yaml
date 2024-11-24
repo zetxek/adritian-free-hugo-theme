@@ -11,7 +11,6 @@
   translation: "Language"
 
 
-
 ## Homepage head title
 - id: head_title
   translation: "Demo site for Adritian - a high performance hugo theme by Adrián Moreno"

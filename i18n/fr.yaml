@@ -1,2 +1,125 @@
-- id: read_more
+Here’s the translation of the content to French:
+
+## Header
+- id: logo_text1  
+  translation: "Cool"
+- id: logo_text2  
+  translation: "Nom"
+
+## Footer
+- id: footer_notice  
+  translation: "© Adritian. Thème gratuit Hugo par Adrián Moreno Peña."
+- id: language  
+  translation: "Langue"
+
+## Homepage head title
+- id: head_title  
+  translation: "Site de démonstration pour Adritian - un thème Hugo haute performance par Adrián Moreno"
+- id: head_description  
+  translation: "Ce thème Hugo (Adritian) est basé sur Bootstrap et possède des fonctionnalités qui le rendent adapté pour un site personnel, un portfolio ou d'autres types d'applications monopages."
+
+## Homepage showcase
+- id: showcase_title  
+  translation: "Bonjour, je suis Cool."
+- id: showcase_subtitle  
+  translation: "Voici mon titre"
+- id: showcase_description  
+  translation: "C'est un bon endroit pour commencer avec une présentation de vous-même. Peut-être mentionner l'endroit <a target='_blank' href='https://www.adrianmoreno.info/'>où vous travaillez</a>. Vous pouvez aussi mentionner où vous vivez, votre parcours et quel est l'objectif du site. <br>Vous pouvez télécharger ce thème depuis <a target='_blank' href='https://github.com/zetxek/adritian-free-hugo-theme'>github</a>, et le voir en direct <a target='_blank' href='https://adritian-demo.vercel.app//'>comme un site de démonstration</a> ou <a target='_blank' href="https://www.adrianmoreno.info">un vrai site</a>.<br>Vous pouvez trouver ce contenu à éditer dans le fichier theme.yaml."
+- id: showcase_button  
+  translation: "Contacter"
+
+## Homepage about
+- id: about_title  
+  translation: "Qui suis-je ?"
+- id: about_content  
+  translation:  <p class="lead">
+      Ici, vous pouvez ajouter quelques informations sur vous. Un petit extrait qui décrit 
+      votre expérience, par exemple.   
+      </p>
+      <p class="lead">
+      Expliquez quelque chose sur votre parcours académique/études, ainsi que vos
+      domaines de travail préférés. Considérez cette section comme une mise en contexte pour 
+      l'expérience que vous allez décrire ci-dessous. Pourquoi avez-vous changé de travail ? Qu'est-ce qui vous a poussé à prendre un nouveau poste ? 
+      Même si vous ne cherchez pas de travail, c'est un bon moyen de suggérer
+      quel type de projets vous intéresse.
+    </p>
+- id: about_button  
+  translation: "À propos de moi"
+
+## Homepage education
+- id: education_title  
+  translation: "Éducation"
+
+## Homepage experience
+- id: experience_title  
+  translation: "Expérience"
+- id: experience_description  
+  translation: "C'est ici que vous pouvez mettre en avant un peu de votre expérience. Nombre d'années d'expérience totale, spécialisation, etc."
+- id: experience_button  
+  translation: "LinkedIn" 
+- id: experience_button_url  
+  translation: "https://www.linkedin.com/in/adrianmoreno/"
+- id: experience_button2  
+  translation: "Télécharger mon CV"
+- id: experience_button2_url  
+  translation: "Télécharger mon CV"
+- id: experience_button3  
+  translation: "Voir tout"
+- id: experience_button3_url  
+  translation: "/experience"
+
+## Homepage client & work
+- id: client_work_title  
+  translation: "Clients & Travaux"
+
+## Homepage newsletter
+- id: newsletter_title  
+  translation: "Bulletin"
+- id: newsletter_button  
+  translation: "S'abonner"
+- id: newsletter_placeholder  
+  translation: "Votre email"
+- id: newsletter_success_message  
+  translation: "Merci de vous être abonné à ma newsletter !"
+- id: newsletter_error_message  
+  translation: "Une erreur est survenue. Veuillez réessayer."
+- id: newsletter_note  
+  translation: "Nous ne partagerons jamais votre email avec qui que ce soit."
+
+## Homepage testimonials
+- id: testimonials_title  
+  translation: "Témoignages"
+
+## Homepage contact
+- id: contact_title  
+  translation: "Contact"
+- id: contact_button  
+  translation: "Envoyer le message"
+- id: contact_form_name  
+  translation: "Nom complet"
+- id: contact_form_email  
+  translation: "Adresse email"
+- id: contact_form_message  
+  translation: "Tapez votre message ici"
+- id: contact_phone_title  
+  translation: "Numéro de téléphone"
+- id: contact_phone_number  
+  translation: "+555 (11) 123 44 55"
+- id: contact_email_title  
+  translation: "Email"
+- id: contact_email_email  
+  translation: '<a href="mailto:mail@example.com">mail@example.com</a>'
+- id: contact_address_title  
+  translation: "Adresse"
+- id: contact_address_address  
+  translation: "Rue/quartier exact (vous pouvez omettre ceci)<br />Code postal, Ville"
+- id: contact_button  
+  translation: "Envoyer le message"
+
+## Blog
+- id: read_more  
   translation: "Lire la suite"
+- id: published_on  
+  translation: "Publié le"
+- id: continue_reading  
+  translation: "Continuer à lire"
