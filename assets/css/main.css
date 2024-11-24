@@ -10903,6 +10903,9 @@ aside.content-browser{
     .contact__info h3{
         color: #bebdbd;
     }
+    .section--contact {
+       background-image: url(../img/contact-bg-dark.png);
+    }
     .btn-primary{
         background-color: #fff;
         color: #000;
