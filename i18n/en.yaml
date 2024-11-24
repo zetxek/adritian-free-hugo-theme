@@ -1,3 +1,5 @@
+- id: language
+  translation: "Language"
 - id: read_more
   translation: "Read more"
 - id: published_on

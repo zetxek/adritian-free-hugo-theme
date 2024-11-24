@@ -18,7 +18,27 @@
       </ul>
     </div>
     <div class="footer__right">
-      
+      {{ if hugo.IsMultilingual }}
+      <nav class="language-selector">
+        <ul>
+          {{ range .Site.Languages }}
+            {{ if eq . $.Site.Language }}
+            <li class="dropdown">
+              <button type="button" class="dropdown__title" aria-expanded="false" aria-controls="languages-dropdown">
+                <span class="label">{{ i18n "language" }}</span>    
+              </button>
+            <ul class="dropdown__menu" id="languages-dropdown">
+              <li class="current"><span>✔️ {{ .LanguageName }}</span></li>
+              {{ end }}
+              {{ end }}
+              {{ range $.Translations }}
+              <li><a title="{{ .Language.LanguageName }}" href="{{ .Permalink }}">{{ .Language.LanguageName }}</a></li>
+            </ul>
+              {{ end }}
+          </li>
+        </ul>
+      </nav>
+      {{ end }}
     </div>
   </div>
 </footer>

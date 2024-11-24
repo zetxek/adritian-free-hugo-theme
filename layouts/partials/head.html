@@ -24,6 +24,14 @@
         {{ $cssResources = $cssResources | append $cssFile }}
     {{ end }}
 {{ end }}
+{{ range .Site.Params.plugins.scss }}  
+  {{ $scss := resources.Get .URL }}
+  
+  {{ $style := $scss | resources.ToCSS | resources.Fingerprint }}
+  <link rel="stylesheet" href="{{ $style.Permalink }}" integrity="{{ $style.Data.Integrity }}">
+
+{{ end }}
+
 {{ $cssBundle := $cssResources | resources.Concat "css/bundle.css" }}
 
 
