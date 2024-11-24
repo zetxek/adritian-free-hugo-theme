@@ -1,12 +1,3 @@
-- id: language
-  translation: "Language"
-- id: read_more
-  translation: "Read more"
-- id: published_on
-  translation: "Published en"
-- id: continue_reading
-  translation: "Continue reading"
-
 ## Header
 - id: logo_text1
   translation: "Cool"
@@ -16,6 +7,8 @@
 ## Footer
 - id: footer_notice
   translation: "© Adritian. Free Hugo theme by Adrián Moreno Peña."
+- id: language
+  translation: "Language"
 
 
 
@@ -23,7 +16,7 @@
 - id: head_title
   translation: "Demo site for Adritian - a high performance hugo theme by Adrián Moreno"
 - id: head_description
-  translation: "This hugo theme (Adritian) is based on Boostrap and has features that make it suitable for a personal site, a portfolio or other kind of Single Page Applications."
+  translation: "This hugo theme (Adritian) is based on Bootstrap and has features that make it suitable for a personal site, a portfolio or other kind of Single Page Applications."
 
 ## Homepage showcase
 - id: showcase_title
@@ -122,3 +115,11 @@
   translation: "Exact street/neighborhood (you can omit this)<br />Postcode, City"
 - id: contact_button
   translation: "Send Message"
+
+## Blog
+- id: read_more
+  translation: "Read more"
+- id: published_on
+  translation: "Published en"
+- id: continue_reading
+  translation: "Continue reading"
