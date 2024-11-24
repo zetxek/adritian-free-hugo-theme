@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row flex-column-reverse flex-md-row rad-fade-down">
             <div class="col-12 cold-md-12 col-sm-6 mt-5 mt-sm-0">
-                {{ $baseLangSite := .Sites.First }}
+                {{ $baseLangSite := .Sites.Default }}
                 {{ $xp := (where .Site.RegularPages.ByDate "Type" "experience") }}
                 {{ $xp = $xp | lang.Merge (where $baseLangSite.RegularPages.ByDate.Reverse "Type" "experience") }}
                 
