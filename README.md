@@ -12,17 +12,17 @@ The templates are based on Bootstrap (so they're responsive and mobile-first), a
 Some of the best applications for the theme are for minimalistic websites, single-page applications, and personal portfolios. It has a contact form you can customize to your mail address without setting up a backend (https://formspree.io).
 
 
-🚀 Some of the improvements (vs the original theme):
+🚀 What can you expect:
 
-- removal of jQuery
-- upgrade of Bootstrap from v4 to v5
+- fast, minimalistic code (no jQuery)
+- Bootstrap from v5 as css framework
 - Hugo assets pipeline support
 - Multi-language (i18n) support
-- added more pages/templates (experience, blog)
-- upgrade loading performance (100 score in [Google Page Speed Insights](https://pagespeed.web.dev))
-- dark theme support (based on system/browser settings)
-- support for [Vercel Speed Insights](https://vercel.com/docs/speed-insights/quickstart) (via the parameter `vercelPageInsights` in `hugo.toml`, disabled by default)
-- support for [Vercel Analytics](https://vercel.com/docs/analytics/quickstart) (via the parameter `vercelAnalytics` in `hugo.toml`, disabled by default)
+- Support for custom content types (experience, blog)
+- Very high performance (100$ score in [Google Page Speed Insights](https://pagespeed.web.dev))
+- Dark theme support (based on system/browser settings)
+- Support for [Vercel Speed Insights](https://vercel.com/docs/speed-insights/quickstart) (via the parameter `vercelPageInsights` in `hugo.toml`, disabled by default)
+- Support for [Vercel Analytics](https://vercel.com/docs/analytics/quickstart) (via the parameter `vercelAnalytics` in `hugo.toml`, disabled by default)
 
   <img width="1536" alt="SCR-20240814-ihfs" src="https://github.com/user-attachments/assets/38553a02-48d0-48f4-a69a-ed4f7e32e092">
 
