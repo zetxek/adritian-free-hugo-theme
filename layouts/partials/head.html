@@ -27,7 +27,7 @@
 {{ range .Site.Params.plugins.scss }}  
   {{ $scss := resources.Get .URL }}
   
-  {{ $style := $scss | resources.ToCSS | resources.Fingerprint }}
+  {{ $style := $scss | css.Sass | resources.Fingerprint }}
   <link rel="stylesheet" href="{{ $style.Permalink }}" integrity="{{ $style.Data.Integrity }}">
 
 {{ end }}
