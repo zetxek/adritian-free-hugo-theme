@@ -1,36 +1,42 @@
 ## Header
-- id: logo_text1
+- id: "logo_text1"
   translation: "Cool"
-- id: logo_text2
+
+- id: "logo_text2"
   translation: "Name"
 
 ## Footer
-- id: footer_notice
+- id: "footer_notice"
   translation: "© Adritian. Free Hugo theme by Adrián Moreno Peña."
-- id: language
+
+- id: "language"
   translation: "Language"
 
-
 ## Homepage head title
-- id: head_title
+- id: "head_title"
   translation: "Demo site for Adritian - a high performance hugo theme by Adrián Moreno"
-- id: head_description
+
+- id: "head_description"
   translation: "This hugo theme (Adritian) is based on Bootstrap and has features that make it suitable for a personal site, a portfolio or other kind of Single Page Applications."
 
 ## Homepage showcase
-- id: showcase_title
+- id: "showcase_title"
   translation: "Hello, I’m Cool."
-- id: showcase_subtitle
+
+- id: "showcase_subtitle"
   translation: "This is my title"
-- id: showcase_description
-  translation: This is a good place to start with an introduction about yourself. Maybe a mention to the place <a target='_blank' href='https://www.adrianmoreno.info/'>where you work</a>. You can also mention where you live, your background and what's the purpose of the site. <br>You can download this theme from <a target='_blank' href='https://github.com/zetxek/adritian-free-hugo-theme'>github</a>, and see it live <a target='_blank' href="https://adritian-demo.vercel.app//">as a demo site</a> or <a target='_blank' href="https://www.adrianmoreno.info">a real one</a>.<br>You can find this content to edit in the theme.yaml file.
-- id: showcase_button
+
+- id: "showcase_description"
+  translation: "This is a good place to start with an introduction about yourself. Maybe a mention to the place <a target='_blank' href='https://www.adrianmoreno.info/'>where you work</a>. You can also mention where you live, your background and what's the purpose of the site. <br>You can download this theme from <a target='_blank' href='https://github.com/zetxek/adritian-free-hugo-theme'>github</a>, and see it live <a target='_blank' href='https://adritian-demo.vercel.app//'>as a demo site</a> or <a target='_blank' href='https://www.adrianmoreno.info'>a real one</a>.<br>You can find this content to edit in the theme.yaml file."
+
+- id: "showcase_button"
   translation: "Contact"
 
 ## Homepage about
-- id: about_title
+- id: "about_title"
   translation: "Who am I?"
-- id: about_content
+
+- id: "about_content"
   translation:  <p class="lead">
       Here you can add some information about you. A small excerpt that describes 
       your experience, for example.   
@@ -42,83 +48,109 @@
       new gig? Even if you are not looking for a job, it's a good way to hint about
       what kind of projects you are interested in.
     </p>
-- id: about_button
+
+- id: "about_button"
   translation: "About Me"
 
 ## Homepage education
-- id: education_title
-  translation: Education
+- id: "education_title"
+  translation: "Education"
 
 ## Homepage experience
-- id: experience_title
-  translation: Experience
-- id: experience_description
-  translation: This is where you can highlight a bit over your experience. Years of total experience, specialization, etc.
-- id: experience_button
+- id: "experience_title"
+  translation: "Experience"
+
+- id: "experience_description"
+  translation: "This is where you can highlight a bit over your experience. Years of total experience, specialization, etc."
+
+- id: "experience_button"
   translation: "LinkedIn" 
-- id: experience_button_url
+
+- id: "experience_button_url"
   translation: "https://www.linkedin.com/in/adrianmoreno/"
-- id: experience_button2
+
+- id: "experience_button2"
   translation: "Download my resume"
-- id: experience_button2_url
+
+- id: "experience_button2_url"
   translation: "Download my resume"
-- id: experience_button3
+
+- id: "experience_button3"
   translation: "View all"
-- id: experience_button3_url
+
+- id: "experience_button3_url"
   translation: "/experience"
 
 ## Homepage client & work
-- id: client_work_title
-  translation: Clients & Work
+- id: "client_work_title"
+  translation: "Clients & Work"
 
 ## Homepage newsletter
-- id: newsletter_title
-  translation: Newsletter
-- id: newsletter_button
+- id: "newsletter_title"
+  translation: "Newsletter"
+
+- id: "newsletter_button"
   translation: "Subscribe"
-- id: newsletter_placeholder
+
+- id: "newsletter_placeholder"
   translation: "Your email"
-- id: newsletter_success_message
+
+- id: "newsletter_success_message"
   translation: "Thank you for subscribing to my newsletter!"
-- id: newsletter_error_message
+
+- id: "newsletter_error_message"
   translation: "An error occurred. Please try again."
-- id: newsletter_note
-  translation: "We'll never share your email with anyone else." 
+
+- id: "newsletter_note"
+  translation: "We'll never share your email with anyone else."
 
 ## Homepage testimonials
-- id: testimonials_title
-  translation: Testimonials
+- id: "testimonials_title"
+  translation: "Testimonials"
 
 ## Homepage contact
-- id: contact_title
-  translation: Contact
-- id: contact_button
+- id: "contact_title"
+  translation: "Contact"
+
+- id: "contact_button"
   translation: "Send message"
-- id: contact_form_name
+
+- id: "contact_form_name"
   translation: "Full Name"
-- id: contact_form_email
+
+- id: "contact_form_email"
   translation: "Email Address"
-- id: contact_form_message
+
+- id: "contact_form_message"
   translation: "Type Your Message Here"
-- id: contact_phone_title
+
+- id: "contact_phone_title"
   translation: "Phone Number"
-- id: contact_phone_number
+
+- id: "contact_phone_number"
   translation: "+555 (11) 123 44 55"
-- id: contact_email_title
+
+- id: "contact_email_title"
   translation: "Email"
-- id: contact_email_email
+
+- id: "contact_email_email"
   translation: '<a href="mailto:mail@example.com">mail@example.com</a>'
-- id: contact_address_title
+
+- id: "contact_address_title"
   translation: "Address"
-- id: contact_address_address
+
+- id: "contact_address_address"
   translation: "Exact street/neighborhood (you can omit this)<br />Postcode, City"
-- id: contact_button
+
+- id: "contact_button"
   translation: "Send Message"
 
 ## Blog
-- id: read_more
+- id: "read_more"
   translation: "Read more"
-- id: published_on
+
+- id: "published_on"
   translation: "Published en"
-- id: continue_reading
+
+- id: "continue_reading"
   translation: "Continue reading"

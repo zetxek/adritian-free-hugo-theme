@@ -1,120 +1,151 @@
-Here’s the translation of the content to Spanish:
-
 ## Header
-- id: logo_text1  
+- id: "logo_text1"
   translation: "Genial"
-- id: logo_text2  
+
+- id: "logo_text2"
   translation: "Nombre"
 
 ## Footer
-- id: footer_notice  
+- id: "footer_notice"
   translation: "© Adritian. Tema gratuito de Hugo por Adrián Moreno Peña."
-- id: language  
+
+- id: "language"
   translation: "Idioma"
 
 ## Homepage head title
-- id: head_title  
+- id: "head_title"
   translation: "Sitio demo de Adritian - un tema Hugo de alto rendimiento por Adrián Moreno"
-- id: head_description  
+
+- id: "head_description"
   translation: "Este tema de Hugo (Adritian) está basado en Bootstrap y tiene características que lo hacen adecuado para un sitio personal, un portafolio u otros tipos de aplicaciones de una sola página."
 
 ## Homepage showcase
-- id: showcase_title  
+- id: "showcase_title"
   translation: "Hola, soy Cool."
-- id: showcase_subtitle  
+
+- id: "showcase_subtitle"
   translation: "Este es mi título"
-- id: showcase_description
+
+- id: "showcase_description"
   translation: "Este es un buen lugar para comenzar con una introducción sobre ti mismo. Tal vez una mención al lugar <a target='_blank' href='https://www.adrianmoreno.info/'>donde trabajas</a>. También puedes mencionar dónde vives, tu formación y cuál es el propósito del sitio. <br>Puedes descargar este tema desde <a target='_blank' href='https://github.com/zetxek/adritian-free-hugo-theme'>github</a>, y verlo en vivo <a target='_blank' href='https://adritian-demo.vercel.app//'>como un sitio demo</a> o <a target='_blank' href='https://www.adrianmoreno.info'>uno real</a>.<br>Puedes encontrar este contenido para editar en el archivo theme.yaml."
-- id: showcase_button  
+
+- id: "showcase_button"
   translation: "Contactar"
 
 ## Homepage about
-- id: about_title  
+- id: "about_title"
   translation: "¿Quién soy?"
-- id: about_content  
+
+- id: "about_content"
   translation:  <p class="lead">
       Aquí puedes agregar algo de información sobre ti. Un pequeño extracto que describa tu experiencia, por ejemplo.   
       </p>
       <p class="lead">
       Explica algo sobre tu formación académica, así como tus áreas de trabajo preferidas. Piensa en esta sección como un contexto para la experiencia que describirás más abajo. ¿Por qué cambiaste de trabajo? ¿Qué te motivó a tomar un nuevo puesto? Incluso si no estás buscando trabajo, es una buena manera de insinuar qué tipo de proyectos te interesan.
     </p>
-- id: about_button  
+
+- id: "about_button"
   translation: "Sobre mí"
 
 ## Homepage education
-- id: education_title  
+- id: "education_title"
   translation: "Educación"
 
 ## Homepage experience
-- id: experience_title  
+- id: "experience_title"
   translation: "Experiencia"
-- id: experience_description  
+
+- id: "experience_description"
   translation: "Aquí es donde puedes resaltar un poco sobre tu experiencia. Años de experiencia total, especialización, etc."
-- id: experience_button  
+
+- id: "experience_button"
   translation: "LinkedIn" 
-- id: experience_button_url  
+
+- id: "experience_button_url"
   translation: "https://www.linkedin.com/in/adrianmoreno/"
-- id: experience_button2  
+
+- id: "experience_button2"
   translation: "Descargar mi CV"
-- id: experience_button2_url  
+
+- id: "experience_button2_url"
   translation: "Descargar mi CV"
-- id: experience_button3  
+
+- id: "experience_button3"
   translation: "Ver todo"
-- id: experience_button3_url  
-  translation: "/experiencia"
+
+- id: "experience_button3_url"
+  translation: "/es/experience"
 
 ## Homepage client & work
-- id: client_work_title  
+- id: "client_work_title"
   translation: "Clientes y Trabajos"
 
 ## Homepage newsletter
-- id: newsletter_title  
+- id: "newsletter_title"
   translation: "Boletín"
-- id: newsletter_button  
+
+- id: "newsletter_button"
   translation: "Suscribirse"
-- id: newsletter_placeholder  
+
+- id: "newsletter_placeholder"
   translation: "Tu correo electrónico"
-- id: newsletter_success_message  
+
+- id: "newsletter_success_message"
   translation: "¡Gracias por suscribirte a mi boletín!"
-- id: newsletter_error_message  
+
+- id: "newsletter_error_message"
   translation: "Ocurrió un error. Por favor, inténtalo de nuevo."
-- id: newsletter_note  
+
+- id: "newsletter_note"
   translation: "Nunca compartiremos tu correo electrónico con nadie más."
 
 ## Homepage testimonials
-- id: testimonials_title  
+- id: "testimonials_title"
   translation: "Testimonios"
 
 ## Homepage contact
-- id: contact_title  
+- id: "contact_title"
   translation: "Contacto"
-- id: contact_button  
+
+- id: "contact_button"
   translation: "Enviar mensaje"
-- id: contact_form_name  
+
+- id: "contact_form_name"
   translation: "Nombre completo"
-- id: contact_form_email  
+
+- id: "contact_form_email"
   translation: "Correo electrónico"
-- id: contact_form_message  
+
+- id: "contact_form_message"
   translation: "Escribe tu mensaje aquí"
-- id: contact_phone_title  
+
+- id: "contact_phone_title"
   translation: "Número de teléfono"
-- id: contact_phone_number  
+
+- id: "contact_phone_number"
   translation: "+555 (11) 123 44 55"
-- id: contact_email_title  
+
+- id: "contact_email_title"
   translation: "Correo electrónico"
-- id: contact_email_email  
+
+- id: "contact_email_email"
   translation: '<a href="mailto:mail@example.com">mail@example.com</a>'
-- id: contact_address_title  
+
+- id: "contact_address_title"
   translation: "Dirección"
-- id: contact_address_address  
+
+- id: "contact_address_address"
   translation: "Calle/barrio exacto (puedes omitir esto)<br />Código postal, Ciudad"
-- id: contact_button  
+
+- id: "contact_button"
   translation: "Enviar mensaje"
 
 ## Blog
-- id: read_more  
+- id: "read_more"
   translation: "Leer más"
-- id: published_on  
+
+- id: "published_on"
   translation: "Publicado el"
-- id: continue_reading  
+
+- id: "continue_reading"
   translation: "Continuar leyendo"
