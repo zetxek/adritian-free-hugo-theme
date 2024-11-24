@@ -74,16 +74,17 @@ hugo v0.122.0-b9a03bd59d5f71a529acb3e33f995e0ef332b3aa+extended darwin/arm64 Bui
 
 WARN  found no layout file for "html" for kind "taxonomy": You should create a template file which matches Hugo Layouts Lookup Rules for this combination.
 
-                   | EN
--------------------+------
-  Pages            |   5
-  Paginator pages  |   0
-  Non-page files   |   0
-  Static files     | 114
-  Processed images |   4
-  Aliases          |   0
-  Sitemaps         |   1
-  Cleaned          |   0
+                   | EN | ES | FR
+-------------------+----+----+-----
+  Pages            | 23 | 11 |  8
+  Paginator pages  |  0 |  0 |  0
+  Non-page files   |  0 |  0 |  0
+  Static files     | 87 | 87 | 87
+  Processed images | 28 |  0 |  0
+  Aliases          |  1 |  0 |  0
+  Cleaned          |  0 |  0 |  0
+
+
 
 Built in 617 ms
 Environment: "development"
