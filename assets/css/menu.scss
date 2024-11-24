@@ -83,16 +83,14 @@ $transition: 280ms all 120ms ease-out;
     .dropdown__menu {
       position: absolute;
       min-width: 15ch;
-      left: 50%;
-      top: calc(-100% - 3rem);
+      left: 0;
+      top: 0;
       transition: $transition;
-      transform: rotateX(-90deg) translateX(-50%);
-      transform-origin: top center;
+      transform: translateY(-80%);
+      transform-origin: bottom center;
       visibility: hidden;
       opacity: 0.3;
-      padding: 0.5em 0;
       background-color: #fff;
-      border-radius: 4px;
       box-shadow: 0 0.15em 0.25em rgba(black, 0.25);
   
       li.current{
@@ -121,9 +119,9 @@ $transition: 280ms all 120ms ease-out;
       border: 0.5rem solid transparent;
       border-bottom-color: #fff;
       position: absolute;
-      top: calc(55% - 1.25rem);
+      top: 0;
       left: 112%;
-      transform: translateX(-230%) rotateX(180deg);
+      transform: translateX(-220%) rotateX(180deg)  translateY(-82%);
       transition: $transition;
       opacity: 0;
       will-change: opacity;
@@ -137,8 +135,8 @@ $transition: 280ms all 120ms ease-out;
   
       .dropdown__menu {
         opacity: 1;
-        transform: rotateX(0) translateX(-50%);
         visibility: visible;
+        transform: translateY(-80%);
   
         a {
           opacity: 1;

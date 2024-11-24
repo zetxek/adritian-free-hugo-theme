@@ -32,9 +32,9 @@
               {{ end }}
               {{ end }}
               {{ range $.Translations }}
-              <li><a title="{{ .Language.LanguageName }}" href="{{ .Permalink }}">{{ .Language.LanguageName }}</a></li>
-            </ul>
+              <li><a class="translation" title="{{ .Language.LanguageName }}" href="{{ .Permalink }}">{{ .Language.LanguageName }}</a></li>
               {{ end }}
+            </ul>
           </li>
         </ul>
       </nav>
