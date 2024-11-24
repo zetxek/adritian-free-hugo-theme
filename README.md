@@ -17,7 +17,7 @@ Some of the best applications for the theme are for minimalistic websites, singl
 - removal of jQuery
 - upgrade of Bootstrap from v4 to v5
 - Hugo assets pipeline support
-- some (basic) i18n features
+- Multi-language (i18n) support
 - added more pages/templates (experience, blog)
 - upgrade loading performance (100 score in [Google Page Speed Insights](https://pagespeed.web.dev))
 - dark theme support (based on system/browser settings)
@@ -93,6 +93,12 @@ Web Server is available at http://localhost:53031/ (bind address 127.0.0.1)
 Press Ctrl+C to stop
 
 ```
+
+#### Multi-language support
+
+The theme implements the [internationalization (i18n) system by Hugo](https://gohugo.io/content-management/multilingual/), to enable multilingual sites.
+
+
 
 ## Dark theme
 

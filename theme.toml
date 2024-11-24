@@ -8,11 +8,14 @@ description = "Minimalistic and clean theme for Hugo, great for Single Page pers
 homepage = "https://github.com/zetxek/adritian-free-hugo-theme"
 demosite = "https://zetxek.github.io/adritian-demo/"
 
-tags = ["responsive", "clean", "light", "personal", "bootstrap", "blog", "portfolio", "dark", "light"]
+tags = ["responsive", "clean", "light", "personal", "bootstrap", "blog", "portfolio", "dark", "light", "multilingual"]
 
 
 features = [
-    "widgets"
+    "widgets",
+    "blog",
+    "portfolio",
+    "dark-mode"
 ]
 
 min_version = "0.123.0"
