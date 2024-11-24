@@ -1,12 +1,6 @@
 baseURL = "https://www.adrianmoreno.info"
-languageCode = "en-us"
+languageCode = "en"
 theme = "adritian-free-hugo-theme"
-
-
-# Languages
-defaultContentLanguage = 'en'
-defaultContentLanguageInSubdir = false
-fallbackLanguages = 'en'
 
 [languages]
   [languages.en]
@@ -41,6 +35,21 @@ fallbackLanguages = 'en'
         URL = "#contact"
         weight = 6
 
+      [[languages.en.menus.footer]]
+        name = "About"
+        URL = "#about"
+        weight = 2
+
+      [[languages.en.menus.footer]]
+        name = "Portfolio"
+        URL = "#portfolio"
+        weight = 3
+
+      [[languages.en.menus.footer]]
+        name = "Contact"
+        URL = "#contact"
+        weight = 4
+
 
   [languages.es]
     disabled = false
@@ -57,6 +66,7 @@ fallbackLanguages = 'en'
         name = 'Portfolio'
         URL = '/es/#portfolio'
         weight = 3
+
       #  [[languages.es.menus.header]]
       #  name = "Experiencia"
       #  URL = "/es/#experience"
@@ -72,6 +82,22 @@ fallbackLanguages = 'en'
         URL = "/es/#contact"
         weight = 6
 
+      [[languages.es.menus.footer]]
+        name = "Sobre mi"
+        URL = "/es/#about"
+        weight = 2
+
+      [[languages.es.menus.footer]]
+        name = "Portfolio"
+        URL = "/es/#portfolio"
+        weight = 3
+
+      [[languages.es.menus.footer]]
+        name = "Contact"
+        URL = "/es/#contact"
+        weight = 4
+
+  
   
 
 # Plugins
@@ -92,26 +118,6 @@ fallbackLanguages = 'en'
   URL = "js/sticky-header.js"
   [[params.plugins.js]]
   URL = "js/library/fontfaceobserver.js"
-
-
-# navigation
-[menu]
-
-
-  [[menu.footer]]
-  name = "About"
-  URL = "#about"
-  weight = 2
-
-  [[menu.footer]]
-  name = "Portfolio"
-  URL = "#portfolio"
-  weight = 3
-
-  [[menu.footer]]
-  name = "Contact"
-  URL = "#contact"
-  weight = 4
 
 
 [params]
