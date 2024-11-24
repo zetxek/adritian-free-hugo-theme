@@ -5,9 +5,9 @@ theme = "adritian-free-hugo-theme"
 [languages]
   [languages.en]
     disabled = false
-    languageCode = ''
-    languageDirection = ''
-    languageName = ''
+    languageCode = 'en'
+    languageDirection = 'ltr'
+    languageName = 'English'
     title = ''
     weight = 0
 
@@ -53,9 +53,9 @@ theme = "adritian-free-hugo-theme"
 
   [languages.es]
     disabled = false
-    languageCode = ''
-    languageDirection = ''
-    languageName = ''
+    languageCode = 'es'
+    languageDirection = 'ltr'
+    languageName = 'Español'
     title = ''
     weight = 0
       [[languages.es.menus.header]]
@@ -97,6 +97,52 @@ theme = "adritian-free-hugo-theme"
         URL = "/es/#contact"
         weight = 4
 
+  [languages.fr]
+    disabled = false
+    languageCode = 'fr'
+    languageDirection = 'ltr'
+    languageName = 'Français'
+    title = ''
+    weight = 0
+
+    [languages.fr.menus]
+      [[languages.fr.menus.header]]
+        name = 'About'
+        URL = '#about'
+        weight = 2
+      [[languages.fr.menus.header]]
+        name = 'Portfolio'
+        URL = '#portfolio'
+        weight = 3
+      #  [[languages.fr.menus.header]]
+      #  name = "Experience"
+      #  URL = "#experience"
+      #  weight = 4
+
+      [[languages.fr.menus.header]]
+        name = "Blog"
+        URL = "/blog"
+        weight = 5
+
+      [[languages.fr.menus.header]]
+        name = "Contact"
+        URL = "#contact"
+        weight = 6
+
+      [[languages.fr.menus.footer]]
+        name = "About"
+        URL = "#about"
+        weight = 2
+
+      [[languages.fr.menus.footer]]
+        name = "Portfolio"
+        URL = "#portfolio"
+        weight = 3
+
+      [[languages.fr.menus.footer]]
+        name = "Contact"
+        URL = "#contact"
+        weight = 4
   
   
 
@@ -119,6 +165,9 @@ theme = "adritian-free-hugo-theme"
   [[params.plugins.js]]
   URL = "js/library/fontfaceobserver.js"
 
+  # SCSS Plugins
+  [[params.plugins.scss]]
+  URL = "css/menu.scss"
 
 [params]
 

@@ -23,8 +23,8 @@ Here’s the translation of the content to French:
   translation: "Bonjour, je suis Cool."
 - id: showcase_subtitle  
   translation: "Voici mon titre"
-- id: showcase_description  
-  translation: "C'est un bon endroit pour commencer avec une présentation de vous-même. Peut-être mentionner l'endroit <a target='_blank' href='https://www.adrianmoreno.info/'>où vous travaillez</a>. Vous pouvez aussi mentionner où vous vivez, votre parcours et quel est l'objectif du site. <br>Vous pouvez télécharger ce thème depuis <a target='_blank' href='https://github.com/zetxek/adritian-free-hugo-theme'>github</a>, et le voir en direct <a target='_blank' href='https://adritian-demo.vercel.app//'>comme un site de démonstration</a> ou <a target='_blank' href="https://www.adrianmoreno.info">un vrai site</a>.<br>Vous pouvez trouver ce contenu à éditer dans le fichier theme.yaml."
+- id: "showcase_description"
+  translation: "C'est un bon endroit pour commencer avec une présentation de vous-même. Peut-être mentionner l'endroit <a target='_blank' href='https://www.adrianmoreno.info/'>où vous travaillez</a>. Vous pouvez aussi mentionner où vous vivez, votre parcours et quel est l'objectif du site. <br>Vous pouvez télécharger ce thème depuis <a target='_blank' href='https://github.com/zetxek/adritian-free-hugo-theme'>github</a>, et le voir en direct <a target='_blank' href='https://adritian-demo.vercel.app//'>comme un site de démonstration</a> ou <a target='_blank' href='https://www.adrianmoreno.info'>un vrai site</a>.<br>Vous pouvez trouver ce contenu à éditer dans le fichier theme.yaml."
 - id: showcase_button  
   translation: "Contacter"
 

@@ -23,8 +23,8 @@ Here’s the translation of the content to Spanish:
   translation: "Hola, soy Cool."
 - id: showcase_subtitle  
   translation: "Este es mi título"
-- id: showcase_description  
-  translation: "Este es un buen lugar para comenzar con una introducción sobre ti mismo. Tal vez una mención al lugar <a target='_blank' href='https://www.adrianmoreno.info/'>donde trabajas</a>. También puedes mencionar dónde vives, tu formación y cuál es el propósito del sitio. <br>Puedes descargar este tema desde <a target='_blank' href='https://github.com/zetxek/adritian-free-hugo-theme'>github</a>, y verlo en vivo <a target='_blank' href='https://adritian-demo.vercel.app//'>como un sitio demo</a> o <a target='_blank' href="https://www.adrianmoreno.info">uno real</a>.<br>Puedes encontrar este contenido para editar en el archivo theme.yaml."
+- id: showcase_description
+  translation: "Este es un buen lugar para comenzar con una introducción sobre ti mismo. Tal vez una mención al lugar <a target='_blank' href='https://www.adrianmoreno.info/'>donde trabajas</a>. También puedes mencionar dónde vives, tu formación y cuál es el propósito del sitio. <br>Puedes descargar este tema desde <a target='_blank' href='https://github.com/zetxek/adritian-free-hugo-theme'>github</a>, y verlo en vivo <a target='_blank' href='https://adritian-demo.vercel.app//'>como un sitio demo</a> o <a target='_blank' href='https://www.adrianmoreno.info'>uno real</a>.<br>Puedes encontrar este contenido para editar en el archivo theme.yaml."
 - id: showcase_button  
   translation: "Contactar"
 
