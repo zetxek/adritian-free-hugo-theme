@@ -97,6 +97,8 @@ Press Ctrl+C to stop
 
 #### Multi-language support
 
+https://github.com/user-attachments/assets/030e765a-275f-4141-88e0-b854ebe551da
+
 The theme implements the [internationalization (i18n) system by Hugo](https://gohugo.io/content-management/multilingual/), to enable multilingual sites.
 
 See the content in `i18n` to edit the translations, and the configuration `hugo.toml` to define your active languages. The example site has 3 enabled languages (`en` for English, `es` for Spanish and `fr` for French).
