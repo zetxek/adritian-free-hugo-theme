@@ -8,8 +8,8 @@ position: "Butterfly collector" # from-to, for example "2022-2024". Fill-in.
 
 params:
     image:
-        x: "images/testimonials/testimonial3.jpg" # example: "images/clients/asgardia.png"
-        _2x: "images/testimonials/testimonial3@2x.jpg" # example: "images/clients/asgardia@2x.png"
+        x: "images/testimonials/testimonial3.png" # example: "images/clients/asgardia.png"
+        _2x: "images/testimonials/testimonial3@2x.png" # example: "images/clients/asgardia@2x.png"
 
 ## For the content, you can use markdown
 ##
