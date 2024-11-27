@@ -153,7 +153,7 @@ theme = "adritian-free-hugo-theme"
   [[params.plugins.css]]
   URL = "css/main.css"
   [[params.plugins.css]]
-  URL = "css/rad-icons.css"
+  URL = "css/adritian-icons.css"
   [[params.plugins.css]]
   URL = "css/custom.css"
 
