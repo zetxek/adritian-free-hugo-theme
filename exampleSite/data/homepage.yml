@@ -17,10 +17,10 @@ showcase:
     - icon: "linkedin"
       URL: "https://www.linkedin.com/in/adrianmoreno/"
 
-    - icon: "github"
+    - icon: "square-github"
       URL: "https://github.com/zetxek"
 
-    - icon: "twitter"
+    - icon: "x-twitter"
       URL: "https://twitter.com/zetxek"
 
     - icon: "dribbble"
@@ -35,7 +35,7 @@ showcase:
     - icon: "instagram"
       URL: "https://www.instagram.com/zetxek/"
 
-    - icon: "facebook"
+    - icon: "square-facebook"
       URL: "https://www.facebook.com/zetxek/"
 
     - icon: "codepen"
@@ -44,11 +44,28 @@ showcase:
     - icon: "yelp"
       URL: "https://www.yelp.com/"
 
+    - icon: "bluesky"
+      URL: "https://www.bluesky.com/"
+
+    - icon: "threads"
+      URL: "https://www.threads.net/"
+
+    - icon: "face-smile"
+      URL: "https://www.adrianmoreno.info/"
+
+    - icon: "user"
+      URL: "https://www.adrianmoreno.info/"
+
+    - icon: "quote"
+      URL: "https://www.adrianmoreno.info/"
+
+    - icon: "cloud-arrow-down"
+      URL: "https://www.adrianmoreno.info/"
 # about
 about:
   enable: true
   button:
-    icon: "icon-smile-fill"
+    icon: "icon-user"
     URL: "https://www.linkedin.com/in/adrianmoreno/"
   image:
     x: "images/who-am-i/user-picture.png"
@@ -73,9 +90,9 @@ experience:
   button:
     icon: "icon-linkedin"
   button2:
-    icon: "icon-profile-fill"
+    icon: "icon-file-pdf"
   button3:
-    icon: "icon-arrow-right"
+    icon: "icon-cloud-arrow-down"
 
 # Client & Work
 client_and_work:
