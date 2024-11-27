@@ -1,11 +1,11 @@
 @font-face {
   font-family: 'adritian-icons';
-  src: url('../fonts/adritian-icons.eot?49721891');
-  src: url('../fonts/adritian-icons.eot?49721891#iefix') format('embedded-opentype'),
-       url('../fonts/adritian-icons.woff2?49721891') format('woff2'),
-       url('../fonts/adritian-icons.woff?49721891') format('woff'),
-       url('../fonts/adritian-icons.ttf?49721891') format('truetype'),
-       url('../fonts/adritian-icons.svg?49721891#adritian-icons') format('svg');
+  src: url('../fonts/adritian-icons.eot?5985466');
+  src: url('../fonts/adritian-icons.eot?5985466#iefix') format('embedded-opentype'),
+       url('../fonts/adritian-icons.woff2?5985466') format('woff2'),
+       url('../fonts/adritian-icons.woff?5985466') format('woff'),
+       url('../fonts/adritian-icons.ttf?5985466') format('truetype'),
+       url('../fonts/adritian-icons.svg?5985466#adritian-icons') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -15,7 +15,7 @@
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
     font-family: 'adritian-icons';
-    src: url('../fonts/adritian-icons.svg?49721891#adritian-icons') format('svg');
+    src: url('../fonts/adritian-icons.svg?5985466#adritian-icons') format('svg');
   }
 }
 */
@@ -59,15 +59,24 @@
 .icon-x-twitter:before { content: '\e802'; } /* '' */
 .icon-email:before { content: '\e803'; } /* '' */
 .icon-user:before { content: '\f007'; } /* '' */
+.icon-download:before { content: '\f019'; } /* '' */
+.icon-circle-info:before { content: '\f05a'; } /* '' */
 .icon-square-twitter:before { content: '\f081'; } /* '' */
 .icon-square-facebook:before { content: '\f082'; } /* '' */
 .icon-linkedin:before { content: '\f08c'; } /* '' */
 .icon-square-github:before { content: '\f092'; } /* '' */
-.icon-quote:before { content: '\f10d'; } /* '' */
+.icon-circle-arrow-left:before { content: '\f0a8'; } /* '' */
+.icon-circle-arrow-right:before { content: '\f0a9'; } /* '' */
+.icon-circle-arrow-up:before { content: '\f0aa'; } /* '' */
+.icon-circle-arrow-down:before { content: '\f0ab'; } /* '' */
+.icon-quote-left:before { content: '\f10d'; } /* '' */
 .icon-face-smile:before { content: '\f118'; } /* '' */
+.icon-square-arrow-up-right:before { content: '\f14c'; } /* '' */
 .icon-youtube:before { content: '\f167'; } /* '' */
 .icon-instagram:before { content: '\f16d'; } /* '' */
 .icon-dribbble:before { content: '\f17d'; } /* '' */
 .icon-behance:before { content: '\f1b4'; } /* '' */
+.icon-file-pdf:before { content: '\f1c1'; } /* '' */
 .icon-codepen:before { content: '\f1cb'; } /* '' */
 .icon-yelp:before { content: '\f1e9'; } /* '' */
+.icon-cloud-arrow-down:before { content: '\f381'; } /* '' */

@@ -107,6 +107,60 @@
       "css": "yelp",
       "code": 61929,
       "src": "fa6brands"
+    },
+    {
+      "uid": "4b1676624d44038d36d33bd538d549fe",
+      "css": "download",
+      "code": 61465,
+      "src": "fa6solid"
+    },
+    {
+      "uid": "1c9c53430169877cd218b79d3b1780bd",
+      "css": "file-pdf",
+      "code": 61889,
+      "src": "fa6solid"
+    },
+    {
+      "uid": "6c1121466423a9681a8408e889f5695d",
+      "css": "circle-arrow-left",
+      "code": 61608,
+      "src": "fa6solid"
+    },
+    {
+      "uid": "919ee1a7ee21d14e4d40122937a33160",
+      "css": "circle-arrow-right",
+      "code": 61609,
+      "src": "fa6solid"
+    },
+    {
+      "uid": "304f96ad84267f3857957b12d15ac009",
+      "css": "circle-arrow-up",
+      "code": 61610,
+      "src": "fa6solid"
+    },
+    {
+      "uid": "c9c307d1fa78fa912df2b7a1c7b1f53b",
+      "css": "circle-arrow-down",
+      "code": 61611,
+      "src": "fa6solid"
+    },
+    {
+      "uid": "6d60d32286fd0fd7967089117ba49da5",
+      "css": "cloud-arrow-down",
+      "code": 62337,
+      "src": "fa6solid"
+    },
+    {
+      "uid": "14fb7c860f56db56ef65c1d41a31488d",
+      "css": "square-arrow-up-right",
+      "code": 61772,
+      "src": "fa6solid"
+    },
+    {
+      "uid": "89815b2565674eb5018b3bd9b07b12d4",
+      "css": "circle-info",
+      "code": 61530,
+      "src": "fa6solid"
     }
   ]
 }
