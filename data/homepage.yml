@@ -44,6 +44,11 @@ showcase:
     - icon: "yelp"
       URL: "https://www.yelp.com/"
 
+    - icon: "bluesky"
+      URL: "https://www.bluesky.com/"
+
+    - icon: "threads"
+      URL: "https://www.threads.net/"
 # about
 about:
   enable: true
