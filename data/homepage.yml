@@ -10,17 +10,17 @@ showcase:
     x: "images/showcase/showcase-mobile.jpg"
 
   button:
-    icon: "icon-mail-fill"
+    icon: "icon-email"
     URL: "https://www.adrianmoreno.info/"
 
   socialLinks:
     - icon: "linkedin"
       URL: "https://www.linkedin.com/in/adrianmoreno/"
 
-    - icon: "github"
+    - icon: "square-github"
       URL: "https://github.com/zetxek"
 
-    - icon: "twitter"
+    - icon: "x-twitter"
       URL: "https://twitter.com/zetxek"
 
     - icon: "dribbble"
@@ -35,7 +35,7 @@ showcase:
     - icon: "instagram"
       URL: "https://www.instagram.com/zetxek/"
 
-    - icon: "facebook"
+    - icon: "square-facebook"
       URL: "https://www.facebook.com/zetxek/"
 
     - icon: "codepen"
@@ -49,6 +49,15 @@ showcase:
 
     - icon: "threads"
       URL: "https://www.threads.net/"
+
+    - icon: "face-smile"
+      URL: "https://www.adrianmoreno.info/"
+
+    - icon: "user"
+      URL: "https://www.adrianmoreno.info/"
+
+    - icon: "quote"
+      URL: "https://www.adrianmoreno.info/"
 # about
 about:
   enable: true
@@ -76,9 +85,9 @@ education:
 experience:
   enable: true
   button:
-    icon: "icon-linkedin-fill"
+    icon: "icon-linkedin"
   button2:
-    icon: "icon-profile-fill"
+    icon: "icon-profile"
   button3:
     icon: "icon-arrow-right"
 
@@ -96,7 +105,7 @@ contact:
   form:
     action: "#"
   button:
-    icon: "icon-mail-fill"
+    icon: "icon-email"
 
 # newsletter
 newsletter:

@@ -10,7 +10,7 @@ showcase:
     x: "images/showcase/showcase-mobile.jpg"
 
   button:
-    icon: "icon-mail-fill"
+    icon: "icon-email"
     URL: "https://www.adrianmoreno.info/"
 
   socialLinks:
@@ -71,7 +71,7 @@ education:
 experience:
   enable: true
   button:
-    icon: "icon-linkedin-fill"
+    icon: "icon-linkedin"
   button2:
     icon: "icon-profile-fill"
   button3:
@@ -91,7 +91,7 @@ contact:
   form:
     action: "#"
   button:
-    icon: "icon-mail-fill"
+    icon: "icon-email"
 
 # newsletter
 newsletter:
