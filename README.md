@@ -63,36 +63,39 @@ Note: the theme has **not** been migrated to Hugo Modules yet. To install it, yo
 - Start Hugo with `hugo server -D`
 - 🎉 The theme is alive on http://localhost:1313/
 
-The output for the last command will be something like
+_Optional:_
+if you want to preview the theme with the example content before deciding if it's what you are looking for, you can run the theme with the example content:
+```
+cd themes/adritian-free-hugo-theme/exampleSite
+hugo server --themesDir ../..
+```
+
+
+The output for the `serve` command will be something like
 ```
 adritian-demo git:(master) ✗ hugo server -D
-port 1313 already in use, attempting to use an available port
-Watching for changes in /Users/adrianmorenopena/Projects/adritian-demo/{archetypes,assets,content,data,i18n,layouts,static,themes}
-Watching for config changes in /Users/adrianmorenopena/Projects/adritian-demo/hugo.toml
+Watching for changes in /Users/adrianmorenopena/tmp/theme-test/themes/adritian-free-hugo-theme/{archetypes,assets,data,exampleSite,i18n,layouts,static}
+Watching for config changes in /Users/adrianmorenopena/tmp/theme-test/themes/adritian-free-hugo-theme/exampleSite/hugo.toml
 Start building sites …
-hugo v0.122.0-b9a03bd59d5f71a529acb3e33f995e0ef332b3aa+extended darwin/arm64 BuildDate=2024-01-26T15:54:24Z VendorInfo=brew
+hugo v0.136.2+extended darwin/arm64 BuildDate=2024-10-17T14:30:05Z VendorInfo=brew
 
-WARN  found no layout file for "html" for kind "taxonomy": You should create a template file which matches Hugo Layouts Lookup Rules for this combination.
 
                    | EN | ES | FR
 -------------------+----+----+-----
-  Pages            | 23 | 11 |  8
+  Pages            | 24 | 10 |  8
   Paginator pages  |  0 |  0 |  0
   Non-page files   |  0 |  0 |  0
-  Static files     | 87 | 87 | 87
-  Processed images | 28 |  0 |  0
+  Static files     | 90 | 90 | 90
+  Processed images | 24 |  0 |  0
   Aliases          |  1 |  0 |  0
   Cleaned          |  0 |  0 |  0
 
-
-
-Built in 617 ms
+Built in 1788 ms
 Environment: "development"
-Serving pages from memory
+Serving pages from disk
 Running in Fast Render Mode. For full rebuilds on change: hugo server --disableFastRender
-Web Server is available at http://localhost:53031/ (bind address 127.0.0.1)
+Web Server is available at http://localhost:1313/ (bind address 127.0.0.1)
 Press Ctrl+C to stop
-
 ```
 
 #### Multi-language support
