@@ -35,10 +35,10 @@ jobs:
          cd theme-test
          npm i -D postcss postcss-cli autoprefixer
          ## need to copy the theme to the site
+         ls -la
          echo "first dir"
          ls -la ../ 
          echo "second dir"
          ls -lsa ../../
-         cp -r ../../ themes/adritian-free-hugo-theme theme-test/themes/adritian-free-hugo-theme
          ## run example site
          hugo server --themesDir ../.. --theme adritian-free-hugo-theme --source ../../exampleSite --themesDir ../../exampleSite/themes --bind
