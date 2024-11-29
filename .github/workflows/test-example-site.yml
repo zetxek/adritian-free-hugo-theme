@@ -41,4 +41,4 @@ jobs:
          echo "second dir"
          ls -lsa ../../
          ## run example site
-         hugo server --themesDir ../.. --theme adritian-free-hugo-theme --source ../../exampleSite --themesDir ../../exampleSite/themes --bind
+         hugo server --themesDir ../..
