@@ -5,6 +5,12 @@
       <div class="about__profile-picture col-12 col-md-6">
         {{ $img := resources.Get .Site.Data.homepage.about.image.x }}
         {{ $img2x := resources.Get .Site.Data.homepage.about.image._2x }}      
+        
+        {{ with $img }}
+        {{ with $img2x}}
+              
+        {{/* ⚠️ If the image is not found, it will not be displayed - this whole block will be skipped */}} 
+
         {{ $imgWebp := $img.Resize (printf "%dx%d webp" $img.Width $img.Height) }}
         {{ $img2xWebp := $img.Resize (printf "%dx%d webp" $img2x.Width $img2x.Height) }}
         <picture>
@@ -18,9 +24,11 @@
             srcset="{{ $img.RelPermalink }} 1x, {{ $img2x.RelPermalink }} 2x"
             data-src="{{ $img.RelPermalink }}"
             data-srcset="{{ $img.RelPermalink }} 1x, {{ $img2x.RelPermalink }} 2x"
-            alt="Profile Picture of Adrián Moreno (@zetxek), working side by side with a colleague: sitting on a desk, while looking at a screen"
+            alt='{{ i18n "about_image_alt" }}'
           />
         </picture>
+        {{ end }}
+        {{ end }}
       </div>
       <div class="col-12 col-md-6 my-auto my-auto">
         <h2>{{ i18n "about_title" }}</h2>

@@ -32,6 +32,10 @@
 - id: "showcase_button"
   translation: "Contacter"
 
+  ## not visible but used for accessibility
+- id: "showcase_image_alt"
+  translation: "A picture of Cool Name"
+
 ## Homepage about
 - id: "about_title"
   translation: "Qui suis-je ?"
@@ -51,6 +55,10 @@
 
 - id: "about_button"
   translation: "À propos de moi"
+
+  ## not visible but used for accessibility
+- id: "showcase_image_alt"
+  translation: "En photo de cool name"
 
 ## Homepage education
 - id: "education_title"

@@ -68,8 +68,8 @@ about:
     icon: "icon-user"
     URL: "https://www.linkedin.com/in/adrianmoreno/"
   image:
-    x: "images/who-am-i/user-picture.png"
-    _2x: "images/who-am-i/user-picture@2x.png"
+    x: "images/about/user-picture.png"
+    _2x: "images/about/user-picture@2x.png"
 
 # education
 education:
