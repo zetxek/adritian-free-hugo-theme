@@ -1,0 +1,187 @@
+baseURL = "https://www.adrianmoreno.info"
+languageCode = "en"
+theme = "adritian-free-hugo-theme"
+
+[languages]
+  [languages.en]
+    disabled = false
+    languageCode = 'en'
+    languageDirection = 'ltr'
+    languageName = 'English'
+    title = ''
+    weight = 0
+
+    [languages.en.menus]
+      [[languages.en.menus.header]]
+        name = 'About'
+        URL = '#about'
+        weight = 2
+      [[languages.en.menus.header]]
+        name = 'Portfolio'
+        URL = '#portfolio'
+        weight = 3
+      #  [[languages.en.menus.header]]
+      #  name = "Experience"
+      #  URL = "#experience"
+      #  weight = 4
+
+      [[languages.en.menus.header]]
+        name = "Blog"
+        URL = "/blog"
+        weight = 5
+
+      [[languages.en.menus.header]]
+        name = "Contact"
+        URL = "#contact"
+        weight = 6
+
+      [[languages.en.menus.footer]]
+        name = "About"
+        URL = "#about"
+        weight = 2
+
+      [[languages.en.menus.footer]]
+        name = "Portfolio"
+        URL = "#portfolio"
+        weight = 3
+
+      [[languages.en.menus.footer]]
+        name = "Contact"
+        URL = "#contact"
+        weight = 4
+
+
+  [languages.es]
+    disabled = false
+    languageCode = 'es'
+    languageDirection = 'ltr'
+    languageName = 'Español'
+    title = ''
+    weight = 0
+      [[languages.es.menus.header]]
+        name = 'Sobre mi'
+        URL = '/es/#about'
+        weight = 2
+      [[languages.es.menus.header]]
+        name = 'Portfolio'
+        URL = '/es/#portfolio'
+        weight = 3
+
+      #  [[languages.es.menus.header]]
+      #  name = "Experiencia"
+      #  URL = "/es/#experience"
+      #  weight = 4
+
+      [[languages.es.menus.header]]
+        name = "Blog"
+        URL = "/es/blog"
+        weight = 5
+
+      [[languages.es.menus.header]]
+        name = "Contacto"
+        URL = "/es/#contact"
+        weight = 6
+
+      [[languages.es.menus.footer]]
+        name = "Sobre mi"
+        URL = "/es/#about"
+        weight = 2
+
+      [[languages.es.menus.footer]]
+        name = "Portfolio"
+        URL = "/es/#portfolio"
+        weight = 3
+
+      [[languages.es.menus.footer]]
+        name = "Contact"
+        URL = "/es/#contact"
+        weight = 4
+
+  [languages.fr]
+    disabled = false
+    languageCode = 'fr'
+    languageDirection = 'ltr'
+    languageName = 'Français'
+    title = ''
+    weight = 0
+
+    [languages.fr.menus]
+      [[languages.fr.menus.header]]
+        name = 'About'
+        URL = '#about'
+        weight = 2
+      [[languages.fr.menus.header]]
+        name = 'Portfolio'
+        URL = '#portfolio'
+        weight = 3
+      #  [[languages.fr.menus.header]]
+      #  name = "Experience"
+      #  URL = "#experience"
+      #  weight = 4
+
+      [[languages.fr.menus.header]]
+        name = "Blog"
+        URL = "/blog"
+        weight = 5
+
+      [[languages.fr.menus.header]]
+        name = "Contact"
+        URL = "#contact"
+        weight = 6
+
+      [[languages.fr.menus.footer]]
+        name = "About"
+        URL = "#about"
+        weight = 2
+
+      [[languages.fr.menus.footer]]
+        name = "Portfolio"
+        URL = "#portfolio"
+        weight = 3
+
+      [[languages.fr.menus.footer]]
+        name = "Contact"
+        URL = "#contact"
+        weight = 4
+  
+  
+
+# Plugins
+[params.plugins]
+
+  # CSS Plugins
+  [[params.plugins.css]]
+  URL = "css/main.css"
+  [[params.plugins.css]]
+  URL = "css/adritian-icons.css"
+  [[params.plugins.css]]
+  URL = "css/custom.css"
+
+  # JS Plugins
+  [[params.plugins.js]]
+  URL = "js/rad-animations.js"
+  [[params.plugins.js]]
+  URL = "js/sticky-header.js"
+  [[params.plugins.js]]
+  URL = "js/library/fontfaceobserver.js"
+
+  # SCSS Plugins
+  [[params.plugins.scss]]
+  URL = "css/menu.scss"
+
+[params]
+
+  sections = ["showcase", "about", "education", "experience", "client-and-work", "testimonial", "contact", "newsletter"]
+
+  homepageExperienceCount = 6
+
+  # controls vercel page insights - disabled by default
+  vercelPageInsights = false
+  vercelAnalytics = false
+  
+  [params.google_analytics]
+      code = "UA-XXXXX-Y"
+      enabled = false
+  [params.google_tag_manager]
+      code = "GTM-XXXXX"
+      enabled = false

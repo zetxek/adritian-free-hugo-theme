@@ -1,0 +1,115 @@
+## Looking for strings? Check the i18n folder.
+
+# showcase
+showcase:
+  enable: true
+  image:
+    x: "images/showcase/showcase.png"
+    _2x: "images/showcase/showcase@2x.png"
+  imageMobile:
+    x: "images/showcase/showcase-mobile.jpg"
+
+  button:
+    icon: "icon-email"
+    URL: "https://www.adrianmoreno.info/"
+
+  socialLinks:
+    - icon: "linkedin"
+      URL: "https://www.linkedin.com/in/adrianmoreno/"
+
+    - icon: "square-github"
+      URL: "https://github.com/zetxek"
+
+    - icon: "x-twitter"
+      URL: "https://twitter.com/zetxek"
+
+    - icon: "dribbble"
+      URL: "#"
+
+    - icon: "behance"
+      URL: "#"
+
+    - icon: "youtube"
+      URL: "#"
+
+    - icon: "instagram"
+      URL: "https://www.instagram.com/zetxek/"
+
+    - icon: "square-facebook"
+      URL: "https://www.facebook.com/zetxek/"
+
+    - icon: "codepen"
+      URL: "#"
+
+    - icon: "yelp"
+      URL: "https://www.yelp.com/"
+
+    - icon: "bluesky"
+      URL: "https://www.bluesky.com/"
+
+    - icon: "threads"
+      URL: "https://www.threads.net/"
+
+    - icon: "face-smile"
+      URL: "https://www.adrianmoreno.info/"
+
+    - icon: "user"
+      URL: "https://www.adrianmoreno.info/"
+
+    - icon: "quote"
+      URL: "https://www.adrianmoreno.info/"
+
+    - icon: "cloud-arrow-down"
+      URL: "https://www.adrianmoreno.info/"
+# about
+about:
+  enable: true
+  button:
+    icon: "icon-user"
+    URL: "https://www.linkedin.com/in/adrianmoreno/"
+  image:
+    x: "images/about/user-picture.png"
+    _2x: "images/about/user-picture@2x.png"
+
+# education
+education:
+  enable: true
+  items:
+    - university: "University of Life"
+      year: "2012-2017"
+      degree: "Bachelor of Applied Science (BASc), Electrical Engineering"
+
+    - university: "High School of Hard Knocks"
+      year: "2009-2012"
+      degree: "High School Diploma, Sciences, Math, Computer & Business Studies"
+
+# experience
+## to hiden a button, set the icon to an empty string
+experience:
+  enable: true
+  button:
+    icon: "icon-linkedin"
+  button2:
+    icon: "icon-file-pdf"
+  button3:
+    icon: "icon-cloud-arrow-down"
+
+# Client & Work
+client_and_work:
+  enable: true
+
+# testimonial
+testimonial:
+  enable: true
+
+# contact
+contact:
+  enable: true
+  form:
+    action: "#"
+  button:
+    icon: "icon-email"
+
+# newsletter
+newsletter:
+  enable: true
