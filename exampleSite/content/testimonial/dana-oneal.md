@@ -7,7 +7,7 @@ name: "International Interrogations" # place/city/country for the experience. Fi
 position: "Internal Intern" # from-to, for example "2022-2024". Fill-in.
 
 params:
-    logo:
+    image:
         x: "images/testimonials/testimonial2.png" # example: "images/clients/asgardia.png"
         _2x: "images/testimonials/testimonial2@2x.png" # example: "images/clients/asgardia@2x.png"
 
