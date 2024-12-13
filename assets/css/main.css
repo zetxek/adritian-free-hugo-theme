@@ -10857,6 +10857,12 @@ aside.content-browser{
     .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6{
         color: #fff;
     }
+    .section li{
+        color: #a6a6a6
+    }
+    .section li::before{
+        background-color: #a6a6a6
+    }
     .display-1{
         color: #fff;
     }
