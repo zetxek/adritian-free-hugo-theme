@@ -9480,7 +9480,7 @@ html body {
 .clients__item:hover {
     opacity: 1;
 }
-.testimonial .icon-quote {
+.testimonial .icon-quote-left {
     display: block;
     margin-bottom: 16px;
 }
@@ -9488,7 +9488,7 @@ html body {
     .clients__item {
         margin-left: 50px;
     }
-    .testimonial .icon-quote {
+    .testimonial .icon-quote-left {
         margin-bottom: 24px;
     }
     .img-clip-left-backward {
@@ -10483,11 +10483,19 @@ aside.content-browser{
     .header .navbar-brand span:nth-child(2){
         color: #fff;
     }
+    .header .navbar .nav-item .nav-link::after{
+        background-color: #fff;
+    }
     .navbar-light .navbar-toggler-icon{
         background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke='rgba(255, 255, 255, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
     }
     .header.collapse.show::before, .header.collapsing::before{
         background-color: #181818;
+    }
+    @media (min-width: 992px) {
+        .header .navbar .nav-item:hover .nav-link::after {
+            background-color: #fff;
+        }
     }
     
     @media only screen and (max-width : 990px) {
