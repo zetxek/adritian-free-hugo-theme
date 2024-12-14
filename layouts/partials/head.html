@@ -1,7 +1,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-<meta name="theme-color" content="#478079" >
+<meta name="theme-color" content="#478079"/>
 
 {{ if .Site.Params.analytics.google_tag_manager.enabled }}
 <link rel="preconnect" href="https://www.googletagmanager.com">
@@ -9,7 +9,7 @@
 <!-- endinject -->
 <title>{{ i18n "head_title" }}</title>
 <meta name="description" content='{{ i18n "head_description" }}'>
-
+<meta name="generator-mode" content='{{ hugo.Environment }}'>
 {{ $critical := resources.Get "css/critical.css" | css.Sass | resources.Minify }}
 <style data-generator="critical-css">
 {{ $critical.Content | safeCSS }}
@@ -26,14 +26,11 @@
 {{ end }}
 {{ range .Site.Params.plugins.scss }}  
   {{ $scss := resources.Get .URL }}
-  
   {{ $style := $scss | css.Sass | resources.Fingerprint }}
-  <link rel="stylesheet" href="{{ $style.Permalink }}" integrity="{{ $style.Data.Integrity }}" crossorigin="anonymous">
-
+  <link rel="stylesheet" href="{{ $style.Permalink }}" integrity="{{ $style.Data.Integrity }}" crossorigin="anonymous"/>
 {{ end }}
 
 {{ $cssBundle := $cssResources | resources.Concat "css/bundle.css" }}
-
 
 <!-- Purge CSS -->
 {{ $css := $cssBundle | css.PostCSS }} 
@@ -54,7 +51,7 @@
 />
 <noscript>
   <link 
-    rel="stylesheet" 
+    rel="stylesheet"
     href="{{ $css.RelPermalink }}"
     {{ if hugo.IsProduction -}} 
     integrity="{{ $css.Data.Integrity }}"

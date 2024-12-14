@@ -1,360 +1,9 @@
-.popover,
-.tooltip,
-address {
-    font-style: normal;
-}
-.breadcrumb-item + .breadcrumb-item:hover::before,
-.btn-link,
-.btn:hover,
-.card-link:hover,
-.dropdown-item.active,
-.dropdown-item:active,
-.dropdown-item:focus,
-.dropdown-item:hover,
-.nav-link:focus,
-.nav-link:hover,
-.navbar-brand:focus,
-.navbar-brand:hover,
-.navbar-toggler:focus,
-.navbar-toggler:hover,
-.page-link:hover,
-a,
-a.badge:focus,
-a.badge:hover,
-a:not([href]):not([tabindex]),
-a:not([href]):not([tabindex]):focus,
-a:not([href]):not([tabindex]):hover {
-    text-decoration: none;
-}
-.accordion > .card,
-.collapsing,
-.dropdown-divider,
-.modal-open,
-.progress,
-.toast,
-svg {
-    overflow: hidden;
-}
-img,
-svg {
-    vertical-align: middle;
-}
-.dropdown-menu,
-.tooltip,
-body,
-caption {
-    text-align: left;
-}
-.popover,
-.tooltip,
-button,
-select {
-    text-transform: none;
-}
-pre,
-textarea {
-    overflow: auto;
-}
-.badge,
-progress,
-sub,
-sup {
-    vertical-align: baseline;
-}
-.custom-range,
-.custom-select,
-[type="search"] {
-    -webkit-appearance: none;
-}
-/*@font-face {
-    font-family: Inter;
-    font-display: swap;
-    font-style: normal;
-    font-weight: 300;
-    src: url(../fonts/inter/Inter-Light.woff2) format("woff2"), url(../fonts/inter/Inter-Light.woff) format("woff");
-}
-@font-face {
-    font-family: Inter;
-    font-display: swap;
-    font-style: normal;
-    font-weight: 700;
-    src: url(../fonts/inter/Inter-Bold.woff2) format("woff2"), url(../fonts/inter/Inter-Bold.woff) format("woff");
-}*./
-@-webkit-keyframes right-to-left {
-    0% {
-        -webkit-transform: translateX(180%);
-        transform: translateX(180%);
-    }
-    100% {
-        -webkit-transform: translateX(0);
-        transform: translateX(0);
-    }
-}
-@keyframes right-to-left {
-    0% {
-        -webkit-transform: translateX(180%);
-        transform: translateX(180%);
-    }
-    100% {
-        -webkit-transform: translateX(0);
-        transform: translateX(0);
-    }
-}
-@-webkit-keyframes right-to-left-out {
-    0% {
-        -webkit-transform: translateX(0);
-        transform: translateX(0);
-    }
-    100% {
-        -webkit-transform: translateX(180%);
-        transform: translateX(180%);
-    }
-}
-@keyframes right-to-left-out {
-    0% {
-        -webkit-transform: translateX(0);
-        transform: translateX(0);
-    }
-    100% {
-        -webkit-transform: translateX(180%);
-        transform: translateX(180%);
-    }
-}
-@-webkit-keyframes left-to-right {
-    0% {
-        opacity: 0;
-        -webkit-transform: translateX(-20%);
-        transform: translateX(-20%);
-    }
-    100% {
-        opacity: 1;
-        -webkit-transform: translateX(0);
-        transform: translateX(0);
-    }
-}
-@keyframes left-to-right {
-    0% {
-        opacity: 0;
-        -webkit-transform: translateX(-20%);
-        transform: translateX(-20%);
-    }
-    100% {
-        opacity: 1;
-        -webkit-transform: translateX(0);
-        transform: translateX(0);
-    }
-}
-@-webkit-keyframes left-to-right-out {
-    0% {
-        -webkit-transform: translateX(0);
-        transform: translateX(0);
-    }
-    100% {
-        -webkit-transform: translateX(-180%);
-        transform: translateX(-180%);
-    }
-}
-@keyframes left-to-right-out {
-    0% {
-        -webkit-transform: translateX(0);
-        transform: translateX(0);
-    }
-    100% {
-        -webkit-transform: translateX(-180%);
-        transform: translateX(-180%);
-    }
-}
-@-webkit-keyframes newsletter-notification-in {
-    0% {
-        top: 100%;
-    }
-    100% {
-        top: calc(100% + 10px);
-    }
-}
-@keyframes newsletter-notification-in {
-    0% {
-        top: 100%;
-    }
-    100% {
-        top: calc(100% + 10px);
-    }
-}
-@-webkit-keyframes fade-in {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
-}
-@keyframes fade-in {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
-}
-@-webkit-keyframes stretch-in {
-    0% {
-        width: 0;
-    }
-    100% {
-        width: 100%;
-    }
-}
-@keyframes stretch-in {
-    0% {
-        width: 0;
-    }
-    100% {
-        width: 100%;
-    }
-}
-@-webkit-keyframes slide-to-right {
-    0% {
-        opacity: 0;
-        -webkit-transform: translateX(-70px);
-        transform: translateX(-70px);
-    }
-    100% {
-        opacity: 1;
-        -webkit-transform: translateX(0);
-        transform: translateX(0);
-    }
-}
-@keyframes slide-to-right {
-    0% {
-        opacity: 0;
-        -webkit-transform: translateX(-70px);
-        transform: translateX(-70px);
-    }
-    100% {
-        opacity: 1;
-        -webkit-transform: translateX(0);
-        transform: translateX(0);
-    }
-}
-@-webkit-keyframes slide-to-left {
-    0% {
-        opacity: 0;
-        -webkit-transform: translateX(70px);
-        transform: translateX(70px);
-    }
-    100% {
-        -webkit-transform: translateX(0);
-        transform: translateX(0);
-        opacity: 1;
-    }
-}
-@keyframes slide-to-left {
-    0% {
-        opacity: 0;
-        -webkit-transform: translateX(70px);
-        transform: translateX(70px);
-    }
-    100% {
-        -webkit-transform: translateX(0);
-        transform: translateX(0);
-        opacity: 1;
-    }
-}
-@-webkit-keyframes fade-out {
-    0% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0;
-    }
-}
-@keyframes fade-out {
-    0% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0;
-    }
-}
-@-webkit-keyframes animated-node-enter-to-right {
-    0% {
-        opacity: 0;
-        -webkit-transform: translateX(-30px);
-        transform: translateX(-30px);
-    }
-    100% {
-        opacity: 1;
-        -webkit-transform: translateX(0);
-        transform: translateX(0);
-    }
-}
-@keyframes animated-node-enter-to-right {
-    0% {
-        opacity: 0;
-        -webkit-transform: translateX(-30px);
-        transform: translateX(-30px);
-    }
-    100% {
-        opacity: 1;
-        -webkit-transform: translateX(0);
-        transform: translateX(0);
-    }
-}
-@-webkit-keyframes animated-node-enter-to-left {
-    0% {
-        opacity: 0;
-        -webkit-transform: translateX(60px);
-        transform: translateX(60px);
-    }
-    100% {
-        opacity: 1;
-        -webkit-transform: translateX(0);
-        transform: translateX(0);
-    }
-}
-@keyframes animated-node-enter-to-left {
-    0% {
-        opacity: 0;
-        -webkit-transform: translateX(60px);
-        transform: translateX(60px);
-    }
-    100% {
-        opacity: 1;
-        -webkit-transform: translateX(0);
-        transform: translateX(0);
-    }
-}
-@-webkit-keyframes animated-node-enter-to-top {
-    0% {
-        opacity: 0;
-        -webkit-transform: translateY(40px);
-        transform: translateY(40px);
-    }
-    100% {
-        opacity: 1;
-        -webkit-transform: translateX(0);
-        transform: translateX(0);
-    }
-}
-@keyframes animated-node-enter-to-top {
-    0% {
-        opacity: 0;
-        -webkit-transform: translateY(40px);
-        transform: translateY(40px);
-    }
-    100% {
-        opacity: 1;
-        -webkit-transform: translateX(0);
-        transform: translateX(0);
-    }
-} /*!
-
+/*
  * Bootstrap Reboot v4.3.1 (https://getbootstrap.com/)
  * Copyright 2011-2019 The Bootstrap Authors
  * Copyright 2011-2019 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * Forked from Normalize.css, licensed MIT (https://github.com/necolas/normalize.css/blob/master/LICENSE.md)
- */ /*!
  * Bootstrap Grid v4.3.1 (https://getbootstrap.com/)
  * Copyright 2011-2019 The Bootstrap Authors
  * Copyright 2011-2019 Twitter, Inc.
@@ -407,7 +56,8 @@ dd,
 label,
 legend {
     margin-bottom: 0.5rem;
-} /*!
+} 
+/*!
  * Bootstrap v4.3.1 (https://getbootstrap.com/)
  * Copyright 2011-2019 The Bootstrap Authors
  * Copyright 2011-2019 Twitter, Inc.
@@ -10943,4 +10593,73 @@ aside.content-browser{
     .posts-list article.summary{
         color: #c3c3c3;
     }
+}
+
+.popover,
+.tooltip,
+address {
+    font-style: normal;
+}
+.breadcrumb-item + .breadcrumb-item:hover::before,
+.btn-link,
+.btn:hover,
+.card-link:hover,
+.dropdown-item.active,
+.dropdown-item:active,
+.dropdown-item:focus,
+.dropdown-item:hover,
+.nav-link:focus,
+.nav-link:hover,
+.navbar-brand:focus,
+.navbar-brand:hover,
+.navbar-toggler:focus,
+.navbar-toggler:hover,
+.page-link:hover,
+a,
+a.badge:focus,
+a.badge:hover,
+a:not([href]):not([tabindex]),
+a:not([href]):not([tabindex]):focus,
+a:not([href]):not([tabindex]):hover {
+    text-decoration: none;
+}
+.accordion > .card,
+.collapsing,
+.dropdown-divider,
+.modal-open,
+.progress,
+.toast,
+svg {
+    overflow: hidden;
+}
+img,
+svg {
+    vertical-align: middle;
+}
+.dropdown-menu,
+.tooltip,
+body,
+caption {
+    text-align: left;
+}
+.popover,
+.tooltip,
+button,
+select {
+    text-transform: none;
+}
+pre,
+textarea {
+    overflow: auto;
+}
+.badge,
+progress,
+sub,
+sup {
+    vertical-align: baseline;
+}
+.custom-range,
+.custom-select,
+[type="search"] {
+    -webkit-appearance: none;
 }
