@@ -190,6 +190,98 @@ Have you used the theme in your website? Send a PR to add it to the list for ins
 ## Contributors
 
 <!-- readme: collaborators,contributors -start -->
+<table>
+	<tbody>
+		<tr>
+            <td align="center">
+                <a href="https://github.com/zetxek">
+                    <img src="https://avatars.githubusercontent.com/u/240085?v=4" width="100;" alt="zetxek"/>
+                    <br />
+                    <sub><b>Adrián Moreno Peña</b></sub>
+                </a>
+            </td>
+            <td align="center">
+                <a href="https://github.com/selmanceker">
+                    <img src="https://avatars.githubusercontent.com/u/32300911?v=4" width="100;" alt="selmanceker"/>
+                    <br />
+                    <sub><b>selmanceker</b></sub>
+                </a>
+            </td>
+            <td align="center">
+                <a href="https://github.com/AtocM">
+                    <img src="https://avatars.githubusercontent.com/u/8729791?v=4" width="100;" alt="AtocM"/>
+                    <br />
+                    <sub><b>Murat Öcal</b></sub>
+                </a>
+            </td>
+            <td align="center">
+                <a href="https://github.com/martinsam">
+                    <img src="https://avatars.githubusercontent.com/u/34697?v=4" width="100;" alt="martinsam"/>
+                    <br />
+                    <sub><b>Samuel Martin</b></sub>
+                </a>
+            </td>
+            <td align="center">
+                <a href="https://github.com/dcorto">
+                    <img src="https://avatars.githubusercontent.com/u/5486937?v=4" width="100;" alt="dcorto"/>
+                    <br />
+                    <sub><b>D. Corto</b></sub>
+                </a>
+            </td>
+            <td align="center">
+                <a href="https://github.com/oaksakal">
+                    <img src="https://avatars.githubusercontent.com/u/453038?v=4" width="100;" alt="oaksakal"/>
+                    <br />
+                    <sub><b>Ozgur Aksakal</b></sub>
+                </a>
+            </td>
+		</tr>
+		<tr>
+            <td align="center">
+                <a href="https://github.com/Ceesaxp">
+                    <img src="https://avatars.githubusercontent.com/u/67934?v=4" width="100;" alt="Ceesaxp"/>
+                    <br />
+                    <sub><b>Andrei Popov</b></sub>
+                </a>
+            </td>
+            <td align="center">
+                <a href="https://github.com/brandynmauro">
+                    <img src="https://avatars.githubusercontent.com/u/34288491?v=4" width="100;" alt="brandynmauro"/>
+                    <br />
+                    <sub><b>Brandyn</b></sub>
+                </a>
+            </td>
+            <td align="center">
+                <a href="https://github.com/ericreid">
+                    <img src="https://avatars.githubusercontent.com/u/16538?v=4" width="100;" alt="ericreid"/>
+                    <br />
+                    <sub><b>Eric Reid</b></sub>
+                </a>
+            </td>
+            <td align="center">
+                <a href="https://github.com/BangKarlsen">
+                    <img src="https://avatars.githubusercontent.com/u/1835444?v=4" width="100;" alt="BangKarlsen"/>
+                    <br />
+                    <sub><b>Jesper Højgaard</b></sub>
+                </a>
+            </td>
+            <td align="center">
+                <a href="https://github.com/LeahWilleke">
+                    <img src="https://avatars.githubusercontent.com/u/60404112?v=4" width="100;" alt="LeahWilleke"/>
+                    <br />
+                    <sub><b>LeahWilleke</b></sub>
+                </a>
+            </td>
+            <td align="center">
+                <a href="https://github.com/evolutionise">
+                    <img src="https://avatars.githubusercontent.com/u/6320469?v=4" width="100;" alt="evolutionise"/>
+                    <br />
+                    <sub><b>Alix</b></sub>
+                </a>
+            </td>
+		</tr>
+	<tbody>
+</table>
 <!-- readme: collaborators,contributors -end -->
 
 ## License
