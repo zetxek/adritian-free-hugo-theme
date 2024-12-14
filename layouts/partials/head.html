@@ -28,7 +28,7 @@
   {{ $scss := resources.Get .URL }}
   
   {{ $style := $scss | css.Sass | resources.Fingerprint }}
-  <link rel="stylesheet" href="{{ $style.Permalink }}" integrity="{{ $style.Data.Integrity }}">
+  <link rel="stylesheet" href="{{ $style.Permalink }}" integrity="{{ $style.Data.Integrity }}" crossorigin="anonymous">
 
 {{ end }}
 
@@ -49,6 +49,7 @@
   onload="this.onload=null;this.rel='stylesheet'"
   {{ if hugo.IsProduction -}} 
     integrity="{{ $css.Data.Integrity }}"
+    crossorigin="anonymous"
   {{- end }}
 />
 <noscript>
@@ -57,6 +58,7 @@
     href="{{ $css.RelPermalink }}"
     {{ if hugo.IsProduction -}} 
     integrity="{{ $css.Data.Integrity }}"
+    crossorigin="anonymous"
     {{- end }}
   />
 </noscript>
