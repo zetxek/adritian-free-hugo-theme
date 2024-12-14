@@ -187,6 +187,16 @@ Have you used the theme in your website? Send a PR to add it to the list for ins
 - [adrian moreno's personal site](https://www.adrianmoreno.info)
 - add your website here!
 
+## Contributors
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
 
 ## License
 
