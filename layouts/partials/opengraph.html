@@ -1,0 +1,50 @@
+{{ $img := resources.Get "images/og_base.png" }} 
+{{ $font := resources.Get "Inter-Variable.ttf" }}
+{{ $text := "" }}
+<meta property="og:title" content="{{ .Title }}" />
+<meta property="og:description" content="{{ with .Description }}{{ . }}{{ else }}{{if .IsPage}}{{ .Summary }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}{{ end }}" />
+<meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}" />
+<meta property="og:url" content="{{ .Permalink }}" />
+<meta property="og:locale" content="{{ .Lang }}" />
+{{- if .IsHome }} 
+  {{ $text = .Site.Params.Description }}
+{{- end }}
+ 
+{{- if .IsPage }}
+  {{- $iso8601 := "2006-01-02T15:04:05-07:00" -}}
+  <meta property="article:section" content="{{ .Section }}" />
+  {{ with .PublishDate }}<meta property="article:published_time" {{ .Format $iso8601 | printf "content=%q" | safeHTMLAttr }} />{{ end }}
+  {{ with .Lastmod }}<meta property="article:modified_time" {{ .Format $iso8601 | printf "content=%q" | safeHTMLAttr }} />{{ end }}
+  {{ $text = .Page.Title }} 
+ 
+{{- with .Params.thumbnail }} 
+  {{ $thumbnail := $.Resources.Get . }}
+  {{ with $thumbnail }}
+    {{ $img = $img.Filter (images.Overlay (.Process "fit 300x250") 875 38 )}}
+  {{ end }}
+{{ end }}
+ 
+{{ $img = $img.Filter (images.Text $text (dict
+  "color" "#d8d8d8"
+  "size" 64
+  "linespacing" 2
+  "x" 40
+  "y" 300
+  "font" $font
+))}}
+{{ $img = resources.Copy (path.Join $.Page.RelPermalink "og.png") $img }} 
+ 
+<meta property="og:image" content="{{$img.Permalink}}">
+<meta property="og:image:width" content="{{$img.Width}}" />
+<meta property="og:image:height" content="{{$img.Height}}" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="{{ .Title }}" />
+<meta name="twitter:description" content="{{ with .Description }}{{ . }}{{ else }}{{if .IsPage}}{{ .Summary }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}{{ end -}}"/>
+<meta name="twitter:image" content="{{$img.Permalink}}" />
+ 
+{{- with .Params.audio }}<meta property="og:audio" content="{{ . }}" />{{ end }}
+{{- with .Site.Params.title }}<meta property="og:site_name" content="{{ . }}" />{{ end }}
+{{- with .Params.videos }}{{- range . }}
+<meta property="og:video" content="{{ . | absURL }}" />
+{{ end }}{{ end }}
+{{ end }}
