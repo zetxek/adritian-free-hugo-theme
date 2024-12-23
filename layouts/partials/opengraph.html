@@ -25,11 +25,19 @@
 {{ end }}
  
 {{ $img = $img.Filter (images.Text $text (dict
-  "color" "#d8d8d8"
-  "size" 64
+  "color" "#ffffff"
+  "size" 50
   "linespacing" 2
-  "x" 40
+  "x" 50
   "y" 300
+  "font" $font
+))}}
+{{ $img = $img.Filter (images.Text "AdritianDemo" (dict
+  "color" "#ffffff"
+  "size" 50
+  "linespacing" 2
+  "x" 50
+  "y" 50
   "font" $font
 ))}}
 {{ $img = resources.Copy (path.Join $.Page.RelPermalink "og.png") $img }} 
