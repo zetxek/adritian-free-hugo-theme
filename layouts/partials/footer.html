@@ -1,22 +1,14 @@
 <footer class="footer w-100">
   <div class="container">
     <div class="container-fluid">
-      <div class="row w-100">
-        <div
-          class="footer_left col-12 col-lg-4 mb-3 mb-lg-0 text-center text-lg-start d-flex align-items-center justify-content-center"
-        >
-          <div
-            class="footer__copy h-100 d-flex align-items-center justify-content-center"
-          >
+      <div class="row w-100 align-items-center">
+        <div class="footer_left col-12 col-lg-4 mb-3 mb-lg-0 text-center text-lg-start">
+          <div class="footer__copy">
             <span>{{ i18n "footer_notice" | safeHTML }}</span>
           </div>
         </div>
-        <div
-          class="footer_links col-12 col-lg-6 mb-3 mb-lg-0 text-center text-lg-start d-flex align-items-center"
-        >
-          <ul
-            class="navbar-nav w-100 align-items-center justify-content-center justify-content-lg-start d-flex flex-wrap gap-2"
-          >
+        <div class="footer_links col-12 col-lg-6 mb-3 mb-lg-0 text-center text-lg-start">
+          <ul class="navbar-nav w-100 align-items-center justify-content-center justify-content-lg-start d-flex flex-wrap gap-2">
             <li class="nav-item">
               <a class="nav-link px-2" href="{{ .Site.BaseURL | absURL }}"
                 >🏠 HOME</a
@@ -31,16 +23,11 @@
             {{ end }}
           </ul>
         </div>
-        <div
-          class="footer_right col-12 col-lg-2 text-center text-lg-end d-flex align-items-center"
-        >
-          <div class="row justify-content-center w-100">
-            {{ if hugo.IsMultilingual }} {{ if not
-            .Site.Params.languages.selector.disable.footer }}
-            <nav
-              id="footer-language-selector"
-              class="language-selector nav-item dropdown dropup col-6"
-            >
+        <div class="footer_right col-12 col-lg-2 mb-3 mb-lg-0 text-center text-lg-end">
+          <div class="d-flex flex-column flex-lg-row justify-content-center align-items-center gap-2">
+            {{ if hugo.IsMultilingual }} 
+            {{ if not .Site.Params.languages.selector.disable.footer }}
+            <nav id="footer-language-selector" class="language-selector nav-item dropdown dropup">
               {{ range .Site.Languages }} {{ if eq . $.Site.Language }}
               <button
                 type="button"
@@ -74,12 +61,11 @@
                 {{ end }}
               </ul>
             </nav>
-            {{ end }} {{ end }} {{ if not
-            .Site.Params.colorTheme.selector.disable.footer }}
-            <div
-              id="footer-color-selector"
-              class="nav-item dropdown dropup col-6"
-            >
+            {{ end }} 
+            {{ end }}
+            
+            {{ if not .Site.Params.colorTheme.selector.disable.footer }}
+            <div id="footer-color-selector" class="nav-item dropdown dropup">
               <button
                 class="btn btn-link nav-link py-2 px-0 px-lg-2 dropdown-toggle d-flex align-items-center show"
                 id="bd-theme"
