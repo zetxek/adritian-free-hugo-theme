@@ -15,16 +15,16 @@
           class="footer_links col-12 col-lg-6 mb-3 mb-lg-0 text-center text-lg-start d-flex align-items-center"
         >
           <ul
-            class="navbar-nav w-100 align-items-center justify-content-center justify-content-lg-start"
+            class="navbar-nav w-100 align-items-center justify-content-center justify-content-lg-start d-flex flex-wrap gap-2"
           >
             <li class="nav-item">
-              <a class="nav-link" href="{{ .Site.BaseURL | absURL }}"
+              <a class="nav-link px-2" href="{{ .Site.BaseURL | absURL }}"
                 >🏠 HOME</a
               >
             </li>
             {{ range .Site.Menus.footer }}
             <li class="nav-item">
-              <a class="nav-link" href="{{ .URL | relURL }}"
+              <a class="nav-link px-2" href="{{ .URL | relURL }}"
                 >{{ .Name | upper }}</a
               >
             </li>
