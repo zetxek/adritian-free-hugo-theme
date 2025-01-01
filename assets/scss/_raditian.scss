@@ -1406,6 +1406,15 @@ body.home div.experience{
     color: white !important;
 }
 
+.experience.selected a > .experience__date,
+.experience:hover a > .experience__date,
+.experience:active a > .experience__date,
+.experience a:hover > .experience__date,
+.experience a:active > .experience__date{
+    color: white !important;
+}
+
+
 .all-experience-container{
     margin-top: 50px;
 }
