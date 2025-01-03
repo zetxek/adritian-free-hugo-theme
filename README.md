@@ -113,7 +113,7 @@ See the content in `i18n` to edit the translations, and the configuration `hugo.
 
 You can add additional languages, or disable the provided ones (by setting `disabled` to `true` on the languages you don't need).
 
-The introduction of i18n support was done in the version `v1.3.0` and it has breaking changes due to the way in which the content was managed. You can read about the upgrade path in upgrading.md.
+The introduction of i18n support was done in the version `v1.3.0` and it has breaking changes due to the way in which the content was managed. You can read about the upgrade path in [UPGRADING.md](UPGRADING.md).
 
 ## Dark theme
 
