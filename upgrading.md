@@ -2,6 +2,74 @@
 
 This documentation is meant to help you upgrade across versions, when potentially breaking changes are introduced.
 
+## v1.4.13
+
+### Analytics section re-organized
+
+In the [PR #121](https://github.com/zetxek/adritian-free-hugo-theme/pull/121), we moved the analytics config to a new section in the configuration for better extensibility and clarity.
+
+Before:
+```
+  vercelPageInsights = false
+  vercelAnalytics = false
+
+  [params.google_analytics]
+      code = "UA-XXXXX-Y"
+      enabled = false
+  [params.google_tag_manager]
+      code = "GTM-XXXXX"
+      enabled = false
+```
+
+After:
+```
+  [params.analytics]
+  ## Analytics parameters.
+  ### Supported so far: Vercel (Page Insights, Analytics)
+  ### And Google (Tag Manager, Analytics)
+
+  # controls vercel page insights - disabled by default
+  # to enable, just set to true
+  vercelPageInsights = false
+  vercelAnalytics = false
+  
+  # google analytics and tag manager. to enable, set "enabled" to true
+  # and add the tracking code (UA-something for analytics, GTM-something for tag manager)
+  [params.analytics.googleAnalytics]
+      code = "UA-XXXXX-Y"
+      enabled = true
+  [params.analytics.googleTagManager]
+      code = "GTM-XXXXX"
+      enabled = false
+```
+
+See the theme's [`exampleSite` hugo.toml](https://github.com/zetxek/adritian-free-hugo-theme/blob/main/exampleSite/hugo.toml) file for an example configuration.
+
+### "Experience buttons" can be hidden
+
+A new configuration option has been added to the experience buttons. 
+
+Before:
+```
+experience:
+  button:
+    enable: true
+    icon: "icon-linkedin"
+    ## the url and text are localized, fill them in the i18n file
+    ## keys: experience_button, experience_button_url
+```
+
+After:
+```
+experience:
+  enable: true
+  button:
+    enable: true
+    icon: "icon-linkedin"
+    ## the url and text are localized, fill them in the i18n file
+    ## keys: experience_button, experience_button_url
+```
+
 ## v1.4.9
 
 ### Change 1: new translations keys

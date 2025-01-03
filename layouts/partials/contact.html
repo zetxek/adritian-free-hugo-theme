@@ -33,12 +33,20 @@
                     </form>
                 </div>
                 <div class="col-12 col-lg-5 contact__info">
+                    {{ if i18n "contact_phone_number" }}
                     <h3>{{ i18n "contact_phone_title" }}</h3>
                     <span>{{ i18n "contact_phone_number" }}</span>
+                    {{ end }}
+
+                    {{ if i18n "contact_email_email" }}
                     <h3>{{ i18n "contact_email_title" }}</h3>
                     <span>{{ i18n "contact_email_email" | safeHTML }}</span>
+                    {{ end }}
+                    
+                    {{ if i18n "contact_address_address" }}
                     <h3>{{ i18n "contact_address_title" }}</h3>
                     <span>{{ i18n "contact_address_address" | safeHTML }}</span>
+                    {{ end }}
                 </div>
             </div>
         </div>

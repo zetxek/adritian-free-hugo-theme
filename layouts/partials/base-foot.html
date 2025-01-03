@@ -18,15 +18,15 @@
 <script defer src='{{ "js/library/bootstrap.bundle.min.js" | absURL }}'></script>
 
 <!-- vercel insights -->
-{{ $vercelPageInsights := .Site.Params.vercelPageInsights }}
-{{ $vercelAnalytics := .Site.Params.vercelAnalytics }}
+{{- $vercelPageInsights := .Site.Params.analytics.vercelPageInsights }}
+{{- $vercelAnalytics := .Site.Params.analytics.vercelAnalytics }}
 
 <script>
   window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
 </script>
-{{ if $vercelPageInsights }}
+{{- if $vercelPageInsights }}
 <script defer src="/_vercel/speed-insights/script.js"></script>
-{{ end }}
-{{ if $vercelAnalytics }} 
+{{- end }}
+{{- if $vercelAnalytics }} 
 <script defer src="/_vercel/insights/script.js"></script>
-{{ end }}
+{{- end }}

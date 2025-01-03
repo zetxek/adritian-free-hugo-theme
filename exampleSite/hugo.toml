@@ -11,14 +11,22 @@ theme = "adritian-free-hugo-theme"
 
   homepageExperienceCount = 6
 
+  [params.analytics]
+  ## Analytics parameters.
+  ### Supported so far: Vercel (Page Insights, Analytics)
+  ### And Google (Tag Manager, Analytics)
+
   # controls vercel page insights - disabled by default
+  # to enable, just set to true
   vercelPageInsights = false
   vercelAnalytics = false
   
-  [params.google_analytics]
+  # google analytics and tag manager. to enable, set "enabled" to true
+  # and add the tracking code (UA-something for analytics, GTM-something for tag manager)
+  [params.analytics.googleAnalytics]
       code = "UA-XXXXX-Y"
       enabled = false
-  [params.google_tag_manager]
+  [params.analytics.googleTagManager]
       code = "GTM-XXXXX"
       enabled = false
 

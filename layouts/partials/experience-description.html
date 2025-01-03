@@ -4,6 +4,7 @@
     <p class="lead">{{ i18n "experience_description" }}</p>
   </div>
   <div class="row">
+    {{ if .Site.Data.homepage.experience.button.enable }}
     <div class="col-12 col-lg-4">
       <a
         href="{{ .Site.Data.homepage.experience.button.URL | absURL }}"
@@ -11,11 +12,15 @@
         target="_blank"
         rel="noopener noreferrer"
       >
-        <i class="{{ .Site.Data.homepage.experience.button.icon }}"></i>
+      {{ if .Site.Data.homepage.experience.button.icon }}
+      <i class="{{ .Site.Data.homepage.experience.button.icon }}"></i>
+      {{ end }}      
         {{ i18n "experience_button" }}
         <i class="icon-arrow-right"></i
       ></a>
     </div>
+    {{ end }}
+    {{ if .Site.Data.homepage.experience.button2.enable }}
     <div class="col-12 col-lg-4">
       <a
         href='{{ i18n "experience_button2_url" | absURL }}'
@@ -23,18 +28,23 @@
         target="_blank"
         rel="noopener noreferrer"
       >
-        <i class="{{ .Site.Data.homepage.experience.button2.icon }}"></i>
+      {{ if .Site.Data.homepage.experience.button2.icon }}
+      <i class="{{ .Site.Data.homepage.experience.button2.icon }}"></i>
+      {{ end }}
         {{ i18n "experience_button2" }}
       </a>
     </div>
-    {{ if .Site.Data.homepage.experience.button3.icon }}
+    {{ end }}
+    {{ if .Site.Data.homepage.experience.button3.enable }}
     <div class="col-12 col-lg-4">
       <a
         href='{{ i18n "experience_button3_url" | absURL }}'
         class="btn btn-frameless  w-100"
         rel="noopener noreferrer"
       >
+        {{ if .Site.Data.homepage.experience.button3.icon }}
         <i class="{{ .Site.Data.homepage.experience.button3.icon }}"></i>
+        {{ end }}
         {{ i18n "experience_button3" }}
       </a>
     </div>
