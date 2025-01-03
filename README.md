@@ -113,7 +113,7 @@ See the content in `i18n` to edit the translations, and the configuration `hugo.
 
 You can add additional languages, or disable the provided ones (by setting `disabled` to `true` on the languages you don't need).
 
-The introduction of i18n support was done in the version `v1.3.0` and it has breaking changes due to the way in which the content was managed. You can read about the upgrade path in upgrading.md.
+The introduction of i18n support was done in the version `v1.3.0` and it has breaking changes due to the way in which the content was managed. You can read about the upgrade path in [UPGRADING.md](UPGRADING.md).
 
 ## Dark theme
 
@@ -180,9 +180,13 @@ This theme is a version of the one found on my website [adrianmoreno.info](https
 
 If you have improvements for the theme, you are very welcome to make a PR if you are able 💕. Otherwise - see below for how to get help (and maybe help others with the same problem).
 
-## Getting help
+### Getting help
 
 The project is offered "as is", and it's a hobby project that powers my personal website. Support is given whenever life allows - you can create an issue [create an issue](https://github.com/zetxek/adritian-free-hugo-theme/issues) so anyone else could also help, or the author.
+
+### Contributing
+
+Your PRs will get a preview URL in Vercel.
 
 ## Showcase
 
