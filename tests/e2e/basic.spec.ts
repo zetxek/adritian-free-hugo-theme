@@ -25,8 +25,29 @@ test.describe('Theme basic functionality', () => {
 
   test('theme switcher works', async ({ page }) => {
     await page.goto(BASE_URL);
+    // attribute exists
+    await expect(page.locator('html')).toHaveAttribute('data-bs-theme');
+    // click on theme switcher
     await page.click('#bd-theme');
+    /* click on the html element:
+    <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
+                    ☀️ Light
+                  </button>
+    */
+    await page.click('text=☀️ Light');
+    await expect(page.locator('html')).toHaveAttribute('data-bs-theme', 'light');
+    
+    // click on theme switcher
+    await page.click('#bd-theme');
+    /* click on the html element:
+    <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="dark" aria-pressed="true">
+                    🌑 Dark
+                    <span class="theme-icon dark d-none" aria-hidden="true"></span>
+                  </button>
+    */
+    await page.click('text=🌑 Dark');
     await expect(page.locator('html')).toHaveAttribute('data-bs-theme', 'dark');
+    
   });
 
   test('navigation is visible', async ({ page }) => {
