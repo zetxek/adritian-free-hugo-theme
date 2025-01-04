@@ -20,9 +20,11 @@ jobs:
           token: ${{ secrets.PRIVATE_TOKEN_GITHUB }}
           submodules: true
       - name: Show submodule status (pre)
+        shell: bash
         run: |
           git submodule status
       - name: Pull & update submodules recursively
+        shell: bash
         run: |
           git submodule init
           git config --global pull.rebase false  # merge
@@ -31,14 +33,17 @@ jobs:
           # git submodule update --remote --recursive --quiet
 
       - name: Print submodule status (post)
+        shell: bash
         run: |
           git submodule status
       
       - name: Print submodule diff
+        shell: bash
         run: |
           git diff --submodule=diff
 
       - name: Send pull-request
+        shell: bash        
         run: |
           LATEST_TAG=$(git describe --tags --always)  
           LATEST_COMMIT=$(git rev-parse HEAD)
@@ -134,13 +139,17 @@ jobs:
             🔗 Triggered by https://github.com/zetxek/adritian-free-hugo-theme/actions/workflows/update-demo-pr.yml"
             echo "PR body: "$PR_BODY
 
-            gh pr create \
+            PR_RESULT = $(gh pr create \
               --title "$PR_TITLE" \
               --body "$PR_BODY" \
               --head $BRANCH_NAME \
               --base $BASE_BRANCH \
               --assignee $ASSIGNEE \
-              --label preview
+              --label preview)
+            if [ $? -ne 0 ]; then
+              echo "Error creating PR: $PR_RESULT"
+              exit 0
+            fi
 
             echo "✅ Pull-request created - done! "
           fi
