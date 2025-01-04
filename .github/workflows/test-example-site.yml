@@ -2,9 +2,6 @@
 name: Test example site
 
 on:
-    # Runs on the branch 131-idea-end-to-endintegration-test-with-playwright
-    push:
-        branches: ["131-idea-end-to-endintegration-test-with-playwright"]
     # Runs on pull requests targeting the default branch
     pull_request:
         branches: ["main"]
