@@ -30,9 +30,9 @@ jobs:
       - name: Pull & update submodules recursively
         shell: bash
         run: |
-          git submodule init || exit 0
-          git config --global pull.rebase false || exit 0  # merge 
-          git submodule foreach --recursive git pull || exit 0
+          git submodule init || echo "Error executing" && exit 0
+          git config --global pull.rebase false || echo "Error executing" && exit 0  # merge 
+          git submodule foreach --recursive git pull || echo "Error executing" && exit 0
           # Skipping due to error "fatal: Unable to find xxx revision in submodule path 'themes/adritian-free-hugo-theme"
           # git submodule update --remote --recursive --quiet
 
