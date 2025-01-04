@@ -4,6 +4,10 @@
 name: PR demo site (on PR)
 ## This will open a PR which will open a vercel preview URL in the demo site
 on:
+  # push to the branch 124-idea-the-action-pr-demo-site-on-pr-shouldnt-count-as-a-check
+  push:
+    branches:
+      - 124-idea-the-action-pr-demo-site-on-pr-shouldnt-count-as-a-check
   pull_request:
   workflow_dispatch:
 
