@@ -1,7 +1,10 @@
 # Workflow to verify that the exampleSite runs ok
-name: Dry-run example site
+name: Test example site
 
 on:
+    # Runs on the branch 131-idea-end-to-endintegration-test-with-playwright
+    push:
+        branches: ["131-idea-end-to-endintegration-test-with-playwright"]
     # Runs on pull requests targeting the default branch
     pull_request:
         branches: ["main"]
@@ -11,7 +14,7 @@ on:
 
 jobs:
   # Build job
-  build:
+  build-and-test:
     runs-on: ubuntu-latest
     env:
       HUGO_VERSION: 0.136.2
@@ -21,19 +24,35 @@ jobs:
           wget -O ${{ runner.temp }}/hugo.deb https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb \
           && sudo dpkg -i ${{ runner.temp }}/hugo.deb
       
-      - name: Setup hugo site
-        run: hugo new site theme-test
-
       - name: Checkout
         uses: actions/checkout@v4
         with:
           submodules: recursive
-          path: theme-test/themes/adritian-free-hugo-theme
 
-      - name: Run demo site
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps
+
+      - name: Build and serve demo site
         run: |
-         cd theme-test
-         npm i -D postcss postcss-cli autoprefixer
-         cd themes/adritian-free-hugo-theme/exampleSite
-         ## run example site
-         hugo build --themesDir ../..
+          cd exampleSite
+          hugo server --themesDir ../.. --buildDrafts --buildFuture --bind 0.0.0.0 &
+          sleep 10
+
+      - name: Run Playwright tests
+        run: npm run test:e2e
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report
+          retention-days: 30

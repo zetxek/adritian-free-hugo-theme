@@ -1,0 +1,12 @@
+{
+  "scripts": {
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.41.2",
+    "postcss": "^8.4.35",
+    "postcss-cli": "^11.0.0",
+    "autoprefixer": "^10.4.17"
+  }
+}

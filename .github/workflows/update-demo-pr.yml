@@ -130,7 +130,6 @@ jobs:
           if [ -n "$PR_EXISTS" ]; then
             echo "PR Exists. Updating pull-request..."
             gh pr view
-            
             echo "✅ Pull-request created - done! "
             
           # Else, we create it
