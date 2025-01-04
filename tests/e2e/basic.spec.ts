@@ -5,6 +5,7 @@ const BASE_URL: string = process.env.TEST_BASE_URL ?? 'http://localhost:1313';
 if (!BASE_URL.startsWith('http')) {
   throw new Error('TEST_BASE_URL must be a valid URL starting with http:// or https://');
 }
+console.log(`Running tests against ${BASE_URL}`);
 
 test.describe('Theme basic functionality', () => {
   test.beforeAll(async () => {
