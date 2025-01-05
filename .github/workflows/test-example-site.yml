@@ -47,10 +47,10 @@ jobs:
         run: npm run test:e2e
 
       - name: Troubleshoot test location
-        run: ls -la tests/test-results/
+        run: ls -la tests
 
       - name: Troubleshoot test location
-        run: ls -la tests/
+        run: ls -la test-results
 
       - name: Upload test results
         if: always()
