@@ -49,9 +49,6 @@ jobs:
       - name: Troubleshoot test location (test-results)
         run: ls -la test-results
 
-      - name: Troubleshoot test location (playwright-report)
-        run: ls -la playwright-report
-
       - name: Troubleshoot test location
         run: cat test-results/.last-run.json
 
