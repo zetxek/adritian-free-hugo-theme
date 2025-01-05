@@ -20,6 +20,7 @@ test.describe('Theme basic functionality', () => {
 
   test('homepage loads correctly', async ({ page }) => {
     await page.goto(BASE_URL);
+    await page.screenshot({ path: 'test-result/screenshots/homepage.png', fullPage: true });
     await expect(page).toHaveTitle(/Adritian/);
   });
 
@@ -27,6 +28,7 @@ test.describe('Theme basic functionality', () => {
     await page.goto(BASE_URL);
     // attribute exists
     await expect(page.locator('html')).toHaveAttribute('data-bs-theme');
+    await page.screenshot({ path: 'test-result/screenshots/base-theme.png', fullPage: true });
     // click on theme switcher
     await page.click('#bd-theme');
     /* click on the html element:
@@ -36,7 +38,7 @@ test.describe('Theme basic functionality', () => {
     */
     await page.click('text=☀️ Light');
     await expect(page.locator('html')).toHaveAttribute('data-bs-theme', 'light');
-    
+    await page.screenshot({ path: 'test-result/screenshots/light.png', fullPage: true });
     // click on theme switcher
     await page.click('#bd-theme');
     /* click on the html element:
@@ -47,7 +49,7 @@ test.describe('Theme basic functionality', () => {
     */
     await page.click('text=🌑 Dark');
     await expect(page.locator('html')).toHaveAttribute('data-bs-theme', 'dark');
-    
+    await page.screenshot({ path: 'test-result/screenshots/dark.png', fullPage: true });
   });
 
   test('navigation is visible', async ({ page }) => {
