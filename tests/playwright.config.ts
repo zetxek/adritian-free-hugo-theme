@@ -19,7 +19,8 @@ const config: PlaywrightTestConfig = {
         baseURL: 'http://localhost:1313',
         screenshot: 'on',
         trace: 'retain-on-failure',
-        video: 'on-first-retry',
+        video: 'on',
+        
     },
     reporter: [
         ['html', { outputFolder }],
