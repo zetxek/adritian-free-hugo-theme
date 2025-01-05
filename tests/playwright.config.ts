@@ -1,8 +1,17 @@
 import { PlaywrightTestConfig } from '@playwright/test';
 import path from 'path';
+import fs from 'fs';
 
+// Ensure output directories exist
 const outputFolder = path.join(process.cwd(), 'playwright-report');
 const testResults = path.join(process.cwd(), 'test-results');
+
+// Create directories if they don't exist
+[outputFolder, testResults].forEach(dir => {
+    if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir, { recursive: true });
+    }
+});
 
 const config: PlaywrightTestConfig = {
     testDir: './e2e',

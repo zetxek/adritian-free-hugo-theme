@@ -46,11 +46,15 @@ jobs:
       - name: Run Playwright tests
         run: npm run test:e2e
 
-      - name: Troubleshoot test location (test-results)
-        run: ls -la test-results
-
-      - name: Troubleshoot test location
-        run: cat test-results/.last-run.json
+      - name: Debug directory structure
+        run: |
+          pwd
+          echo "Current directory contents:"
+          ls -la
+          echo "Playwright report directory:"
+          ls -la playwright-report || echo "playwright-report not found"
+          echo "Test results directory:"
+          ls -la test-results || echo "test-results not found"
 
       - name: Upload test results
         if: always()
@@ -58,6 +62,6 @@ jobs:
         with:
           name: playwright-results
           path: |
-            playwright-report/**/*
-            test-results/**/*
+            ${{ github.workspace }}/playwright-report
+            ${{ github.workspace }}/test-results
           retention-days: 30
