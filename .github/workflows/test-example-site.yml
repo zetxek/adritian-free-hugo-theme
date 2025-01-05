@@ -46,6 +46,12 @@ jobs:
       - name: Run Playwright tests
         run: npm run test:e2e
 
+      - name: Troubleshoot test location
+        run: ls -la tests/test-results/
+
+      - name: Troubleshoot test location
+        run: ls -la tests/
+
       - name: Upload test results
         if: always()
         uses: actions/upload-artifact@v4
