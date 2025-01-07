@@ -35,6 +35,22 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Cache Node Modules
+        id: cache-node-modules
+        uses: actions/cache@v4
+        with:
+          path: |
+            node_modules
+          key: modules-${{ hashFiles('package-lock.json') }}
+        
+      - name: Cache Playwright Binaries
+        id: cache-playwright
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/ms-playwright
+          key: playwright-${{ hashFiles('package-lock.json') }}
+          
       - name: Install dependencies
         run: npm ci
 
@@ -61,11 +77,36 @@ jobs:
           echo "Test results directory:"
           ls -la test-results || echo "test-results not found"
 
-      - name: Upload test results
+      - name: Get the failure count
+        id: tests
+        run: |
+          export count=$(cat ./playwright-report/result.txt | grep Failed | cut -d ':' -f 2 | tr -d ' ') 
+          echo "fail_count=$count" >> "$GITHUB_OUTPUT"
+          echo $count
+      
+      - uses: mshick/add-pr-comment@v2
         if: always()
-        uses: actions/upload-artifact@v4
         with:
-          name: playwright-results
-          path: |
-            ${{ github.workspace }}/test-results
-          retention-days: 30
+            message-path: |
+              ./playwright-report/result.txt
+            message-failure: |
+              Workflow failed
+  
+      - name: Setup Pages
+        if: steps.tests.outputs.fail_count != '0'
+        uses: actions/configure-pages@v3  
+  
+      - name: Upload Artifact
+        if: steps.tests.outputs.fail_count != '0'
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: "./playwright-report"
+      
+      - name: Fail the job if there any failed case
+        if:  steps.tests.outputs.fail_count != '0' 
+        run : |
+            exit 1
+
+      outputs:
+            fail_count: ${{ steps.tests.outputs.fail_count }}
+  
