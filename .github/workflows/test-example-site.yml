@@ -47,6 +47,9 @@ jobs:
           hugo server --themesDir ../.. --buildDrafts --buildFuture --bind 0.0.0.0 &
           sleep 10
 
+      - name: Debug env variable
+        run: echo $CI 
+
       - name: Run Playwright tests
         run: npm run test:e2e
 
@@ -55,8 +58,6 @@ jobs:
           pwd
           echo "Current directory contents:"
           ls -la
-          echo "Playwright report directory:"
-          ls -la playwright-report || echo "playwright-report not found"
           echo "Test results directory:"
           ls -la test-results || echo "test-results not found"
 
@@ -66,6 +67,5 @@ jobs:
         with:
           name: playwright-results
           path: |
-            ${{ github.workspace }}/playwright-report
             ${{ github.workspace }}/test-results
           retention-days: 30
