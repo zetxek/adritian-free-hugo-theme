@@ -10,6 +10,8 @@ on:
         branches: ["134-bug-playwright-runs-in-github-actions-dont-save-screenshots"]
     # Allows you to run this workflow manually from the Actions tab
     workflow_dispatch:
+env:
+  CI: true
 
 jobs:
   # Build job
