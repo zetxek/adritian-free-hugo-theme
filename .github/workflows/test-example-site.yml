@@ -92,13 +92,13 @@ jobs:
             message-failure: |
               Workflow failed
   
-      - name: Setup Pages
-        if: steps.tests.outputs.fail_count != '0'
-        uses: actions/configure-pages@v3  
+#      - name: Setup Pages
+#        if: steps.tests.outputs.fail_count != '0'
+#        uses: actions/configure-pages@v3  
   
       - name: Upload Artifact
         if: steps.tests.outputs.fail_count != '0'
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-artifact@v4
         with:
           path: "./playwright-report"
       
