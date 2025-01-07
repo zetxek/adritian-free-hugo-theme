@@ -22,7 +22,7 @@ const config: PlaywrightTestConfig = {
         video: 'on',
         
     },
-    reporter: [
+    reporter: process.env.CI ? 'github' : [
         ['html', { outputFolder }],
         ['list']
     ],
