@@ -109,4 +109,19 @@ jobs:
 #            exit 1
     outputs:
       fail_count: ${{ steps.tests.outputs.fail_count }}
-  
+
+  publish-reports:
+    if: ${{ contains(github.ref,'main') &&  (contains(fromJSON('[ "push"]'), github.event_name)) && needs.test.outputs.fail_count != '0' }}
+    needs: [ build-and-test ]
+    runs-on: ubuntu-latest
+    permissions: 
+        pages: write
+        id-token: write
+    environment:
+        name: github-pages
+        url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+        - name: Deploy to GitHub Pages
+          id: deployment
+          uses: actions/deploy-pages@v2  
