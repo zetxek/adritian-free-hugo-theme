@@ -1,4 +1,5 @@
-import { PlaywrightTestConfig } from '@playwright/test';
+import { PlaywrightTestConfig, defineConfig, devices } from '@playwright/test';
+
 import path from 'path';
 import fs from 'fs';
 
@@ -13,8 +14,8 @@ const testResults = path.join(process.cwd(), 'test-results');
     }
 });
 
-const config: PlaywrightTestConfig = {
-    testDir: './e2e',
+export default defineConfig ({
+    testDir: './tests',
     use: {
         baseURL: 'http://localhost:1313',
         screenshot: 'on',
@@ -33,6 +34,4 @@ const config: PlaywrightTestConfig = {
         reuseExistingServer: true,
     },
     preserveOutput: 'always',
-};
-
-export default config;
+});

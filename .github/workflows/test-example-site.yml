@@ -33,7 +33,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: lts/*
 
       - name: Cache Node Modules
         id: cache-node-modules
@@ -91,17 +91,14 @@ jobs:
               ./playwright-report/result.txt
             message-failure: |
               Workflow failed
-  
-#      - name: Setup Pages
-#        if: steps.tests.outputs.fail_count != '0'
-#        uses: actions/configure-pages@v3  
-  
-      - name: Upload Artifact
-        if: steps.tests.outputs.fail_count != '0'
-        uses: actions/upload-pages-artifact@v1
+
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
         with:
-          path: "./playwright-report"
-      
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
+              
       - name: Fail the job if there any failed case
         if:  steps.tests.outputs.fail_count != '0' 
         run : |
