@@ -82,13 +82,13 @@ jobs:
           echo "fail_count=$count" >> "$GITHUB_OUTPUT"
           echo $count
       
-      - uses: mshick/add-pr-comment@v2
-        if: always()
-        with:
-            message-path: |
-              ./playwright-report/result.txt
-            message-failure: |
-              Workflow failed
+#      - uses: mshick/add-pr-comment@v2
+#        if: always()
+#        with:
+#            message-path: |
+#              ./playwright-report/result.txt
+#            message-failure: |
+#              Workflow failed
 
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
