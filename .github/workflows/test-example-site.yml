@@ -99,7 +99,7 @@ jobs:
         uses: actions/configure-pages@v3
 
       - name: Upload Artifact for pages
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v4
         with:
               path: "./playwright-report"
 
