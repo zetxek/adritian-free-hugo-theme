@@ -23,6 +23,11 @@ export default defineConfig ({
         video: 'on',
         
     },
+    // Run all tests in parallel.
+    fullyParallel: true,
+    // Fail the build on CI if you accidentally left test.only in the source code.
+    forbidOnly: !!process.env.CI,
+
     reporter: process.env.CI ? 'github' : [
         ['html', { outputFolder }],
         ['list']
