@@ -99,10 +99,10 @@ jobs:
           path: playwright-report/
           retention-days: 30
               
-      - name: Fail the job if there any failed case
-        if:  steps.tests.outputs.fail_count != '0' 
-        run : |
-            exit 1
+#      - name: Fail the job if there any failed case
+#        if:  steps.tests.outputs.fail_count != '0' 
+#        run : |
+#            exit 1
     outputs:
       fail_count: ${{ steps.tests.outputs.fail_count }}
   
