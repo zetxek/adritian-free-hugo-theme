@@ -96,13 +96,14 @@ jobs:
           path: playwright-report/
           retention-days: 30
       - name: Setup Pages
-        uses: actions/configure-pages@v3
+        uses: actions/configure-pages@v5
 
       - name: Upload Artifact for pages
+        if: always()
         uses: actions/upload-pages-artifact@v3
         with:
               path: "./playwright-report"
-
+     
 #      - name: Fail the job if there any failed case
 #        if:  steps.tests.outputs.fail_count != '0' 
 #        run : |
