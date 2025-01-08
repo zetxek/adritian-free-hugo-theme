@@ -63,9 +63,6 @@ jobs:
           hugo server --themesDir ../.. --buildDrafts --buildFuture --bind 0.0.0.0 &
           sleep 10
 
-      - name: Debug env variable
-        run: echo $CI 
-
       - name: Run Playwright tests
         run: npm run test:e2e
 
@@ -98,7 +95,14 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 30
-              
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
+
+      - name: Upload Artifact for pages
+        uses: actions/upload-pages-artifact@v1
+        with:
+              path: "./playwright-report"
+
 #      - name: Fail the job if there any failed case
 #        if:  steps.tests.outputs.fail_count != '0' 
 #        run : |
