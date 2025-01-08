@@ -28,10 +28,18 @@ export default defineConfig ({
     // Fail the build on CI if you accidentally left test.only in the source code.
     forbidOnly: !!process.env.CI,
 
-    reporter: process.env.CI ? 'github' : [
-        ['html', { outputFolder }],
-        ['list']
-    ],
+    reporter: 
+        process.env.CI ? 
+        [
+            ['github'],
+            ['html', { outputFolder }],
+            ['list']
+        ] : 
+        [
+            ['html', { outputFolder }],
+            ['list']
+        ]
+    ,
     outputDir: testResults,
     webServer: {
         command: 'cd exampleSite && hugo server --themesDir ../.. --buildDrafts --buildFuture --bind 0.0.0.0',
