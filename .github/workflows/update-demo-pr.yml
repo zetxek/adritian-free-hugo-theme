@@ -142,7 +142,7 @@ jobs:
             🔗 Triggered by https://github.com/zetxek/adritian-free-hugo-theme/actions/workflows/update-demo-pr.yml"
             echo "PR body: "$PR_BODY
 
-            PR_RESULT = $(gh pr create \
+            PR_RESULT=$(gh pr create \
               --title "$PR_TITLE" \
               --body "$PR_BODY" \
               --head $BRANCH_NAME \
