@@ -114,6 +114,7 @@ jobs:
 
   publish-reports:
     # if: ${{ contains(github.ref,'main') &&  (contains(fromJSON('[ "push"]'), github.event_name))}}
+    continue-on-error: true
     needs: [ build-and-test ]
     runs-on: ubuntu-latest
     permissions: 
