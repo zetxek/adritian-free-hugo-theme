@@ -72,8 +72,8 @@ test.describe('Theme basic functionality', () => {
     // Now it should be visible
     await expect(skipLink).toBeVisible();
     
-    // Click the skip link
-    await skipLink.click();
+    // Press Enter key on the skip link
+    await skipLink.press('Enter');
     
     // Verify we jumped to the main content
     // Check URL hash
