@@ -11,6 +11,9 @@
 ></noscript>
 <!-- End Google Tag Manager (noscript) -->
 {{ end }}
+
+{{ partial "skip-to-content.html" }}
+
 <header class="header fixed-top rad-animation-group" id="header">
   <div class="container rad-fade-in">
     <nav class="navbar bd-navbar navbar-expand-lg navbar-light p-0">
@@ -51,4 +54,6 @@
   </div>
 </header>
 
-{{ if not .IsHome }} {{ partial "breadcrumb.html" . }} {{ end }}
+{{- if not .IsHome }} 
+  {{ partial "breadcrumb.html" . }} 
+{{- end }}

@@ -177,6 +177,24 @@ footer_links .nav-item .nav-link::after {
     color: white;
     background-color: white !important;
 }
+
+/* skip to content */
+.skip-to-content-link {
+    position: absolute;
+    left: -9999px;
+    z-index: 999;
+    padding: 1em;
+    background-color: white;
+    color: black;
+    opacity: 0;
+  }
+  
+  .skip-to-content-link:focus {
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 1;
+  }
+  
 /* dark mode */
 /** Media-query based color switching **/
 // $color-mode-type: media-query;

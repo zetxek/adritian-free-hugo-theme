@@ -5,6 +5,10 @@
 - id: "logo_text2"
   translation: "Nom"
 
+## General
+- id: "skipToMainContent"
+  translation: "Aller au contenu principal"
+
 ## Footer
 - id: "footer_notice"
   translation: "© Adritian. Thème gratuit Hugo par Adrián Moreno Peña."
