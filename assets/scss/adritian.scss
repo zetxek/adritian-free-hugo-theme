@@ -7,6 +7,12 @@
 .header .navbar-brand span:first-child{
     color: #478079;
 }
+
+/* navigation items when tabbing */
+.header .navbar-light .navbar-nav .nav-link:focus,
+.footer .navbar-nav .nav-item .nav-link:focus{
+    text-decoration: underline !important;
+}
 .header .container{
     padding-left: 10px;
 }
@@ -213,11 +219,6 @@ footer_links .nav-item .nav-link::after {
     }
     .header .navbar-light .navbar-nav .nav-link{
         color: #fff !important;
-    }
-    /* navigation items when tabbing */
-    .header .navbar-light .navbar-nav .nav-link:focus,
-    .footer .navbar-nav .nav-item .nav-link:focus{
-        text-decoration: underline !important;
     }
     .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6{
         color: #fff !important;
