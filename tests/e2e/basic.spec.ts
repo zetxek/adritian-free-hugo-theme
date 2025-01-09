@@ -57,4 +57,30 @@ test.describe('Theme basic functionality', () => {
     await page.goto(BASE_URL);
     await expect(page.locator('.footer_links')).toBeVisible();
   });
+
+  test('skip to content link works', async ({ page }) => {
+    // Navigate to a content page
+    await page.goto(`${BASE_URL}/blog`);
+    
+    // The skip link should be initially hidden but in the DOM
+    const skipLink = page.locator('.skip-to-content-link');
+    await expect(skipLink).toBeAttached();
+    
+    // Focus the skip link (simulates tabbing to it)
+    await skipLink.focus();
+    
+    // Now it should be visible
+    await expect(skipLink).toBeVisible();
+    
+    // Click the skip link
+    await skipLink.click();
+    
+    // Verify we jumped to the main content
+    // Check URL hash
+    await expect(page).toHaveURL(/#main-content$/);
+    
+    // Verify focus is moved to main content
+    const mainContent = page.locator('#main-content');
+    await expect(mainContent).toBeFocused();
+  });
 });
