@@ -954,8 +954,8 @@ textarea:focus {
         padding-right: 20px;
     }
 }
-.header .navbar .nav-item .nav-link::after,
-.footer_links .nav-item .nav-link::after {
+
+.nav-link::after {
     content: "";
     position: absolute;
     left: 20px;
@@ -976,6 +976,12 @@ textarea:focus {
     transition-duration: 0.4s;
     -webkit-transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
     transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+.nav-link:focus::after,
+.nav-link:focus-visible::after {
+    -webkit-transform: scaleX(1);
+    transform: scaleX(1);
 }
 .footer_links .nav-item .nav-link::after {
     background-color: white;
