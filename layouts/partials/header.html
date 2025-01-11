@@ -47,8 +47,16 @@
               >
             </li>
             {{ end }}
+            {{ .Scratch.Set "selectorPlacement" "mobile-header" }}
+            <li class="nav-item">
+            {{ partial "selector-language.html" . }}
+            </li>
+            <li class="nav-item">
+            {{ partial "selector-theme.html" . }}
+            </li>
           </ul>
         </div>
+
       </div>
     </nav>
   </div>

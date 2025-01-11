@@ -1,12 +1,14 @@
 {{/* indicates where the partial is placed 
  so far the placement can either be header or footer */}}
-<nav id='{{ .Scratch.Get "selectorPlacement" }}-language-selector' class="language-selector nav-item dropdown dropup">
-    {{ range .Site.Languages }} {{ if eq . $.Site.Language }}
+ {{- $placement := .Scratch.Get "selectorPlacement" }}
+<nav id='{{ $placement }}-language-selector' class='language-selector nav-item dropdown dropup {{ if eq $placement "mobile-header" }}nav-link{{ end }}'>
+    {{ range .Site.Languages }} 
+    {{ if eq . $.Site.Language }}
     <button
       type="button"
       class="btn btn-link nav-link py-2 px-0 px-lg-2 dropdown-toggle d-flex align-items-center show"
       aria-expanded="false"
-      aria-controls="languages-dropdown"
+      aria-controls="languages-dropdown-{{ $placement }}"
       aria-expanded="true"
       data-bs-toggle="dropdown"
       data-bs-display="static"
@@ -16,13 +18,15 @@
     </button>
     <ul
       class="dropdown-menu dropdown-menu-end dropup"
-      id="languages-dropdown"
+      id="languages-dropdown-{{ $placement }}"
       data-bs-popper="static"
     >
       <li class="dropdown-item current active">
         <span>✔️ {{ .LanguageName }}</span>
       </li>
-      {{ end }} {{ end }} {{ range $.Translations }}
+      {{ end }} 
+      {{ end }} 
+      {{ range $.Translations }}
       <li class="dropdown-item choice">
         <a
           class="translation btn-link nav-link show"
