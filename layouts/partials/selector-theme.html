@@ -1,0 +1,61 @@
+<div id="footer-color-selector" class="nav-item dropdown dropup">
+    <button
+      class="btn btn-link nav-link py-2 px-0 px-lg-2 dropdown-toggle d-flex align-items-center show"
+      id="bd-theme"
+      type="button"
+      aria-expanded="true"
+      data-bs-toggle="dropdown"
+      data-bs-display="static"
+      aria-label="Toggle theme (light)"
+    >
+      <span class="theme-icon auto d-none" aria-hidden="true"
+        >{{ i18n "theme_auto_short" }}</span
+      >
+      <span class="current-theme">{{ i18n "theme_auto" }}</span>
+      <span class="d-lg-none ms-2 visually-hidden" id="bd-theme-text"
+        >{{ i18n "toggle_theme" }}</span
+      >
+    </button>
+    <ul
+      class="dropdown-menu dropdown-menu-end dropup"
+      aria-labelledby="bd-theme-text"
+      data-bs-popper="static"
+    >
+      <li>
+        <button
+          type="button"
+          class="dropdown-item d-flex align-items-center active"
+          data-bs-theme-value="light"
+          aria-pressed="true"
+        >
+          {{ i18n "theme_light" }}
+        </button>
+      </li>
+      <li>
+        <button
+          type="button"
+          class="dropdown-item d-flex align-items-center"
+          data-bs-theme-value="dark"
+          aria-pressed="false"
+        >
+          {{ i18n "theme_dark" }}
+          <span class="theme-icon dark d-none" aria-hidden="true"
+            >{{ i18n "theme_dark_short" }}</span
+          >
+        </button>
+      </li>
+      <li>
+        <button
+          type="button"
+          class="dropdown-item d-flex align-items-center"
+          data-bs-theme-value="auto"
+          aria-pressed="false"
+        >
+          {{ i18n "theme_auto" }}
+          <span class="theme-icon light d-none" aria-hidden="true"
+            >{{ i18n "theme_light_short" }}</span
+          >
+        </button>
+      </li>
+    </ul>
+  </div>

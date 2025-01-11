@@ -1,0 +1,34 @@
+<nav id="footer-language-selector" class="language-selector nav-item dropdown dropup">
+    {{ range .Site.Languages }} {{ if eq . $.Site.Language }}
+    <button
+      type="button"
+      class="btn btn-link nav-link py-2 px-0 px-lg-2 dropdown-toggle d-flex align-items-center show"
+      aria-expanded="false"
+      aria-controls="languages-dropdown"
+      aria-expanded="true"
+      data-bs-toggle="dropdown"
+      data-bs-display="static"
+      aria-label="Select language"
+    >
+      <span class="label">{{ i18n "language" }}</span>
+    </button>
+    <ul
+      class="dropdown-menu dropdown-menu-end dropup"
+      id="languages-dropdown"
+      data-bs-popper="static"
+    >
+      <li class="dropdown-item current active">
+        <span>✔️ {{ .LanguageName }}</span>
+      </li>
+      {{ end }} {{ end }} {{ range $.Translations }}
+      <li class="dropdown-item choice">
+        <a
+          class="translation btn-link nav-link show"
+          title="{{ .Language.LanguageName }}"
+          href="{{ .Permalink }}"
+          >{{ .Language.LanguageName }}</a
+        >
+      </li>
+      {{ end }}
+    </ul>
+  </nav>
