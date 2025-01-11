@@ -1,4 +1,6 @@
-<div id="footer-color-selector" class="nav-item dropdown dropup">
+{{/* indicates where the partial is placed 
+  so far the placement can either be header or footer */}}
+<div id='{{ .Scratch.Get "selectorPlacement" }}-color-selector' class="nav-item dropdown dropup">
     <button
       class="btn btn-link nav-link py-2 px-0 px-lg-2 dropdown-toggle d-flex align-items-center show"
       id="bd-theme"
@@ -6,7 +8,7 @@
       aria-expanded="true"
       data-bs-toggle="dropdown"
       data-bs-display="static"
-      aria-label="Toggle theme (light)"
+      aria-label='{{ i18n "toggle_theme" }}'
     >
       <span class="theme-icon auto d-none" aria-hidden="true"
         >{{ i18n "theme_auto_short" }}</span

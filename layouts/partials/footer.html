@@ -27,11 +27,13 @@
           <div class="d-flex flex-column flex-lg-row justify-content-center align-items-center gap-2">
             {{- if hugo.IsMultilingual }} 
             {{- if not .Site.Params.languages.selector.disable.footer }}
+            {{ .Scratch.Set "selectorPlacement" "footer" }}
             {{ partial "selector-language.html" . }}
             {{- end }} 
             {{- end }}
             
             {{- if not .Site.Params.colorTheme.selector.disable.footer }}
+            {{ .Scratch.Set "selectorPlacement" "footer" }}
             {{ partial "selector-theme.html" . }}
             {{- end }}
           </div>

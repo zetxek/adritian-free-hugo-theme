@@ -1,4 +1,6 @@
-<nav id="footer-language-selector" class="language-selector nav-item dropdown dropup">
+{{/* indicates where the partial is placed 
+ so far the placement can either be header or footer */}}
+<nav id='{{ .Scratch.Get "selectorPlacement" }}-language-selector' class="language-selector nav-item dropdown dropup">
     {{ range .Site.Languages }} {{ if eq . $.Site.Language }}
     <button
       type="button"
