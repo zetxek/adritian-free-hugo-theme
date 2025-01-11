@@ -29,7 +29,7 @@
           data-bs-target="#navbarSupportedContent, #header"
           aria-controls="navbarSupportedContent"
           aria-expanded="false"
-          aria-label="Toggle navigation"
+          aria-label='{{ i18n "toggle_navigation" }}'
         >
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -37,7 +37,7 @@
           <ul class="navbar-nav ml-lg-auto">
             <li class="nav-item">
               <a class="nav-link active" href="{{ .Site.BaseURL | relLangURL }}"
-                >HOME</a
+                >{{ i18n "nav_home" }}</a
               >
             </li>
             {{ range .Site.Menus.header }}

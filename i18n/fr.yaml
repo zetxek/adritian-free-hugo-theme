@@ -5,9 +5,15 @@
 - id: "logo_text2"
   translation: "Nom"
 
+- id: "nav_home"
+  translation: "ACCUEIL"
+  
 ## General
 - id: "skipToMainContent"
   translation: "Aller au contenu principal"
+
+- id: "toggle_navigation" 
+  translation: "Basculer la navigation"
 
 ## Footer
 - id: "footer_notice"

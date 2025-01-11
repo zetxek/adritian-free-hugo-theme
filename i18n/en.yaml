@@ -17,9 +17,15 @@
 - id: "logo_text2"
   translation: "Demo"
 
+- id: "nav_home"
+  translation: "HOME"
+
 ## General
 - id: "skipToMainContent"
   translation: "Skip to main content"
+
+- id: "toggle_navigation"
+  translation: "Toggle navigation"
 
 ## Footer
 - id: "footer_notice"
@@ -192,3 +198,4 @@
   translation: "Sorry, but the page you were looking for could not be found."
 - id: "404_button"
   translation: "Back to homepage"
+
