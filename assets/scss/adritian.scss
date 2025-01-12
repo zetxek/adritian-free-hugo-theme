@@ -228,7 +228,18 @@ footer_links .nav-item .nav-link::after {
         }
         .header .navbar .nav-item{
             border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
-        }    
+        }
+        #mobile-header-language-selector,
+        #mobile-header-color-selector
+        {
+            flex-direction: column;
+        }
+        #languages-dropdown-mobile-header,
+        #theme-dropdown-mobile-header
+        {
+            font-size: inherit;
+        }
+
     }
     .header--sticky-triggered{
         background: #181818  !important;

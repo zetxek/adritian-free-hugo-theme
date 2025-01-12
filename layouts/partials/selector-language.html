@@ -17,7 +17,7 @@
       <span class="label">{{ i18n "language" }}</span>
     </button>
     <ul
-      class="dropdown-menu dropdown-menu-end dropup"
+      class='dropdown-menu dropdown-menu-end {{ if not (eq $placement "mobile-header") }}dropup{{ end }}'
       id="languages-dropdown-{{ $placement }}"
       data-bs-popper="static"
     >
