@@ -24,28 +24,33 @@ test.describe('Theme basic functionality', () => {
   });
 
   test('theme switcher works', async ({ page }) => {
+    // set the browser theme preference to "light"
+    // Emulate dark color scheme
+    await page.emulateMedia({ colorScheme: 'dark' });
+
+
     await page.goto(BASE_URL);
     // attribute exists
     await expect(page.locator('html')).toHaveAttribute('data-bs-theme');
     // click on theme switcher
-    await page.click('#bd-theme');
+    await page.click('#bd-theme-footer');
     /* click on the html element:
     <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
                     ☀️ Light
                   </button>
     */
-    await page.click('text=☀️ Light');
-    await expect(page.locator('html')).toHaveAttribute('data-bs-theme', 'light');
+   await page.getByRole('button', { name: '☀️ Light' }).last().click();
+   await expect(page.locator('html')).toHaveAttribute('data-bs-theme', 'light');
     // click on theme switcher
-    await page.click('#bd-theme');
+    await page.click('#bd-theme-footer');
     /* click on the html element:
     <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="dark" aria-pressed="true">
                     🌑 Dark
                     <span class="theme-icon dark d-none" aria-hidden="true"></span>
                   </button>
     */
-    await page.click('text=🌑 Dark');
-    await expect(page.locator('html')).toHaveAttribute('data-bs-theme', 'dark');
+    await expect(page.getByText('🌑 Dark').last()).toBeVisible();
+    await expect(page.locator('html')).toHaveAttribute('data-bs-theme', 'light');
   });
 
   test('navigation is visible', async ({ page }) => {

@@ -32,7 +32,7 @@
     setTheme(getPreferredTheme())
   
     const showActiveTheme = (theme, focus = false) => {
-      const themeSwitcher = document.querySelector('#bd-theme')
+      const themeSwitcher = document.querySelector('#bd-theme-footer')
   
       if (!themeSwitcher) {
         return
