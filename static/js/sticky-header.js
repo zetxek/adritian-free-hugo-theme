@@ -9,6 +9,7 @@ class StickyHeader {
       (this.bodyPosition = 0),
       window.addEventListener("DOMContentLoaded", () => this.initSticky()),
       this.scrollChanged();
+      this.navbar = document.getElementById('navbarSupportedContent');
       // add window resize listener
       window.addEventListener("resize", () => this.resizeHandler());
   }
@@ -32,12 +33,12 @@ class StickyHeader {
         : this.header.classList.toggle(this.triggeredStickyClass, false);
   }
   resizeHandler() {
-    console.log('window resized - sticky header. window size = ', window.innerWidth);
-    // if the window size is larger than 992px, remove collapse and show classes
-    // to show the main content in case that the navigation was triggered
+    // if the window size is larger than 992px and the navbar is displayed,
+    // toggle the navbar to hide it
     if (window.innerWidth > 991) {
-        this.header.classList.remove('show');
-        this.header.classList.remove('collapsed');
+        if (this.navbar?.classList.contains('show')) {
+            simulateClick(document.querySelector('.navbar-toggler'));
+        }
       }
   }
 }
