@@ -54,10 +54,10 @@ test.describe('Language switching functionality', () => {
     await expect(page.getByText('Expérience').first()).toBeVisible();
     
     // Navigate to home
-    await page.getByText('🏠 HOME').click();
+    await page.getByText('ACCUEIL').click();
     
     // Verify language maintained
     await expect(page.locator('html')).toHaveAttribute('lang', 'fr');
-    await expect(page.getByText('Langue').first()).toBeVisible();
+    await expect(page.getByText('Langue').last()).toBeVisible();
   });
 });
