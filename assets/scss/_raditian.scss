@@ -1458,6 +1458,14 @@ article.post.summary h2{
     margin-bottom: 20px;
 }
 
+ul.tags {
+    display: inline-flex;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
 #blog-single #meta{
     margin-bottom: 20px;
 }
