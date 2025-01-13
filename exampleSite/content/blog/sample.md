@@ -1,9 +1,12 @@
-+++
-title = 'Sample blog content 1'
-date = 2024-06-21T14:38:33+02:00
-draft = false
-type = 'blog'
-+++
+---
+title: 'Sample blog content 1'
+date: 2024-06-21T14:38:33+02:00
+draft: false
+type: 'blog'
+tags: 
+  - sample
+  - lorem-ipsum
+---
 
 Sample blog content. Like a lorem ipsum but saying something more interesting.
 
