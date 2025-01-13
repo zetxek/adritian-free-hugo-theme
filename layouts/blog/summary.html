@@ -5,17 +5,17 @@
       <div>
         <section>
           {{ i18n "published_on" }} 
-          <h4 id="date">{{ .Date.Format "Mon Jan 2, 2006" }}</h4> · 
-          <h4 id="wordcount">{{ .WordCount }} Words</h4>
+          <h4 class="date">{{ .Date.Format "Mon Jan 2, 2006" }}</h4> · 
+          <h4 class="wordcount">{{ .WordCount }} Words</h4>
         </section>
         {{ with .GetTerms "topics" }}
-        <ul id="topics">
+        <ul class="topics">
           {{ range . }}
           <li><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></li>
           {{ end }}
         </ul>
         {{ end }} {{ with .GetTerms "tags" }}
-        <ul id="tags">
+        <ul class="tags">
           {{ range . }}
           <li><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></li>
           {{ end }}
