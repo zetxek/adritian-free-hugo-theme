@@ -1464,7 +1464,29 @@ ul.tags {
     margin: 0;
     padding: 0;
     list-style: none;
-  }
+
+    li {
+      position: relative;
+      display: inline-block;
+      padding: 0.4em 1.2em 0.4em 1.6em;
+      background-color: #f5f5f5;
+      color: #333;
+      font-size: 0.9rem;
+      border-radius: 0.25rem;
+
+      &::before {
+        content: "";
+        position: absolute;
+        left: 0.4em;
+        top: 50%;
+        transform: translateY(-50%) rotate(45deg);
+        width: 0.6em;
+        height: 0.6em;
+        background-color: #f5f5f5;
+        border-radius: 2px;
+      }
+    }
+}
 
 #blog-single #meta{
     margin-bottom: 20px;
