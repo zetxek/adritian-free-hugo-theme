@@ -10,8 +10,142 @@ tags:
 
 Sample blog content. Like a lorem ipsum but saying something more interesting.
 
-Welcome to the world of "Content Ipsum," the fresh alternative to the classic lorem ipsum. It's the perfect blend for designers and writers who crave a dash of creativity and meaning in their placeholder text. Imagine a text that not only fills the space but also sparks the imagination, a text that weaves tales of innovation, inspiration, and the endless possibilities that creativity brings.
+We will show some content that is supported:
 
-In the realm of "Content Ipsum," every paragraph is a journey through the wonders of the human mind, a celebration of the achievements that have shaped our world, and a look into the future that awaits us. From the depths of the ocean to the farthest reaches of the universe, "Content Ipsum" takes you on an adventure that captivates and informs.
+## Basic Syntax
 
-So, the next time you're crafting a design or drafting a document, let "Content Ipsum" infuse your work with the spirit of discovery and the joy of creation. It's more than just text; it's a narrative that connects, engages, and inspires. Welcome to the evolution of placeholder text – where every word is a story waiting to be told.
+### Headings
+
+```
+# Heading 1
+## Heading 2
+### Heading 3
+#### Heading 4
+##### Heading 5
+###### Heading 6
+```
+
+## Heading 2
+### Heading 3
+#### Heading 4
+##### Heading 5
+###### Heading 6
+
+### Emphasis
+
+```text
+*This text will be italic*
+_This will also be italic_
+
+**This text will be bold**
+__This will also be bold__
+
+_You **can** combine them_
+```
+
+*This text will be italic*
+
+_This will also be italic_
+
+**This text will be bold**
+
+__This will also be bold__
+
+_You **can** combine them_
+
+### Lists
+
+#### Unordered
+
+```
+* Item 1
+* Item 2
+  * Item 2a
+  * Item 2b
+```
+
+* Item 1
+* Item 2
+  * Item 2a
+  * Item 2b
+
+#### Ordered
+
+```
+1. Item 1
+2. Item 2
+3. Item 3
+   1. Item 3a
+   2. Item 3b
+```
+
+### Images
+
+```markdown
+![GitHub Logo](https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png)
+```
+
+![GitHub Logo](https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png)
+
+### Links
+
+```markdown
+[Hugo](https://gohugo.io)
+```
+
+[Hugo](https://gohugo.io)
+
+### Blockquotes
+
+```markdown
+As Newton said:
+
+> If I have seen further it is by standing on the shoulders of Giants.
+```
+
+> If I have seen further it is by standing on the shoulders of Giants.
+
+### Inline Code
+
+```markdown
+Inline `code` has `back-ticks around` it.
+```
+
+Inline `code` has `back-ticks around` it.
+
+### Code Blocks
+
+#### Syntax Highlighting
+
+````markdown
+```go
+func main() {
+    fmt.Println("Hello World")
+}
+```
+````
+
+```go
+func main() {
+    fmt.Println("Hello World")
+}
+```
+
+### Tables
+
+```markdown
+| Syntax    | Description |
+| --------- | ----------- |
+| Header    | Title       |
+| Paragraph | Text        |
+```
+
+| Syntax    | Description |
+| --------- | ----------- |
+| Header    | Title       |
+| Paragraph | Text        |
+
+## References
+
+- [Markdown Syntax](https://www.markdownguide.org/basic-syntax/)
+- [Hugo Markdown](https://gohugo.io/content-management/formats/#markdown)
