@@ -9,7 +9,7 @@
 <body>
   {{ partial "header.html" . }}
   <!-- list type: {{ .Kind }} -->
-  <main class="list"> 
+  <main class="list flex-grow-1"> 
     <section id="main-content" class="container section list-{{ .Kind }}">
       <h1>{{ .Title }}</h1>
       {{ if eq .Kind "taxonomy" }}
