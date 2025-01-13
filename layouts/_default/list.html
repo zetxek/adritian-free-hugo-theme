@@ -13,9 +13,9 @@
     <section id="main-content" class="container section list-{{ .Kind }}">
       <h1>{{ .Title }}</h1>
       {{ if eq .Kind "taxonomy" }}
-        <ul>
+        <ul class="list list-{{ .Kind }}">
           {{ range .Data.Terms.ByCount }}
-            <li>
+            <li class="item item-{{ .Page.Kind }}">
               <a href="{{ .Page.RelPermalink }}">{{ .Page.Title }}</a> ({{ .Count }})
             </li>
           {{ end }}
