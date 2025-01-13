@@ -186,7 +186,7 @@
   translation: "Read more"
 
 - id: "published_on"
-  translation: "Published on"
+  translation: "Published on "
 
 - id: "continue_reading"
   translation: "Continue reading"
