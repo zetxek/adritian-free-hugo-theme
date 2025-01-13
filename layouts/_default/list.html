@@ -8,16 +8,25 @@
 
 <body>
   {{ partial "header.html" . }}
-
+  <!-- list type: {{ .Kind }} -->
   <main class="list"> 
-    <section id="main-content" class="container section">
+    <section id="main-content" class="container section list-{{ .Kind }}">
       <h1>{{ .Title }}</h1>
-      <ul>
-        <!-- Renders the li.html content view for each content/posts/*.md -->
-        {{ range .Pages }}
-          {{ .Render "li" }}
-        {{ end }}
-      </ul>
+      {{ if eq .Kind "taxonomy" }}
+        <ul>
+          {{ range .Data.Terms.ByCount }}
+            <li>
+              <a href="{{ .Page.RelPermalink }}">{{ .Page.Title }}</a> ({{ .Count }})
+            </li>
+          {{ end }}
+        </ul>
+      {{ else }}
+        <ul>
+          {{ range .Pages }}
+            {{ .Render "li" }}
+          {{ end }}
+        </ul>
+      {{ end }}
     </section>
   </main>
 
