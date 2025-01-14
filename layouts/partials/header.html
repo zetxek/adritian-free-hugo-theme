@@ -48,9 +48,14 @@
             </li>
             {{ end }}
             {{ .Scratch.Set "selectorPlacement" "mobile-header" }}
+            
+            {{- if hugo.IsMultilingual }} 
+            {{- if not .Site.Params.languages.selector.disable.footer }}
             <li class="nav-item">
             {{ partial "selector-language.html" . }}
             </li>
+            {{- end }}
+            {{- end }}
             <li class="nav-item">
             {{ partial "selector-theme.html" . }}
             </li>
