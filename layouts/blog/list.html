@@ -1,30 +1,37 @@
-<!-- inject:../components/baseHead/baseHeadStart.html -->
 <!DOCTYPE html>
 <html lang="{{- $.Lang }}">
-
 <head>
-  {{ partial "head.html" . }} {{ partial "head_custom.html" . }}
+  {{ partial "head.html" . }}
+  {{ partial "head_custom.html" . }}
 </head>
 
 <body>
   {{ partial "header.html" . }}
 
-  <main id="main-content" class="blog flex-grow-1"> 
-    <section class="container section">
-      <h1 class="rad-fade-down rad-waiting rad-animate">{{ .Title }}</h1>
-      <div class="posts-list container">
-        <!-- Renders the li.html content view for each content/posts/*.md -->
-        {{ range .Pages }}
-          <div class="row row--padded rad-animation-group rad-fade-down rad-waiting rad-animate section--border-bottom">
-          {{ .Render "summary" }}
-          </div>
+  <main id="main-content" class="blog flex-grow-1">
+    <div class="container section">
+      <div class="row {{ if eq .Site.Params.blog.layout "sidebar" }}has-sidebar{{ end }}">
+        {{ if eq .Site.Params.blog.layout "sidebar" }}
+        <div class="col-sidebar" style="width: {{ .Site.Params.blog.sidebarWidth }}%">
+          {{ partial "blog-sidebar.html" . }}
+        </div>
         {{ end }}
+        
+        <div class="col-content" {{ if eq .Site.Params.blog.layout "sidebar" }}style="width: calc(100% - {{ .Site.Params.blog.sidebarWidth }}%)"{{ end }}>
+          <h1 class="rad-fade-down rad-waiting rad-animate">{{ .Title }}</h1>
+          <div class="posts-list">
+            {{ range .Pages }}
+              <div class="row row--padded rad-animation-group rad-fade-down rad-waiting rad-animate section--border-bottom">
+                {{ .Render "summary" }}
+              </div>
+            {{ end }}
+          </div>
+        </div>
       </div>
-    </section>
+    </div>
   </main>
 
-  {{ partial "footer.html" . }} {{ partial "base-foot.html" . }}
+  {{ partial "footer.html" . }}
+  {{ partial "base-foot.html" . }}
 </body>
-
 </html>
-<!-- endinject -->
