@@ -137,6 +137,18 @@ _(optional, if you want to use the contact form)_ edit line 212 in your `homepag
 
 ##### Blog
 
+Two layouts are available for the blog:
+- `default` (full-width for posts)
+- `sidebar` (sidebar with recent posts and categories)
+
+| Default Layout | Sidebar Layout |
+|---------------|----------------|
+| ![Default blog layout with full width content](./images/blog-default.jpeg) | ![Blog layout with sidebar showing recent posts](./images/blog-sidebar.jpeg) |
+| Full width posts | Posts with left sidebar |
+| Clean, focused reading experience | Shows recent posts and categories |
+| Maximizes content area | 25% width sidebar by default |
+| Best for image-heavy posts | Helps with site navigation |
+
 <img width="1271" alt="image" src="https://github.com/user-attachments/assets/1821a3b7-f572-4958-8c4f-bd1687cc8f71">
 
 
@@ -144,6 +156,8 @@ To use the blog, you can use the content type "blog", and render it in the URL `
 You can add a menu link to it in `hugo.toml`.
 
 The posts will be markdown files stored in the `content/blog` folder.
+
+The layout can be configured in the `hugo.toml` file, under the `[params.blog]` section.
 
 ##### Experience
 
