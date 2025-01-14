@@ -27,10 +27,19 @@
       background: var(--bs-gray-100);
       border-radius: 0.5rem;
       
+      @include color-mode(dark) {
+        background-color: #121212;
+      }
+      
       h3 {
         margin-bottom: 1rem;
         font-size: 1.2rem;
-        color: var(--bs-gray-700);
+        font-weight: 600;
+        color: var(--bs-gray-900);
+        
+        @include color-mode(dark) {
+          color: var(--bs-white);
+        }
       }
       
       ul {
@@ -41,8 +50,18 @@
         li {
           margin-bottom: 0.75rem;
           
-          &:last-child {
-            margin-bottom: 0;
+          a {
+            color: var(--bs-gray-700);
+            text-decoration: none;
+            transition: color 0.2s ease;
+            
+            @include color-mode(dark) {
+              color: var(--bs-gray-300);
+            }
+            
+            &:hover {
+              color: var(--bs-primary);
+            }
           }
         }
       }
@@ -52,8 +71,22 @@
           display: block;
           font-size: 0.875rem;
           color: var(--bs-gray-600);
+          
+          @include color-mode(dark) {
+            color: var(--bs-gray-500);
+          }
         }
       }
     }
   }
+}
+
+@include color-mode(dark) {
+  .blog {
+    .blog-sidebar {
+      .sidebar-section {
+        background-color: #121212;
+      }
+    }
+  }   
 }

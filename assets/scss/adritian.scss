@@ -208,8 +208,6 @@ footer_links .nav-item .nav-link::after {
   }
 
 /* dark mode */
-/** Media-query based color switching **/
-// $color-mode-type: media-query;
 @include color-mode(dark) {
     
     html body, body {
