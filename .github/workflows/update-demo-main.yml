@@ -17,21 +17,19 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-        with: 
-          repository: zetxek/adritian-demo
-          token: ${{ secrets.PRIVATE_TOKEN_GITHUB }}
-          submodules: true
 
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: 'latest'
+          extended: true
 
-      - name: Print submodule status
-        run: |
-          git submodule status
-      
-      - name: Print submodule diff
-        run: |
-          git diff --submodule=diff
+      - name: Setup Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '>=1.20.0'
 
-      - name: Update & send pull-request
+      - name: Clone demo repository
         run: |
           LATEST_TAG=$(git describe --tags --always)  
           LATEST_COMMIT=$(git rev-parse HEAD)
@@ -44,10 +42,7 @@ jobs:
           echo "Latest tag: $LATEST_TAG"
           echo "Latest commit: $LATEST_COMMIT"
 
-          git config --global --add --bool push.autoSetupRemote true
-
-          # Clone the remote repository and change working directory to the
-          # folder it was cloned to.
+          # Clone the remote repository
           git clone \
             --depth=1 \
             --branch=main \
@@ -56,66 +51,50 @@ jobs:
 
           cd $FOLDER
 
-          # Setup the committers identity.
+          # Setup the committers identity
           git config user.email "actions@github.com"
-          git config user.name "GitHub Actions - update theme submodule"
+          git config user.name "GitHub Actions - update theme module"
           git config pull.rebase false
+          git config --global --add --bool push.autoSetupRemote true
 
-          # Create a new feature branch for the changes.
+          # Create a new feature branch for the changes
           git checkout -b $BRANCH_NAME
 
-          # Initialize and update the submodules.
-          echo "Initializing and updating submodules..."
-          git submodule update --init --recursive
+          # Initialize Hugo module if not already initialized
+          if [ ! -f "go.mod" ]; then
+            hugo mod init github.com/$REPOSITORY
+          fi
 
-          # Update the script files to the latest version.
+          # Update the theme module to latest version
           echo "Updating theme to $LATEST_TAG..."
-          cd themes/adritian-free-hugo-theme
-          git checkout main
-          git pull origin main
-          cd ../..
-          git add themes/adritian-free-hugo-theme
-          echo "Updated submodule. Comitting changes."
+          hugo mod get -u github.com/zetxek/adritian-free-hugo-theme@$LATEST_TAG
+          hugo mod tidy
 
-          # Commit the changes and push the feature branch to origin
-          git config --global --add --bool push.autoSetupRemote true
-          echo "🔄 Adding all changes - updating theme to $LATEST_TAG"
-          git add --all
-          echo "✉️ Changes added. Comitting and pushing."
-
-          COMMIT_MSG_THEME='chore: update theme submodule to `'"$LATEST_TAG"'`'
-          echo 'Committing theme: '"$COMMIT_MSG_THEME"
-          git commit -am "$COMMIT_MSG_THEME" && git push --force || echo "No changes to theme"
-
-          tree themes/adritian-free-hugo-theme -r
-
-          # Copy content
-          cp themes/adritian-free-hugo-theme/exampleSite/hugo.toml hugo.toml
+          # Copy example config
+          cp $(hugo mod vendor github.com/zetxek/adritian-free-hugo-theme)/exampleSite/hugo.toml hugo.toml
           # Update URL
           sed -i -e "s/\"https\:\/\/www\.adrianmoreno\.info\"/\"https\:\/\/adritian-demo\.vercel\.app\/\"/g" hugo.toml
 
-          COMMIT_MSG_CONFIG='chore: update config/content submodule to `'"$LATEST_TAG"'` from https://github.com/zetxek/adritian-free-hugo-theme'
-          echo "Committing content/config: $COMMIT_MSG_CONFIG"
-          git commit -am "$COMMIT_MSG_CONFIG"  && git push --force || echo "No changes to config"
+          # Commit the changes
+          echo "🔄 Adding all changes - updating theme to $LATEST_TAG"
+          git add go.mod go.sum hugo.toml
+          
+          COMMIT_MSG="chore: update theme module to $LATEST_TAG"
+          git commit -am "$COMMIT_MSG" || echo "No changes to commit"
 
           echo "Pushing branch: $BRANCH_NAME"
           git push origin $BRANCH_NAME --force
 
-          # Store the PAT in a file that can be accessed by the
-          # GitHub CLI.
+          # Create pull request
           echo "${{ secrets.PRIVATE_TOKEN_GITHUB }}" > token.txt
-
-          # Authorize GitHub CLI for the current repository and
-          # create a pull-requests containing the updates.
-          echo "Logging in to GitHub CLI."
           gh auth login --with-token < token.txt
 
           echo "Creating pull-request..."
-          PR_TITLE='chore: update theme to `'$LATEST_TAG'`'
-          echo 'PR title: '$PR_TITLE
-          PR_BODY="🤖 This automated PR updates the theme submodule to the latest version: https://github.com/zetxek/adritian-free-hugo-theme/commit/$LATEST_COMMIT.
+          PR_TITLE="chore: update theme to $LATEST_TAG"
+          PR_BODY="🤖 This automated PR updates the theme module to version $LATEST_TAG.
+          
+          Changes from: https://github.com/zetxek/adritian-free-hugo-theme/commit/$LATEST_COMMIT
           🔗 Triggered by https://github.com/zetxek/adritian-free-hugo-theme/actions/workflows/update-demo-pr.yml"
-          echo "PR body: "$PR_BODY
 
           gh pr create \
             --title "$PR_TITLE" \
@@ -124,4 +103,4 @@ jobs:
             --base $BASE_BRANCH \
             --assignee $ASSIGNEE
 
-          echo "✅ Pull-request created - done! "
+          echo "✅ Pull-request created - done!"
