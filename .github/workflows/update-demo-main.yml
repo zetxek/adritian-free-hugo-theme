@@ -69,12 +69,7 @@ jobs:
           echo "Updating theme to $LATEST_TAG..."
           hugo mod get -u github.com/zetxek/adritian-free-hugo-theme@$LATEST_TAG
           hugo mod tidy
-
-          # Copy example config
-          cp $(hugo mod vendor github.com/zetxek/adritian-free-hugo-theme)/exampleSite/hugo.toml hugo.toml
-          # Update URL
-          sed -i -e "s/\"https\:\/\/www\.adrianmoreno\.info\"/\"https\:\/\/adritian-demo\.vercel\.app\/\"/g" hugo.toml
-
+          
           # Commit the changes
           echo "🔄 Adding all changes - updating theme to $LATEST_TAG"
           git add go.mod go.sum hugo.toml
