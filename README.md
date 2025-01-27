@@ -184,9 +184,6 @@ If you have improvements for the theme, you are very welcome to make a PR if you
 
 The project is offered "as is", and it's a hobby project that powers my personal website. Support is given whenever life allows - you can create an issue [create an issue](https://github.com/zetxek/adritian-free-hugo-theme/issues) so anyone else could also help, or the author.
 
-### Contributing
-
-Your PRs will get a preview URL in Vercel.
 
 ## Showcase
 
