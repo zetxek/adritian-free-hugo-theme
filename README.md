@@ -47,66 +47,73 @@ You have two reference implementations of the theme provided:
 
 ## Quickstart
 
-We support two installation methods: as a [Hugo module](https://gohugo.io/hugo-modules/), or as a [git submodule](https://gohugo.io/getting-started/quick-start/#create-a-site). 
+#### Install Hugo
 
-Alternatively, you can also [download the theme as a zip file](https://github.com/zetxek/adritian-free-hugo-theme/releases), and copy the files to your site. But that will lead to your site being "stuck in time" and more difficult to upgrade. **This is not recommended or supported directly**.
+To use `adritian-free-hugo-theme` you need to install Hugo by following https://gohugo.io/getting-started/installing/.
+
+We recommend installing the theme as a [Hugo module](https://gohugo.io/hugo-modules/) (recommended, and explained below).
+
+Other alternative is to use [git submodules](https://gohugo.io/getting-started/quick-start/#create-a-site), or to [download the theme as a zip file](https://github.com/zetxek/adritian-free-hugo-theme/releases), and copy the files to your site. But that will lead to your site being "stuck in time" and more difficult to upgrade. **This is not recommended or supported directly**.
 
 ### As a Hugo Module (recommended)
 
 > **Note:** Ensure you have **Go** and **Hugo** installed, and that you have created a new Hugo project before proceeding.
 
-1. Initialize Hugo Module system in your site if you haven't already:
+As a pre-requirement, you will need Hugo set up and running. You can follow [the official guide for it](https://gohugo.io/categories/installation/).
 
-```bash
-hugo mod init github.com/username/your-site
+The theme has been tested with the version `0.136` of Hugo. If you get errors regarding missing functionalities, check if you have the last version of Hugo available.
+
+Note: the theme supports both Hugo modules and git submodules. To install the theme in most maintanable way you should use Hugo modules. If you prefer git submodules you can follow these [older instructions](https://gohugobrasil.netlify.app/themes/installing-and-using-themes/) or the next ones as help:
+
+<details>
+<summary>Instructions to setup the theme as a hugo module</summary>
+
+- Create a new Hugo site (this will create a new folder): `hugo new site <your website's name>`
+- Enter the newly created folder: `cd <your website's name>/`
+- Initialize Hugo Module system in your site if you haven't already: `hugo mod init github.com/username/your-site` **you don't need to host your website on github, you can add anything as a name**
+- Add the theme as a dependency: add the following to your site's `hugo.toml`: 
+
+```
+[[module.imports]] 
+    path="github.com/zetxek/adritian-free-hugo-theme"
+```
+- Add the following to your site's `hugo.toml` configuration file:
+
+```
+# The following mounts are required for the theme to be able to load bootstrap
+# Remember also to copy the theme's `package.json` to your site, and run `npm install`
+[[module.mounts]]
+  source = "node_modules/bootstrap/scss"
+  target = "assets/scss/bootstrap"
+
+[[module.mounts]]
+  source = "node_modules/bootstrap/dist/js"
+  target = "assets/js/bootstrap"
+
+[[module.mounts]]
+  source = "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+  target = "assets/js/vendor/bootstrap.bundle.min.js"
 ```
 
-2. Add the theme as a dependency in your site's `hugo.toml`:
-```toml
-[module]
-  [[module.imports]]
-    path = "github.com/zetxek/adritian-free-hugo-theme"
-```
+This will allow the theme to load the bootstrap files from the node_modules folder (that you will install in the next steps).
+Note: see the `exampleSite` folder for more configuration options.
 
-3. Get the module:
-```bash
-hugo mod get -u
-```
+- Get the module: `hugo mod get -u`
+- Execute `hugo mod npm pack` - this will generate a `package.json` file in the root folder of your site, with the dependencies for the theme.
+- Execute `npm install` - this will install the dependencies for the theme (including bootstrap)
+- Start Hugo with `hugo server`
+- 🎉 The theme is alive on http://localhost:1313/
 
-4. Start Hugo with:
-```bash
-hugo server
-```
+</details>
+
 
 ### Traditional Installation (as git submodule)
 
 If you prefer not to use Hugo Modules, you can still install the theme as a git submodule.
 The guide is very similar to [official "Quick Start"](https://gohugo.io/getting-started/quick-start/#create-a-site), just changing the theme URL in the `git submodule add` command: 
 
-```bash
-git submodule add https://github.com/zetxek/adritian-free-hugo-theme.git themes/adritian-free-hugo-theme
-```
-
-## Download
-
-Note: we recommend using the [Hugo module method](#as-a-hugo-module-recommended) for installation.
-
-You can get the theme files in two ways:
-- (Best if you intend to contribute to the theme) Clone the repo: `git clone https://github.com/zetxek/adritian-free-hugo-theme.git`.
-- [Download from](https://github.com/zetxek/adritian-free-hugo-theme/archive/main.zip) GitHub.
-
-
-#### Install Hugo
-
-To use `adritian-free-hugo-theme` you need to install Hugo by following https://gohugo.io/getting-started/installing/.
-
-#### Setting up
-
-As a pre-requirement, you will need Hugo set up and running. You can follow [the official guide for it](https://gohugo.io/categories/installation/).
-
-The theme has been tested with the version `0.136` of Hugo. If you get errors regarding missing functionalities, check if you have the last version of Hugo available.
-
-Note: the theme supports both Hugo modules and git submodules. To install the theme in the cleanest way you can use Hugo modules, but if you prefer git submodules you can follow these [older instructions](https://gohugobrasil.netlify.app/themes/installing-and-using-themes/) or the next ones as help:
+<details>
+<summary>Old instructions for git submodules</summary>
 
 - Create a new Hugo site (this will create a new folder): `hugo new site <your website's name>`
 - Enter the newly created folder: `cd <your website's name>/`
@@ -116,6 +123,13 @@ Note: the theme supports both Hugo modules and git submodules. To install the th
 - Start Hugo with `hugo server -D`
 - 🎉 The theme is alive on http://localhost:1313/
 
+</details>
+
+
+---
+
+After this, you can start adding your own content to the site, and customize the configuration.
+
 _Optional:_
 if you want to preview the theme with the example content before deciding if it's what you are looking for, you can run the theme with the example content:
 ```
@@ -123,8 +137,9 @@ cd themes/adritian-free-hugo-theme/exampleSite
 hugo server --themesDir ../..
 ```
 
-
-The output for the `serve` command will be something like
+The output for the `serve` command will be something like this:
+<details>
+<summary>Example output for the serve command</summary>
 ```
 adritian-demo git:(master) ✗ hugo server -D
 Watching for changes in /Users/adrianmorenopena/tmp/theme-test/themes/adritian-free-hugo-theme/{archetypes,assets,data,exampleSite,i18n,layouts,static}
@@ -150,6 +165,7 @@ Running in Fast Render Mode. For full rebuilds on change: hugo server --disableF
 Web Server is available at http://localhost:1313/ (bind address 127.0.0.1)
 Press Ctrl+C to stop
 ```
+</details>
 
 #### Multi-language support
 

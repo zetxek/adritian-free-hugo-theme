@@ -2,6 +2,29 @@
 
 This documentation is meant to help you upgrade across versions, when potentially breaking changes are introduced.
 
+## v1.5.1
+
+The theme uses bootstrap as a dependency, installed from npm.
+This requires some steps in the site:
+
+1. copy the theme `package.json` to your site, and run `npm install`
+2. add the following section to the `hugo.toml` configuration to your site:
+
+```
+  [[module.mounts]]
+    source = "node_modules/bootstrap/scss"
+    target = "assets/scss/bootstrap"
+
+  [[module.mounts]]
+    source = "node_modules/bootstrap/dist/js"
+    target = "assets/js/bootstrap"
+
+  [[module.mounts]]
+    source = "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+    target = "assets/js/vendor/bootstrap.bundle.min.js"
+```
+
+
 ## v1.5.0
 
 The theme has been updated to support Hugo modules.

@@ -33,37 +33,39 @@
     {{- if findRE "^http" .URL }}
         <link rel="stylesheet" href="{{ .URL | absURL }}">
     {{- else }}
-        {{- $cssFile := resources.Get .URL }}
-        {{- $cssResources = $cssResources | append $cssFile }}
+        {{- with resources.Get .URL }}
+            {{- $cssResources = $cssResources | append . }}
+        {{- end }}
     {{- end }}
 {{- end }}
 
-{{- $cssBundle := $cssResources | resources.Concat "css/bundle.css" }}
-
-{{- $css := $cssBundle }} 
-{{- if hugo.IsProduction }} 
-    {{- $css = $css | minify | fingerprint | resources.PostProcess }} 
-{{- end }}
-<link
-  rel="preload"
-  href="{{ $css.RelPermalink }}"
-  as="style"
-  onload="this.onload=null;this.rel='stylesheet'"
-  {{ if hugo.IsProduction -}} 
-    integrity="{{ $css.Data.Integrity }}"
-    crossorigin="anonymous"
-  {{- end }}
-/>
-<noscript>
-  <link 
-    rel="stylesheet"
-    href="{{ $css.RelPermalink }}"
-    {{ if hugo.IsProduction -}} 
-    integrity="{{ $css.Data.Integrity }}"
-    crossorigin="anonymous"
+{{- if gt (len $cssResources) 0 }}
+    {{- $cssBundle := $cssResources | resources.Concat "css/bundle.css" }}
+    {{- $css := $cssBundle }} 
+    {{- if hugo.IsProduction }} 
+        {{- $css = $css | minify | fingerprint | resources.PostProcess }} 
     {{- end }}
-  />
-</noscript>
+    <link
+      rel="preload"
+      href="{{ $css.RelPermalink }}"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
+      {{ if hugo.IsProduction -}} 
+        integrity="{{ $css.Data.Integrity }}"
+        crossorigin="anonymous"
+      {{- end }}
+    />
+    <noscript>
+      <link 
+        rel="stylesheet"
+        href="{{ $css.RelPermalink }}"
+        {{ if hugo.IsProduction -}} 
+        integrity="{{ $css.Data.Integrity }}"
+        crossorigin="anonymous"
+        {{- end }}
+      />
+    </noscript>
+{{- end }}
 {{- range .Site.Params.plugins.scss }}
   {{/* no external scss processing - as they need to be processed by the theme */}}
   {{- $scss := resources.Get .URL }}

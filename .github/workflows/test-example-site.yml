@@ -5,9 +5,6 @@ on:
     # Runs on pull requests targeting the default branch
     pull_request:
         branches: ["main"]
-    # Runs on push to the development branch 
-    push:
-        branches: ["134-bug-playwright-runs-in-github-actions-dont-save-screenshots"]
     # Allows you to run this workflow manually from the Actions tab
     workflow_dispatch:
 env:
@@ -43,7 +40,7 @@ jobs:
             node_modules
           key: modules-${{ hashFiles('package-lock.json') }}
         
-      - name: Cache Playwright Binaries
+      - name: Cache Playwright Browsers
         id: cache-playwright
         uses: actions/cache@v4
         with:
@@ -55,6 +52,7 @@ jobs:
         run: npm ci
 
       - name: Install Playwright browsers
+        if: steps.cache-playwright.outputs.cache-hit != 'true'
         run: npx playwright install --with-deps
 
       - name: Build and serve demo site

@@ -20,26 +20,7 @@ jobs:
         with: 
           repository: zetxek/adritian-demo
           token: ${{ secrets.PRIVATE_TOKEN_GITHUB }}
-          submodules: true
-      - name: Show submodule status (pre)
-        run: |
-          git submodule status
-      - name: Pull & update submodules recursively
-        run: |
-          git submodule init
-          git config --global pull.rebase false  # merge
-          git submodule foreach --recursive git pull
-          # Skipping due to error "fatal: Unable to find xxx revision in submodule path 'themes/adritian-free-hugo-theme"
-          # git submodule update --remote --recursive --quiet
-
-      - name: Print submodule status (post)
-        run: |
-          git submodule status
       
-      - name: Print submodule diff
-        run: |
-          git diff --submodule=diff
-
       - name: Dump github context
         run:   echo "$GITHUB_CONTEXT"
         shell: bash
@@ -58,8 +39,7 @@ jobs:
           BRANCH_NAME="theme-update/update-theme-to-$LATEST_TAG"
           BASE_BRANCH="main"
           ASSIGNEE="zetxek"
-          SUBMODULE_PATH="themes/adritian-free-hugo-theme"
-
+          
           echo "Latest tag: $LATEST_TAG"
           echo "Latest commit: $LATEST_COMMIT"
           echo "PR URL: $PR_URL"
@@ -78,32 +58,19 @@ jobs:
 
           # Setup the committers identity.
           git config user.email "actions@github.com"
-          git config user.name "GitHub Actions - update theme submodule"
+          git config user.name "GitHub Actions - update theme module version"
 
           # Create a new feature branch for the changes.
           echo "Working branch: $BRANCH_NAME"
           git checkout -b $BRANCH_NAME
-
-          # Set submodule repo
-          echo "Setting submodule URL: $REPO_NAME"
-          git submodule set-url -- $SUBMODULE_PATH $REPO_NAME
-
-          # Set submodule branch
-          echo "Submodule branch: $SOURCE_BRANCH_NAME"
-          git submodule set-branch --branch $SOURCE_BRANCH_NAME $SUBMODULE_PATH
-
-          # Update the script files to the latest version.
-          git submodule update --init --recursive
-          git submodule update --recursive --remote
-          echo "Updated submodules. Setting up git."
-
+          
           # Commit the changes and push the feature branch to origin
           git config --global --add --bool push.autoSetupRemote true
           echo "Committing all changes."
           git add --all
 
-          COMMIT_MSG_THEME='chore: update theme submodule to `'"$LATEST_TAG"'`'
-          echo 'Committing theme: '"$COMMIT_MSG_THEME"
+          COMMIT_MSG_THEME='chore: update theme module version to `'"$LATEST_TAG"'`'
+          echo 'Updating theme module: '"$COMMIT_MSG_THEME"
           git commit -am "$COMMIT_MSG_THEME" && git push --force || echo "No changes to theme"
 
           # Copy content
@@ -111,7 +78,7 @@ jobs:
           # Update URL
           sed -i -e "s/\"https\:\/\/www\.adrianmoreno\.info\"/\"https\:\/\/adritian-demo\.vercel\.app\/\"/g" hugo.toml
 
-          COMMIT_MSG_CONFIG='chore: update config/content submodule to `'"$LATEST_TAG"'` from https://github.com/zetxek/adritian-free-hugo-theme'
+          COMMIT_MSG_CONFIG='chore: update config/content to `'"$LATEST_TAG"'` from https://github.com/zetxek/adritian-free-hugo-theme'
           echo "Committing content/config: $COMMIT_MSG_CONFIG"
           git commit -am "$COMMIT_MSG_CONFIG"  && git push --force || echo "No changes to config"
 
@@ -143,7 +110,7 @@ jobs:
             PR_TITLE='preview: update theme to `'$SOURCE_BRANCH_NAME'`'
             echo 'PR title: '$PR_TITLE
             PR_BODY="⚠️ The source PR is not merged yet - this is a preview PR.
-            🤖 This automated PR updates the theme submodule to a PR in the source repo: $PR_URL.
+            🤖 This automated PR updates the theme version to a PR in the source repo: $PR_URL.
             🔗 Triggered by https://github.com/zetxek/adritian-free-hugo-theme/actions/workflows/update-demo-pr.yml"
             echo "PR body: "$PR_BODY
 
