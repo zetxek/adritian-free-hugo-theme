@@ -5,6 +5,16 @@
 - id: "logo_text2"
   translation: "Nombre"
 
+- id: "nav_home"
+  translation: "INICIO"
+
+## General
+- id: "skipToMainContent"
+  translation: "Saltar al contenido principal"
+
+- id: "toggle_navigation"
+  translation: "Mostrar navegación"
+
 ## Footer
 - id: "footer_notice"
   translation: "© Adritian. Tema gratuito de Hugo por Adrián Moreno Peña."
@@ -13,7 +23,7 @@
   translation: "Idioma"
 
 - id: "toggle_theme"
-  translation: "Selectionar esquema de color"
+  translation: "Seleccionar esquema de color"
 
 - id: "theme_light"
   translation: "☀️ Claro"
@@ -163,7 +173,15 @@
   translation: "Leer más"
 
 - id: "published_on"
-  translation: "Publicado el"
+  translation: "Publicado el "
 
 - id: "continue_reading"
   translation: "Continuar leyendo"
+
+## 404 Page
+- id: "404_title"  
+  translation: "Página no encontrada"
+- id: "404_description"
+  translation: "Lo sentimos, pero la página que buscabas no pudo ser encontrada."
+- id: "404_button"
+  translation: "Volver al inicio"

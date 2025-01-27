@@ -21,9 +21,12 @@
       return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
     }
   
-    const setTheme = theme => {
+    function setTheme(theme) {
       if (theme === 'auto') {
-        document.documentElement.setAttribute('data-bs-theme', (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'))
+        document.documentElement.setAttribute(
+          'data-bs-theme',
+          window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+        )
       } else {
         document.documentElement.setAttribute('data-bs-theme', theme)
       }
@@ -32,31 +35,31 @@
     setTheme(getPreferredTheme())
   
     const showActiveTheme = (theme, focus = false) => {
-      const themeSwitcher = document.querySelector('#bd-theme')
+      const themeSwitcher = document.querySelectorAll('.bd-theme-selector')
   
       if (!themeSwitcher) {
         return
       }
   
       const themeSwitcherText = document.querySelector('#bd-theme-text')
-      const activeTheme = document.querySelector('.current-theme')
-      const btnToActive = document.querySelector(`[data-bs-theme-value="${theme}"]`)
-      const iconOfActiveBtn = btnToActive.querySelector('span.theme-icon')
+      const activeTheme = document.querySelectorAll('.current-theme')
+      const btnToActive = document.querySelectorAll(`[data-bs-theme-value="${theme}"]`)
+      //const iconOfActiveBtn = btnToActive.querySelector('span.theme-icon')
 
   
       document.querySelectorAll('[data-bs-theme-value]').forEach(element => {
         element.classList.remove('active')
         element.setAttribute('aria-pressed', 'false')
       })
-  
-      btnToActive.classList.add('active')
-      btnToActive.setAttribute('aria-pressed', 'true')
-      activeTheme.textContent = btnToActive.textContent
-      const themeSwitcherLabel = `${themeSwitcherText.textContent} (${btnToActive.dataset.bsThemeValue})`
-      themeSwitcher.setAttribute('aria-label', themeSwitcherLabel)
-  
-      if (focus) {
-        themeSwitcher.focus()
+      for (const element of btnToActive){
+        element.setAttribute('aria-pressed', 'true')
+      }
+      for (const element of activeTheme) {
+        element.textContent = btnToActive[0].textContent
+      }
+      const themeSwitcherLabel = `${themeSwitcherText.textContent} (${btnToActive[0].dataset.bsThemeValue})`
+      for (const element of themeSwitcher) {
+        element.setAttribute('aria-label', themeSwitcherLabel)
       }
     }
   

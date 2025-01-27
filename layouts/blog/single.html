@@ -1,6 +1,6 @@
 <!-- inject:../components/baseHead/baseHeadStart.html -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{- $.Lang }}">
   <head>
     {{ partial "head.html" . }} {{ partial "head_custom.html" . }}
   </head>
@@ -12,13 +12,13 @@
       id="blog-single"
       class="section section--border-bottom rad-animation-group flex-grow-1"
     >
-      <div class="container">
+      <div id="main-content" class="container">
         <h1><a href="{{ .RelPermalink }}">{{ .Title }}</a></h1>
 
         <aside id="meta" class="light-border-bottom">
           <div>
             <section>
-              {{ i18n "published_on" }}
+              {{ i18n "published_on" }} 
               <h4 id="date">{{ .Date.Format "Mon Jan 2, 2006" }}</h4>
               ·
               <h4 id="wordcount">{{ .WordCount }} Words</h4>
@@ -30,7 +30,7 @@
               {{ end }}
             </ul>
             {{ end }} {{ with .GetTerms "tags" }}
-            <ul id="tags">
+            <ul class="tags">
               {{ range . }}
               <li><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></li>
               {{ end }}

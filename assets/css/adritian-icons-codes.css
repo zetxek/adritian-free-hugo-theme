@@ -4,6 +4,7 @@
 .icon-x-twitter:before { content: '\e802'; } /* '' */
 .icon-email:before { content: '\e803'; } /* '' */
 .icon-user:before { content: '\f007'; } /* '' */
+.icon-table-list:before { content: '\f00b'; } /* '' */
 .icon-download:before { content: '\f019'; } /* '' */
 .icon-circle-info:before { content: '\f05a'; } /* '' */
 .icon-square-twitter:before { content: '\f081'; } /* '' */
@@ -18,6 +19,7 @@
 .icon-face-smile:before { content: '\f118'; } /* '' */
 .icon-square-arrow-up-right:before { content: '\f14c'; } /* '' */
 .icon-youtube:before { content: '\f167'; } /* '' */
+.icon-square-xing:before { content: '\f169'; } /* '' */
 .icon-instagram:before { content: '\f16d'; } /* '' */
 .icon-dribbble:before { content: '\f17d'; } /* '' */
 .icon-behance:before { content: '\f1b4'; } /* '' */

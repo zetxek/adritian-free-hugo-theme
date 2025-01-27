@@ -17,7 +17,7 @@
                 {{ end }}
                 {{ range first $totalCount (sort $xp "Date" "desc") }}
                 <div class="experience">
-                    <a href="{{.Permalink}}">
+                    <a href="{{.Permalink | relURL }}">
                         {{/* The context, ".", is now each one of the pages as it goes
                         through the loop */}}
                         <div class="experience__date">{{ .Params.duration }}</div>
@@ -31,7 +31,7 @@
                 <div class="all-experience-container">
                     {{ $xpExtra := sub $xpCount $totalCount }}
                     <em>And {{ $xpExtra }} more</em><br />
-                    <a href="{{ absURL "experience" }} " title=" See additional {{ $xpExtra }} experience items"
+                    <a href="{{ absURL "experience" | relLangURL }} " title=" See additional {{ $xpExtra }} experience items"
                         class="btn btn-primary btn-all-experience">
                         <i class="{{ .Site.Data.homepage.experience.button3.icon }}"></i>
                         {{ i18n "experience_button3" }}

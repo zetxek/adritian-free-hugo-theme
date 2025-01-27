@@ -1,6 +1,6 @@
 <!-- inject:../components/baseHead/baseHeadStart.html -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{- $.Lang }}">
 
 <head>
   {{ partial "head.html" . }} {{ partial "head_custom.html" . }}
@@ -8,16 +8,35 @@
 
 <body>
   {{ partial "header.html" . }}
-
-  <main class="list"> 
-    <section class="container section">
+  <!-- list type: {{ .Kind }} -->
+  <main class="list flex-grow-1"> 
+    <section id="main-content" class="container section list-{{ .Kind }}">
       <h1>{{ .Title }}</h1>
-      <ul>
-        <!-- Renders the li.html content view for each content/posts/*.md -->
-        {{ range .Pages }}
-          {{ .Render "li" }}
+      {{ if eq .Kind "taxonomy" }}
+        <ul class="list list-{{ .Kind }}">
+          {{ range .Data.Terms.ByCount }}
+            <li class="item item-{{ .Page.Kind }}">
+              <a href="{{ .Page.RelPermalink }}">{{ .Page.Title }}</a> ({{ .Count }})
+            </li>
+          {{ end }}
+        </ul>
+      {{ else }}
+        {{ if eq .Site.Params.blog.listStyle "summary" }}
+          <div class="posts-list">
+            {{ range .Pages }}
+              <div class="row row--padded rad-animation-group rad-fade-down rad-waiting rad-animate section--border-bottom">
+                {{ .Render "summary" }}
+              </div>
+            {{ end }}
+          </div>
+        {{ else }}
+          <ul class="posts-list-simple">
+            {{ range .Pages }}
+              {{ .Render "li" }}
+            {{ end }}
+          </ul>
         {{ end }}
-      </ul>
+      {{ end }}
     </section>
   </main>
 

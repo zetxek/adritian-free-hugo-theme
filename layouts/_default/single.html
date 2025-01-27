@@ -21,7 +21,7 @@
         </ul>
       {{ end }}
       {{ with .GetTerms "tags" }}
-        <ul id="tags">
+        <ul class="tags">
           {{ range . }}
             <li><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></li>
           {{ end }}

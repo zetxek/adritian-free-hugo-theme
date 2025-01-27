@@ -61,6 +61,9 @@ showcase:
 
     - icon: "cloud-arrow-down"
       URL: "https://www.adrianmoreno.info/"
+
+    - icon: "square-xing"
+      URL: "https://www.adrianmoreno.info/"
 # about
 about:
   enable: true
@@ -88,11 +91,20 @@ education:
 experience:
   enable: true
   button:
+    enable: true
     icon: "icon-linkedin"
+    ## the url and text are localized, fill them in the i18n file
+    ## keys: experience_button, experience_button_url
   button2:
+    enable: true
     icon: "icon-file-pdf"
+    ## the url and text are localized, fill them in the i18n file
+    ## keys: experience_button2, experience_button_url2 
   button3:
+    enable: true
     icon: "icon-cloud-arrow-down"
+    ## the url and text are localized, fill them in the i18n file
+    ## keys: experience_button2, experience_button_url2 
 
 # Client & Work
 client_and_work:

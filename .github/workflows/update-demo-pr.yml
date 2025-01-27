@@ -4,6 +4,10 @@
 name: PR demo site (on PR)
 ## This will open a PR which will open a vercel preview URL in the demo site
 on:
+  # push to the branch 124-idea-the-action-pr-demo-site-on-pr-shouldnt-count-as-a-check
+  push:
+    branches:
+      - 124-idea-the-action-pr-demo-site-on-pr-shouldnt-count-as-a-check
   pull_request:
   workflow_dispatch:
 
@@ -20,25 +24,30 @@ jobs:
           token: ${{ secrets.PRIVATE_TOKEN_GITHUB }}
           submodules: true
       - name: Show submodule status (pre)
+        shell: bash
         run: |
           git submodule status
       - name: Pull & update submodules recursively
+        shell: bash
         run: |
-          git submodule init
-          git config --global pull.rebase false  # merge
-          git submodule foreach --recursive git pull
+          git submodule init || echo "Error executing" && exit 0
+          git config --global pull.rebase false || echo "Error executing" && exit 0  # merge 
+          git submodule foreach --recursive git pull || echo "Error executing" && exit 0
           # Skipping due to error "fatal: Unable to find xxx revision in submodule path 'themes/adritian-free-hugo-theme"
           # git submodule update --remote --recursive --quiet
 
       - name: Print submodule status (post)
+        shell: bash
         run: |
           git submodule status
       
       - name: Print submodule diff
+        shell: bash
         run: |
           git diff --submodule=diff
 
       - name: Send pull-request
+        shell: bash        
         run: |
           LATEST_TAG=$(git describe --tags --always)  
           LATEST_COMMIT=$(git rev-parse HEAD)
@@ -121,7 +130,6 @@ jobs:
           if [ -n "$PR_EXISTS" ]; then
             echo "PR Exists. Updating pull-request..."
             gh pr view
-            
             echo "✅ Pull-request created - done! "
             
           # Else, we create it
@@ -134,13 +142,17 @@ jobs:
             🔗 Triggered by https://github.com/zetxek/adritian-free-hugo-theme/actions/workflows/update-demo-pr.yml"
             echo "PR body: "$PR_BODY
 
-            gh pr create \
+            PR_RESULT=$(gh pr create \
               --title "$PR_TITLE" \
               --body "$PR_BODY" \
               --head $BRANCH_NAME \
               --base $BASE_BRANCH \
               --assignee $ASSIGNEE \
-              --label preview
+              --label preview)
+            if [ $? -ne 0 ]; then
+              echo "Error creating PR: $PR_RESULT"
+              exit 0
+            fi
 
             echo "✅ Pull-request created - done! "
           fi

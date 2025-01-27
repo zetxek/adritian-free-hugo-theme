@@ -1,0 +1,30 @@
+<aside class="blog-sidebar">
+  {{ if .Site.Params.blog.showCategories }}
+  <div class="sidebar-section categories">
+    <h3>{{ i18n "categories" | default "Categories" }}</h3>
+    {{ if .Site.Taxonomies.tags }}
+    <ul class="tags">
+      {{ range $name, $taxonomy := .Site.Taxonomies.tags }}
+      <li>
+        <a href="{{ "/tags/" | relLangURL }}{{ $name | urlize }}">{{ $name }}</a>
+      </li>
+      {{ end }}
+    </ul>
+    {{ end }}
+  </div>
+  {{ end }}
+
+  {{ if .Site.Params.blog.showRecentPosts }}
+  <div class="sidebar-section recent-posts">
+    <h3>{{ i18n "recent_posts" | default "Recent Posts" }}</h3>
+    <ul>
+      {{ range first .Site.Params.blog.recentPostCount (where .Site.RegularPages "Type" "blog") }}
+      <li>
+        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+        <span class="post-date">{{ .Date.Format "Jan 2, 2006" }}</span>
+      </li>
+      {{ end }}
+    </ul>
+  </div>
+  {{ end }}
+</aside> 

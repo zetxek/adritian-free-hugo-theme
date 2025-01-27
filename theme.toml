@@ -7,9 +7,9 @@ licenselink = "https://github.com/zetxek/adritian-free-hugo-theme/blob/main/LICE
 description = "Minimalistic and clean theme for Hugo, great for Single Page personal websites. Can be easily extended to custom content types and has a simple blog."
 homepage = "https://github.com/zetxek/adritian-free-hugo-theme"
 demosite = "https://zetxek.github.io/adritian-demo/"
+min_version = "0.123.0"
 
 tags = ["responsive", "clean", "light", "personal", "bootstrap", "blog", "portfolio", "dark", "light", "multilingual"]
-
 
 features = [
     "widgets",
@@ -17,8 +17,6 @@ features = [
     "portfolio",
     "dark-mode"
 ]
-
-min_version = "0.123.0"
 
 [author]
 name = "Adrián Moreno Peña"

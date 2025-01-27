@@ -6,5 +6,17 @@ Thumbs.db
 npm-debug.log
 node_modules
 builds
-package-lock.json
  
+# Playwright
+/test-results/
+/tests/coverage-report
+playwright-report
+test-results
+exampleSite/public
+exampleSite/resources
+exampleSite/.hugo_build.lock
+exampleSite/hugo_stats.json
+
+# Local builds
+.hugo_build.lock
+public/

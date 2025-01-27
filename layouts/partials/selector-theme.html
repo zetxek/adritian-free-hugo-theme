@@ -1,0 +1,65 @@
+{{/* indicates where the partial is placed 
+  so far the placement can either be header or footer */}}
+{{- $placement := .Scratch.Get "selectorPlacement" }}
+<div id='{{ .Scratch.Get "selectorPlacement" }}-color-selector' class='nav-item dropdown dropup {{ if eq $placement "mobile-header" }}nav-link{{ end }}'>
+    <button
+      class="btn btn-link py-2 px-0 px-lg-2 dropdown-toggle d-flex align-items-center show bd-theme-selector"
+      id='bd-theme-{{ .Scratch.Get "selectorPlacement" }}'
+      type="button"
+      aria-expanded="true"
+      data-bs-toggle="dropdown"
+      data-bs-display="static"
+      aria-label='{{ i18n "toggle_theme" }}'
+    >
+      <span class="theme-icon auto d-none" aria-hidden="true"
+        >{{ i18n "theme_auto_short" }}</span
+      >
+      <span class="current-theme">{{ i18n "theme_auto" }}</span>
+      <span class="d-lg-none ms-2 visually-hidden" id="bd-theme-text"
+        >{{ i18n "toggle_theme" }}</span
+      >
+    </button>
+    <ul
+      id="theme-dropdown-{{ $placement }}"
+      class="dropdown-menu dropdown-menu-end dropup"
+      aria-labelledby="bd-theme-text"
+      data-bs-popper="static"
+    >
+      <li>
+        <button
+          type="button"
+          class="dropdown-item d-flex align-items-center active"
+          data-bs-theme-value="light"
+          aria-pressed="true"
+        >
+          {{ i18n "theme_light" }}
+        </button>
+      </li>
+      <li>
+        <button
+          type="button"
+          class="dropdown-item d-flex align-items-center"
+          data-bs-theme-value="dark"
+          aria-pressed="false"
+        >
+          {{ i18n "theme_dark" }}
+          <span class="theme-icon dark d-none" aria-hidden="true"
+            >{{ i18n "theme_dark_short" }}</span
+          >
+        </button>
+      </li>
+      <li>
+        <button
+          type="button"
+          class="dropdown-item d-flex align-items-center"
+          data-bs-theme-value="auto"
+          aria-pressed="false"
+        >
+          {{ i18n "theme_auto" }}
+          <span class="theme-icon light d-none" aria-hidden="true"
+            >{{ i18n "theme_light_short" }}</span
+          >
+        </button>
+      </li>
+    </ul>
+  </div>

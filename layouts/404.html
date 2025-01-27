@@ -1,7 +1,6 @@
 <!-- inject:../components/baseHead/baseHeadStart.html -->
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="{{- $.Lang }}">
 <head>
 
     {{ partial "head.html" . }}
@@ -17,11 +16,11 @@
     <section class="section four-o-four">
       <div class="container text-center">
         <h1 class="display-1">404</h1>
-        <h4>Page not found</h4>
+        <h4>{{ i18n "404_title" }}</h4>
         <p>
-          Sorry, but the page you were looking for could not be found.
+          {{ i18n "404_description" }}
         </p>
-        <a href="{{ .Site.BaseURL | absURL }}" class="btn btn-primary">Back to homepage</a>
+        <a href="{{ .Site.BaseURL | absURL }}" class="btn btn-primary">{{ i18n "404_button" }}</a>
       </div>
     </section>
 

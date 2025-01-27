@@ -161,6 +161,18 @@
       "css": "circle-info",
       "code": 61530,
       "src": "fa6solid"
+    },
+    {
+      "uid": "dcf0306d04831e66595e9ff59f9f95c7",
+      "css": "table-list",
+      "code": 61451,
+      "src": "fa6solid"
+    },
+    {
+      "uid": "4bef0175d5b8f8b2a32bfeddf99621b5",
+      "css": "square-xing",
+      "code": 61801,
+      "src": "fa6brands"
     }
   ]
 }

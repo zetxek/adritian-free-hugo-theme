@@ -5,7 +5,7 @@ $transition: 280ms all 120ms ease-out;
 
 .language-selector {
   li.choice {
-    padding-left: 22px;
+    padding: 0;
   }
 
   .label {
@@ -15,7 +15,15 @@ $transition: 280ms all 120ms ease-out;
   .dropdown-toggle::after {
     color: $color;
   }
+}
 
+#mobile-header-language-selector{
+  .label {
+    color: black;
+  }
+}
+#mobile-header-language-selector .dropdown-toggle::after{
+  color: black;
 }
 
 #footer-color-selector {
@@ -26,5 +34,17 @@ $transition: 280ms all 120ms ease-out;
     .current-theme{
       color: $color;
     }
+  
+}
+
+@include color-mode(dark){
+  #mobile-header-language-selector{
+    .label {
+      color: white;
+    }
+  }
+  #mobile-header-language-selector .dropdown-toggle::after{
+    color: white;
+  }
   
 }

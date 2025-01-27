@@ -11,11 +11,14 @@
 ></noscript>
 <!-- End Google Tag Manager (noscript) -->
 {{ end }}
+
+{{ partial "skip-to-content.html" }}
+
 <header class="header fixed-top rad-animation-group" id="header">
   <div class="container rad-fade-in">
     <nav class="navbar bd-navbar navbar-expand-lg navbar-light p-0">
       <div class="container-fluid">
-        <a class="navbar-brand mx-auto" href="{{ .Site.BaseURL | absURL }}">
+        <a class="navbar-brand mx-auto" href="{{ .Site.BaseURL | relLangURL }}">
           <span>{{ i18n "logo_text1" }}</span>
           <span>{{ i18n "logo_text2" }}</span>
         </a>
@@ -26,15 +29,15 @@
           data-bs-target="#navbarSupportedContent, #header"
           aria-controls="navbarSupportedContent"
           aria-expanded="false"
-          aria-label="Toggle navigation"
+          aria-label='{{ i18n "toggle_navigation" }}'
         >
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ml-lg-auto">
             <li class="nav-item">
-              <a class="nav-link active" href="{{ .Site.BaseURL | absURL }}"
-                >HOME</a
+              <a class="nav-link active" href="{{ .Site.BaseURL | relLangURL }}"
+                >{{ i18n "nav_home" }}</a
               >
             </li>
             {{ range .Site.Menus.header }}
@@ -44,11 +47,26 @@
               >
             </li>
             {{ end }}
+            {{ .Scratch.Set "selectorPlacement" "mobile-header" }}
+            
+            {{- if hugo.IsMultilingual }} 
+            {{- if not .Site.Params.languages.selector.disable.footer }}
+            <li class="nav-item">
+            {{ partial "selector-language.html" . }}
+            </li>
+            {{- end }}
+            {{- end }}
+            <li class="nav-item">
+            {{ partial "selector-theme.html" . }}
+            </li>
           </ul>
         </div>
+
       </div>
     </nav>
   </div>
 </header>
 
-{{ if not .IsHome }} {{ partial "breadcrumb.html" . }} {{ end }}
+{{- if not .IsHome }} 
+  {{ partial "breadcrumb.html" . }} 
+{{- end }}

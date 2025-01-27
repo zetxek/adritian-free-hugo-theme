@@ -1,26 +1,41 @@
 <section id="breadcrumb-bar" class="breadcrumb-bar container">
-        <ul class="breadcrumbs">
-            <li class="breadcrum-item"><span><a href="{{ relURL "" }}">Home</a></span></li>
-            {{- $.Scratch.Set "url" "" -}}
-            {{- range (split .RelPermalink "/") -}}
-                {{- if (gt (len .) 0) -}}    
-                    {{- $.Scratch.Set "isPage" "false" -}}
-                    {{- $.Scratch.Add "url" (print "/" . ) -}}
-                    {{- if $.Site.GetPage (print . ".md") -}}
-                        {{- with $.Site.GetPage (print . ".md") -}}
-                            {{- if .IsPage -}}
-                                {{- $.Scratch.Set "isPage" "true" -}}
-                            {{- end -}}
-                        {{- end -}}
+    <ul class="breadcrumbs">
+        <li class="breadcrum-item"><span><a href="{{ relURL "" }}">Home</a></span></li>
+        {{- $.Scratch.Set "url" "" -}}
+        {{- $taxonomy := .Data.Plural -}}
+        {{- range $index, $element := (split (trim .RelPermalink "/") "/") -}}
+            {{- $.Scratch.Add "url" (print "/" . ) -}}
+            {{- if eq $index 0 -}}
+                {{- if eq . "tags" -}}
+                    <li class="breadcrum-item"><span><a href="{{ $.Scratch.Get `url` }}">Tags</a></span></li>
+                {{- else if eq . "categories" -}}
+                    <li class="breadcrum-item"><span><a href="{{ $.Scratch.Get `url` }}">Categories</a></span></li>
+                {{- else -}}
+                    {{- $section := $.Site.GetPage "section" . -}}
+                    {{- if $section -}}
+                        <li class="breadcrum-item"><span><a href="{{ $.Scratch.Get `url` }}">{{ $section.Title }}</a></span></li>
+                    {{- else -}}
+                        <li class="breadcrum-item"><span><a href="{{ $.Scratch.Get `url` }}">{{ humanize . }}</a></span></li>
                     {{- end -}}
-                    {{- if eq ($.Scratch.Get "isPage") "true" -}}
-                        {{- with $.Site.GetPage (print . ".md") -}}
-                            <li class="breadcrum-item current">{{ .Title }}</li>
+                {{- end -}}
+            {{- else -}}
+                {{- if eq $taxonomy "tags" -}}
+                    <li class="breadcrum-item current">{{ humanize . }}</li>
+                {{- else if eq $taxonomy "categories" -}}
+                    <li class="breadcrum-item current">{{ humanize . }}</li>
+                {{- else -}}
+                    {{- $currentPage := $.Site.GetPage ($.Scratch.Get "url") -}}
+                    {{- if $currentPage -}}
+                        {{- if $currentPage.IsPage -}}
+                            <li class="breadcrum-item current">{{ $currentPage.Title }}</li>
+                        {{- else -}}
+                            <li class="breadcrum-item"><span><a href="{{ $.Scratch.Get `url` }}">{{ $currentPage.Title }}</a></span></li>
                         {{- end -}}
                     {{- else -}}
                         <li class="breadcrum-item"><span><a href="{{ $.Scratch.Get `url` }}">{{ humanize . }}</a></span></li>
                     {{- end -}}
                 {{- end -}}
             {{- end -}}
-            </ul>
+        {{- end -}}
+    </ul>
 </section>

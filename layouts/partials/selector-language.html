@@ -1,0 +1,41 @@
+{{/* indicates where the partial is placed 
+ so far the placement can either be header or footer */}}
+ {{- $placement := .Scratch.Get "selectorPlacement" }}
+<div id='{{ $placement }}-language-selector' class='language-selector nav-item dropdown dropup {{ if eq $placement "mobile-header" }}nav-link{{ end }}'>
+    {{ range .Site.Languages }} 
+    {{ if eq . $.Site.Language }}
+    <button
+      class="btn btn-link py-2 px-0 px-lg-2 dropdown-toggle d-flex align-items-center show"
+      id='btn-select-language-{{ $placement }}'
+      type="button"
+      aria-expanded="true"
+      aria-controls="languages-dropdown-{{ $placement }}"
+      aria-expanded="true"
+      data-bs-toggle="dropdown"
+      data-bs-display="static"
+      aria-label='{{ i18n "language" }}'
+    >
+      <span class="label">{{ i18n "language" }}</span>
+    </button>
+    <ul
+      class='dropdown-menu dropdown-menu-end {{ if not (eq $placement "mobile-header") }}dropup{{ end }}'
+      id="languages-dropdown-{{ $placement }}"
+      data-bs-popper="static"
+    >
+      <li class="dropdown-item current selected">
+        <span>✔️ {{ .LanguageName }}</span>
+      </li>
+      {{ end }} 
+      {{ end }} 
+      {{ range $.Translations }}
+      <li class="dropdown-item choice">
+        <a
+          class="dropdown-item translation btn-link d-flex align-items-center show"
+          title="{{ .Language.LanguageName }}"
+          href="{{ .Permalink }}"
+          >{{ .Language.LanguageName }}</a
+        >
+      </li>
+      {{ end }}
+    </ul>
+  </div>

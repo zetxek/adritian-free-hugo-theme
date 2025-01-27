@@ -1,0 +1,43 @@
+[module]
+
+  [module.hugoVersion]
+    extended = true
+    min = "0.92.0"
+
+
+  [[module.mounts]]
+    source = "archetypes"
+    target = "archetypes"
+
+  [[module.mounts]]
+    source = "assets"
+    target = "assets"
+
+  [[module.mounts]]
+    source = "i18n"
+    target = "i18n"
+
+  [[module.mounts]]
+    source = "layouts" 
+    target = "layouts"
+
+  [[module.mounts]]
+    source = "static"
+    target = "static"
+
+  ## Bootstrap is disabled as a direct dependency
+  ## and instead included embedded in the theme 
+  ## See https://github.com/zetxek/adritian-free-hugo-theme/discussions/158
+
+  # [[module.mounts]]
+  #   source = "assets/scss/bootstrap/_vendor"
+  #   target = "assets/scss/bootstrap/vendor"
+
+  # # Import Bootstrap
+  # [[module.imports]]
+  #   path = "github.com/gohugoio/hugo-mod-bootstrap-scss/v5"
+  #   disable = false
+
+  # # Import Popper.js (required by Bootstrap)
+  # [[module.imports]]
+  #   path = "github.com/gohugoio/hugo-mod-jslibs-dist/popperjs/v2" 

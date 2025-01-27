@@ -1,0 +1,161 @@
+## Updates demo site (https://github.com/zetxek/adritian-demo)
+## taken from https://stackoverflow.com/a/68213855/570087
+
+name: PR demo site (on external PR)
+## This will open a PR which will open a vercel preview URL in the demo site
+on:
+  pull_request_target:
+    types: [labeled]
+  workflow_dispatch:
+
+jobs:
+  update-demo:
+    env:
+      SOURCE_BRANCH_NAME: ${{ github.head_ref || github.ref_name }} # PR branch name
+      PR_NUMBER: ${{ github.event.number }}
+    runs-on: ubuntu-latest
+    if: contains(github.event.pull_request.labels.*.name, 'safe to test')
+    steps:
+      - uses: actions/checkout@v4
+        with: 
+          repository: zetxek/adritian-demo
+          token: ${{ secrets.PRIVATE_TOKEN_GITHUB }}
+          submodules: true
+      - name: Show submodule status (pre)
+        run: |
+          git submodule status
+      - name: Pull & update submodules recursively
+        run: |
+          git submodule init
+          git config --global pull.rebase false  # merge
+          git submodule foreach --recursive git pull
+          # Skipping due to error "fatal: Unable to find xxx revision in submodule path 'themes/adritian-free-hugo-theme"
+          # git submodule update --remote --recursive --quiet
+
+      - name: Print submodule status (post)
+        run: |
+          git submodule status
+      
+      - name: Print submodule diff
+        run: |
+          git diff --submodule=diff
+
+      - name: Dump github context
+        run:   echo "$GITHUB_CONTEXT"
+        shell: bash
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+
+      - name: Send pull-request
+        run: |
+          LATEST_TAG=$(git describe --tags --always)  
+          LATEST_COMMIT=$(git rev-parse HEAD)
+          SOURCE_REPOSITORY="zetxek/adritian-free-hugo-theme"
+          REPOSITORY="zetxek/adritian-demo"
+          REPO_NAME=${{ github.event.pull_request.head.repo.full_name }}
+          FOLDER="bin/$REPOSITORY"
+          PR_URL="https://github.com/$SOURCE_REPOSITORY/pull/$PR_NUMBER"
+          BRANCH_NAME="theme-update/update-theme-to-$LATEST_TAG"
+          BASE_BRANCH="main"
+          ASSIGNEE="zetxek"
+          SUBMODULE_PATH="themes/adritian-free-hugo-theme"
+
+          echo "Latest tag: $LATEST_TAG"
+          echo "Latest commit: $LATEST_COMMIT"
+          echo "PR URL: $PR_URL"
+
+          git config --global --add --bool push.autoSetupRemote true
+
+          # Clone the remote repository and change working directory to the
+          # folder it was cloned to.
+          git clone \
+            --depth=1 \
+            --branch=main \
+            https://some-user:${{ secrets.PRIVATE_TOKEN_GITHUB }}@github.com/$REPOSITORY \
+            $FOLDER
+
+          cd $FOLDER
+
+          # Setup the committers identity.
+          git config user.email "actions@github.com"
+          git config user.name "GitHub Actions - update theme submodule"
+
+          # Create a new feature branch for the changes.
+          echo "Working branch: $BRANCH_NAME"
+          git checkout -b $BRANCH_NAME
+
+          # Set submodule repo
+          echo "Setting submodule URL: $REPO_NAME"
+          git submodule set-url -- $SUBMODULE_PATH $REPO_NAME
+
+          # Set submodule branch
+          echo "Submodule branch: $SOURCE_BRANCH_NAME"
+          git submodule set-branch --branch $SOURCE_BRANCH_NAME $SUBMODULE_PATH
+
+          # Update the script files to the latest version.
+          git submodule update --init --recursive
+          git submodule update --recursive --remote
+          echo "Updated submodules. Setting up git."
+
+          # Commit the changes and push the feature branch to origin
+          git config --global --add --bool push.autoSetupRemote true
+          echo "Committing all changes."
+          git add --all
+
+          COMMIT_MSG_THEME='chore: update theme submodule to `'"$LATEST_TAG"'`'
+          echo 'Committing theme: '"$COMMIT_MSG_THEME"
+          git commit -am "$COMMIT_MSG_THEME" && git push --force || echo "No changes to theme"
+
+          # Copy content
+          cp themes/adritian-free-hugo-theme/exampleSite/hugo.toml hugo.toml
+          # Update URL
+          sed -i -e "s/\"https\:\/\/www\.adrianmoreno\.info\"/\"https\:\/\/adritian-demo\.vercel\.app\/\"/g" hugo.toml
+
+          COMMIT_MSG_CONFIG='chore: update config/content submodule to `'"$LATEST_TAG"'` from https://github.com/zetxek/adritian-free-hugo-theme'
+          echo "Committing content/config: $COMMIT_MSG_CONFIG"
+          git commit -am "$COMMIT_MSG_CONFIG"  && git push --force || echo "No changes to config"
+
+          echo "Pushing branch: $BRANCH_NAME"
+          git push origin $BRANCH_NAME --force
+
+          # Store the PAT in a file that can be accessed by the
+          # GitHub CLI.
+          echo "${{ secrets.PRIVATE_TOKEN_GITHUB }}" > token.txt
+
+          # Authorize GitHub CLI for the current repository and
+          # create a pull-requests containing the updates.
+          echo "Logging in to GitHub CLI."
+          gh auth login --with-token < token.txt
+
+          # Check if the PR already exists - if there's no "number" returned, we default to empty string
+          PR_EXISTS=$(gh pr list --state open --base $BASE_BRANCH --head $BRANCH_NAME --json number | jq '.[0].number // empty')
+          echo "PR_EXISTS: $PR_EXISTS"
+          # Check if there's a PR number. If the PR exists, update it (empty = it doesn't exist)
+          if [ -n "$PR_EXISTS" ]; then
+            echo "PR Exists. Updating pull-request..."
+            gh pr view
+            
+            echo "✅ Pull-request created - done! "
+            
+          # Else, we create it
+          else
+            echo "✨PR Does not exist yet. Creating pull-request..."
+            PR_TITLE='preview: update theme to `'$SOURCE_BRANCH_NAME'`'
+            echo 'PR title: '$PR_TITLE
+            PR_BODY="⚠️ The source PR is not merged yet - this is a preview PR.
+            🤖 This automated PR updates the theme submodule to a PR in the source repo: $PR_URL.
+            🔗 Triggered by https://github.com/zetxek/adritian-free-hugo-theme/actions/workflows/update-demo-pr.yml"
+            echo "PR body: "$PR_BODY
+
+            gh pr create \
+              --title "$PR_TITLE" \
+              --body "$PR_BODY" \
+              --head $BRANCH_NAME \
+              --base $BASE_BRANCH \
+              --assignee $ASSIGNEE \
+              --label preview
+
+            echo "✅ Pull-request created - done! "
+          fi
+
+          
