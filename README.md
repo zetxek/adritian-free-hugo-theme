@@ -180,7 +180,7 @@ This theme is a version of the one found on my website [adrianmoreno.info](https
 
 If you have improvements for the theme, you are very welcome to make a PR if you are able 💕. Otherwise - see below for how to get help (and maybe help others with the same problem).
 
-### Getting help
+## Getting help
 
 The project is offered "as is", and it's a hobby project that powers my personal website. Support is given whenever life allows - you can create an issue [create an issue](https://github.com/zetxek/adritian-free-hugo-theme/issues) so anyone else could also help, or the author.
 
