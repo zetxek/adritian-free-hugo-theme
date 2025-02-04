@@ -2,19 +2,20 @@
 A modern Hugo theme for personal websites and professional landing pages - with blog and portfolio support
 
 [![Vercel Deploy](https://deploy-badge.vercel.app/vercel/adritian-demo?name=demo)
-](https://adritian-demo.vercel.app/)
+](https://adritian-demo.vercel.app/) [![Test example site](https://github.com/zetxek/adritian-free-hugo-theme/actions/workflows/test-example-site.yml/badge.svg)](https://github.com/zetxek/adritian-free-hugo-theme/actions/workflows/test-example-site.yml)
 
 ## 🚀 Key Features
 
-- 🏎️ Fast, minimalistic code (no jQuery)
-- 🖼️ Bootstrap v5 (`v5.3.3`) framework with Scss customization
+- 🏎️ Fast, minimalistic code (no jQuery or other javascript frameworks)
+- 🖼️ Bootstrap v5 (`v5.3.3`) CSS framework with Scss customization
 - 📚 Multi-language (i18n) support
 - 🛠️ Custom content types (work experience, blog)
 - 💯 Perfect Lighthouse scores (Performance, Accessibility, SEO)
 - 🌚 Automatic dark/light theme switching
+- 🖨️ Print-ready CV template 
 - ⚡ Vercel-ready with Analytics & Speed Insights support
 
-The theme focuses on accessibility, high performance and usability (being very easy to get started). It's extendable by adding your own styles or content types, with a solid foundation you can built on.
+The theme focuses on accessibility, high performance, and usability (it's very easy to get started). It's extendable by adding your own styles or content types, and it has a solid foundation on which to build.
 
 Some of the best applications for the theme are for minimalistic websites, single-page applications, and personal portfolios. It has a contact form you can customize to your mail address without setting up a backend.
 
@@ -47,30 +48,30 @@ You have two reference implementations of the theme provided:
 
 #### Install Hugo
 
-This is a theme for the website generator Hugo - so to use it you need to install Hugo by following https://gohugo.io/getting-started/installing/.
+This is a theme for the website generator Hugo. To use it, you must install Hugo by following [the official guide](https://gohugo.io/getting-started/installing/).
 
 **We recommend installing the theme as a [Hugo module](https://gohugo.io/hugo-modules/) (recommended, and explained below).**
 
-Other alternative is to use [git submodules](https://gohugo.io/getting-started/quick-start/#create-a-site), or to [download the theme as a zip file](https://github.com/zetxek/adritian-free-hugo-theme/releases), and copy the files to your site`*`. But that will lead to your site being "stuck in time" and more difficult to upgrade. **This is not recommended or supported directly**.
+Other alternative is to use [git submodules](https://gohugo.io/getting-started/quick-start/#create-a-site), or to [download the theme as a zip file](https://github.com/zetxek/adritian-free-hugo-theme/releases), and copy the files to your site`*`. But that will make your site "stuck in time" and more difficult to upgrade. **This is not recommended or supported directly**.
 
-> **On the release files:** `*` from the version `v1.5.4` the theme available as a zip file in the [releases page](https://github.com/zetxek/adritian-free-hugo-theme/releases) contains the `node_modules` folder, so you don't need to install it separately. This is provided as a convenience for edge cases that might have problems installing the theme as a module, or downloading many files.__
+> **On the release files:** `*` from the version `v1.5.4` the theme available as a zip file in the [releases page](https://github.com/zetxek/adritian-free-hugo-theme/releases) contains the `node_modules` folder, so you don't need to install it separately. This is a convenience for edge cases that might have problems installing the theme as a module or downloading many files.__
 
 ### As a Hugo Module (recommended)
 
-> **Note:** Ensure you have **Go** and **Hugo** installed, and that you have created a new Hugo project before proceeding.
+> **Note:** Before proceeding, **Ensure you have Go and Hugo installed** and that you have created a new Hugo project.
 
 As a pre-requirement, you will need Hugo set up and running. You can follow [the official guide for it](https://gohugo.io/categories/installation/).
 
-The theme has been tested with the version `0.136` of Hugo. If you get errors regarding missing functionalities, check if you have the last version of Hugo available.
+The theme has been tested with Hugo version `0.136`. If you get errors regarding missing functionalities, check if you have the latest version of Hugo available.
 
-Note: the theme supports both Hugo modules and git submodules. To install the theme in most maintanable way you should use Hugo modules. If you prefer git submodules you can follow these [older instructions](https://gohugobrasil.netlify.app/themes/installing-and-using-themes/) or the next ones as help:
+Note: the theme supports both Hugo modules and git submodules. To install the theme in the most maintainable way, you should use Hugo modules. If you prefer git submodules you can follow these [older instructions](https://gohugobrasil.netlify.app/themes/installing-and-using-themes/) or the next ones as help:
 
 <details>
 <summary>Instructions to setup the theme as a hugo module</summary>
 
 1. Create a new Hugo site (this will create a new folder): `hugo new site <your website's name>`
 1. Enter the newly created folder: `cd <your website's name>/`
-1. Initialize Hugo Module system in your site if you haven't already: `hugo mod init github.com/username/your-site` (_you don't need to host your website on github, you can add anything as a name_)
+1. Initialize the Hugo Module system in your site if you haven't already: `hugo mod init github.com/username/your-site` (_you don't need to host your website on GitHub, you can add anything as a name_)
 1. Replace the contents of your config file (`hugo.toml`) file by these: 
 
 
@@ -521,6 +522,16 @@ The experience is displayed in several locations:
 This theme is a version of the one found on my website [adrianmoreno.info](https://www.adrianmoreno.info). If you run into trouble, [you can check the code on my website](https://github.com/zetxek/adrianmoreno.info) for reference.
 
 If you have improvements for the theme, you are very welcome to make a PR if you are able 💕. Otherwise - see below for how to get help (and maybe help others with the same problem).
+
+### Common issues 
+
+- The site fails to build. Look for the last line of the stacktrace - if you find mentions to missing files, such as in
+```
+Error: error building site: TOCSS: failed to transform "/scss/adritian.scss" (text/x-scss): ".../.cache/hugo_cache/modules/filecache/modules/pkg/mod/github.com/zetxek/adritian-free-hugo-theme@v1.5.6/assets/scss/adritian.scss:1:1": File to import not found or unreadable: bootstrap/bootstrap.
+```
+Make sure that you have the dependencies installed. Check the troubleshooting steps in the [following issue](https://github.com/zetxek/adritian-free-hugo-theme/issues/194#issuecomment-2634193132).
+
+- The site renders in a weird-looking way, or you miss content. Check that the content of your site's config file (`hugo.toml`) contain what is mentioned [in the guide](https://github.com/zetxek/adritian-free-hugo-theme?tab=readme-ov-file#as-a-hugo-module-recommended), especially the `mount` sections. 
 
 ## Getting help
 
