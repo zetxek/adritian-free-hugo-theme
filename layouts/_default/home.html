@@ -19,9 +19,22 @@
 
 	{{ partial "header.html" . }}
 
-	{{ range .Site.Params.sections }}
-	{{ partial . $ }}
-	{{ end }}
+    {{ $baseLangSite := .Sites.Default }}
+    {{ $home := (where .Site.RegularPages.ByDate "Type" "homepage") }}
+    {{ $home = $home | lang.Merge (where $baseLangSite.RegularPages.ByDate.Reverse "Type" "homepage") }}
+    {{ $homeCount := len $home }}
+                
+    
+    {{ if lt $homeCount 1 }}
+        DEFAULT
+        {{ range .Site.Params.sections }}
+        {{ partial . $ }}
+        {{ end }}
+    {{ else }}
+    {{ range first 1 (sort $home "Date" "desc") }}
+        {{ .Content | safeHTML }}
+    {{ end }}
+    {{ end }}
 
 	{{ partial "footer.html" . }}
     {{ partial "base-foot.html" . }}
