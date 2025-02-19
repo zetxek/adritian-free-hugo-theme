@@ -15,12 +15,12 @@
           class="btn btn-primary"
         >
           <i class="{{ .Site.Data.homepage.showcase.button.icon }}"></i>
-          {{ i18n "showcase_button" }}
+          {{ .Params.buttonText }}
         </a>
       </div>
       <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 profile-image">
-        {{ $img := resources.Get .Site.Data.homepage.showcase.image.x }}
-        {{ $img2x := resources.Get .Site.Data.homepage.showcase.image._2x }}
+        {{ $img := resources.Get (.Get "image") }}
+        {{ $img2x := resources.Get (.Get "image2x") }}
 
         {{ with $img }}
         {{ with $img2x}}
