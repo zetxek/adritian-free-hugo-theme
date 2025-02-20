@@ -12,10 +12,19 @@ title =  "Home"
     image2x="images/showcase/showcase@2x.png"
  >}}
 
+
+{{< about-section >}}
+
+{{< education-list
+    title="Education" >}}
+
 ## Experience
 {{< experience-list >}}
  
-{{< about-section >}}
+
+{{< client-and-work >}} 
+
+{{ < testimonial >}}
 
 ```
 sections = [
