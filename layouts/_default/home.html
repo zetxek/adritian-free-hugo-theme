@@ -20,13 +20,14 @@
 	{{ partial "header.html" . }}
 
     {{ $baseLangSite := .Sites.Default }}
-    {{ $home := (where .Site.RegularPages.ByDate "Type" "homepage") }}
-    {{ $home = $home | lang.Merge (where $baseLangSite.RegularPages.ByDate.Reverse "Type" "homepage") }}
+    {{ $home := where .Site.RegularPages "Type" "homepage" }}
     {{ $homeCount := len $home }}
                 
     
     {{ if lt $homeCount 1 }}
-        DEFAULT
+        <!-- DEFAULT -->
+        {{ warnf "Adritian: No homepage found (%d 'homepage' items). Please create a homepage in your content folder." ($homeCount) }}
+        {{ warnf "Adritian: (deprecated) Using Site.Params.Sections to render homepage." }}
         {{ range .Site.Params.sections }}
         {{ partial . $ }}
         {{ end }}

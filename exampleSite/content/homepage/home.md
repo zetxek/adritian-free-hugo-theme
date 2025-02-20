@@ -1,5 +1,7 @@
 +++
 title =  "Home"
+type = "homepage"
+draft = false
 +++
 
 
