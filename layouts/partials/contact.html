@@ -1,51 +1,82 @@
+{{ $contextType := printf "%T" . }}
+{{ $isShortcode := (eq $contextType "*hugolib.ShortcodeWithPage") }}
+
 {{ if .Site.Data.homepage.contact.enable }}
 <section id="contact" class="section section--contact pt-0">
     <div class="container">
         <div class="contact">
-            <h2>{{ i18n "contact_title" }}</h2>
+
+
+    {{ if $isShortcode }}
+    <h2>{{ .Get "title" }}</h2>     
+    {{ else }}
+    <h2>{{ i18n "contact_title" }}</h2>
+    {{ end }}
+
             <div class="row pt-2">
                 <div class="col-12 col-lg-7">
                     <form action="{{ .Site.Data.homepage.contact.form.action }}" method="{{ .Site.Data.homepage.contact.form.method }}">
                         <div class="row">
                             <div class="col-12 col-sm-6">
                                 <input type="text" name="full_name" id="full_name"
-                                       placeholder='{{ i18n "contact_form_name" }}'/>
+                                       placeholder='{{ if $isShortcode }} {{ .Get "contact_form_name" }} {{ else }} {{ i18n "contact_form_name" }} {{ end }}'/>
                             </div>
                             <div class="col-12 col-sm-6">
                                 <input type="text" name="email" id="email"
-                                       placeholder='{{ i18n "contact_form_email" }}'/>
+                                       placeholder='{{ if $isShortcode }} {{ .Get "contact_form_email" }} {{ else }} {{ i18n "contact_form_email" }} {{ end }}'/>
                             </div>
                         </div>
                         <div class="row pt-4">
                             <div class="col-12">
                                 <textarea name="message" id="message"
-                                          cols="30" rows="3" placeholder='{{ i18n "contact_form_message" }}'></textarea>
+                                          cols="30" rows="3" placeholder='{{ if $isShortcode }} {{ .Get "contact_form_message" }} {{ else }} {{ i18n "contact_form_message" }} {{ end }}'></textarea>
                             </div>
                         </div>
                         <div class="row pt-4">
                             <div class="col-12">
                                 <button type="submit" class="btn btn-primary">
                                     <i class="{{ .Site.Data.homepage.contact.button.icon }}"></i>
-                                    {{ i18n "contact_button" }}
+                                    {{ if $isShortcode }} {{ .Get "contact_button" }} {{ else }} {{ i18n "contact_buton" }} {{ end }}
                                 </button>
                             </div>
                         </div>
                     </form>
                 </div>
                 <div class="col-12 col-lg-5 contact__info">
-                    {{ if i18n "contact_phone_number" }}
-                    <h3>{{ i18n "contact_phone_title" }}</h3>
-                    <span>{{ i18n "contact_phone_number" }}</span>
+                    {{ if $isShortcode }}
+                        {{ if .Get "contact_phone_number" }}
+                        <h3>{{ .Get "contact_phone_title" }}</h3>
+                        <span>{{ .Get "contact_phone_number" }}</span>
+                        {{ end }}
+                    {{ else }}
+                        {{ if i18n "contact_phone_number" }}
+                        <h3>{{ i18n "contact_phone_title" }}</h3>
+                        <span>{{ i18n "contact_phone_number" }}</span>
+                        {{ end }}
                     {{ end }}
 
-                    {{ if i18n "contact_email_email" }}
-                    <h3>{{ i18n "contact_email_title" }}</h3>
-                    <span>{{ i18n "contact_email_email" | safeHTML }}</span>
+                    {{ if $isShortcode }}
+                        {{ if .Get "contact_email_email" }}
+                        <h3>{{ .Get "contact_email_title" }}</h3>
+                        <span>{{ .Get "contact_email_email" | safeHTML }}</span>
+                        {{ end }}
+                    {{ else }}
+                        {{ if i18n "contact_email_email" }}
+                        <h3>{{ i18n "contact_email_title" }}</h3>
+                        <span>{{ i18n "contact_email_email" | safeHTML }}</span>
+                        {{ end }}
                     {{ end }}
                     
-                    {{ if i18n "contact_address_address" }}
-                    <h3>{{ i18n "contact_address_title" }}</h3>
-                    <span>{{ i18n "contact_address_address" | safeHTML }}</span>
+                    {{ if $isShortcode }}
+                        {{ if .Get "contact_address_address" }}
+                        <h3>{{ .Get "contact_address_title" }}</h3>
+                        <span>{{ .Get "contact_address_address" | safeHTML }}</span>
+                        {{ end }}
+                    {{ else }}
+                        {{ if i18n "contact_address_address" }}
+                        <h3>{{ i18n "contact_address_title" }}</h3>
+                        <span>{{ i18n "contact_address_address" | safeHTML }}</span>
+                        {{ end }}
                     {{ end }}
                 </div>
             </div>
