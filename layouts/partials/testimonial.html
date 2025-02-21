@@ -23,7 +23,7 @@
             
             {{ $testimonials := (where .Site.RegularPages.ByDate "Type" "testimonial") }}
             
-            {{ if ne $contextType "*hugolib.ShortcodeWithPage" }}
+            {{ if not $isShortcode }}
             {{ $baseLangSite := .Sites.Default }}
             {{ $testimonials = $testimonials | lang.Merge (where $baseLangSite.RegularPages.ByDate "Type" "testimonial") }}
             {{ end }}

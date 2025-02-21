@@ -1,5 +1,8 @@
-{{ if .Site.Data.homepage.about.enable }}
-<section id="about" class="section rad-animation-group pb-0" >
+
+{{ $contextType := printf "%T" . }}
+{{ $isShortcode := (eq $contextType "*hugolib.ShortcodeWithPage") }}
+
+<section id="about" class="section rad-animation-group pb-0">
   <div class="container rad-fade-down">
     <div class="row d-flex flex-column-reverse flex-md-row">
       <div class="about__profile-picture col-12 col-md-6">
@@ -9,8 +12,6 @@
         {{ with $img }}
         {{ with $img2x}}
               
-        {{/* ⚠️ If the image is not found, it will not be displayed - this whole block will be skipped */}} 
-
         {{ $imgWebp := $img.Resize (printf "%dx%d webp" $img.Width $img.Height) }}
         {{ $img2xWebp := $img.Resize (printf "%dx%d webp" $img2x.Width $img2x.Height) }}
         <picture>
@@ -31,18 +32,31 @@
         {{ end }}
       </div>
       <div class="col-12 col-md-6 my-auto my-auto">
-        <h2>{{ i18n "about_title" }}</h2>
-        {{ i18n "about_content" | safeHTML }}
+        <h2>
+        {{ if $isShortcode }}
+          {{ .Get "title" | default (i18n "about_title") }}
+        {{ else }}
+          {{ i18n "about_title" }}
+        {{ end }}
+        </h2>
+        {{ if $isShortcode }}
+          {{ .Get "content" | default (i18n "about_content") | safeHTML }}
+        {{ else }}
+          {{ i18n "about_content" | safeHTML }}
+        {{ end }}
         <a
           href="{{ .Site.Data.homepage.about.button.URL | absURL }}"
           target="_blank"
           class="btn btn-primary"
         >
           <i class="{{ .Site.Data.homepage.about.button.icon }}"></i>
-          {{ i18n "about_button" }}
+          {{ if $isShortcode }}
+            {{ .Get "button_text" | default (i18n "about_button") }}
+          {{ else }}
+            {{ i18n "about_button" }}
+          {{ end }}
         </a>
       </div>
     </div>
   </div>
-</section>
-{{ end }}
+</section> 
