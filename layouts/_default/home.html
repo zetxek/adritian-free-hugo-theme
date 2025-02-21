@@ -15,12 +15,18 @@
 
 </head>
 
+{{ range .Site.Pages }}
+  {{ if .File }}
+    {{ warnf "Path: %s | IsDraft: %t | Type: %s | Section: %s | Kind: %s" .File.Path .Draft .Type .Section .Kind }}
+  {{ else }}
+    {{ warnf "No .File for this page: Type=%s, Section=%s, Kind=%s" .Type .Section .Kind }}
+  {{ end }}
+{{ end }}
 <body class="{{ if .IsHome }}home{{ end }}">
 
 	{{ partial "header.html" . }}
 
-    {{ $baseLangSite := .Sites.Default }}
-    {{ $home := where .Site.RegularPages "Type" "homepage" }}
+    {{ $home := where .Site.Pages "Type" "homepage" }}
     {{ $homeCount := len $home }}
                 
     
@@ -33,6 +39,7 @@
         {{ end }}
     {{ else }}
     {{ range first 1 (sort $home "Date" "desc") }}
+        {{ warnf "Adritian: Using 'homepage' content type to render homepage." }}
         {{ .Content | safeHTML }}
     {{ end }}
     {{ end }}

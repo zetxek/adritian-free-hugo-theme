@@ -1,14 +1,33 @@
-{{ if .Site.Data.homepage.testimonial.enable }}
 <section id="testimonial" class="section rad-animation-group section--border-bottom">
     <div class="container">
-        <h2 class="rad-fade-down">{{ i18n "testimonials_title" }}</h2>
+    {{ $contextType := printf "%T" . }}
+    Context type = {{ $contextType }}. 
+    
+    {{/* 
+    When passed from a shortcode, the context type is *hugolib.ShortcodeWithPage. 
+    When passed from a partial included in a page via params, the context type is *hugolib.pageState. 
+
+    If the context is a shortcode, we use the shortcode arguments to display the title.
+    If the context is a partial, we use the i18n function to display the title. 
+    */}}
+
+    {{ if eq $contextType "*hugolib.ShortcodeWithPage" }}
+    <p>Context is of type *hugolib.pageForShortcode</p>
+    <h2 class="rad-fade-down">{{ .Get "title" }}</h2>     
+    {{ else }}
+    <h2 class="rad-fade-down">{{ i18n "testimonials_title" }}</h2>     
+    <p>Context is not of type *hugolib.pageForShortcode</p>
+    {{ end }}
         <div class="row row--padded mb-0 rad-fade-down">
             
-            {{ $baseLangSite := .Sites.Default }}
             {{ $testimonials := (where .Site.RegularPages.ByDate "Type" "testimonial") }}
+            
+            {{ if ne $contextType "*hugolib.ShortcodeWithPage" }}
+            {{ $baseLangSite := .Sites.Default }}
             {{ $testimonials = $testimonials | lang.Merge (where $baseLangSite.RegularPages.ByDate "Type" "testimonial") }}
-            {{ range $testimonials }} 
-
+            {{ end }}
+            {{ range $testimonials }}
+            
             <div class="col-12 col-md-4 mb-5 mb-md-0 testimonial container">
                 <i class="icon-quote-left"></i>
                 {{ .Content }}
@@ -49,5 +68,3 @@
         </div>
     </div>
 </section>
-{{ end }}
-
