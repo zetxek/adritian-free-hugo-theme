@@ -1,60 +1,100 @@
-{{ if .Site.Data.homepage.showcase.enable }}
 <section id="showcase" class="rad-showcase rad-showcase--index rad-animation-group rad-fade-down">
   <div id="main-content" class="container">
+    {{- $contextType := printf "%T" . -}}
+    {{- $isShortcode := (eq $contextType "*hugolib.ShortcodeWithPage") -}}
+
+    {{/* ---------------------------------------------------------------------------
+         INTRO TITLE / DESCRIPTION / BUTTON
+         --------------------------------------------------------------------------- */}}
+    {{- /* Intro title/description */}}
+    {{- $showcaseTitle := "" -}}
+    {{- $showcaseSubtitle := "" -}}
+    {{- $showcaseDescription := "" -}}
+    {{- $buttonURL := "" -}}
+    {{- $buttonIcon := "" -}}
+    {{- $buttonText := "" -}}
+    {{- $imageX := "" -}}
+    {{- $image2x := "" -}}
+    {{- $socialLinks := "" -}}
+
+    {{- if $isShortcode }}
+      {{/* Shortcode params */}}
+      {{- $showcaseTitle = .Get "title" | default ( i18n "showcase_title" ) -}}
+      {{- $showcaseSubtitle = .Get "subtitle" | default ( i18n "showcase_subtitle" ) -}}
+      {{- $showcaseDescription = .Get "description" | default ( i18n "showcase_description" ) | safeHTML -}}
+      {{- $buttonURL = .Get "button_url" | default .Site.Data.homepage.showcase.button.URL -}}
+      {{- $buttonIcon = .Get "button_icon" | default .Site.Data.homepage.showcase.button.icon -}}
+      {{- $buttonText = .Get "button_text" | default ( i18n "showcase_button" ) -}}
+      {{- $imageX = .Get "image_x" | default .Site.Data.homepage.showcase.image.x -}}
+      {{- $image2x = .Get "image_2x" | default .Site.Data.homepage.showcase.image._2x -}}
+      {{- $socialLinks = .Get "social_links" | default .Site.Data.homepage.showcase.socialLinks -}}
+    {{ else }}
+      {{/* Fallback site or i18n */}}
+      {{- $showcaseTitle = i18n "showcase_title" -}}
+      {{- $showcaseSubtitle = i18n "showcase_subtitle" -}}
+      {{- $showcaseDescription = i18n "showcase_description" | safeHTML -}}
+      {{- $buttonURL = .Site.Data.homepage.showcase.button.URL -}}
+      {{- $buttonIcon = .Site.Data.homepage.showcase.button.icon -}}
+      {{- $buttonText = i18n "showcase_button" -}}
+      {{- $imageX = .Site.Data.homepage.showcase.image.x -}}
+      {{- $image2x = .Site.Data.homepage.showcase.image._2x -}}
+      {{- $socialLinks = .Site.Data.homepage.showcase.socialLinks -}}
+    {{ end }}
+
     <div class="row flex-column-reverse flex-md-row rad-fade-down rad-waiting rad-animate">
       <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
         <h1 class="display-1">
-          {{ i18n "showcase_title" }}
+          {{ $showcaseTitle }}
           <br />
-          <span>{{ i18n "showcase_subtitle" }}</span>
+          <span>{{ $showcaseSubtitle | safeHTML }}</span>
         </h1>
         <div class="lead">
-          {{ i18n "showcase_description" | safeHTML }}
+          {{ $showcaseDescription }}
         </div>
         <a
-          href="{{ .Site.Data.homepage.showcase.button.URL }}"
+          href="{{ $buttonURL }}"
           class="btn btn-primary"
         >
-          <i class="{{ .Site.Data.homepage.showcase.button.icon }}"></i>
-          {{ i18n "showcase_button" }}
+          <i class="{{ $buttonIcon }}"></i>
+          {{ $buttonText }}
         </a>
       </div>
-<div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 profile-image">
+      <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 profile-image">
 
-  {{ $img := resources.Get .Site.Data.homepage.showcase.image.x }}
-  {{ $img2x := resources.Get .Site.Data.homepage.showcase.image._2x }}
+        {{ $img := resources.Get $imageX }}
+        {{ $img2x := resources.Get $image2x }}
 
-  {{ with $img }}
-  {{ with $img2x}}
-              
-  {{/* ⚠️ If the image is not found, it will not be displayed - this whole block will be skipped */}} 
+        {{ with $img }}
+        {{ with $img2x}}
+                    
+        {{/* ⚠️ If the image is not found, it will not be displayed - this whole block will be skipped */}} 
 
-  {{ $imgWebp := $img.Resize (printf "%dx%d webp q75 Lanczos picture" $img.Width $img.Height) }}
-  {{ $img2xWebp := $img2x.Resize (printf "%dx%d webp q75 Lanczos picture" $img2x.Width $img2x.Height) }}
+        {{ $imgWebp := $img.Resize (printf "%dx%d webp q75 Lanczos picture" $img.Width $img.Height) }}
+        {{ $img2xWebp := $img2x.Resize (printf "%dx%d webp q75 Lanczos picture" $img2x.Width $img2x.Height) }}
 
 
-  <picture>
-    <source srcset="{{ $imgWebp.RelPermalink }} 1x, {{ $img2xWebp.RelPermalink }} 2x" type="image/webp" />
-    <source srcset="{{ $img.RelPermalink }} 1x, {{ $img2x.RelPermalink }} 2x" type="image/webp">
-    <img
-      width="{{ $img.Width }}"
-      height="{{ $img.Height }}"
-      class="lozad img-responsive"
-      src="data:image/gif;base64,R0lGODlhBwACAIAAAP///wAAACH5BAEAAAEALAAAAAAHAAIAAAIDjI9YADs="
-      srcset="{{ $img.RelPermalink }} 1x, {{ $img2x.RelPermalink }} 2x"
-      data-src="{{ $img.RelPermalink }}"
-      data-srcset="{{ $img.RelPermalink }} 1x, {{ $img2x.RelPermalink }} 2x"
-      alt='{{ i18n "showcase_image_alt" }}'
-    />
-  </picture>
-  {{ end }}
-  {{ end }}
+        <picture>
+          <source srcset="{{ $imgWebp.RelPermalink }} 1x, {{ $img2xWebp.RelPermalink }} 2x" type="image/webp" />
+          <source srcset="{{ $img.RelPermalink }} 1x, {{ $img2x.RelPermalink }} 2x" type="image/webp">
+          <img
+            width="{{ $img.Width }}"
+            height="{{ $img.Height }}"
+            class="lozad img-responsive"
+            src="data:image/gif;base64,R0lGODlhBwACAIAAAP///wAAACH5BAEAAAEALAAAAAAHAAIAAAIDjI9YADs="
+            srcset="{{ $img.RelPermalink }} 1x, {{ $img2x.RelPermalink }} 2x"
+            data-src="{{ $img.RelPermalink }}"
+            data-srcset="{{ $img.RelPermalink }} 1x, {{ $img2x.RelPermalink }} 2x"
+            alt='{{ i18n "showcase_image_alt" }}'
+          />
+        </picture>
+        {{ end }}
+        {{ end }}
 
-</div>
+      </div>
     </div>
     <div class="row platform-links">
       <div class="col-12">
-        {{ range .Site.Data.homepage.showcase.socialLinks }}
+        {{ range $socialLinks }}
         <a href="{{ .URL | absURL }}" target="_blank" rel="noopener noreferrer" aria-label="{{ .icon }}"
           ><i class="icon-{{ .icon }}"></i
         ></a>
@@ -64,4 +104,3 @@
   </div>
   
 </section>
-{{ end }}
