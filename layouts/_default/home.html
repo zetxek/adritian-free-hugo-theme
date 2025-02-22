@@ -26,20 +26,20 @@
 
 	{{ partial "header.html" . }}
 
-    {{ $home := where .Site.Pages "Type" "homepage" }}
+    {{ $home := where .Site.Pages "Type" "home" }}
     {{ $homeCount := len $home }}
                 
     
     {{ if lt $homeCount 1 }}
         <!-- DEFAULT -->
-        {{ warnf "Adritian: No homepage found (%d 'homepage' items). Please create a homepage in your content folder." ($homeCount) }}
+        {{ warnf "Adritian: No homepage found (%d 'home' items). Please create a home in your content folder." ($homeCount) }}
         {{ warnf "Adritian: (deprecated) Using Site.Params.Sections to render homepage." }}
         {{ range .Site.Params.sections }}
         {{ partial . $ }}
         {{ end }}
     {{ else }}
     {{ range first 1 (sort $home "Date" "desc") }}
-        {{ warnf "Adritian: Using 'homepage' content type to render homepage." }}
+        {{ warnf "Adritian: Using 'home' content type to render homepage." }}
         {{ .Content | safeHTML }}
     {{ end }}
     {{ end }}

@@ -1,6 +1,6 @@
 +++
 title =  "Home"
-type = "homepage"
+type = "home"
 draft = false
 +++
 

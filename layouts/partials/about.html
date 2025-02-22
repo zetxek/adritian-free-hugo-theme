@@ -6,8 +6,23 @@
     <div class="row d-flex flex-column-reverse flex-md-row">
       <div class="about__profile-picture col-12 col-md-6">
         {{/* Use cond to pick which value to use for the images */}}
-        {{ $imgXParam := cond $isShortcode ( .Get "image" | default .Site.Data.homepage.about.image.x ) .Site.Data.homepage.about.image.x }}
-        {{ $img2xParam := cond $isShortcode ( .Get "image2x" | default .Site.Data.homepage.about.image._2x ) .Site.Data.homepage.about.image._2x }}
+        {{ $imgXParam := "" }}
+        {{ $img2xParam := "" }}
+        {{ if $isShortcode }}
+        {{ with .Get "image" }}
+          {{ $imgXParam = . }}
+        {{ else }}
+          {{ $imgXParam = .Site.Data.homepage.about.image.x }}
+        {{ end }}
+        {{ end }}
+        
+        {{ if $isShortcode }}
+        {{ with .Get "image2x" }}
+          {{ $img2xParam = . }}
+        {{ else }}
+          {{ $img2xParam = .Site.Data.homepage.about.image._2x }}
+        {{ end }}
+        {{ end }}
 
         {{ warnf "about.html: Image x: %q" $imgXParam }}
         {{ warnf "about.html: Image 2x: %q" $img2xParam }}
