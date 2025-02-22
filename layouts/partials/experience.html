@@ -1,10 +1,9 @@
 {{ $contextType := printf "%T" . }}
 {{ $isShortcode := (eq $contextType "*hugolib.ShortcodeWithPage") }}
 
-{{ if .Site.Data.homepage.experience.enable }}
 <section id="experience-single" class="container section-experience section section--border-bottom rad-animation-group flex-grow-1">
   <div class="row flex-column-reverse flex-md-row rad-fade-down">
-    <div class="experience-list col-12 col-md-12 col-sm-6 mt-5 mt-sm-0">
+    <div class="experience-list col-12 col-md-6">
       <h2>
         {{ if $isShortcode }}
           {{ .Get "title" | default (i18n "experience_title") }}
@@ -71,9 +70,8 @@
       </div>
       {{ end }}
     </div>
-    <div class="col-12 col-md-6">
+    <div class="experience-description col-12 col-md-6">
       {{ partial "experience-description.html" . }}
     </div>
   </div>
 </section>
-{{ end }}
