@@ -8,7 +8,7 @@ location: "Stavanger, Norway"
 duration: "2023-2024"
 
 ---
-### Fixing the world, one byte at a time
+### 2nd job: Chief Intern
 
 As Chief Intern at Internet Affairs Inc., I led several key initiatives that helped streamline our internal processes and boost productivity. Working closely with cross-functional teams, I developed and implemented an automated documentation system that reduced report generation time by 65% and improved accuracy by 40%.
 

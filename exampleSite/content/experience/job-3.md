@@ -8,7 +8,7 @@ location: "Stavanger, Norway"
 duration: "2024-now"
 
 ---
-### Fixing the world, one byte at a time
+### 3rd job: CIO
 
 As Chief Information Officer at Internet Affairs Inc., I lead the strategic transformation of our digital infrastructure and cybersecurity initiatives. My team of 150+ IT professionals works tirelessly to protect and optimize our global network spanning 23 countries.
 
