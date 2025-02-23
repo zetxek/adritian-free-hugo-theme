@@ -1,0 +1,70 @@
+<!-- inject:../components/baseHead/baseHeadStart.html -->
+<!DOCTYPE html>
+<html lang="{{- $.Lang }}" 
+	{{- if .Site.Params.colorTheme.auto.disable }}
+	data-bs-theme="{{ .Site.Params.colorTheme.forced.theme }}"
+	theme-forced="true"
+	theme-auto="false"
+	{{- end }}>
+
+<head>
+
+    {{ partial "head.html" . }}
+
+    {{ partial "head_custom.html" . }}
+
+</head>
+
+{{/*
+  This template iterates through all pages in the site and logs debugging information.
+  For each page, it prints:
+    - File path (if file exists)
+    - Draft status
+    - Page type
+    - Section
+    - Kind
+  
+  If a page doesn't have an associated file, it logs that information separately.    
+  Warning levels are used to make the output visible in Hugo's build logs.
+*/}}
+{{ range .Site.Pages }}
+  {{ if .File }}
+    {{ warnf "Path: %s | Lang: %s | IsDraft: %t | Type: %s | Section: %s | Kind: %s" .File.Path .Lang .Draft .Type .Section .Kind }}
+  {{ else }}
+    {{ warnf "No .File for this page: Type=%s, Section=%s, Kind=%s" .Type .Section .Kind }}
+  {{ end }}
+{{ end }}
+<body class="{{ if .IsHome }}home{{ end }}">
+
+	{{ partial "header.html" . }}
+
+    {{ $home := where (where .Site.Pages "Type" "home") "Lang" .Lang }}
+    {{ $homeCount := len $home }}
+
+  {{ range $home }}
+  {{ if .File }}
+    {{ warnf "[HOME] Path: %s | Lang: %s | IsDraft: %t | Type: %s | Section: %s | Kind: %s" .File.Path .Lang .Draft .Type .Section .Kind }}
+  {{ end }}
+{{ end }}              
+    
+    {{ if lt $homeCount 1 }}
+        <!-- DEFAULT -->
+        {{ warnf "Adritian: No homepage found for lang '%s' (%d 'home' items). Please create a home in your content folder." .Lang ($homeCount) }}
+        {{ warnf "Adritian: (deprecated) Using Site.Params.Sections to render homepage for lang '%s'." .Lang }}
+
+        {{ range .Site.Params.sections }}
+        {{ partial . $ }}
+        {{ end }}
+    {{ else }}
+    {{ range (sort $home "Date" "desc") }}
+        {{ warnf "Adritian: Using 'home' content type to render homepage." }}
+        {{ .Content | safeHTML }}
+    {{ end }}
+    {{ end }}
+
+	{{ partial "footer.html" . }}
+    {{ partial "base-foot.html" . }}
+</body>
+
+</html>
+<!-- endinject -->

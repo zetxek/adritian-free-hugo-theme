@@ -1,5 +1,5 @@
 ---
-title: 'Sample blog content 1'
+title: 'Sample content: formatting styles'
 date: 2024-06-21T14:38:33+02:00
 draft: false
 type: 'blog'
@@ -78,6 +78,17 @@ _You **can** combine them_
    1. Item 3a
    2. Item 3b
 ```
+
+#### Nested
+
+- This is an unordered list sample 1
+- This is an unordered list sample 2
+    - This is an unordered indented list sample 1
+    - This is an unordered indented list sample 2
+1. This is an ordered list sample 1
+2. This is an ordered list sample 2
+    1. This is an ordered indented list sample 1
+    2. This is an ordered indented list sample 2
 
 ### Images
 

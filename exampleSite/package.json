@@ -4,6 +4,7 @@
     "devDependencies": {
       "@playwright/test": "project",
       "@types/node": "project",
+      "@zetxek/adritian-theme-helper": "github.com/zetxek/adritian-free-hugo-theme",
       "autoprefixer": "project",
       "bootstrap": "project",
       "bootstrap-print-css": "github.com/zetxek/adritian-free-hugo-theme",
@@ -16,6 +17,7 @@
   "devDependencies": {
     "@playwright/test": "^1.49.1",
     "@types/node": "^22.10.5",
+    "@zetxek/adritian-theme-helper": "^1.0.3",
     "autoprefixer": "^10.4.17",
     "bootstrap": "^5.3.3",
     "bootstrap-print-css": "^1.0.0",

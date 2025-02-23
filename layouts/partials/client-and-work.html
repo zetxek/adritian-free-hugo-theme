@@ -1,18 +1,27 @@
 {{/* Used for the Client&Works section in the homepage */}}
 {{/* If some content is missing/not displayed, check the images for the client/work */}}
 
+{{ $contextType := printf "%T" . }}
+{{ $isShortcode := (eq $contextType "*hugolib.ShortcodeWithPage") }}
 
 {{ if .Site.Data.homepage.client_and_work.enable }}
 <section id="portfolio" class="section section--border-bottom">
   <div class="container client-works-container">
     <h2 class="rad-animation-group rad-fade-down">
-      {{ i18n "client_work_title" }}
+      {{ if $isShortcode }}
+        {{ .Get "title" }}
+      {{ else }}
+        {{ i18n "client_work_title" }}
+      {{ end }}
     </h2>
     <div class="row row--padded rad-animation-group rad-fade-down">
       <div class="col-12">
         <div class="clients">
-          {{ $baseLangSite := .Sites.Default }}
-          {{ $clients := (where .Site.RegularPages.ByDate.Reverse "Type" "client-work" | lang.Merge (where $baseLangSite.RegularPages.ByDate.Reverse "Type" "client-work") ) }}          
+          {{ $clients := (where .Site.RegularPages.ByDate.Reverse "Type" "client-work") }}
+            {{ if not $isShortcode }}
+            {{ $baseLangSite := .Sites.Default }}
+            {{ $clients := (where .Site.RegularPages.ByDate.Reverse "Type" "client-work" | lang.Merge (where $baseLangSite.RegularPages.ByDate.Reverse "Type" "client-work") ) }}          
+          {{ end }}
           {{ range $clients }}
           <div class="clients__item">
             <a href="{{ .Params.link }}" aria-label="Link to the client site for {{ .Params.title }} (opens in a new window)" target="_blank">

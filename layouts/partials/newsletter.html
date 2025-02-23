@@ -1,38 +1,69 @@
+{{ $contextType := printf "%T" . }}
+{{ $isShortcode := (eq $contextType "*hugolib.ShortcodeWithPage") }}
+
 {{ if .Site.Data.homepage.newsletter.enable }}
 <section id="newsletter" class="section section--cta">
-<div class="container">
-  <div class="row">
-    <div class="col-12 text-center">
-      <h2>{{ i18n "newsletter_title" }}</h2>
-      <div class="rad-subscription-group">
-        <form id="rad-subscription"
-          action="{{ .Site.Data.homepage.newsletter.form.action }}" 
-          method="{{ .Site.Data.homepage.newsletter.form.method }}" >
-          <input
-            id="rad-subscription-email"
-            type="email"
-            class="form-control"
-            aria-describedby="emailHelp"
-            placeholder='{{ i18n "newsletter_placeholder" }}'
-            aria-label='{{ i18n "newsletter_placeholder" }}'
-          />
-          <button type="submit" id="rad-subscription-submit" class="btn btn-light btn-rounded">
-            {{ i18n "newsletter_button" }}
-          </button>
-        </form>
-        <div id="rad-subscription-success" class="d-none">
-          <p class="lead">{{ i18n "newsletter_success_message" }}</p>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h2>
+          {{ if $isShortcode }} 
+            {{ .Get "newsletter_title" }} 
+          {{ else }} 
+            {{ i18n "newsletter_title" }}
+          {{ end }}
+        </h2>
+        <div class="rad-subscription-group">
+          <form
+            id="rad-subscription"
+            action="{{ .Site.Data.homepage.newsletter.form.action }}" 
+            method="{{ .Site.Data.homepage.newsletter.form.method }}"
+          >
+            <input
+              id="rad-subscription-email"
+              type="email"
+              class="form-control"
+              aria-describedby="emailHelp"
+              placeholder='{{ if $isShortcode }} {{ .Get "newsletter_placeholder" }} {{ else }} {{ i18n "newsletter_placeholder" }} {{ end }}'
+              aria-label='{{ if $isShortcode }} {{ .Get "newsletter_placeholder" }} {{ else }} {{ i18n "newsletter_placeholder" }} {{ end }}'
+            />
+            <button type="submit" id="rad-subscription-submit" class="btn btn-light btn-rounded">
+              {{ if $isShortcode }} 
+                {{ .Get "newsletter_button" }} 
+              {{ else }} 
+                {{ i18n "newsletter_button" }} 
+              {{ end }}
+            </button>
+          </form>
+          <div id="rad-subscription-success" class="d-none">
+            <p class="lead">
+              {{ if $isShortcode }} 
+                {{ .Get "newsletter_success_message" }} 
+              {{ else }} 
+                {{ i18n "newsletter_success_message" }} 
+              {{ end }}
+            </p>
+          </div>
+          <div id="rad-subscription-fail" class="d-none">
+            <p>
+              {{ if $isShortcode }} 
+                {{ .Get "newsletter_error_message" }} 
+              {{ else }} 
+                {{ i18n "newsletter_error_message" }} 
+              {{ end }}
+            </p>
+          </div>
+          <script src='{{ "js/subscription.js" | absURL }}'></script>
         </div>
-        <div id="rad-subscription-fail" class="d-none">
-          <p>{{ i18n "newsletter_error_message" }}</p>
-        </div>
-        <script src='{{ "js/subscription.js" | absURL }}'></script>
+        <small id="emailHelp" class="form-text text-muted">
+          {{ if $isShortcode }} 
+            {{ .Get "newsletter_note" }} 
+          {{ else }} 
+            {{ i18n "newsletter_note" }}
+          {{ end }}
+        </small>
       </div>
-      <small id="emailHelp" class="form-text text-muted"
-        >{{ i18n "newsletter_note" }}</small
-      >
     </div>
   </div>
-</div>
 </section>
 {{ end }}

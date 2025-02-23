@@ -9,7 +9,7 @@ duration: "2022-2024"
 companyLogo: "images/experience/internet-affairs.png"
 
 ---
-### Fixing the world, one byte at a time
+### 1st job: Junior Intern
 
 The beginning of a great career. As a Junior Intern at Internet Affairs Inc., I had the opportunity to work on various projects that helped me develop my technical and professional skills. Working alongside experienced developers, I contributed to the company's core web applications and learned industry best practices in software development.
 

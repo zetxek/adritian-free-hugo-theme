@@ -15,9 +15,9 @@ test.describe('Blog page content', () => {
 
   test('should navigate to the sample blog article by clicking on the post link', async ({ page }) => {
     await page.goto(`${BASE_URL}/blog`);
-    await page.click('text=Sample blog content 1'); // Adjust text if needed
+    await page.click('text=Sample content: formatting styles'); // Adjust text if needed
     await expect(page).toHaveURL(`${BASE_URL}/blog/sample/`);
-    await expect(page.getByRole('heading', { name: /sample blog content 1/i })).toBeVisible();
+    await expect(page.getByRole('heading', { name: /sample content/i })).toBeVisible();
   });
 });
 

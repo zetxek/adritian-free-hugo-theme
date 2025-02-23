@@ -1,0 +1,9 @@
+{{ $url := .Get "url" }}
+{{ $icon := .Get "icon" }} <!-- Fixed variable assignment for icon -->
+<a
+  href="{{ $url | absURL }}"
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label="{{ $icon }}"
+  ><i class="icon-{{ $icon }}"></i
+></a>

@@ -8,6 +8,6 @@ location: "Stavanger, Norway"
 duration: "2024-now"
 
 ---
-### Fixing the world, one byte at a time
+### 3rd job: Gerente General
 
-Hostile takeover - who is the boss now!
+Con una traducción al español, se puede llegar a cualquier parte.

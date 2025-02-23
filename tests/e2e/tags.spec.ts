@@ -23,7 +23,7 @@ test.describe('Tag functionality', () => {
     await page.getByRole('link', { name: /Sample/ }).click();
     // Verify tag page
     await expect(page).toHaveURL(/\/tags\/sample/);
-    await expect(page.getByRole('heading', { name: 'Sample blog content 1' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Sample content: formatting styles' })).toBeVisible();
   });
 
   test('tag page content links', async ({ page }) => {
