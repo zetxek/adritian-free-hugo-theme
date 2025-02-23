@@ -25,8 +25,8 @@
       {{- $buttonURL = .Get "button_url" | default .Site.Data.homepage.showcase.button.URL -}}
       {{- $buttonIcon = .Get "button_icon" | default .Site.Data.homepage.showcase.button.icon -}}
       {{- $buttonText = .Get "button_text" | default ( i18n "showcase_button" ) -}}
-      {{- $imageX = .Get "image_x" | default .Site.Data.homepage.showcase.image.x -}}
-      {{- $image2x = .Get "image_2x" | default .Site.Data.homepage.showcase.image._2x -}}
+      {{- $imageX = .Get "image" | default .Site.Data.homepage.showcase.image.x -}}
+      {{- $image2x = .Get "image2x" | default .Site.Data.homepage.showcase.image._2x -}}
       {{- $socialLinks = .Get "social_links" -}}
     {{ else }}
       {{/* Fallback site or i18n */}}
@@ -40,6 +40,10 @@
       {{- $image2x = .Site.Data.homepage.showcase.image._2x -}}
       {{- $socialLinks = .Site.Data.homepage.showcase.socialLinks -}}
     {{ end }}
+
+
+        {{ warnf "showcase.html: Image x: %q" $imageX }}
+        {{ warnf "showcase.html: Image 2x: %q" $image2x }}
 
     <div class="row flex-column-reverse flex-md-row rad-fade-down rad-waiting rad-animate">
       <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
@@ -64,14 +68,20 @@
         {{ $img := resources.Get $imageX }}
         {{ $img2x := resources.Get $image2x }}
 
+        {{ if not $img }}
+            {{ warnf "showcase.html: Image not found: %q" $imageX }}
+        {{ end }}
+        {{ if not $img2x }}
+            {{ warnf "showcase.html: Image 2x not found: %q" $image2x }}
+        {{ end }}
+
         {{ with $img }}
         {{ with $img2x}}
-                    
+              
         {{/* ⚠️ If the image is not found, it will not be displayed - this whole block will be skipped */}} 
 
         {{ $imgWebp := $img.Resize (printf "%dx%d webp q75 Lanczos picture" $img.Width $img.Height) }}
         {{ $img2xWebp := $img2x.Resize (printf "%dx%d webp q75 Lanczos picture" $img2x.Width $img2x.Height) }}
-
 
         <picture>
           <source srcset="{{ $imgWebp.RelPermalink }} 1x, {{ $img2xWebp.RelPermalink }} 2x" type="image/webp" />
