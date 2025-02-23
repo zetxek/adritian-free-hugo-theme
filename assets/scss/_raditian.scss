@@ -1198,21 +1198,21 @@ textarea:focus {
 .rad-showcase .container p.lead {
     width: 100%;
 }
-.rad-showcase .platform-links {
+.platform-links {
     margin-top: 40px;
     margin-right: -5px;
 }
 @media (min-width: 992px) {
-    .rad-showcase .platform-links {
+    .platform-links {
         margin-right: -10px;
     }
 }
-.rad-showcase .platform-links [class^="icon-"] {
+.platform-links [class^="icon-"] {
     margin-right: 5px;
     font-size: 17px;
     color: #000;
 }
-.rad-showcase .platform-links [class^="icon-"]:hover::before {
+.platform-links [class^="icon-"]:hover::before {
     -webkit-transition-duration: 0.15s;
     transition-duration: 0.15s;
     -webkit-transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
@@ -1225,7 +1225,7 @@ textarea:focus {
     transform: scale(1.2);
 }
 @media (min-width: 992px) {
-    .rad-showcase .platform-links [class^="icon-"] {
+    .platform-links [class^="icon-"] {
         font-size: 19px;
         margin-right: 10px;
     }

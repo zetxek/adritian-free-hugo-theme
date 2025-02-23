@@ -27,7 +27,7 @@
       {{- $buttonText = .Get "button_text" | default ( i18n "showcase_button" ) -}}
       {{- $imageX = .Get "image_x" | default .Site.Data.homepage.showcase.image.x -}}
       {{- $image2x = .Get "image_2x" | default .Site.Data.homepage.showcase.image._2x -}}
-      {{- $socialLinks = .Get "social_links" | default .Site.Data.homepage.showcase.socialLinks -}}
+      {{- $socialLinks = .Get "social_links" -}}
     {{ else }}
       {{/* Fallback site or i18n */}}
       {{- $showcaseTitle = i18n "showcase_title" -}}
@@ -94,11 +94,13 @@
     </div>
     <div class="row platform-links">
       <div class="col-12">
-        {{ range $socialLinks }}
-        <a href="{{ .URL | absURL }}" target="_blank" rel="noopener noreferrer" aria-label="{{ .icon }}"
-          ><i class="icon-{{ .icon }}"></i
-        ></a>
-        {{ end }}
+        {{- if $socialLinks -}}
+          {{ range $socialLinks }}
+          <a href="{{ .URL | absURL }}" target="_blank" rel="noopener noreferrer" aria-label="{{ .icon }}"
+            ><i class="icon-{{ .icon }}"></i
+          ></a>
+          {{ end }}
+        {{- end -}}
       </div>
     </div>
   </div>
