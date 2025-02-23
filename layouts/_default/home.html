@@ -58,7 +58,6 @@
     {{ else }}
     {{ range (sort $home "Date" "desc") }}
         {{ warnf "Adritian: Using 'home' content type to render homepage." }}
-        {{ warnf "Rendering content for home item with path: %s for lang '%s'" .File.Path .Lang }} 
         {{ .Content | safeHTML }}
     {{ end }}
     {{ end }}
