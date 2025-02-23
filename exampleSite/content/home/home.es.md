@@ -58,8 +58,8 @@ draft = false
     button1_text="Visitar Ejemplo"
     button1_icon="icon-globe"
     button2_text="Otro Botón (2)"
-    button3_text="Botón #3"
-    button3_url="/experience"
+    button3_text="Ver todo"
+    button3_url="/es/experience"
     social_links="aaa"
 >}}
 ## Experiencia (lista)
