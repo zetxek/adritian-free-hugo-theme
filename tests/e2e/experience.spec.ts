@@ -69,7 +69,7 @@ test.describe('Experience items functionality', () => {
     await expect(jobCard).toBeVisible();
 
     // Verify header content
-    await expect(page.getByRole('heading', { name: 'Chief Intern' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Chief Intern' }).first()).toBeVisible();
     await expect(page.locator('.text-muted', { hasText: 'Internet Affairs Inc.' })).toBeVisible();
     
     // Verify metadata
