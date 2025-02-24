@@ -46,7 +46,7 @@
                     {{ if $isShortcode }}
                         {{ if .Get "contact_phone_number" }}
                         <h3>{{ .Get "contact_phone_title" }}</h3>
-                        <span>{{ .Get "contact_phone_number" }}</span>
+                        <span>{{ .Get "contact_phone_number" | safeHTML }}</span>
                         {{ end }}
                     {{ else }}
                         {{ if i18n "contact_phone_number" }}
