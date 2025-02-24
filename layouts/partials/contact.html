@@ -51,7 +51,7 @@
                     {{ else }}
                         {{ if i18n "contact_phone_number" }}
                         <h3>{{ i18n "contact_phone_title" }}</h3>
-                        <span>{{ i18n "contact_phone_number" }}</span>
+                        <span>{{ i18n "contact_phone_number" | safeHTML }}</span>
                         {{ end }}
                     {{ end }}
 

@@ -1,35 +1,58 @@
-{{ $contextType := printf "%T" . }}
-{{ $isShortcode := (eq $contextType "*hugolib.ShortcodeWithPage") }}
+{{- $contextType := printf "%T" . -}}
+{{- $isShortcode := (eq $contextType "*hugolib.ShortcodeWithPage") -}}
+
+{{/* ---------------------------------------------------------------------------
+     TITLE AND CONTENT
+     --------------------------------------------------------------------------- */}}
+{{- $title := "" -}}
+{{- $content := "" -}}
+
+{{- if $isShortcode }}
+  {{- $title = .Get "title" | default ( i18n "about_title" ) -}}
+  {{- $content = .Get "content" | default ( i18n "about_content" ) | safeHTML -}}
+{{ else }}
+  {{- $title = i18n "about_title" -}}
+  {{- $content = i18n "about_content" | safeHTML -}}
+{{ end }}
+
+{{/* ---------------------------------------------------------------------------
+     IMAGES
+     --------------------------------------------------------------------------- */}}
+{{- $imgX := "" -}}
+{{- $img2x := "" -}}
+
+{{- if $isShortcode }}
+  {{- $imgX = .Get "image" | default .Site.Data.homepage.about.image.x -}}
+  {{- $img2x = .Get "image2x" | default .Site.Data.homepage.about.image._2x -}}
+{{ else }}
+  {{- $imgX = .Site.Data.homepage.about.image.x -}}
+  {{- $img2x = .Site.Data.homepage.about.image._2x -}}
+{{ end }}
+
+{{/* ---------------------------------------------------------------------------
+     BUTTON
+     --------------------------------------------------------------------------- */}}
+{{- $btnURL := "" -}}
+{{- $btnIcon := "" -}}
+{{- $btnText := "" -}}
+
+{{- if $isShortcode }}
+  {{- $btnURL = .Get "button_url" | default .Site.Data.homepage.about.button.URL -}}
+  {{- $btnIcon = .Get "button_icon" | default .Site.Data.homepage.about.button.icon -}}
+  {{- $btnText = .Get "button_text" | default ( i18n "about_button" ) -}}
+{{ else }}
+  {{- $btnURL = .Site.Data.homepage.about.button.URL -}}
+  {{- $btnIcon = .Site.Data.homepage.about.button.icon -}}
+  {{- $btnText = i18n "about_button" -}}
+{{ end }}
+
+{{- $img := resources.Get $imgX -}}
+{{- $img2x := resources.Get $img2x -}}
 
 <section id="about" class="section rad-animation-group pb-0">
   <div class="container rad-fade-down">
     <div class="row d-flex flex-column-reverse flex-md-row">
       <div class="about__profile-picture col-12 col-md-6">
-        {{/* Use cond to pick which value to use for the images */}}
-        {{ $imgXParam := "" }}
-        {{ $img2xParam := "" }}
-        {{ if $isShortcode }}
-        {{ with .Get "image" }}
-          {{ $imgXParam = . }}
-        {{ else }}
-          {{ $imgXParam = .Site.Data.homepage.about.image.x }}
-        {{ end }}
-        {{ end }}
-        
-        {{ if $isShortcode }}
-        {{ with .Get "image2x" }}
-          {{ $img2xParam = . }}
-        {{ else }}
-          {{ $img2xParam = .Site.Data.homepage.about.image._2x }}
-        {{ end }}
-        {{ end }}
-
-        {{ warnf "about.html: Image x: %q" $imgXParam }}
-        {{ warnf "about.html: Image 2x: %q" $img2xParam }}
-
-        {{ $img := resources.Get $imgXParam }}
-        {{ $img2x := resources.Get $img2xParam }}
-
         {{ with $img }}
           {{ with $img2x }}
             {{ $imgWebp := .Resize (printf "%dx%d webp" .Width .Height) }}
@@ -49,39 +72,23 @@
               />
             </picture>
           {{ else }}
-            {{ warnf "about.html: 2x image not found: %q" $img2xParam }}
+            {{ warnf "about.html: 2x image not found: %q" $img2x }}
           {{ end }}
         {{ else }}
-          {{ warnf "about.html: Image not found: %q" $imgXParam }}
+          {{ warnf "about.html: Image not found: %q" $imgX }}
         {{ end }}
       </div>
       <div class="col-12 col-md-6 my-auto my-auto">
-        <h2>
-          {{ if $isShortcode }}
-            {{ .Get "title" | default (i18n "about_title") }}
-          {{ else }}
-            {{ i18n "about_title" }}
-          {{ end }}
-        </h2>
+        <h2>{{ $title }}</h2>
         <div class="about-me content lead">
-          {{ if $isShortcode }}
-            {{ .Get "content" | default (i18n "about_content") | safeHTML }}
-          {{ else }}
-            {{ i18n "about_content" | safeHTML }}
-          {{ end }}
+          {{ $content }}
         </div>
-        <a
-          href="{{ if $isShortcode }}{{ .Get "button_url" | default (.Site.Data.homepage.about.button.URL | absURL) }}{{ else }}{{ .Site.Data.homepage.about.button.URL | absURL }}{{ end }}"
-          target="_blank"
-          class="btn btn-primary"
-        >
-          <i class="{{ if $isShortcode }}{{ .Get "button_icon" | default .Site.Data.homepage.about.button.icon }}{{ else }}{{ .Site.Data.homepage.about.button.icon }}{{ end }}"></i>
-          {{ if $isShortcode }}
-            {{ .Get "button_text" | default (i18n "about_button") }}
-          {{ else }}
-            {{ i18n "about_button" }}
-          {{ end }}
-        </a>
+        {{ if $btnText }}
+          <a href="{{ $btnURL | absURL }}" target="_blank" class="btn btn-primary">
+            <i class="{{ $btnIcon }}"></i>
+            {{ $btnText }}
+          </a>
+        {{ end }}
       </div>
     </div>
   </div>

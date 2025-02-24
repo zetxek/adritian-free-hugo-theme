@@ -69,13 +69,19 @@
 {{- range .Site.Params.plugins.scss }}
   {{/* no external scss processing - as they need to be processed by the theme */}}
   {{- $scss := resources.Get .URL }}
-  {{- $style := $scss | css.Sass }}
+  {{- $style := false }}
+  {{- if $scss }}
+    {{- $style = $scss | css.Sass }}
+  {{- else }}
+    {{- warnf "SCSS file not found: %s" .URL }}
+  {{- end }}
   {{- if hugo.IsProduction }} 
     {{- $style = $scss | css.Sass | resources.Minify | resources.Fingerprint }} 
   {{- end }}
+{{- if $style }}
 <link rel="stylesheet" href="{{ $style.Permalink }}" integrity="{{ $style.Data.Integrity }}" crossorigin="anonymous"/>
 {{- end }}
-
+{{- end }}
 
 <!-- printed only it not disabled -->
 {{- if not .Site.Params.colorTheme.auto.disable }}
