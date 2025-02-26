@@ -107,6 +107,12 @@ p + p {
     line-height: normal;
     color: #000;
 }
+
+.showcase-section .platform-links.shortcode{
+    /* align to the left margin */
+    margin-left: -40px;
+}
+
 @media (min-width: 992px) {
     .display-1 {
         font-size: 60px;

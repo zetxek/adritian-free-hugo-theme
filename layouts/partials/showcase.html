@@ -2,6 +2,9 @@
   <div id="main-content" class="container">
     {{- $contextType := printf "%T" . -}}
     {{- $isShortcode := (eq $contextType "*hugolib.ShortcodeWithPage") -}}
+    {{- $inner := (.Scratch.Get "Inner") -}}
+
+    
 
     {{/* ---------------------------------------------------------------------------
          INTRO TITLE / DESCRIPTION / BUTTON
@@ -45,7 +48,7 @@
         {{ warnf "showcase.html: Image x: %q" $imageX }}
         {{ warnf "showcase.html: Image 2x: %q" $image2x }}
 
-    <div class="row flex-column-reverse flex-md-row rad-fade-down rad-waiting rad-animate">
+    <div class="showcase-section row flex-column-reverse flex-md-row rad-fade-down rad-waiting rad-animate">
       <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
         <h1 class="display-1">
           {{ $showcaseTitle }}
@@ -102,8 +105,19 @@
         {{ end }}
         {{ end }}
 
+<!-- future "right text -->
+
       </div>
+
+    {{- if $inner }}
+    <div class="col-12 inner-content">
+      {{ $inner }}
     </div>
+    {{ end }}
+
+    </div>
+
+
     <div class="row platform-links">
       <div class="col-12">
         {{- if $socialLinks -}}
