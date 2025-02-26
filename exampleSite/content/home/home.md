@@ -82,7 +82,7 @@ draft = false
     contact_form_message="Your text"
     contact_button="Send message"
     contact_phone_title="My phone"
-    contact_phone_number="<a href='tel:+555 666 777'>"
+    contact_phone_number="<a href='tel:+555 666 777'>555 666 777</a>"
     contact_email_title="My mail"
     contact_email_email="demo@demosite.com"
     contact_address_title="My location"
