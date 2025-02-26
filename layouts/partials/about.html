@@ -39,7 +39,7 @@
 {{- if $isShortcode }}
   {{- $btnURL = .Get "button_url" | default .Site.Data.homepage.about.button.URL -}}
   {{- $btnIcon = .Get "button_icon" | default .Site.Data.homepage.about.button.icon -}}
-  {{- $btnText = .Get "button_text" | default ( i18n "about_button" ) -}}
+  {{- $btnText = .Get "button_text" | default false -}}
 {{ else }}
   {{- $btnURL = .Site.Data.homepage.about.button.URL -}}
   {{- $btnIcon = .Site.Data.homepage.about.button.icon -}}
@@ -86,7 +86,7 @@
         {{ if $btnText }}
           <a href="{{ $btnURL | absURL }}" target="_blank" class="btn btn-primary">
             <i class="{{ $btnIcon }}"></i>
-            {{ $btnText }}
+            {{ $btnText }}jjjj
           </a>
         {{ end }}
       </div>
