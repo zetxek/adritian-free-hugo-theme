@@ -9,9 +9,10 @@ A modern, fast and extensible Hugo theme for personal websites and professional 
 - 🏎️ Fast, minimalistic code (no jQuery or other javascript frameworks)
 - 🖼️ Bootstrap v5 (`v5.3.3`) CSS framework with Scss customization
 - 📚 Multi-language (i18n) support
-- 🛠️ Custom content types (work experience, blog)
+- 🛠️ Custom content types (work experience, education, projects/work showcase, testimonials, blog)
+- 🧰 Multiple shortcodes to customize your landing page in any way you want
 - 💯 Perfect Lighthouse scores (Performance, Accessibility, SEO)
-- 🌚 Automatic dark/light theme switching
+- 🌚 Automatic dark/light theme switching, with manual override
 - 🖨️ Print-friendly CV template 
 - ⚡ Vercel-ready with Analytics & Speed Insights support
 
