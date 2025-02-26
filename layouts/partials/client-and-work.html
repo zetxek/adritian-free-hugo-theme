@@ -4,7 +4,6 @@
 {{ $contextType := printf "%T" . }}
 {{ $isShortcode := (eq $contextType "*hugolib.ShortcodeWithPage") }}
 
-{{ if .Site.Data.homepage.client_and_work.enable }}
 <section id="portfolio" class="section section--border-bottom">
   <div class="container client-works-container">
     <h2 class="rad-animation-group rad-fade-down">
@@ -138,4 +137,3 @@
     {{ end }}
   </div>
 </section>
-{{ end }}

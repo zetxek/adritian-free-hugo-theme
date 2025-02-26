@@ -1,7 +1,6 @@
 {{ $contextType := printf "%T" . }}
 {{ $isShortcode := (eq $contextType "*hugolib.ShortcodeWithPage") }}
 
-{{ if .Site.Data.homepage.newsletter.enable }}
 <section id="newsletter" class="section section--cta">
   <div class="container">
     <div class="row">
@@ -66,4 +65,3 @@
     </div>
   </div>
 </section>
-{{ end }}
