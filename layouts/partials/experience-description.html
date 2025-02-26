@@ -10,7 +10,7 @@
 
 {{- if $isShortcode }}
   {{/* Shortcode params */}}
-  {{- $introTitle = .Get "intro_title" | default ( i18n "experience_title" ) -}}
+  {{- $introTitle = .Get "intro_title" | default false -}}
   {{- $introDescription = .Get "intro_description" | default ( i18n "experience_description" ) | safeHTML -}}
 {{ else }}
   {{/* Fallback site or i18n */}}

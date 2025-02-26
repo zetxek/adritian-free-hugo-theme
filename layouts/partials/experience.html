@@ -6,7 +6,7 @@
     <div class="experience-list col-12 col-md-6">
       <h2>
         {{ if $isShortcode }}
-          {{ .Get "title" | default (i18n "experience_title") }}
+          {{ .Get "title" | default "" }}
         {{ else }}
           {{ i18n "experience_title" }}
         {{ end }}
