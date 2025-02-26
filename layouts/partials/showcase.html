@@ -24,7 +24,7 @@
       {{- $showcaseDescription = .Get "description" | default ( i18n "showcase_description" ) | safeHTML -}}
       {{- $buttonURL = .Get "button_url" | default .Site.Data.homepage.showcase.button.URL -}}
       {{- $buttonIcon = .Get "button_icon" | default .Site.Data.homepage.showcase.button.icon -}}
-      {{- $buttonText = .Get "button_text" | default ( i18n "showcase_button" ) -}}
+      {{- $buttonText = .Get "button_text" | default false -}}
       {{- $imageX = .Get "image" | default .Site.Data.homepage.showcase.image.x -}}
       {{- $image2x = .Get "image2x" | default .Site.Data.homepage.showcase.image._2x -}}
       {{- $socialLinks = .Get "social_links" -}}
@@ -55,6 +55,7 @@
         <div class="lead">
           {{ $showcaseDescription }}
         </div>
+        {{ if $buttonText }}
         <a
           href="{{ $buttonURL }}"
           class="btn btn-primary"
@@ -62,6 +63,7 @@
           <i class="{{ $buttonIcon }}"></i>
           {{ $buttonText }}
         </a>
+        {{ end }}
       </div>
       <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 profile-image">
 
