@@ -1,81 +1,115 @@
-{{ $contextType := printf "%T" . }}
-{{ $isShortcode := (eq $contextType "*hugolib.ShortcodeWithPage") }}
+{{- $contextType := printf "%T" . -}}
+{{- $isShortcode := (eq $contextType "*hugolib.ShortcodeWithPage") -}}
+
+{{/* ---------------------------------------------------------------------------
+     CONTACT FORM ELEMENTS
+     --------------------------------------------------------------------------- */}}
+{{- /* Title */}}
+{{- $title := "" -}}
+{{- if $isShortcode }}
+    {{- $title = .Get "title" -}}
+{{ else }}
+    {{- $title = i18n "contact_title" -}}
+{{ end }}
+
+{{- /* Form placeholders */}}
+{{- $formName := "" -}}
+{{- $formEmail := "" -}}
+{{- $formMessage := "" -}}
+{{- $formButton := "" -}}
+{{- if $isShortcode }}
+    {{- $formName = .Get "contact_form_name" -}}
+    {{- $formEmail = .Get "contact_form_email" -}}
+    {{- $formMessage = .Get "contact_form_message" -}}
+    {{- $formButton = .Get "contact_button" -}}
+{{ else }}
+    {{- $formName = i18n "contact_form_name" -}}
+    {{- $formEmail = i18n "contact_form_email" -}}
+    {{- $formMessage = i18n "contact_form_message" -}}
+    {{- $formButton = i18n "contact_buton" -}}
+{{ end }}
+
+{{/* ---------------------------------------------------------------------------
+     CONTACT INFO
+     --------------------------------------------------------------------------- */}}
+{{- /* Phone */}}
+{{- $phoneTitle := "" -}}
+{{- $phoneNumber := "" -}}
+{{- if $isShortcode }}
+    {{- $phoneTitle = .Get "contact_phone_title" -}}
+    {{- $phoneNumber = .Get "contact_phone_number" -}}
+{{ else }}
+    {{- $phoneTitle = i18n "contact_phone_title" -}}
+    {{- $phoneNumber = i18n "contact_phone_number" -}}
+{{ end }}
+
+{{- /* Email */}}
+{{- $emailTitle := "" -}}
+{{- $emailAddress := "" -}}
+{{- if $isShortcode }}
+    {{- $emailTitle = .Get "contact_email_title" -}}
+    {{- $emailAddress = .Get "contact_email_email" -}}
+{{ else }}
+    {{- $emailTitle = i18n "contact_email_title" -}}
+    {{- $emailAddress = i18n "contact_email_email" -}}
+{{ end }}
+
+{{- /* Address */}}
+{{- $addressTitle := "" -}}
+{{- $addressText := "" -}}
+{{- if $isShortcode }}
+    {{- $addressTitle = .Get "contact_address_title" -}}
+    {{- $addressText = .Get "contact_address_address" -}}
+{{ else }}
+    {{- $addressTitle = i18n "contact_address_title" -}}
+    {{- $addressText = i18n "contact_address_address" -}}
+{{ end }}
 
 <section id="contact" class="section section--contact pt-0">
     <div class="container">
         <div class="contact">
-
-
-    {{ if $isShortcode }}
-    <h2>{{ .Get "title" }}</h2>     
-    {{ else }}
-    <h2>{{ i18n "contact_title" }}</h2>
-    {{ end }}
+            <h2>{{ $title }}</h2>
 
             <div class="row pt-2">
                 <div class="col-12 col-lg-7">
                     <form action="{{ .Site.Data.homepage.contact.form.action }}" method="{{ .Site.Data.homepage.contact.form.method }}">
                         <div class="row">
                             <div class="col-12 col-sm-6">
-                                <input type="text" name="full_name" id="full_name"
-                                       placeholder='{{ if $isShortcode }} {{ .Get "contact_form_name" }} {{ else }} {{ i18n "contact_form_name" }} {{ end }}'/>
+                                <input type="text" name="full_name" id="full_name" placeholder="{{ $formName }}"/>
                             </div>
                             <div class="col-12 col-sm-6">
-                                <input type="text" name="email" id="email"
-                                       placeholder='{{ if $isShortcode }} {{ .Get "contact_form_email" }} {{ else }} {{ i18n "contact_form_email" }} {{ end }}'/>
+                                <input type="text" name="email" id="email" placeholder="{{ $formEmail }}"/>
                             </div>
                         </div>
                         <div class="row pt-4">
                             <div class="col-12">
-                                <textarea name="message" id="message"
-                                          cols="30" rows="3" placeholder='{{ if $isShortcode }} {{ .Get "contact_form_message" }} {{ else }} {{ i18n "contact_form_message" }} {{ end }}'></textarea>
+                                <textarea name="message" id="message" cols="30" rows="3" placeholder="{{ $formMessage }}"></textarea>
                             </div>
                         </div>
                         <div class="row pt-4">
                             <div class="col-12">
                                 <button type="submit" class="btn btn-primary">
                                     <i class="{{ .Site.Data.homepage.contact.button.icon }}"></i>
-                                    {{ if $isShortcode }} {{ .Get "contact_button" }} {{ else }} {{ i18n "contact_buton" }} {{ end }}
+                                    {{ $formButton }}
                                 </button>
                             </div>
                         </div>
                     </form>
                 </div>
                 <div class="col-12 col-lg-5 contact__info">
-                    {{ if $isShortcode }}
-                        {{ if .Get "contact_phone_number" }}
-                        <h3>{{ .Get "contact_phone_title" }}</h3>
-                        <span>{{ .Get "contact_phone_number" | safeHTML }}</span>
-                        {{ end }}
-                    {{ else }}
-                        {{ if i18n "contact_phone_number" }}
-                        <h3>{{ i18n "contact_phone_title" }}</h3>
-                        <span>{{ i18n "contact_phone_number" | safeHTML }}</span>
-                        {{ end }}
+                    {{ if $phoneNumber }}
+                    <h3>{{ $phoneTitle }}</h3>
+                    <span>{{ $phoneNumber | safeHTML }}</span>
                     {{ end }}
 
-                    {{ if $isShortcode }}
-                        {{ if .Get "contact_email_email" }}
-                        <h3>{{ .Get "contact_email_title" }}</h3>
-                        <span>{{ .Get "contact_email_email" | safeHTML }}</span>
-                        {{ end }}
-                    {{ else }}
-                        {{ if i18n "contact_email_email" }}
-                        <h3>{{ i18n "contact_email_title" }}</h3>
-                        <span>{{ i18n "contact_email_email" | safeHTML }}</span>
-                        {{ end }}
+                    {{ if $emailAddress }}
+                    <h3>{{ $emailTitle }}</h3>
+                    <span>{{ $emailAddress | safeHTML }}</span>
                     {{ end }}
                     
-                    {{ if $isShortcode }}
-                        {{ if .Get "contact_address_address" }}
-                        <h3>{{ .Get "contact_address_title" }}</h3>
-                        <span>{{ .Get "contact_address_address" | safeHTML }}</span>
-                        {{ end }}
-                    {{ else }}
-                        {{ if i18n "contact_address_address" }}
-                        <h3>{{ i18n "contact_address_title" }}</h3>
-                        <span>{{ i18n "contact_address_address" | safeHTML }}</span>
-                        {{ end }}
+                    {{ if $addressText }}
+                    <h3>{{ $addressTitle }}</h3>
+                    <span>{{ $addressText | safeHTML }}</span>
                     {{ end }}
                 </div>
             </div>
