@@ -35,6 +35,7 @@ draft = false
     {{< link icon="square-xing" url="https://www.adrianmoreno.info/" >}}
 
 {{< /platform-links >}}
+{{< /showcase-section >}}
 
 {{< about-section
     title="Sobre mí"

@@ -14,28 +14,28 @@ draft = false
     image2x="images/showcase/showcase@2x.png"
  >}}
 
-{{< platform-links >}}
-    {{< link icon="square-facebook" url="https://facebook.com/yourpage" >}}
-    {{< link icon="square-twitter" url="https://twitter.com/yourpage" >}}
-    {{< link icon="linkedin" url="https://www.linkedin.com/in/adrianmoreno/" >}}
-    {{< link icon="square-github" url="https://github.com/zetxek" >}}
-    {{< link icon="x-twitter" url="https://twitter.com/zetxek" >}}
-    {{< link icon="dribbble" url="#" >}}
-    {{< link icon="behance" url="#" >}}
-    {{< link icon="youtube" url="#" >}}
-    {{< link icon="instagram" url="https://www.instagram.com/zetxek/" >}}
-    {{< link icon="square-facebook" url="https://www.facebook.com/zetxek/" >}}
-    {{< link icon="codepen" url="#" >}}
-    {{< link icon="yelp" url="https://www.yelp.com/" >}}
-    {{< link icon="bluesky" url="https://www.bluesky.com/" >}}
-    {{< link icon="threads" url="https://www.threads.net/" >}}
-    {{< link icon="face-smile" url="https://www.adrianmoreno.info/" >}}
-    {{< link icon="user" url="https://www.adrianmoreno.info/" >}}
-    {{< link icon="quote-left" url="https://www.adrianmoreno.info/" >}}
-    {{< link icon="cloud-arrow-down" url="https://www.adrianmoreno.info/" >}}
-    {{< link icon="square-xing" url="https://www.adrianmoreno.info/" >}}
-
-{{< /platform-links >}}
+    {{< platform-links >}}
+        {{< link icon="square-facebook" url="https://facebook.com/yourpage" >}}
+        {{< link icon="square-twitter" url="https://twitter.com/yourpage" >}}
+        {{< link icon="linkedin" url="https://www.linkedin.com/in/adrianmoreno/" >}}
+        {{< link icon="square-github" url="https://github.com/zetxek" >}}
+        {{< link icon="x-twitter" url="https://twitter.com/zetxek" >}}
+        {{< link icon="dribbble" url="#" >}}
+        {{< link icon="behance" url="#" >}}
+        {{< link icon="youtube" url="#" >}}
+        {{< link icon="instagram" url="https://www.instagram.com/zetxek/" >}}
+        {{< link icon="square-facebook" url="https://www.facebook.com/zetxek/" >}}
+        {{< link icon="codepen" url="#" >}}
+        {{< link icon="yelp" url="https://www.yelp.com/" >}}
+        {{< link icon="bluesky" url="https://www.bluesky.com/" >}}
+        {{< link icon="threads" url="https://www.threads.net/" >}}
+        {{< link icon="face-smile" url="https://www.adrianmoreno.info/" >}}
+        {{< link icon="user" url="https://www.adrianmoreno.info/" >}}
+        {{< link icon="quote-left" url="https://www.adrianmoreno.info/" >}}
+        {{< link icon="cloud-arrow-down" url="https://www.adrianmoreno.info/" >}}
+        {{< link icon="square-xing" url="https://www.adrianmoreno.info/" >}}
+    {{< /platform-links >}}
+{{< /showcase-section >}}
 
 {{< about-section
     title="À propos de moi"
@@ -46,7 +46,6 @@ draft = false
     button_url="https://www.google.com"
     image="images/about/user-picture.png"
     image2x="images/about/user-picture@2x.png"
-
  >}}
 
 {{< education-list

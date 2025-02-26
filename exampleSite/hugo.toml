@@ -1,11 +1,11 @@
-baseURL = "https://www.adrianmoreno.info"
+baseURL = "https://adritian-demo.vercel.app/"
+title = "Adritian Demo"
 languageCode = "en"
 
-[module]
-[module.hugoVersion]
-# We use hugo.Deps to list dependencies, which was added in Hugo 0.92.0
-min = "0.92.0"
+[markup.goldmark.renderer]
+unsafe = true
 
+[module]
 [[module.imports]]
 path = "github.com/zetxek/adritian-free-hugo-theme"
 
@@ -48,8 +48,8 @@ target = "assets/js/vendor/bootstrap.bundle.min.js"
 source = "node_modules/bootstrap-print-css/css/bootstrap-print.css"
 target = "assets/css/bootstrap-print.css"
 
-[params]
 
+[params]
 title = 'Adritian - a high performance hugo theme by Adrián Moreno'
 description = 'This hugo theme (Adritian) is based on Bootstrap and has features that make it suitable for a personal site, a portfolio or other kind of Single Page Applications.'
 images = ['/img/og-img.png']
@@ -63,7 +63,6 @@ sections = [
   "contact",
   "newsletter",
 ]
-
 # If you want to display an image logo in the header, you can add it here
 # logo = '/img/hugo.svg'
 
@@ -124,7 +123,7 @@ weight = 3
 #  weight = 4
 
 [[languages.en.menus.header]]
-name = "Blog"
+name = "How to"
 URL = "/blog"
 weight = 5
 
@@ -255,15 +254,6 @@ URL = "css/adritian-icons.css"
 [[params.plugins.css]]
 URL = "css/bootstrap-print.css"
 
-
-# JS Plugins
-[[params.plugins.js]]
-URL = "js/rad-animations.js"
-[[params.plugins.js]]
-URL = "js/sticky-header.js"
-[[params.plugins.js]]
-URL = "js/library/fontfaceobserver.js"
-
 # JS Plugins
 [[params.plugins.js]]
 URL = "js/rad-animations.js"
@@ -304,6 +294,7 @@ showCategories = true
 showRecentPosts = true
 recentPostCount = 5
 listStyle = "summary"  # options: simple, summary
+
 
 [params.experience]
 showJobCard = true # Set to false to hide the job card
