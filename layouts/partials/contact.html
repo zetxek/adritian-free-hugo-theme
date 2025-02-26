@@ -12,6 +12,20 @@
     {{- $title = i18n "contact_title" -}}
 {{ end }}
 
+{{/* ---------------------------------------------------------------------------
+     FORM CONFIGURATION
+     --------------------------------------------------------------------------- */}}
+{{- /* Form action and method */}}
+{{- $formAction := "" -}}
+{{- $formMethod := "" -}}
+{{- if $isShortcode }}
+    {{- $formAction = .Get "form_action" | default .Site.Data.homepage.contact.form.action -}}
+    {{- $formMethod = .Get "form_method" | default .Site.Data.homepage.contact.form.method -}}
+{{ else }}
+    {{- $formAction = .Site.Data.homepage.contact.form.action -}}
+    {{- $formMethod = .Site.Data.homepage.contact.form.method -}}
+{{ end }}
+
 {{- /* Form placeholders */}}
 {{- $formName := "" -}}
 {{- $formEmail := "" -}}
@@ -72,7 +86,7 @@
 
             <div class="row pt-2">
                 <div class="col-12 col-lg-7">
-                    <form action="{{ .Site.Data.homepage.contact.form.action }}" method="{{ .Site.Data.homepage.contact.form.method }}">
+                    <form action="{{ $formAction }}" method="{{ $formMethod }}">
                         <div class="row">
                             <div class="col-12 col-sm-6">
                                 <input type="text" name="full_name" id="full_name" placeholder="{{ $formName }}"/>

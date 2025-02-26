@@ -19,6 +19,8 @@ Aside of that:
 As usual, I have "dog-fed" the theme into my own website first. You can [see the PR showing the change](https://github.com/zetxek/adrianmoreno.info/pull/291) it took to migrate. The most significant file (that you can "copy-paste") is [home.md](https://github.com/zetxek/adrianmoreno.info/pull/291/files#diff-34cdd7812bb042723b4068c4df80283586271078662d619aa33f88e8e62d6fd2
 ).
 
+You can also find a detailed PR for the demo site with [all the shortcodes in action](https://github.com/zetxek/adritian-demo/pull/182).
+
 
 Note: I have tried to keep backwards compatibility up to a point. But consider migrating the theme to shortcodes if you want to keep updated with the upstream version, as support for `homepage.yml` will be less prioritary, and retired at some point.
 Alternatively, fix your theme to the last version `v1.6.1`, to prevent upgrading (losing the new features and improvements).
