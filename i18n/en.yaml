@@ -122,15 +122,6 @@
   translation: "Education"
 
 ## Homepage experience
-- id: "experience_title"
-  translation: "Experience"
-
-- id: "experience_description"
-  translation: '<p>This is where you can highlight a bit over your experience. Years of total experience, specialization, etc.
-      <br/>The content in this intro comes from the <code>i18n/en.yaml</code> file, in the <code>experience_description</code> item.
-      <br/>The content for each experience item (that you can click on the left) is defined in the <code>content/experience</code> folder, with one content item per experience, as in <code>job-1.md</code>, <code>job-2.md</code>, etc.
-      <br/>The content (text and URL) for the buttons below (where you can add links) comes from the translation file, <code>i18n/en.yaml</code>, in the <code>experience_button</code>, <code>experience_button_url</code>, <code>experience_button2</code>, <code>experience_button2_url</code>, <code>experience_button3</code>, <code>experience_button3_url</code> items.'
-
 - id: "experience_button"
   translation: "LinkedIn" 
 

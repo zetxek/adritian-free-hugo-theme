@@ -13,9 +13,9 @@
   {{- $introTitle = .Get "intro_title" | default false -}}
   {{- $introDescription = .Get "intro_description" | default ( i18n "experience_description" ) | safeHTML -}}
 {{ else }}
-  {{/* Fallback site or i18n */}}
-  {{- $introTitle = i18n "experience_title" -}}
-  {{- $introDescription = i18n "experience_description" | safeHTML -}}
+  {{/* Fallback to site content */}}
+  {{- $introTitle = .Title -}}
+  {{- $introDescription = .Content | safeHTML -}}
 {{ end }}
 
 {{/* ---------------------------------------------------------------------------
