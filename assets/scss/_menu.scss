@@ -1,32 +1,32 @@
 $color: white;
-$color-border: #478079;
+$color-border: $base-color;
 $color-dark: scale-color($color, $lightness: -30%);
 $transition: 280ms all 120ms ease-out;
 
 .underline-item {
-  border-bottom: 1px solid $color;
+    border-bottom: 1px solid $color;
 }
 
 // prevents the menu content from not being visible
 // https://github.com/zetxek/adritian-free-hugo-theme/issues/206
-.header .navbar .nav-item.language-selector, 
+.header .navbar .nav-item.language-selector,
 .header .navbar .nav-item.theme-selector {
-  overflow: visible;
+    overflow: visible;
 
-  .nav-link{
-    padding: 0;
-  }
+    .nav-link {
+        padding: 0;
+    }
 }
 
 .language-selector,
 .theme-selector {
-  li.choice {
-    padding: 0;
-  }
+    li.choice {
+        padding: 0;
+    }
 }
 
 .footer_right button.btn,
 .footer_right .btn-link:hover,
 .footer_right .btn-link:focus {
-  color: white;
+    color: white;
 }

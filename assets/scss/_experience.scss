@@ -1,16 +1,16 @@
 .experience__company {
-    color: #478079 !important;
+    color: $base-color !important;
 }
 
 .experience__company {
-    color: #478079;
+    color: $base-color;
 }
 
 .experience__location {
     font-weight: normal;
 }
 
-.experience+.experience {
+.experience + .experience {
     padding-top: 0;
 }
 
@@ -31,7 +31,7 @@ body.home div.experience {
 .experience a:hover,
 .experience a:active {
     display: block;
-    background-color: #488079;
+    background-color: $base-color;
 }
 
 .experience.selected a .experience__company,

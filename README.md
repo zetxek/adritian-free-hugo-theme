@@ -88,7 +88,7 @@ path = "github.com/zetxek/adritian-free-hugo-theme"
 
 1. Prepare the `package.json` file: `hugo mod npm pack`
 1. Install the dependencies: `npm install`. This will include Bootstrap (needed for styling) and the helper script [adritian-theme-helper](https://github.com/zetxek/adritian-theme-helper). 
-1. Run the initial content downloader: `./node_modules/adritian-theme-helper/dist/scripts/download-content.js`. This will download the demo content from the [adritian-demo](https://github.com/zetxek/adritian-demo) repository and copy it to your site, for a quick start (including translations, images, configuration and content)
+1. Run the initial content downloader: `./node_modules/@zetxek/adritian-theme-helper/dist/scripts/download-content.js`. This will download the demo content from the [adritian-demo](https://github.com/zetxek/adritian-demo) repository and copy it to your site, for a quick start (including translations, images, configuration and content)
 </details>
 
 
