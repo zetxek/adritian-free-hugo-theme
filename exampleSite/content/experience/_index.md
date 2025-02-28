@@ -10,4 +10,12 @@ These kind of content, the "index pages", are called "branch bundles". You can r
 
 The content for each experience item (that you can click on the left) is defined in the `content/experience` folder, with one content item per experience, as in `job-1.md`, `job-2.md`, etc.
 
-The content (text and URL) for the buttons below (where you can add links) comes from the translation file, `i18n/en.yaml`, in the `experience_button`, `experience_button_url`, `experience_button2`, `experience_button2_url`, `experience_button3`, `experience_button3_url` items.
+The content (text and URL) for the buttons below (where you can add links) comes from two different files, depending on where you see this content:
+1. in the "experience" page (`/experience`): this is passed from the content file, in `/content/experience/_index.md`
+2. in the home page (or another page), using shortcodes.
+
+In both cases, the arguments that can be passed are:
+- button1: 
+    - button1_text
+    - button1_ url
+    - button1_icon
