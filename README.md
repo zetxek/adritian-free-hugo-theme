@@ -205,9 +205,29 @@ The beginning of a great career.
 
 The experience can be displayed in several locations:
 
-1. [🔗](https://adritian-demo.vercel.app/#experience-single) By using the shortcode `experience-section`: in a page (such as your homepage), with a limited number of experiences (controlled by the config parameter `homepageExperienceCount` in the file `hugo.toml`). The summary is displayed, as well as a introduction text and optional links.
-2. [🔗](https://adritian-demo.vercel.app/experience) Automatically, in the __Experience page__, in `/experience`, with a list of all experiences (no limit). The summary is displayed for each item, as well as a introduction text and optional links.
-3. [🔗](https://adritian-demo.vercel.app/experience/job-1/) Individual experience page (such as `/experience/job-1`), where all details are displayed, and links to the other descriptions are available to navigate.
+<table>
+	<tbody>
+		<tr>
+            <td align="center">
+		    <img alt="SCR-20250228-kgmq-2" src="https://github.com/user-attachments/assets/7e974632-824c-494c-9dbc-67bb96992517" />
+
+                1. <a href="https://adritian-demo.vercel.app/#experience-single">🔗</a> By using the shortcode <code>experience-section</code>: in a page (such as your homepage), with a limited number of experiences (controlled by the config parameter <code>homepageExperienceCount</code> in the file <code>hugo.toml</code>). The summary is displayed, as well as a introduction text and optional links.
+            </td>
+            <td align="center">
+<img alt="SCR-20250228-kgpu" src="https://github.com/user-attachments/assets/ad53f815-2bd4-4723-a9a1-28be2c01461a" />
+
+                2. <a href="https://adritian-demo.vercel.app/experience">🔗</a> Automatically, in the <strong>Experience page</strong>, in <code>/experience</code>, with a list of all experiences (no limit). The summary is displayed for each item, as well as a introduction text and optional links.
+            </td>
+            <td align="center" width="33%">
+<img alt="SCR-20250228-kgse" src="https://github.com/user-attachments/assets/97a20b98-df5c-4e07-9b2e-d7aba75ec81b" />
+
+     
+                3. <a href="https://adritian-demo.vercel.app/experience/job-1/">🔗</a>Individual experience page (such as <code>/experience/job-1</code>), where all details are displayed, and links to the other descriptions are available to navigate.
+            </td>	    
+		</tr>
+	</tbody>
+</table>
+
 
 ## Troubleshooting
 
