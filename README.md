@@ -117,27 +117,36 @@ https://github.com/user-attachments/assets/030e765a-275f-4141-88e0-b854ebe551da
 
 The theme implements the [internationalization (i18n) system by Hugo](https://gohugo.io/content-management/multilingual/), to enable multilingual sites.
 
-See the content in `i18n` to edit the translations, and the configuration `hugo.toml` to define your active languages. The example site has 3 enabled languages (`en` for English, `es` for Spanish and `fr` for French).
+See the content in the  `i18n` folder to edit the translations, and the configuration `hugo.toml` to define your active languages. The example site has 3 enabled languages (`en` for English, `es` for Spanish and `fr` for French).
 
 You can add additional languages, or disable the provided ones (by setting `disabled` to `true` on the languages you don't need).
 
-The introduction of i18n support was done in the version `v1.3.0` and it has breaking changes due to the way in which the content was managed. You can read about the upgrade path in [UPGRADING.md](UPGRADING.md).
+Most of the content is expected to be translated via the content system of Hugo:
+
+- [by file name](https://gohugo.io/content-management/multilingual/#translation-by-file-name)
+- [by content directory](https://gohugo.io/content-management/multilingual/#translation-by-content-directory) 
+
+Note: The introduction of i18n support was done in the version `v1.3.0` and it has breaking changes due to the way in which the content was managed. You can read about the upgrade path in [UPGRADING.md](UPGRADING.md). In the version `v1.7.0` the usage of Hugo's content management was expanded, to use less `i18n` strings and more file name/content directory based translations.
 
 #### Editing the theme content
 
 You can check the repository [adritian-demo](https://github.com/zetxek/adritian-demo) for a reference implementation, as well as the [theme website](https://adritian-demo.vercel.app/) (https://adritian-demo.vercel.app/), to get a visual guide on how to edit the content. 
 
+Following the initial setup instructions you will get a "ready-to-use" version of the site, with sample content for you to edit and customize.
+
 #### Shortcodes
 
-The theme has two shortcodes available for use in the content:
+The theme has multiple shortcodes available for use in the content, so you can customize your homepage (or any other page) as you want. You can read about them in the [shortcodes page](https://adritian-demo.vercel.app/blog/shortcodes). From the version `v1.7.0` this is the preferred way to setup your theme content and translations - as that's the most flexible system.
 
-- education-list
-- experience-list
+You can see the shortcodes in use in the demo site's pages, like
 
-You can see them in effect in the [demo site CV page](https://adritian-demo.vercel.app/cv). 
+- [home page](https://adritian-demo.vercel.app/) [`(source)`](https://raw.githubusercontent.com/zetxek/adritian-demo/refs/heads/main/content/home/home.md)
+- [CV page](https://adritian-demo.vercel.app/cv) [`(source)`](https://raw.githubusercontent.com/zetxek/adritian-demo/refs/heads/main/content/cv.md)
 
 #### Contact form
 _(optional, if you want to use the contact form)_ edit the key `contact` in your `homepage.yml` file, to customize your mail address. Sign up in [formspree](https://formspree.io) to redirect mails to your own.
+
+It can be rendered in any page via the `contact-section` shortcode.
 
 #### Blog
 
@@ -169,7 +178,7 @@ This functionality and content is especially suited for personal professional si
 
 <img width="1444" alt="SCR-20240624-uaoi" src="https://github.com/zetxek/adritian-free-hugo-theme/assets/240085/9ea86d6a-62c6-4c4f-96ba-8450fa24dd68">
 
-It can be used to render job experience, projects or clients. Each experience/project has a duration, job title, company name, location and description/excerpt as well as a longer text. 
+It can be used to render job experience, projects and/or clients. Each experience/project has a duration, job title, company name, location and description/excerpt as well as a longer text. 
 
 The experience is managed through a specific content type (see `content/experience` for an example).
 You can use `hugo new experience/experience-name.md` (replacing `experience-name` by the name of the job experience).
@@ -194,11 +203,11 @@ duration: "2022-2024"
 The beginning of a great career. 
 ```
 
-The experience is displayed in several locations:
+The experience can be displayed in several locations:
 
-1. Homepage, with a limited number of experiences (controlled by the config parameter `homepageExperienceCount` in the file `hugo.toml`). The summary is displayed. 
-2. Experience page, in `/experience`, with a list of all experiences (no limit). The summary is displayed for each item.
-3. Individual experience page, where all details are displayed
+1. [🔗](https://adritian-demo.vercel.app/#experience-single) By using the shortcode `experience-section`: in a page (such as your homepage), with a limited number of experiences (controlled by the config parameter `homepageExperienceCount` in the file `hugo.toml`). The summary is displayed, as well as a introduction text and optional links.
+2. [🔗](https://adritian-demo.vercel.app/experience) Automatically, in the __Experience page__, in `/experience`, with a list of all experiences (no limit). The summary is displayed for each item, as well as a introduction text and optional links.
+3. [🔗](https://adritian-demo.vercel.app/experience/job-1/) Individual experience page (such as `/experience/job-1`), where all details are displayed, and links to the other descriptions are available to navigate.
 
 ## Troubleshooting
 
