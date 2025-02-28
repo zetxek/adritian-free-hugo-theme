@@ -1,3 +1,7 @@
+{{/*This partial is used from
+- layouts/shortcodes/experience.html, anywhere via shortcode (commonly in homepage)
+- layouts/experience/list.html, in "/experience" page(s))
+*/}}
 {{- $contextType := printf "%T" . -}}
 {{- $isShortcode := (eq $contextType "*hugolib.ShortcodeWithPage") -}}
 
@@ -13,7 +17,8 @@
   {{- $introTitle = .Get "intro_title" | default false -}}
   {{- $introDescription = .Get "intro_description" | default ( i18n "experience_description" ) | safeHTML -}}
 {{ else }}
-  {{/* Fallback to site content */}}
+  {{/* Fallback to the content of the markdown in /experience/_index.md */}}
+  {{/* Base fields from content */}}
   {{- $introTitle = .Title -}}
   {{- $introDescription = .Content | safeHTML -}}
 {{ end }}
@@ -80,6 +85,38 @@
   {{- $btn3URL = i18n "experience_button3_url" -}}
   {{- $btn3Text = i18n "experience_button3" -}}
 {{ end }}
+
+{{/* Fields from front matter */}}
+  {{- with .Params.button1_icon }}
+    {{- $btn1Icon = . -}}
+  {{ end }}
+  {{- with .Params.button1_url }}
+    {{- $btn1URL = . -}}
+  {{ end }}
+  {{- with .Params.button1_text }}
+    {{- $btn1Enable = true -}}
+    {{- $btn1Text = . -}}
+  {{ end }}
+  {{- with .Params.button2_icon }}
+    {{- $btn2Icon = . -}}
+  {{ end }}
+  {{- with .Params.button2_url }}
+    {{- $btn2URL = . -}}
+  {{ end }}
+  {{- with .Params.button2_text }}
+    {{- $btn2Enable = true -}}
+    {{- $btn2Text = . -}}
+  {{ end }}
+  {{- with .Params.button3_icon }}
+    {{- $btn3Icon = . -}}
+  {{ end }}
+  {{- with .Params.button3_url }}
+    {{- $btn3URL = . -}}
+  {{ end }}
+  {{- with .Params.button3_text }}
+    {{- $btn3Enable = true -}}
+    {{- $btn3Text = . -}}
+  {{ end }}
 
 <div class="container-experience">
   <div class="row">
