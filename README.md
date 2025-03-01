@@ -56,9 +56,9 @@ Other relevant repositories related to this theme are:
 
 This is a theme for the website generator Hugo. To use it, you must install Hugo by following [the official guide](https://gohugo.io/getting-started/installing/).
 
-**We recommend installing the theme as a [Hugo module](https://gohugo.io/hugo-modules/) (recommended, and explained below).**
+**We recommend installing the theme as a [Hugo module](https://gohugo.io/hugo-modules/) (recommended, and explained below).** This is the most powerful way to install the theme, will allow you to combine it with other modules, and is probably the easiest way to update across theme versions.
 
-Other alternative is to use [git submodules](https://gohugo.io/getting-started/quick-start/#create-a-site), or to [download the theme as a zip file](https://github.com/zetxek/adritian-free-hugo-theme/releases), and copy the files to your site`*`. But that will make your site "stuck in time" and more difficult to upgrade. **This is not recommended or supported directly**.
+Another alternative is to use [git submodules](https://gohugo.io/getting-started/quick-start/#create-a-site) or to [download the theme as a zip file](https://github.com/zetxek/adritian-free-hugo-theme/releases) and copy the files to your site`*`. But that will make your site "stuck in time" and more difficult to upgrade. **This is not recommended or supported directly**.
 
 > **On the release files:** `*` from the version `v1.5.4` the theme available as a zip file in the [releases page](https://github.com/zetxek/adritian-free-hugo-theme/releases) contains the `node_modules` folder, so you don't need to install it separately. This is a convenience for edge cases that might have problems installing the theme as a module or downloading many files.__
 
@@ -67,9 +67,9 @@ Other alternative is to use [git submodules](https://gohugo.io/getting-started/q
 > **Note:** Before proceeding, **Ensure you have Go and Hugo installed** and that you have created a new Hugo project.
 As a pre-requirement, you will need Hugo set up and running. You can follow [the official guide for it](https://gohugo.io/categories/installation/).
 
-The theme has been tested with Hugo version `0.136`. If you get errors regarding missing functionalities, check if you have the latest version of Hugo available.
+The theme has been tested with Hugo version `0.136` (extended version). If you get errors regarding missing functionalities, check if you have the latest version of Hugo available.
 
-Note: the theme supports both Hugo modules and git submodules. To install the theme in the most maintainable way, you should use Hugo modules. If you prefer git submodules you can follow these [older instructions](https://gohugobrasil.netlify.app/themes/installing-and-using-themes/) or the next ones as help:
+**Note:** as mentioned, the theme supports both Hugo modules and git submodules. You should use Hugo modules to install the theme in the most maintainable way. If you prefer git submodules you can follow these [older instructions](https://gohugobrasil.netlify.app/themes/installing-and-using-themes/) or the next ones as help:
 
 <details>
 <summary>Step-by-step instructions to setup the theme as a hugo module</summary>
@@ -86,9 +86,9 @@ Note: the theme supports both Hugo modules and git submodules. To install the th
 path = "github.com/zetxek/adritian-free-hugo-theme"
 ```
 
-1. Prepare the `package.json` file: `hugo mod npm pack`
-1. Install the dependencies: `npm install`. This will include Bootstrap (needed for styling) and the helper script [adritian-theme-helper](https://github.com/zetxek/adritian-theme-helper). 
-1. Run the initial content downloader: `./node_modules/@zetxek/adritian-theme-helper/dist/scripts/download-content.js`. This will download the demo content from the [adritian-demo](https://github.com/zetxek/adritian-demo) repository and copy it to your site, for a quick start (including translations, images, configuration and content)
+6. Prepare the `package.json` file: `hugo mod npm pack`
+7. Install the dependencies: `npm install`. This will include Bootstrap (needed for styling) and the helper script [adritian-theme-helper](https://github.com/zetxek/adritian-theme-helper). 
+8. Run the initial content downloader: `./node_modules/@zetxek/adritian-theme-helper/dist/scripts/download-content.js`. This will download the demo content from the [adritian-demo](https://github.com/zetxek/adritian-demo) repository and copy it to your site, for a quick start (including translations, images, configuration and content)
 </details>
 
 
@@ -103,11 +103,11 @@ After you have installed the `npm` packages and setup the initial contents, you 
 1. 🎉 The theme is alive on http://localhost:1313/
 
 For next steps and guidance on where to customize your content, [check the demo site](https://adritian-demo.vercel.app/). 
-For other installation methods (as submodule, or manual configuration) you can check the demo site help page. 
+You can check the demo site help page for other installation methods (such as submodules or manual configuration). 
 
 ### Additional features and configuration
 
-The theme is extensible and customizable in multiple areas, and it can be tricky to figure what to exactly edit. This is a guide (that is complemented by the [demo site](https://adritian-demo.vercel.app/)).
+The theme is extensible and customizable in multiple areas, and it can be tricky to figure out exactly what to edit. This is a guide (that is complemented by the [demo site](https://adritian-demo.vercel.app/)).
 
 <img width="1395" alt="image" src="https://github.com/user-attachments/assets/270c4445-5354-441a-ab23-21d91762e33c" />
 
@@ -136,7 +136,7 @@ Following the initial setup instructions you will get a "ready-to-use" version o
 
 #### Shortcodes
 
-The theme has multiple shortcodes available for use in the content, so you can customize your homepage (or any other page) as you want. You can read about them in the [shortcodes page](https://adritian-demo.vercel.app/blog/shortcodes). From the version `v1.7.0` this is the preferred way to setup your theme content and translations - as that's the most flexible system.
+The theme has multiple shortcodes available for use in the content, so you can customize your homepage (or any other page) as you want. You can read about them in the [shortcodes page](https://adritian-demo.vercel.app/blog/shortcodes). Since version `v1.7.0,` this is the preferred way to set up your theme content and translations, as that's the most flexible system.
 
 You can see the shortcodes in use in the demo site's pages, like
 
@@ -225,7 +225,7 @@ Error: error building site: TOCSS: failed to transform "/scss/adritian.scss" (te
 ```
 Make sure that you have the dependencies installed. Check the troubleshooting steps in the [following issue](https://github.com/zetxek/adritian-free-hugo-theme/issues/194#issuecomment-2634193132).
 
-- The site renders in a weird-looking way, or you miss content. Check that the content of your site's config file (`hugo.toml`) contain what is mentioned [in the guide](https://github.com/zetxek/adritian-free-hugo-theme?tab=readme-ov-file#as-a-hugo-module-recommended), especially the `mount` sections. 
+- The site renders in a weird-looking way, or you miss content. Check that the content of your site's config file (`hugo.toml`) contains what is mentioned [in the guide](https://github.com/zetxek/adritian-free-hugo-theme?tab=readme-ov-file#as-a-hugo-module-recommended), especially the `mount` sections. 
 
 ### Getting help
 
