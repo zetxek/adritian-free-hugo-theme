@@ -11,7 +11,7 @@ The main changes are:
 - deprecation of `homepage.yml`. Stopped using some of its values (such as `.Site.Data.homepage.newsletter.enable`, given that the shortcodes can be rendered in any page, not only the home)
 - introduction of numerous shortcodes, to replicate the same experience (in any page)
 
-Aside of that:
+Aside from that:
 - "education" comes now from its own content type
 - fixed bugs where some buttons couldn't be hidden by not passing content
 - deprecated dynamic content in `i18n` files - in favour of storing it in markdown files. For example, your page headings or descriptions won't be stored in these files anymore.
@@ -22,8 +22,9 @@ As usual, I have "dog-fed" the theme into my own website first. You can [see the
 You can also find a detailed PR for the demo site with [all the shortcodes in action](https://github.com/zetxek/adritian-demo/pull/182).
 
 
-Note: I have tried to keep backwards compatibility up to a point. But consider migrating the theme to shortcodes if you want to keep updated with the upstream version, as support for `homepage.yml` will be less prioritary, and retired at some point.
-Alternatively, fix your theme to the last version `v1.6.1`, to prevent upgrading (losing the new features and improvements).
+Note: I have tried to keep backwards compatibility up to a point. But **I recommend considering migrating your site to shortcodes**, if you want to keep updated with the upstream version. Support for `homepage.yml` will be less prioritary, and retired at some point, because of the complexity in mantaining multiple ways of passing content to the theme.
+
+🛑 Alternatively, fix your theme to the last version `v1.6.1`, to prevent upgrading (losing the new features and improvements).
 
 ## v1.6.0
 
