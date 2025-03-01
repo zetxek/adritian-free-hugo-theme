@@ -203,13 +203,13 @@ duration: "2022-2024"
 The beginning of a great career. 
 ```
 
-The experience can be displayed in several locations:
+The experience can be displayed in several locations and different styles:
 
-| Shortcode usage | Experience page | Single experience item | 
-|---------------|----------------|----------------|
-| ![Experience list with shortcode](https://github.com/user-attachments/assets/7e974632-824c-494c-9dbc-67bb96992517) | ![Experience page](https://github.com/user-attachments/assets/ad53f815-2bd4-4723-a9a1-28be2c01461a) | ![Single experience page](https://github.com/user-attachments/assets/97a20b98-df5c-4e07-9b2e-d7aba75ec81b) |
-| Experience list rendered via shortcode | Experience list in /experience | Experience item in in single page |
-| [🔗](https://adritian-demo.vercel.app/#experience-single) By using the shortcode `experience-section`: in a page (such as your homepage), with a limited number of experiences (controlled by the config parameter `homepageExperienceCount` in the file `hugo.toml`). The summary is displayed, as well as an introduction text and optional links | [🔗](https://adritian-demo.vercel.app/experience) Automatically, in the **Experience page**, in `/experience`, with a list of all experiences (no limit). The summary is displayed for each item, as well as a introduction text and optional links. | [🔗](https://adritian-demo.vercel.app/experience/job-1/) Individual experience page (such as `/experience/job-1`), where all details are displayed, and links to the other descriptions are available to navigate. |
+| Shortcode usage | Experience page | Single experience item | Print-friendly list |
+|---------------|----------------|----------------|----------------|
+| ![Experience list with shortcode](https://github.com/user-attachments/assets/7e974632-824c-494c-9dbc-67bb96992517) | ![Experience page](https://github.com/user-attachments/assets/ad53f815-2bd4-4723-a9a1-28be2c01461a) | ![Single experience page](https://github.com/user-attachments/assets/97a20b98-df5c-4e07-9b2e-d7aba75ec81b) | ![CV Experience](https://github.com/user-attachments/assets/7d2d7e4b-a23c-4be7-9617-da7232ea11a7) |
+| Experience list rendered via shortcode | Experience list in /experience | Experience item in in single page | Full-width print-friendly experience 
+| [🔗](https://adritian-demo.vercel.app/#experience-single) By using the shortcode `experience-section`: in a page (such as your homepage), with a limited number of experiences (controlled by the config parameter `homepageExperienceCount` in the file `hugo.toml`). The summary is displayed, as well as an introduction text and optional links | [🔗](https://adritian-demo.vercel.app/experience) Automatically, in the **Experience page**, in `/experience`, with a list of all experiences (no limit). The summary is displayed for each item, as well as a introduction text and optional links. | [🔗](https://adritian-demo.vercel.app/experience/job-1/) Individual experience page (such as `/experience/job-1`), where all details are displayed, and links to the other descriptions are available to navigate. | [🔗](https://adritian-demo.vercel.app/cv) Using the shortcode `experience-list` you can generate a list of experience that is not interactive - good for print-friendly layouts.
 
 ## Troubleshooting
 
