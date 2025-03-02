@@ -66,7 +66,8 @@ draft = false
     button3_url="/experience"
     social_links="aaa"
 >}}
-## Experience (list)
+
+## Experience (as list)
 
 {{< experience-list >}}
 
@@ -83,11 +84,14 @@ draft = false
     contact_form_message="Your text"
     contact_button="Send message"
     contact_phone_title="My phone"
-    contact_phone_number="<a href='tel:+555 666 777'>555 666 777</a>"
+    contact_phone_number="<a href='tel:+555666777'>555 666 777</a>"
     contact_email_title="My mail"
     contact_email_email="demo@demosite.com"
     contact_address_title="My location"
-    contact_address_address="🇩🇰 Denmark" >}}
+    contact_address_address="🇩🇰 Denmark"
+    form_action="https://formspree.io/f/info@adrianmoreno.info"
+    form_method="POST"
+>}}
 
 {{< newsletter-section 
     newsletter_title="Stay updated"
@@ -96,6 +100,8 @@ draft = false
     newsletter_success_message="Thank you for subscribing!"
     newsletter_error_message="Something went wrong, please try again."
     newsletter_note="We respect your privacy and won't share your data."
+    form_action="/"
+    form_method="POST"
 >}}
 
 ## Extra content
