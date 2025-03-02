@@ -18,6 +18,7 @@
 {{- /* Form action and method */}}
 {{- $formAction := "" -}}
 {{- $formMethod := "" -}}
+aaa
 {{- if $isShortcode }}
     {{- $formAction = .Get "form_action" | default .Site.Data.homepage.contact.form.action -}}
     {{- $formMethod = .Get "form_method" | default .Site.Data.homepage.contact.form.method -}}

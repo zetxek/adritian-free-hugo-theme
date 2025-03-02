@@ -1,6 +1,20 @@
 {{ $contextType := printf "%T" . }}
 {{ $isShortcode := (eq $contextType "*hugolib.ShortcodeWithPage") }}
 
+{{/* ---------------------------------------------------------------------------
+     NEWSLETTER FORM CONFIGURATION
+     --------------------------------------------------------------------------- */}}
+{{- /* Form action and method */}}
+{{- $formAction := "" -}}
+{{- $formMethod := "" -}}
+{{- if $isShortcode }}
+    {{- $formAction = .Get "form_action" | default .Site.Data.homepage.newsletter.form.action -}}
+    {{- $formMethod = .Get "form_method" | default .Site.Data.homepage.newsletter.form.method -}}
+{{ else }}
+    {{- $formAction = .Site.Data.homepage.newsletter.form.action -}}
+    {{- $formMethod = .Site.Data.homepage.newsletter.form.method -}}
+{{ end }}
+
 <section id="newsletter" class="section section--cta">
   <div class="container">
     <div class="row">
@@ -15,8 +29,8 @@
         <div class="rad-subscription-group">
           <form
             id="rad-subscription"
-            action="{{ .Site.Data.homepage.newsletter.form.action }}" 
-            method="{{ .Site.Data.homepage.newsletter.form.method }}"
+            action="{{ $formAction }}"
+            method="{{ $formMethod }}"
           >
             <input
               id="rad-subscription-email"
