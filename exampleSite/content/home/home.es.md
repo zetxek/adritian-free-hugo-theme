@@ -61,7 +61,6 @@ draft = false
     button2_text="Otro Botón (2)"
     button3_text="Ver todo"
     button3_url="/es/experience"
-    social_links="aaa"
 >}}
 ## Experiencia (lista)
 

@@ -64,7 +64,6 @@ draft = false
     button2_url="/experience"
     button3_text="Button #3"
     button3_url="/experience"
-    social_links="aaa"
 >}}
 
 ## Experience (as list)

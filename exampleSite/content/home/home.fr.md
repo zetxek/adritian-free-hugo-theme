@@ -61,7 +61,6 @@ draft = false
     button2_text="Autre bouton (2)"
     button3_text="Bouton #3"
     button3_url="/experience"
-    social_links="aaa"
 >}}
 ## Expérience (liste)
 
