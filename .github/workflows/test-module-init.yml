@@ -33,7 +33,7 @@ jobs:
               if: github.ref != 'refs/heads/main'
               working-directory: ./test-site
               run: |
-                hugo mod get -u github.com/zetxek/adritian-free-hugo-theme@${{ github.ref }}
+                hugo mod get -u github.com/zetxek/adritian-free-hugo-theme@${{ github.sha }}
 
             - name: Configure Hugo module in hugo.toml
               working-directory: ./test-site
