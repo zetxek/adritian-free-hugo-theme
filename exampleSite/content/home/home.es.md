@@ -39,7 +39,7 @@ draft = false
 
 {{< about-section
     title="Sobre mí"
-    content="Usando delimitadores HTML <code><></code>"
+    content="Usando <code>sintaxis HTML</code>"
     about_button="Texto del botón"
     button_icon="info"
     button_text="Puedes editar esto"
@@ -62,9 +62,11 @@ draft = false
     button3_text="Ver todo"
     button3_url="/es/experience"
 >}}
+
+
 ## Experiencia (lista)
 
-{{< experience-list >}}
+Puedes ver una versión alternativa, usando `experience-list` en [/cv](/cv).
  
 
 {{< client-and-work-section
@@ -84,7 +86,10 @@ draft = false
     contact_email_title="Mi correo"
     contact_email_email="demo@demosite.com"
     contact_address_title="Mi ubicación"
-    contact_address_address="🇩🇰 Dinamarca" >}}
+    contact_address_address="🇩🇰 Dinamarca"
+    form_action="/"
+    form_method="POST"
+     >}}
 
 {{< newsletter-section 
     newsletter_title="Mantente actualizado"
@@ -93,19 +98,6 @@ draft = false
     newsletter_success_message="¡Gracias por suscribirte!"
     newsletter_error_message="Algo salió mal, por favor inténtalo de nuevo."
     newsletter_note="Respetamos tu privacidad y no compartiremos tus datos."
+    form_action="/"
+    form_method="POST"
 >}}
-
-Additional content added after the `section` blocks:
-
-```
-sections = [
-  "showcase",
-  "about",
-  "education",
-  "experience",
-  "client-and-work",
-  "testimonial",
-  "contact",
-  "newsletter",
-]
-```
