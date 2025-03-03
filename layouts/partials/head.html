@@ -46,21 +46,21 @@
         {{- $css = $css | minify | fingerprint | resources.PostProcess }} 
     {{- end }}
     <link
-      rel="preload"
-      href="{{ $css.RelPermalink }}"
-      as="style"
-      onload="this.onload=null;this.rel='stylesheet'"
+      rel="preload" 
+      href="{{ $css.RelPermalink }}" 
+      as="style" 
+      onload="this.onload=null;this.rel='stylesheet'" 
       {{- if hugo.IsProduction -}} 
-        integrity="{{ $css.Data.Integrity }}"
+        integrity="{{ $css.Data.Integrity }}" 
         crossorigin="anonymous"
       {{- end -}}
     />
     <noscript>
       <link 
         rel="stylesheet"
-        href="{{ $css.RelPermalink }}"
+        href="{{ $css.RelPermalink }}" 
         {{- if hugo.IsProduction -}} 
-        integrity="{{ $css.Data.Integrity }}"
+        integrity="{{ $css.Data.Integrity }}" 
         crossorigin="anonymous"
         {{- end -}}
       />
