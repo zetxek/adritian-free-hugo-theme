@@ -37,7 +37,7 @@ jobs:
                     path = "github.com/zetxek/adritian-free-hugo-theme"' > hugo.toml
             
             - name: Upload test site
-              uses: actions/upload-artifact@v3
+              uses: actions/upload-artifact@v4
               with:
                 name: test-site
                 path: test-site
@@ -56,7 +56,7 @@ jobs:
                 extended: true
                 
             - name: Download test site
-              uses: actions/download-artifact@v3
+              uses: actions/download-artifact@v4
               with:
                 name: test-site
                 path: test-site
@@ -91,7 +91,7 @@ jobs:
               run: hugo
 
             - name: Upload built site
-              uses: actions/upload-artifact@v3
+              uses: actions/upload-artifact@v4
               with:
                 name: built-site
                 path: test-site/public
@@ -102,7 +102,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Download built site
-              uses: actions/download-artifact@v3
+              uses: actions/download-artifact@v4
               with:
                 name: built-site
                 path: ./public
