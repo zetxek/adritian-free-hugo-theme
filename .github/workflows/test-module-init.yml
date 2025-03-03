@@ -13,7 +13,7 @@ jobs:
             - uses: actions/checkout@v4
 
             - name: Setup Hugo
-              uses: peaceiris/actions-hugo@v2
+              uses: peaceiris/actions-hugo@v3
               with:
                 hugo-version: 'latest'
                 extended: true
@@ -35,6 +35,31 @@ jobs:
                     echo '[module]
                     [[module.imports]]
                     path = "github.com/zetxek/adritian-free-hugo-theme"' > hugo.toml
+            
+            - name: Upload test site
+              uses: actions/upload-artifact@v3
+              with:
+                name: test-site
+                path: test-site
+                retention-days: 1
+
+    build-site:
+        needs: test-module-init
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            
+            - name: Setup Hugo
+              uses: peaceiris/actions-hugo@v3
+              with:
+                hugo-version: 'latest'
+                extended: true
+                
+            - name: Download test site
+              uses: actions/download-artifact@v3
+              with:
+                name: test-site
+                path: test-site
 
             - name: Pack dependencies
               working-directory: ./test-site
@@ -65,8 +90,25 @@ jobs:
               working-directory: ./test-site
               run: hugo
 
+            - name: Upload built site
+              uses: actions/upload-artifact@v3
+              with:
+                name: built-site
+                path: test-site/public
+                retention-days: 1
+
+    validate-html:
+        needs: build-site
+        runs-on: ubuntu-latest
+        steps:
+            - name: Download built site
+              uses: actions/download-artifact@v3
+              with:
+                name: built-site
+                path: ./public
+
             - name: Print index.html
-              working-directory: ./test-site/public
+              working-directory: ./public
               run: |
                     cat index.html
 
@@ -74,4 +116,4 @@ jobs:
             - name: Validate HTML syntax
               uses: Cyb3r-Jak3/html5validator-action@v7.2.0
               with:
-                root: ./test-site/public
+                root: ./public
