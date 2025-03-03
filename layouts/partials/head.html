@@ -50,19 +50,19 @@
       href="{{ $css.RelPermalink }}" 
       as="style" 
       onload="this.onload=null;this.rel='stylesheet'" 
-      {{- if hugo.IsProduction -}} 
-        integrity="{{ $css.Data.Integrity }}" 
-        crossorigin="anonymous"
-      {{- end -}}
+      {{ if hugo.IsProduction }} 
+      integrity="{{ $css.Data.Integrity }}" 
+      crossorigin="anonymous"
+      {{ end }}
     />
     <noscript>
       <link 
         rel="stylesheet"
         href="{{ $css.RelPermalink }}" 
-        {{- if hugo.IsProduction -}} 
+        {{ if hugo.IsProduction }} 
         integrity="{{ $css.Data.Integrity }}" 
         crossorigin="anonymous"
-        {{- end -}}
+        {{ end }}
       />
     </noscript>
 {{- end }}
