@@ -33,7 +33,10 @@ jobs:
               if: github.ref != 'refs/heads/main'
               working-directory: ./test-site
               run: |
-                hugo mod get -u github.com/zetxek/adritian-free-hugo-theme@${{ github.sha }}
+                # Use the branch that initiated the PR
+                branch_name=${GITHUB_HEAD_REF}
+                echo "Using branch: ${branch_name}"
+                hugo mod get -u github.com/zetxek/adritian-free-hugo-theme@${branch_name}
 
             - name: Configure Hugo module in hugo.toml
               working-directory: ./test-site
