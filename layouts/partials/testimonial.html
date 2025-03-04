@@ -1,34 +1,34 @@
-{{ $contextType := printf "%T" . }}
-{{ $isShortcode := (eq $contextType "*hugolib.ShortcodeWithPage") }}
+{{- $contextType := printf "%T" . -}}
+{{- $isShortcode := (eq $contextType "*hugolib.ShortcodeWithPage") -}}
+
+{{/* ---------------------------------------------------------------------------
+     SECTION TITLE
+     --------------------------------------------------------------------------- */}}
+{{- $title := "" -}}
+{{- if $isShortcode }}
+  {{- $title = .Get "title" -}}
+{{ else }}
+  {{- $title = i18n "testimonials_title" -}}
+{{ end }}
+
+{{/* ---------------------------------------------------------------------------
+     TESTIMONIALS COLLECTION
+     --------------------------------------------------------------------------- */}}
+{{- $testimonials := (where .Site.RegularPages.ByDate "Type" "testimonial") -}}
+{{- if not $isShortcode }}
+  {{- $baseLangSite := .Sites.Default -}}
+  {{- $testimonials = $testimonials | lang.Merge (where $baseLangSite.RegularPages.ByDate "Type" "testimonial") -}}
+{{- end -}}
 
 <section id="testimonial" class="section rad-animation-group section--border-bottom">
     <div class="container">
-    
     {{/* 
     When passed from a shortcode, the context type is *hugolib.ShortcodeWithPage. 
     When passed from a partial included in a page via params, the context type is *hugolib.pageState. 
-
-    If the context is a shortcode, we use the shortcode arguments to display the title.
-    If the context is a partial, we use the i18n function to display the title. 
     */}}
-
-    {{ if $isShortcode }}
-    <!--<p>Context is of type *hugolib.pageForShortcode</p>-->
-    <h2 class="rad-fade-down">{{ .Get "title" }}</h2>     
-    {{ else }}
-    <h2 class="rad-fade-down">{{ i18n "testimonials_title" }}</h2>     
-    <!--<p>Context is not of type *hugolib.pageForShortcode</p>-->
-    {{ end }}
+    <h2 class="rad-fade-down">{{ $title }}</h2>
         <div class="row row--padded mb-0 rad-fade-down">
-            
-            {{ $testimonials := (where .Site.RegularPages.ByDate "Type" "testimonial") }}
-            
-            {{ if not $isShortcode }}
-            {{ $baseLangSite := .Sites.Default }}
-            {{ $testimonials = $testimonials | lang.Merge (where $baseLangSite.RegularPages.ByDate "Type" "testimonial") }}
-            {{ end }}
             {{ range $testimonials }}
-            
             <div class="col-12 col-md-4 mb-5 mb-md-0 testimonial container">
                 <i class="icon-quote-left"></i>
                 {{ .Content }}
