@@ -104,3 +104,53 @@ test('footer_right should contain exactly 2 dropdown element for language and th
   // Verify exactly 2 dropdown elements exist within footer_right
   await expect(page.locator('footer .footer_right .dropdown')).toHaveCount(2);
 });
+
+
+test('should load all homepage images correctly', async ({ page }) => {
+  await page.goto('http://localhost:1313');
+  
+  // Wait for network to be idle (most images loaded)
+  await page.waitForLoadState('networkidle');
+  
+  // Helper function to check images - handles both regular and lazy-loaded images
+  const checkImageElements = async (selector: string) => {
+    const elements = page.locator(selector);
+    const count = await elements.count();
+    
+    expect(count).toBeGreaterThan(0, `Expected to find at least one element matching "${selector}"`);
+    
+    for (let i = 0; i < count; i++) {
+      const element = elements.nth(i);
+      await expect(element).toBeVisible();
+      
+      const isLazyLoaded = await element.evaluate(el => 
+        el.classList.contains('lozad') || el.hasAttribute('data-src'));
+      
+      if (isLazyLoaded) {
+        // For lazy-loaded images, check that data attributes exist
+        const dataSrc = await element.getAttribute('data-src');
+        expect(dataSrc).toBeTruthy();
+      } else {
+        // For regular images, check naturalWidth
+        const naturalWidth = await element.evaluate(el => (el as HTMLImageElement).naturalWidth);
+        expect(naturalWidth).toBeGreaterThan(0, 'Image should have loaded (naturalWidth > 0)');
+      }
+    }
+  };
+  
+  // Check all required image elements
+  await checkImageElements('.profile-image img');
+  
+  // .image-left-overflow might be an element with background image or contain an img
+  const leftOverflowElement = page.locator('.image-left-overflow').first();
+  await expect(leftOverflowElement).toBeVisible();
+  
+  // Check if it contains any img elements
+  const hasImg = await page.locator('.image-left-overflow img').count() > 0;
+  if (hasImg) {
+    await checkImageElements('.image-left-overflow img');
+  }
+  
+  await checkImageElements('.client-works-container .picture img');
+  await checkImageElements('.testimonial__author .picture img');
+});
