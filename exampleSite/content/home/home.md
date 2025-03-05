@@ -88,7 +88,7 @@ draft = false
     contact_email_email="demo@demosite.com"
     contact_address_title="My location"
     contact_address_address="🇩🇰 Denmark"
-    form_action="https://formspree.io/f/info@adrianmoreno.info"
+    form_action="https://formspree.io/f/mail@example.com"
     form_method="POST"
 >}}
 
