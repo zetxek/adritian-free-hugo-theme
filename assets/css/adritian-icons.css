@@ -1,11 +1,11 @@
 @font-face {
   font-family: 'adritian-icons';
-  src: url('../fonts/adritian-icons.eot?16548302');
-  src: url('../fonts/adritian-icons.eot?16548302#iefix') format('embedded-opentype'),
-       url('../fonts/adritian-icons.woff2?16548302') format('woff2'),
-       url('../fonts/adritian-icons.woff?16548302') format('woff'),
-       url('../fonts/adritian-icons.ttf?16548302') format('truetype'),
-       url('../fonts/adritian-icons.svg?16548302#adritian-icons') format('svg');
+  src: url('../fonts/adritian-icons.eot?87809070');
+  src: url('../fonts/adritian-icons.eot?87809070#iefix') format('embedded-opentype'),
+       url('../fonts/adritian-icons.woff2?87809070') format('woff2'),
+       url('../fonts/adritian-icons.woff?87809070') format('woff'),
+       url('../fonts/adritian-icons.ttf?87809070') format('truetype'),
+       url('../fonts/adritian-icons.svg?87809070#adritian-icons') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -15,7 +15,7 @@
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
     font-family: 'adritian-icons';
-    src: url('../fonts/adritian-icons.svg?16548302#adritian-icons') format('svg');
+    src: url('../fonts/adritian-icons.svg?87809070#adritian-icons') format('svg');
   }
 }
 */
@@ -81,4 +81,5 @@
 .icon-file-pdf:before { content: '\f1c1'; } /* '' */
 .icon-codepen:before { content: '\f1cb'; } /* '' */
 .icon-yelp:before { content: '\f1e9'; } /* '' */
+.icon-medium:before { content: '\f23a'; } /* '' */
 .icon-cloud-arrow-down:before { content: '\f381'; } /* '' */
