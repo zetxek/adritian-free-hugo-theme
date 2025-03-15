@@ -20,3 +20,6 @@ exampleSite/hugo_stats.json
 # Local builds
 .hugo_build.lock
 public/
+
+# idea
+.idea/

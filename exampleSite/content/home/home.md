@@ -11,7 +11,6 @@ draft = false
     buttonText="Email"
     description="<strong>Strong</strong> and normal text. This comes from <a href='https://github.com/zetxek/adritian-demo/blob/main/content/home/home.md?plain=1'><code>home.md</code></a>, using the <code>showcase-section</code> shortcode.<br/>Below you can see the social links, provided by the <code>platform-links</code> shortcode."
     image="images/showcase/showcase.png"
-    image2x="images/showcase/showcase@2x.png"
  >}}
 
 {{< platform-links >}}
@@ -46,8 +45,6 @@ draft = false
     button_text="You can edit the text, link and icon"
     button_url="https://www.google.com"
     image="images/about/user-picture.png"
-    image2x="images/about/user-picture@2x.png"
-
  >}}
 
 {{< education-list

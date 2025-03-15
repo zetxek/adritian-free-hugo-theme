@@ -19,14 +19,11 @@
      IMAGES
      --------------------------------------------------------------------------- */}}
 {{- $imgX := "" -}}
-{{- $img2x := "" -}}
 
 {{- if $isShortcode }}
   {{- $imgX = .Get "image" | default .Site.Data.homepage.about.image.x -}}
-  {{- $img2x = .Get "image2x" | default .Site.Data.homepage.about.image._2x -}}
 {{ else }}
   {{- $imgX = .Site.Data.homepage.about.image.x -}}
-  {{- $img2x = .Site.Data.homepage.about.image._2x -}}
 {{ end }}
 
 {{/* ---------------------------------------------------------------------------
@@ -46,37 +43,12 @@
   {{- $btnText = i18n "about_button" -}}
 {{ end }}
 
-{{- $img := resources.Get $imgX -}}
-{{- $img2x := resources.Get $img2x -}}
 
 <section id="about" class="section rad-animation-group pb-0">
   <div class="container rad-fade-down">
     <div class="row d-flex flex-column-reverse flex-md-row">
       <div class="about__profile-picture col-12 col-md-6">
-        {{ with $img }}
-          {{ with $img2x }}
-            {{ $imgWebp := .Resize (printf "%dx%d webp" .Width .Height) }}
-            {{ $img2xWebp := .Resize (printf "%dx%d webp" $img2x.Width $img2x.Height) }}
-            <picture>
-              <source srcset="{{ $imgWebp.RelPermalink }} 1x, {{ $img2xWebp.RelPermalink }} 2x" type="image/webp" />
-              <source srcset="{{ $img.RelPermalink }} 1x, {{ $img2x.RelPermalink }} 2x" type="image/webp">
-              <img
-                width="{{ $img.Width }}"
-                height="{{ $img.Height }}"
-                class="lozad img-responsive image-left-overflow"
-                src="data:image/gif;base64,R0lGODlhBwACAIAAAP///wAAACH5BAEAAAEALAAAAAAHAAIAAAIDjI9YADs="
-                srcset="{{ $img.RelPermalink }} 1x, {{ $img2x.RelPermalink }} 2x"
-                data-src="{{ $img.RelPermalink }}"
-                data-srcset="{{ $img.RelPermalink }} 1x, {{ $img2x.RelPermalink }} 2x"
-                alt='{{ i18n "about_image_alt" }}'
-              />
-            </picture>
-          {{ else }}
-            {{ warnf "about.html: 2x image not found: %q" $img2x }}
-          {{ end }}
-        {{ else }}
-          {{ warnf "about.html: Image not found: %q" $imgX }}
-        {{ end }}
+        {{ partial "lazypicture" (dict "src" $imgX "height" 561 "classes" "image-left-overflow")}}
       </div>
       <div class="col-12 col-md-6 my-auto my-auto">
         <h2>{{ $title }}</h2>

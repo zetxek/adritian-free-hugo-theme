@@ -1,0 +1,24 @@
+{{/*.src is the image path*/}}
+{{/*.height is used for resizing*/}}
+{{/*.classes is added to the image*/}}
+
+{{ $img := resources.Get .src }}
+{{ $height := int .height }}
+{{ $height2 := mul 2 $height }}
+
+{{ $imgOri := $img.Resize (printf "x%d q75 Lanczos picture" $height) }}
+{{ $imgOri2 := $img.Resize (printf "x%d q75 Lanczos picture" $height2) }}
+{{ $imgWebp := $img.Resize (printf "x%d webp q75 Lanczos picture" $height) }}
+{{ $imgWebp2 := $img.Resize (printf "x%d webp q75 Lanczos picture" $height2) }}
+
+<picture>
+    <source srcset="{{ $imgWebp.RelPermalink }} 1x, {{ $imgWebp2.RelPermalink }} 2x" type="image/webp" />
+    <source srcset="{{ $imgOri.RelPermalink }} 1x, {{ $imgOri2.RelPermalink }} 2x" type="{{ $imgOri.MediaType.Type }}">
+    <img
+            width="{{ $imgOri.Width }}"
+            height="{{ $imgOri.Height }}"
+            class="lozad img-responsive {{ .classes }}"
+            src="data:image/gif;base64,R0lGODlhBwACAIAAAP///wAAACH5BAEAAAEALAAAAAAHAAIAAAIDjI9YADs="
+            alt='{{ i18n "showcase_image_alt" }}'
+    />
+</picture>
