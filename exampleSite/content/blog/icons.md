@@ -38,6 +38,5 @@ You can see them rendered here:
 - `cloud-arrow-down`: {{< link icon="cloud-arrow-down" url="https://example.com" >}}
 - `medium`: {{< link icon="medium" url="https://example.com" >}}
 
-
 Do you need more icons?
 You can check this github issue to check how to [add your own](https://github.com/zetxek/adritian-free-hugo-theme/pull/169), or if it's relevant for the community you can request one [via the issue tracker like @klangborste did](https://github.com/zetxek/adritian-free-hugo-theme/issues/168). 
