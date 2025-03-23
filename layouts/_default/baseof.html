@@ -11,7 +11,6 @@
 </head>
 
 <body class="{{- if .IsHome }}home{{- end }}{{- with .File }} page-{{- .ContentBaseName }}{{- end }}">
-    {{ partial "header.html" . }}
 
     <main class="container">
         {{ block "main" . }}{{ end }}
