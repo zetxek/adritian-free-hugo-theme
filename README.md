@@ -327,6 +327,13 @@ Have you used the theme on your website? Send a PR to add it to the list for ins
                 </a>
             </td>
             <td align="center">
+                <a href="https://github.com/martin-weber-dynatrace">
+                    <img src="https://avatars.githubusercontent.com/u/205166030?v=4" width="100;" alt="martin-weber-dynatrace"/>
+                    <br />
+                    <sub><b>martin-weber-dynatrace</b></sub>
+                </a>
+            </td>
+            <td align="center">
                 <a href="https://github.com/raulalmeidatarazona">
                     <img src="https://avatars.githubusercontent.com/u/61455658?v=4" width="100;" alt="raulalmeidatarazona"/>
                     <br />
@@ -347,6 +354,8 @@ Have you used the theme on your website? Send a PR to add it to the list for ins
                     <sub><b>Andrei Popov</b></sub>
                 </a>
             </td>
+		</tr>
+		<tr>
             <td align="center">
                 <a href="https://github.com/brandynmauro">
                     <img src="https://avatars.githubusercontent.com/u/34288491?v=4" width="100;" alt="brandynmauro"/>
@@ -354,8 +363,6 @@ Have you used the theme on your website? Send a PR to add it to the list for ins
                     <sub><b>Brandyn</b></sub>
                 </a>
             </td>
-		</tr>
-		<tr>
             <td align="center">
                 <a href="https://github.com/ericreid">
                     <img src="https://avatars.githubusercontent.com/u/16538?v=4" width="100;" alt="ericreid"/>
