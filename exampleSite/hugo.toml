@@ -2,10 +2,24 @@ baseURL = "https://adritian-demo.vercel.app/"
 title = "Adritian Demo"
 languageCode = "en"
 
-
- 
 [markup.goldmark.renderer]
 unsafe = true
+
+# Exclude footer section from generating list pages (index.html and index.xml)
+[outputs]
+  page = ["HTML"]
+  home = ["HTML", "RSS"]
+  section = ["HTML", "RSS"]
+  taxonomy = ["HTML", "RSS"]
+  term = ["HTML", "RSS"]
+  footer = []
+
+# Explicitly prevent the footer section from generating any output
+[outputFormats.footerSection]
+  # Empty configuration to prevent any output
+
+# Specifically disable generation of these kinds for the footer content
+disableKinds = ["footerSection", "RSS"]
 
 [module]
 [[module.imports]]
@@ -90,10 +104,7 @@ code = "GTM-XXXXX"
 enabled = false
 
 [build]
-writeStats = true
-
 [build.buildStats]
-enabledFor = ["scss"]
 disableClasses = false
 disableIDs = false
 disableTags = false
@@ -320,14 +331,12 @@ mobileHeader = false
 ## by default we allow override AND automatic selection
 
 [params.blog]
-layout = "sidebar-right"     # options: default (no sidebar), sidebar, sidebar-right
+layout = "sidebar-right"     # options: default, sidebar
 sidebarWidth = "25"    # percentage width of the sidebar
 showCategories = true
 showRecentPosts = true
 recentPostCount = 5
 listStyle = "summary"  # options: simple, summary
-featured_sort_by_weight = true
-featured_sort_by_date = false
 
 
 [params.experience]
