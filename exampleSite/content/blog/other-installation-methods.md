@@ -10,7 +10,7 @@ tags:
 
 This is a guide that extends the default instructions offered in [the theme readme](https://github.com/zetxek/adritian-free-hugo-theme/blob/main/README.md). 
 
-### Manual configuration 
+#### Manual configuration 
 If you prefer to manually set your site, you need to replace the contents of your config file (`hugo.toml`) file by these: 
 
 <details>

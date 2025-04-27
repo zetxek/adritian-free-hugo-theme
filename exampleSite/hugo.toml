@@ -214,7 +214,6 @@ name = "Blog"
 URL = "/es/blog"
 weight = 5
 
-
 [[languages.es.menus.header]]
 pre = "email"
 name = "Contacto"

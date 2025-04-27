@@ -46,8 +46,12 @@ You can see them rendered here:
 - {{< link icon="tiktok" url="https://example.com" >}} `tiktok`
 
 You can use them in several ways. 
+
 1. With the `link` shortcode, as shown above. For more information on how to use shortcodes like this one, visit our [shortcodes documentation page](/blog/shortcodes/).
+
+
 2. In the theme menus (header and footer):
+
 ```
 [[languages.en.menus.header]]
 pre = "search"
@@ -55,10 +59,13 @@ name = "Search"
 URL = "/search"
 weight = 7
 ```
+
 3. Directly as HTML markup:
+
 ```
 <i class="icon-email" aria-label="Contact"></i>
 ```
+
 
 Do you need more icons?
 You can check this github issue to check how to [add your own](https://github.com/zetxek/adritian-free-hugo-theme/pull/169), or if it's relevant for the community you can request one [via the issue tracker like @klangborste did](https://github.com/zetxek/adritian-free-hugo-theme/issues/168).
