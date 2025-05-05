@@ -109,7 +109,7 @@
 
                     {{ if $email }}
                     <h3>{{ $email_heading }}</h3>
-                    <span>{{ $email }}</span>
+                    <span><a href="mailto:{{ $email }}">{{ $email }}</a></span>
                     {{ end }}
                     
                     {{ if $location }}
