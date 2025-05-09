@@ -83,6 +83,39 @@ function param(name) {
   }
 }
 
+// Format date for display
+function formatDate(dateString) {
+  if (!dateString) return '';
+  
+  try {
+    const date = new Date(dateString);
+    if (isNaN(date)) return '';
+    
+    return date.toLocaleDateString(undefined, {
+      year: 'numeric', 
+      month: 'short', 
+      day: 'numeric'
+    });
+  } catch (error) {
+    console.error("Error formatting date:", error);
+    return dateString;
+  }
+}
+
+// Highlight search terms in text
+function highlightText(text, searchQuery) {
+  if (!text || !searchQuery) return text;
+  
+  try {
+    // Create a case-insensitive regex for the search query
+    const regex = new RegExp(`(${searchQuery.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')})`, 'gi');
+    return text.replace(regex, '<mark>$1</mark>');
+  } catch (error) {
+    console.error("Error highlighting text:", error);
+    return text;
+  }
+}
+
 // Get search query from URL parameter
 const searchQuery = param("s");
 try {
@@ -168,7 +201,7 @@ function executeSearch(searchQuery) {
 
     // Show loading indicator
     searchResults.innerHTML =
-      '<div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div>';
+      '<div class="d-flex justify-content-center my-4"><div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div></div>';
 
     fetch("/index.json")
       .then((response) => {
@@ -192,11 +225,16 @@ function executeSearch(searchQuery) {
         searchResults.innerHTML = "";
 
         if (result.length > 0) {
-          populateResults(result);
+          // Display result count
+          searchResults.insertAdjacentHTML(
+            "beforeend",
+            `<div class="alert alert-info mb-4">${result.length} result${result.length > 1 ? 's' : ''} found for "${DOMPurify.sanitize(searchQuery)}"</div>`
+          );
+          populateResults(result, searchQuery);
         } else {
           searchResults.insertAdjacentHTML(
             "beforeend",
-            "<div class='alert'>No matches found</div>",
+            "<div class='alert alert-warning'>No matches found. Try adjusting your search terms.</div>",
           );
         }
       })
@@ -210,7 +248,7 @@ function executeSearch(searchQuery) {
   }
 }
 
-function populateResults(result) {
+function populateResults(result, searchQuery) {
   try {
     if (!Array.isArray(result)) {
       throw new Error("Invalid search results");
@@ -225,154 +263,87 @@ function populateResults(result) {
     if (!templateElement) {
       throw new Error("Search result template not found");
     }
-    const templateDefinition = templateElement.innerHTML;
+    const templateContent = templateElement.innerHTML;
 
+    // Create a document fragment to efficiently add multiple results
+    const fragment = document.createDocumentFragment();
+    
     for (const [key, value] of result.entries()) {
       if (!value || !value.item) {
         console.warn("Skipping invalid search result item", value);
         continue;
       }
 
-      const contents = value.item.contents || "";
+      // Get the item data
+      const item = value.item;
+      
+      // Create excerpt
       let snippet = "";
-      const snippetHighlights = [];
-      let start;
-      let end;
-
-      if (fuseOptions.tokenize) {
-        snippetHighlights.push(searchQuery);
-      } else {
-        if (value.matches) {
-          for (const mvalue of value.matches) {
-            if (!mvalue || typeof mvalue.key !== "string") {
-              continue;
-            }
-
-            if (
-              mvalue.key === "tags" ||
-              mvalue.key === "categories"
-            ) {
-              snippetHighlights.push(mvalue.value);
-            } else if (
-              mvalue.key === "contents" &&
-              Array.isArray(mvalue.indices) &&
-              mvalue.indices.length > 0
-            ) {
-              try {
-                start =
-                  mvalue.indices[0][0] - summaryInclude > 0
-                    ? mvalue.indices[0][0] - summaryInclude
-                    : 0;
-                end =
-                  mvalue.indices[0][1] + summaryInclude < contents.length
-                    ? mvalue.indices[0][1] + summaryInclude
-                    : contents.length;
-                snippet += contents.substring(start, end);
-
-                if (typeof mvalue.value === "string") {
-                  const highlightValue =
-                    mvalue.indices[0][1] - mvalue.indices[0][0] + 1;
-                  if (
-                    highlightValue > 0 &&
-                    mvalue.indices[0][0] < mvalue.value.length
-                  ) {
-                    snippetHighlights.push(
-                      mvalue.value.substring(
-                        mvalue.indices[0][0],
-                        mvalue.indices[0][0] + highlightValue,
-                      ),
-                    );
-                  }
-                }
-              } catch (e) {
-                console.warn("Error processing match indices", e);
-              }
-            }
-          }
+      if (item.contents) {
+        // Try to find the first match in the content to center the snippet there
+        const matches = value.matches?.filter(match => match.key === 'contents') || [];
+        
+        if (matches.length > 0 && matches[0].indices && matches[0].indices.length > 0) {
+          // Get the first match position
+          const firstMatchIdx = matches[0].indices[0][0];
+          
+          // Calculate start and end positions for the snippet
+          const halfSnippetLength = Math.floor(summaryInclude / 2);
+          let start = Math.max(0, firstMatchIdx - halfSnippetLength);
+          let end = Math.min(item.contents.length, firstMatchIdx + halfSnippetLength);
+          
+          // Extract the snippet
+          snippet = item.contents.substring(start, end);
+          
+          // Add ellipsis if needed
+          if (start > 0) snippet = "..." + snippet;
+          if (end < item.contents.length) snippet = snippet + "...";
+        } else {
+          // If no specific match found, just take the beginning
+          snippet = item.contents.substring(0, summaryInclude) + "...";
         }
       }
+      
+      // Sanitize and highlight the snippet
+      snippet = DOMPurify.sanitize(snippet);
+      snippet = highlightText(snippet, searchQuery);
 
-      if (snippet.length < 1 && contents) {
-        snippet += contents.substring(0, summaryInclude * 2);
-      }
-
-      try {
-        // Insert the templated result
-        const output = render(templateDefinition, {
-          key: key,
-          title: value.item.title || "Untitled",
-          link: value.item.permalink || "#",
-          tags: value.item.tags || "",
-          categories: value.item.categories || "",
-          snippet: snippet || "No preview available",
-        });
-        searchResults.insertAdjacentHTML("beforeend", output);
-
-        // Add highlighting after insertion
-        for (const snipvalue of snippetHighlights) {
-          if (!snipvalue) continue;
-
-          const summaryElem = document.getElementById(`summary-${key}`);
-          if (summaryElem && typeof Mark !== "undefined") {
-            try {
-              const markInstance = new Mark(summaryElem);
-              markInstance.mark(snipvalue);
-            } catch (e) {
-              console.warn("Error highlighting text:", e);
-            }
-          }
-        }
-      } catch (error) {
-        console.error("Error rendering search result:", error);
-      }
+      // Format tags and categories
+      const tags = item.tags ? formatTags(item.tags, "tag") : "";
+      const categories = item.categories ? formatTags(item.categories, "category") : "";
+      
+      // Replace template placeholders
+      let renderedResult = templateContent
+        .replace(/{permalink}/g, item.permalink)
+        .replace(/{title}/g, highlightText(DOMPurify.sanitize(item.title), searchQuery))
+        .replace(/{snippet}/g, snippet)
+        .replace(/{date}/g, item.date || '')
+        .replace(/{tags}/g, tags)
+        .replace(/{categories}/g, categories);
+      
+      // Create a temporary container to hold the rendered HTML
+      const tempDiv = document.createElement('div');
+      tempDiv.innerHTML = renderedResult;
+      
+      // Append the result to the fragment
+      fragment.appendChild(tempDiv.firstElementChild);
     }
+    
+    // Append all results at once
+    searchResults.appendChild(fragment);
+    
   } catch (error) {
     console.error("Error populating results:", error);
-    displayError("There was a problem displaying search results.");
+    displayError("Failed to display search results.");
   }
 }
 
-function render(templateString, data) {
-  try {
-    if (!templateString || !data) {
-      throw new Error("Invalid template or data");
-    }
-
-    let conditionalMatches, conditionalPattern, copy;
-    conditionalPattern = /\$\{\s*isset ([a-zA-Z]*) \s*\}(.*)\$\{\s*end\s*}/g;
-
-    // Since loop below depends on re.lastIndex, we use a copy to capture any manipulations
-    copy = templateString;
-
-    while ((conditionalMatches = conditionalPattern.exec(templateString)) !== null) {
-      if (conditionalMatches.length < 3) continue;
-
-      if (data[conditionalMatches[1]]) {
-        // Valid key, remove conditionals, leave contents
-        copy = copy.replace(conditionalMatches[0], conditionalMatches[2]);
-      } else {
-        // Not valid, remove entire section
-        copy = copy.replace(conditionalMatches[0], "");
-      }
-    }
-
-    let result = copy;
-
-    // Now any conditionals removed we can do simple substitution
-    for (const key in data) {
-      if (Object.prototype.hasOwnProperty.call(data, key)) {
-        const value = data[key];
-        if (value !== undefined && value !== null) {
-          const find = `\\$\\{\\s*${key}\\s*\\}`;
-          const re = new RegExp(find, "g");
-          result = result.replace(re, value);
-        }
-      }
-    }
-
-    return result;
-  } catch (error) {
-    console.error("Error rendering template:", error);
-    return '<div class="alert alert-danger">Error rendering result</div>';
-  }
+function formatTags(tags, type) {
+  if (!tags || !Array.isArray(tags)) return "";
+  
+  const badgeClass = type === "tag" ? "bg-primary" : "bg-secondary";
+  
+  return tags
+    .map(tag => `<span class="badge ${badgeClass} me-1">${DOMPurify.sanitize(tag)}</span>`)
+    .join(" ");
 }

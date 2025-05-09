@@ -1,0 +1,127 @@
+// Transitions and animations for the Adritian Hugo theme
+// These enhance the user experience with subtle visual feedback
+
+// Basic transitions
+.transition-all {
+  transition: all 0.3s ease;
+}
+
+.transition-opacity {
+  transition: opacity 0.2s ease-in-out;
+}
+
+.transition-transform {
+  transition: transform 0.3s ease;
+}
+
+.transition-colors {
+  transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+}
+
+.transition-shadow {
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+// Shadow hover effects
+.hover-shadow {
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
+  
+  &:hover, &:focus {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+    transform: translateY(-2px);
+  }
+}
+
+// Fade animations
+.fade-enter {
+  opacity: 0;
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transition: opacity 0.3s ease-in;
+}
+
+.fade-exit {
+  opacity: 1;
+}
+
+.fade-exit-active {
+  opacity: 0;
+  transition: opacity 0.3s ease-out;
+}
+
+// Page transitions
+.page-enter {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.page-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+// Subtle hover effects for buttons and links
+a:not(.btn), .nav-link {
+  transition: color 0.2s ease, text-decoration 0.2s ease;
+  
+  &:hover {
+    text-decoration-thickness: 0.1em;
+  }
+}
+
+.btn {
+  transition: all 0.2s ease-in-out;
+  
+  &:hover, &:focus {
+    transform: translateY(-1px);
+  }
+  
+  &:active {
+    transform: translateY(1px);
+  }
+}
+
+// Card animations
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-5px);
+  }
+}
+
+// Pulsing animation for attention
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.pulse {
+  animation: pulse 2s infinite;
+}
+
+// Shimmer effect for loading states
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.shimmer {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite linear;
+} 

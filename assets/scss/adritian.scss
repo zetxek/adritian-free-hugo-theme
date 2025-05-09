@@ -1,12 +1,151 @@
+@import "bootstrap/mixins";
+@import "bootstrap/functions";
+@import "bootstrap/variables";
+
 @import "variables";
-@import "bootstrap/bootstrap";
+
+@import "bootstrap/root";
+@import "bootstrap/reboot";
+@import "bootstrap/type";
+@import "bootstrap/containers";
+@import "bootstrap/grid";
+
+@import "bootstrap/images";
+@import "bootstrap/tables";
+@import "bootstrap/forms";
+@import "bootstrap/buttons";
+@import "bootstrap/dropdown";
+@import "bootstrap/button-group";
+@import "bootstrap/nav";
+@import "bootstrap/navbar";
+@import "bootstrap/card";
+@import "bootstrap/breadcrumb";
+@import "bootstrap/pagination";
+@import "bootstrap/badge";
+@import "bootstrap/alert";
+@import "bootstrap/list-group";
+@import "bootstrap/close";
+@import "bootstrap/modal";
+@import "bootstrap/spinners";
+
+@import "bootstrap/helpers";
+
+@import "bootstrap/utilities";
+@import "bootstrap/utilities/api";
+
 @import "navbar";
 @import "menu";
 @import "raditian";
 @import "blog";
 @import "experience";
-@import "print";
 @import "search";
+@import "print";
+@import "transitions";
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+:focus-visible {
+  outline: 2px solid rgba(var(--bs-primary-rgb), 0.5);
+  outline-offset: 2px;
+}
+
+.skip-to-content {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--bs-primary);
+  color: white;
+  padding: 8px;
+  z-index: 100;
+  transition: top 0.3s;
+
+  &:focus {
+    top: 0;
+  }
+}
+
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+}
+
+section {
+  position: relative;
+  padding: 4rem 0;
+
+  @include media-breakpoint-down(md) {
+    padding: 3rem 0;
+  }
+
+  &.py-large {
+    padding: 6rem 0;
+
+    @include media-breakpoint-down(md) {
+      padding: 4rem 0;
+    }
+  }
+}
+
+footer {
+  padding: 3rem 0;
+  
+  .social-icons {
+    a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: rgba(var(--bs-dark-rgb), 0.1);
+      color: var(--bs-body-color);
+      margin-right: 0.5rem;
+      transition: all 0.2s ease;
+      
+      &:hover {
+        background-color: var(--bs-primary);
+        color: white;
+        transform: translateY(-3px);
+      }
+    }
+  }
+}
+
+[data-bs-theme="dark"] {
+  .navbar {
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.3);
+  }
+  
+  .card {
+    border-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.03);
+  }
+
+  .hover-shadow:hover {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3) !important;
+  }
+}
+
+.visually-hidden:not(:focus):not(:active) {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
 
 /** main style **/
 .header .navbar-brand span:first-child {

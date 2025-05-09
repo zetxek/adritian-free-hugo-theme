@@ -6,44 +6,75 @@
 {{ end }}
 
 {{ define "main" }}
-<section id="main-content" class="search-section p-3 p-lg-5 d-flex flex-column align-items-center bg-light rounded shadow-sm">
-  <div class="my-auto w-100" style="max-width: 760px;">
-    <h2 class="mb-4 text-center">Search the Site</h2>
-    
-    <noscript>
-      <div class="alert alert-warning" role="alert">
-        JavaScript is required to use the search functionality, because the search takes place client-side in the web browser. 
-        <br/>
-        Please enable JavaScript in your browser to use this functionality.
-      </div>
-    </noscript>
-    
-    <div class="mb-5">
-      <form action="{{ "search" | absURL }}">
-        <div class="input-group">
-          <input id="search-query" name="s" class="form-control form-control-lg" type="search" placeholder="Type to search..." autocomplete="off" aria-label="Search" />
-          <button type="submit" class="input-group-text">
-            <i class="icon-circle-arrow-right"></i>
-          </button>
+<script src="{{ "js/fuse.min.js" | absURL }}"></script>
+<script src="{{ "js/purify.min.js" | absURL }}"></script>
+<script src="{{ "js/search.js" | absURL }}"></script>
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-8 col-lg-7">
+      <section id="main-content" class="search-section p-3 p-lg-5 d-flex flex-column align-items-center bg-light rounded shadow-sm">
+        <div class="w-100 mb-4">
+          <h1 class="mb-4 text-center">Search</h1>
+          
+          <noscript class="alert alert-warning d-block my-4">
+            JavaScript is required to use the search functionality, because the search takes place client-side in the web browser.
+          </noscript>
+          
+          <div class="mx-auto">
+            <form action="{{ "search" | absURL }}" class="mb-4">
+              <div class="input-group input-group-lg">
+                <input 
+                  id="search-query" 
+                  name="s" 
+                  class="form-control" 
+                  type="search" 
+                  placeholder="Type to search..." 
+                  autocomplete="off" 
+                  aria-label="Search" 
+                />
+                <button type="submit" class="btn btn-primary">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                  </svg>
+                  <span class="visually-hidden">Search</span>
+                </button>
+              </div>
+            </form>
+          </div>
+          
+          <div id="search-results" class="search-results card border-0">
+            <div class="alert">Please enter at least 2 characters to search</div>
+          </div>
         </div>
-      </form>
+      </section>
     </div>
-    
-    <div id="search-results" class="card border-0">
+  </div>
+</div>
+
+<!-- this template is used by search.js and appended to the search-results div above -->
+<script id="search-result-template" type="text/x-js-template">
+  <article class="search-result mb-4">
+    <div class="card h-100 border-0 shadow-sm hover-shadow transition-shadow">
       <div class="card-body">
-        <h3 class="card-title">Matching pages</h3>
-        <!-- Results will appear here -->
+        <h2 class="card-title h5 mb-2">
+          <a href="{permalink}" class="stretched-link text-decoration-none">{title}</a>
+        </h2>
+        <div class="mb-2 small text-muted d-flex align-items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar me-1" viewBox="0 0 16 16">
+            <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
+          </svg>
+          <time datetime="{date}">{date}</time>
+        </div>
+        <div class="card-text mt-2">
+          <p class="search-snippet">{snippet}</p>
+          <div class="d-flex flex-wrap mt-2">
+            <div class="me-2 mb-1 small">{categories}</div>
+            <div class="small">{tags}</div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</section>
-<!-- this template is sucked in by search.js and appended to the search-results div above. So editing here will adjust style -->
-<script id="search-result-template" type="text/x-js-template">
-  <div id="summary-${key}" class="mb-4 p-3 border-bottom">
-    <h4 class="mb-1"><a href="${link}" class="text-decoration-none">${title}</a></h4>
-    <p class="mb-2 text-muted small">${snippet}</p>
-    ${ isset tags }<span class="badge bg-primary me-1">Tags: ${tags}</span>${ end }
-    ${ isset categories }<span class="badge bg-secondary">Categories: ${categories}</span>${ end }
-  </div>
+  </article>
 </script>
 {{ end }}

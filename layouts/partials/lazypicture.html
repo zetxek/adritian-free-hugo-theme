@@ -5,64 +5,117 @@
 {{/*.alt alternate text*/}}
 {{/*.class is added to the image*/}}
 {{/*.pictureclass is added to the picture*/}}
+{{/*.loading - can be 'lazy' or 'eager'. Default is 'lazy'*/}}
+{{/*.fetchpriority - can be 'high', 'low', or 'auto'. Default is 'auto'*/}}
 
 {{ $img := resources.Get .src }}
 {{ if $img }}
-
     {{- $target1 := "" -}}
     {{- $target2 := "" -}}
 
     {{- if (and .width .height) }}
-{{/*        {{ warnf "lazypicture.html: width and height" }}*/}}
         {{ $swidth := int .width }}
         {{ $sheight := int .height }}
         {{- $target1 = (printf "%dx%d" $swidth $sheight) -}}
         {{- $target2 = (printf "%dx%d" (mul 2 $swidth) (mul 2 $sheight)) -}}
     {{- else if .width }}
-{{/*        {{ warnf "lazypicture.html: width" }}*/}}
         {{ $swidth := int .width }}
         {{- $target1 = (printf "%dx" $swidth) -}}
         {{- $target2 = (printf "%dx" (mul 2 $swidth)) -}}
     {{- else if .height }}
-{{/*        {{ warnf "lazypicture.html: height" }}*/}}
         {{ $sheight := int .height }}
         {{- $target1 = (printf "x%d" $sheight) -}}
         {{- $target2 = (printf "x%d" (mul 2 $sheight)) -}}
     {{- else if .scale }}
-{{/*        {{ warnf "lazypicture.html: scale" }}*/}}
         {{ $swidth := int (mul (float $img.Width) (float .scale) ) }}
         {{ $sheight := int (mul (float $img.Height) (float .scale) ) }}
-
         {{- $target1 = (printf "%dx%d" $swidth $sheight) -}}
         {{- $target2 = (printf "%dx%d" (mul 2 $swidth) (mul 2 $sheight)) -}}
     {{ else }}
         {{- $target1 = (printf "%dx%d" $img.Width $img.Height) -}}
     {{ end }}
 
-{{/*    {{ warnf "lazypicture.html: target1 %s" $target1 }}*/}}
-
-    {{ $imgOri := $img.Resize (printf "%s q75 Lanczos picture" $target1) }}
-    {{ $imgWebp := $img.Resize (printf "%s webp q75 Lanczos picture" $target1) }}
-
+    {{/* Create optimized responsive images */}}
+    {{ $imgOri := $img.Resize (printf "%s q80 Lanczos picture" $target1) }}
+    {{ $imgWebp := $img.Resize (printf "%s webp q80 Lanczos picture" $target1) }}
+    {{ $imgAvif := "" }}
+    {{ if in (slice "jpg" "jpeg" "png") $img.MediaType.SubType }}
+        {{ $imgAvif = $img.Resize (printf "%s avif q80 Lanczos picture" $target1) }}
+    {{ end }}
+    
+    {{/* Low quality image placeholder for better perceived performance */}}
+    {{ $lqip := $img.Resize "20x webp q50" }}
+    {{ $lqipBase64 := $lqip.Content | base64Encode }}
+    
+    {{/* Set loading attribute with default value */}}
+    {{ $loading := "lazy" }}
+    {{ if .loading }}
+        {{ $loading = .loading }}
+    {{ end }}
+    
+    {{/* Set fetchpriority attribute with default value */}}
+    {{ $fetchpriority := "auto" }}
+    {{ if .fetchpriority }}
+        {{ $fetchpriority = .fetchpriority }}
+    {{ end }}
 
     <picture class="{{ .pictureclass }}">
         {{- if $target2 }}
-            {{ $imgOri2 := $img.Resize (printf "%s q75 Lanczos picture" $target2) }}
-            {{ $imgWebp2 := $img.Resize (printf "%s webp q75 Lanczos picture" $target2) }}
-
-            <source srcset="{{ $imgWebp.RelPermalink }} 1x, {{ $imgWebp2.RelPermalink }} 2x" type="image/webp" />
-            <source srcset="{{ $imgOri.RelPermalink }} 1x, {{ $imgOri2.RelPermalink }} 2x" type="{{ $imgOri.MediaType.Type }}">
+            {{ $imgOri2 := $img.Resize (printf "%s q80 Lanczos picture" $target2) }}
+            {{ $imgWebp2 := $img.Resize (printf "%s webp q80 Lanczos picture" $target2) }}
+            
+            {{/* AVIF format for optimal compression - 2x */}}
+            {{ if $imgAvif }}
+                {{ $imgAvif2 := $img.Resize (printf "%s avif q80 Lanczos picture" $target2) }}
+                <source 
+                    srcset="{{ $imgAvif.RelPermalink }} 1x, {{ $imgAvif2.RelPermalink }} 2x" 
+                    type="image/avif" 
+                />
+            {{ end }}
+            
+            {{/* WebP format - 2x */}}
+            <source 
+                srcset="{{ $imgWebp.RelPermalink }} 1x, {{ $imgWebp2.RelPermalink }} 2x" 
+                type="image/webp" 
+            />
+            
+            {{/* Original format - 2x */}}
+            <source 
+                srcset="{{ $imgOri.RelPermalink }} 1x, {{ $imgOri2.RelPermalink }} 2x" 
+                type="{{ $imgOri.MediaType.Type }}"
+            >
         {{- else }}
-            <source srcset="{{ $imgWebp.RelPermalink }} 1x" type="image/webp" />
-            <source srcset="{{ $imgOri.RelPermalink }} 1x" type="{{ $imgOri.MediaType.Type }}">
+            {{/* AVIF format for optimal compression - 1x */}}
+            {{ if $imgAvif }}
+                <source 
+                    srcset="{{ $imgAvif.RelPermalink }}" 
+                    type="image/avif" 
+                />
+            {{ end }}
+            
+            {{/* WebP format - 1x */}}
+            <source 
+                srcset="{{ $imgWebp.RelPermalink }}" 
+                type="image/webp" 
+            />
+            
+            {{/* Original format - 1x */}}
+            <source 
+                srcset="{{ $imgOri.RelPermalink }}" 
+                type="{{ $imgOri.MediaType.Type }}"
+            >
         {{- end }}
 
         <img
-                width="{{ $imgOri.Width }}"
-                class="lozad img-responsive {{ .class }}"
-                data-src="data:image/gif;base64,R0lGODlhBwACAIAAAP///wAAACH5BAEAAAEALAAAAAAHAAIAAAIDjI9YADs="
-                alt='{{ .alt }}'
-                src="{{ $imgOri.RelPermalink }}"
+            width="{{ $imgOri.Width }}"
+            height="{{ $imgOri.Height }}"
+            class="img-fluid {{ .class }}"
+            src="{{ $imgOri.RelPermalink }}"
+            alt="{{ with .alt }}{{ . }}{{ else }}{{ "" }}{{ end }}"
+            loading="{{ $loading }}"
+            fetchpriority="{{ $fetchpriority }}"
+            style="background-size: cover; background-image: url(data:image/webp;base64,{{ $lqipBase64 }});"
+            decoding="async"
         />
     </picture>
 {{ else }}
