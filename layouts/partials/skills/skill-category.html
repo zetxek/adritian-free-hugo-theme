@@ -1,0 +1,21 @@
+{{ $skills := .skills }}
+
+<div class="row">
+    {{ range $skills }}
+    <div class="col-md-6">
+        <div class="skill-item">
+            <div class="skill-header">
+                <h3 class="skill-name">{{ .name }}</h3>
+                <span class="skill-level">{{ .level }}%</span>
+            </div>
+            <div class="skill-bar">
+                <div class="skill-bar-fill" style="width: {{ .level }}%;"></div>
+            </div>
+            <div class="d-flex justify-content-between align-items-center">
+                <span class="skill-years">{{ .years }} years</span>
+                <span class="skill-description">{{ .description }}</span>
+            </div>
+        </div>
+    </div>
+    {{ end }}
+</div>

@@ -1,230 +1,46 @@
-@charset "UTF-8";
+// Import Bootstrap
+@import "bootstrap/scss/bootstrap";
 
+// Import theme variables and mixins
 @import "variables";
 @import "theme-init";
-@import "bootstrap/bootstrap";
+@import "raditian";
 @import "navbar";
 @import "menu";
-@import "raditian";
-@import "blog";
 @import "experience";
+@import "blog";
+@import "page-transition";
 @import "print";
 @import "search";
-@import "page-transition";
+@import "skills";
 
-/** main style **/
-.header .navbar-brand span:first-child {
-  color: $base-color;
-}
-
-.header .container {
-  padding-left: 10px;
-}
-
-html body ::selection {
-  background-color: $base-color;
-  color: #fff;
-}
-
-.container {
-  padding-left: 24px;
-  padding-right: 24px;
-}
-
-.container {
-  padding-left: 24px;
-  padding-right: 24px;
-}
-
-.h1,
-.h2,
-.h3,
-.h4,
-.h5,
-.h6,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-weight: 700;
-  line-height: normal;
-  color: #000;
-  margin-bottom: 8px;
-}
-
-.btn:focus-visible{
-  box-shadow: 0 0 0 0.2rem $primary;
-}
-
-@media (min-width: 992px) {
-  .h1,
-  .h2,
-  .h3,
-  .h4,
-  .h5,
-  .h6,
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    margin-bottom: 10px;
+// Responsive adjustments
+@media (max-width: 991px) {
+  .header .navbar .nav-item .nav-link {
+    padding: 0.3rem 0;
   }
 }
 
-h1,
-h2 {
-  margin-bottom: 16px;
+// Dropdown styling
+.dropdown-menu {
+  border-radius: 0;
+  border: none;
+  padding: 0.5rem;
 }
-
-h2 {
-  font-size: 32px;
+.dropdown-item {
+  padding: 0.25rem 1rem;
+  font-size: 0.9rem;
 }
-
-@media (min-width: 992px) {
-  h1 {
-    margin-bottom: 10px;
-  }
-  h2 {
-    margin-bottom: 10px;
-    font-size: 36px;
-  }
+.dropdown-item:hover {
+  background-color: #f8f9fa;
+  border-radius: 4px 10px;
 }
-
-h3,
-h4 {
-  font-size: 20px;
-  font-weight: 600;
-}
-
-@media (min-width: 992px) {
-  h3,
-  h4 {
-    font-size: 32px;
-  }
-  p {
-    line-height: 28px;
-  }
-}
-
-p {
-  font-size: 16px;
-  font-weight: 300;
-  line-height: 28px;
-  color: #333;
-}
-
-p + p {
-  margin-top: -12px;
-}
-
-.display-1 {
-  font-size: 36px;
-  font-weight: 800;
-  line-height: normal;
-  color: #000;
-}
-
-.showcase-section .platform-links.shortcode {
-  /* align to the left margin */
-  margin-left: -40px;
-}
-
-@media (min-width: 992px) {
-  .display-1 {
-    font-size: 60px;
-  }
-}
-
-.lead {
-  margin-bottom: 1rem;
-}
-
-.lead a,
-p a,
-span a {
-  color: #000;
-  font-weight: 600;
-  text-decoration: underline;
-  text-underline-position: from-font;
-  text-decoration-style: solid;
-  text-decoration-thickness: 1px;
-  transition: all 0.5s;
-}
-
-.lead a:hover,
-p a:hover,
-span a:hover {
-  color: $base-color;
-}
-
-.lead {
-  font-size: 16px;
-  font-weight: 300;
-  line-height: 1.2;
-  letter-spacing: -0px;
-  color: #000;
-}
-
-br {
-  content: "";
-  margin: 2em;
-  display: block;
-  font-size: 24%;
-}
-
-@media (min-width: 992px) {
-  .lead {
-    font-size: 18px;
-  }
-  .contact {
-    margin-top: -2px;
-  }
-}
-
-@media (min-width: 992px) {
-  .ml-lg-auto,
-  .mx-lg-auto {
-    margin-left: auto !important;
-  }
-
-  #mobile-header-language-selector,
-  #mobile-header-color-selector {
-    display: none;
-  }
-}
-
-.dropdown-item.selected {
-  font-weight: bold;
-}
-
-#mobile-header-language-selector,
-#mobile-header-color-selector {
-  flex-direction: column;
-}
-
-#languages-dropdown-mobile-header,
-#theme-dropdown-mobile-header {
-  font-size: inherit;
-}
-
-a.dropdown-item.translation,
-li.dropdown-item.current.selected {
-  width: 100%;
-  padding: 4px 10px;
-}
-
 li.dropdown-item.choice a {
   padding-left: 30px;
 }
-
 .dropdown-menu button[aria-pressed="true"] {
   font-weight: bold;
 }
-
 html[data-bs-theme="dark"] {
   #dark-toggle {
     span.dark {
@@ -232,7 +48,6 @@ html[data-bs-theme="dark"] {
     }
   }
 }
-
 html[data-bs-theme="light"] {
   #dark-toggle {
     span.light {
@@ -240,12 +55,10 @@ html[data-bs-theme="light"] {
     }
   }
 }
-
 footer_links .nav-item .nav-link::after {
   color: white;
   background-color: white !important;
 }
-
 /* skip to content */
 .skip-to-content-link {
   position: absolute;
@@ -256,13 +69,11 @@ footer_links .nav-item .nav-link::after {
   color: black;
   opacity: 0;
 }
-
 .skip-to-content-link:focus {
   left: 50%;
   transform: translateX(-50%);
   opacity: 1;
 }
-
 /* dark mode */
 @include color-mode(dark) {
   $primary: $dark-primary;
@@ -280,7 +91,6 @@ footer_links .nav-item .nav-link::after {
   .header .navbar .nav-item .nav-link:hover a {
     text-decoration: none;
   }
-
   .navbar-light .navbar-toggler-icon {
     background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke='rgba(255, 255, 255, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
   }
@@ -288,13 +98,11 @@ footer_links .nav-item .nav-link::after {
   .header.collapsing::before {
     background-color: #181818;
   }
-
   @media (min-width: 992px) {
     .header .navbar .nav-item:hover .nav-link::after {
       background-color: #fff;
     }
   }
-
   @media only screen and (max-width: 990px) {
     .header .navbar .nav-item:first-child {
       border-top: 1px solid rgba(255, 255, 255, 0.1);
@@ -333,7 +141,6 @@ footer_links .nav-item .nav-link::after {
   .lead {
     color: #fff;
   }
-
   .lead a,
   p a,
   span a {
@@ -350,7 +157,6 @@ footer_links .nav-item .nav-link::after {
   .platform-links [class^="icon-"] {
     color: #fff !important;
   }
-
   .education__degree,
   .experience__date {
     color: #a6a6a6;
@@ -443,7 +249,6 @@ footer_links .nav-item .nav-link::after {
     box-shadow: none;
     border: none;
   }
-
   .posts-list article.summary {
     color: #c3c3c3;
   }
@@ -451,17 +256,32 @@ footer_links .nav-item .nav-link::after {
   .post-summary.post-content * {
     color: white;
   }
-
   .text-muted {
     color: rgba(255, 255, 255, 0.6);
   }
-
   .dropdown-item.active,
   .dropdown-item:active,
   .dropdown-item:focus,
   .dropdown-item:hover {
     background-color: $base-color;
   }
+  
+  // Dark mode for skills section
+  .skill-item {
+    background-color: #202020;
+  }
+  
+  .skill-bar {
+    background-color: #333333;
+  }
+  
+  .skill-years {
+    background-color: #333333;
+    color: #d5d5d5;
+  }
+  
+  .skill-description {
+    color: #a6a6a6;
+  }
 }
-
 /* end dark mode */
