@@ -10,57 +10,14 @@
             </div>
         </div>
 
+        {{ range .Params.skill_categories }}
         <div class="row mt-5">
             <div class="col-12">
-                <h2 class="mb-4">Programming Languages</h2>
-                {{ partial "skills/skill-category.html" (dict "skills" (slice 
-                    (dict "name" "JavaScript/TypeScript" "level" 95 "years" "10+" "description" "Modern ES6+, TypeScript, React, Node.js")
-                    (dict "name" "Java" "level" 85 "years" "8+" "description" "Enterprise applications, Spring framework")
-                    (dict "name" "PHP" "level" 90 "years" "10+" "description" "Laravel, Symfony, WordPress")
-                    (dict "name" "Swift/Objective-C" "level" 80 "years" "7+" "description" "iOS native development")
-                    (dict "name" "Kotlin/Java" "level" 75 "years" "6+" "description" "Android native development")
-                )) }}
+                <h2 class="mb-4">{{ .name }}</h2>
+                {{ partial "skills/skill-category.html" (dict "skills" .skills) }}
             </div>
         </div>
-
-        <div class="row mt-5">
-            <div class="col-12">
-                <h2 class="mb-4">Frameworks & Technologies</h2>
-                {{ partial "skills/skill-category.html" (dict "skills" (slice 
-                    (dict "name" "React/React Native" "level" 90 "years" "7+" "description" "Web and cross-platform mobile apps")
-                    (dict "name" "Node.js" "level" 90 "years" "8+" "description" "Express, NestJS, API development")
-                    (dict "name" "AWS" "level" 85 "years" "6+" "description" "EC2, S3, Lambda, CloudFront, RDS")
-                    (dict "name" "Docker/Kubernetes" "level" 80 "years" "5+" "description" "Containerization, orchestration")
-                    (dict "name" "CI/CD" "level" 90 "years" "8+" "description" "GitHub Actions, Jenkins, CircleCI")
-                )) }}
-            </div>
-        </div>
-
-        <div class="row mt-5">
-            <div class="col-12">
-                <h2 class="mb-4">Architecture & Methodologies</h2>
-                {{ partial "skills/skill-category.html" (dict "skills" (slice 
-                    (dict "name" "Microservices" "level" 90 "years" "7+" "description" "Design, implementation, scaling")
-                    (dict "name" "API Design" "level" 95 "years" "9+" "description" "RESTful, GraphQL, OpenAPI")
-                    (dict "name" "Agile/Scrum" "level" 95 "years" "10+" "description" "Team leadership, sprint planning")
-                    (dict "name" "DevOps" "level" 85 "years" "6+" "description" "Infrastructure as code, monitoring")
-                    (dict "name" "System Design" "level" 90 "years" "8+" "description" "Scalable architectures, performance")
-                )) }}
-            </div>
-        </div>
-
-        <div class="row mt-5">
-            <div class="col-12">
-                <h2 class="mb-4">Leadership & Soft Skills</h2>
-                {{ partial "skills/skill-category.html" (dict "skills" (slice 
-                    (dict "name" "Team Management" "level" 95 "years" "8+" "description" "Building high-performing teams")
-                    (dict "name" "Technical Mentoring" "level" 90 "years" "7+" "description" "Career development, coaching")
-                    (dict "name" "Product Strategy" "level" 85 "years" "6+" "description" "Roadmap planning, prioritization")
-                    (dict "name" "Cross-functional Collaboration" "level" 90 "years" "8+" "description" "Working with product, design, business")
-                    (dict "name" "Technical Communication" "level" 95 "years" "10+" "description" "Documentation, presentations")
-                )) }}
-            </div>
-        </div>
+        {{ end }}
     </div>
 </section>
 {{ end }}
