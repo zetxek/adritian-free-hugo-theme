@@ -24,6 +24,6 @@
   },
   "dependencies": {
     "fuse.js": "^7.1.0",
-    "dompurify": "^3.2.6"
+    "dompurify": "^3.2.7"
   }
 }
