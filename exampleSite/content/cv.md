@@ -3,17 +3,33 @@ title: 'Printable CV'
 hideTitle: true
 ---
 
-ℹ This page is a demo of the printer-friendly output of the theme. You can find the source code in the demo repo (https://raw.githubusercontent.com/zetxek/adritian-demo/refs/heads/main/content/cv.md). Try printing it directly from your browser! 
-
 ### About me
 
-I am a passionate software engineer with over 10 years of experience building web applications and distributed systems. My expertise spans full-stack development, cloud architecture, and leading engineering teams to deliver impactful solutions. I thrive on solving complex technical challenges while mentoring others and fostering a collaborative engineering culture.
+Materials science researcher specializing in data-driven alloy design and first-principles simulations. I integrate density functional theory with interpretable machine learning to uncover how alloy chemistry governs defect stability and transport. Experienced collaborating across experimental and computational teams to deliver actionable insights for energy materials.
 
-Throughout my career, I've focused on creating scalable, maintainable software using modern technologies and best practices. I'm particularly interested in distributed systems, performance optimization, and building resilient architectures. When I'm not coding, I enjoy contributing to open source projects and sharing knowledge through technical writing and speaking at conferences.
+### Research Interests
+
+- Machine learning models for materials discovery and design
+- Defect thermodynamics and diffusion in HCP metals
+- High-throughput workflow development for DFT and ReaxFF simulations
 
 ### Experience
 
 {{< experience-list >}}
 
+### Education
+
 {{< education-list title="Education" >}}
 
+### Honors & Awards
+
+- Outstanding Graduate of Hunan University (2025)
+- National Graduate Scholarship (2024)
+- Outstanding Graduate of Dalian City (2022)
+- First Prize, National College Students Mathematics Competition, Liaoning Province (2021)
+
+### Skills Snapshot
+
+- VASP, AFLOW, Elastool, and custom high-throughput workflows for defect energetics
+- scikit-learn, ASE, pymatgen, SISSO, and SHAP for interpretable materials informatics
+- Python-based data pipelines, scientific scripting, and reproducible HPC automation
