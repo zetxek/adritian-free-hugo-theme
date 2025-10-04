@@ -186,7 +186,7 @@ weight = 4
 
 
 [languages.es]
-disabled = true
+disabled = false
 languageCode = 'es'
 languageDirection = 'ltr'
 languageName = 'Español'
@@ -253,7 +253,7 @@ URL = "/es/#contact"
 weight = 4
 
 [languages.fr]
-disabled = true
+disabled = false
 languageCode = 'fr'
 languageDirection = 'ltr'
 languageName = 'Français'

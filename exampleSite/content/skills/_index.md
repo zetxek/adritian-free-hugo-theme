@@ -2,56 +2,52 @@
 title: "Technical Skills"
 date: 2025-05-19T14:56:00+01:00
 draft: false
-description: "Computational materials science toolkit blending first-principles modeling and interpretable machine learning."
+description: "A comprehensive overview of technical skills and expertise across various domains."
 skill_categories:
-  - name: "Computational Materials"
+  - name: "Programming Languages"
     skills:
-      - name: "VASP"
+      - name: "JavaScript/TypeScript"
+        level: 95
+        years: "10+"
+        description: "Modern ES6+, TypeScript, React, Node.js"
+      - name: "Java"
+        level: 85
+        years: "8+"
+        description: "Enterprise applications, Spring framework"
+      - name: "PHP"
         level: 90
-        years: "4+"
-        description: "High-accuracy DFT calculations for metals, defects, and interfaces"
-      - name: "High-throughput workflows"
-        level: 85
-        years: "3+"
-        description: "Automation with AFLOW, Elastool, and custom scripts"
-      - name: "Reactive force fields"
+        years: "10+"
+        description: "Laravel, Symfony, WordPress"
+      - name: "Swift/Objective-C"
         level: 80
-        years: "3"
-        description: "ReaxFF dataset curation and validation for corrosion studies"
-  - name: "Machine Learning & Data"
-    skills:
-      - name: "scikit-learn & SISSO"
-        level: 85
-        years: "3+"
-        description: "Interpretable models for defect energetics and stability"
-      - name: "ASE & pymatgen"
-        level: 88
-        years: "4+"
-        description: "Structure generation, feature engineering, and workflow integration"
-      - name: "SHAP analysis"
-        level: 80
-        years: "2"
-        description: "Model explainability for materials property predictions"
-  - name: "Programming & Automation"
-    skills:
-      - name: "Python"
-        level: 90
-        years: "5+"
-        description: "Data processing, workflow orchestration, and visualization"
-      - name: "Scientific scripting"
-        level: 85
-        years: "5"
-        description: "Batch job management and HPC-ready tooling"
-  - name: "Languages"
-    skills:
-      - name: "English"
+        years: "7+"
+        description: "iOS native development"
+      - name: "Kotlin/Java"
         level: 75
-        years: "IELTS 6.5"
-        description: "Fluent in academic and collaborative settings"
-      - name: "Mandarin Chinese"
-        level: 100
-        years: "Native"
-        description: "Native proficiency"
+        years: "6+"
+        description: "Android native development"
+  - name: "Frameworks & Technologies"
+    skills:
+      - name: "React/React Native"
+        level: 90
+        years: "7+"
+        description: "Web and cross-platform mobile apps"
+      - name: "Node.js"
+        level: 90
+        years: "8+"
+        description: "Express, NestJS, API development"
+      - name: "AWS"
+        level: 85
+        years: "6+"
+        description: "EC2, S3, Lambda, CloudFront, RDS"
+      - name: "Docker/Kubernetes"
+        level: 80
+        years: "5+"
+        description: "Containerization, orchestration"
+      - name: "CI/CD"
+        level: 90
+        years: "8+"
+        description: "GitHub Actions, Jenkins, CircleCI"
 ---
 
-I combine electronic-structure simulations with data-driven methods to explain and predict how alloying and defects influence materials performance. My workflow spans clean dataset generation, reproducible automation on HPC resources, and clear communication of insights to multidisciplinary teams.
+As a technology professional, I've developed expertise across multiple technical domains throughout my career. This skills showcase highlights my technical capabilities, from programming languages to architectural patterns and methodologies.
