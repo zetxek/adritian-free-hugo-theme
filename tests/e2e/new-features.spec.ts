@@ -240,10 +240,10 @@ test.describe('New Blog Features', () => {
       await page.goto(`${BASE_URL}/blog/new-features-demo/`);
       
       // Switch to dark theme
-      const themeButton = page.locator('#bd-theme-footer');
+      const themeButton = page.locator('div#footer-color-selector button.bd-theme-selector');
       await themeButton.scrollIntoViewIfNeeded();
       await themeButton.click();
-      await page.getByRole('button', { name: '🌑 Dark' }).last().click();
+      await page.locator('div#footer-color-selector .dropdown-item[data-bs-theme-value="dark"]').click();
       
       // Wait for theme change
       await page.waitForTimeout(500);

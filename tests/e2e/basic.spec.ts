@@ -35,7 +35,7 @@ test.describe('Theme basic functionality', () => {
     // attribute exists
     await expect(page.locator('html')).toHaveAttribute('data-bs-theme');
     // click on theme switcher
-    await page.click('#bd-theme-footer');
+    await page.click('div#footer-color-selector button.bd-theme-selector');
     /* click on the html element:
     <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
                     ☀️ Light
@@ -44,7 +44,7 @@ test.describe('Theme basic functionality', () => {
    await page.getByRole('button', { name: '☀️ Light' }).last().click();
    await expect(page.locator('html')).toHaveAttribute('data-bs-theme', 'light');
     // click on theme switcher
-    await page.click('#bd-theme-footer');
+    await page.click('div#footer-color-selector button.bd-theme-selector');
     /* click on the html element:
     <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="dark" aria-pressed="true">
                     🌑 Dark
