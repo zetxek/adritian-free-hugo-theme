@@ -300,16 +300,13 @@ test.describe('New Blog Features', () => {
       // Navigate to Spanish version
       await page.goto(`${BASE_URL}/es/`);
       
-      // Switch to a Spanish blog post if available
-      // For now, just check that the interface works
-      await page.goto(`${BASE_URL}/`);
       
       // Open language switcher
-      const languageButton = page.locator('button', { hasText: 'Language' }).first();
+      const languageButton = page.locator('button', { hasText: 'Idioma' }).first();
       await languageButton.click();
       
       // Should see language options
-      await expect(page.locator('text=Español')).toBeVisible();
+      await expect(page.locator('#languages-dropdown-header').getByText('Español')).toBeVisible();
     });
   });
 
