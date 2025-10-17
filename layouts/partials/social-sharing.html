@@ -7,7 +7,7 @@
   <h3>{{ i18n "share_this_post" | default "Share this post" }}</h3>
   <div class="share-buttons">
     {{ if or .Site.Params.sharing.twitter (not (isset .Site.Params.sharing "twitter")) }}
-    <a href="https://twitter.com/intent/tweet?url={{ $shareUrl }}&text={{ $shareTitle }}" 
+    <a href="https://twitter.com/intent/tweet?url={{ $shareUrl | urlquery }}&text={{ $shareTitle | urlquery }}" 
        target="_blank" 
        rel="noopener noreferrer"
        aria-label="{{ i18n "share_on_twitter" | default "Share on Twitter" }}"
