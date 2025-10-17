@@ -20,7 +20,7 @@
     {{ end }}
     
     {{ if or .Site.Params.sharing.linkedin (not (isset .Site.Params.sharing "linkedin")) }}
-    <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ $shareUrl }}" 
+    <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ $shareUrl | urlquery }}" 
        target="_blank" 
        rel="noopener noreferrer"
        aria-label="{{ i18n "share_on_linkedin" | default "Share on LinkedIn" }}"
