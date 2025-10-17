@@ -10,7 +10,7 @@
         {{ with .Description }}
         <p class="related-post-excerpt">{{ . }}</p>
         {{ else }}
-        <p class="related-post-excerpt">{{ .Summary | truncate 120 }}</p>
+        <p class="related-post-excerpt">{{ .Summary | plainify | truncate 120 }}</p>
         {{ end }}
         <div class="related-post-meta">
           <span class="post-date">{{ .Date.Format "Jan 2, 2006" }}</span>
