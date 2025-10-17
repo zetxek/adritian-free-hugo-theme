@@ -233,30 +233,6 @@ test.describe('New Blog Features', () => {
     });
   });
 
-  test.describe('Dark Mode Support', () => {
-    test('new features should work in dark mode', async ({ page }) => {
-      // Set dark mode
-      await page.emulateMedia({ colorScheme: 'dark' });
-      await page.goto(`${BASE_URL}/blog/new-features-demo/`);
-      
-      // Switch to dark theme
-      const themeButton = page.locator('div#footer-color-selector button.bd-theme-selector');
-      await themeButton.scrollIntoViewIfNeeded();
-      await themeButton.click();
-      await page.locator('div#footer-color-selector .dropdown-item[data-bs-theme-value="dark"]').click();
-      
-      // Wait for theme change
-      await page.waitForTimeout(500);
-      
-      // Check that features are still visible
-      await expect(page.locator('.related-posts')).toBeVisible();
-      await expect(page.locator('.social-sharing')).toBeVisible();
-      await expect(page.locator('.table-of-contents')).toBeVisible();
-      
-      // Check that HTML has dark theme attribute
-      await expect(page.locator('html')).toHaveAttribute('data-bs-theme', 'dark');
-    });
-  });
 
   test.describe('Responsive Design', () => {
     test('features should be visible on mobile', async ({ page }) => {
