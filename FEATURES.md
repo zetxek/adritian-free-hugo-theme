@@ -113,6 +113,14 @@ All features support the theme's multilingual capabilities with translations for
 - English (en)
 - Spanish (es)
 - French (fr)
+- German (de)
+- Dutch (nl)
+- Danish (da)
+- Italian (it)
+- Portuguese (pt)
+- Swedish (sv)
+- Norwegian (no)
+- Polish (pl)
 
 Additional languages can be added by creating translation files in `i18n/`.
 

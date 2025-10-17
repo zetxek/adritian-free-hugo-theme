@@ -126,9 +126,21 @@ https://github.com/user-attachments/assets/030e765a-275f-4141-88e0-b854ebe551da
 
 The theme implements the [internationalization (i18n) system by Hugo](https://gohugo.io/content-management/multilingual/), to enable multilingual sites.
 
-See the content in the  `i18n` folder to edit the translations, and the configuration `hugo.toml` to define your active languages. The example site has 3 enabled languages (`en` for English, `es` for Spanish and `fr` for French).
+See the content in the  `i18n` folder to edit the translations, and the configuration `hugo.toml` to define your active languages. The theme includes translations for:
 
-You can add additional languages, or disable the provided ones (by setting `disabled` to `true` on the languages you don't need).
+- **English** (`en`)
+- **Spanish** (`es`)
+- **French** (`fr`)
+- **German** (`de`)
+- **Dutch** (`nl`)
+- **Danish** (`da`)
+- **Italian** (`it`)
+- **Portuguese** (`pt`)
+- **Swedish** (`sv`)
+- **Norwegian** (`no`)
+- **Polish** (`pl`)
+
+The example site has 3 enabled languages by default (`en`, `es`, and `fr`). You can enable additional languages by adding them to your `hugo.toml` configuration, or disable the provided ones (by setting `disabled` to `true` on the languages you don't need).
 
 Most of the content is expected to be translated via the content system of Hugo:
 

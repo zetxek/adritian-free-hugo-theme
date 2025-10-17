@@ -1,0 +1,224 @@
+## Meta tags
+- id: "meta_title"
+  translation: "Adritian - et høytytende Hugo-tema av Adrián Moreno"
+- id: "meta_description"
+  translation: "Dette Hugo-temaet (Adritian) er basert på Bootstrap og har funksjoner som gjør det egnet for et personlig nettsted, en portefølje eller andre typer Single Page-applikasjoner."
+- id: "meta_keywords"
+  translation: "hugo, tema, bootstrap, adritian, adrian moreno, personlig nettsted, portefølje, single page-applikasjon"
+- id: "meta_author"
+  translation: "Adrián Moreno Peña"
+- id: "meta_image"
+  translation: "/img/general/og-image.jpg"
+
+## Header
+- id: "logo_alt"
+  translation: "Adritian-logo"
+
+- id: "logo_text1"
+  translation: "Adritian"
+
+- id: "logo_text2"
+  translation: "Demo"
+
+## General
+- id: "skipToMainContent"
+  translation: "Hopp til hovedinnhold"
+
+- id: "toggle_navigation"
+  translation: "Veksle navigasjon"
+
+## Footer
+- id: "footer_notice"
+  translation: "© Adritian. Gratis Hugo-tema av Adrián Moreno Peña."
+
+- id: "language"
+  translation: "Språk"
+
+- id: "toggle_theme"
+  translation: "Bytt tema"
+
+- id: "theme_light"
+  translation: "☀️ Lys"
+- id: "theme_dark"
+  translation: "🌑 Mørk"
+- id: "theme_auto"
+  translation: "✨ Auto"
+
+## Homepage head title
+- id: "head_title"
+  translation: "Demonstrasjonsside for Adritian - et høytytende Hugo-tema av Adrián Moreno"
+
+- id: "head_description"
+  translation: "Dette Hugo-temaet (Adritian) er basert på Bootstrap og har funksjoner som gjør det egnet for et personlig nettsted, en portefølje eller andre typer Single Page-applikasjoner."
+
+## Homepage showcase
+- id: "showcase_title"
+  translation: "Velkommen til demoen"
+
+- id: "showcase_subtitle"
+  translation: "La oss dykke ned i et eksempel"
+
+- id: "showcase_description"
+  translation: "Dette er et høytytende tema for den statiske nettstedgeneratoren Hugo."
+
+- id: "showcase_button"
+  translation: "Kontakt"
+
+- id: "showcase_image_alt"
+  translation: "Et bilde av Cool Name"
+
+## Homepage about
+- id: "about_title"
+  translation: "Hvem er jeg?"
+
+- id: "about_content"
+  translation: "Her kan du legge til litt informasjon om deg selv."
+
+- id: "about_button"
+  translation: "Om meg"
+
+## Homepage education
+- id: "education_title"
+  translation: "Utdanning"
+
+## Homepage experience
+- id: "experience_button"
+  translation: "LinkedIn"
+
+- id: "experience_button_url"
+  translation: "https://www.linkedin.com/in/adrianmoreno/"
+
+- id: "experience_button2"
+  translation: "Last ned CV"
+
+- id: "experience_button2_url"
+  translation: "/img/general/user-smile-fill.svg"
+
+- id: "experience_button3"
+  translation: "Vis alle"
+
+- id: "experience_button3_url"
+  translation: "/experience"
+
+## Homepage client & work
+- id: "client_work_title"
+  translation: "Klienter & Arbeid"
+
+## Homepage newsletter
+- id: "newsletter_title"
+  translation: "Nyhetsbrev"
+
+- id: "newsletter_button"
+  translation: "Abonner"
+
+- id: "newsletter_placeholder"
+  translation: "Din e-post"
+
+- id: "newsletter_success_message"
+  translation: "Takk for at du abonnerer på nyhetsbrevet mitt!"
+
+- id: "newsletter_error_message"
+  translation: "Det oppstod en feil. Vennligst prøv igjen."
+
+- id: "newsletter_note"
+  translation: "Vi vil aldri dele e-posten din med andre."
+
+## Homepage testimonials
+- id: "testimonials_title"
+  translation: "Anbefalinger"
+
+## Homepage contact
+- id: "contact_title"
+  translation: "Kontakt"
+
+- id: "contact_button"
+  translation: "Send melding"
+
+- id: "contact_form_name"
+  translation: "Fullt navn"
+
+- id: "contact_form_email"
+  translation: "E-postadresse"
+
+- id: "contact_form_message"
+  translation: "Skriv meldingen din her"
+
+- id: "contact_phone_title"
+  translation: "Telefonnummer"
+
+- id: "contact_phone_number"
+  translation: "Definert i i18n/no.yaml (contact_phone_number)"
+
+- id: "contact_email_title"
+  translation: "E-post"
+
+- id: "contact_email_email"
+  translation: "Definert i i18n/no.yaml (contact_email_email)"
+
+- id: "contact_address_title"
+  translation: "Adresse"
+
+- id: "contact_address_address"
+  translation: "Definert i i18n/no.yaml (contact_address_address)"
+
+## Blog
+- id: "read_more"
+  translation: "Les mer"
+
+- id: "published_on"
+  translation: "Publisert den "
+
+- id: "continue_reading"
+  translation: "Fortsett å lese"
+
+## 404 Page
+- id: "404_title"
+  translation: "Side ikke funnet"
+- id: "404_description"
+  translation: "Beklager, men siden du lette etter ble ikke funnet."
+- id: "404_button"
+  translation: "Tilbake til startsiden"
+
+## Related Posts
+- id: "related_posts"
+  translation: "Relaterte innlegg"
+
+## Social Sharing
+- id: "share_this_post"
+  translation: "Del dette innlegget"
+- id: "share_on_twitter"
+  translation: "Del på Twitter"
+- id: "share_on_linkedin"
+  translation: "Del på LinkedIn"
+- id: "share_on_facebook"
+  translation: "Del på Facebook"
+- id: "share_via_email"
+  translation: "Del via e-post"
+- id: "share_twitter_label"
+  translation: "Twitter"
+- id: "share_linkedin_label"
+  translation: "LinkedIn"
+- id: "share_facebook_label"
+  translation: "Facebook"
+- id: "share_email_label"
+  translation: "E-post"
+
+## Table of Contents
+- id: "table_of_contents"
+  translation: "Innholdsfortegnelse"
+
+## Comments
+- id: "comments"
+  translation: "Kommentarer"
+
+## Reading time and metadata
+- id: "min_read"
+  translation: "min lesetid"
+- id: "last_updated"
+  translation: "Oppdatert"
+
+## Taxonomy
+- id: "categories"
+  translation: "Kategorier"
+- id: "recent_posts"
+  translation: "Nyeste innlegg"

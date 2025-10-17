@@ -1,0 +1,224 @@
+## Meta tags
+- id: "meta_title"
+  translation: "Adritian - un tema Hugo ad alte prestazioni di Adrián Moreno"
+- id: "meta_description"
+  translation: "Questo tema Hugo (Adritian) è basato su Bootstrap e ha caratteristiche che lo rendono adatto per un sito web personale, un portfolio o altri tipi di Single Page Application."
+- id: "meta_keywords"
+  translation: "hugo, tema, bootstrap, adritian, adrian moreno, sito web personale, portfolio, single page application"
+- id: "meta_author"
+  translation: "Adrián Moreno Peña"
+- id: "meta_image"
+  translation: "/img/general/og-image.jpg"
+
+## Header
+- id: "logo_alt"
+  translation: "Logo Adritian"
+
+- id: "logo_text1"
+  translation: "Adritian"
+
+- id: "logo_text2"
+  translation: "Demo"
+
+## General
+- id: "skipToMainContent"
+  translation: "Vai al contenuto principale"
+
+- id: "toggle_navigation"
+  translation: "Attiva/disattiva navigazione"
+
+## Footer
+- id: "footer_notice"
+  translation: "© Adritian. Tema Hugo gratuito di Adrián Moreno Peña."
+
+- id: "language"
+  translation: "Lingua"
+
+- id: "toggle_theme"
+  translation: "Cambia tema"
+
+- id: "theme_light"
+  translation: "☀️ Chiaro"
+- id: "theme_dark"
+  translation: "🌑 Scuro"
+- id: "theme_auto"
+  translation: "✨ Auto"
+
+## Homepage head title
+- id: "head_title"
+  translation: "Sito demo per Adritian - un tema Hugo ad alte prestazioni di Adrián Moreno"
+
+- id: "head_description"
+  translation: "Questo tema Hugo (Adritian) è basato su Bootstrap e ha caratteristiche che lo rendono adatto per un sito web personale, un portfolio o altri tipi di Single Page Application."
+
+## Homepage showcase
+- id: "showcase_title"
+  translation: "Benvenuto alla demo"
+
+- id: "showcase_subtitle"
+  translation: "Immergiamoci in un esempio"
+
+- id: "showcase_description"
+  translation: "Questo è un tema ad alte prestazioni per il generatore di siti web statici Hugo."
+
+- id: "showcase_button"
+  translation: "Contatto"
+
+- id: "showcase_image_alt"
+  translation: "Un'immagine di Cool Name"
+
+## Homepage about
+- id: "about_title"
+  translation: "Chi sono?"
+
+- id: "about_content"
+  translation: "Qui puoi aggiungere alcune informazioni su di te."
+
+- id: "about_button"
+  translation: "Su di me"
+
+## Homepage education
+- id: "education_title"
+  translation: "Istruzione"
+
+## Homepage experience
+- id: "experience_button"
+  translation: "LinkedIn"
+
+- id: "experience_button_url"
+  translation: "https://www.linkedin.com/in/adrianmoreno/"
+
+- id: "experience_button2"
+  translation: "Scarica curriculum"
+
+- id: "experience_button2_url"
+  translation: "/img/general/user-smile-fill.svg"
+
+- id: "experience_button3"
+  translation: "Visualizza tutto"
+
+- id: "experience_button3_url"
+  translation: "/experience"
+
+## Homepage client & work
+- id: "client_work_title"
+  translation: "Clienti & Lavoro"
+
+## Homepage newsletter
+- id: "newsletter_title"
+  translation: "Newsletter"
+
+- id: "newsletter_button"
+  translation: "Iscriviti"
+
+- id: "newsletter_placeholder"
+  translation: "La tua email"
+
+- id: "newsletter_success_message"
+  translation: "Grazie per esserti iscritto alla mia newsletter!"
+
+- id: "newsletter_error_message"
+  translation: "Si è verificato un errore. Riprova."
+
+- id: "newsletter_note"
+  translation: "Non condivideremo mai la tua email con altri."
+
+## Homepage testimonials
+- id: "testimonials_title"
+  translation: "Testimonianze"
+
+## Homepage contact
+- id: "contact_title"
+  translation: "Contatto"
+
+- id: "contact_button"
+  translation: "Invia messaggio"
+
+- id: "contact_form_name"
+  translation: "Nome completo"
+
+- id: "contact_form_email"
+  translation: "Indirizzo email"
+
+- id: "contact_form_message"
+  translation: "Digita qui il tuo messaggio"
+
+- id: "contact_phone_title"
+  translation: "Numero di telefono"
+
+- id: "contact_phone_number"
+  translation: "Definito in i18n/it.yaml (contact_phone_number)"
+
+- id: "contact_email_title"
+  translation: "Email"
+
+- id: "contact_email_email"
+  translation: "Definito in i18n/it.yaml (contact_email_email)"
+
+- id: "contact_address_title"
+  translation: "Indirizzo"
+
+- id: "contact_address_address"
+  translation: "Definito in i18n/it.yaml (contact_address_address)"
+
+## Blog
+- id: "read_more"
+  translation: "Leggi di più"
+
+- id: "published_on"
+  translation: "Pubblicato il "
+
+- id: "continue_reading"
+  translation: "Continua a leggere"
+
+## 404 Page
+- id: "404_title"
+  translation: "Pagina non trovata"
+- id: "404_description"
+  translation: "Spiacenti, ma la pagina che stavi cercando non è stata trovata."
+- id: "404_button"
+  translation: "Torna alla homepage"
+
+## Related Posts
+- id: "related_posts"
+  translation: "Articoli correlati"
+
+## Social Sharing
+- id: "share_this_post"
+  translation: "Condividi questo articolo"
+- id: "share_on_twitter"
+  translation: "Condividi su Twitter"
+- id: "share_on_linkedin"
+  translation: "Condividi su LinkedIn"
+- id: "share_on_facebook"
+  translation: "Condividi su Facebook"
+- id: "share_via_email"
+  translation: "Condividi via email"
+- id: "share_twitter_label"
+  translation: "Twitter"
+- id: "share_linkedin_label"
+  translation: "LinkedIn"
+- id: "share_facebook_label"
+  translation: "Facebook"
+- id: "share_email_label"
+  translation: "Email"
+
+## Table of Contents
+- id: "table_of_contents"
+  translation: "Indice"
+
+## Comments
+- id: "comments"
+  translation: "Commenti"
+
+## Reading time and metadata
+- id: "min_read"
+  translation: "min di lettura"
+- id: "last_updated"
+  translation: "Aggiornato"
+
+## Taxonomy
+- id: "categories"
+  translation: "Categorie"
+- id: "recent_posts"
+  translation: "Articoli recenti"

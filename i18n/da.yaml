@@ -1,0 +1,224 @@
+## Meta tags
+- id: "meta_title"
+  translation: "Adritian - et kraftfuldt Hugo-tema af Adrián Moreno"
+- id: "meta_description"
+  translation: "Dette Hugo-tema (Adritian) er baseret på Bootstrap og har funktioner, der gør det egnet til et personligt website, en portefølje eller andre typer Single Page-applikationer."
+- id: "meta_keywords"
+  translation: "hugo, tema, bootstrap, adritian, adrian moreno, personligt website, portefølje, single page-applikation"
+- id: "meta_author"
+  translation: "Adrián Moreno Peña"
+- id: "meta_image"
+  translation: "/img/general/og-image.jpg"
+
+## Header
+- id: "logo_alt"
+  translation: "Adritian-logo"
+
+- id: "logo_text1"
+  translation: "Adritian"
+
+- id: "logo_text2"
+  translation: "Demo"
+
+## General
+- id: "skipToMainContent"
+  translation: "Gå til hovedindhold"
+
+- id: "toggle_navigation"
+  translation: "Skift navigation"
+
+## Footer
+- id: "footer_notice"
+  translation: "© Adritian. Gratis Hugo-tema af Adrián Moreno Peña."
+
+- id: "language"
+  translation: "Sprog"
+
+- id: "toggle_theme"
+  translation: "Skift tema"
+
+- id: "theme_light"
+  translation: "☀️ Lys"
+- id: "theme_dark"
+  translation: "🌑 Mørk"
+- id: "theme_auto"
+  translation: "✨ Auto"
+
+## Homepage head title
+- id: "head_title"
+  translation: "Demosite for Adritian - et kraftfuldt Hugo-tema af Adrián Moreno"
+
+- id: "head_description"
+  translation: "Dette Hugo-tema (Adritian) er baseret på Bootstrap og har funktioner, der gør det egnet til et personligt website, en portefølje eller andre typer Single Page-applikationer."
+
+## Homepage showcase
+- id: "showcase_title"
+  translation: "Velkommen til demoen"
+
+- id: "showcase_subtitle"
+  translation: "Lad os dykke ned i et eksempel"
+
+- id: "showcase_description"
+  translation: "Dette er et kraftfuldt tema til den statiske website-generator Hugo."
+
+- id: "showcase_button"
+  translation: "Kontakt"
+
+- id: "showcase_image_alt"
+  translation: "Et billede af Cool Name"
+
+## Homepage about
+- id: "about_title"
+  translation: "Hvem er jeg?"
+
+- id: "about_content"
+  translation: "Her kan du tilføje noget information om dig selv."
+
+- id: "about_button"
+  translation: "Om mig"
+
+## Homepage education
+- id: "education_title"
+  translation: "Uddannelse"
+
+## Homepage experience
+- id: "experience_button"
+  translation: "LinkedIn"
+
+- id: "experience_button_url"
+  translation: "https://www.linkedin.com/in/adrianmoreno/"
+
+- id: "experience_button2"
+  translation: "Download CV"
+
+- id: "experience_button2_url"
+  translation: "/img/general/user-smile-fill.svg"
+
+- id: "experience_button3"
+  translation: "Vis alle"
+
+- id: "experience_button3_url"
+  translation: "/experience"
+
+## Homepage client & work
+- id: "client_work_title"
+  translation: "Klienter & Arbejde"
+
+## Homepage newsletter
+- id: "newsletter_title"
+  translation: "Nyhedsbrev"
+
+- id: "newsletter_button"
+  translation: "Abonner"
+
+- id: "newsletter_placeholder"
+  translation: "Din e-mail"
+
+- id: "newsletter_success_message"
+  translation: "Tak for at abonnere på mit nyhedsbrev!"
+
+- id: "newsletter_error_message"
+  translation: "Der opstod en fejl. Prøv venligst igen."
+
+- id: "newsletter_note"
+  translation: "Vi deler aldrig din e-mail med andre."
+
+## Homepage testimonials
+- id: "testimonials_title"
+  translation: "Anbefalinger"
+
+## Homepage contact
+- id: "contact_title"
+  translation: "Kontakt"
+
+- id: "contact_button"
+  translation: "Send besked"
+
+- id: "contact_form_name"
+  translation: "Fulde navn"
+
+- id: "contact_form_email"
+  translation: "E-mailadresse"
+
+- id: "contact_form_message"
+  translation: "Skriv din besked her"
+
+- id: "contact_phone_title"
+  translation: "Telefonnummer"
+
+- id: "contact_phone_number"
+  translation: "Defineret i i18n/da.yaml (contact_phone_number)"
+
+- id: "contact_email_title"
+  translation: "E-mail"
+
+- id: "contact_email_email"
+  translation: "Defineret i i18n/da.yaml (contact_email_email)"
+
+- id: "contact_address_title"
+  translation: "Adresse"
+
+- id: "contact_address_address"
+  translation: "Defineret i i18n/da.yaml (contact_address_address)"
+
+## Blog
+- id: "read_more"
+  translation: "Læs mere"
+
+- id: "published_on"
+  translation: "Udgivet den "
+
+- id: "continue_reading"
+  translation: "Fortsæt med at læse"
+
+## 404 Page
+- id: "404_title"
+  translation: "Side ikke fundet"
+- id: "404_description"
+  translation: "Beklager, men siden du ledte efter kunne ikke findes."
+- id: "404_button"
+  translation: "Tilbage til forsiden"
+
+## Related Posts
+- id: "related_posts"
+  translation: "Relaterede indlæg"
+
+## Social Sharing
+- id: "share_this_post"
+  translation: "Del dette indlæg"
+- id: "share_on_twitter"
+  translation: "Del på Twitter"
+- id: "share_on_linkedin"
+  translation: "Del på LinkedIn"
+- id: "share_on_facebook"
+  translation: "Del på Facebook"
+- id: "share_via_email"
+  translation: "Del via e-mail"
+- id: "share_twitter_label"
+  translation: "Twitter"
+- id: "share_linkedin_label"
+  translation: "LinkedIn"
+- id: "share_facebook_label"
+  translation: "Facebook"
+- id: "share_email_label"
+  translation: "E-mail"
+
+## Table of Contents
+- id: "table_of_contents"
+  translation: "Indholdsfortegnelse"
+
+## Comments
+- id: "comments"
+  translation: "Kommentarer"
+
+## Reading time and metadata
+- id: "min_read"
+  translation: "min. læsetid"
+- id: "last_updated"
+  translation: "Opdateret"
+
+## Taxonomy
+- id: "categories"
+  translation: "Kategorier"
+- id: "recent_posts"
+  translation: "Seneste indlæg"

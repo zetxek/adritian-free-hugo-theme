@@ -1,0 +1,224 @@
+## Meta tags
+- id: "meta_title"
+  translation: "Adritian - een krachtig Hugo-thema door Adrián Moreno"
+- id: "meta_description"
+  translation: "Dit Hugo-thema (Adritian) is gebaseerd op Bootstrap en heeft functies die het geschikt maken voor een persoonlijke website, een portfolio of andere soorten Single Page-applicaties."
+- id: "meta_keywords"
+  translation: "hugo, thema, bootstrap, adritian, adrian moreno, persoonlijke website, portfolio, single page-applicatie"
+- id: "meta_author"
+  translation: "Adrián Moreno Peña"
+- id: "meta_image"
+  translation: "/img/general/og-image.jpg"
+
+## Header
+- id: "logo_alt"
+  translation: "Adritian-logo"
+
+- id: "logo_text1"
+  translation: "Adritian"
+
+- id: "logo_text2"
+  translation: "Demo"
+
+## General
+- id: "skipToMainContent"
+  translation: "Ga naar hoofdinhoud"
+
+- id: "toggle_navigation"
+  translation: "Navigatie in-/uitschakelen"
+
+## Footer
+- id: "footer_notice"
+  translation: "© Adritian. Gratis Hugo-thema door Adrián Moreno Peña."
+
+- id: "language"
+  translation: "Taal"
+
+- id: "toggle_theme"
+  translation: "Thema wijzigen"
+
+- id: "theme_light"
+  translation: "☀️ Licht"
+- id: "theme_dark"
+  translation: "🌑 Donker"
+- id: "theme_auto"
+  translation: "✨ Auto"
+
+## Homepage head title
+- id: "head_title"
+  translation: "Demosite voor Adritian - een krachtig Hugo-thema door Adrián Moreno"
+
+- id: "head_description"
+  translation: "Dit Hugo-thema (Adritian) is gebaseerd op Bootstrap en heeft functies die het geschikt maken voor een persoonlijke website, een portfolio of andere soorten Single Page-applicaties."
+
+## Homepage showcase
+- id: "showcase_title"
+  translation: "Welkom bij de demo"
+
+- id: "showcase_subtitle"
+  translation: "Laten we een voorbeeld bekijken"
+
+- id: "showcase_description"
+  translation: "Dit is een krachtig thema voor de statische website-generator Hugo."
+
+- id: "showcase_button"
+  translation: "Contact"
+
+- id: "showcase_image_alt"
+  translation: "Een foto van Cool Name"
+
+## Homepage about
+- id: "about_title"
+  translation: "Wie ben ik?"
+
+- id: "about_content"
+  translation: "Hier kunt u wat informatie over uzelf toevoegen."
+
+- id: "about_button"
+  translation: "Over mij"
+
+## Homepage education
+- id: "education_title"
+  translation: "Opleiding"
+
+## Homepage experience
+- id: "experience_button"
+  translation: "LinkedIn"
+
+- id: "experience_button_url"
+  translation: "https://www.linkedin.com/in/adrianmoreno/"
+
+- id: "experience_button2"
+  translation: "CV downloaden"
+
+- id: "experience_button2_url"
+  translation: "/img/general/user-smile-fill.svg"
+
+- id: "experience_button3"
+  translation: "Alles bekijken"
+
+- id: "experience_button3_url"
+  translation: "/experience"
+
+## Homepage client & work
+- id: "client_work_title"
+  translation: "Klanten & Werk"
+
+## Homepage newsletter
+- id: "newsletter_title"
+  translation: "Nieuwsbrief"
+
+- id: "newsletter_button"
+  translation: "Abonneren"
+
+- id: "newsletter_placeholder"
+  translation: "Uw e-mail"
+
+- id: "newsletter_success_message"
+  translation: "Bedankt voor het abonneren op mijn nieuwsbrief!"
+
+- id: "newsletter_error_message"
+  translation: "Er is een fout opgetreden. Probeer het opnieuw."
+
+- id: "newsletter_note"
+  translation: "We zullen uw e-mail nooit met anderen delen."
+
+## Homepage testimonials
+- id: "testimonials_title"
+  translation: "Getuigenissen"
+
+## Homepage contact
+- id: "contact_title"
+  translation: "Contact"
+
+- id: "contact_button"
+  translation: "Bericht verzenden"
+
+- id: "contact_form_name"
+  translation: "Volledige naam"
+
+- id: "contact_form_email"
+  translation: "E-mailadres"
+
+- id: "contact_form_message"
+  translation: "Typ hier uw bericht"
+
+- id: "contact_phone_title"
+  translation: "Telefoonnummer"
+
+- id: "contact_phone_number"
+  translation: "Gedefinieerd in i18n/nl.yaml (contact_phone_number)"
+
+- id: "contact_email_title"
+  translation: "E-mail"
+
+- id: "contact_email_email"
+  translation: "Gedefinieerd in i18n/nl.yaml (contact_email_email)"
+
+- id: "contact_address_title"
+  translation: "Adres"
+
+- id: "contact_address_address"
+  translation: "Gedefinieerd in i18n/nl.yaml (contact_address_address)"
+
+## Blog
+- id: "read_more"
+  translation: "Lees meer"
+
+- id: "published_on"
+  translation: "Gepubliceerd op "
+
+- id: "continue_reading"
+  translation: "Doorgaan met lezen"
+
+## 404 Page
+- id: "404_title"
+  translation: "Pagina niet gevonden"
+- id: "404_description"
+  translation: "Sorry, maar de pagina die u zocht kon niet worden gevonden."
+- id: "404_button"
+  translation: "Terug naar startpagina"
+
+## Related Posts
+- id: "related_posts"
+  translation: "Gerelateerde berichten"
+
+## Social Sharing
+- id: "share_this_post"
+  translation: "Dit bericht delen"
+- id: "share_on_twitter"
+  translation: "Delen op Twitter"
+- id: "share_on_linkedin"
+  translation: "Delen op LinkedIn"
+- id: "share_on_facebook"
+  translation: "Delen op Facebook"
+- id: "share_via_email"
+  translation: "Delen via e-mail"
+- id: "share_twitter_label"
+  translation: "Twitter"
+- id: "share_linkedin_label"
+  translation: "LinkedIn"
+- id: "share_facebook_label"
+  translation: "Facebook"
+- id: "share_email_label"
+  translation: "E-mail"
+
+## Table of Contents
+- id: "table_of_contents"
+  translation: "Inhoudsopgave"
+
+## Comments
+- id: "comments"
+  translation: "Reacties"
+
+## Reading time and metadata
+- id: "min_read"
+  translation: "min. leestijd"
+- id: "last_updated"
+  translation: "Bijgewerkt"
+
+## Taxonomy
+- id: "categories"
+  translation: "Categorieën"
+- id: "recent_posts"
+  translation: "Recente berichten"
