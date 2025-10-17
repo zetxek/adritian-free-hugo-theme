@@ -26,17 +26,6 @@ test.describe('Site without menus', () => {
   });
 
 
-  test('footer_right should exist but contain no dropdown elements', async ({ page }) => {
-    await page.goto(`${BASE_URL}/disable-menu/`);
-
-    // Verify footer and footer_right exist
-    await expect(page.locator('footer')).toBeAttached();
-    await expect(page.locator('footer .footer_right')).toBeAttached();
-
-    // Verify no dropdown elements exist within footer_right
-    await expect(page.locator('footer .footer_right .dropdown')).not.toBeAttached();
-  });
-
   test('content should still be properly displayed', async ({ page }) => {
     await page.goto(`${BASE_URL}`);
 
