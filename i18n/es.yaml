@@ -68,3 +68,48 @@
   translation: "Lo sentimos, pero la página que buscabas no pudo ser encontrada."
 - id: "404_button"
   translation: "Volver al inicio"
+
+## Related Posts
+- id: "related_posts"
+  translation: "Publicaciones relacionadas"
+
+## Social Sharing
+- id: "share_this_post"
+  translation: "Compartir esta publicación"
+- id: "share_on_twitter"
+  translation: "Compartir en Twitter"
+- id: "share_on_linkedin"
+  translation: "Compartir en LinkedIn"
+- id: "share_on_facebook"
+  translation: "Compartir en Facebook"
+- id: "share_via_email"
+  translation: "Compartir por correo electrónico"
+- id: "share_twitter_label"
+  translation: "Twitter"
+- id: "share_linkedin_label"
+  translation: "LinkedIn"
+- id: "share_facebook_label"
+  translation: "Facebook"
+- id: "share_email_label"
+  translation: "Correo"
+
+## Table of Contents
+- id: "table_of_contents"
+  translation: "Tabla de contenidos"
+
+## Comments
+- id: "comments"
+  translation: "Comentarios"
+
+## Reading time and metadata
+- id: "min_read"
+  translation: "min de lectura"
+- id: "last_updated"
+  translation: "Actualizado"
+
+## Taxonomy
+- id: "categories"
+  translation: "Categorías"
+- id: "recent_posts"
+  translation: "Publicaciones recientes"
+

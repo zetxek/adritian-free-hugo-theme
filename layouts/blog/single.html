@@ -10,6 +10,16 @@
           <h4 id="date">{{ .Date.Format "Mon Jan 2, 2006" }}</h4>
           ·
           <h4 id="wordcount">{{ .WordCount }} Words</h4>
+          {{ $readingTime := div .WordCount 200 }}
+          {{ if lt $readingTime 1 }}
+            {{ $readingTime = 1 }}
+          {{ end }}
+          ·
+          <h4 id="reading-time">{{ $readingTime }} {{ i18n "min_read" | default "min read" }}</h4>
+          {{ if .Params.lastmod }}
+          ·
+          <h4 id="last-modified">{{ i18n "last_updated" | default "Updated" }}: {{ .Lastmod.Format "Jan 2, 2006" }}</h4>
+          {{ end }}
         </section>
         {{ with .GetTerms "topics" }}
         <ul id="topics">
@@ -27,9 +37,15 @@
       </div>
     </aside>
 
+    {{ partial "toc.html" . }}
+
     <div class="row flex-column-reverse flex-md-row rad-fade-down">
       <div class="col-12">{{ .Content | safeHTML }}</div>
     </div>
+
+    {{ partial "social-sharing.html" . }}
+
+    {{ partial "related-posts.html" . }}
 
     <aside class="content-browser light-border-top">
       {{ i18n "continue_reading" }}
@@ -43,6 +59,8 @@
         {{ end }}
       </div>
     </aside>
+
+    {{ partial "comments.html" . }}
   </div>
 </section>
 {{ end }}

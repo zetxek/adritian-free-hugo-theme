@@ -4,6 +4,20 @@
     extended = true
     min = "0.92.0"
 
+# Related content configuration
+[related]
+  includeNewer = true
+  threshold = 80
+  toLower = false
+  
+  [[related.indices]]
+    name = "tags"
+    weight = 100
+  
+  [[related.indices]]
+    name = "date"
+    weight = 10
+
 # Performance optimizations
 [markup]
   [markup.goldmark]

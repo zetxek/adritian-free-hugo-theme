@@ -18,6 +18,12 @@ A modern, fast and extensible Hugo theme for personal websites and professional 
 - 🔧 Technical Skills showcase with visual skill bars and categories
 - ⚡ Vercel-ready with Analytics & Speed Insights support
 - 🖼️ Menus with icon support
+- 🔗 **Related posts** - Automatically display related content based on tags
+- 📤 **Social sharing buttons** - Built-in sharing for Twitter/X, LinkedIn, Facebook, and Email
+- 📑 **Table of Contents** - Auto-generated, sticky TOC for blog posts
+- 💬 **Comments integration** - Support for Disqus, Giscus, and Utterances
+- ⏱️ **Reading time display** - Estimated reading time for blog posts
+- 🏷️ **Enhanced taxonomy support** - Improved tags and categories display
 
 The theme focuses on accessibility, high performance, and usability (it's very easy to get started). It's extendable by adding your own styles or content types, and it has a solid foundation on which to build.
 
@@ -207,6 +213,71 @@ listStyle = "summary"        # options: simple, summary
 - `showRecentPosts`: Display recent posts in the sidebar
 - `recentPostCount`: Number of recent posts to show in the sidebar
 - `listStyle`: Choose between `simple` (title and date only) or `summary` (includes excerpt)
+
+##### Blog Post Features
+
+**Related Posts**
+
+The theme automatically shows related posts at the end of each blog post based on shared tags and publish dates. This is powered by Hugo's built-in related content feature.
+
+**Table of Contents**
+
+Enable a table of contents for any blog post by adding these parameters to your post's frontmatter:
+
+```yaml
+---
+toc: true
+tocSticky: true  # optional, makes TOC sticky on desktop
+---
+```
+
+The TOC automatically generates from your post headings and only appears when the post has more than 400 words.
+
+**Social Sharing**
+
+Social sharing buttons are enabled by default for all blog posts. You can customize which platforms appear in your `hugo.toml`:
+
+```toml
+[params.sharing]
+  enabled = true
+  twitter = true
+  linkedin = true
+  facebook = true
+  email = true
+```
+
+**Comments**
+
+The theme supports popular comment systems. Configure in your `hugo.toml`:
+
+```toml
+[params.comments]
+  enabled = true
+  provider = "giscus"  # options: "disqus", "giscus", "utterances"
+  
+  # For Giscus (GitHub Discussions)
+  [params.comments.giscus]
+    repo = "username/repo"
+    repoId = "your-repo-id"
+    category = "General"
+    categoryId = "your-category-id"
+  
+  # For Utterances (GitHub Issues)
+  [params.comments.utterances]
+    repo = "username/repo"
+    issueTerm = "pathname"
+    theme = "preferred-color-scheme"
+```
+
+For Disqus, set your `disqusShortname` in the site configuration.
+
+**Reading Time & Metadata**
+
+Blog posts automatically display:
+- Estimated reading time
+- Word count
+- Publication date
+- Last modified date (if `lastmod` is set in frontmatter)
 
 #### (Job) Experience
 

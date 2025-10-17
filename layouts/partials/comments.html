@@ -1,0 +1,45 @@
+{{ if .Site.Params.comments.enabled }}
+<aside class="comments-section light-border-top">
+  <h3>{{ i18n "comments" | default "Comments" }}</h3>
+  
+  {{ if eq .Site.Params.comments.provider "disqus" }}
+    {{ if .Site.DisqusShortname }}
+      {{ template "_internal/disqus.html" . }}
+    {{ end }}
+  {{ end }}
+  
+  {{ if eq .Site.Params.comments.provider "giscus" }}
+    {{ with .Site.Params.comments.giscus }}
+    <script src="https://giscus.app/client.js"
+            data-repo="{{ .repo }}"
+            data-repo-id="{{ .repoId }}"
+            data-category="{{ .category }}"
+            data-category-id="{{ .categoryId }}"
+            data-mapping="{{ .mapping | default "pathname" }}"
+            data-strict="{{ .strict | default "0" }}"
+            data-reactions-enabled="{{ .reactionsEnabled | default "1" }}"
+            data-emit-metadata="{{ .emitMetadata | default "0" }}"
+            data-input-position="{{ .inputPosition | default "bottom" }}"
+            data-theme="{{ .theme | default "preferred_color_scheme" }}"
+            data-lang="{{ .lang | default "en" }}"
+            data-loading="{{ .loading | default "lazy" }}"
+            crossorigin="anonymous"
+            async>
+    </script>
+    {{ end }}
+  {{ end }}
+  
+  {{ if eq .Site.Params.comments.provider "utterances" }}
+    {{ with .Site.Params.comments.utterances }}
+    <script src="https://utteranc.es/client.js"
+            repo="{{ .repo }}"
+            issue-term="{{ .issueTerm | default "pathname" }}"
+            label="{{ .label }}"
+            theme="{{ .theme | default "preferred-color-scheme" }}"
+            crossorigin="anonymous"
+            async>
+    </script>
+    {{ end }}
+  {{ end }}
+</aside>
+{{ end }}

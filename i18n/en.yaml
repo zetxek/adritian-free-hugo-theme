@@ -219,3 +219,47 @@
 - id: "404_button"
   translation: "Back to homepage"
 
+## Related Posts
+- id: "related_posts"
+  translation: "Related Posts"
+
+## Social Sharing
+- id: "share_this_post"
+  translation: "Share this post"
+- id: "share_on_twitter"
+  translation: "Share on Twitter"
+- id: "share_on_linkedin"
+  translation: "Share on LinkedIn"
+- id: "share_on_facebook"
+  translation: "Share on Facebook"
+- id: "share_via_email"
+  translation: "Share via Email"
+- id: "share_twitter_label"
+  translation: "Twitter"
+- id: "share_linkedin_label"
+  translation: "LinkedIn"
+- id: "share_facebook_label"
+  translation: "Facebook"
+- id: "share_email_label"
+  translation: "Email"
+
+## Table of Contents
+- id: "table_of_contents"
+  translation: "Table of Contents"
+
+## Comments
+- id: "comments"
+  translation: "Comments"
+
+## Reading time and metadata
+- id: "min_read"
+  translation: "min read"
+- id: "last_updated"
+  translation: "Updated"
+
+## Taxonomy
+- id: "categories"
+  translation: "Categories"
+- id: "recent_posts"
+  translation: "Recent Posts"
+

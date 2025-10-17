@@ -1,0 +1,10 @@
+{{ if and .Params.toc (gt .WordCount 400) }}
+{{ if .TableOfContents }}
+<aside class="table-of-contents {{ if .Params.tocSticky }}toc-sticky{{ end }}">
+  <h3>{{ i18n "table_of_contents" | default "Table of Contents" }}</h3>
+  <nav id="TableOfContents">
+    {{ .TableOfContents }}
+  </nav>
+</aside>
+{{ end }}
+{{ end }}

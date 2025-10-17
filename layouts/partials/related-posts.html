@@ -1,0 +1,30 @@
+{{ $related := .Site.RegularPages.Related . | first 3 }}
+{{ with $related }}
+<aside class="related-posts light-border-top">
+  <h3>{{ i18n "related_posts" | default "Related Posts" }}</h3>
+  <ul class="related-posts-list">
+    {{ range . }}
+    <li class="related-post-item">
+      <a href="{{ .RelPermalink }}">
+        <h4>{{ .Title }}</h4>
+        {{ with .Description }}
+        <p class="related-post-excerpt">{{ . }}</p>
+        {{ else }}
+        <p class="related-post-excerpt">{{ .Summary | truncate 120 }}</p>
+        {{ end }}
+        <div class="related-post-meta">
+          <span class="post-date">{{ .Date.Format "Jan 2, 2006" }}</span>
+          {{ with .GetTerms "tags" }}
+          <span class="post-tags">
+            {{ range first 2 . }}
+            <span class="tag">{{ .LinkTitle }}</span>
+            {{ end }}
+          </span>
+          {{ end }}
+        </div>
+      </a>
+    </li>
+    {{ end }}
+  </ul>
+</aside>
+{{ end }}
