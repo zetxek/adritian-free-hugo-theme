@@ -8,6 +8,7 @@
     "test": "npm-run-all build --parallel --continue-on-error --aggregate-output test-*",
     "test:e2e": "export TEST_NO_MENUS=false; playwright test",
     "test:e2e:no-menus": "export TEST_NO_MENUS=true; playwright test",
+    "test:e2e:new-features": "playwright test tests/e2e/new-features.spec.ts",
     "test:e2e:ui": "playwright test --ui",
     "test:e2e:debug": "playwright test --debug"
   },

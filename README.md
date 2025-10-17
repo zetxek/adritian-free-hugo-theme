@@ -336,6 +336,41 @@ This theme is a version of the one found on my website [adrianmoreno.info](https
 
 If you have improvements for the theme, you are very welcome to make a PR if you are able 💕. Otherwise - see below for how to get help (and maybe help others with the same problem).
 
+## Testing
+
+The theme includes comprehensive E2E tests using Playwright to ensure all features work correctly.
+
+### Running Tests
+
+```bash
+# Run all tests
+npm test
+
+# Run E2E tests only
+npm run test:e2e
+
+# Run new features tests specifically
+npm run test:e2e:new-features
+
+# Run tests in UI mode (interactive)
+npm run test:e2e:ui
+```
+
+### Test Coverage
+
+The test suite includes **27 comprehensive tests** for the new blog features:
+- Related Posts functionality
+- Social Sharing buttons (Twitter, LinkedIn, Facebook, Email)
+- Table of Contents generation and navigation
+- Enhanced reading metadata (reading time, word count, dates)
+- Dark mode compatibility
+- Responsive design
+- Accessibility features
+- Multilingual support
+- Performance validation
+
+See `tests/README.md` for detailed testing documentation.
+
 ### Common issues 
 
 - The site fails to build. Look for the last line of the stacktrace - if you find mentions to missing files, such as in
