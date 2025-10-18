@@ -6,18 +6,17 @@
     <aside id="meta" class="light-border-bottom">
       <div>
         <section>
-          {{ i18n "published_on" }}
-          <h4 id="date">{{ .Date.Format "Mon Jan 2, 2006" }}</h4>
+          {{ i18n "published_on" }}&nbsp;<h4 id="date">{{ .Date.Format "Mon Jan 2, 2006" }}</h4>
           ·
           <h4 id="wordcount">{{ .WordCount }} Words</h4>
           {{ $readingTime := div .WordCount 200 }}
           {{ if lt $readingTime 1 }}
             {{ $readingTime = 1 }}
           {{ end }}
-          ·
+          &nbsp;·&nbsp;
           <h4 id="reading-time">{{ $readingTime }} {{ i18n "min_read" | default "min read" }}</h4>
           {{ if .Params.lastmod }}
-          ·
+          &nbsp;·&nbsp;
           <h4 id="last-modified">{{ i18n "last_updated" | default "Updated" }}: {{ .Lastmod.Format "Jan 2, 2006" }}</h4>
           {{ end }}
         </section>
