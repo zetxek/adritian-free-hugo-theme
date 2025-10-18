@@ -1603,7 +1603,7 @@ a.nav-link::after {
 }
 
 // Dark mode support
-[data-bs-theme="dark"] {
+html[data-bs-theme="dark"] {
     .breadcrumbs {
         background: linear-gradient(135deg, rgba(80, 90, 100, 0.95) 0%, rgba(70, 80, 90, 1) 100%);
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.2);
