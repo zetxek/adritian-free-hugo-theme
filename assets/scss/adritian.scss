@@ -495,13 +495,68 @@ footer_links .nav-item .nav-link::after {
   #topics,
   ul.list-taxonomy {
     li a {
-      background-color: #2a2a2a;
-      color: #e0e0e0;
-      border: none;
+      background-color: rgba(255, 255, 255, 0.08);
+      color: #e8e8e8;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 
       &:hover {
-        background-color: #3a3a3a;
+        background-color: rgba(255, 255, 255, 0.15);
         color: #fff;
+        border-color: rgba(255, 255, 255, 0.2);
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4), 0 0 12px rgba(255, 255, 255, 0.1);
+        transform: translateY(-2px);
+      }
+    }
+  }
+
+  // Blog sidebar dark mode improvements
+  .blog-sidebar {
+    .sidebar-section {
+      background: linear-gradient(135deg, rgba(42, 42, 42, 0.6) 0%, rgba(35, 35, 35, 0.7) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.05);
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+
+      h3 {
+        color: #fff;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+        border-bottom: 2px solid rgba(255, 255, 255, 0.15);
+        padding-bottom: 0.5rem;
+      }
+
+      ul.tags li a {
+        background: rgba(255, 255, 255, 0.08);
+        color: #e8e8e8;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        font-weight: 400;
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.15);
+          color: #fff;
+          border-color: rgba(255, 255, 255, 0.2);
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+          text-decoration: none;
+        }
+      }
+
+      &.recent-posts {
+        ul li {
+          a {
+            color: rgba(255, 255, 255, 0.8);
+            
+            &:hover {
+              color: #fff;
+              text-decoration: underline;
+            }
+          }
+
+          .post-date {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.8rem;
+          }
+        }
       }
     }
   }
