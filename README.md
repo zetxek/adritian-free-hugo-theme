@@ -29,6 +29,9 @@ The theme focuses on accessibility, high performance, and usability (it's very e
 
 Some of the best applications for the theme are for minimalistic websites, single-page applications, and personal portfolios. It has a contact form you can customize to your mail address without setting up a backend.
 
+> [!TIP]
+> Do you like the theme? 🌟 Star the repo on GitHub to help make it more visible
+
 ## Live demo & Preview
 
 You can see it live at [www.adrianmoreno.info](https://www.adrianmoreno.info) (my personal website), as well as in these screenshots of the homepage, in the dark and light variations of the theme:
