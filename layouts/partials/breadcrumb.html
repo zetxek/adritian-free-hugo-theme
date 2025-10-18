@@ -1,43 +1,78 @@
 <section id="breadcrumb-bar" class="breadcrumb-bar container">
-    <ul class="breadcrumbs d-print-none">
-        <li class="breadcrum-item"><span><a href="{{ relURL "" }}">Home</a></span></li>
-        {{- $.Scratch.Set "url" "" -}}
-        {{- $taxonomy := .Data.Plural -}}
-        {{- range $index, $element := (split (trim .RelPermalink "/") "/") -}}
-        {{- $.Scratch.Add "url" (print "/" . ) -}}
-        {{- if eq $index 0 -}}
-        {{- if eq . "tags" -}}
-        <li class="breadcrum-item"><span><a href="{{ $.Scratch.Get `url` }}">Tags</a></span></li>
-        {{- else if eq . "categories" -}}
-        <li class="breadcrum-item"><span><a href="{{ $.Scratch.Get `url` }}">Categories</a></span></li>
-        {{- else -}}
-        {{- $section := $.Site.GetPage "section" . -}}
-        {{- if $section -}}
-        <li class="breadcrum-item"><span><a href="{{ $.Scratch.Get `url` }}">{{ $section.Title }}</a></span></li>
-        {{- else -}}
-        <li class="breadcrum-item"><span><a href="{{ $.Scratch.Get `url` }}">{{ humanize . }}</a></span></li>
-        {{- end -}}
-        {{- end -}}
-        {{- else -}}
-        {{- if eq $taxonomy "tags" -}}
-        <li class="breadcrum-item current">{{ humanize . }}</li>
-        {{- else if eq $taxonomy "categories" -}}
-        <li class="breadcrum-item current">{{ humanize . }}</li>
-        {{- else -}}
-        {{- $currentPage := $.Site.GetPage ($.Scratch.Get "url") -}}
-        {{- if $currentPage -}}
-        {{- if $currentPage.IsPage -}}
-        <li class="breadcrum-item current">{{ $currentPage.Title }}</li>
-        {{- else -}}
-        <li class="breadcrum-item not-page"><span><a href="{{ $.Scratch.Get `url` }}">{{ $currentPage.Title
-                    }}</a></span></li>
-        {{- end -}}
-        {{- else -}}
-        <li class="breadcrum-item not-current-page"><span><a href="{{ $.Scratch.Get `url` }}">{{ humanize .
-                    }}</a></span></li>
-        {{- end -}}
-        {{- end -}}
-        {{- end -}}
-        {{- end -}}
-    </ul>
+    <nav aria-label="breadcrumb" class="d-print-none">
+        <ol class="breadcrumbs">
+            <li class="breadcrumb-item">
+                <a href="{{ relURL "" }}" class="breadcrumb-link">
+                    <span class="breadcrumb-icon">🏠</span>
+                    <span class="breadcrumb-text">Home</span>
+                </a>
+            </li>
+            {{- $.Scratch.Set "url" "" -}}
+            {{- $taxonomy := .Data.Plural -}}
+            {{- range $index, $element := (split (trim .RelPermalink "/") "/") -}}
+            {{- $.Scratch.Add "url" (print "/" . ) -}}
+            {{- if eq $index 0 -}}
+            {{- if eq . "tags" -}}
+            <li class="breadcrumb-item">
+                <a href="{{ $.Scratch.Get `url` }}" class="breadcrumb-link">
+                    <span class="breadcrumb-text">Tags</span>
+                </a>
+            </li>
+            {{- else if eq . "categories" -}}
+            <li class="breadcrumb-item">
+                <a href="{{ $.Scratch.Get `url` }}" class="breadcrumb-link">
+                    <span class="breadcrumb-text">Categories</span>
+                </a>
+            </li>
+            {{- else -}}
+            {{- $section := $.Site.GetPage "section" . -}}
+            {{- if $section -}}
+            <li class="breadcrumb-item">
+                <a href="{{ $.Scratch.Get `url` }}" class="breadcrumb-link">
+                    <span class="breadcrumb-text">{{ $section.Title }}</span>
+                </a>
+            </li>
+            {{- else -}}
+            <li class="breadcrumb-item">
+                <a href="{{ $.Scratch.Get `url` }}" class="breadcrumb-link">
+                    <span class="breadcrumb-text">{{ humanize . }}</span>
+                </a>
+            </li>
+            {{- end -}}
+            {{- end -}}
+            {{- else -}}
+            {{- if eq $taxonomy "tags" -}}
+            <li class="breadcrumb-item active" aria-current="page">
+                <span class="breadcrumb-text">{{ humanize . }}</span>
+            </li>
+            {{- else if eq $taxonomy "categories" -}}
+            <li class="breadcrumb-item active" aria-current="page">
+                <span class="breadcrumb-text">{{ humanize . }}</span>
+            </li>
+            {{- else -}}
+            {{- $currentPage := $.Site.GetPage ($.Scratch.Get "url") -}}
+            {{- if $currentPage -}}
+            {{- if $currentPage.IsPage -}}
+            <li class="breadcrumb-item active" aria-current="page">
+                <span class="breadcrumb-text">{{ $currentPage.Title }}</span>
+            </li>
+            {{- else -}}
+            <li class="breadcrumb-item">
+                <a href="{{ $.Scratch.Get `url` }}" class="breadcrumb-link">
+                    <span class="breadcrumb-text">{{ $currentPage.Title }}</span>
+                </a>
+            </li>
+            {{- end -}}
+            {{- else -}}
+            <li class="breadcrumb-item">
+                <a href="{{ $.Scratch.Get `url` }}" class="breadcrumb-link">
+                    <span class="breadcrumb-text">{{ humanize . }}</span>
+                </a>
+            </li>
+            {{- end -}}
+            {{- end -}}
+            {{- end -}}
+            {{- end -}}
+        </ol>
+    </nav>
 </section>
