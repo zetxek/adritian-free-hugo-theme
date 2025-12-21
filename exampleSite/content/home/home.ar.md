@@ -6,9 +6,9 @@ draft = false
 
 {{< showcase-section
     title="قسم العرض"
-    subtitle="عنوان فرعي - من ملف &lt;code&gt;home.md&lt;/code&gt;"
+    subtitle="عنوان فرعي - من ملف <code>home.md</code>"
     buttonText="تواصل"
-    description="نص &lt;strong&gt;عريض&lt;/strong&gt; ونص عادي. هذا المحتوى من ملف &lt;code&gt;home.ar.md&lt;/code&gt;. إذا لم يتم توفيره، يتم استخدام الترجمة الافتراضية من i18n (للتوافق مع الإصدارات الأقدم من 1.7.0)"
+    description="نص <strong>عريض</strong> ونص عادي. هذا المحتوى من ملف <code>home.ar.md</code>. إذا لم يتم توفيره، يتم استخدام الترجمة الافتراضية من i18n (للتوافق مع الإصدارات الأقدم من 1.7.0)"
     imgSrc="images/showcase/showcase.png"
     imgScale="0.5"
     sectionId="قسم-العرض"
@@ -40,7 +40,7 @@ draft = false
 
 {{< about-section
     title="عني"
-    content="باستخدام &lt;code&gt;صيغة HTML&lt;/code&gt;"
+    content="باستخدام <code>صيغة HTML</code>"
     about_button="نص الزر"
     button_icon="info"
     button_text="يمكنك تعديل هذا"
@@ -57,7 +57,7 @@ draft = false
 {{< experience-section
     title="خبرتي المهنية (القسم)"
     intro_title="مقدمة"
-    intro_description="الوصف.&lt;br&gt;يمكنك استخدام HTML، بتنسيق &lt;strong&gt;عريض&lt;/strong&gt;، أو قوائم &lt;ul&gt;&lt;li&gt;واحد&lt;/li&gt;&lt;li&gt;اثنان&lt;/li&gt;&lt;/ul&gt;" 
+    intro_description="الوصف.<br>يمكنك استخدام HTML، بتنسيق <strong>عريض</strong>، أو قوائم <ul><li>واحد</li><li>اثنان</li></ul>" 
     button1_url="https://example.com"
     button1_text="زيارة المثال"
     button1_icon="icon-globe"
