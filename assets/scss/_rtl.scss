@@ -125,6 +125,7 @@
       }
       
       + .breadcrumb-item::before {
+        // Use backslash as RTL separator (mirrored from forward slash)
         content: "\\";
       }
     }
@@ -227,12 +228,12 @@ html[dir="rtl"] {
   // Padding utilities
   .ps-0 {
     padding-right: 0 !important;
-    padding-left: unset !important;
+    padding-left: inherit !important;
   }
   
   .pe-0 {
     padding-left: 0 !important;
-    padding-right: unset !important;
+    padding-right: inherit !important;
   }
   
   // Text utilities
