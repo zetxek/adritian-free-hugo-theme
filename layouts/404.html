@@ -10,75 +10,28 @@
       </div>
     </section>
 
-    {{/* Build translations data by reading i18n files for each language */}}
-    {{- $translations := dict }}
+    {{/* Get available languages for redirect logic */}}
+    {{- $languages := slice }}
     {{- range .Site.Languages }}
-      {{- $lang := .Lang }}
-      {{- $dir := .LanguageDirection | default "ltr" }}
-      {{- $homeUrl := "/" }}
-      {{- if ne $lang "en" }}
-        {{- $homeUrl = printf "/%s/" $lang }}
+      {{- if ne .Lang "en" }}
+        {{- $languages = $languages | append .Lang }}
       {{- end }}
-      
-      {{/* Read and parse the i18n file for this language using os.ReadFile */}}
-      {{- $i18nPath := printf "i18n/%s.yaml" $lang }}
-      {{- $i18nContent := "" }}
-      {{- with os.ReadFile $i18nPath }}
-        {{- $i18nContent = . }}
-      {{- end }}
-      
-      {{/* Extract 404 translations from the i18n data */}}
-      {{- $title := "Page not found" }}
-      {{- $description := "Sorry, but the page you were looking for could not be found." }}
-      {{- $button := "Back to homepage" }}
-      
-      {{- if $i18nContent }}
-        {{- $i18nData := $i18nContent | transform.Unmarshal }}
-        {{- range $i18nData }}
-          {{- if eq .id "404_title" }}
-            {{- $title = .translation }}
-          {{- else if eq .id "404_description" }}
-            {{- $description = .translation }}
-          {{- else if eq .id "404_button" }}
-            {{- $button = .translation }}
-          {{- end }}
-        {{- end }}
-      {{- end }}
-      
-      {{- $langData := dict 
-          "title" $title
-          "description" $description
-          "button" $button
-          "dir" $dir 
-          "homeUrl" $homeUrl 
-      }}
-      {{- $translations = merge $translations (dict $lang $langData) }}
     {{- end }}
 
     <script>
       (function() {
-        // Translations dynamically generated from i18n files
-        const translations = {{ $translations | jsonify | safeJS }};
-
+        // Available non-default languages from Hugo config
+        const languages = {{ $languages | jsonify | safeJS }};
+        
         // Detect language from URL path
         const path = window.location.pathname;
         const pathParts = path.split('/').filter(p => p);
         const firstPart = pathParts[0] || '';
         
-        // Check if first part is a known language code
-        const detectedLang = translations[firstPart] ? firstPart : 'en';
-        const t = translations[detectedLang] || translations['en'];
-
-        // Update page content
-        if (t) {
-          document.getElementById('error-title').textContent = t.title;
-          document.getElementById('error-description').textContent = t.description;
-          document.getElementById('error-button').textContent = t.button;
-          document.getElementById('error-button').href = t.homeUrl;
-
-          // Update document direction for RTL languages
-          document.documentElement.setAttribute('dir', t.dir);
-          document.documentElement.setAttribute('lang', detectedLang);
+        // If URL starts with a known language code and we're not already on the 404.html page,
+        // redirect to the language-specific 404 page for full localization (header, footer, etc.)
+        if (languages.includes(firstPart) && !path.endsWith('/404.html')) {
+          window.location.replace('/' + firstPart + '/404.html');
         }
       })();
     </script>
