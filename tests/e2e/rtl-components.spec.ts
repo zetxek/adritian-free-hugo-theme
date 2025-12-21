@@ -1,17 +1,14 @@
 import { test, expect } from '@playwright/test';
 import {
   getRTLPage,
-  getLTRPage,
   verifyRTLAlignment,
   verifyBorderSide,
   verifyRTLDirection,
   verifyImageMirrored,
 } from '../utils/rtl-helpers';
 
-const BASE_URL = 'http://localhost:1313';
-
 test.describe('RTL Component-Specific Tests', () => {
-  test.beforeEach(async ({ page }) => {
+  test.beforeEach(async () => {
     test.skip(process.env.TEST_NO_MENUS === 'true', 'Skipping test because TEST_NO_MENUS is true');
   });
 
@@ -28,7 +25,6 @@ test.describe('RTL Component-Specific Tests', () => {
     
     // Verify breadcrumb separator positioning
     const firstItem = breadcrumbs.locator('.breadcrumb-item').first();
-    const separator = firstItem.locator('::after');
     // Check that separator margin is on the right side in RTL
     const marginRight = await firstItem.evaluate((el) => {
       const after = window.getComputedStyle(el, '::after');
