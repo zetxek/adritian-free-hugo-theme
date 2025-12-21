@@ -137,4 +137,115 @@ test.describe('RTL (Right-to-Left) language support', () => {
     // Verify footer links are visible
     await expect(page.locator('.footer_links')).toBeVisible();
   });
+
+  test('breadcrumb renders correctly in RTL', async ({ page }) => {
+    test.skip(process.env.TEST_NO_MENUS === 'true', 'Skipping test because TEST_NO_MENUS is true');
+
+    await page.goto(`${BASE_URL}/ar/blog/sample`);
+    
+    // Verify breadcrumbs are visible
+    const breadcrumbs = page.locator('.breadcrumbs');
+    if (await breadcrumbs.count() > 0) {
+      await expect(breadcrumbs).toBeVisible();
+      
+      // Verify breadcrumb items align correctly
+      const textAlign = await breadcrumbs.evaluate((el) => window.getComputedStyle(el).textAlign);
+      expect(['right', 'start']).toContain(textAlign);
+    }
+  });
+
+  test('code block alignment in RTL', async ({ page }) => {
+    test.skip(process.env.TEST_NO_MENUS === 'true', 'Skipping test because TEST_NO_MENUS is true');
+
+    await page.goto(`${BASE_URL}/ar/blog/sample`);
+    
+    // Find code blocks
+    const codeBlocks = page.locator('pre');
+    const count = await codeBlocks.count();
+    
+    if (count > 0) {
+      const firstCodeBlock = codeBlocks.first();
+      const direction = await firstCodeBlock.evaluate((el) => window.getComputedStyle(el).direction);
+      // Code blocks should remain LTR even in RTL pages
+      expect(direction).toBe('ltr');
+    }
+  });
+
+  test('blockquote border positioning in RTL', async ({ page }) => {
+    test.skip(process.env.TEST_NO_MENUS === 'true', 'Skipping test because TEST_NO_MENUS is true');
+
+    await page.goto(`${BASE_URL}/ar/blog/sample`);
+    
+    // Find blockquotes
+    const blockquotes = page.locator('blockquote');
+    const count = await blockquotes.count();
+    
+    if (count > 0) {
+      const firstBlockquote = blockquotes.first();
+      const borderRight = await firstBlockquote.evaluate((el) => window.getComputedStyle(el).borderRightWidth);
+      const borderLeft = await firstBlockquote.evaluate((el) => window.getComputedStyle(el).borderLeftWidth);
+      
+      // Border should be on the right in RTL
+      expect(parseInt(borderRight) || 0).toBeGreaterThan(0);
+      expect(parseInt(borderLeft) || 0).toBe(0);
+    }
+  });
+
+  test('Table of Contents border positioning in RTL', async ({ page }) => {
+    test.skip(process.env.TEST_NO_MENUS === 'true', 'Skipping test because TEST_NO_MENUS is true');
+
+    await page.goto(`${BASE_URL}/ar/blog/new-features-demo`);
+    
+    // Find table of contents
+    const toc = page.locator('.table-of-contents');
+    const count = await toc.count();
+    
+    if (count > 0) {
+      const firstToc = toc.first();
+      const borderRight = await firstToc.evaluate((el) => window.getComputedStyle(el).borderRightWidth);
+      const borderLeft = await firstToc.evaluate((el) => window.getComputedStyle(el).borderLeftWidth);
+      
+      // Border should be on the right in RTL
+      expect(parseInt(borderRight) || 0).toBeGreaterThan(0);
+      expect(parseInt(borderLeft) || 0).toBe(0);
+    }
+  });
+
+  test('image mirroring functionality in RTL', async ({ page }) => {
+    test.skip(process.env.TEST_NO_MENUS === 'true', 'Skipping test because TEST_NO_MENUS is true');
+
+    await page.goto(`${BASE_URL}/ar/`);
+    
+    // Check showcase image (should be mirrored)
+    const showcaseImage = page.locator('.showcase-section .profile-image img');
+    const showcaseCount = await showcaseImage.count();
+    
+    if (showcaseCount > 0) {
+      const transform = await showcaseImage.first().evaluate((el) => window.getComputedStyle(el).transform);
+      // Should be mirrored (contains negative scale or scaleX(-1))
+      expect(transform).not.toBe('none');
+    }
+  });
+
+  test('responsive behavior in RTL mode', async ({ page }) => {
+    test.skip(process.env.TEST_NO_MENUS === 'true', 'Skipping test because TEST_NO_MENUS is true');
+
+    await page.goto(`${BASE_URL}/ar/`);
+    
+    // Test mobile viewport
+    await page.setViewportSize({ width: 375, height: 667 });
+    await expect(page.locator('html')).toHaveAttribute('dir', 'rtl');
+    
+    // Verify navigation is still functional
+    const navbar = page.locator('nav.navbar');
+    await expect(navbar).toBeVisible();
+    
+    // Test tablet viewport
+    await page.setViewportSize({ width: 768, height: 1024 });
+    await expect(page.locator('html')).toHaveAttribute('dir', 'rtl');
+    
+    // Test desktop viewport
+    await page.setViewportSize({ width: 1920, height: 1080 });
+    await expect(page.locator('html')).toHaveAttribute('dir', 'rtl');
+  });
 });

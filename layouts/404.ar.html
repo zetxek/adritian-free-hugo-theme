@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl"
+    {{- if .Site.Params.colorTheme.auto.disable }}
+    data-bs-theme="{{ .Site.Params.colorTheme.forced.theme }}"
+    theme-forced="true"
+    theme-auto="false"
+    {{- end }}>
+<head>
+    {{ partial "head.html" . }}
+    {{ partial "head_custom.html" . }}
+</head>
+
+<body class="page-404">
+    {{ partial "header.html" . }}
+
+    <main class="container">
+        <section id="main-content" class="section four-o-four">
+            <div class="container text-center">
+                <h1 class="display-1">404</h1>
+                <h4>{{ i18n "404_title" }}</h4>
+                <p>
+                    {{ i18n "404_description" }}
+                </p>
+                <a href="/ar/" class="btn btn-primary">{{ i18n "404_button" }}</a>
+            </div>
+        </section>
+    </main>
+
+    <div class="d-print-none">
+        {{ partial "footer.html" . }}
+    </div>
+    
+    {{ partial "base-foot.html" . }}
+</body>
+</html>
+

@@ -2,11 +2,84 @@
     <section id="main-content" class="section four-o-four">
       <div class="container text-center">
         <h1 class="display-1">404</h1>
-        <h4>{{ i18n "404_title" }}</h4>
-        <p>
+        <h4 id="error-title">{{ i18n "404_title" }}</h4>
+        <p id="error-description">
           {{ i18n "404_description" }}
         </p>
-        <a href="{{ .Site.BaseURL | absURL }}" class="btn btn-primary">{{ i18n "404_button" }}</a>
+        <a id="error-button" href="/" class="btn btn-primary">{{ i18n "404_button" }}</a>
       </div>
     </section>
+
+    {{/* Build translations data by reading i18n files for each language */}}
+    {{- $translations := dict }}
+    {{- range .Site.Languages }}
+      {{- $lang := .Lang }}
+      {{- $dir := .LanguageDirection | default "ltr" }}
+      {{- $homeUrl := "/" }}
+      {{- if ne $lang "en" }}
+        {{- $homeUrl = printf "/%s/" $lang }}
+      {{- end }}
+      
+      {{/* Read and parse the i18n file for this language using os.ReadFile */}}
+      {{- $i18nPath := printf "i18n/%s.yaml" $lang }}
+      {{- $i18nContent := "" }}
+      {{- with os.ReadFile $i18nPath }}
+        {{- $i18nContent = . }}
+      {{- end }}
+      
+      {{/* Extract 404 translations from the i18n data */}}
+      {{- $title := "Page not found" }}
+      {{- $description := "Sorry, but the page you were looking for could not be found." }}
+      {{- $button := "Back to homepage" }}
+      
+      {{- if $i18nContent }}
+        {{- $i18nData := $i18nContent | transform.Unmarshal }}
+        {{- range $i18nData }}
+          {{- if eq .id "404_title" }}
+            {{- $title = .translation }}
+          {{- else if eq .id "404_description" }}
+            {{- $description = .translation }}
+          {{- else if eq .id "404_button" }}
+            {{- $button = .translation }}
+          {{- end }}
+        {{- end }}
+      {{- end }}
+      
+      {{- $langData := dict 
+          "title" $title
+          "description" $description
+          "button" $button
+          "dir" $dir 
+          "homeUrl" $homeUrl 
+      }}
+      {{- $translations = merge $translations (dict $lang $langData) }}
+    {{- end }}
+
+    <script>
+      (function() {
+        // Translations dynamically generated from i18n files
+        const translations = {{ $translations | jsonify | safeJS }};
+
+        // Detect language from URL path
+        const path = window.location.pathname;
+        const pathParts = path.split('/').filter(p => p);
+        const firstPart = pathParts[0] || '';
+        
+        // Check if first part is a known language code
+        const detectedLang = translations[firstPart] ? firstPart : 'en';
+        const t = translations[detectedLang] || translations['en'];
+
+        // Update page content
+        if (t) {
+          document.getElementById('error-title').textContent = t.title;
+          document.getElementById('error-description').textContent = t.description;
+          document.getElementById('error-button').textContent = t.button;
+          document.getElementById('error-button').href = t.homeUrl;
+
+          // Update document direction for RTL languages
+          document.documentElement.setAttribute('dir', t.dir);
+          document.documentElement.setAttribute('lang', detectedLang);
+        }
+      })();
+    </script>
 {{ end }}

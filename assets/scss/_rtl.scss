@@ -135,19 +135,23 @@
   }
 
   // Breadcrumb
-  .breadcrumb {
+  #breadcrumb-bar {
+    text-align: right;
+    
+    nav {
+      // Keep inline-block, text-align on parent will align it to the right
+      display: inline-block;
+    }
+  }
+  
+  .breadcrumbs {
     padding-right: 0;
+    justify-content: flex-end; // Align breadcrumbs to the right in RTL
     
     .breadcrumb-item {
-      &::before {
-        float: right;
-        padding-left: 0.5rem;
-        padding-right: 0;
-      }
-      
-      + .breadcrumb-item::before {
-        // Use backslash as RTL separator (mirrored from forward slash)
-        content: "\\";
+      &:not(:last-child)::after {
+        margin-left: 0;
+        margin-right: 0.5rem;
       }
     }
   }
@@ -211,6 +215,89 @@
     ul {
       padding-right: 1rem;
       padding-left: 0;
+    }
+  }
+
+  // Table of Contents (full component)
+  .table-of-contents {
+    border-left: none;
+    border-right: 4px solid var(--bs-primary);
+    
+    #TableOfContents {
+      ul {
+        padding-left: 0;
+        padding-right: 0;
+        
+        ul {
+          padding-left: 0;
+          padding-right: 1.5rem;
+        }
+      }
+    }
+  }
+
+  // Code blocks
+  .post-content,
+  .post-summary {
+    code {
+      text-align: left; // Code should remain left-aligned even in RTL
+      direction: ltr; // Code is typically LTR
+    }
+    
+    pre {
+      text-align: left;
+      direction: ltr;
+      
+      code {
+        direction: ltr;
+      }
+    }
+  }
+
+  // Blockquotes
+  .post-content,
+  .post-summary {
+    blockquote {
+      border-left: none;
+      border-right: 4px solid var(--bs-primary);
+      padding-left: 0;
+      padding-right: 1.5rem;
+      text-align: right;
+    }
+  }
+
+  // Tables
+  table {
+    text-align: right;
+    direction: rtl;
+    
+    th,
+    td {
+      text-align: right;
+    }
+  }
+
+  // Search input enhancements
+  #search-query {
+    text-align: right;
+    direction: rtl;
+  }
+  
+  .input-group {
+    direction: rtl;
+    
+    #search-query {
+      border-top-right-radius: 0.375rem;
+      border-bottom-right-radius: 0.375rem;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+    
+    .input-group-text {
+      border-top-left-radius: 0.375rem;
+      border-bottom-left-radius: 0.375rem;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
     }
   }
 

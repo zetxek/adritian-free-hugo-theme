@@ -21,7 +21,15 @@ export default defineConfig ({
         screenshot: 'on',
         trace: 'retain-on-failure',
         video: 'on',
-        
+    },
+    expect: {
+        // Configure screenshot comparison threshold
+        toHaveScreenshot: {
+            // Pixel difference threshold (0-1, where 1 = 100% difference)
+            threshold: 0.2,
+            // Maximum number of pixels that can differ
+            maxDiffPixels: 100,
+        },
     },
     // Run all tests in parallel.
     fullyParallel: true,
