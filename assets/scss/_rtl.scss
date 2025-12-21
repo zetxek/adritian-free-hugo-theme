@@ -56,6 +56,27 @@
       margin-left: 0;
       margin-right: -40px;
     }
+    
+    // Mirror showcase image for RTL - the image appears on the left side in RTL
+    // which looks better with the content flow
+    .profile-image {
+      img {
+        transform: scaleX(-1);
+      }
+    }
+  }
+  
+  // RTL image mirroring - images with class "rtl-mirror" will be mirrored in RTL mode
+  // This is useful for directional images like arrows, hands pointing, etc.
+  img.rtl-mirror,
+  .rtl-mirror img {
+    transform: scaleX(-1);
+  }
+  
+  // Images that should NOT be mirrored in RTL (override for specific cases)
+  img.rtl-no-mirror,
+  .rtl-no-mirror img {
+    transform: none !important;
   }
 
   // Experience and education timeline
