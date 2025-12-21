@@ -136,7 +136,7 @@ jobs:
 
             # Validate HTML syntax with https://github.com/marketplace/actions/html5-validator
             - name: Validate HTML syntax
-              uses: Cyb3r-Jak3/html5validator-action@v7.2.0
+              uses: Cyb3r-Jak3/html5validator-action@v8.0.0
               with:
                 root: ./public
                 skip_git_check: true
