@@ -6,9 +6,9 @@ draft = false
 
 {{< showcase-section
     title="קטע תצוגה"
-    subtitle="כותרת משנה - מ-<code>home.md</code>"
+    subtitle="כותרת משנה - מ-&lt;code&gt;home.md&lt;/code&gt;"
     buttonText="צור קשר"
-    description="טקסט <strong>מודגש</strong> וטקסט רגיל. התוכן הזה מגיע מ-<code>home.he.md</code>. אם לא סופק, נעשה שימוש בתרגום ברירת המחדל מ-i18n (לתאימות לאחור עם גרסאות <1.7.0)"
+    description="טקסט &lt;strong&gt;מודגש&lt;/strong&gt; וטקסט רגיל. התוכן הזה מגיע מ-&lt;code&gt;home.he.md&lt;/code&gt;. אם לא סופק, נעשה שימוש בתרגום ברירת המחדל מ-i18n (לתאימות לאחור עם גרסאות &lt;1.7.0)"
     imgSrc="images/showcase/showcase.png"
     imgScale="0.5"
     sectionId="קטע-תצוגה"
@@ -40,7 +40,7 @@ draft = false
 
 {{< about-section
     title="אודותיי"
-    content="באמצעות <code>תחביר HTML</code>"
+    content="באמצעות &lt;code&gt;תחביר HTML&lt;/code&gt;"
     about_button="טקסט כפתור"
     button_icon="info"
     button_text="אתה יכול לערוך את זה"
@@ -57,7 +57,7 @@ draft = false
 {{< experience-section
     title="הניסיון התעסוקתי שלי (קטע)"
     intro_title="הקדמה"
-    intro_description="תיאור.<br>אתה יכול להשתמש ב-HTML, עם עיצוב <strong>מודגש</strong>, או רשימות <ul><li>אחד</li><li>שניים</li></ul>" 
+    intro_description="תיאור.&lt;br&gt;אתה יכול להשתמש ב-HTML, עם עיצוב &lt;strong&gt;מודגש&lt;/strong&gt;, או רשימות &lt;ul&gt;&lt;li&gt;אחד&lt;/li&gt;&lt;li&gt;שניים&lt;/li&gt;&lt;/ul&gt;" 
     button1_url="https://example.com"
     button1_text="בקר בדוגמה"
     button1_icon="icon-globe"
