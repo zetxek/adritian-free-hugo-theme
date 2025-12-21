@@ -28,8 +28,8 @@ export default defineConfig ({
         // Configure screenshot comparison threshold for cross-platform compatibility
         toHaveScreenshot: {
             // Pixel difference threshold (0-1, where 1 = 100% difference)
-            // Increased to handle font rendering differences across platforms
-            threshold: 0.3,
+            // Tuned low to catch regressions while tolerating minor font/rendering differences
+            threshold: 0.05,
             // Maximum ratio of pixels that can differ (10% of image)
             maxDiffPixelRatio: 0.1,
         },
