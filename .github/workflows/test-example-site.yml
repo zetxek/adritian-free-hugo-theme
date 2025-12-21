@@ -2,7 +2,7 @@
 name: Test example site
 
 permissions:
-  contents: read
+  contents: write
   id-token: write
   pages: write
   pull-requests: write
@@ -139,6 +139,8 @@ jobs:
         uses: actions/checkout@v4
         with:
           submodules: recursive
+          ref: ${{ github.head_ref }}
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -164,6 +166,16 @@ jobs:
           cd exampleSite
           hugo server --themesDir ../.. --buildDrafts --buildFuture --bind 0.0.0.0 &
           sleep 10
+
+      - name: Update visual regression snapshots
+        run: npx playwright test tests/e2e/rtl-visual.spec.ts --update-snapshots --reporter=line
+        continue-on-error: true
+
+      - name: Commit updated snapshots
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: update visual regression snapshots from CI [skip ci]"
+          file_pattern: "tests/e2e/**/*-snapshots/*.png"
 
       - name: Run Playwright tests (with menus)
         run: npm run test:e2e
