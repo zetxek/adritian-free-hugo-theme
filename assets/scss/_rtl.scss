@@ -321,18 +321,19 @@
 }
 
 // Bootstrap RTL overrides
+// Using html[dir="rtl"] for higher specificity to override Bootstrap utilities without !important
 html[dir="rtl"] {
   // Use Bootstrap's RTL mixins when available
   
-  // Margin utilities
-  .ms-auto {
-    margin-right: auto !important;
-    margin-left: 0 !important;
+  // Margin utilities - using body selector for additional specificity
+  body .ms-auto {
+    margin-right: auto;
+    margin-left: 0;
   }
   
-  .me-auto {
-    margin-left: auto !important;
-    margin-right: 0 !important;
+  body .me-auto {
+    margin-left: auto;
+    margin-right: 0;
   }
   
   // Padding utilities

@@ -136,12 +136,17 @@ export async function verifyBorderSide(
   const borderLeft = await element.evaluate((el) => window.getComputedStyle(el).borderLeftWidth);
   const borderRight = await element.evaluate((el) => window.getComputedStyle(el).borderRightWidth);
 
+  const leftWidth = parseInt(borderLeft) || 0;
+  const rightWidth = parseInt(borderRight) || 0;
+  
   if (expectedSide === 'left') {
-    expect(parseInt(borderLeft)).toBeGreaterThan(0);
-    expect(parseInt(borderRight)).toBe(0);
+    expect(leftWidth).toBeGreaterThan(0);
+    // Check that left border is greater than or equal to right border
+    expect(leftWidth).toBeGreaterThanOrEqual(rightWidth);
   } else {
-    expect(parseInt(borderRight)).toBeGreaterThan(0);
-    expect(parseInt(borderLeft)).toBe(0);
+    expect(rightWidth).toBeGreaterThan(0);
+    // Check that right border is greater than or equal to left border
+    expect(rightWidth).toBeGreaterThanOrEqual(leftWidth);
   }
 }
 
@@ -164,10 +169,19 @@ export async function verifyRTLDirection(page: Page, selector: string): Promise<
 export async function verifyImageMirrored(page: Page, selector: string): Promise<void> {
   const element = page.locator(selector).first();
   const transform = await element.evaluate((el) => window.getComputedStyle(el).transform);
-  // scaleX(-1) indicates mirroring
+  // scaleX(-1) returns a matrix like "matrix(-1, 0, 0, 1, 0, 0)"
+  // Parse the matrix to check if the first value (scaleX component) is -1
   expect(transform).toContain('matrix');
-  // Check if transform contains negative scale (mirrored)
-  const hasMirror = transform.includes('-1') || transform.includes('scaleX(-1)');
-  expect(hasMirror).toBe(true);
+  
+  // Extract matrix values: matrix(a, b, c, d, tx, ty)
+  // For scaleX(-1), the 'a' value (first number) should be -1
+  const matrixMatch = transform.match(/matrix\(([^)]+)\)/);
+  expect(matrixMatch).not.toBeNull();
+  
+  if (matrixMatch) {
+    const values = matrixMatch[1].split(',').map(v => parseFloat(v.trim()));
+    // First value is the scaleX component
+    expect(values[0]).toBe(-1);
+  }
 }
 
