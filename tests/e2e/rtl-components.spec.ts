@@ -1,10 +1,10 @@
-import { test, expect } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 import {
   getRTLPage,
-  verifyRTLAlignment,
   verifyBorderSide,
-  verifyRTLDirection,
   verifyImageMirrored,
+  verifyRTLAlignment,
+  verifyRTLDirection,
 } from '../utils/rtl-helpers';
 
 test.describe('RTL Component-Specific Tests', () => {

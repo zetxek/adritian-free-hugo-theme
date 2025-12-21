@@ -1,7 +1,6 @@
-import { test, expect } from '@playwright/test';
-import { getRTLPage, getLTRPage } from '../utils/rtl-helpers';
+import { expect, test } from '@playwright/test';
+import { getLTRPage, getRTLPage } from '../utils/rtl-helpers';
 
-const BASE_URL = 'http://localhost:1313';
 
 test.describe('RTL Visual Regression Tests', () => {
   test.beforeEach(async ({ page }) => {
@@ -16,7 +15,6 @@ test.describe('RTL Visual Regression Tests', () => {
     await getLTRPage(page, '/');
     await page.waitForLoadState('networkidle');
     await expect(page.locator('html')).toHaveScreenshot('homepage-ltr.png', {
-      fullPage: false,
       animations: 'disabled',
     });
 
@@ -24,7 +22,6 @@ test.describe('RTL Visual Regression Tests', () => {
     await getRTLPage(page, '/');
     await page.waitForLoadState('networkidle');
     await expect(page.locator('html')).toHaveScreenshot('homepage-rtl.png', {
-      fullPage: false,
       animations: 'disabled',
     });
   });
@@ -81,7 +78,6 @@ test.describe('RTL Visual Regression Tests', () => {
     await getLTRPage(page, '/blog/sample');
     await page.waitForLoadState('networkidle');
     await expect(page.locator('main')).toHaveScreenshot('blog-post-ltr.png', {
-      fullPage: false,
       animations: 'disabled',
     });
 
@@ -89,7 +85,6 @@ test.describe('RTL Visual Regression Tests', () => {
     await getRTLPage(page, '/blog/sample');
     await page.waitForLoadState('networkidle');
     await expect(page.locator('main')).toHaveScreenshot('blog-post-rtl.png', {
-      fullPage: false,
       animations: 'disabled',
     });
   });
@@ -215,7 +210,6 @@ test.describe('RTL Visual Regression Tests', () => {
     await page.waitForLoadState('networkidle');
     
     await expect(page.locator('html')).toHaveScreenshot('mobile-rtl.png', {
-      fullPage: false,
       animations: 'disabled',
     });
   });
@@ -227,7 +221,6 @@ test.describe('RTL Visual Regression Tests', () => {
     await page.waitForLoadState('networkidle');
     
     await expect(page.locator('html')).toHaveScreenshot('tablet-rtl.png', {
-      fullPage: false,
       animations: 'disabled',
     });
   });
