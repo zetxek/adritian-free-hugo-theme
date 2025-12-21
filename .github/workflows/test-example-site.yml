@@ -167,15 +167,21 @@ jobs:
           hugo server --themesDir ../.. --buildDrafts --buildFuture --bind 0.0.0.0 &
           sleep 10
 
-      - name: Update visual regression snapshots
+      - name: Remove existing visual snapshots (to regenerate on Linux)
+        run: rm -rf tests/e2e/rtl-visual.spec.ts-snapshots/
+
+      - name: Generate visual regression snapshots on Linux
         run: npx playwright test tests/e2e/rtl-visual.spec.ts --update-snapshots --reporter=line
         continue-on-error: true
+
+      - name: List generated snapshots
+        run: ls -la tests/e2e/rtl-visual.spec.ts-snapshots/ || echo "No snapshots directory found"
 
       - name: Commit updated snapshots
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "chore: update visual regression snapshots from CI [skip ci]"
-          file_pattern: "tests/e2e/**/*-snapshots/*.png"
+          commit_message: "chore: update visual regression snapshots from CI"
+          file_pattern: "tests/e2e/*-snapshots/*.png"
 
       - name: Run Playwright tests (with menus)
         run: npm run test:e2e
