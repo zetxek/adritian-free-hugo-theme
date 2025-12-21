@@ -45,9 +45,11 @@
 
   // Skip to content link
   .skip-to-content-link:focus {
+    // Use logical properties so centering works consistently in RTL
     left: auto;
-    right: 50%;
-    transform: translateX(50%);
+    right: auto;
+    inset-inline-start: 50%;
+    transform: translateX(-50%);
   }
 
   // Showcase section
