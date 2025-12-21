@@ -16,6 +16,8 @@ const testResults = path.join(process.cwd(), 'test-results');
 
 export default defineConfig ({
     testDir: './tests',
+    // Platform-agnostic snapshot naming (removes -linux, -darwin, -win32 suffixes)
+    snapshotPathTemplate: '{testDir}/{testFileDir}/{testFileName}-snapshots/{arg}{ext}',
     use: {
         baseURL: 'http://localhost:1313',
         screenshot: 'on',
@@ -23,12 +25,13 @@ export default defineConfig ({
         video: 'on',
     },
     expect: {
-        // Configure screenshot comparison threshold
+        // Configure screenshot comparison threshold for cross-platform compatibility
         toHaveScreenshot: {
             // Pixel difference threshold (0-1, where 1 = 100% difference)
-            threshold: 0.2,
-            // Maximum number of pixels that can differ
-            maxDiffPixels: 100,
+            // Increased to handle font rendering differences across platforms
+            threshold: 0.3,
+            // Maximum ratio of pixels that can differ (10% of image)
+            maxDiffPixelRatio: 0.1,
         },
     },
     // Run all tests in parallel.

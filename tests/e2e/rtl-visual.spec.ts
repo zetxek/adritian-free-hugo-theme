@@ -80,7 +80,7 @@ test.describe('RTL Visual Regression Tests', () => {
     // Screenshot LTR blog post
     await getLTRPage(page, '/blog/sample');
     await page.waitForLoadState('networkidle');
-    await expect(page.locator('main, .container')).toHaveScreenshot('blog-post-ltr.png', {
+    await expect(page.locator('main')).toHaveScreenshot('blog-post-ltr.png', {
       fullPage: false,
       animations: 'disabled',
     });
@@ -88,7 +88,7 @@ test.describe('RTL Visual Regression Tests', () => {
     // Screenshot RTL blog post
     await getRTLPage(page, '/blog/sample');
     await page.waitForLoadState('networkidle');
-    await expect(page.locator('main, .container')).toHaveScreenshot('blog-post-rtl.png', {
+    await expect(page.locator('main')).toHaveScreenshot('blog-post-rtl.png', {
       fullPage: false,
       animations: 'disabled',
     });
