@@ -318,6 +318,120 @@ name = "Contact"
 URL = "#contact"
 weight = 4
 
+[languages.ar]
+disabled = false
+languageCode = 'ar'
+languageDirection = 'rtl'
+languageName = 'العربية'
+title = ''
+weight = 0
+
+[languages.ar.menus]
+[[languages.ar.menus.header]]
+name = "الرئيسية"
+URL = "/ar/"
+weight = 1
+[[languages.ar.menus.header]]
+name = 'عني'
+URL = '/ar/#عني'
+weight = 2
+[[languages.ar.menus.header]]
+name = 'المهارات'
+URL = '/ar/skills'
+weight = 3
+[[languages.ar.menus.header]]
+name = 'أعمالي'
+URL = '/ar/#اعمالي'
+weight = 4
+[[languages.ar.menus.header]]
+name = "المدونة"
+URL = "/ar/blog"
+weight = 5
+[[languages.ar.menus.header]]
+pre = "email"
+name = "تواصل"
+URL = "/ar/#تواصل"
+weight = 6
+[[languages.ar.menus.header]]
+pre = "search"
+name = "بحث"
+URL = "/search"
+weight = 7
+
+[[languages.ar.menus.footer]]
+name = "الرئيسية"
+URL = "/ar/"
+weight = 1
+[[languages.ar.menus.footer]]
+name = "عني"
+URL = "/ar/#عني"
+weight = 2
+[[languages.ar.menus.footer]]
+name = "أعمالي"
+URL = "/ar/#اعمالي"
+weight = 3
+[[languages.ar.menus.footer]]
+name = "تواصل"
+URL = "/ar/#تواصل"
+weight = 4
+
+[languages.he]
+disabled = false
+languageCode = 'he'
+languageDirection = 'rtl'
+languageName = 'עברית'
+title = ''
+weight = 0
+
+[languages.he.menus]
+[[languages.he.menus.header]]
+name = "בית"
+URL = "/he/"
+weight = 1
+[[languages.he.menus.header]]
+name = 'אודות'
+URL = '/he/#אודות'
+weight = 2
+[[languages.he.menus.header]]
+name = 'מיומנויות'
+URL = '/he/skills'
+weight = 3
+[[languages.he.menus.header]]
+name = 'עבודות'
+URL = '/he/#עבודות'
+weight = 4
+[[languages.he.menus.header]]
+name = "בלוג"
+URL = "/he/blog"
+weight = 5
+[[languages.he.menus.header]]
+pre = "email"
+name = "צור קשר"
+URL = "/he/#צור-קשר"
+weight = 6
+[[languages.he.menus.header]]
+pre = "search"
+name = "חיפוש"
+URL = "/search"
+weight = 7
+
+[[languages.he.menus.footer]]
+name = "בית"
+URL = "/he/"
+weight = 1
+[[languages.he.menus.footer]]
+name = "אודות"
+URL = "/he/#אודות"
+weight = 2
+[[languages.he.menus.footer]]
+name = "עבודות"
+URL = "/he/#עבודות"
+weight = 3
+[[languages.he.menus.footer]]
+name = "צור קשר"
+URL = "/he/#צור-קשר"
+weight = 4
+
 
 # Plugins
 [params.plugins]

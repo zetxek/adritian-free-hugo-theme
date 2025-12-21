@@ -1,0 +1,229 @@
+## Meta tags
+- id: "meta_title"
+  translation: "אדריטיאן - תבנית הוגו בביצועים גבוהים מאת אדריאן מורנו"
+- id: "meta_description"
+  translation: "תבנית הוגו זו (אדריטיאן) מבוססת על Bootstrap ומכילה תכונות שהופכות אותה למתאימה לאתר אישי, לתיק עבודות או לסוגים אחרים של יישומי עמוד יחיד."
+- id: "meta_keywords"
+  translation: "הוגו, תבנית, בוטסטרפ, אדריטיאן, אדריאן מורנו, אתר אישי, תיק עבודות, יישום עמוד יחיד"
+- id: "meta_author"
+  translation: "אדריאן מורנו פניה"
+- id: "meta_image"
+  translation: "/img/general/og-image.jpg"
+
+## Header
+- id: "logo_alt"
+  translation: "לוגו אדריטיאן"
+
+- id: "logo_text1"
+  translation: "אדריטיאן"
+
+- id: "logo_text2"
+  translation: "דמו"
+
+## General
+- id: "skipToMainContent"
+  translation: "דלג לתוכן הראשי"
+
+- id: "toggle_navigation"
+  translation: "החלף ניווט"
+
+## Footer
+- id: "footer_notice"
+  translation: "© אדריטיאן. תבנית הוגו חינמית מאת אדריאן מורנו פניה."
+
+- id: "language"
+  translation: "שפה"
+
+- id: "toggle_theme"
+  translation: "החלף ערכת נושא"
+
+- id: "theme_light"
+  translation: "☀️ בהיר"
+- id: "theme_dark"
+  translation: "🌑 כהה"
+- id: "theme_auto"
+  translation: "✨ אוטומטי"
+
+## Homepage head title
+- id: "head_title"
+  translation: "אתר דמו לאדריטיאן - תבנית הוגו בביצועים גבוהים מאת אדריאן מורנו"
+
+- id: "head_description"
+  translation: "תבנית הוגו זו (אדריטיאן) מבוססת על Bootstrap ומכילה תכונות שהופכות אותה למתאימה לאתר אישי, לתיק עבודות או לסוגים אחרים של יישומי עמוד יחיד."
+
+## Homepage showcase
+- id: "showcase_title"
+  translation: "ברוכים הבאים לדמו"
+
+- id: "showcase_subtitle"
+  translation: "בואו נצלול לדוגמה"
+
+- id: "showcase_description"
+  translation: "זוהי תבנית בביצועים גבוהים למחולל האתרים הסטטי הוגו. ניתן לערוך תוכן לדוגמה זה בקבצי התרגום (מכיוון שהתבנית תומכת בתרגומים)."
+
+- id: "showcase_button"
+  translation: "צור קשר"
+
+  ## not visible but used for accessibility
+- id: "showcase_image_alt"
+  translation: "תמונה של שם מגניב"
+
+## Homepage about
+- id: "about_title"
+  translation: "מי אני?"
+
+- id: "about_content"
+  translation: '<p class="lead">
+      כאן תוכלו להוסיף מידע על עצמכם. קטע קצר שמתאר את הניסיון שלכם, לדוגמה.
+      <br/>
+      תוכלו להסביר משהו על הרקע האקדמי/הלימודי שלכם, וכן על תחומי העבודה המועדפים עליכם.
+      </p>'
+
+- id: "about_button"
+  translation: "אודותיי"
+
+## Homepage education
+- id: "education_title"
+  translation: "השכלה"
+
+## Homepage experience
+- id: "experience_button"
+  translation: "לינקדאין"
+
+- id: "experience_button_url"
+  translation: "https://www.linkedin.com/in/adrianmoreno/"
+
+- id: "experience_button2"
+  translation: "הורד קורות חיים"
+
+- id: "experience_button2_url"
+  translation: "/img/general/user-smile-fill.svg"
+
+- id: "experience_button3"
+  translation: "הצג הכל"
+
+- id: "experience_button3_url"
+  translation: "/experience"
+
+## Homepage client & work
+- id: "client_work_title"
+  translation: "לקוחות ועבודות"
+
+## Homepage newsletter
+- id: "newsletter_title"
+  translation: "ניוזלטר"
+
+- id: "newsletter_button"
+  translation: "הירשם"
+
+- id: "newsletter_placeholder"
+  translation: "האימייל שלך"
+
+- id: "newsletter_success_message"
+  translation: "תודה שנרשמת לניוזלטר שלי!"
+
+- id: "newsletter_error_message"
+  translation: "אירעה שגיאה. אנא נסה שוב."
+
+- id: "newsletter_note"
+  translation: "לעולם לא נשתף את האימייל שלך עם אף אחד אחר."
+
+## Homepage testimonials
+- id: "testimonials_title"
+  translation: "המלצות"
+
+## Homepage contact
+- id: "contact_title"
+  translation: "צור קשר"
+
+- id: "contact_button"
+  translation: "שלח הודעה"
+
+- id: "contact_form_name"
+  translation: "שם מלא"
+
+- id: "contact_form_email"
+  translation: "כתובת אימייל"
+
+- id: "contact_form_message"
+  translation: "הקלד את ההודעה שלך כאן"
+
+- id: "contact_phone_title"
+  translation: "מספר טלפון"
+
+- id: "contact_phone_number"
+  translation: "מוגדר ב-i18n/he.yaml (contact_phone_number)"
+
+- id: "contact_email_title"
+  translation: "אימייל"
+
+- id: "contact_email_email"
+  translation: "מוגדר ב-i18n/he.yaml (contact_email_email)"
+
+- id: "contact_address_title"
+  translation: "כתובת"
+
+- id: "contact_address_address"
+  translation: "מוגדר ב-i18n/he.yaml (contact_address_address)"
+
+## Blog
+- id: "read_more"
+  translation: "קרא עוד"
+
+- id: "published_on"
+  translation: "פורסם ב-"
+
+- id: "continue_reading"
+  translation: "המשך לקרוא"
+
+## 404 Page
+- id: "404_title"
+  translation: "הדף לא נמצא"
+- id: "404_description"
+  translation: "מצטערים, אך הדף שחיפשת לא נמצא."
+- id: "404_button"
+  translation: "חזרה לדף הבית"
+
+## Related Posts
+- id: "related_posts"
+  translation: "פוסטים קשורים"
+
+## Social Sharing
+- id: "share_this_post"
+  translation: "שתף פוסט זה"
+- id: "share_on_twitter"
+  translation: "שתף בטוויטר"
+- id: "share_on_linkedin"
+  translation: "שתף בלינקדאין"
+- id: "share_on_facebook"
+  translation: "שתף בפייסבוק"
+- id: "share_via_email"
+  translation: "שתף באימייל"
+- id: "share_twitter_label"
+  translation: "טוויטר"
+- id: "share_linkedin_label"
+  translation: "לינקדאין"
+- id: "share_facebook_label"
+  translation: "פייסבוק"
+- id: "share_email_label"
+  translation: "אימייל"
+
+## Table of Contents
+- id: "table_of_contents"
+  translation: "תוכן העניינים"
+
+## Comments
+- id: "comments"
+  translation: "תגובות"
+
+## Reading time and metadata
+- id: "min_read"
+  translation: "דקות קריאה"
+- id: "last_updated"
+  translation: "עודכן"
+
+## Taxonomy
+- id: "categories"
+  translation: "קטגוריות"
+- id: "recent_posts"
+  translation: "פוסטים אחרונים"

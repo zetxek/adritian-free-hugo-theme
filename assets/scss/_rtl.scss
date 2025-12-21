@@ -1,0 +1,255 @@
+// RTL (Right-to-Left) Support Styles
+// This file contains all the necessary overrides for RTL languages like Arabic and Hebrew
+
+[dir="rtl"] {
+  // Text alignment adjustments
+  text-align: right;
+
+  // Container and layout adjustments
+  .container {
+    text-align: right;
+  }
+
+  // Header adjustments
+  .header {
+    .navbar-brand {
+      margin-right: 0;
+      margin-left: auto;
+    }
+    
+    .navbar-nav {
+      padding-right: 0;
+      padding-left: 0;
+    }
+    
+    .navbar .nav-item .nav-link::after {
+      right: 0;
+      left: auto;
+    }
+  }
+
+  // Navbar adjustments
+  .navbar-collapse {
+    .navbar-nav {
+      margin-right: auto;
+      margin-left: 0 !important;
+    }
+  }
+
+  // Footer adjustments
+  .footer_links {
+    .nav {
+      justify-content: flex-start;
+    }
+  }
+
+  // Skip to content link
+  .skip-to-content-link:focus {
+    left: auto;
+    right: 50%;
+    transform: translateX(50%);
+  }
+
+  // Showcase section
+  .showcase-section {
+    .platform-links.shortcode {
+      margin-left: 0;
+      margin-right: -40px;
+    }
+  }
+
+  // Experience and education timeline
+  .education,
+  .experience-item {
+    &::before {
+      left: auto;
+      right: 0;
+    }
+  }
+
+  // Lists with custom markers
+  .section li::before {
+    left: auto;
+    right: 0;
+    margin-left: 0;
+    margin-right: -1.5em;
+  }
+
+  // Buttons with icons
+  .btn {
+    i, [class^="icon-"] {
+      margin-right: 0;
+      margin-left: 0.5rem;
+    }
+  }
+
+  // Dropdowns
+  .dropdown-menu {
+    text-align: right;
+    
+    &.dropdown-menu-end {
+      right: auto;
+      left: 0;
+    }
+  }
+
+  // Form inputs
+  input,
+  textarea {
+    text-align: right;
+  }
+
+  // Blog posts
+  .posts-list {
+    article {
+      text-align: right;
+    }
+  }
+
+  // Blog sidebar
+  .blog-sidebar {
+    .sidebar-section {
+      text-align: right;
+    }
+  }
+
+  // Breadcrumb
+  .breadcrumb {
+    padding-right: 0;
+    
+    .breadcrumb-item {
+      &::before {
+        float: right;
+        padding-left: 0.5rem;
+        padding-right: 0;
+      }
+      
+      + .breadcrumb-item::before {
+        content: "\\";
+      }
+    }
+  }
+
+  // Contact section
+  .contact__info {
+    text-align: right;
+  }
+
+  // Client work cards
+  .client-works-container {
+    text-align: right;
+  }
+
+  // Testimonials
+  .testimonial {
+    text-align: right;
+    
+    &__author {
+      flex-direction: row-reverse;
+    }
+    
+    &__author-info {
+      text-align: right;
+      margin-left: 0;
+      margin-right: 1rem;
+    }
+  }
+
+  // Language selector
+  #footer-language-selector,
+  #header-language-selector {
+    .dropdown-menu {
+      text-align: right;
+    }
+  }
+
+  // Search
+  .search-results {
+    text-align: right;
+  }
+
+  // Skills section
+  .skills-section {
+    text-align: right;
+    
+    .progress {
+      direction: rtl;
+    }
+  }
+
+  // Social sharing
+  .social-sharing {
+    direction: rtl;
+  }
+
+  // Table of contents
+  .toc {
+    text-align: right;
+    
+    ul {
+      padding-right: 1rem;
+      padding-left: 0;
+    }
+  }
+
+  // Responsive adjustments
+  @media (min-width: 992px) {
+    .ml-lg-auto,
+    .mx-lg-auto {
+      margin-left: 0 !important;
+      margin-right: auto !important;
+    }
+  }
+
+  // Print styles for RTL
+  @media print {
+    body {
+      direction: rtl;
+    }
+  }
+}
+
+// Bootstrap RTL overrides
+html[dir="rtl"] {
+  // Use Bootstrap's RTL mixins when available
+  
+  // Margin utilities
+  .ms-auto {
+    margin-right: auto !important;
+    margin-left: 0 !important;
+  }
+  
+  .me-auto {
+    margin-left: auto !important;
+    margin-right: 0 !important;
+  }
+  
+  // Padding utilities
+  .ps-0 {
+    padding-right: 0 !important;
+    padding-left: unset !important;
+  }
+  
+  .pe-0 {
+    padding-left: 0 !important;
+    padding-right: unset !important;
+  }
+  
+  // Text utilities
+  .text-start {
+    text-align: right !important;
+  }
+  
+  .text-end {
+    text-align: left !important;
+  }
+  
+  // Float utilities
+  .float-start {
+    float: right !important;
+  }
+  
+  .float-end {
+    float: left !important;
+  }
+}
