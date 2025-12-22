@@ -8,7 +8,7 @@ A modern, fast and extensible Hugo theme for personal websites and professional 
 
 - 🏎️ Fast, minimalistic code (no jQuery or other javascript frameworks)
 - 🖼️ Bootstrap v5 (`v5.3.7`) CSS framework with Scss customization
-- 📚 Multi-language (i18n) support
+- 📚 Multi-language (i18n) support with RTL (Right-to-Left) language support
 - 🛠️ Custom content types (work experience, education, projects/work showcase, testimonials, blog)
 - 🧰 Multiple shortcodes to customize your landing page in any way you want
 - 🔎 Lightning fast search (powered by [fuse.js](https://www.fusejs.io/))
@@ -142,6 +142,10 @@ See the content in the  `i18n` folder to edit the translations, and the configur
 - **Swedish** (`sv`)
 - **Norwegian** (`no`)
 - **Polish** (`pl`)
+- **Arabic** (`ar`) - with full RTL support
+- **Hebrew** (`he`) - with full RTL support
+
+The theme includes comprehensive RTL (Right-to-Left) language support for Arabic and Hebrew. When a language is configured with `languageDirection = 'rtl'` in `hugo.toml`, the theme automatically applies RTL styling to all components including navigation, forms, tables, code blocks, blockquotes, breadcrumbs, and more. Images can be automatically mirrored using the `rtl-mirror` class, or prevented from mirroring with `rtl-no-mirror`.
 
 The example site has 3 enabled languages by default (`en`, `es`, and `fr`). You can enable additional languages by adding them to your `hugo.toml` configuration, or disable the provided ones (by setting `disabled` to `true` on the languages you don't need).
 
@@ -150,7 +154,7 @@ Most of the content is expected to be translated via the content system of Hugo:
 - [by file name](https://gohugo.io/content-management/multilingual/#translation-by-file-name)
 - [by content directory](https://gohugo.io/content-management/multilingual/#translation-by-content-directory) 
 
-Note: The introduction of i18n support was done in the version `v1.3.0` and it has breaking changes due to the way in which the content was managed. You can read about the upgrade path in [UPGRADING.md](UPGRADING.md). In the version `v1.7.0` the usage of Hugo's content management was expanded, to use less `i18n` strings and more file name/content directory based translations.
+Note: The introduction of i18n support was done in the version `v1.3.0` and it has breaking changes due to the way in which the content was managed. You can read about the upgrade path in [CHANGELOG.md](CHANGELOG.md). In the version `v1.7.0` the usage of Hugo's content management was expanded, to use less `i18n` strings and more file name/content directory based translations.
 
 #### Editing the theme content
 

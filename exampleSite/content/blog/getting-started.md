@@ -383,7 +383,7 @@ Some of the key files are:
 Hugo allows you to customize the theme in many ways. You can override the theme's layouts, styles, and content.
 For that, you just need to locate the file you would like to change, copy it to your site's corresponding folder (`layouts`, `assets`, ...), and edit it.
 
-**Note**: if you do this you will not benefit from theme updates, and that could lead to bugs. You can keep an eye on the [UPGRADING.md](https://github.com/zetxek/adritian-free-hugo-theme/blob/main/UPGRADING.md) file.
+**Note**: if you do this you will not benefit from theme updates, and that could lead to bugs. You can keep an eye on the [CHANGELOG.md](https://github.com/zetxek/adritian-free-hugo-theme/blob/main/CHANGELOG.md) file.
 
 ### Improving the theme
 

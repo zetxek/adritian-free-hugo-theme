@@ -2,7 +2,7 @@
 
 This documentation tracks changes across versions, including new features, improvements, and breaking changes.
 
-## v1.8.0 (or next version)
+## v1.8.0
 
 ### RTL (Right-to-Left) Language Support
 
