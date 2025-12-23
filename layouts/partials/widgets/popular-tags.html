@@ -5,7 +5,7 @@
 {{ if $allTags }}
 <div class="widget widget-popular-tags card border-0 shadow-sm mb-4">
   <div class="card-body">
-    <h3 class="h5 card-title mb-3">Popular Tags</h3>
+    <h3 class="h5 card-title mb-3">{{ i18n "popular_tags" }}</h3>
     <ul class="list-taxonomy widget-tags">
       {{ range first 10 $allTags.ByCount }}
         <li>
@@ -18,7 +18,7 @@
     </ul>
     <div class="mt-3">
       <a href="{{ "tags" | absURL }}" class="btn btn-sm btn-outline-secondary">
-        View all tags
+        {{ i18n "view_all_tags" }}
       </a>
     </div>
   </div>

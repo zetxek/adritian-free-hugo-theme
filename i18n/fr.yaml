@@ -122,4 +122,8 @@
   translation: "Catégories"
 - id: "recent_posts"
   translation: "Articles récents"
+- id: "popular_tags"
+  translation: "Tags populaires"
+- id: "view_all_tags"
+  translation: "Voir tous les tags"
 

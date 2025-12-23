@@ -227,3 +227,7 @@
   translation: "קטגוריות"
 - id: "recent_posts"
   translation: "פוסטים אחרונים"
+- id: "popular_tags"
+  translation: "תגיות פופולריות"
+- id: "view_all_tags"
+  translation: "צפה בכל התגיות"

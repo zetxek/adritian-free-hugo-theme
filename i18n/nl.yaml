@@ -222,3 +222,7 @@
   translation: "Categorieën"
 - id: "recent_posts"
   translation: "Recente berichten"
+- id: "popular_tags"
+  translation: "Populaire tags"
+- id: "view_all_tags"
+  translation: "Bekijk alle tags"

@@ -222,3 +222,7 @@
   translation: "Kategorier"
 - id: "recent_posts"
   translation: "Nyeste innlegg"
+- id: "popular_tags"
+  translation: "Populære tagger"
+- id: "view_all_tags"
+  translation: "Se alle tagger"
