@@ -298,15 +298,23 @@ function populateResults(result) {
 
       try {
         // Insert the templated result
+        const tags = value.item.tags || "";
+        const categories = value.item.categories || "";
         const output = render(templateDefinition, {
           key: key,
           title: value.item.title || "Untitled",
           link: value.item.permalink || "#",
-          tags: value.item.tags || "",
-          categories: value.item.categories || "",
+          tags: Array.isArray(tags) ? tags.join(',') : tags,
+          categories: Array.isArray(categories) ? categories.join(',') : categories,
           snippet: snippet || "No preview available",
         });
         searchResults.insertAdjacentHTML("beforeend", output);
+        
+        // Add tags/categories as clickable badges
+        const resultElement = document.getElementById(`summary-${key}`);
+        if (resultElement && typeof addTagsToResult === 'function') {
+          addTagsToResult(resultElement);
+        }
 
         // Add highlighting after insertion
         for (const snipvalue of snippetHighlights) {
