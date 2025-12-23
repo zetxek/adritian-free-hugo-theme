@@ -153,9 +153,7 @@ test.describe('Search functionality', () => {
     
     // Verify badges have the correct styling classes
     const firstBadge = tagBadges.first();
-    await expect(firstBadge).toHaveClass(/badge/);
-    await expect(firstBadge).toHaveClass(/bg-primary/);
-    await expect(firstBadge).toHaveClass(/text-decoration-none/);
+    await expect(firstBadge).toHaveClass('badge bg-primary text-decoration-none me-1');
   });
 
   test('clicking a tag badge updates search input and filters results', async ({ page }) => {
