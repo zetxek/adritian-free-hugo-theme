@@ -283,13 +283,12 @@ test.describe('Search functionality', () => {
     
     // Click a different tag badge
     const secondBadge = page.locator('#search-results .badge.bg-primary').first();
-    if (await secondBadge.isVisible()) {
-      const secondBadgeText = await secondBadge.textContent();
-      await secondBadge.click();
-      await page.waitForTimeout(500);
-      
-      // Verify search updated to the new tag
-      await expect(page.locator('#search-query')).toHaveValue(secondBadgeText || '');
-    }
+    await expect(secondBadge).toBeVisible();
+    const secondBadgeText = await secondBadge.textContent();
+    await secondBadge.click();
+    await page.waitForTimeout(500);
+    
+    // Verify search updated to the new tag
+    await expect(page.locator('#search-query')).toHaveValue(secondBadgeText || '');
   });
 });
