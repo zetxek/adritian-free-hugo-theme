@@ -1,6 +1,10 @@
 import { test, expect } from '@playwright/test';
 
-const BASE_URL = process.env.PLAYWRIGHT_BASE_URL || 'http://localhost:1313';
+const BASE_URL: string = process.env.TEST_BASE_URL ?? 'http://localhost:1313';
+
+if (!BASE_URL.startsWith('http')) {
+  throw new Error('TEST_BASE_URL must be a valid URL starting with http:// or https://');
+}
 
 test.describe('Site without menus', () => {
   // Read environment variable TEST_NO_MENUS

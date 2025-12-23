@@ -163,6 +163,9 @@ test.describe('Popular tags widget', () => {
       }
     }
     
+    // Ensure we actually collected counts to verify
+    expect(counts.length).toBeGreaterThan(0);
+    
     // Verify counts are in descending order (highest to lowest)
     for (let i = 0; i < counts.length - 1; i++) {
       expect(counts[i]).toBeGreaterThanOrEqual(counts[i + 1]);

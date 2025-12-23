@@ -171,10 +171,23 @@ npm run build
 ## Configuration
 
 Tests use the Playwright configuration in `playwright.config.ts` which:
-- Runs tests against `http://localhost:1313`
+- Runs tests against `http://localhost:1313` by default
 - Automatically starts the Hugo server
 - Captures screenshots and videos on test failures
 - Generates HTML reports
+
+### Environment Variables
+
+- **`TEST_BASE_URL`**: Override the base URL for tests (default: `http://localhost:1313`)
+  ```bash
+  TEST_BASE_URL=https://example.com npm run test:e2e
+  ```
+- **`TEST_NO_MENUS`**: Run tests for configurations without menus (default: `false`)
+  ```bash
+  TEST_NO_MENUS=true npm run test:e2e
+  ```
+
+All test files validate that `TEST_BASE_URL` starts with `http://` or `https://` for security.
 
 ## Writing New Tests
 
