@@ -210,19 +210,17 @@ test.describe('Search functionality', () => {
     
     // Click on a tag badge (e.g., "lorem-ipsum")
     const loremBadge = page.locator('#search-results .badge.bg-primary', { hasText: 'lorem-ipsum' }).first();
+    await expect(loremBadge).toBeVisible();
+    await loremBadge.click();
     
-    if (await loremBadge.isVisible()) {
-      await loremBadge.click();
-      
-      // Wait for the search to update (the debounce is 300ms)
-      await page.waitForTimeout(500);
-      
-      // Verify the search input was updated
-      await expect(page.locator('#search-query')).toHaveValue('lorem-ipsum');
-      
-      // Verify the URL was updated
-      await expect(page).toHaveURL(/s=lorem-ipsum/);
-    }
+    // Wait for the search to update (the debounce is 300ms)
+    await page.waitForTimeout(500);
+    
+    // Verify the search input was updated
+    await expect(page.locator('#search-query')).toHaveValue('lorem-ipsum');
+    
+    // Verify the URL was updated
+    await expect(page).toHaveURL(/s=lorem-ipsum/);
   });
 
   test('tag badge click prevents default link behavior', async ({ page }) => {
