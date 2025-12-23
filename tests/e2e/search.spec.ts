@@ -135,10 +135,13 @@ test.describe('Search functionality', () => {
   test('tag badges are rendered in search results', async ({ page }) => {
     await page.goto(`${BASE_URL}/search`);
     
+    // Wait for the page to be fully loaded
+    await page.waitForLoadState('networkidle');
+    
     // Search for "adritian" which should return blog posts with tags
     await page.locator('#search-query').fill('adritian');
     
-    // Wait for search results to appear
+    // Wait for search results to appear (the debounce is 300ms)
     await page.waitForTimeout(500);
     
     // Verify we have results
@@ -158,10 +161,13 @@ test.describe('Search functionality', () => {
   test('clicking a tag badge updates search input and filters results', async ({ page }) => {
     await page.goto(`${BASE_URL}/search`);
     
+    // Wait for the page to be fully loaded
+    await page.waitForLoadState('networkidle');
+    
     // Search for "adritian" to get results with tags
     await page.locator('#search-query').fill('adritian');
     
-    // Wait for search results to appear
+    // Wait for search results to appear (the debounce is 300ms)
     await page.waitForTimeout(500);
     
     // Verify we have results
@@ -176,7 +182,7 @@ test.describe('Search functionality', () => {
     // Click the badge
     await guideBadge.click();
     
-    // Wait for the search to update
+    // Wait for the search to update (the debounce is 300ms)
     await page.waitForTimeout(500);
     
     // Verify the search input was updated with the tag
@@ -192,10 +198,13 @@ test.describe('Search functionality', () => {
   test('clicking different tag badges updates search correctly', async ({ page }) => {
     await page.goto(`${BASE_URL}/search`);
     
+    // Wait for the page to be fully loaded
+    await page.waitForLoadState('networkidle');
+    
     // Search for "sample" to get results with that tag
     await page.locator('#search-query').fill('sample');
     
-    // Wait for search results to appear
+    // Wait for search results to appear (the debounce is 300ms)
     await page.waitForTimeout(500);
     
     // Verify we have results
@@ -207,7 +216,7 @@ test.describe('Search functionality', () => {
     if (await loremBadge.isVisible()) {
       await loremBadge.click();
       
-      // Wait for the search to update
+      // Wait for the search to update (the debounce is 300ms)
       await page.waitForTimeout(500);
       
       // Verify the search input was updated
@@ -221,10 +230,13 @@ test.describe('Search functionality', () => {
   test('tag badge click prevents default link behavior', async ({ page }) => {
     await page.goto(`${BASE_URL}/search`);
     
+    // Wait for the page to be fully loaded
+    await page.waitForLoadState('networkidle');
+    
     // Search for "adritian"
     await page.locator('#search-query').fill('adritian');
     
-    // Wait for search results
+    // Wait for search results (the debounce is 300ms)
     await page.waitForTimeout(500);
     
     // Get initial URL
@@ -249,10 +261,13 @@ test.describe('Search functionality', () => {
   test('multiple tag badges can be clicked sequentially', async ({ page }) => {
     await page.goto(`${BASE_URL}/search`);
     
+    // Wait for the page to be fully loaded
+    await page.waitForLoadState('networkidle');
+    
     // Search for "adritian" to get multiple results with different tags
     await page.locator('#search-query').fill('adritian');
     
-    // Wait for search results
+    // Wait for search results (the debounce is 300ms)
     await page.waitForTimeout(500);
     
     // Click the first tag badge
