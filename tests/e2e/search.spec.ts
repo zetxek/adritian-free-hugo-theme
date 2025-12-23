@@ -242,6 +242,9 @@ test.describe('Search functionality', () => {
     const tagBadge = page.locator('#search-results .badge.bg-primary').first();
     await expect(tagBadge).toBeVisible();
     
+    // Get the badge text before clicking
+    const tagText = await tagBadge.textContent();
+    
     await tagBadge.click();
     
     // Wait a moment
@@ -252,6 +255,9 @@ test.describe('Search functionality', () => {
     
     // But the URL should have been updated with the search parameter
     expect(page.url()).not.toBe(initialUrl);
+    
+    // Verify the search input was updated with the clicked tag value
+    await expect(page.locator('#search-query')).toHaveValue(tagText || '');
   });
 
   test('multiple tag badges can be clicked sequentially', async ({ page }) => {
