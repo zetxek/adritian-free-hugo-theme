@@ -74,7 +74,7 @@ function addTagsToResult(element) {
   const categories = element.dataset.categories;
   
   if (tags) {
-    const tagArray = Array.isArray(tags) ? tags : tags.split(',').map(t => t.trim()).filter(Boolean);
+    const tagArray = tags.split(',').map(t => t.trim()).filter(Boolean);
     if (tagArray.length > 0) {
       const tagDiv = document.createElement('div');
       tagDiv.className = 'mb-1';
@@ -93,7 +93,7 @@ function addTagsToResult(element) {
   }
   
   if (categories) {
-    const catArray = Array.isArray(categories) ? categories : categories.split(',').map(c => c.trim()).filter(Boolean);
+    const catArray = categories.split(',').map(c => c.trim()).filter(Boolean);
     if (catArray.length > 0) {
       const catDiv = document.createElement('div');
       catDiv.className = 'mb-1';
