@@ -88,7 +88,12 @@ function addTagsToResult(element) {
         tagDiv.appendChild(createTagBadge(tag, 'tag'));
       });
       
-      element.querySelector('p').after(tagDiv);
+      const paragraphElement = element.querySelector('p');
+      if (paragraphElement) {
+        paragraphElement.after(tagDiv);
+      } else {
+        element.appendChild(tagDiv);
+      }
     }
   }
   
@@ -107,7 +112,12 @@ function addTagsToResult(element) {
         catDiv.appendChild(createTagBadge(cat, 'category'));
       });
       
-      element.querySelector('p').after(catDiv);
+      const paragraphElement = element.querySelector('p');
+      if (paragraphElement) {
+        paragraphElement.after(catDiv);
+      } else {
+        element.appendChild(catDiv);
+      }
     }
   }
 }
