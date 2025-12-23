@@ -316,6 +316,8 @@ html[dir="rtl"] body {
   #search-query {
     text-align: right;
     direction: rtl;
+    padding-left: 0;
+    padding-right: 1rem;
   }
   
   .input-group {
