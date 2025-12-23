@@ -1,4 +1,4 @@
-# GitHub Copilot Agents for Academy Theme
+# GitHub Copilot Agents for Adritian Hugo Theme
 
 This document provides guidance for AI agents working on the
 adritian-free-hugo-theme Theme repository.
