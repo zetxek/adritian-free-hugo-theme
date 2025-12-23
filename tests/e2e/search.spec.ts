@@ -131,4 +131,154 @@ test.describe('Search functionality', () => {
     // Should still show results, potentially different count
     await expect(page.locator('#search-results div[id^="summary-"]').first()).toBeVisible();
   });
+
+  test('tag badges are rendered in search results', async ({ page }) => {
+    await page.goto(`${BASE_URL}/search`);
+    
+    // Search for "adritian" which should return blog posts with tags
+    await page.locator('#search-query').fill('adritian');
+    
+    // Wait for search results to appear
+    await page.waitForTimeout(500);
+    
+    // Verify we have results
+    await expect(page.locator('#search-results div[id^="summary-"]').first()).toBeVisible();
+    
+    // Check that tag badges are rendered
+    const tagBadges = page.locator('#search-results .badge.bg-primary');
+    await expect(tagBadges.first()).toBeVisible();
+    
+    // Verify badges have the correct styling classes
+    const firstBadge = tagBadges.first();
+    await expect(firstBadge).toHaveClass(/badge/);
+    await expect(firstBadge).toHaveClass(/bg-primary/);
+    await expect(firstBadge).toHaveClass(/text-decoration-none/);
+  });
+
+  test('clicking a tag badge updates search input and filters results', async ({ page }) => {
+    await page.goto(`${BASE_URL}/search`);
+    
+    // Search for "adritian" to get results with tags
+    await page.locator('#search-query').fill('adritian');
+    
+    // Wait for search results to appear
+    await page.waitForTimeout(500);
+    
+    // Verify we have results
+    await expect(page.locator('#search-results div[id^="summary-"]').first()).toBeVisible();
+    
+    // Find a tag badge (e.g., "guide")
+    const guideBadge = page.locator('#search-results .badge.bg-primary', { hasText: 'guide' }).first();
+    
+    // Verify the badge is visible before clicking
+    await expect(guideBadge).toBeVisible();
+    
+    // Click the badge
+    await guideBadge.click();
+    
+    // Wait for the search to update
+    await page.waitForTimeout(500);
+    
+    // Verify the search input was updated with the tag
+    await expect(page.locator('#search-query')).toHaveValue('guide');
+    
+    // Verify the URL was updated
+    await expect(page).toHaveURL(/s=guide/);
+    
+    // Verify search results are filtered (should show posts with "guide" tag)
+    await expect(page.locator('#search-results div[id^="summary-"]').first()).toBeVisible();
+  });
+
+  test('clicking different tag badges updates search correctly', async ({ page }) => {
+    await page.goto(`${BASE_URL}/search`);
+    
+    // Search for "sample" to get results with that tag
+    await page.locator('#search-query').fill('sample');
+    
+    // Wait for search results to appear
+    await page.waitForTimeout(500);
+    
+    // Verify we have results
+    await expect(page.locator('#search-results div[id^="summary-"]').first()).toBeVisible();
+    
+    // Click on a tag badge (e.g., "lorem-ipsum")
+    const loremBadge = page.locator('#search-results .badge.bg-primary', { hasText: 'lorem-ipsum' }).first();
+    
+    if (await loremBadge.isVisible()) {
+      await loremBadge.click();
+      
+      // Wait for the search to update
+      await page.waitForTimeout(500);
+      
+      // Verify the search input was updated
+      await expect(page.locator('#search-query')).toHaveValue('lorem-ipsum');
+      
+      // Verify the URL was updated
+      await expect(page).toHaveURL(/s=lorem-ipsum/);
+    }
+  });
+
+  test('tag badge click prevents default link behavior', async ({ page }) => {
+    await page.goto(`${BASE_URL}/search`);
+    
+    // Search for "adritian"
+    await page.locator('#search-query').fill('adritian');
+    
+    // Wait for search results
+    await page.waitForTimeout(500);
+    
+    // Get initial URL
+    const initialUrl = page.url();
+    
+    // Click a tag badge
+    const tagBadge = page.locator('#search-results .badge.bg-primary').first();
+    await expect(tagBadge).toBeVisible();
+    
+    await tagBadge.click();
+    
+    // Wait a moment
+    await page.waitForTimeout(300);
+    
+    // Verify we're still on the search page (not navigated to the href)
+    expect(page.url()).toContain('/search');
+    
+    // But the URL should have been updated with the search parameter
+    expect(page.url()).not.toBe(initialUrl);
+  });
+
+  test('multiple tag badges can be clicked sequentially', async ({ page }) => {
+    await page.goto(`${BASE_URL}/search`);
+    
+    // Search for "adritian" to get multiple results with different tags
+    await page.locator('#search-query').fill('adritian');
+    
+    // Wait for search results
+    await page.waitForTimeout(500);
+    
+    // Click the first tag badge
+    const firstBadge = page.locator('#search-results .badge.bg-primary').first();
+    await expect(firstBadge).toBeVisible();
+    const firstBadgeText = await firstBadge.textContent();
+    
+    await firstBadge.click();
+    await page.waitForTimeout(500);
+    
+    // Verify search updated
+    await expect(page.locator('#search-query')).toHaveValue(firstBadgeText || '');
+    
+    // Now search for something else to get different tags
+    await page.locator('#search-query').fill('sample');
+    await page.waitForTimeout(500);
+    
+    // Click a different tag badge
+    const secondBadge = page.locator('#search-results .badge.bg-primary').first();
+    if (await secondBadge.isVisible()) {
+      const secondBadgeText = await secondBadge.textContent();
+      await secondBadge.click();
+      await page.waitForTimeout(500);
+      
+      // Verify search updated to the new tag
+      await expect(page.locator('#search-query')).toHaveValue(secondBadgeText || '');
+    }
+  });
 });
