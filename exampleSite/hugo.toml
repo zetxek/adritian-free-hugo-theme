@@ -2,6 +2,9 @@ baseURL = "https://adritian-demo.vercel.app/"
 title = "Adritian Demo"
 languageCode = "en"
 
+[pagination]
+pagerSize = 3
+
 
 # Exclude footer section from generating list pages (index.html and index.xml)
 [outputs]
