@@ -1,6 +1,13 @@
 // RTL (Right-to-Left) Support Styles
 // This file contains all the necessary overrides for RTL languages like Arabic and Hebrew
 
+// Prevent horizontal scroll caused by elements with negative margins in RTL
+// This is critical for mobile RTL layouts
+html[dir="rtl"],
+html[dir="rtl"] body {
+  overflow-x: hidden;
+}
+
 [dir="rtl"] {
   // Text alignment adjustments
   text-align: right;
@@ -66,6 +73,28 @@
         transform: scaleX(-1);
       }
     }
+  }
+  
+  // Fix elements with negative margins that cause horizontal overflow on mobile RTL
+  // About profile picture - reset negative margins on mobile
+  .about__profile-picture {
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
+    max-width: 100%;
+    flex: 0 0 100%;
+  }
+  
+  // Platform links - reset negative margins
+  .platform-links {
+    margin-right: 0;
+    margin-left: 0;
+  }
+  
+  // Clients section - reset negative margins
+  .clients {
+    margin-left: 0;
+    margin-right: 0;
   }
   
   // RTL image mirroring - images with class "rtl-mirror" will be mirrored in RTL mode
