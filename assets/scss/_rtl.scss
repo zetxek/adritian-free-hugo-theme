@@ -56,7 +56,7 @@
   .showcase-section {
     .platform-links.shortcode {
       margin-left: 0;
-      margin-right: -40px;
+      margin-right: 0; // Don't use negative margin in RTL as it causes horizontal scroll on mobile
     }
     
     // Mirror showcase image for RTL - the image appears on the left side in RTL
