@@ -193,7 +193,7 @@ test.describe('Search functionality', () => {
     await expect(page.locator('#search-results div[id^="summary-"]').first()).toBeVisible();
   });
 
-  test('clicking different tag badges updates search correctly', async ({ page }) => {
+  test('clicking a lorem-ipsum tag badge updates search input and URL', async ({ page }) => {
     await page.goto(`${BASE_URL}/search`);
     
     // Wait for the page to be fully loaded
