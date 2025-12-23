@@ -1,0 +1,26 @@
+{{/* Popular Tags Widget for sidebar on term pages */}}
+{{ $site := .Site }}
+{{ $allTags := $site.Taxonomies.tags }}
+
+{{ if $allTags }}
+<div class="widget widget-popular-tags card border-0 shadow-sm mb-4">
+  <div class="card-body">
+    <h3 class="h5 card-title mb-3">Popular Tags</h3>
+    <ul class="list-taxonomy widget-tags">
+      {{ range first 10 $allTags.ByCount }}
+        <li>
+          <a href="{{ .Page.RelPermalink }}">
+            {{ .Page.Title }}
+            <span class="badge taxonomy-count">{{ .Count }}</span>
+          </a>
+        </li>
+      {{ end }}
+    </ul>
+    <div class="mt-3">
+      <a href="{{ "tags" | absURL }}" class="btn btn-sm btn-outline-secondary">
+        View all tags
+      </a>
+    </div>
+  </div>
+</div>
+{{ end }}
