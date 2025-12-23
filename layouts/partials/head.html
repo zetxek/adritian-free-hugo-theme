@@ -86,7 +86,7 @@
   {{- if $style }}
     <link
       rel="stylesheet"
-      href="{{ $style.Permalink }}"
+      href="{{ $style.RelPermalink }}"
       integrity="{{ $style.Data.Integrity }}"
       crossorigin="anonymous" />
   {{- end }}
@@ -119,7 +119,7 @@
   {{- if hugo.IsProduction }}
     {{- $colorModesScript = $colorModesScript | resources.Minify | resources.Fingerprint }}
   {{- end }}
-  <script defer src="{{ $colorModesScript.Permalink }}"></script>
+  <script defer src="{{ $colorModesScript.RelPermalink }}"></script>
 {{- else }}
   <!-- disabled color theme selector -->
 {{- end }}
@@ -130,7 +130,7 @@
     defer
     src="https://www.googletagmanager.com/gtag/js?id={{ .Site.Params.analytics.google_tag_manager.code }}"></script>
   {{- $analytics := resources.Get "js/gtag.js" | resources.Minify }}
-  <script defer src="{{ $analytics.Permalink }}"></script>
+  <script defer src="{{ $analytics.RelPermalink }}"></script>
 {{- else }}
   <!-- no google tag displayed -->
 {{- end }}
