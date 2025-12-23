@@ -49,15 +49,18 @@
 // Translated labels from Hugo i18n
 const SEARCH_LABELS = {
   tags: "{{ i18n "search_tags_label" }}",
-  categories: "{{ i18n "search_categories_label" }}"
+  categories: "{{ i18n "search_categories_label" }}",
+  filterByTag: "{{ i18n "search_filter_by_tag" }}",
+  filterByCategory: "{{ i18n "search_filter_by_category" }}"
 };
 
 // Generate clickable tag/category badges
-function createTagBadge(tag) {
+function createTagBadge(tag, type) {
   const badge = document.createElement('a');
   badge.href = `${window.location.pathname}?s=${encodeURIComponent(tag)}`;
   badge.className = 'badge bg-primary text-decoration-none me-1';
   badge.textContent = tag;
+  badge.setAttribute('aria-label', `${type === 'tag' ? SEARCH_LABELS.filterByTag : SEARCH_LABELS.filterByCategory}: ${tag}`);
   badge.onclick = function(e) {
     e.preventDefault();
     document.getElementById('search-query').value = tag;
@@ -82,7 +85,7 @@ function addTagsToResult(element) {
       tagDiv.appendChild(label);
       
       tagArray.forEach(tag => {
-        tagDiv.appendChild(createTagBadge(tag));
+        tagDiv.appendChild(createTagBadge(tag, 'tag'));
       });
       
       element.querySelector('p').after(tagDiv);
@@ -101,7 +104,7 @@ function addTagsToResult(element) {
       catDiv.appendChild(label);
       
       catArray.forEach(cat => {
-        catDiv.appendChild(createTagBadge(cat));
+        catDiv.appendChild(createTagBadge(cat, 'category'));
       });
       
       element.querySelector('p').after(catDiv);

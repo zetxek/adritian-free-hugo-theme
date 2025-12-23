@@ -49,6 +49,10 @@
   translation: "Etiquetas"
 - id: "search_categories_label"
   translation: "Categorías"
+- id: "search_filter_by_tag"
+  translation: "Filtrar resultados de búsqueda por etiqueta"
+- id: "search_filter_by_category"
+  translation: "Filtrar resultados de búsqueda por categoría"
 
 ## Homepage head title
 - id: "head_title"

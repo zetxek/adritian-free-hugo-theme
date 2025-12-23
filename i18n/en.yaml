@@ -50,6 +50,10 @@
   translation: "Tags"
 - id: "search_categories_label"
   translation: "Categories"
+- id: "search_filter_by_tag"
+  translation: "Filter search results by tag"
+- id: "search_filter_by_category"
+  translation: "Filter search results by category"
 
 ## Homepage head title
 - id: "head_title"
