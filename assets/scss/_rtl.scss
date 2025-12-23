@@ -63,7 +63,11 @@ html[dir="rtl"] body {
   .showcase-section {
     .platform-links.shortcode {
       margin-left: 0;
-      margin-right: 0; // Don't use negative margin in RTL as it causes horizontal scroll on mobile
+      
+      // Apply negative margin only on larger screens to prevent horizontal scroll on mobile
+      @media (min-width: 992px) {
+        margin-right: -40px;
+      }
     }
     
     // Mirror showcase image for RTL - the image appears on the left side in RTL

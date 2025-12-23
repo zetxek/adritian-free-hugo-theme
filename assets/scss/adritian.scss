@@ -136,8 +136,10 @@ b, strong{
 }
 
 .showcase-section .platform-links.shortcode {
-  /* align to the left margin */
-  margin-left: -40px;
+  /* align to the left margin only on larger screens to prevent horizontal scroll on mobile */
+  @media (min-width: 992px) {
+    margin-left: -40px;
+  }
 }
 
 @media (min-width: 992px) {
