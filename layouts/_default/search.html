@@ -69,57 +69,36 @@ function createTagBadge(tag, type) {
   return badge;
 }
 
+// Helper function to add a taxonomy section (tags or categories) to search results
+function addTaxonomySection(element, dataString, labelText, type) {
+  if (!dataString) return;
+  
+  const itemArray = dataString.split(',').map(item => item.trim()).filter(Boolean);
+  if (itemArray.length === 0) return;
+  
+  const containerDiv = document.createElement('div');
+  containerDiv.className = 'mb-1';
+  
+  const label = document.createElement('span');
+  label.className = 'text-muted small';
+  label.textContent = labelText + ': ';
+  containerDiv.appendChild(label);
+  
+  itemArray.forEach(item => {
+    containerDiv.appendChild(createTagBadge(item, type));
+  });
+  
+  const paragraphElement = element.querySelector('p');
+  if (paragraphElement) {
+    paragraphElement.after(containerDiv);
+  } else {
+    element.appendChild(containerDiv);
+  }
+}
+
 function addTagsToResult(element) {
-  const tags = element.dataset.tags;
-  const categories = element.dataset.categories;
-  
-  if (tags) {
-    const tagArray = tags.split(',').map(t => t.trim()).filter(Boolean);
-    if (tagArray.length > 0) {
-      const tagDiv = document.createElement('div');
-      tagDiv.className = 'mb-1';
-      
-      const label = document.createElement('span');
-      label.className = 'text-muted small';
-      label.textContent = SEARCH_LABELS.tags + ': ';
-      tagDiv.appendChild(label);
-      
-      tagArray.forEach(tag => {
-        tagDiv.appendChild(createTagBadge(tag, 'tag'));
-      });
-      
-      const paragraphElement = element.querySelector('p');
-      if (paragraphElement) {
-        paragraphElement.after(tagDiv);
-      } else {
-        element.appendChild(tagDiv);
-      }
-    }
-  }
-  
-  if (categories) {
-    const catArray = categories.split(',').map(c => c.trim()).filter(Boolean);
-    if (catArray.length > 0) {
-      const catDiv = document.createElement('div');
-      catDiv.className = 'mb-1';
-      
-      const label = document.createElement('span');
-      label.className = 'text-muted small';
-      label.textContent = SEARCH_LABELS.categories + ': ';
-      catDiv.appendChild(label);
-      
-      catArray.forEach(cat => {
-        catDiv.appendChild(createTagBadge(cat, 'category'));
-      });
-      
-      const paragraphElement = element.querySelector('p');
-      if (paragraphElement) {
-        paragraphElement.after(catDiv);
-      } else {
-        element.appendChild(catDiv);
-      }
-    }
-  }
+  addTaxonomySection(element, element.dataset.tags, SEARCH_LABELS.tags, 'tag');
+  addTaxonomySection(element, element.dataset.categories, SEARCH_LABELS.categories, 'category');
 }
 </script>
 {{ end }}
