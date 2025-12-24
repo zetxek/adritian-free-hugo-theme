@@ -248,7 +248,7 @@ test.describe('Search functionality', () => {
     await tagBadge.click();
     
     // Wait a moment
-    await page.waitForTimeout(300);
+    await page.waitForTimeout(500);
     
     // Verify we're still on the search page (not navigated to the href)
     expect(page.url()).toContain('/search');
