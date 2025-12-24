@@ -28,6 +28,16 @@
   }
 
   .related-post-item {
+    // Override global `.section li::before` dot markers
+    padding-left: 0;
+
+    &::before {
+      content: none !important;
+      display: none !important;
+      width: 0 !important;
+      height: 0 !important;
+    }
+
     background: var(--bs-gray-100);
     border-radius: 0.5rem;
     padding: 1.5rem;

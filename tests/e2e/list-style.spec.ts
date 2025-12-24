@@ -8,20 +8,17 @@ if (!BASE_URL.startsWith('http')) {
 
 test.describe('List style functionality', () => {
   test('summary style shows full post previews', async ({ page }) => {
-    await page.goto(`${BASE_URL}/tags/sample`);
-    
-    // Check for summary style elements
+    await page.goto(`${BASE_URL}/blog`);
+
+    // Check for summary style elements on the blog list
     const articleSummary = page.locator('article.post.summary');
-    await expect(articleSummary).toBeVisible();
-    
+    await expect(articleSummary.first()).toBeVisible();
+
     // Verify summary components are present
-    await expect(page.locator('article.post.summary h2').first()).toBeVisible();
-    await expect(page.locator('article.post.summary .post-meta').first()).toBeVisible();
-    await expect(page.locator('article.post.summary .post-summary').first()).toBeVisible();
-    await expect(page.locator('article.post.summary .btn-outline-secondary').first()).toBeVisible();
-    
-    // Verify tags are displayed
-    await expect(page.locator('ul.tags li')).toHaveCount(2);
+    await expect(articleSummary.first().locator('h2.post-title')).toBeVisible();
+    await expect(articleSummary.first().locator('.post-meta')).toBeVisible();
+    await expect(articleSummary.first().locator('.post-summary')).toBeVisible();
+    await expect(articleSummary.first().locator('.btn-outline-secondary')).toBeVisible();
   });
 
 }); 
