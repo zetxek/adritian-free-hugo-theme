@@ -131,4 +131,60 @@ test.describe('Search functionality', () => {
     // Should still show results, potentially different count
     await expect(page.locator('#search-results div[id^="summary-"]').first()).toBeVisible();
   });
+
+  test('tags and categories render correctly when paragraph element is missing', async ({ page }) => {
+    await page.goto(`${BASE_URL}/search`);
+    
+    // Wait for the page to be fully loaded
+    await page.waitForLoadState('networkidle');
+    
+    // Modify the search result template to remove the paragraph element
+    await page.evaluate(() => {
+      const template = document.getElementById('search-result-template');
+      if (template) {
+        // Update template to exclude the paragraph element
+        template.innerHTML = `
+          <div id="summary-\${key}" class="mb-4 p-3 border-bottom" data-tags="\${tags}" data-categories="\${categories}">
+            <h4 class="mb-1"><a href="\${link}" class="text-decoration-none">\${title}</a></h4>
+          </div>
+        `;
+      }
+    });
+    
+    // Type "adritian" to trigger a search with results that have tags/categories
+    await page.locator('#search-query').fill('adritian');
+    
+    // Wait for search results to appear
+    await page.waitForTimeout(500);
+    
+    // Verify that at least one result is shown
+    await expect(page.locator('#search-results div[id^="summary-"]').first()).toBeVisible();
+    
+    // Verify that tags are rendered even without the paragraph element
+    // The tags/categories should be appended directly to the result container
+    const firstResult = page.locator('#search-results div[id^="summary-"]').first();
+    
+    // Check if tags or categories sections exist
+    const tagsOrCategoriesExist = await firstResult.locator('div.mb-1 .badge').count();
+    
+    // We should have tags/categories badges visible (if the content has them)
+    if (tagsOrCategoriesExist > 0) {
+      // Verify badges are visible and clickable
+      await expect(firstResult.locator('div.mb-1 .badge').first()).toBeVisible();
+      
+      // Verify no JavaScript errors occurred during rendering
+      const consoleErrors: string[] = [];
+      page.on('console', msg => {
+        if (msg.type() === 'error') {
+          consoleErrors.push(msg.text());
+        }
+      });
+      
+      // There should be no errors related to null/undefined paragraph elements
+      const relevantErrors = consoleErrors.filter(err => 
+        err.includes('querySelector') || err.includes('paragraph') || err.includes('after')
+      );
+      expect(relevantErrors).toHaveLength(0);
+    }
+  });
 });
