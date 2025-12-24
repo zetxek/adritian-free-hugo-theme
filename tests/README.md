@@ -13,6 +13,7 @@ This directory contains end-to-end tests for the Adritian Hugo theme using Playw
 - `search.spec.ts` - Search functionality
 - `html-validation.spec.ts` - HTML validation
 - `tags.spec.ts` - Tag pages
+- `pagination.spec.ts` - Tag and category page pagination
 - `contact.spec.ts` - Contact form
 - `list-style.spec.ts` - List style variations
 - `sections.spec.ts` - Section rendering
@@ -114,6 +115,42 @@ The `new-features.spec.ts` test suite includes **27 comprehensive tests** coveri
 ### Comments Integration (1 test)
 - ✅ Structure validation for comment systems
 
+## Pagination Tests
+
+The `pagination.spec.ts` test suite includes **16 comprehensive tests** covering pagination functionality for term pages (tags and categories):
+
+### Pagination Controls (6 tests)
+- ✅ Display pagination controls when multiple pages exist
+- ✅ Show current page as active
+- ✅ Navigate to next page when next button is clicked
+- ✅ Navigate to previous page when previous button is clicked
+- ✅ Don't show previous button on first page
+- ✅ Don't show next button on last page
+
+### Pagination Window Logic (3 tests)
+- ✅ Show all pages in window range (window size of 2 pages around current)
+- ✅ Navigate directly to specific page by clicking page number
+- ✅ Display first and last page numbers always
+
+### Ellipsis Display (1 test)
+- ✅ Show ellipsis correctly when there are many pages
+
+### Navigation Flow (1 test)
+- ✅ Maintain pagination when navigating between pages
+
+### Content Validation (1 test)
+- ✅ Display correct number of posts per page (based on pagination settings)
+
+### Accessibility (1 test)
+- ✅ Accessible pagination controls with proper ARIA labels
+
+### Multi-taxonomy Support (1 test)
+- ✅ Work with both categories and tags
+
+### Edge Cases (2 tests)
+- ✅ Don't show pagination when there is only one page
+- ✅ Handle direct navigation to non-existent page gracefully
+
 ## Prerequisites
 
 1. Install dependencies:
@@ -134,10 +171,23 @@ npm run build
 ## Configuration
 
 Tests use the Playwright configuration in `playwright.config.ts` which:
-- Runs tests against `http://localhost:1313`
+- Runs tests against `http://localhost:1313` by default
 - Automatically starts the Hugo server
 - Captures screenshots and videos on test failures
 - Generates HTML reports
+
+### Environment Variables
+
+- **`TEST_BASE_URL`**: Override the base URL for tests (default: `http://localhost:1313`)
+  ```bash
+  TEST_BASE_URL=https://example.com npm run test:e2e
+  ```
+- **`TEST_NO_MENUS`**: Run tests for configurations without menus (default: `false`)
+  ```bash
+  TEST_NO_MENUS=true npm run test:e2e
+  ```
+
+All test files validate that `TEST_BASE_URL` starts with `http://` or `https://` for security.
 
 ## Writing New Tests
 

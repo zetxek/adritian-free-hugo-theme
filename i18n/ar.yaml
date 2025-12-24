@@ -227,3 +227,7 @@
   translation: "التصنيفات"
 - id: "recent_posts"
   translation: "المقالات الأخيرة"
+- id: "popular_tags"
+  translation: "العلامات الشائعة"
+- id: "view_all_tags"
+  translation: "عرض جميع العلامات"

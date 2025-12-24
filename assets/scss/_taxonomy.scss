@@ -24,8 +24,8 @@
         align-items: center;
         gap: 0.5rem;
         padding: 0.5rem 1rem;
-        background-color: #f5f5f5;
-        color: #333;
+        background-color: $gray-100;
+        color: $gray-800;
         border-radius: 0.25rem;
         font-size: 0.9rem;
         font-weight: 500;
@@ -33,7 +33,7 @@
         text-decoration: none;
 
         &:hover {
-          background-color: #e8e8e8;
+          background-color: $gray-200;
           transform: translateY(-2px);
           box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
@@ -137,7 +137,7 @@
 
       .meta {
         font-size: 0.875rem !important;
-        color: #6c757d !important;
+        color: $gray-600 !important;
         font-weight: 400;
         display: flex;
         align-items: center;
@@ -263,7 +263,7 @@
       }
 
       .meta {
-        color: #adb5bd;
+        color: $gray-500;
       }
     }
 

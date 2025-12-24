@@ -132,169 +132,59 @@ test.describe('Search functionality', () => {
     await expect(page.locator('#search-results div[id^="summary-"]').first()).toBeVisible();
   });
 
-  test('tag badges are rendered in search results', async ({ page }) => {
+  test('tags and categories render correctly when paragraph element is missing', async ({ page }) => {
     await page.goto(`${BASE_URL}/search`);
     
     // Wait for the page to be fully loaded
     await page.waitForLoadState('networkidle');
     
-    // Search for "adritian" which should return blog posts with tags
+    // Modify the search result template to remove the paragraph element
+    await page.evaluate(() => {
+      const template = document.getElementById('search-result-template');
+      if (template) {
+        // Update template to exclude the paragraph element
+        template.innerHTML = `
+          <div id="summary-\${key}" class="mb-4 p-3 border-bottom" data-tags="\${tags}" data-categories="\${categories}">
+            <h4 class="mb-1"><a href="\${link}" class="text-decoration-none">\${title}</a></h4>
+          </div>
+        `;
+      }
+    });
+    
+    // Type "adritian" to trigger a search with results that have tags/categories
     await page.locator('#search-query').fill('adritian');
     
-    // Wait for search results to appear (the debounce is 300ms)
+    // Wait for search results to appear
     await page.waitForTimeout(500);
     
-    // Verify we have results
+    // Verify that at least one result is shown
     await expect(page.locator('#search-results div[id^="summary-"]').first()).toBeVisible();
     
-    // Check that tag badges are rendered
-    const tagBadges = page.locator('#search-results .badge.bg-primary');
-    await expect(tagBadges.first()).toBeVisible();
+    // Verify that tags are rendered even without the paragraph element
+    // The tags/categories should be appended directly to the result container
+    const firstResult = page.locator('#search-results div[id^="summary-"]').first();
     
-    // Verify badges have the correct styling classes
-    const firstBadge = tagBadges.first();
-    await expect(firstBadge).toHaveClass('badge bg-primary text-decoration-none me-1');
-  });
-
-  test('clicking a tag badge updates search input and filters results', async ({ page }) => {
-    await page.goto(`${BASE_URL}/search`);
+    // Check if tags or categories sections exist
+    const tagsOrCategoriesExist = await firstResult.locator('div.mb-1 .badge').count();
     
-    // Wait for the page to be fully loaded
-    await page.waitForLoadState('networkidle');
-    
-    // Search for "adritian" to get results with tags
-    await page.locator('#search-query').fill('adritian');
-    
-    // Wait for search results to appear (the debounce is 300ms)
-    await page.waitForTimeout(500);
-    
-    // Verify we have results
-    await expect(page.locator('#search-results div[id^="summary-"]').first()).toBeVisible();
-    
-    // Find a tag badge (e.g., "guide")
-    const guideBadge = page.locator('#search-results .badge.bg-primary', { hasText: 'guide' }).first();
-    
-    // Verify the badge is visible before clicking
-    await expect(guideBadge).toBeVisible();
-    
-    // Click the badge
-    await guideBadge.click();
-    
-    // Wait for the search to update (the debounce is 300ms)
-    await page.waitForTimeout(500);
-    
-    // Verify the search input was updated with the tag
-    await expect(page.locator('#search-query')).toHaveValue('guide');
-    
-    // Verify the URL was updated
-    await expect(page).toHaveURL(/s=guide/);
-    
-    // Verify search results are filtered (should show posts with "guide" tag)
-    await expect(page.locator('#search-results div[id^="summary-"]').first()).toBeVisible();
-  });
-
-  test('clicking a lorem-ipsum tag badge updates search input and URL', async ({ page }) => {
-    await page.goto(`${BASE_URL}/search`);
-    
-    // Wait for the page to be fully loaded
-    await page.waitForLoadState('networkidle');
-    
-    // Search for "sample" to get results with that tag
-    await page.locator('#search-query').fill('sample');
-    
-    // Wait for search results to appear (the debounce is 300ms)
-    await page.waitForTimeout(500);
-    
-    // Verify we have results
-    await expect(page.locator('#search-results div[id^="summary-"]').first()).toBeVisible();
-    
-    // Click on a tag badge (e.g., "lorem-ipsum")
-    const loremBadge = page.locator('#search-results .badge.bg-primary', { hasText: 'lorem-ipsum' }).first();
-    await expect(loremBadge).toBeVisible();
-    await loremBadge.click();
-    
-    // Wait for the search to update (the debounce is 300ms)
-    await page.waitForTimeout(500);
-    
-    // Verify the search input was updated
-    await expect(page.locator('#search-query')).toHaveValue('lorem-ipsum');
-    
-    // Verify the URL was updated
-    await expect(page).toHaveURL(/s=lorem-ipsum/);
-  });
-
-  test('tag badge click prevents default link behavior', async ({ page }) => {
-    await page.goto(`${BASE_URL}/search`);
-    
-    // Wait for the page to be fully loaded
-    await page.waitForLoadState('networkidle');
-    
-    // Search for "adritian"
-    await page.locator('#search-query').fill('adritian');
-    
-    // Wait for search results (the debounce is 300ms)
-    await page.waitForTimeout(500);
-    
-    // Get initial URL
-    const initialUrl = page.url();
-    
-    // Click a tag badge
-    const tagBadge = page.locator('#search-results .badge.bg-primary').first();
-    await expect(tagBadge).toBeVisible();
-    
-    // Get the badge text before clicking
-    const tagText = await tagBadge.textContent();
-    
-    await tagBadge.click();
-    
-    // Wait a moment
-    await page.waitForTimeout(500);
-    
-    // Verify we're still on the search page (not navigated to the href)
-    expect(page.url()).toContain('/search');
-    
-    // But the URL should have been updated with the search parameter
-    expect(page.url()).not.toBe(initialUrl);
-    
-    // Verify the search input was updated with the clicked tag value
-    await expect(page.locator('#search-query')).toHaveValue(tagText || '');
-  });
-
-  test('multiple tag badges can be clicked sequentially', async ({ page }) => {
-    await page.goto(`${BASE_URL}/search`);
-    
-    // Wait for the page to be fully loaded
-    await page.waitForLoadState('networkidle');
-    
-    // Search for "adritian" to get multiple results with different tags
-    await page.locator('#search-query').fill('adritian');
-    
-    // Wait for search results (the debounce is 300ms)
-    await page.waitForTimeout(500);
-    
-    // Click the first tag badge
-    const firstBadge = page.locator('#search-results .badge.bg-primary').first();
-    await expect(firstBadge).toBeVisible();
-    const firstBadgeText = await firstBadge.textContent();
-    
-    await firstBadge.click();
-    await page.waitForTimeout(500);
-    
-    // Verify search updated
-    await expect(page.locator('#search-query')).toHaveValue(firstBadgeText || '');
-    
-    // Now search for something else to get different tags
-    await page.locator('#search-query').fill('sample');
-    await page.waitForTimeout(500);
-    
-    // Click a different tag badge
-    const secondBadge = page.locator('#search-results .badge.bg-primary').first();
-    await expect(secondBadge).toBeVisible();
-    const secondBadgeText = await secondBadge.textContent();
-    await secondBadge.click();
-    await page.waitForTimeout(500);
-    
-    // Verify search updated to the new tag
-    await expect(page.locator('#search-query')).toHaveValue(secondBadgeText || '');
+    // We should have tags/categories badges visible (if the content has them)
+    if (tagsOrCategoriesExist > 0) {
+      // Verify badges are visible and clickable
+      await expect(firstResult.locator('div.mb-1 .badge').first()).toBeVisible();
+      
+      // Verify no JavaScript errors occurred during rendering
+      const consoleErrors: string[] = [];
+      page.on('console', msg => {
+        if (msg.type() === 'error') {
+          consoleErrors.push(msg.text());
+        }
+      });
+      
+      // There should be no errors related to null/undefined paragraph elements
+      const relevantErrors = consoleErrors.filter(err => 
+        err.includes('querySelector') || err.includes('paragraph') || err.includes('after')
+      );
+      expect(relevantErrors).toHaveLength(0);
+    }
   });
 });

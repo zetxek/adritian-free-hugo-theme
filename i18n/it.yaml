@@ -222,3 +222,7 @@
   translation: "Categorie"
 - id: "recent_posts"
   translation: "Articoli recenti"
+- id: "popular_tags"
+  translation: "Tag popolari"
+- id: "view_all_tags"
+  translation: "Visualizza tutti i tag"

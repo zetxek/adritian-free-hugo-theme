@@ -49,6 +49,10 @@
   translation: "Tags"
 - id: "search_categories_label"
   translation: "Catégories"
+- id: "search_filter_by_tag"
+  translation: "Filtrer les résultats de recherche par tag"
+- id: "search_filter_by_category"
+  translation: "Filtrer les résultats de recherche par catégorie"
 
 ## Homepage head title
 - id: "head_title"
@@ -118,4 +122,8 @@
   translation: "Catégories"
 - id: "recent_posts"
   translation: "Articles récents"
+- id: "popular_tags"
+  translation: "Tags populaires"
+- id: "view_all_tags"
+  translation: "Voir tous les tags"
 
