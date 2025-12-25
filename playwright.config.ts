@@ -3,6 +3,9 @@ import { PlaywrightTestConfig, defineConfig, devices } from '@playwright/test';
 import path from 'path';
 import fs from 'fs';
 
+const port = Number(process.env.PLAYWRIGHT_PORT) || 1313;
+const baseURL = `http://localhost:${port}`;
+
 // Ensure output directories exist
 const outputFolder = path.join(process.cwd(), 'playwright-report');
 const testResults = path.join(process.cwd(), 'test-results');
@@ -19,7 +22,7 @@ export default defineConfig ({
     // Platform-agnostic snapshot naming (removes -linux, -darwin, -win32 suffixes)
     snapshotPathTemplate: '{testDir}/{testFileDir}/{testFileName}-snapshots/{arg}{ext}',
     use: {
-        baseURL: 'http://localhost:1313',
+        baseURL,
         screenshot: 'on',
         trace: 'retain-on-failure',
         video: 'on',
@@ -53,8 +56,8 @@ export default defineConfig ({
     ,
     outputDir: testResults,
     webServer: {
-        command: 'cd exampleSite && hugo server --themesDir ../.. --buildDrafts --buildFuture --bind 0.0.0.0',
-        url: 'http://localhost:1313',
+        command: `cd exampleSite && hugo server --themesDir ../.. --buildDrafts --buildFuture --bind 0.0.0.0 --port ${port}`,
+        url: baseURL,
         reuseExistingServer: true,
     },
     preserveOutput: 'always',

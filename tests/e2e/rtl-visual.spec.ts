@@ -155,7 +155,12 @@ test.describe('RTL Visual Regression Tests', () => {
     
     const breadcrumbs = page.locator('.breadcrumbs');
     if (await breadcrumbs.count() > 0) {
-      await expect(breadcrumbs.first()).toHaveScreenshot('breadcrumbs-rtl.png', {
+      const breadcrumbTarget = breadcrumbs.first();
+      await breadcrumbTarget.evaluate((element) => {
+        element.style.width = '400px';
+        element.style.boxSizing = 'border-box';
+      });
+      await expect(breadcrumbTarget).toHaveScreenshot('breadcrumbs-rtl.png', {
         animations: 'disabled',
       });
     }
@@ -239,4 +244,3 @@ test.describe('RTL Visual Regression Tests', () => {
     }
   });
 });
-
