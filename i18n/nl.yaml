@@ -171,6 +171,22 @@
 - id: "continue_reading"
   translation: "Doorgaan met lezen"
 
+## Blog Stats (for list-cards layout)
+- id: "blog_stats_posts"
+  translation: "Berichten"
+
+- id: "blog_stats_last_updated"
+  translation: "Laatst bijgewerkt"
+
+- id: "blog_stats_first_post"
+  translation: "Eerste bericht"
+
+- id: "blog_stats_topics"
+  translation: "Onderwerpen"
+
+- id: "blog_stats_latest_post"
+  translation: "Nieuwste bericht"
+
 ## 404 Page
 - id: "404_title"
   translation: "Pagina niet gevonden"

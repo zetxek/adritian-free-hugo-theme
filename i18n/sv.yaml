@@ -171,6 +171,22 @@
 - id: "continue_reading"
   translation: "Fortsätt läsa"
 
+## Blog Stats (for list-cards layout)
+- id: "blog_stats_posts"
+  translation: "Inlägg"
+
+- id: "blog_stats_last_updated"
+  translation: "Senast uppdaterad"
+
+- id: "blog_stats_first_post"
+  translation: "Första inlägget"
+
+- id: "blog_stats_topics"
+  translation: "Ämnen"
+
+- id: "blog_stats_latest_post"
+  translation: "Senaste inlägget"
+
 ## 404 Page
 - id: "404_title"
   translation: "Sidan hittades inte"
