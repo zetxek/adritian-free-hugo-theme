@@ -517,3 +517,65 @@
         transform: translateX(3px);
     }
 }
+
+// Card layout styles
+.blog-list {
+    article {
+        position: relative;
+        transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+
+        &:hover,
+        &:focus-within {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12) !important;
+            border-color: rgba($base-color, 0.3) !important;
+        }
+
+        &:focus-within {
+            outline: 2px solid rgba($base-color, 0.5);
+            outline-offset: 2px;
+        }
+
+        a {
+            // Use stretched-link pattern for accessibility
+            &::after {
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                z-index: 1;
+                content: "";
+            }
+
+            &:focus {
+                outline: none;
+            }
+
+            &:focus-visible {
+                outline: 2px solid $base-color;
+                outline-offset: 4px;
+                border-radius: 4px;
+            }
+        }
+    }
+}
+
+// Dark theme adjustments for card layout
+[data-theme="dark"] {
+    .blog-list article {
+        &:hover,
+        &:focus-within {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4) !important;
+            border-color: rgba($dark-primary, 0.4) !important;
+        }
+
+        &:focus-within {
+            outline-color: rgba($dark-primary, 0.6);
+        }
+
+        a:focus-visible {
+            outline-color: $dark-primary;
+        }
+    }
+}
