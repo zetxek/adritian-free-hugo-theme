@@ -176,6 +176,22 @@
 - id: "continue_reading"
   translation: "המשך לקרוא"
 
+## Blog Stats (for list-cards layout)
+- id: "blog_stats_posts"
+  translation: "פוסטים"
+
+- id: "blog_stats_last_updated"
+  translation: "עודכן לאחרונה"
+
+- id: "blog_stats_first_post"
+  translation: "פוסט ראשון"
+
+- id: "blog_stats_topics"
+  translation: "נושאים"
+
+- id: "blog_stats_latest_post"
+  translation: "פוסט אחרון"
+
 ## 404 Page
 - id: "404_title"
   translation: "הדף לא נמצא"

@@ -171,6 +171,22 @@
 - id: "continue_reading"
   translation: "Weiterlesen"
 
+## Blog Stats (for list-cards layout)
+- id: "blog_stats_posts"
+  translation: "Beiträge"
+
+- id: "blog_stats_last_updated"
+  translation: "Zuletzt aktualisiert"
+
+- id: "blog_stats_first_post"
+  translation: "Erster Beitrag"
+
+- id: "blog_stats_topics"
+  translation: "Themen"
+
+- id: "blog_stats_latest_post"
+  translation: "Neuester Beitrag"
+
 ## 404 Page
 - id: "404_title"
   translation: "Seite nicht gefunden"

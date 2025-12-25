@@ -176,6 +176,22 @@
 - id: "continue_reading"
   translation: "متابعة القراءة"
 
+## Blog Stats (for list-cards layout)
+- id: "blog_stats_posts"
+  translation: "المقالات"
+
+- id: "blog_stats_last_updated"
+  translation: "آخر تحديث"
+
+- id: "blog_stats_first_post"
+  translation: "أول مقال"
+
+- id: "blog_stats_topics"
+  translation: "المواضيع"
+
+- id: "blog_stats_latest_post"
+  translation: "آخر مقال"
+
 ## 404 Page
 - id: "404_title"
   translation: "الصفحة غير موجودة"

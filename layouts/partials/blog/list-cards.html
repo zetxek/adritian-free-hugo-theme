@@ -26,23 +26,23 @@
             <div class="card-body">
               <div class="row g-3">
                 <div class="col-6">
-                  <div class="text-muted small">Posts</div>
+                  <h3 class="text-muted small mb-1">{{ i18n "blog_stats_posts" }}</h3>
                   <div class="h4 mb-0">{{ len $posts }}</div>
                 </div>
                 <div class="col-6">
-                  <div class="text-muted small">Last updated</div>
+                  <h3 class="text-muted small mb-1">{{ i18n "blog_stats_last_updated" }}</h3>
                   {{ with $latestPosts }}
                     <div class="h4 mb-0">{{ (index . 0).Date.Format "Jan 2, 2006" }}</div>
                   {{ end }}
                 </div>
                 <div class="col-6">
-                  <div class="text-muted small">First post</div>
+                  <h3 class="text-muted small mb-1">{{ i18n "blog_stats_first_post" }}</h3>
                   {{ with $earliestPosts }}
                     <div class="h6 mb-0">{{ (index . 0).Date.Format "Jan 2, 2006" }}</div>
                   {{ end }}
                 </div>
                 <div class="col-6">
-                  <div class="text-muted small">Topics</div>
+                  <h3 class="text-muted small mb-1">{{ i18n "blog_stats_topics" }}</h3>
                   {{ with $topicsTaxonomy }}
                     <div class="h6 mb-0">{{ len . }}</div>
                   {{ else }}
@@ -53,7 +53,7 @@
               {{ with $latestPosts }}
                 {{ $latest := index . 0 }}
                 <div class="mt-4">
-                  <div class="text-muted small">Latest post</div>
+                  <h3 class="text-muted small mb-1">{{ i18n "blog_stats_latest_post" }}</h3>
                   <a class="fw-semibold text-decoration-none" href="{{ $latest.RelPermalink }}">{{ $latest.LinkTitle }}</a>
                 </div>
               {{ end }}

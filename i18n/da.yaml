@@ -171,6 +171,22 @@
 - id: "continue_reading"
   translation: "Fortsæt med at læse"
 
+## Blog Stats (for list-cards layout)
+- id: "blog_stats_posts"
+  translation: "Indlæg"
+
+- id: "blog_stats_last_updated"
+  translation: "Senest opdateret"
+
+- id: "blog_stats_first_post"
+  translation: "Første indlæg"
+
+- id: "blog_stats_topics"
+  translation: "Emner"
+
+- id: "blog_stats_latest_post"
+  translation: "Seneste indlæg"
+
 ## 404 Page
 - id: "404_title"
   translation: "Side ikke fundet"
