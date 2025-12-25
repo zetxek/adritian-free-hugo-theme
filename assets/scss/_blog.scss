@@ -261,6 +261,66 @@
             }
         }
     }
+
+    // Pagination styling for blog list pages
+    .pagination {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        list-style: none;
+        padding: 0;
+        margin: 2.5rem 0 0;
+
+        .page-item {
+            margin: 0;
+            list-style: none;
+
+            &::before {
+                content: none;
+                display: none;
+            }
+        }
+
+        .page-link {
+            color: $base-color;
+            background-color: transparent;
+            border: 1px solid rgba(0, 0, 0, 0.12);
+            padding: 0.5rem 0.8rem;
+            text-align: center;
+            border-radius: 0;
+            transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+            line-height: 1.1;
+            margin: 0;
+
+            &:hover,
+            &:focus-visible {
+                background-color: rgba($base-color, 0.12);
+                border-color: $base-color;
+            }
+        }
+
+        // Compact pagination with connected pills
+        .page-item + .page-item .page-link {
+            margin-left: -1px;
+        }
+
+        .page-item:first-child .page-link {
+            border-top-left-radius: 0.375rem;
+            border-bottom-left-radius: 0.375rem;
+        }
+
+        .page-item:last-child .page-link {
+            border-top-right-radius: 0.375rem;
+            border-bottom-right-radius: 0.375rem;
+        }
+
+        .page-item.active .page-link {
+            background-color: $base-color;
+            border-color: $base-color;
+            color: $white;
+            font-weight: 600;
+        }
+    }
 }
 
 @include color-mode(dark) {
@@ -330,6 +390,26 @@
                 &:hover {
                     color: var(--bs-primary);
                 }
+            }
+        }
+
+        .pagination {
+            .page-link {
+                color: $dark-primary;
+                background-color: transparent;
+                border-color: rgba(255, 255, 255, 0.12);
+
+                &:hover,
+                &:focus-visible {
+                    background-color: rgba($dark-primary, 0.12);
+                    border-color: $dark-primary;
+                }
+            }
+
+            .page-item.active .page-link {
+                background-color: $dark-primary;
+                border-color: $dark-primary;
+                color: var(--bs-body-bg);
             }
         }
     }
@@ -416,4 +496,3 @@
         transform: translateX(3px);
     }
 }
-

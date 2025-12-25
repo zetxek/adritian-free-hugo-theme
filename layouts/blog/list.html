@@ -22,126 +22,132 @@
           <h1 class="rad-fade-down rad-waiting rad-animate">{{ .Title }}</h1>
           {{ .Content }}
 
-          <!-- Main Featured Post - Full Width Design -->
-          <div class="featured-post-container">
-            {{ $featuredPosts := where .Pages ".Params.featured" true }}
-            {{ if isset .Site.Params "blog" }}
-              {{ if isset .Site.Params.blog "featured_sort_by_weight" }}
-                {{ if .Site.Params.blog.featured_sort_by_weight }}
-                  {{ $featuredPosts = sort $featuredPosts "Weight" }}
+          {{ $allPosts := .Pages }}
+          {{ $nonFeaturedPosts := where $allPosts ".Params.featured" "!=" true }}
+          {{ $paginator := .Paginate $nonFeaturedPosts }}
+
+          {{ if eq $paginator.PageNumber 1 }}
+            <!-- Main Featured Post - Full Width Design -->
+            <div class="featured-post-container">
+              {{ $featuredPosts := where $allPosts ".Params.featured" true }}
+              {{ if isset .Site.Params "blog" }}
+                {{ if isset .Site.Params.blog "featured_sort_by_weight" }}
+                  {{ if .Site.Params.blog.featured_sort_by_weight }}
+                    {{ $featuredPosts = sort $featuredPosts "Weight" }}
+                  {{ end }}
+                {{ else }}
+                  {{ $featuredPosts = sort $featuredPosts "Date" "desc" }}
                 {{ end }}
               {{ else }}
                 {{ $featuredPosts = sort $featuredPosts "Date" "desc" }}
               {{ end }}
-            {{ else }}
-              {{ $featuredPosts = sort $featuredPosts "Date" "desc" }}
-            {{ end }}
-            {{ $mainFeaturedPost := first 1 $featuredPosts }}
-            {{ if $mainFeaturedPost }}
-              {{ range $mainFeaturedPost }}
-                <div class="p-4 p-md-5 mb-4 rounded text-body-emphasis bg-body-secondary">
-                  <div class="row align-items-center">
-                    <div class="col-lg-8 px-0">
-                      <h2 class="display-4 fst-italic">
-                        {{ .Title }}
-                      </h2>
-                        <div class="lead my-3">
-                        {{ .Summary | plainify | safeHTML }}
-                        </div>
-                      <p class="lead mb-0">
-                        <a href="{{ .RelPermalink }}" class="text-body-emphasis fw-bold">
-                          Continue reading...
-                        </a>
-                      </p>
-                    </div>
-                    {{ if isset .Params "images" }}
-                      {{ with .Params.images }}
-                        {{ if isset . "featured_image" }}
-                          <div class="col-lg-4 d-flex justify-content-center align-items-center mt-4 mt-lg-0">
-                            <img src="{{ .featured_image }}" alt="{{ $.Title }}" class="featured-thumbnail img-fluid rounded">
+              {{ $mainFeaturedPost := first 1 $featuredPosts }}
+              {{ if $mainFeaturedPost }}
+                {{ range $mainFeaturedPost }}
+                  <div class="p-4 p-md-5 mb-4 rounded text-body-emphasis bg-body-secondary">
+                    <div class="row align-items-center">
+                      <div class="col-lg-8 px-0">
+                        <h2 class="display-4 fst-italic">
+                          {{ .Title }}
+                        </h2>
+                          <div class="lead my-3">
+                          {{ .Summary | plainify | safeHTML }}
                           </div>
-                        {{ end }}
-                      {{ end }}
-                    {{ end }}
-                  </div>
-                </div>
-              {{ end }}
-            {{ else }}
-              <!-- no featured post is found -->
-            {{ end }}
-          </div>
-
-          <div class="row mb-2">
-            <!-- Secondary featured posts (2-3rd featured posts) -->
-            {{ $secondaryFeaturedPosts := after 1 $featuredPosts | first 2 }}
-            
-            {{ if $secondaryFeaturedPosts }}
-              {{ range $secondaryFeaturedPosts }}
-                <div class="col-md-6">
-                  <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-                    <div class="col p-4 d-flex flex-column position-static">
-                      {{ with .GetTerms "topics" }}
-                        {{ range first 1 . }}
-                          <strong class="d-inline-block mb-2 text-primary-emphasis">
-                            {{ .LinkTitle }}
-                          </strong>
-                        {{ end }}
-                      {{ end }}
-                      <h3 class="mb-0">{{ .Title }}</h3>
-                      <div class="mb-1 text-body-secondary">{{ .Date.Format "Jan 2, 2006" }}</div>
-                      <div class="card-text mb-auto">
-                        {{ .Summary | plainify | truncate 120 }}
+                        <p class="lead mb-0">
+                          <a href="{{ .RelPermalink }}" class="text-body-emphasis fw-bold">
+                            Continue reading...
+                          </a>
+                        </p>
                       </div>
-                      <a href="{{ .RelPermalink }}" class="icon-link gap-1 icon-link-hover stretched-link">
-                        Continue reading
-                        <svg class="bi" aria-hidden="true" width="16" height="16" focusable="false">
-                          <use xlink:href="#chevron-right"></use>
-                        </svg>
-                      </a>
-                    </div>
-                    <div class="col-auto d-none d-lg-block">
                       {{ if isset .Params "images" }}
                         {{ with .Params.images }}
                           {{ if isset . "featured_image" }}
-                            <img src="{{ .featured_image }}" width="200" height="250" alt="{{ $.Title }}" class="secondary-featured-img">
-                          {{ else }}
-                            <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" 
-                                role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice"
-                                focusable="false">
-                              <title>Placeholder</title>
-                              <rect width="100%" height="100%" fill="#55595c"></rect>
-                              <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
-                            </svg>
+                            <div class="col-lg-4 d-flex justify-content-center align-items-center mt-4 mt-lg-0">
+                              <img src="{{ .featured_image }}" alt="{{ $.Title }}" class="featured-thumbnail img-fluid rounded">
+                            </div>
                           {{ end }}
                         {{ end }}
-                      {{ else }}
-                        <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" 
-                            role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice"
-                            focusable="false">
-                          <title>Placeholder</title>
-                          <rect width="100%" height="100%" fill="#55595c"></rect>
-                          <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
-                        </svg>
                       {{ end }}
                     </div>
                   </div>
-                </div>
+                {{ end }}
+              {{ else }}
+                <!-- no featured post is found -->
               {{ end }}
+            </div>
+
+            <div class="row mb-2">
+              <!-- Secondary featured posts (2-3rd featured posts) -->
+              {{ $secondaryFeaturedPosts := after 1 $featuredPosts | first 2 }}
               
-            
-            {{ end }}
-          </div>
+              {{ if $secondaryFeaturedPosts }}
+                {{ range $secondaryFeaturedPosts }}
+                  <div class="col-md-6">
+                    <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                      <div class="col p-4 d-flex flex-column position-static">
+                        {{ with .GetTerms "topics" }}
+                          {{ range first 1 . }}
+                            <strong class="d-inline-block mb-2 text-primary-emphasis">
+                              {{ .LinkTitle }}
+                            </strong>
+                          {{ end }}
+                        {{ end }}
+                        <h3 class="mb-0">{{ .Title }}</h3>
+                        <div class="mb-1 text-body-secondary">{{ .Date.Format "Jan 2, 2006" }}</div>
+                        <div class="card-text mb-auto">
+                          {{ .Summary | plainify | truncate 120 }}
+                        </div>
+                        <a href="{{ .RelPermalink }}" class="icon-link gap-1 icon-link-hover stretched-link">
+                          Continue reading
+                          <svg class="bi" aria-hidden="true" width="16" height="16" focusable="false">
+                            <use xlink:href="#chevron-right"></use>
+                          </svg>
+                        </a>
+                      </div>
+                      <div class="col-auto d-none d-lg-block">
+                        {{ if isset .Params "images" }}
+                          {{ with .Params.images }}
+                            {{ if isset . "featured_image" }}
+                              <img src="{{ .featured_image }}" width="200" height="250" alt="{{ $.Title }}" class="secondary-featured-img">
+                            {{ else }}
+                              <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" 
+                                  role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice"
+                                  focusable="false">
+                                <title>Placeholder</title>
+                                <rect width="100%" height="100%" fill="#55595c"></rect>
+                                <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
+                              </svg>
+                            {{ end }}
+                          {{ end }}
+                        {{ else }}
+                          <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" 
+                              role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice"
+                              focusable="false">
+                            <title>Placeholder</title>
+                            <rect width="100%" height="100%" fill="#55595c"></rect>
+                            <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
+                          </svg>
+                        {{ end }}
+                      </div>
+                    </div>
+                  </div>
+                {{ end }}
+              {{ end }}
+            </div>
+          {{ end }}
 
           <div class="posts-list">
-            {{ $allPosts := .Pages }}
-            {{ $nonFeaturedPosts := where $allPosts ".Params.featured" "!=" true }}
-            {{ range $nonFeaturedPosts }}
+            {{ range $paginator.Pages }}
               <div
                 class="row row--padded rad-animation-group rad-fade-down rad-waiting rad-animate section--border-bottom">
                 {{ .Render "summary" }}
               </div>
             {{ end }}
           </div>
+
+          {{ if gt $paginator.TotalPages 1 }}
+            {{ template "_internal/pagination.html" . }}
+          {{ end }}
         </div>
         
         {{ if eq .Site.Params.blog.layout "sidebar-right" }}
