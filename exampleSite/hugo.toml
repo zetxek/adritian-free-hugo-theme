@@ -493,7 +493,7 @@ showCategories = true
 showRecentPosts = true
 recentPostCount = 5
 listStyle = "summary"  # options: simple, summary
-listLayout = "cards" # options: default, cards
+listLayout = "default" # options: default, cards
 featured_sort_by_weight = true
 featured_sort_by_date = false
 
