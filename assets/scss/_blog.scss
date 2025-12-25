@@ -320,6 +320,18 @@
             color: $white;
             font-weight: 600;
         }
+
+        // Disabled state for pagination controls (e.g., first/last pages)
+        .page-item.disabled .page-link,
+        .page-link:disabled {
+            color: var(--bs-secondary-color);
+            background-color: transparent;
+            border-color: rgba(0, 0, 0, 0.12);
+            pointer-events: none;
+            cursor: not-allowed;
+            opacity: 0.65;
+            box-shadow: none;
+        }
     }
 }
 
