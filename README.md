@@ -222,6 +222,7 @@ showCategories = true        # show categories in the sidebar
 showRecentPosts = true       # show recent posts in the sidebar
 recentPostCount = 5          # number of recent posts to display
 listStyle = "summary"        # options: simple, summary
+listLayout = "default"       # options: default, cards
 ```
 
 **Configuration options:**
@@ -232,6 +233,7 @@ listStyle = "summary"        # options: simple, summary
 - `showRecentPosts`: Display recent posts in the sidebar
 - `recentPostCount`: Number of recent posts to show in the sidebar
 - `listStyle`: Choose between `simple` (title and date only) or `summary` (includes excerpt)
+- `listLayout`: Choose between `default` (featured + list) or `cards` (stats header + card grid)
 
 ##### Blog Post Features
 

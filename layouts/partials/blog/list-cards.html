@@ -1,0 +1,106 @@
+{{ $posts := where .RegularPages "Draft" false }}
+{{ $latestPosts := first 1 (sort $posts "Date" "desc") }}
+{{ $earliestPosts := first 1 (sort $posts "Date" "asc") }}
+{{ $topicsTaxonomy := .Site.Taxonomies.topics }}
+{{ if not $topicsTaxonomy }}
+  {{ $topicsTaxonomy = .Site.Taxonomies.tags }}
+{{ end }}
+{{ $topicsPage := .Site.GetPage "topics" }}
+{{ if not $topicsPage }}
+  {{ $topicsPage = .Site.GetPage "tags" }}
+{{ end }}
+<section id="blog-list" class="blog section section--border-bottom rad-animation-group flex-grow-1">
+  <div class="container">
+    <header class="blog-intro mb-5">
+      <div class="row gy-4 align-items-start">
+        <div class="col-12 col-lg-7">
+          <h1 class="mb-3">{{ .Title }}</h1>
+          {{ if .Content }}
+            <div class="lead blog-intro-copy">{{ .Content }}</div>
+          {{ else if .Params.description }}
+            <p class="lead blog-intro-copy">{{ .Params.description }}</p>
+          {{ end }}
+        </div>
+        <div class="col-12 col-lg-5">
+          <div class="card border-0 shadow-sm h-100">
+            <div class="card-body">
+              <div class="row g-3">
+                <div class="col-6">
+                  <div class="text-muted small">Posts</div>
+                  <div class="h4 mb-0">{{ len $posts }}</div>
+                </div>
+                <div class="col-6">
+                  <div class="text-muted small">Last updated</div>
+                  {{ with $latestPosts }}
+                    <div class="h4 mb-0">{{ (index . 0).Date.Format "Jan 2, 2006" }}</div>
+                  {{ end }}
+                </div>
+                <div class="col-6">
+                  <div class="text-muted small">First post</div>
+                  {{ with $earliestPosts }}
+                    <div class="h6 mb-0">{{ (index . 0).Date.Format "Jan 2, 2006" }}</div>
+                  {{ end }}
+                </div>
+                <div class="col-6">
+                  <div class="text-muted small">Topics</div>
+                  {{ with $topicsTaxonomy }}
+                    <div class="h6 mb-0">{{ len . }}</div>
+                  {{ else }}
+                    <div class="h6 mb-0">0</div>
+                  {{ end }}
+                </div>
+              </div>
+              {{ with $latestPosts }}
+                {{ $latest := index . 0 }}
+                <div class="mt-4">
+                  <div class="text-muted small">Latest post</div>
+                  <a class="fw-semibold text-decoration-none" href="{{ $latest.RelPermalink }}">{{ $latest.LinkTitle }}</a>
+                </div>
+              {{ end }}
+              {{ with $topicsPage }}
+                <div class="mt-3">
+                  <a class="blog-topics-cta" href="{{ .RelPermalink }}">
+                    <span>Browse {{ .Title }}</span>
+                    <span class="blog-topics-cta-icon" aria-hidden="true">&rarr;</span>
+                  </a>
+                </div>
+              {{ end }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    {{ $paginator := .Paginate $posts }}
+    <div class="row g-4">
+      {{ range $paginator.Pages }}
+        <div class="col-12 col-md-6 col-lg-4">
+          <article class="h-100 p-4 border rounded-3 shadow-sm">
+            <div class="text-muted small mb-2">{{ .Date.Format "Jan 2, 2006" }}</div>
+            <h2 class="h4 mb-3">
+              <a class="text-decoration-none" href="{{ .RelPermalink }}">{{ .Title }}</a>
+            </h2>
+            {{ with .Summary }}
+              <p class="mb-3">{{ . | plainify | truncate 200 }}</p>
+            {{ end }}
+            {{ $terms := .GetTerms "topics" }}
+            {{ if not $terms }}
+              {{ $terms = .GetTerms "tags" }}
+            {{ end }}
+            {{ with $terms }}
+              <ul class="list-inline small text-muted mb-0">
+                {{ range first 3 . }}
+                  <li class="list-inline-item">#{{ .LinkTitle }}</li>
+                {{ end }}
+              </ul>
+            {{ end }}
+          </article>
+        </div>
+      {{ end }}
+    </div>
+
+    {{ if gt $paginator.TotalPages 1 }}
+      {{ template "_internal/pagination.html" . }}
+    {{ end }}
+  </div>
+</section>

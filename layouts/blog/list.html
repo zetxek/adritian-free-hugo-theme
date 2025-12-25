@@ -1,4 +1,7 @@
 {{ define "main" }}
+  {{ if eq .Site.Params.blog.listLayout "cards" }}
+    {{ partial "blog/list-cards.html" . }}
+  {{ else }}
   <div id="main-content" class="blog flex-grow-1">
     <div class="section">
       <div
@@ -160,4 +163,5 @@
       </div>
     </div>
   </div>
+  {{ end }}
 {{ end }}
