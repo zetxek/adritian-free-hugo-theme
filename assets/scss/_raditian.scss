@@ -1856,6 +1856,31 @@ article.post.summary h2 {
             font-size: 1.125rem;
             line-height: 1.75;
         }
+
+        .col-12 {
+            > ul,
+            > ol {
+                margin-bottom: 1.5rem;
+                padding-left: 1.5rem;
+                color: var(--bs-body-color);
+                font-size: 16px;
+                font-weight: 300;
+                line-height: 28px;
+            }
+
+            > ul li,
+            > ol li {
+                margin-bottom: 0.5rem;
+            }
+
+            > ul {
+                list-style-type: disc;
+            }
+
+            > ul li::marker {
+                color: $base-color;
+            }
+        }
     }
 }
 
