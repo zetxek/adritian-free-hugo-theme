@@ -115,7 +115,7 @@ test.describe('Blog list pagination', () => {
     const posts = page.locator('.posts-list .row--padded');
     const postCount = await posts.count();
     
-    // Should have exactly 3 posts (based on pagerSize setting)
+    // Should have up to 3 posts (based on pagerSize setting)
     expect(postCount).toBeLessThanOrEqual(3);
     expect(postCount).toBeGreaterThan(0);
   });
