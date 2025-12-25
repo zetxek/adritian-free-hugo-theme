@@ -83,10 +83,7 @@
             {{ with .Summary }}
               <p class="mb-3">{{ . | plainify | truncate 200 }}</p>
             {{ end }}
-            {{ $terms := .GetTerms "topics" }}
-            {{ if not $terms }}
-              {{ $terms = .GetTerms "tags" }}
-            {{ end }}
+            {{ $terms := or (.GetTerms "topics") (.GetTerms "tags") }}
             {{ with $terms }}
               <ul class="list-inline small text-muted mb-0">
                 {{ range first 3 . }}
