@@ -72,13 +72,13 @@
     </header>
 
     {{ $paginator := .Paginate $posts }}
-    <div class="row g-4">
+    <div class="row g-4 blog-list">
       {{ range $paginator.Pages }}
         <div class="col-12 col-md-6 col-lg-4">
           <article class="h-100 p-4 border rounded-3 shadow-sm">
             <div class="text-muted small mb-2">{{ .Date.Format "Jan 2, 2006" }}</div>
             <h2 class="h4 mb-3">
-              <a class="text-decoration-none" href="{{ .RelPermalink }}">{{ .Title }}</a>
+              <a class="text-decoration-none stretched-link" href="{{ .RelPermalink }}">{{ .Title }}</a>
             </h2>
             {{ with .Summary }}
               <p class="mb-3">{{ . | plainify | truncate 200 }}</p>
