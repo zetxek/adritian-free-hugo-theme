@@ -423,6 +423,15 @@
                 border-color: $dark-primary;
                 color: var(--bs-body-bg);
             }
+
+            .page-item.disabled .page-link {
+                color: var(--bs-gray-600);
+                background-color: transparent;
+                border-color: rgba(255, 255, 255, 0.12);
+                opacity: 0.65;
+                pointer-events: none;
+                cursor: not-allowed;
+            }
         }
     }
 
