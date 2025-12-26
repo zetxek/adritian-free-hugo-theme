@@ -170,7 +170,8 @@ function executeSearch(searchQuery) {
     searchResults.innerHTML =
       '<div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div>';
 
-    fetch("/index.json")
+    const indexUrl = searchResults.dataset.indexUrl || "/index.json";
+    fetch(indexUrl)
       .then((response) => {
         if (!response.ok) {
           throw new Error(
