@@ -8,7 +8,7 @@
 {{ define "main" }}
 <section id="main-content" class="search-section p-3 p-lg-5 d-flex flex-column align-items-center bg-light rounded shadow-sm">
   <div class="my-auto w-100" style="max-width: 760px;">
-    <h2 class="mb-4 text-center">Search the Site</h2>
+    <h2 class="mb-4 text-center">{{ i18n "search_title" }}</h2>
     
     <noscript>
       <div class="alert alert-warning" role="alert">
@@ -21,7 +21,7 @@
     <div class="mb-5">
       <form action="{{ "search" | absURL }}">
         <div class="input-group">
-          <input id="search-query" name="s" class="form-control form-control-lg" type="search" placeholder="Type to search..." autocomplete="off" aria-label="Search" />
+          <input id="search-query" name="s" class="form-control form-control-lg" type="search" placeholder="{{ i18n "search_placeholder" }}" autocomplete="off" aria-label="Search" />
           <button type="submit" class="input-group-text">
             <i class="icon-circle-arrow-right"></i>
           </button>
@@ -31,7 +31,7 @@
     
     <div id="search-results" class="card border-0">
       <div class="card-body">
-        <h3 class="card-title">Matching pages</h3>
+        <h3 class="card-title">{{ i18n "search_results_heading" }}</h3>
         <!-- Results will appear here -->
       </div>
     </div>
@@ -47,12 +47,23 @@
 
 <script>
 // Translated labels from Hugo i18n
-const SEARCH_LABELS = {
-  tags: "{{ i18n "search_tags_label" }}",
-  categories: "{{ i18n "search_categories_label" }}",
-  filterByTag: "{{ i18n "search_filter_by_tag" }}",
-  filterByCategory: "{{ i18n "search_filter_by_category" }}"
+window.SEARCH_I18N = {
+  labels: {
+    tags: "{{ i18n "search_tags_label" }}",
+    categories: "{{ i18n "search_categories_label" }}",
+    filterByTag: "{{ i18n "search_filter_by_tag" }}",
+    filterByCategory: "{{ i18n "search_filter_by_category" }}"
+  },
+  messages: {
+    minChars: "{{ i18n "search_min_chars" }}",
+    noMatches: "{{ i18n "search_no_matches" }}",
+    loading: "{{ i18n "search_loading" }}",
+    errorGeneric: "{{ i18n "search_error_generic" }}",
+    untitled: "{{ i18n "search_untitled" }}",
+    noPreview: "{{ i18n "search_no_preview" }}"
+  }
 };
+const SEARCH_LABELS = window.SEARCH_I18N.labels;
 
 // Generate clickable tag/category badges
 function createTagBadge(tag, type) {

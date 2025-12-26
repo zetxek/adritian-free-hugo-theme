@@ -58,7 +58,7 @@
                           </div>
                         <p class="lead mb-0">
                           <a href="{{ .RelPermalink }}" class="text-body-emphasis fw-bold">
-                            Continue reading...
+                            {{ i18n "continue_reading" }}...
                           </a>
                         </p>
                       </div>
@@ -101,7 +101,7 @@
                           {{ .Summary | plainify | truncate 120 }}
                         </div>
                         <a href="{{ .RelPermalink }}" class="icon-link gap-1 icon-link-hover stretched-link">
-                          Continue reading
+                          {{ i18n "continue_reading" }}
                           <svg class="bi" aria-hidden="true" width="16" height="16" focusable="false">
                             <use xlink:href="#chevron-right"></use>
                           </svg>
