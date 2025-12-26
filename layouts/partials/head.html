@@ -124,11 +124,11 @@
   <!-- disabled color theme selector -->
 {{- end }}
 
-{{- if .Site.Params.analytics.google_tag_manager.enabled }}
+{{- if .Site.Params.analytics.googleTagManager.enabled }}
   <!-- Google tag (gtag.js), google analytics -->
   <script
     defer
-    src="https://www.googletagmanager.com/gtag/js?id={{ .Site.Params.analytics.google_tag_manager.code }}"></script>
+    src="https://www.googletagmanager.com/gtag/js?id={{ .Site.Params.analytics.googleTagManager.code }}"></script>
   {{- $analytics := resources.Get "js/gtag.js" | resources.Minify }}
   <script defer src="{{ $analytics.RelPermalink }}"></script>
 {{- else }}

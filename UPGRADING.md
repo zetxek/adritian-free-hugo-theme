@@ -2,7 +2,28 @@
 
 This documentation tracks changes across versions, including new features, improvements, and breaking changes.
 
-## v1.8.0 (or next version)
+## v1.8.6: Google Tag Manager config key standardized
+
+### Analytics key standardization
+
+The Google Tag Manager config key has been standardized to `params.analytics.googleTagManager`.
+The old `params.analytics.google_tag_manager` key is no longer supported.
+
+Before:
+```
+[params.analytics.google_tag_manager]
+code = "GTM-XXXXX"
+enabled = false
+```
+
+After:
+```
+[params.analytics.googleTagManager]
+code = "GTM-XXXXX"
+enabled = false
+```
+
+## v1.8.0
 
 ### RTL (Right-to-Left) Language Support
 
