@@ -198,7 +198,8 @@ function executeSearch(searchQuery) {
         "Loading...",
       )}</span></div>`;
 
-    fetch("/index.json")
+    const indexUrl = searchResults.dataset.indexUrl || "/index.json";
+    fetch(indexUrl)
       .then((response) => {
         if (!response.ok) {
           throw new Error(
