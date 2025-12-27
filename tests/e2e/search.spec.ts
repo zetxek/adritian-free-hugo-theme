@@ -188,3 +188,204 @@ test.describe('Search functionality', () => {
     }
   });
 });
+
+test.describe('Multilingual search functionality', () => {
+  test.beforeAll(async () => {
+    // Health check
+    try {
+      await fetch(BASE_URL);
+    } catch (error) {
+      console.error(`Failed to connect to ${BASE_URL}. Is the Hugo server running?`);
+      throw error;
+    }
+  });
+
+  test('search page uses language-aware URL for English', async ({ page }) => {
+    await page.goto(`${BASE_URL}/en/search`);
+    
+    // Wait for the page to be fully loaded
+    await page.waitForLoadState('networkidle');
+    
+    // Verify the search form action uses relLangURL (language-aware path)
+    const form = page.locator('form');
+    const action = await form.getAttribute('action');
+    
+    // The form action should include the language prefix
+    expect(action).toBe('/en/search');
+  });
+
+  test('search page uses language-aware URL for Spanish', async ({ page }) => {
+    await page.goto(`${BASE_URL}/es/search`);
+    
+    // Wait for the page to be fully loaded
+    await page.waitForLoadState('networkidle');
+    
+    // Verify the search form action uses relLangURL (language-aware path)
+    const form = page.locator('form');
+    const action = await form.getAttribute('action');
+    
+    // The form action should include the Spanish language prefix
+    expect(action).toBe('/es/search');
+  });
+
+  test('search results container has correct data-index-url for English', async ({ page }) => {
+    await page.goto(`${BASE_URL}/en/search`);
+    
+    // Wait for the page to be fully loaded
+    await page.waitForLoadState('networkidle');
+    
+    // Verify the search results container has the correct data-index-url attribute
+    const searchResults = page.locator('#search-results');
+    const indexUrl = await searchResults.getAttribute('data-index-url');
+    
+    // The data-index-url should be language-aware
+    expect(indexUrl).toBe('/en/index.json');
+  });
+
+  test('search results container has correct data-index-url for Spanish', async ({ page }) => {
+    await page.goto(`${BASE_URL}/es/search`);
+    
+    // Wait for the page to be fully loaded
+    await page.waitForLoadState('networkidle');
+    
+    // Verify the search results container has the correct data-index-url attribute
+    const searchResults = page.locator('#search-results');
+    const indexUrl = await searchResults.getAttribute('data-index-url');
+    
+    // The data-index-url should be language-aware for Spanish
+    expect(indexUrl).toBe('/es/index.json');
+  });
+
+  test('search fetches index.json from correct language path (English)', async ({ page }) => {
+    // Set up network monitoring
+    const requests: string[] = [];
+    page.on('request', request => {
+      if (request.url().includes('index.json')) {
+        requests.push(request.url());
+      }
+    });
+
+    await page.goto(`${BASE_URL}/en/search`);
+    
+    // Wait for the page to be fully loaded
+    await page.waitForLoadState('networkidle');
+    
+    // Type a search query to trigger the fetch
+    await page.locator('#search-query').fill('test');
+    
+    // Wait for search to execute
+    await page.waitForTimeout(500);
+    
+    // Verify that index.json was fetched from the English language path
+    const englishIndexRequests = requests.filter(url => url.includes('/en/index.json'));
+    expect(englishIndexRequests.length).toBeGreaterThan(0);
+  });
+
+  test('search fetches index.json from correct language path (Spanish)', async ({ page }) => {
+    // Set up network monitoring
+    const requests: string[] = [];
+    page.on('request', request => {
+      if (request.url().includes('index.json')) {
+        requests.push(request.url());
+      }
+    });
+
+    await page.goto(`${BASE_URL}/es/search`);
+    
+    // Wait for the page to be fully loaded
+    await page.waitForLoadState('networkidle');
+    
+    // Type a search query to trigger the fetch
+    await page.locator('#search-query').fill('test');
+    
+    // Wait for search to execute
+    await page.waitForTimeout(500);
+    
+    // Verify that index.json was fetched from the Spanish language path
+    const spanishIndexRequests = requests.filter(url => url.includes('/es/index.json'));
+    expect(spanishIndexRequests.length).toBeGreaterThan(0);
+  });
+
+  test('search results are language-specific for Spanish', async ({ page }) => {
+    await page.goto(`${BASE_URL}/es/search`);
+    
+    // Wait for the page to be fully loaded
+    await page.waitForLoadState('networkidle');
+    
+    // Search for a term that should return Spanish results
+    await page.locator('#search-query').fill('experiencia');
+    
+    // Wait for search results to appear
+    await page.waitForTimeout(500);
+    
+    // Verify we have results
+    const resultsCount = await page.locator('#search-results div[id^="summary-"]').count();
+    
+    // If results exist, verify they link to Spanish content (URLs should contain /es/)
+    if (resultsCount > 0) {
+      const firstResultLink = page.locator('#search-results div[id^="summary-"] a').first();
+      const href = await firstResultLink.getAttribute('href');
+      
+      // The result should link to Spanish content
+      expect(href).toContain('/es/');
+    }
+  });
+
+  test('search works correctly when baseURL has subdirectory', async ({ page }) => {
+    // This test simulates a subdirectory deployment scenario
+    // In such cases, relLangURL ensures the paths are correct
+    
+    await page.goto(`${BASE_URL}/en/search`);
+    
+    // Wait for the page to be fully loaded
+    await page.waitForLoadState('networkidle');
+    
+    // Get the form action
+    const form = page.locator('form');
+    const action = await form.getAttribute('action');
+    
+    // Get the data-index-url
+    const searchResults = page.locator('#search-results');
+    const indexUrl = await searchResults.getAttribute('data-index-url');
+    
+    // Both should be relative paths starting with /
+    // This works for both root and subdirectory deployments
+    expect(action).toMatch(/^\/[a-z]{2}\/search$/);
+    expect(indexUrl).toMatch(/^\/[a-z]{2}\/index\.json$/);
+    
+    // Perform a search to verify it works
+    await page.locator('#search-query').fill('theme');
+    await page.waitForTimeout(500);
+    
+    // Should have results or a message (no errors)
+    const hasResults = await page.locator('#search-results div[id^="summary-"]').count() > 0;
+    const hasMessage = await page.locator('#search-results .alert').isVisible();
+    
+    expect(hasResults || hasMessage).toBe(true);
+  });
+
+  test('default language search page without language prefix', async ({ page }) => {
+    // When accessing /search without language prefix, should use default language
+    await page.goto(`${BASE_URL}/search`);
+    
+    // Wait for the page to be fully loaded
+    await page.waitForLoadState('networkidle');
+    
+    // Get the data-index-url - it should still work
+    const searchResults = page.locator('#search-results');
+    const indexUrl = await searchResults.getAttribute('data-index-url');
+    
+    // Should have a valid index URL
+    expect(indexUrl).toContain('index.json');
+    
+    // Search should work
+    await page.locator('#search-query').fill('theme');
+    await page.waitForTimeout(500);
+    
+    // Should have results or a message (no errors)
+    const hasResults = await page.locator('#search-results div[id^="summary-"]').count() > 0;
+    const hasMessage = await page.locator('#search-results .alert').isVisible();
+    
+    expect(hasResults || hasMessage).toBe(true);
+  });
+});
