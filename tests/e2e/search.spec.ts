@@ -196,7 +196,9 @@ test.describe('Search functionality', () => {
 async function verifySearchFormAction(page: any, language: string, expectedAction: string) {
   await page.goto(`${BASE_URL}/${language}/search`);
   await page.waitForLoadState('networkidle');
-  const form = page.locator('form');
+  // Use a more specific selector - the form that contains the search input
+  const form = page.locator('form').filter({ has: page.locator('#search-query') });
+  await expect(form).toBeVisible();
   const action = await form.getAttribute('action');
   expect(action).toBe(expectedAction);
 }
@@ -205,6 +207,7 @@ async function verifySearchIndexUrl(page: any, language: string, expectedIndexUr
   await page.goto(`${BASE_URL}/${language}/search`);
   await page.waitForLoadState('networkidle');
   const searchResults = page.locator('#search-results');
+  await expect(searchResults).toBeVisible();
   const indexUrl = await searchResults.getAttribute('data-index-url');
   expect(indexUrl).toBe(expectedIndexUrl);
 }
@@ -220,12 +223,16 @@ async function verifyIndexJsonFetch(page: any, language: string, searchQuery: st
   await page.goto(`${BASE_URL}/${language}/search`);
   await page.waitForLoadState('networkidle');
 
+  // Wait for search input to be visible
+  const searchInput = page.locator('#search-query');
+  await expect(searchInput).toBeVisible();
+
   // Set up response promise before triggering the search
   const responsePromise = page.waitForResponse((response: any) =>
     response.url().includes(`/${language}/index.json`) && response.status() === 200
   );
 
-  await page.locator('#search-query').fill(searchQuery);
+  await searchInput.fill(searchQuery);
   await responsePromise;
 
   // Verify that index.json was fetched from the correct language path
@@ -272,8 +279,12 @@ test.describe('Multilingual search functionality', () => {
     await page.goto(`${BASE_URL}/es/search`);
     await page.waitForLoadState('networkidle');
     
+    // Wait for search input to be visible
+    const searchInput = page.locator('#search-query');
+    await expect(searchInput).toBeVisible();
+    
     // Search for a term that should return Spanish results
-    await page.locator('#search-query').fill('experiencia');
+    await searchInput.fill('experiencia');
     
     // Wait for search results to appear
     await page.waitForTimeout(SEARCH_DEBOUNCE_WAIT);
@@ -298,12 +309,14 @@ test.describe('Multilingual search functionality', () => {
     await page.goto(`${BASE_URL}/en/search`);
     await page.waitForLoadState('networkidle');
     
-    // Get the form action
-    const form = page.locator('form');
+    // Get the form action - use specific selector for search form
+    const form = page.locator('form').filter({ has: page.locator('#search-query') });
+    await expect(form).toBeVisible();
     const action = await form.getAttribute('action');
     
     // Get the data-index-url
     const searchResults = page.locator('#search-results');
+    await expect(searchResults).toBeVisible();
     const indexUrl = await searchResults.getAttribute('data-index-url');
     
     // Both should be relative paths starting with /
@@ -312,7 +325,9 @@ test.describe('Multilingual search functionality', () => {
     expect(indexUrl).toMatch(/^\/[a-z]{2}\/index\.json$/);
     
     // Perform a search to verify it works
-    await page.locator('#search-query').fill('theme');
+    const searchInput = page.locator('#search-query');
+    await expect(searchInput).toBeVisible();
+    await searchInput.fill('theme');
     
     // Wait for search to execute and verify we get results
     await page.waitForTimeout(SEARCH_DEBOUNCE_WAIT);
