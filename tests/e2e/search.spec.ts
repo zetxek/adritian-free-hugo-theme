@@ -196,8 +196,8 @@ test.describe('Search functionality', () => {
 async function verifySearchFormAction(page: any, language: string, expectedAction: string) {
   await page.goto(`${BASE_URL}/${language}/search`);
   await page.waitForLoadState('networkidle');
-  // Use a more specific selector - the form that contains the search input
-  const form = page.locator('form').filter({ has: page.locator('#search-query') });
+  // Use a more specific selector - the form with action containing "search"
+  const form = page.locator('form[action*="/search"]').first();
   await expect(form).toBeVisible();
   const action = await form.getAttribute('action');
   expect(action).toBe(expectedAction);
@@ -310,7 +310,7 @@ test.describe('Multilingual search functionality', () => {
     await page.waitForLoadState('networkidle');
     
     // Get the form action - use specific selector for search form
-    const form = page.locator('form').filter({ has: page.locator('#search-query') });
+    const form = page.locator('form[action*="/search"]').first();
     await expect(form).toBeVisible();
     const action = await form.getAttribute('action');
     
