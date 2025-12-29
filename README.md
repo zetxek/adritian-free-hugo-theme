@@ -23,7 +23,7 @@ A modern, fast and extensible Hugo theme for personal websites and professional 
 - 📑 **Table of Contents** - Auto-generated, sticky TOC for blog posts
 - 💬 **Comments integration** - Support for Disqus, Giscus, and Utterances
 - ⏱️ **Reading time display** - Estimated reading time for blog posts
-- 🏷️ **Enhanced taxonomy support** - Improved tags and categories display
+- 🏷️ **Enhanced taxonomy support** - Improved tags, categories, authors, and series display
 
 The theme focuses on accessibility, high performance, and usability (it's very easy to get started). It's extendable by adding your own styles or content types, and it has a solid foundation on which to build.
 
@@ -382,6 +382,20 @@ Blog posts automatically display:
 - Word count
 - Publication date
 - Last modified date (if `lastmod` is set in frontmatter)
+
+**Authors & Series**
+
+You can group posts by author and series using taxonomies:
+
+```toml
+authors = ["Jane Doe"]
+series = ["Hugo Basics"]
+series_order = 2 # optional, to order posts inside the series
+```
+
+To customize author or series pages, create term content files:
+- `hugo new authors/jane-doe/_index.md`
+- `hugo new series/hugo-basics/_index.md`
 
 #### (Job) Experience
 

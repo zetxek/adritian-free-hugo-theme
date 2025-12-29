@@ -216,8 +216,53 @@
   }
 }
 
+// Author and series enhancements
+.author-bio,
+.author-card {
+  .author-avatar {
+    width: 96px;
+    height: 96px;
+    border-radius: 999px;
+    object-fit: cover;
+  }
+}
+
+.author-card {
+  .author-avatar {
+    width: 64px;
+    height: 64px;
+  }
+}
+
+.author-links a {
+  color: $base-color;
+
+  &:hover {
+    color: darken($base-color, 8%);
+  }
+}
+
+.series-order {
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
 // Dark mode overrides
 [data-bs-theme="dark"] {
+  .author-bio,
+  .author-card {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.12);
+  }
+
+  .author-links a {
+    color: $dark-primary;
+
+    &:hover {
+      color: lighten($dark-primary, 10%);
+    }
+  }
+
   .taxonomy-page {
     ul.list-taxonomy li a {
       background-color: rgba(255, 255, 255, 0.08);

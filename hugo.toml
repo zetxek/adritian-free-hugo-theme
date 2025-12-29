@@ -70,6 +70,14 @@
   term = ["HTML"]
   footer = []
 
+# Taxonomies
+[taxonomies]
+  tag = "tags"
+  category = "categories"
+  author = "authors"
+  series = "series"
+  topic = "topics"
+
 # Disable specific content kinds to prevent footer from being rendered
 disableKinds = ["footer"]
 

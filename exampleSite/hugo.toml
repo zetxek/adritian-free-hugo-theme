@@ -15,6 +15,13 @@ pagerSize = 3
   term = ["HTML", "RSS"]
   footer = []
 
+[taxonomies]
+  tag = "tags"
+  category = "categories"
+  author = "authors"
+  series = "series"
+  topic = "topics"
+
 # Explicitly prevent the footer section from generating any output
 [outputFormats.footerSection]
   # Empty configuration to prevent any output

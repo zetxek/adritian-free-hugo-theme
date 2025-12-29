@@ -1,0 +1,115 @@
+{{ define "main" }}
+<div class="list flex-grow-1">
+  <section id="main-content" class="section list-{{ .Kind }}">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h1 class="mb-4">{{ .Title }}</h1>
+
+          {{ $taxonomy := .Data.Plural }}
+          {{ if eq $taxonomy "authors" }}
+            {{ partial "author-bio.html" . }}
+          {{ else if eq $taxonomy "series" }}
+            {{ with .Content }}
+              <div class="series-description mb-4">
+                {{ . }}
+              </div>
+            {{ end }}
+          {{ end }}
+
+          <div class="term-page">
+            <div class="row">
+              <div class="col-12 col-lg-8">
+                {{ $pages := .Pages }}
+                {{ if eq $taxonomy "series" }}
+                  {{ $pagesWithOrder := where $pages "Params.series_order" "ne" nil }}
+                  {{ if gt (len $pagesWithOrder) 0 }}
+                    {{ $pages = sort $pages "Params.series_order" "asc" }}
+                  {{ else }}
+                    {{ $pages = $pages.ByWeight }}
+                  {{ end }}
+                {{ end }}
+                {{ $paginator := .Paginate $pages }}
+
+                {{ if eq $taxonomy "authors" }}
+                  <h2 class="h4 mb-3">{{ i18n "author_posts" | default "Posts by this author" }}</h2>
+                {{ else if eq $taxonomy "series" }}
+                  <h2 class="h4 mb-3">{{ i18n "series_posts" | default "Series posts" }}</h2>
+                {{ end }}
+
+                <ul class="posts-list-simple">
+                  {{ range $paginator.Pages }}
+                    <li class="post rad-animation-group rad-fade-down rad-animate">
+                      <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+                      {{ if eq $taxonomy "series" }}
+                        {{ with .Params.series_order }}
+                          <span class="series-order badge bg-light text-dark ms-2">{{ i18n "series_part" | default "Part" }} {{ . }}</span>
+                        {{ end }}
+                      {{ end }}
+                      <div class="meta">{{ .Date.Format "Mon, Jan 2, 2006" }}</div>
+                    </li>
+                  {{ end }}
+                </ul>
+
+                {{ if gt $paginator.TotalPages 1 }}
+                  <nav aria-label="Page navigation" class="mt-5">
+                    <ul class="pagination justify-content-center">
+                      {{ if $paginator.HasPrev }}
+                        <li class="page-item">
+                          <a class="page-link" href="{{ $paginator.Prev.URL }}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                          </a>
+                        </li>
+                      {{ end }}
+
+                      {{ $window := 2 }}
+                      {{ $current := $paginator.PageNumber }}
+                      {{ $total := $paginator.TotalPages }}
+                      {{ $scratch := newScratch }}
+                      {{ $scratch.Set "leftDots" false }}
+                      {{ $scratch.Set "rightDots" false }}
+
+                      {{ range $paginator.Pagers }}
+                        {{ $n := .PageNumber }}
+                        {{ $inWindow := and (ge $n (sub $current $window)) (le $n (add $current $window)) }}
+
+                        {{ if or (eq $n 1) (eq $n $total) $inWindow }}
+                          <li class="page-item {{ if eq . $paginator }}active{{ end }}">
+                            <a class="page-link" href="{{ .URL }}">{{ .PageNumber }}</a>
+                          </li>
+                        {{ else if and (eq $n 2) (gt (sub $current $window) 2) (not ($scratch.Get "leftDots")) }}
+                          <li class="page-item disabled" aria-hidden="true">
+                            <span class="page-link">&hellip;</span>
+                          </li>
+                          {{ $scratch.Set "leftDots" true }}
+                        {{ else if and (eq $n (sub $total 1)) (lt (add $current $window) (sub $total 1)) (not ($scratch.Get "rightDots")) }}
+                          <li class="page-item disabled" aria-hidden="true">
+                            <span class="page-link">&hellip;</span>
+                          </li>
+                          {{ $scratch.Set "rightDots" true }}
+                        {{ end }}
+                      {{ end }}
+
+                      {{ if $paginator.HasNext }}
+                        <li class="page-item">
+                          <a class="page-link" href="{{ $paginator.Next.URL }}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                          </a>
+                        </li>
+                      {{ end }}
+                    </ul>
+                  </nav>
+                {{ end }}
+              </div>
+
+              <div class="col-12 col-lg-4">
+                {{ partial "widgets/popular-tags.html" . }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+{{ end }}

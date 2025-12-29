@@ -1,0 +1,75 @@
+{{ $page := . }}
+{{ $compact := false }}
+{{ $count := 0 }}
+{{ with .page }}
+  {{ $page = . }}
+{{ end }}
+{{ with .compact }}
+  {{ $compact = . }}
+{{ end }}
+{{ with .count }}
+  {{ $count = . }}
+{{ end }}
+
+{{ $name := $page.Params.name | default $page.Title }}
+{{ $role := $page.Params.role }}
+{{ $avatar := $page.Params.avatar | default $page.Params.image }}
+{{ $bio := $page.Params.bio }}
+
+{{ if $compact }}
+  <div class="card h-100 author-card">
+    <div class="card-body d-flex gap-3">
+      {{ with $avatar }}
+        <img class="author-avatar" src="{{ . | relURL }}" alt="{{ $name }}" loading="lazy">
+      {{ end }}
+      <div class="author-card-body">
+        <h3 class="card-title h5 mb-1">
+          <a href="{{ $page.RelPermalink }}" class="text-decoration-none stretched-link">{{ $name }}</a>
+        </h3>
+        {{ with $role }}
+          <p class="text-muted small mb-2">{{ . }}</p>
+        {{ end }}
+        {{ with $bio }}
+          <p class="card-text text-muted mb-2">{{ . | markdownify }}</p>
+        {{ end }}
+        {{ if gt $count 0 }}
+          <p class="text-muted small mb-0">{{ $count }} {{ if eq $count 1 }}post{{ else }}posts{{ end }}</p>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+{{ else }}
+  <div class="card author-bio mb-4">
+    <div class="card-body d-flex flex-column flex-md-row gap-3">
+      {{ with $avatar }}
+        <img class="author-avatar" src="{{ . | relURL }}" alt="{{ $name }}" loading="lazy">
+      {{ end }}
+      <div class="author-bio-body">
+        <h2 class="h4 mb-1">{{ $name }}</h2>
+        {{ with $role }}
+          <p class="text-muted mb-2">{{ . }}</p>
+        {{ end }}
+        {{ if $bio }}
+          <div class="author-bio-text mb-2">{{ $bio | markdownify }}</div>
+        {{ else if $page.Content }}
+          <div class="author-bio-text mb-2">{{ $page.Content }}</div>
+        {{ end }}
+        {{ with $page.Params.links }}
+          <ul class="list-inline mb-0 author-links">
+            {{ range . }}
+              {{ if reflect.IsMap . }}
+                {{ $url := .url | default .URL | default .href }}
+                {{ $label := .label | default .name | default .title | default $url }}
+                {{ if $url }}
+                  <li class="list-inline-item"><a href="{{ $url }}" class="text-decoration-none">{{ $label }}</a></li>
+                {{ end }}
+              {{ else if reflect.IsString . }}
+                <li class="list-inline-item"><a href="{{ . }}" class="text-decoration-none">{{ . }}</a></li>
+              {{ end }}
+            {{ end }}
+          </ul>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+{{ end }}

@@ -1,0 +1,100 @@
+{{ define "main" }}
+<div class="list flex-grow-1">
+  <section id="main-content" class="section list-{{ .Kind }}">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          {{ $taxonomy := .Data.Plural }}
+          {{ $title := .Title }}
+          {{ if eq $taxonomy "authors" }}
+            {{ $title = (i18n "authors" | default $title) }}
+          {{ else if eq $taxonomy "series" }}
+            {{ $title = (i18n "series" | default $title) }}
+          {{ end }}
+          <h1 class="mb-4">{{ $title }}</h1>
+
+          <div class="taxonomy-page">
+            {{ if eq $taxonomy "tags" }}
+              {{/* Tags: pill-based grid layout */}}
+              <ul class="list-taxonomy rad-animation-group">
+                {{ range .Data.Terms.ByCount }}
+                  <li class="rad-fade-down rad-animate">
+                    <a href="{{ .Page.RelPermalink }}">
+                      {{ .Page.Title }}
+                      <span class="badge taxonomy-count">{{ .Count }}</span>
+                    </a>
+                  </li>
+                {{ end }}
+              </ul>
+            {{ else if eq $taxonomy "categories" }}
+              {{/* Categories: card-based layout */}}
+              <div class="row g-4">
+                {{ range .Data.Terms.ByCount }}
+                  <div class="col-12 col-md-6 col-lg-4 rad-animation-group rad-fade-down rad-animate">
+                    <div class="card h-100 category-card">
+                      <div class="card-body">
+                        <h3 class="card-title h5">
+                          <a href="{{ .Page.RelPermalink }}" class="text-decoration-none stretched-link">
+                            {{ .Page.Title }}
+                          </a>
+                        </h3>
+                        <p class="card-text text-muted mb-0">
+                          {{ .Count }} {{ if eq .Count 1 }}post{{ else }}posts{{ end }}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                {{ end }}
+              </div>
+            {{ else if eq $taxonomy "authors" }}
+              {{/* Authors: bio cards */}}
+              <div class="row g-4">
+                {{ range .Data.Terms.ByCount }}
+                  <div class="col-12 col-md-6 col-lg-4 rad-animation-group rad-fade-down rad-animate">
+                    {{ partial "author-bio.html" (dict "page" .Page "compact" true "count" .Count) }}
+                  </div>
+                {{ end }}
+              </div>
+            {{ else if eq $taxonomy "series" }}
+              {{/* Series: card-based layout */}}
+              <div class="row g-4">
+                {{ range .Data.Terms.ByCount }}
+                  <div class="col-12 col-md-6 col-lg-4 rad-animation-group rad-fade-down rad-animate">
+                    <div class="card h-100 category-card series-card">
+                      <div class="card-body">
+                        <h3 class="card-title h5">
+                          <a href="{{ .Page.RelPermalink }}" class="text-decoration-none stretched-link">
+                            {{ .Page.Title }}
+                          </a>
+                        </h3>
+                        {{ with .Page.Params.description }}
+                          <p class="card-text text-muted">{{ . }}</p>
+                        {{ end }}
+                        <p class="card-text text-muted mb-0">
+                          {{ .Count }} {{ if eq .Count 1 }}post{{ else }}posts{{ end }}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                {{ end }}
+              </div>
+            {{ else }}
+              {{/* Fallback: simple list */}}
+              <ul class="list-taxonomy rad-animation-group">
+                {{ range .Data.Terms.ByCount }}
+                  <li class="rad-fade-down rad-animate">
+                    <a href="{{ .Page.RelPermalink }}">
+                      {{ .Page.Title }}
+                      <span class="badge taxonomy-count">{{ .Count }}</span>
+                    </a>
+                  </li>
+                {{ end }}
+              </ul>
+            {{ end }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+{{ end }}

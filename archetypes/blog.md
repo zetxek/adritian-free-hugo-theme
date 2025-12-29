@@ -9,6 +9,9 @@ description = ""
     featured_image = ""  # Path to the featured image
 tags = []
 topics = []
+authors = []
+series = []
+# series_order = 1  # Optional order within a series (lower comes first)
 +++
 
 Add your content here.
