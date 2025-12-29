@@ -196,10 +196,14 @@ test.describe('Search functionality', () => {
 async function verifySearchFormAction(page: any, language: string, expectedAction: string) {
   await page.goto(`${BASE_URL}/${language}/search`);
   await page.waitForLoadState('networkidle');
-  // Use a more specific selector - the form with action containing "search"
-  const form = page.locator('form[action*="/search"]').first();
-  await expect(form).toBeVisible();
-  const action = await form.getAttribute('action');
+  // Wait for search input to ensure page is loaded
+  const searchInput = page.locator('#search-query');
+  await expect(searchInput).toBeVisible();
+  // Find the form that contains the search input using evaluate
+  const action = await page.evaluate(() => {
+    const input = document.getElementById('search-query');
+    return input?.closest('form')?.getAttribute('action') || null;
+  });
   expect(action).toBe(expectedAction);
 }
 
@@ -309,10 +313,14 @@ test.describe('Multilingual search functionality', () => {
     await page.goto(`${BASE_URL}/en/search`);
     await page.waitForLoadState('networkidle');
     
-    // Get the form action - use specific selector for search form
-    const form = page.locator('form[action*="/search"]').first();
-    await expect(form).toBeVisible();
-    const action = await form.getAttribute('action');
+    // Wait for search input to ensure page is loaded
+    const searchInput = page.locator('#search-query');
+    await expect(searchInput).toBeVisible();
+    // Find the form that contains the search input using evaluate
+    const action = await page.evaluate(() => {
+      const input = document.getElementById('search-query');
+      return input?.closest('form')?.getAttribute('action') || null;
+    });
     
     // Get the data-index-url
     const searchResults = page.locator('#search-results');
