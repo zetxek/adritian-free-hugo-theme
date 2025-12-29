@@ -333,7 +333,6 @@ test.describe('Multilingual search functionality', () => {
     expect(indexUrl).toMatch(/^\/[a-z]{2}\/index\.json$/);
     
     // Perform a search to verify it works
-    const searchInput = page.locator('#search-query');
     await expect(searchInput).toBeVisible();
     await searchInput.fill('theme');
     
