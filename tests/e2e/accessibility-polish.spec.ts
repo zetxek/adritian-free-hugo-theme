@@ -20,6 +20,14 @@ test.describe('Accessibility polish', () => {
     await expect(mainContent).toHaveAttribute('tabindex', '-1');
   });
 
+  test('home page exposes a single skip target', async ({ page }) => {
+    await page.goto(BASE_URL);
+
+    const mainContent = page.locator('#main-content');
+    await expect(mainContent).toHaveCount(1);
+    await expect(mainContent).toBeVisible();
+  });
+
   test('header and footer landmarks expose labels', async ({ page }) => {
     await page.goto(BASE_URL);
 

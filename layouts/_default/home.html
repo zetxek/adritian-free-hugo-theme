@@ -38,6 +38,7 @@
 
 	{{ partial "header.html" . }}
 
+    <main id="main-content" tabindex="-1" role="main">
     {{ $home := where (where .Site.Pages "Type" "home") "Lang" .Lang }}
     {{ $homeCount := len $home }}
 
@@ -63,6 +64,7 @@
         </div>
     {{ end }}
     {{ end }}
+    </main>
 
 	{{ partial "footer.html" . }}
     {{ partial "base-foot.html" . }}
