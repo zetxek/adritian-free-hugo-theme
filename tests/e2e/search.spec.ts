@@ -194,10 +194,10 @@ test.describe('Search functionality', () => {
 
 // Helper functions for multilingual search tests
 async function verifySearchFormAction(page: any, language: string, expectedAction: string) {
-  // Navigate to language-specific homepage first to establish language context
-  await page.goto(`${BASE_URL}/${language}/`, { waitUntil: 'networkidle' });
-  // Then navigate to search page - relLangURL will use the language context
-  await page.goto(`${BASE_URL}/search`, { waitUntil: 'networkidle' });
+  // Navigate directly to language-specific search URL
+  // Hugo generates separate pages for each language: /search (default) and /es/search (Spanish)
+  const searchUrl = language === 'en' ? `${BASE_URL}/search` : `${BASE_URL}/${language}/search`;
+  await page.goto(searchUrl, { waitUntil: 'networkidle' });
   
   // Wait for search input to ensure page is loaded
   const searchInput = page.locator('#search-query');
@@ -211,10 +211,10 @@ async function verifySearchFormAction(page: any, language: string, expectedActio
 }
 
 async function verifySearchIndexUrl(page: any, language: string, expectedIndexUrl: string) {
-  // Navigate to language-specific homepage first to establish language context
-  await page.goto(`${BASE_URL}/${language}/`, { waitUntil: 'networkidle' });
-  // Then navigate to search page - relLangURL will use the language context
-  await page.goto(`${BASE_URL}/search`, { waitUntil: 'networkidle' });
+  // Navigate directly to language-specific search URL
+  // Hugo generates separate pages for each language: /search (default) and /es/search (Spanish)
+  const searchUrl = language === 'en' ? `${BASE_URL}/search` : `${BASE_URL}/${language}/search`;
+  await page.goto(searchUrl, { waitUntil: 'networkidle' });
   
   const searchResults = page.locator('#search-results');
   await expect(searchResults).toBeVisible();
@@ -230,10 +230,10 @@ async function verifyIndexJsonFetch(page: any, language: string, searchQuery: st
     }
   });
 
-  // Navigate to language-specific homepage first to establish language context
-  await page.goto(`${BASE_URL}/${language}/`, { waitUntil: 'networkidle' });
-  // Then navigate to search page - relLangURL will use the language context
-  await page.goto(`${BASE_URL}/search`, { waitUntil: 'networkidle' });
+  // Navigate directly to language-specific search URL
+  // Hugo generates separate pages for each language: /search (default) and /es/search (Spanish)
+  const searchUrl = language === 'en' ? `${BASE_URL}/search` : `${BASE_URL}/${language}/search`;
+  await page.goto(searchUrl, { waitUntil: 'networkidle' });
 
   // Wait for search input to be visible
   const searchInput = page.locator('#search-query');
@@ -306,10 +306,9 @@ test.describe('Multilingual search functionality', () => {
   });
 
   test('search results are language-specific for Spanish', async ({ page }) => {
-    // Navigate to Spanish homepage first to establish language context
-    await page.goto(`${BASE_URL}/es/`, { waitUntil: 'networkidle' });
-    // Then navigate to search page - relLangURL will use the language context
-    await page.goto(`${BASE_URL}/search`, { waitUntil: 'networkidle' });
+    // Navigate directly to Spanish search URL
+    // Hugo generates separate pages for each language: /search (default) and /es/search (Spanish)
+    await page.goto(`${BASE_URL}/es/search`, { waitUntil: 'networkidle' });
     
     // Wait for search input to be visible
     const searchInput = page.locator('#search-query');
@@ -338,9 +337,7 @@ test.describe('Multilingual search functionality', () => {
     // root and subdirectory deployments. The relLangURL function ensures paths
     // are correct regardless of baseURL configuration.
     
-    // Navigate to English homepage first to establish language context
-    await page.goto(`${BASE_URL}/en/`, { waitUntil: 'networkidle' });
-    // Then navigate to search page - relLangURL will use the language context
+    // Navigate directly to English search URL (default language may not have prefix)
     await page.goto(`${BASE_URL}/search`, { waitUntil: 'networkidle' });
     
     // Wait for search input to ensure page is loaded
@@ -358,9 +355,11 @@ test.describe('Multilingual search functionality', () => {
     const indexUrl = await searchResults.getAttribute('data-index-url');
     
     // Both should be relative paths starting with /
+    // For default language (English), paths may not have prefix, or may have /en/ prefix
+    // For non-default languages, they should have the language prefix
     // This works for both root and subdirectory deployments
-    expect(action).toMatch(/^\/[a-z]{2}\/search$/);
-    expect(indexUrl).toMatch(/^\/[a-z]{2}\/index\.json$/);
+    expect(action).toMatch(/^(\/[a-z]{2})?\/search$/);
+    expect(indexUrl).toMatch(/^(\/[a-z]{2})?\/index\.json$/);
     
     // Perform a search to verify it works
     await expect(searchInput).toBeVisible();
