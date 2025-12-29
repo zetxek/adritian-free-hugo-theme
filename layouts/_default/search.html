@@ -19,7 +19,7 @@
     </noscript>
     
     <div class="mb-5">
-      <form action="{{ "search" | relLangURL }}">
+      <form action="{{ if .Lang }}{{ "search" | relLangURL }}{{ else }}{{ "search" | absLangURL }}{{ end }}">
         <div class="input-group">
           <input id="search-query" name="s" class="form-control form-control-lg" type="search" placeholder="Type to search..." autocomplete="off" aria-label="Search" />
           <button type="submit" class="input-group-text">
@@ -29,7 +29,7 @@
       </form>
     </div>
     
-    <div id="search-results" class="card border-0" data-index-url="{{ "index.json" | relLangURL }}">
+    <div id="search-results" class="card border-0" data-index-url="{{ if .Lang }}{{ "index.json" | relLangURL }}{{ else }}{{ "index.json" | absLangURL }}{{ end }}">
       <div class="card-body">
         <h3 class="card-title">Matching pages</h3>
         <!-- Results will appear here -->
