@@ -6,6 +6,9 @@ if (!BASE_URL.startsWith('http')) {
   throw new Error('TEST_BASE_URL must be a valid URL starting with http:// or https://');
 }
 
+// Wait time for search debounce (300ms) + buffer
+const SEARCH_DEBOUNCE_WAIT = 500;
+
 test.describe('Search functionality', () => {
   test.beforeAll(async () => {
     // Health check
@@ -186,5 +189,235 @@ test.describe('Search functionality', () => {
       );
       expect(relevantErrors).toHaveLength(0);
     }
+  });
+});
+
+// Helper functions for multilingual search tests
+async function verifySearchFormAction(page: any, language: string, expectedAction: string) {
+  // Navigate directly to language-specific search URL
+  // Hugo generates separate pages for each language: /search (default) and /es/search (Spanish)
+  const searchUrl = language === 'en' ? `${BASE_URL}/search` : `${BASE_URL}/${language}/search`;
+  await page.goto(searchUrl, { waitUntil: 'networkidle' });
+  
+  // Wait for search input to ensure page is loaded
+  const searchInput = page.locator('#search-query');
+  await expect(searchInput).toBeVisible();
+  // Find the form that contains the search input using evaluate
+  const action = await page.evaluate(() => {
+    const input = document.getElementById('search-query');
+    return input?.closest('form')?.getAttribute('action') || null;
+  });
+  expect(action).toBe(expectedAction);
+}
+
+async function verifySearchIndexUrl(page: any, language: string, expectedIndexUrl: string) {
+  // Navigate directly to language-specific search URL
+  // Hugo generates separate pages for each language: /search (default) and /es/search (Spanish)
+  const searchUrl = language === 'en' ? `${BASE_URL}/search` : `${BASE_URL}/${language}/search`;
+  await page.goto(searchUrl, { waitUntil: 'networkidle' });
+  
+  const searchResults = page.locator('#search-results');
+  await expect(searchResults).toBeVisible();
+  const indexUrl = await searchResults.getAttribute('data-index-url');
+  expect(indexUrl).toBe(expectedIndexUrl);
+}
+
+async function verifyIndexJsonFetch(page: any, language: string, searchQuery: string) {
+  const requests: string[] = [];
+  page.on('request', (request: any) => {
+    if (request.url().includes('index.json')) {
+      requests.push(request.url());
+    }
+  });
+
+  // Navigate directly to language-specific search URL
+  // Hugo generates separate pages for each language: /search (default) and /es/search (Spanish)
+  const searchUrl = language === 'en' ? `${BASE_URL}/search` : `${BASE_URL}/${language}/search`;
+  await page.goto(searchUrl, { waitUntil: 'networkidle' });
+
+  // Wait for search input to be visible
+  const searchInput = page.locator('#search-query');
+  await expect(searchInput).toBeVisible();
+
+  // Set up response promise before triggering the search
+  const responsePromise = page.waitForResponse((response: any) =>
+    response.url().includes(`/${language}/index.json`) && response.status() === 200
+  );
+
+  await searchInput.fill(searchQuery);
+  await responsePromise;
+
+  // Verify that index.json was fetched from the correct language path
+  const languageIndexRequests = requests.filter((url: string) => url.includes(`/${language}/index.json`));
+  expect(languageIndexRequests.length).toBeGreaterThan(0);
+}
+
+test.describe('Multilingual search functionality', () => {
+  test.beforeAll(async () => {
+    // Health check
+    try {
+      await fetch(BASE_URL);
+    } catch (error) {
+      console.error(`Failed to connect to ${BASE_URL}. Is the Hugo server running?`);
+      throw error;
+    }
+  });
+
+  test('search page uses language-aware URL for English', async ({ page }) => {
+    // English is the default language (weight 0), so it may not have a prefix
+    // Check both /search and /en/search to handle different Hugo configurations
+    await page.goto(`${BASE_URL}/en/`, { waitUntil: 'networkidle' });
+    await page.goto(`${BASE_URL}/search`, { waitUntil: 'networkidle' });
+    const searchInput = page.locator('#search-query');
+    await expect(searchInput).toBeVisible();
+    const action = await page.evaluate(() => {
+      const input = document.getElementById('search-query');
+      return input?.closest('form')?.getAttribute('action') || null;
+    });
+    // Accept either /search (default language) or /en/search (if language prefix is used)
+    expect(action === '/search' || action === '/en/search').toBe(true);
+  });
+
+  test('search page uses language-aware URL for Spanish', async ({ page }) => {
+    await verifySearchFormAction(page, 'es', '/es/search');
+  });
+
+  test('search results container has correct data-index-url for English', async ({ page }) => {
+    // English is the default language, so it may not have a prefix
+    await page.goto(`${BASE_URL}/en/`, { waitUntil: 'networkidle' });
+    await page.goto(`${BASE_URL}/search`, { waitUntil: 'networkidle' });
+    const searchResults = page.locator('#search-results');
+    await expect(searchResults).toBeVisible();
+    const indexUrl = await searchResults.getAttribute('data-index-url');
+    // Accept either /index.json (default language) or /en/index.json (if language prefix is used)
+    expect(indexUrl === '/index.json' || indexUrl === '/en/index.json').toBe(true);
+  });
+
+  test('search results container has correct data-index-url for Spanish', async ({ page }) => {
+    await verifySearchIndexUrl(page, 'es', '/es/index.json');
+  });
+
+  test('search fetches index.json from correct language path (English)', async ({ page }) => {
+    // English is the default language, so it may use /index.json instead of /en/index.json
+    // Navigate to English search page
+    await page.goto(`${BASE_URL}/search`, { waitUntil: 'networkidle' });
+    
+    const requests: string[] = [];
+    page.on('request', (request: any) => {
+      if (request.url().includes('index.json')) {
+        requests.push(request.url());
+      }
+    });
+
+    const searchInput = page.locator('#search-query');
+    await expect(searchInput).toBeVisible();
+
+    // Set up response promise - accept both /index.json and /en/index.json
+    const responsePromise = page.waitForResponse((response: any) =>
+      (response.url().includes('/index.json') || response.url().includes('/en/index.json')) && response.status() === 200
+    );
+
+    await searchInput.fill('test');
+    await responsePromise;
+
+    // Verify that index.json was fetched (either /index.json or /en/index.json)
+    const indexRequests = requests.filter((url: string) => 
+      url.includes('/index.json') || url.includes('/en/index.json')
+    );
+    expect(indexRequests.length).toBeGreaterThan(0);
+  });
+
+  test('search fetches index.json from correct language path (Spanish)', async ({ page }) => {
+    await verifyIndexJsonFetch(page, 'es', 'test');
+  });
+
+  test('search results are language-specific for Spanish', async ({ page }) => {
+    // Navigate directly to Spanish search URL
+    // Hugo generates separate pages for each language: /search (default) and /es/search (Spanish)
+    await page.goto(`${BASE_URL}/es/search`, { waitUntil: 'networkidle' });
+    
+    // Wait for search input to be visible
+    const searchInput = page.locator('#search-query');
+    await expect(searchInput).toBeVisible();
+    
+    // Search for a term that should return Spanish results
+    // Use "trabajo" which appears in Spanish experience content
+    await searchInput.fill('trabajo');
+    
+    // Wait for search results to appear
+    await page.waitForTimeout(SEARCH_DEBOUNCE_WAIT);
+    
+    // Verify we have results (this should always be true if test data is correct)
+    const resultsCount = await page.locator('#search-results div[id^="summary-"]').count();
+    expect(resultsCount).toBeGreaterThan(0);
+    
+    // Verify the first result links to Spanish content (URLs should contain /es/)
+    const firstResultLink = page.locator('#search-results div[id^="summary-"] a').first();
+    const href = await firstResultLink.getAttribute('href');
+    
+    // The result should link to Spanish content
+    expect(href).toContain('/es/');
+  });
+
+  test('search URLs follow correct relative path pattern', async ({ page }) => {
+    // This test validates that search URLs use relative paths that work for both
+    // root and subdirectory deployments. The relLangURL function ensures paths
+    // are correct regardless of baseURL configuration.
+    
+    // Navigate directly to English search URL (default language may not have prefix)
+    await page.goto(`${BASE_URL}/search`, { waitUntil: 'networkidle' });
+    
+    // Wait for search input to ensure page is loaded
+    const searchInput = page.locator('#search-query');
+    await expect(searchInput).toBeVisible();
+    // Find the form that contains the search input using evaluate
+    const action = await page.evaluate(() => {
+      const input = document.getElementById('search-query');
+      return input?.closest('form')?.getAttribute('action') || null;
+    });
+    
+    // Get the data-index-url
+    const searchResults = page.locator('#search-results');
+    await expect(searchResults).toBeVisible();
+    const indexUrl = await searchResults.getAttribute('data-index-url');
+    
+    // Both should be relative paths starting with /
+    // For default language (English), paths may not have prefix, or may have /en/ prefix
+    // For non-default languages, they should have the language prefix
+    // This works for both root and subdirectory deployments
+    expect(action).toMatch(/^(\/[a-z]{2})?\/search$/);
+    expect(indexUrl).toMatch(/^(\/[a-z]{2})?\/index\.json$/);
+    
+    // Perform a search to verify it works
+    await expect(searchInput).toBeVisible();
+    await searchInput.fill('theme');
+    
+    // Wait for search to execute and verify we get results
+    await page.waitForTimeout(SEARCH_DEBOUNCE_WAIT);
+    
+    // Searching for "theme" should return exactly one result
+    const resultsCount = await page.locator('#search-results div[id^="summary-"]').count();
+    expect(resultsCount).toBe(1);
+  });
+
+  test('default language search page without language prefix', async ({ page }) => {
+    // When accessing /search without language prefix, should use default language
+    await page.goto(`${BASE_URL}/search`);
+    await page.waitForLoadState('networkidle');
+    
+    // Get the data-index-url - it should still work
+    const searchResults = page.locator('#search-results');
+    const indexUrl = await searchResults.getAttribute('data-index-url');
+    
+    // Should have a valid index URL
+    expect(indexUrl).toContain('index.json');
+    
+    // Search should work - searching for "theme" should return exactly one result
+    await page.locator('#search-query').fill('theme');
+    await page.waitForTimeout(SEARCH_DEBOUNCE_WAIT);
+    
+    // Verify we get results (default language search should work)
+    const resultsCount = await page.locator('#search-results div[id^="summary-"]').count();
+    expect(resultsCount).toBe(1);
   });
 });
