@@ -194,14 +194,10 @@ test.describe('Search functionality', () => {
 
 // Helper functions for multilingual search tests
 async function verifySearchFormAction(page: any, language: string, expectedAction: string) {
-  // Try language-prefixed URL first, fall back to /search if it doesn't exist
-  const searchUrl = `${BASE_URL}/${language}/search`;
-  const response = await page.goto(searchUrl, { waitUntil: 'networkidle' });
-  
-  // If we get a 404 or redirect, try the base search URL
-  if (response && (response.status() === 404 || response.url() !== searchUrl)) {
-    await page.goto(`${BASE_URL}/search`, { waitUntil: 'networkidle' });
-  }
+  // Navigate to language-specific homepage first to establish language context
+  await page.goto(`${BASE_URL}/${language}/`, { waitUntil: 'networkidle' });
+  // Then navigate to search page - relLangURL will use the language context
+  await page.goto(`${BASE_URL}/search`, { waitUntil: 'networkidle' });
   
   // Wait for search input to ensure page is loaded
   const searchInput = page.locator('#search-query');
@@ -215,14 +211,10 @@ async function verifySearchFormAction(page: any, language: string, expectedActio
 }
 
 async function verifySearchIndexUrl(page: any, language: string, expectedIndexUrl: string) {
-  // Try language-prefixed URL first, fall back to /search if it doesn't exist
-  const searchUrl = `${BASE_URL}/${language}/search`;
-  const response = await page.goto(searchUrl, { waitUntil: 'networkidle' });
-  
-  // If we get a 404 or redirect, try the base search URL
-  if (response && (response.status() === 404 || response.url() !== searchUrl)) {
-    await page.goto(`${BASE_URL}/search`, { waitUntil: 'networkidle' });
-  }
+  // Navigate to language-specific homepage first to establish language context
+  await page.goto(`${BASE_URL}/${language}/`, { waitUntil: 'networkidle' });
+  // Then navigate to search page - relLangURL will use the language context
+  await page.goto(`${BASE_URL}/search`, { waitUntil: 'networkidle' });
   
   const searchResults = page.locator('#search-results');
   await expect(searchResults).toBeVisible();
@@ -238,14 +230,10 @@ async function verifyIndexJsonFetch(page: any, language: string, searchQuery: st
     }
   });
 
-  // Try language-prefixed URL first, fall back to /search if it doesn't exist
-  const searchUrl = `${BASE_URL}/${language}/search`;
-  const response = await page.goto(searchUrl, { waitUntil: 'networkidle' });
-  
-  // If we get a 404 or redirect, try the base search URL
-  if (response && (response.status() === 404 || response.url() !== searchUrl)) {
-    await page.goto(`${BASE_URL}/search`, { waitUntil: 'networkidle' });
-  }
+  // Navigate to language-specific homepage first to establish language context
+  await page.goto(`${BASE_URL}/${language}/`, { waitUntil: 'networkidle' });
+  // Then navigate to search page - relLangURL will use the language context
+  await page.goto(`${BASE_URL}/search`, { waitUntil: 'networkidle' });
 
   // Wait for search input to be visible
   const searchInput = page.locator('#search-query');
@@ -300,14 +288,10 @@ test.describe('Multilingual search functionality', () => {
   });
 
   test('search results are language-specific for Spanish', async ({ page }) => {
-    // Try language-prefixed URL first, fall back to /search if it doesn't exist
-    const searchUrl = `${BASE_URL}/es/search`;
-    const response = await page.goto(searchUrl, { waitUntil: 'networkidle' });
-    
-    // If we get a 404 or redirect, try the base search URL
-    if (response && (response.status() === 404 || response.url() !== searchUrl)) {
-      await page.goto(`${BASE_URL}/search`, { waitUntil: 'networkidle' });
-    }
+    // Navigate to Spanish homepage first to establish language context
+    await page.goto(`${BASE_URL}/es/`, { waitUntil: 'networkidle' });
+    // Then navigate to search page - relLangURL will use the language context
+    await page.goto(`${BASE_URL}/search`, { waitUntil: 'networkidle' });
     
     // Wait for search input to be visible
     const searchInput = page.locator('#search-query');
@@ -336,14 +320,10 @@ test.describe('Multilingual search functionality', () => {
     // root and subdirectory deployments. The relLangURL function ensures paths
     // are correct regardless of baseURL configuration.
     
-    // Try language-prefixed URL first, fall back to /search if it doesn't exist
-    const searchUrl = `${BASE_URL}/en/search`;
-    const response = await page.goto(searchUrl, { waitUntil: 'networkidle' });
-    
-    // If we get a 404 or redirect, try the base search URL
-    if (response && (response.status() === 404 || response.url() !== searchUrl)) {
-      await page.goto(`${BASE_URL}/search`, { waitUntil: 'networkidle' });
-    }
+    // Navigate to English homepage first to establish language context
+    await page.goto(`${BASE_URL}/en/`, { waitUntil: 'networkidle' });
+    // Then navigate to search page - relLangURL will use the language context
+    await page.goto(`${BASE_URL}/search`, { waitUntil: 'networkidle' });
     
     // Wait for search input to ensure page is loaded
     const searchInput = page.locator('#search-query');
