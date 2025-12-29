@@ -135,6 +135,31 @@ test.describe('Search functionality', () => {
     await expect(page.locator('#search-results div[id^="summary-"]').first()).toBeVisible();
   });
 
+  test('search excludes pages opted out via front matter', async ({ page }) => {
+    await page.goto(`${BASE_URL}/search`);
+
+    await page.locator('#search-query').fill('omitfromsearch');
+
+    await page.waitForTimeout(SEARCH_DEBOUNCE_WAIT);
+
+    await expect(page.locator('#search-results div[id^="summary-"]')).toHaveCount(0);
+    await expect(page.locator('#search-results .alert')).toContainText('No matches found');
+  });
+
+  test('search index includes section and taxonomy data', async ({ page }) => {
+    const response = await page.request.get(`${BASE_URL}/index.json`);
+    expect(response.status()).toBe(200);
+
+    const data = await response.json();
+    expect(Array.isArray(data)).toBe(true);
+    expect(data.length).toBeGreaterThan(0);
+
+    const sample = data[0];
+    expect(Object.prototype.hasOwnProperty.call(sample, 'section')).toBe(true);
+    expect(Object.prototype.hasOwnProperty.call(sample, 'sectionLabel')).toBe(true);
+    expect(Object.prototype.hasOwnProperty.call(sample, 'taxonomies')).toBe(true);
+  });
+
   test('tags and categories render correctly when paragraph element is missing', async ({ page }) => {
     await page.goto(`${BASE_URL}/search`);
     

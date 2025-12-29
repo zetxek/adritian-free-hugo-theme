@@ -1,5 +1,26 @@
 {{- $.Scratch.Add "index" slice -}}
+{{- $siteTaxonomies := .Site.Taxonomies -}}
 {{- range .Site.RegularPages -}}
-    {{- $.Scratch.Add "index" (dict "title" .Title "tags" .Params.tags "categories" .Params.categories "contents" .Plain "permalink" .Permalink) -}}
+  {{- $page := . -}}
+  {{- $includeInSearch := true -}}
+  {{- if isset $page.Params "search" -}}
+    {{- $includeInSearch = ne (lower (printf "%v" (index $page.Params "search"))) "false" -}}
+  {{- end -}}
+  {{- if $includeInSearch -}}
+    {{- $taxonomyData := dict -}}
+    {{- range $taxonomyName, $_ := $siteTaxonomies -}}
+      {{- with (index $page.Params $taxonomyName) -}}
+        {{- $taxonomyData = merge $taxonomyData (dict $taxonomyName .) -}}
+      {{- end -}}
+    {{- end -}}
+    {{- $sectionLabel := "" -}}
+    {{- with $page.CurrentSection -}}
+      {{- $sectionLabel = .LinkTitle -}}
+    {{- end -}}
+    {{- if and (not $sectionLabel) ($page.Section) -}}
+      {{- $sectionLabel = humanize $page.Section -}}
+    {{- end -}}
+    {{- $.Scratch.Add "index" (dict "title" $page.Title "tags" $page.Params.tags "categories" $page.Params.categories "taxonomies" $taxonomyData "section" $page.Section "sectionLabel" $sectionLabel "contents" $page.Plain "permalink" $page.Permalink) -}}
+  {{- end -}}
 {{- end -}}
 {{- $.Scratch.Get "index" | jsonify -}}

@@ -19,7 +19,7 @@
     </noscript>
     
     <div class="mb-5">
-      <form action="{{ "search" | relLangURL }}">
+      <form action="{{ "search" | relLangURL }}" data-index-url="{{ "index.json" | relLangURL }}">
         <div class="input-group">
           <input id="search-query" name="s" class="form-control form-control-lg" type="search" placeholder="{{ i18n "search_placeholder" }}" autocomplete="off" aria-label="Search" />
           <button type="submit" class="input-group-text">

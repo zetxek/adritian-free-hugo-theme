@@ -21,7 +21,13 @@ const fuseOptions = {
 function displayError(message) {
   const searchResultsElement = document.getElementById("search-results");
   if (searchResultsElement) {
-    const sanitizedMessage = DOMPurify.sanitize(message);
+    const resolvedMessage =
+      message ||
+      getSearchMessage(
+        "errorGeneric",
+        "There was a problem with search. Please try again later.",
+      );
+    const sanitizedMessage = DOMPurify.sanitize(resolvedMessage);
     searchResultsElement.innerHTML = `<div class="alert alert-danger">${sanitizedMessage}</div>`;
   } else {
     console.error("Search results container not found");
@@ -48,6 +54,24 @@ function getSearchMessage(key, fallback) {
     return window.SEARCH_I18N.messages[key];
   }
   return fallback;
+}
+
+function getIndexUrl(searchResults) {
+  if (searchResults && searchResults.dataset && searchResults.dataset.indexUrl) {
+    return searchResults.dataset.indexUrl;
+  }
+
+  const formWithIndex = document.querySelector("form[data-index-url]");
+  if (formWithIndex && formWithIndex.dataset.indexUrl) {
+    return formWithIndex.dataset.indexUrl;
+  }
+
+  const dataIndexElement = document.querySelector("[data-search-index-url]");
+  if (dataIndexElement && dataIndexElement.dataset.searchIndexUrl) {
+    return dataIndexElement.dataset.searchIndexUrl;
+  }
+
+  return "/index.json";
 }
 
 // Debounce function to prevent excessive search calls
@@ -198,7 +222,7 @@ function executeSearch(searchQuery) {
         "Loading...",
       )}</span></div>`;
 
-    const indexUrl = searchResults.dataset.indexUrl || "/index.json";
+    const indexUrl = getIndexUrl(searchResults);
     fetch(indexUrl)
       .then((response) => {
         if (!response.ok) {
@@ -234,11 +258,11 @@ function executeSearch(searchQuery) {
       })
       .catch((error) => {
         console.error("Error executing search:", error);
-        displayError(`Failed to search: ${error.message}`);
+        displayError();
       });
   } catch (error) {
     console.error("Error in search execution:", error);
-    displayError("There was a problem with the search. Please try again later.");
+    displayError();
   }
 }
 
@@ -418,6 +442,9 @@ function render(templateString, data) {
     return result;
   } catch (error) {
     console.error("Error rendering template:", error);
-    return '<div class="alert alert-danger">Error rendering result</div>';
+    return `<div class="alert alert-danger">${getSearchMessage(
+      "errorGeneric",
+      "There was a problem with search. Please try again later.",
+    )}</div>`;
   }
 }
