@@ -16,7 +16,7 @@
 
 <header class="header fixed-top rad-animation-group" id="header">
   <div class="container rad-fade-in">
-    <nav class="navbar bd-navbar navbar-expand-lg navbar-light p-0">
+    <nav class="navbar bd-navbar navbar-expand-lg navbar-light p-0" role="navigation" aria-label='{{ i18n "primary_navigation" }}'>
       <div class="container-fluid">
         <a class="navbar-brand mx-auto" href="{{ .Site.BaseURL | relLangURL }}">
             {{ if .Site.Params.logo }}
@@ -34,7 +34,7 @@
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarSupportedContent, #header"
-          aria-controls="navbarSupportedContent"
+          aria-controls="navbarSupportedContent header"
           aria-expanded="false"
           aria-label='{{ i18n "toggle_navigation" }}'
         >

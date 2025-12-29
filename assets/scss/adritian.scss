@@ -62,6 +62,20 @@ h6 {
   box-shadow: 0 0 0 0.2rem $primary;
 }
 
+a:focus-visible,
+button:not(.btn):focus-visible,
+[role="button"]:focus-visible,
+.nav-link:focus-visible,
+.navbar-brand:focus-visible,
+.navbar-toggler:focus-visible,
+.dropdown-item:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid rgba($base-color, 0.6);
+  outline-offset: 3px;
+}
+
 @media (min-width: 992px) {
   .h1,
   .h2,
@@ -267,7 +281,8 @@ footer_links .nav-item .nav-link::after {
   opacity: 0;
 }
 
-.skip-to-content-link:focus {
+.skip-to-content-link:focus,
+.skip-to-content-link:focus-visible {
   left: 50%;
   transform: translateX(-50%);
   opacity: 1;
@@ -280,6 +295,23 @@ footer_links .nav-item .nav-link::after {
   body {
     color: #fff;
     background-color: #181818;
+  }
+
+  .btn:focus-visible{
+    box-shadow: 0 0 0 0.2rem rgba($dark-primary, 0.7);
+  }
+
+  a:focus-visible,
+  button:not(.btn):focus-visible,
+  [role="button"]:focus-visible,
+  .nav-link:focus-visible,
+  .navbar-brand:focus-visible,
+  .navbar-toggler:focus-visible,
+  .dropdown-item:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    outline-color: rgba($dark-primary, 0.7);
   }
   .header .navbar-brand span:nth-child(2) {
     color: #fff;

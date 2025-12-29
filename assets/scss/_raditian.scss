@@ -1933,24 +1933,27 @@ div.blog-single a{
     margin-bottom: 3rem;
     margin-top: 0.5rem;
 
-    section {
+    .post-meta-info {
         font-weight: 300;
         font-size: 1rem;
         color: var(--bs-secondary-color);
         margin-bottom: 1.25rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.35rem;
+        align-items: center;
     }
 
-    h4 {
-        font-size: 1rem;
+    .post-meta-info .date,
+    .post-meta-info .wordcount,
+    .post-meta-info .reading-time,
+    .post-meta-info .last-modified {
         font-weight: 400;
-        display: inline;
         color: var(--bs-body-color);
     }
 
-    h5 {
-        font-size: 0.875rem;
-        font-weight: 300;
-        display: inline;
+    .post-meta-info .meta-separator {
+        color: var(--bs-secondary-color);
     }
 
     #topics,

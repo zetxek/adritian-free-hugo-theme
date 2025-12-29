@@ -1,40 +1,43 @@
 {{ define "main" }}
 <section id="blog-single" class="blog-single section section--border-bottom rad-animation-group flex-grow-1">
-  <div id="main-content">
-    <h1><a href="{{ .RelPermalink }}">{{ .Title }}</a></h1>
+  <article id="main-content" tabindex="-1" class="blog-post" aria-labelledby="blog-post-title">
+    <header class="post-header">
+      <h1 id="blog-post-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h1>
 
-    <aside id="meta" class="light-border-bottom">
-      <div>
-        <section>
-          {{ i18n "published_on" }}&nbsp;<h4 id="date">{{ .Date.Format "Mon Jan 2, 2006" }}</h4>
-          ·
-          <h4 id="wordcount">{{ .WordCount }} Words</h4>
-          {{ $readingTime := div .WordCount 200 }}
-          {{ if lt $readingTime 1 }}
-            {{ $readingTime = 1 }}
+      <div id="meta" class="light-border-bottom">
+        <div class="post-meta">
+          <section class="post-meta-info">
+            <span class="published-label">{{ i18n "published_on" }}</span>
+            <time id="date" class="date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Mon Jan 2, 2006" }}</time>
+            <span class="meta-separator" aria-hidden="true">·</span>
+            <span id="wordcount" class="wordcount">{{ .WordCount }} Words</span>
+            {{ $readingTime := div .WordCount 200 }}
+            {{ if lt $readingTime 1 }}
+              {{ $readingTime = 1 }}
+            {{ end }}
+            <span class="meta-separator" aria-hidden="true">·</span>
+            <span id="reading-time" class="reading-time">{{ $readingTime }} {{ i18n "min_read" | default "min read" }}</span>
+            {{ if .Params.lastmod }}
+              <span class="meta-separator" aria-hidden="true">·</span>
+              <span id="last-modified" class="last-modified">{{ i18n "last_updated" | default "Updated" }}: {{ .Lastmod.Format "Jan 2, 2006" }}</span>
+            {{ end }}
+          </section>
+          {{ with .GetTerms "topics" }}
+          <ul id="topics">
+            {{ range . }}
+            <li><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></li>
+            {{ end }}
+          </ul>
+          {{ end }} {{ with .GetTerms "tags" }}
+          <ul class="tags">
+            {{ range . }}
+            <li><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></li>
+            {{ end }}
+          </ul>
           {{ end }}
-          &nbsp;·&nbsp;
-          <h4 id="reading-time">{{ $readingTime }} {{ i18n "min_read" | default "min read" }}</h4>
-          {{ if .Params.lastmod }}
-          &nbsp;·&nbsp;
-          <h4 id="last-modified">{{ i18n "last_updated" | default "Updated" }}: {{ .Lastmod.Format "Jan 2, 2006" }}</h4>
-          {{ end }}
-        </section>
-        {{ with .GetTerms "topics" }}
-        <ul id="topics">
-          {{ range . }}
-          <li><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></li>
-          {{ end }}
-        </ul>
-        {{ end }} {{ with .GetTerms "tags" }}
-        <ul class="tags">
-          {{ range . }}
-          <li><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></li>
-          {{ end }}
-        </ul>
-        {{ end }}
+        </div>
       </div>
-    </aside>
+    </header>
 
     {{ partial "toc.html" . }}
 
@@ -60,6 +63,6 @@
     </aside>
 
     {{ partial "comments.html" . }}
-  </div>
+  </article>
 </section>
 {{ end }}

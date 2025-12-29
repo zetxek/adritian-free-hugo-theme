@@ -3,8 +3,8 @@
 {{ $shareDescription := .Description | default .Summary }}
 
 {{ if or .Site.Params.sharing.enabled (not (isset .Site.Params.sharing "enabled")) }}
-<aside class="social-sharing light-border-top">
-  <h3>{{ i18n "share_this_post" | default "Share this post" }}</h3>
+<aside class="social-sharing light-border-top" aria-labelledby="social-sharing-title">
+  <h3 id="social-sharing-title">{{ i18n "share_this_post" | default "Share this post" }}</h3>
   <div class="share-buttons">
     {{ if or .Site.Params.sharing.twitter (not (isset .Site.Params.sharing "twitter")) }}
     <a href="https://twitter.com/intent/tweet?url={{ $shareUrl | urlquery }}&text={{ $shareTitle | urlquery }}" 

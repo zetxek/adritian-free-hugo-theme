@@ -9,12 +9,12 @@
 {{ if not $topicsPage }}
   {{ $topicsPage = .Site.GetPage "tags" }}
 {{ end }}
-<section id="main-content" class="blog blog-list section section--border-bottom rad-animation-group flex-grow-1">
+<section id="main-content" tabindex="-1" class="blog blog-list section section--border-bottom rad-animation-group flex-grow-1" aria-labelledby="blog-list-title">
   <div class="container">
     <header class="blog-intro mb-5">
       <div class="row gy-4 align-items-start">
         <div class="col-12 col-lg-7">
-          <h1 class="mb-3">{{ .Title }}</h1>
+          <h1 id="blog-list-title" class="mb-3">{{ .Title }}</h1>
           {{ if .Content }}
             <div class="lead blog-intro-copy">{{ .Content }}</div>
           {{ else if .Params.description }}

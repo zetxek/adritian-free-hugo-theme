@@ -2,7 +2,7 @@
   {{ if eq .Site.Params.blog.listLayout "cards" }}
     {{ partial "blog/list-cards.html" . }}
   {{ else }}
-  <div id="main-content" class="blog flex-grow-1">
+  <div id="main-content" tabindex="-1" class="blog flex-grow-1" aria-labelledby="blog-list-title">
     <div class="section">
       <div
         class="row {{ if or (eq .Site.Params.blog.layout "sidebar") (eq .Site.Params.blog.layout "sidebar-right") }}
@@ -22,7 +22,7 @@
           {{ if or (eq .Site.Params.blog.layout "sidebar") (eq .Site.Params.blog.layout "sidebar-right") }}
             style="width: calc(100% - {{ .Site.Params.blog.sidebarWidth }}%)"
           {{ end }}>
-          <h1 class="rad-fade-down rad-waiting rad-animate">{{ .Title }}</h1>
+          <h1 id="blog-list-title" class="rad-fade-down rad-waiting rad-animate">{{ .Title }}</h1>
           {{ .Content }}
 
           {{ $allPosts := .Pages }}

@@ -5,7 +5,8 @@ so far the placement can either be header or footer */}}
 <div id='{{ .Scratch.Get "selectorPlacement" }}-color-selector'
   class='d-grid gap-2 col-6 mx-auto nav-link dropdown {{ if eq $direction "up" }}dropup{{ end }} {{ if eq $placement "mobile-header" }}nav-link{{ end }}'>
   <button class="btn btn-link py-2 px-0 px-lg-2 dropdown-toggle d-flex align-items-center show bd-theme-selector"
-    id='bd-theme-{{ .Scratch.Get "selectorPlacement" }}' type="button" aria-expanded="true" data-bs-toggle="dropdown"
+    id='bd-theme-{{ .Scratch.Get "selectorPlacement" }}' type="button" aria-expanded="false"
+    aria-controls="theme-dropdown-{{ $placement }}" aria-haspopup="true" data-bs-toggle="dropdown"
     data-bs-display="static" aria-label='{{ i18n "toggle_theme" }}'>
     <span class="theme-icon auto d-none" aria-hidden="true">{{ i18n "theme_auto_short" }}</span>
     <span class="current-theme">{{ i18n "theme_auto" }}</span>

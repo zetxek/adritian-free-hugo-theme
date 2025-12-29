@@ -1,7 +1,7 @@
 {{ $related := .Site.RegularPages.Related . | first 3 }}
 {{ with $related }}
-<aside class="related-posts light-border-top">
-  <h3>{{ i18n "related_posts" | default "Related Posts" }}</h3>
+<aside class="related-posts light-border-top" aria-labelledby="related-posts-title">
+  <h3 id="related-posts-title">{{ i18n "related_posts" | default "Related Posts" }}</h3>
   <ul class="related-posts-list">
     {{ range . }}
     <li class="related-post-item">

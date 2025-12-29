@@ -13,7 +13,7 @@
 <body class="{{- if .IsHome }}home{{- end }}{{- with .File }} page-{{- .ContentBaseName }}{{- end }}">
     {{ partial "header.html" . }}
 
-    <main class="container">
+    <main class="container" role="main">
         {{ block "main" . }}{{ end }}
     </main>
 
