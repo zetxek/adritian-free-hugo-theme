@@ -348,12 +348,19 @@
             color: var(--bs-gray-200);
 
             code {
-                background-color: var(--bs-gray-800);
-                color: var(--bs-gray-200);
+                background-color: var(--bs-gray-800) !important;
+                color: var(--bs-gray-100) !important;
             }
 
-            pre {
-                background-color: var(--bs-gray-800);
+            pre,
+            .highlight pre {
+                background-color: var(--bs-gray-900) !important;
+                color: var(--bs-gray-100) !important;
+
+                code {
+                    background-color: transparent !important;
+                    color: inherit !important;
+                }
             }
 
             blockquote {
