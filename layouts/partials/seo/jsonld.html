@@ -1,0 +1,147 @@
+{{- $siteTitle := .Site.Title -}}
+{{- if not $siteTitle -}}
+  {{- $siteTitle = .Site.Params.title -}}
+{{- end -}}
+{{- with .Site.Params.seo -}}
+  {{- with .siteName -}}
+    {{- $siteTitle = . -}}
+  {{- end -}}
+{{- end -}}
+{{- if not $siteTitle -}}
+  {{- $siteTitle = i18n "head_title" -}}
+{{- end -}}
+
+{{- $siteDescription := .Site.Params.description -}}
+{{- with .Site.Params.seo -}}
+  {{- with .siteDescription -}}
+    {{- $siteDescription = . -}}
+  {{- end -}}
+{{- end -}}
+{{- if not $siteDescription -}}
+  {{- $siteDescription = i18n "head_description" -}}
+{{- end -}}
+
+{{- $siteUrl := .Site.BaseURL -}}
+
+{{- $siteImage := "" -}}
+{{- with .Site.Params.seo -}}
+  {{- with .siteImage -}}
+    {{- $siteImage = . -}}
+  {{- end -}}
+{{- end -}}
+{{- if not $siteImage -}}
+  {{- with .Site.Params.images -}}
+    {{- if gt (len .) 0 -}}
+      {{- $siteImage = index . 0 -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $person := dict -}}
+{{- with .Site.Params.seo -}}
+  {{- with .person -}}
+    {{- $person = dict "@type" "Person" "name" (or .name $siteTitle) -}}
+    {{- with .url -}}
+      {{- $person = merge $person (dict "url" .) -}}
+    {{- end -}}
+    {{- with .image -}}
+      {{- $person = merge $person (dict "image" (. | absURL)) -}}
+    {{- end -}}
+    {{- with .sameAs -}}
+      {{- $person = merge $person (dict "sameAs" .) -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $organization := dict -}}
+{{- with .Site.Params.seo -}}
+  {{- with .organization -}}
+    {{- $organization = dict "@type" "Organization" "name" (or .name $siteTitle) -}}
+    {{- with .url -}}
+      {{- $organization = merge $organization (dict "url" .) -}}
+    {{- end -}}
+    {{- with .logo -}}
+      {{- $organization = merge $organization (dict "logo" (. | absURL)) -}}
+    {{- end -}}
+    {{- with .sameAs -}}
+      {{- $organization = merge $organization (dict "sameAs" .) -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $publisher := dict -}}
+{{- if gt (len $organization) 0 -}}
+  {{- $publisher = $organization -}}
+{{- else if gt (len $person) 0 -}}
+  {{- $publisher = $person -}}
+{{- end -}}
+
+{{- $webSite := dict "@context" "https://schema.org" "@type" "WebSite" "name" $siteTitle "url" $siteUrl "description" $siteDescription -}}
+{{- with .Site.LanguageCode -}}
+  {{- $webSite = merge $webSite (dict "inLanguage" .) -}}
+{{- end -}}
+{{- if $siteImage -}}
+  {{- $webSite = merge $webSite (dict "image" (slice ($siteImage | absURL))) -}}
+{{- end -}}
+{{- if gt (len $publisher) 0 -}}
+  {{- $webSite = merge $webSite (dict "publisher" $publisher) -}}
+{{- end -}}
+
+<script type="application/ld+json">{{ $webSite | jsonify }}</script>
+
+{{- if gt (len $person) 0 -}}
+<script type="application/ld+json">{{ (merge (dict "@context" "https://schema.org") $person) | jsonify }}</script>
+{{- end -}}
+{{- if gt (len $organization) 0 -}}
+<script type="application/ld+json">{{ (merge (dict "@context" "https://schema.org") $organization) | jsonify }}</script>
+{{- end -}}
+
+{{- if and .IsPage (eq .Type "blog") -}}
+  {{- $pageTitle := .Title | default $siteTitle -}}
+  {{- $pageDescription := .Description | default $siteDescription -}}
+  {{- if not $pageDescription -}}
+    {{- $pageDescription = .Summary -}}
+  {{- end -}}
+  {{- if $pageDescription -}}
+    {{- $pageDescription = $pageDescription | plainify -}}
+  {{- end -}}
+
+  {{- $pageImage := "" -}}
+  {{- with .Params.images -}}
+    {{- if isset . "featured_image" -}}
+      {{- $pageImage = .featured_image -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if and (not $pageImage) $siteImage -}}
+    {{- $pageImage = $siteImage -}}
+  {{- end -}}
+
+  {{- $author := dict -}}
+  {{- if gt (len $person) 0 -}}
+    {{- $author = $person -}}
+  {{- else if gt (len $organization) 0 -}}
+    {{- $author = $organization -}}
+  {{- end -}}
+
+  {{- $blogPosting := dict "@context" "https://schema.org" "@type" "BlogPosting" "headline" $pageTitle "url" .Permalink "mainEntityOfPage" (dict "@type" "WebPage" "@id" .Permalink) -}}
+  {{- with $pageDescription -}}
+    {{- $blogPosting = merge $blogPosting (dict "description" .) -}}
+  {{- end -}}
+  {{- with .Date -}}
+    {{- $blogPosting = merge $blogPosting (dict "datePublished" (.Format "2006-01-02T15:04:05Z07:00")) -}}
+  {{- end -}}
+  {{- with .Lastmod -}}
+    {{- $blogPosting = merge $blogPosting (dict "dateModified" (.Format "2006-01-02T15:04:05Z07:00")) -}}
+  {{- end -}}
+  {{- if $pageImage -}}
+    {{- $blogPosting = merge $blogPosting (dict "image" (slice ($pageImage | absURL))) -}}
+  {{- end -}}
+  {{- if gt (len $author) 0 -}}
+    {{- $blogPosting = merge $blogPosting (dict "author" $author) -}}
+  {{- end -}}
+  {{- if gt (len $publisher) 0 -}}
+    {{- $blogPosting = merge $blogPosting (dict "publisher" $publisher) -}}
+  {{- end -}}
+
+<script type="application/ld+json">{{ $blogPosting | jsonify }}</script>
+{{- end -}}

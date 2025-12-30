@@ -71,6 +71,17 @@ title = 'Adritian - a high performance hugo theme by Adrián Moreno'
 description = 'This hugo theme (Adritian) is based on Bootstrap and has features that make it suitable for a personal site, a portfolio or other kind of Single Page Applications.'
 images = ['/img/og-img.png']
 themeColor = '#478079'
+
+[params.seo]
+siteName = 'Adritian'
+siteDescription = 'This hugo theme (Adritian) is based on Bootstrap and has features that make it suitable for a personal site, a portfolio or other kind of Single Page Applications.'
+siteImage = '/img/og-img.png'
+twitterHandle = '@zetxek'
+
+[params.seo.person]
+name = 'Adrián Moreno Peña'
+url = 'https://www.adrianmoreno.info'
+sameAs = ['https://github.com/zetxek']
 sections = [
   "showcase",
   "about",

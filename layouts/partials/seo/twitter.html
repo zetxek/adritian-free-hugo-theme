@@ -1,0 +1,29 @@
+{{- $handle := "" -}}
+{{- with .Site.Params.seo }}
+  {{- with .twitterHandle -}}
+    {{- $handle = . -}}
+  {{- end -}}
+{{- end -}}
+{{- if not $handle -}}
+  {{- with .Site.Social.twitter -}}
+    {{- $handle = . -}}
+  {{- end -}}
+{{- end -}}
+{{- if $handle -}}
+  {{- if not (strings.HasPrefix $handle "@") -}}
+    {{- $handle = printf "@%s" $handle -}}
+  {{- end -}}
+  <meta name="twitter:site" content="{{ $handle }}" />
+  {{- $creator := $handle -}}
+  {{- with .Site.Params.seo }}
+    {{- with .twitterCreator -}}
+      {{- $creator = . -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if and $creator (not (strings.HasPrefix $creator "@")) -}}
+    {{- $creator = printf "@%s" $creator -}}
+  {{- end -}}
+  {{- if $creator -}}
+    <meta name="twitter:creator" content="{{ $creator }}" />
+  {{- end -}}
+{{- end -}}

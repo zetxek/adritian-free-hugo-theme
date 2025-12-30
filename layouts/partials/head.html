@@ -33,6 +33,7 @@
 </title>
 
 <meta name="description" content="{{ i18n "head_description" }}" />
+<link rel="canonical" href="{{ .Permalink }}" />
 <meta name="generator-mode" content="{{ hugo.Environment }}" />
 {{- $critical := resources.Get "css/critical.css" | resources.Minify }}
 <style data-generator="critical-css">
@@ -141,3 +142,6 @@
 <script async src="{{ "js/library/lozad.min.js" | absURL }}"></script>
 
 {{ template "_internal/opengraph.html" . }}
+{{ template "_internal/twitter_cards.html" . }}
+{{ partial "seo/twitter.html" . }}
+{{ partial "seo/jsonld.html" . }}
