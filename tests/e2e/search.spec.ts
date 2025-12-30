@@ -146,6 +146,17 @@ test.describe('Search functionality', () => {
     await expect(page.locator('#search-results .alert')).toContainText('No matches found');
   });
 
+  test('search index excludes the search page itself', async ({ page }) => {
+    const response = await page.request.get(`${BASE_URL}/index.json`);
+    expect(response.status()).toBe(200);
+
+    const data = await response.json();
+    const permalinks = data.map((item: any) => item.permalink || '');
+    const searchPagePattern = /\/search\/?$/;
+    const hasSearchPage = permalinks.some((link: string) => searchPagePattern.test(link));
+    expect(hasSearchPage).toBe(false);
+  });
+
   test('search index includes section and taxonomy data', async ({ page }) => {
     const response = await page.request.get(`${BASE_URL}/index.json`);
     expect(response.status()).toBe(200);

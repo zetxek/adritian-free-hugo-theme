@@ -7,6 +7,25 @@
     {{- $includeInSearch = ne (lower (printf "%v" (index $page.Params "search"))) "false" -}}
   {{- end -}}
   {{- if $includeInSearch -}}
+    {{- $pageType := lower (printf "%v" $page.Type) -}}
+    {{- $pageSection := lower (printf "%v" $page.Section) -}}
+    {{- $pageLayout := lower (printf "%v" $page.Layout) -}}
+    {{- $translationBase := "" -}}
+    {{- with $page.File -}}
+      {{- $translationBase = lower .TranslationBaseName -}}
+    {{- end -}}
+    {{- if or (eq $pageType "search") (eq $pageSection "search") (eq $pageLayout "search") -}}
+      {{- $includeInSearch = false -}}
+    {{- end -}}
+    {{- if eq $translationBase "search" -}}
+      {{- $includeInSearch = false -}}
+    {{- end -}}
+    {{- $relPermalink := lower (printf "%v" $page.RelPermalink) -}}
+    {{- if or (eq $relPermalink "/search") (eq $relPermalink "/search/") (hasSuffix $relPermalink "/search") (hasSuffix $relPermalink "/search/") -}}
+      {{- $includeInSearch = false -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if $includeInSearch -}}
     {{- $taxonomyData := dict -}}
     {{- range $taxonomyName, $_ := $siteTaxonomies -}}
       {{- with (index $page.Params $taxonomyName) -}}
