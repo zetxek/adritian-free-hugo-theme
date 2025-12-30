@@ -241,6 +241,10 @@
 ## Taxonomy
 - id: "categories"
   translation: "קטגוריות"
+- id: "post_singular"
+  translation: "פוסט"
+- id: "post_plural"
+  translation: "פוסטים"
 - id: "tags"
   translation: "תגיות"
 - id: "authors"

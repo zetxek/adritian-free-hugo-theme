@@ -305,6 +305,10 @@
 ## Taxonomy
 - id: "categories"
   translation: "Categories"
+- id: "post_singular"
+  translation: "post"
+- id: "post_plural"
+  translation: "posts"
 - id: "tags"
   translation: "Tags"
 - id: "authors"

@@ -236,6 +236,10 @@
 ## Taxonomy
 - id: "categories"
   translation: "Kategorier"
+- id: "post_singular"
+  translation: "indlæg"
+- id: "post_plural"
+  translation: "indlæg"
 - id: "tags"
   translation: "Tags"
 - id: "authors"

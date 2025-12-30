@@ -236,6 +236,10 @@
 ## Taxonomy
 - id: "categories"
   translation: "Categorieën"
+- id: "post_singular"
+  translation: "bericht"
+- id: "post_plural"
+  translation: "berichten"
 - id: "tags"
   translation: "Tags"
 - id: "authors"

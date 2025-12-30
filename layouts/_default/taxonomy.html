@@ -75,7 +75,7 @@
 
                         {{ if or (eq $n 1) (eq $n $total) $inWindow }}
                           <li class="page-item {{ if eq . $paginator }}active{{ end }}">
-                            <a class="page-link" href="{{ .URL }}">{{ .PageNumber }}</a>
+                            <a class="page-link" href="{{ .URL }}" {{ if eq . $paginator }}aria-current="page"{{ end }}>{{ .PageNumber }}</a>
                           </li>
                         {{ else if and (eq $n 2) (gt (sub $current $window) 2) (not ($scratch.Get "leftDots")) }}
                           <li class="page-item disabled" aria-hidden="true">

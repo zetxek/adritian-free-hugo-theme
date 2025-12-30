@@ -33,7 +33,7 @@
           <p class="card-text text-muted mb-2">{{ . | markdownify }}</p>
         {{ end }}
         {{ if gt $count 0 }}
-          <p class="text-muted small mb-0">{{ $count }} {{ if eq $count 1 }}post{{ else }}posts{{ end }}</p>
+          <p class="text-muted small mb-0">{{ $count }} {{ if eq $count 1 }}{{ i18n "post_singular" | default "post" }}{{ else }}{{ i18n "post_plural" | default "posts" }}{{ end }}</p>
         {{ end }}
       </div>
     </div>
@@ -55,16 +55,21 @@
           <div class="author-bio-text mb-2">{{ $page.Content }}</div>
         {{ end }}
         {{ with $page.Params.links }}
+          {{ $baseURL := $page.Site.BaseURL | urls.Parse }}
           <ul class="list-inline mb-0 author-links">
             {{ range . }}
               {{ if reflect.IsMap . }}
                 {{ $url := .url | default .URL | default .href }}
                 {{ $label := .label | default .name | default .title | default $url }}
                 {{ if $url }}
-                  <li class="list-inline-item"><a href="{{ $url }}" class="text-decoration-none">{{ $label }}</a></li>
+                  {{ $parsed := $url | urls.Parse }}
+                  {{ $isExternal := and $parsed.Host (ne $parsed.Host $baseURL.Host) }}
+                  <li class="list-inline-item"><a href="{{ $url }}" class="text-decoration-none"{{ if $isExternal }} target="_blank" rel="noopener noreferrer"{{ end }}>{{ $label }}</a></li>
                 {{ end }}
               {{ else if reflect.IsString . }}
-                <li class="list-inline-item"><a href="{{ . }}" class="text-decoration-none">{{ . }}</a></li>
+                {{ $parsed := . | urls.Parse }}
+                {{ $isExternal := and $parsed.Host (ne $parsed.Host $baseURL.Host) }}
+                <li class="list-inline-item"><a href="{{ . }}" class="text-decoration-none"{{ if $isExternal }} target="_blank" rel="noopener noreferrer"{{ end }}>{{ . }}</a></li>
               {{ end }}
             {{ end }}
           </ul>

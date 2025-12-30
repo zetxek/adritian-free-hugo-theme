@@ -236,6 +236,10 @@
 ## Taxonomy
 - id: "categories"
   translation: "Categorie"
+- id: "post_singular"
+  translation: "articolo"
+- id: "post_plural"
+  translation: "articoli"
 - id: "tags"
   translation: "Tag"
 - id: "authors"

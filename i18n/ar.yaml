@@ -241,6 +241,10 @@
 ## Taxonomy
 - id: "categories"
   translation: "التصنيفات"
+- id: "post_singular"
+  translation: "منشور"
+- id: "post_plural"
+  translation: "منشورات"
 - id: "tags"
   translation: "الوسوم"
 - id: "authors"

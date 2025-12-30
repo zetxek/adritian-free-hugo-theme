@@ -34,7 +34,7 @@
                             </a>
                           </h3>
                           <p class="card-text text-muted mb-0">
-                            {{ .Count }} {{ if eq .Count 1 }}post{{ else }}posts{{ end }}
+                            {{ .Count }} {{ if eq .Count 1 }}{{ i18n "post_singular" | default "post" }}{{ else }}{{ i18n "post_plural" | default "posts" }}{{ end }}
                           </p>
                         </div>
                       </div>

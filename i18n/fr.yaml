@@ -155,6 +155,10 @@
 ## Taxonomy
 - id: "categories"
   translation: "Catégories"
+- id: "post_singular"
+  translation: "article"
+- id: "post_plural"
+  translation: "articles"
 - id: "tags"
   translation: "Étiquettes"
 - id: "authors"
