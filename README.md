@@ -175,6 +175,21 @@ The theme includes a dedicated Technical Skills showcase section that allows you
 
 To use this feature, create a `skills/_index.md` file with structured front matter for your skill categories and individual skills. The theme will automatically generate a visually appealing skills showcase page.
 
+#### Favicons and web manifest
+
+The theme ships with a default favicon set and `site.webmanifest` under `static/`. You can override the paths via `params.favicons`, or drop your own files in your site's `static/` directory using the same paths.
+
+```toml
+[params.favicons]
+favicon = "/favicon.ico"
+icon16 = "/icons/icon-16.png"
+icon32 = "/icons/icon-32.png"
+appleTouch = "/icons/apple-touch-icon.png"
+manifest = "/site.webmanifest"
+```
+
+If you need custom names or colors in the manifest, place your own manifest file at the path above (or update `manifest` to point to a custom location).
+
 #### Shortcodes
 
 The theme has multiple shortcodes available for use in the content, so you can customize your homepage (or any other page) as you want. You can read about them in the [shortcodes page](https://adritian-demo.vercel.app/blog/shortcodes). Since version `v1.7.0,` this is the preferred way to set up your theme content and translations, as that's the most flexible system.

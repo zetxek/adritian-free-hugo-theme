@@ -85,6 +85,13 @@ sections = [
 
 homepageExperienceCount = 6
 
+[params.favicons]
+favicon = "/favicon.ico"
+icon16 = "/icons/icon-16.png"
+icon32 = "/icons/icon-32.png"
+appleTouch = "/icons/apple-touch-icon.png"
+manifest = "/site.webmanifest"
+
 [params.analytics]
 ## Analytics parameters.
 ### Supported so far: Vercel (Page Insights, Analytics)

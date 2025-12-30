@@ -2,6 +2,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 <meta name="theme-color" content="#478079" />
+{{- $favicons := .Site.Params.favicons | default (dict) -}}
+{{- $favicon := (index $favicons "favicon") | default "/favicon.ico" -}}
+{{- $icon16 := (index $favicons "icon16") | default "/icons/icon-16.png" -}}
+{{- $icon32 := (index $favicons "icon32") | default "/icons/icon-32.png" -}}
+{{- $appleTouch := (index $favicons "appleTouch") | default "/icons/apple-touch-icon.png" -}}
+{{- $manifest := (index $favicons "manifest") | default "/site.webmanifest" -}}
+<link rel="icon" href="{{ $favicon | absURL }}" />
+<link rel="icon" type="image/png" sizes="16x16" href="{{ $icon16 | absURL }}" />
+<link rel="icon" type="image/png" sizes="32x32" href="{{ $icon32 | absURL }}" />
+<link rel="apple-touch-icon" sizes="180x180" href="{{ $appleTouch | absURL }}" />
+<link rel="manifest" href="{{ $manifest | absURL }}" />
 
 {{- if .Site.Params.analytics.googleTagManager.enabled }}
   <link rel="preconnect" href="https://www.googletagmanager.com" />
