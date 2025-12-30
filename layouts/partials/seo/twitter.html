@@ -5,8 +5,19 @@
   {{- end -}}
 {{- end -}}
 {{- if not $handle -}}
-  {{- with .Site.Social.twitter -}}
-    {{- $handle = . -}}
+  {{- with .Site.Params -}}
+    {{- with .social -}}
+      {{- with .twitter -}}
+        {{- $handle = . -}}
+      {{- end -}}
+    {{- end -}}
+    {{- if not $handle -}}
+      {{- with .Social -}}
+        {{- with .twitter -}}
+          {{- $handle = . -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
   {{- end -}}
 {{- end -}}
 {{- if $handle -}}
