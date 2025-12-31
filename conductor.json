@@ -1,6 +1,6 @@
 {
     "scripts": {
-        "setup": "npm i",
+        "setup": "npm ci",
         "run": "cd examplesSite && hugo serve --themesDir=../"
     }
 }
