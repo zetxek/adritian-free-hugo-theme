@@ -2,6 +2,16 @@
 
 This documentation tracks changes across versions, including new features, improvements, and breaking changes.
 
+## v1.8.6
+
+### Search improvements
+
+- Language-aware search index URLs for multilingual sites and subdirectory deployments
+- Ability to opt out any page from search using `search: false`
+- Search page excluded from the index by default
+- Index now includes section/taxonomy metadata for richer filtering
+- Search messaging aligned with i18n fallbacks
+
 ## v1.8.0
 
 ### RTL (Right-to-Left) Language Support
