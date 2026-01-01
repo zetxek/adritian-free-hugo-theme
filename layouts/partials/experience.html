@@ -35,7 +35,8 @@
 
       {{ $xpCount := len $xp }}
 {{/* in the homepage we limit to the homepageExperienceCount param (6 by default) in the inner page (experience) we display the all */}}
-      {{ $totalCount := .Site.Params.homepageExperienceCount }}
+      {{ $totalCount := default 6 .Site.Params.homepageExperienceCount }}
+      {{ $totalCount = int $totalCount }}
 
       {{ if not $isShortcode }}
       {{ if not .IsHome }}
