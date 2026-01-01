@@ -59,3 +59,9 @@
   translation: "Désolé, mais la page que vous recherchez est introuvable."
 - id: "404_button"
   translation: "Retour à l'accueil"
+
+- id: "primary_navigation"
+  translation: "Navigation principale"
+
+- id: "footer_navigation"
+  translation: "Navigation du pied de page"

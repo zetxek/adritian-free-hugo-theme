@@ -270,3 +270,8 @@
 - id: "search_no_preview"
   translation: "Brak podglądu"
 
+- id: "primary_navigation"
+  translation: "Nawigacja główna"
+
+- id: "footer_navigation"
+  translation: "Nawigacja w stopce"

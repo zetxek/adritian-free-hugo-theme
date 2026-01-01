@@ -275,3 +275,8 @@
 - id: "search_no_preview"
   translation: "אין תצוגה מקדימה"
 
+- id: "primary_navigation"
+  translation: "ניווט ראשי"
+
+- id: "footer_navigation"
+  translation: "ניווט תחתון"

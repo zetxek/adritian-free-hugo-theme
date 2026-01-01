@@ -312,3 +312,8 @@
 - id: "view_all_tags"
   translation: "View all tags"
 
+- id: "primary_navigation"
+  translation: "Primary navigation"
+
+- id: "footer_navigation"
+  translation: "Footer navigation"

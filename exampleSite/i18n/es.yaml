@@ -60,3 +60,9 @@
   translation: "Lo sentimos, pero la página que buscabas no pudo ser encontrada."
 - id: "404_button"
   translation: "Volver al inicio"
+
+- id: "primary_navigation"
+  translation: "Navegación principal"
+
+- id: "footer_navigation"
+  translation: "Navegación del pie"

@@ -270,3 +270,8 @@
 - id: "search_no_preview"
   translation: "Nessuna anteprima disponibile"
 
+- id: "primary_navigation"
+  translation: "Navigazione principale"
+
+- id: "footer_navigation"
+  translation: "Navigazione del piè di pagina"

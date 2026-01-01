@@ -275,3 +275,8 @@
 - id: "search_no_preview"
   translation: "لا توجد معاينة"
 
+- id: "primary_navigation"
+  translation: "التنقل الرئيسي"
+
+- id: "footer_navigation"
+  translation: "تنقل التذييل"

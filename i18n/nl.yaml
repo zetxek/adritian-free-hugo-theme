@@ -270,3 +270,8 @@
 - id: "search_no_preview"
   translation: "Geen voorbeeld beschikbaar"
 
+- id: "primary_navigation"
+  translation: "Primaire navigatie"
+
+- id: "footer_navigation"
+  translation: "Voetnavigatie"

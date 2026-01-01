@@ -71,3 +71,8 @@
 - id: "404_button"
   translation: "Back to homepage"
 
+- id: "primary_navigation"
+  translation: "Primary navigation"
+
+- id: "footer_navigation"
+  translation: "Footer navigation"

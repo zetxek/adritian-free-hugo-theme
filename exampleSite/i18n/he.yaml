@@ -227,3 +227,9 @@
   translation: "קטגוריות"
 - id: "recent_posts"
   translation: "פוסטים אחרונים"
+
+- id: "primary_navigation"
+  translation: "ניווט ראשי"
+
+- id: "footer_navigation"
+  translation: "ניווט תחתון"

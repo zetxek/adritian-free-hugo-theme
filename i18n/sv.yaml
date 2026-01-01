@@ -270,3 +270,8 @@
 - id: "search_no_preview"
   translation: "Ingen förhandsvisning tillgänglig"
 
+- id: "primary_navigation"
+  translation: "Primär navigering"
+
+- id: "footer_navigation"
+  translation: "Sidfotsnavigering"

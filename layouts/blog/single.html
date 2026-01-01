@@ -6,7 +6,7 @@
 
       <div id="meta" class="light-border-bottom">
         <div class="post-meta">
-          <section class="post-meta-info">
+          <div class="post-meta-info">
             <span class="published-label">{{ i18n "published_on" }}</span>
             <time id="date" class="date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Mon Jan 2, 2006" }}</time>
             <span class="meta-separator" aria-hidden="true">·</span>
@@ -21,7 +21,7 @@
               <span class="meta-separator" aria-hidden="true">·</span>
               <span id="last-modified" class="last-modified">{{ i18n "last_updated" | default "Updated" }}: {{ .Lastmod.Format "Jan 2, 2006" }}</span>
             {{ end }}
-          </section>
+          </div>
           {{ with .GetTerms "topics" }}
           <ul id="topics">
             {{ range . }}

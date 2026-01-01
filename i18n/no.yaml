@@ -270,3 +270,8 @@
 - id: "search_no_preview"
   translation: "Ingen forhåndsvisning tilgjengelig"
 
+- id: "primary_navigation"
+  translation: "Primærnavigasjon"
+
+- id: "footer_navigation"
+  translation: "Bunntekstnavigasjon"

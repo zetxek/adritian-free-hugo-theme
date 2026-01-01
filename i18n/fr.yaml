@@ -162,3 +162,8 @@
 - id: "view_all_tags"
   translation: "Voir tous les tags"
 
+- id: "primary_navigation"
+  translation: "Navigation principale"
+
+- id: "footer_navigation"
+  translation: "Navigation du pied de page"

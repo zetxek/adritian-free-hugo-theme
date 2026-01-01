@@ -227,3 +227,9 @@
   translation: "التصنيفات"
 - id: "recent_posts"
   translation: "المقالات الأخيرة"
+
+- id: "primary_navigation"
+  translation: "التنقل الرئيسي"
+
+- id: "footer_navigation"
+  translation: "تنقل التذييل"

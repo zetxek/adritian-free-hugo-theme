@@ -441,21 +441,21 @@
         // Readability improvements for dark mode
         .post-summary,
         .post-content {
-            color: var(--bs-gray-200);
+            color: var(--bs-body-color);
 
             code {
-                background-color: var(--bs-gray-800) !important;
-                color: var(--bs-gray-100) !important;
+                background-color: var(--bs-tertiary-bg, var(--bs-gray-800));
+                color: var(--bs-code-color, var(--bs-body-color));
             }
 
             pre,
             .highlight pre {
-                background-color: var(--bs-gray-900) !important;
-                color: var(--bs-gray-100) !important;
+                background-color: var(--bs-secondary-bg, var(--bs-gray-900));
+                color: var(--bs-body-color);
 
                 code {
-                    background-color: transparent !important;
-                    color: inherit !important;
+                    background-color: transparent;
+                    color: inherit;
                 }
             }
 
@@ -507,7 +507,7 @@
             }
 
             blockquote {
-                color: var(--bs-gray-400);
+                color: var(--bs-secondary-color);
             }
 
             // Dark mode copy button
