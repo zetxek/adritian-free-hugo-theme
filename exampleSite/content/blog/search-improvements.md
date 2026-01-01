@@ -9,7 +9,7 @@ tags:
   - guide
 ---
 
-Search is powered by Fuse.js and runs entirely in the browser. This post explains how it works, how the search index is built, and how to customize it for multilingual and subdirectory deployments.
+The search functionality in the theme is powered by Fuse.js and runs entirely in the browser. This post explains how it works, how the search index is built, and how to customize it for multilingual and subdirectory deployments.
 
 ## How search works
 
@@ -65,4 +65,4 @@ This makes it easy to build filters or group results by section/taxonomy in a cu
 - Make sure the search page exists and uses the `search` layout
 - If you use multiple languages, confirm each language builds its own `index.json`
 
-If you need a reference implementation, see the demo search page and this post in the demo site.
+If you need a reference implementation, see the demo search page at https://adritian-demo.vercel.app/search/ and this post at https://adritian-demo.vercel.app/blog/search-improvements/.
