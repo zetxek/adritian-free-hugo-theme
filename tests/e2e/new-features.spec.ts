@@ -220,7 +220,7 @@ test.describe('New Blog Features', () => {
       await expect(metaSection).toBeVisible();
       
       // Should be a logical grouping
-      await expect(metaSection.locator('section')).toBeVisible();
+      await expect(metaSection.locator('.post-meta-info')).toBeVisible();
     });
   });
 
