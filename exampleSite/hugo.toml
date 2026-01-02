@@ -70,6 +70,7 @@ target = "assets/css/bootstrap-print.css"
 title = 'Adritian - a high performance hugo theme by Adrián Moreno'
 description = 'This hugo theme (Adritian) is based on Bootstrap and has features that make it suitable for a personal site, a portfolio or other kind of Single Page Applications.'
 images = ['/img/og-img.png']
+themeColor = '#478079'
 sections = [
   "showcase",
   "about",
@@ -86,11 +87,17 @@ sections = [
 homepageExperienceCount = 6
 
 [params.favicons]
-favicon = "/favicon.ico"
-icon16 = "/icons/icon-16.png"
-icon32 = "/icons/icon-32.png"
-appleTouch = "/icons/apple-touch-icon.png"
-manifest = "/site.webmanifest"
+# Optional: provide a different source image for auto-generation
+source = "icons/favicon.png"
+
+# Optional: override any generated file with a static one
+# favicon = "/favicon.ico"
+# icon16 = "/icons/icon-16.png"
+# icon32 = "/icons/icon-32.png"
+# appleTouch = "/icons/apple-touch-icon.png"
+# icon192 = "/icons/icon-192.png"
+# icon512 = "/icons/icon-512.png"
+# manifest = "/site.webmanifest"
 
 [params.analytics]
 ## Analytics parameters.

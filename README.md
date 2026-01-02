@@ -177,18 +177,33 @@ To use this feature, create a `skills/_index.md` file with structured front matt
 
 #### Favicons and web manifest
 
-The theme ships with a default favicon set and `site.webmanifest` under `static/`. You can override the paths via `params.favicons`, or drop your own files in your site's `static/` directory using the same paths.
+The theme auto-generates favicons and the web manifest from a single high‑resolution source image.
+By default it looks for `assets/icons/favicon.png` and uses Hugo image processing to produce
+16×16, 32×32, 180×180, 192×192, and 512×512 assets. The `favicon.ico` file is generated
+via `npm run favicons` (and is automatically run in the `npm run serve` and `npm run build` scripts).
+
+You can override any individual path via `params.favicons`, or drop your own files in your site’s
+`static/` directory using the same paths. If you override a path, the static file is used instead
+of the generated one. The manifest is generated using your site title and the `params.themeColor`
+value (falling back to `#478079`).
 
 ```toml
 [params.favicons]
+# Optional: provide a different source image for auto-generation
+source = "icons/favicon.png"
+
+# Optional: override any generated file with a static one
 favicon = "/favicon.ico"
 icon16 = "/icons/icon-16.png"
 icon32 = "/icons/icon-32.png"
 appleTouch = "/icons/apple-touch-icon.png"
+icon192 = "/icons/icon-192.png"
+icon512 = "/icons/icon-512.png"
 manifest = "/site.webmanifest"
 ```
 
-If you need custom names or colors in the manifest, place your own manifest file at the path above (or update `manifest` to point to a custom location).
+If you need custom names or colors in the manifest, place your own manifest file at the path above
+(or update `manifest` to point to a custom location).
 
 #### Shortcodes
 
