@@ -25,11 +25,7 @@
 {{- end }}
 
 {{- if not $favicon }}
-  {{- if $icon32Gen }}
-    {{- $favicon = $icon32Gen.RelPermalink -}}
-  {{- else }}
-    {{- $favicon = "/favicon.ico" -}}
-  {{- end }}
+  {{- $favicon = "/favicon.ico" -}}
 {{- end }}
 {{- if not $icon16 }}
   {{- if $icon16Gen }}
