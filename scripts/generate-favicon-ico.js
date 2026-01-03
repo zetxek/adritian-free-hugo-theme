@@ -4,7 +4,6 @@ const fs = require('fs');
 const path = require('path');
 const pngToIco = require('png-to-ico');
 const { PNG } = require('pngjs');
-const { readPNG, resize } = require('png-to-ico/lib/png');
 
 const args = process.argv.slice(2);
 const getArgValue = (flag) => {
@@ -29,9 +28,22 @@ async function generateIco() {
   }
 
   try {
-    const png = await readPNG(sourcePath);
+    const sourceBuffer = fs.readFileSync(sourcePath);
+    const png = PNG.sync.read(sourceBuffer);
     const size = Number.isFinite(targetSize) && targetSize > 0 ? targetSize : 16;
-    const resized = resize(png, size, size);
+    const resized = new PNG({ width: size, height: size });
+    for (let y = 0; y < size; y += 1) {
+      const srcY = Math.floor((y * png.height) / size);
+      for (let x = 0; x < size; x += 1) {
+        const srcX = Math.floor((x * png.width) / size);
+        const srcIdx = (png.width * srcY + srcX) << 2;
+        const dstIdx = (size * y + x) << 2;
+        resized.data[dstIdx] = png.data[srcIdx];
+        resized.data[dstIdx + 1] = png.data[srcIdx + 1];
+        resized.data[dstIdx + 2] = png.data[srcIdx + 2];
+        resized.data[dstIdx + 3] = png.data[srcIdx + 3];
+      }
+    }
     const resizedBuffer = PNG.sync.write(resized);
     const icoBuffer = await pngToIco([resizedBuffer]);
     fs.mkdirSync(path.dirname(outputPath), { recursive: true });

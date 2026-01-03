@@ -177,15 +177,16 @@ To use this feature, create a `skills/_index.md` file with structured front matt
 
 #### Favicons and web manifest
 
-The theme auto-generates favicons and the web manifest from a single high‑resolution source image.
+The theme auto-generates favicons and the web manifest from a single high-resolution source image.
 By default it looks for `assets/icons/favicon.png` and uses Hugo image processing to produce
 16×16, 32×32, 180×180, 192×192, and 512×512 assets. The `favicon.ico` file is generated
 via `npm run favicons` (and is automatically run in the `npm run serve` and `npm run build` scripts).
 
 You can override any individual path via `params.favicons`, or drop your own files in your site’s
-`static/` directory using the same paths. If you override a path, the static file is used instead
-of the generated one. The manifest is generated using your site title and the `params.themeColor`
-value (falling back to `#478079`).
+`static/` directory using the same paths. Uncommenting any of the override lines below disables
+that generated asset and uses the static file at that path (or an absolute URL) instead. The
+manifest is generated using your site title and the `params.themeColor` value (falling back to
+`#478079`).
 
 ```toml
 [params.favicons]
