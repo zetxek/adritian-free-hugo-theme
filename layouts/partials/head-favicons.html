@@ -76,7 +76,7 @@
       (dict "src" $icon512 "sizes" "512x512" "type" "image/png")
     )
   -}}
-  {{- $manifestResource := resources.FromString "site.webmanifest" ($manifestData | jsonify) | resources.Minify -}}
+  {{- $manifestResource := resources.FromString "site.webmanifest" ($manifestData | jsonify) -}}
   {{- $manifest = $manifestResource.RelPermalink -}}
 {{- end }}
 

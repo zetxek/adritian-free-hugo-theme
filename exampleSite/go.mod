@@ -1,9 +1,7 @@
-module github.com/zetxek/adritian-free-hugo-theme/exampleSite
+module exampleSite
 
-go 1.20
+go 1.21
 
+require github.com/zetxek/adritian-free-hugo-theme v0.0.0
 
-require github.com/zetxek/adritian-free-hugo-theme v1.7.12 // indirect
-
-replace github.com/zetxek/adritian-free-hugo-theme => ../
-
+replace github.com/zetxek/adritian-free-hugo-theme => ..
