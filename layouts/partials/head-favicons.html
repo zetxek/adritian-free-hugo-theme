@@ -1,0 +1,91 @@
+{{- $themeColor := .Site.Params.themeColor | default "#478079" -}}
+{{- $favicons := .Site.Params.favicons | default (dict) -}}
+{{- $favicon := (index $favicons "favicon") -}}
+{{- $icon16 := (index $favicons "icon16") -}}
+{{- $icon32 := (index $favicons "icon32") -}}
+{{- $appleTouch := (index $favicons "appleTouch") -}}
+{{- $icon192 := (index $favicons "icon192") -}}
+{{- $icon512 := (index $favicons "icon512") -}}
+{{- $manifest := (index $favicons "manifest") -}}
+
+{{- $sourcePath := (index $favicons "source") | default "icons/favicon.png" -}}
+{{- $source := resources.Get $sourcePath -}}
+{{- $icon16Gen := false -}}
+{{- $icon32Gen := false -}}
+{{- $appleTouchGen := false -}}
+{{- $icon192Gen := false -}}
+{{- $icon512Gen := false -}}
+
+{{- if $source }}
+  {{- $icon16Gen = $source.Resize "16x16" -}}
+  {{- $icon32Gen = $source.Resize "32x32" -}}
+  {{- $appleTouchGen = $source.Resize "180x180" -}}
+  {{- $icon192Gen = $source.Resize "192x192" -}}
+  {{- $icon512Gen = $source.Resize "512x512" -}}
+{{- end }}
+
+{{- if not $favicon }}
+  {{- if $icon32Gen }}
+    {{- $favicon = $icon32Gen.RelPermalink -}}
+  {{- else }}
+    {{- $favicon = "/favicon.ico" -}}
+  {{- end }}
+{{- end }}
+{{- if not $icon16 }}
+  {{- if $icon16Gen }}
+    {{- $icon16 = $icon16Gen.RelPermalink -}}
+  {{- else }}
+    {{- $icon16 = "/icons/icon-16.png" -}}
+  {{- end }}
+{{- end }}
+{{- if not $icon32 }}
+  {{- if $icon32Gen }}
+    {{- $icon32 = $icon32Gen.RelPermalink -}}
+  {{- else }}
+    {{- $icon32 = "/icons/icon-32.png" -}}
+  {{- end }}
+{{- end }}
+{{- if not $appleTouch }}
+  {{- if $appleTouchGen }}
+    {{- $appleTouch = $appleTouchGen.RelPermalink -}}
+  {{- else }}
+    {{- $appleTouch = "/icons/apple-touch-icon.png" -}}
+  {{- end }}
+{{- end }}
+{{- if not $icon192 }}
+  {{- if $icon192Gen }}
+    {{- $icon192 = $icon192Gen.RelPermalink -}}
+  {{- else }}
+    {{- $icon192 = "/icons/icon-192.png" -}}
+  {{- end }}
+{{- end }}
+{{- if not $icon512 }}
+  {{- if $icon512Gen }}
+    {{- $icon512 = $icon512Gen.RelPermalink -}}
+  {{- else }}
+    {{- $icon512 = "/icons/icon-512.png" -}}
+  {{- end }}
+{{- end }}
+{{- if not $manifest }}
+  {{- $siteTitle := .Site.Title | default "Adritian" -}}
+  {{- $manifestData := dict
+    "name" $siteTitle
+    "short_name" $siteTitle
+    "start_url" "/"
+    "display" "standalone"
+    "background_color" "#ffffff"
+    "theme_color" $themeColor
+    "icons" (slice
+      (dict "src" $icon192 "sizes" "192x192" "type" "image/png")
+      (dict "src" $icon512 "sizes" "512x512" "type" "image/png")
+    )
+  -}}
+  {{- $manifestResource := resources.FromString "site.webmanifest" ($manifestData | jsonify) | resources.Minify -}}
+  {{- $manifest = $manifestResource.RelPermalink -}}
+{{- end }}
+
+<link rel="icon" href="{{ $favicon | absURL }}" />
+<link rel="icon" type="image/png" sizes="16x16" href="{{ $icon16 | absURL }}" />
+<link rel="icon" type="image/png" sizes="32x32" href="{{ $icon32 | absURL }}" />
+<link rel="apple-touch-icon" sizes="180x180" href="{{ $appleTouch | absURL }}" />
+<link rel="manifest" href="{{ $manifest | absURL }}" />
