@@ -141,7 +141,6 @@
 <link rel="preload" href="{{ "js/library/lozad.min.js" | absURL }}" as="script">
 <script async src="{{ "js/library/lozad.min.js" | absURL }}"></script>
 
-{{ template "_internal/opengraph.html" . }}
-{{ template "_internal/twitter_cards.html" . }}
-{{ partial "seo/twitter.html" . }}
+{{ partial "opengraph.html" . }}
+{{ partial "twitter_cards.html" . }}
 {{ partial "seo/jsonld.html" . }}

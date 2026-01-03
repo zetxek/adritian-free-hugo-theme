@@ -45,10 +45,6 @@ test('homepage includes canonical, twitter (from params.social), and JSON-LD sit
     await expect(twitterSite).toHaveCount(1);
     await expect(twitterSite).toHaveAttribute('content', '@zetxek');
 
-    const twitterCreator = page.locator('meta[name="twitter:creator"]');
-    await expect(twitterCreator).toHaveCount(1);
-    await expect(twitterCreator).toHaveAttribute('content', '@zetxek');
-
     await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute('content', /summary/i);
 
     const jsonLd = await parseJsonLd(page);
