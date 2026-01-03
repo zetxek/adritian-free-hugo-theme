@@ -87,13 +87,13 @@
   {{- $webSite = merge $webSite (dict "publisher" $publisher) -}}
 {{- end -}}
 
-<script type="application/ld+json">{{ $webSite | jsonify }}</script>
+<script type="application/ld+json">{{ $webSite | jsonify | safeJS }}</script>
 
 {{- if gt (len $person) 0 -}}
-<script type="application/ld+json">{{ (merge (dict "@context" "https://schema.org") $person) | jsonify }}</script>
+<script type="application/ld+json">{{ (merge (dict "@context" "https://schema.org") $person) | jsonify | safeJS }}</script>
 {{- end -}}
 {{- if gt (len $organization) 0 -}}
-<script type="application/ld+json">{{ (merge (dict "@context" "https://schema.org") $organization) | jsonify }}</script>
+<script type="application/ld+json">{{ (merge (dict "@context" "https://schema.org") $organization) | jsonify | safeJS }}</script>
 {{- end -}}
 
 {{- if and .IsPage (eq .Type "blog") -}}
@@ -143,5 +143,5 @@
     {{- $blogPosting = merge $blogPosting (dict "publisher" $publisher) -}}
   {{- end -}}
 
-<script type="application/ld+json">{{ $blogPosting | jsonify }}</script>
+<script type="application/ld+json">{{ $blogPosting | jsonify | safeJS }}</script>
 {{- end -}}
