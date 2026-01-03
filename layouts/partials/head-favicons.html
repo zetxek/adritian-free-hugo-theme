@@ -29,35 +29,35 @@
 {{- end }}
 {{- if not $icon16 }}
   {{- if $icon16Gen }}
-    {{- $icon16 = $icon16Gen.RelPermalink -}}
+    {{- $icon16 = (resources.Copy "icons/icon-16.png" $icon16Gen).RelPermalink -}}
   {{- else }}
     {{- $icon16 = "/icons/icon-16.png" -}}
   {{- end }}
 {{- end }}
 {{- if not $icon32 }}
   {{- if $icon32Gen }}
-    {{- $icon32 = $icon32Gen.RelPermalink -}}
+    {{- $icon32 = (resources.Copy "icons/icon-32.png" $icon32Gen).RelPermalink -}}
   {{- else }}
     {{- $icon32 = "/icons/icon-32.png" -}}
   {{- end }}
 {{- end }}
 {{- if not $appleTouch }}
   {{- if $appleTouchGen }}
-    {{- $appleTouch = $appleTouchGen.RelPermalink -}}
+    {{- $appleTouch = (resources.Copy "icons/apple-touch-icon.png" $appleTouchGen).RelPermalink -}}
   {{- else }}
     {{- $appleTouch = "/icons/apple-touch-icon.png" -}}
   {{- end }}
 {{- end }}
 {{- if not $icon192 }}
   {{- if $icon192Gen }}
-    {{- $icon192 = $icon192Gen.RelPermalink -}}
+    {{- $icon192 = (resources.Copy "icons/icon-192.png" $icon192Gen).RelPermalink -}}
   {{- else }}
     {{- $icon192 = "/icons/icon-192.png" -}}
   {{- end }}
 {{- end }}
 {{- if not $icon512 }}
   {{- if $icon512Gen }}
-    {{- $icon512 = $icon512Gen.RelPermalink -}}
+    {{- $icon512 = (resources.Copy "icons/icon-512.png" $icon512Gen).RelPermalink -}}
   {{- else }}
     {{- $icon512 = "/icons/icon-512.png" -}}
   {{- end }}
