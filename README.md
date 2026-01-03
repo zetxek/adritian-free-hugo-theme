@@ -206,6 +206,48 @@ manifest = "/site.webmanifest"
 If you need custom names or colors in the manifest, place your own manifest file at the path above
 (or update `manifest` to point to a custom location).
 
+#### SEO and social metadata
+
+The theme leverages Hugo's embedded templates for Open Graph and Twitter cards, and adds JSON-LD
+metadata and canonical URLs. Configure these in your site `hugo.toml`:
+
+```toml
+# Default Open Graph/Twitter image (used by Hugo embedded templates)
+images = ["/img/og-img.png"]
+
+[params.social]
+twitter = "your_handle" # used for twitter:site (add @ is automatic)
+
+[params.seo]
+siteName = "Your site name"
+siteDescription = "Short description of your site"
+siteImage = "/img/og-img.png"
+
+[params.seo.person]
+name = "Your Name"
+url = "https://example.com"
+sameAs = ["https://github.com/youruser", "https://www.linkedin.com/in/youruser/"]
+
+# Alternatively, use organization metadata
+[params.seo.organization]
+name = "Your Company"
+url = "https://example.com"
+logo = "/img/logo.png"
+sameAs = ["https://www.linkedin.com/company/yourcompany"]
+```
+
+Blog posts can provide a featured image for JSON-LD with front matter:
+
+```toml
+[images]
+featured_image = "/img/blog/my-post.png"
+```
+
+Notes:
+- Open Graph/Twitter cards are rendered by Hugo's embedded templates (`opengraph.html`, `twitter_cards.html`).
+- Canonical URLs are emitted automatically from each page permalink.
+- JSON-LD includes `WebSite` metadata for all pages and `BlogPosting` for blog posts.
+
 #### Shortcodes
 
 The theme has multiple shortcodes available for use in the content, so you can customize your homepage (or any other page) as you want. You can read about them in the [shortcodes page](https://adritian-demo.vercel.app/blog/shortcodes). Since version `v1.7.0,` this is the preferred way to set up your theme content and translations, as that's the most flexible system.
