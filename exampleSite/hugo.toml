@@ -76,7 +76,9 @@ themeColor = '#478079'
 siteName = 'Adritian'
 siteDescription = 'This hugo theme (Adritian) is based on Bootstrap and has features that make it suitable for a personal site, a portfolio or other kind of Single Page Applications.'
 siteImage = '/img/og-img.png'
-twitterHandle = '@zetxek'
+
+[params.social]
+twitter = 'zetxek'
 
 [params.seo.person]
 name = 'Adrián Moreno Peña'

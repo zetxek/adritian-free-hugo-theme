@@ -34,7 +34,7 @@ const parseJsonLd = async (page: import('@playwright/test').Page) => {
 };
 
 test.describe('SEO metadata', () => {
-  test('homepage includes canonical, twitter, and JSON-LD site metadata', async ({ page }) => {
+test('homepage includes canonical, twitter (from params.social), and JSON-LD site metadata', async ({ page }) => {
     await page.goto(BASE_URL);
 
     const canonicalHref = await getCanonical(page);
@@ -42,9 +42,11 @@ test.describe('SEO metadata', () => {
     expect(canonicalHref).toBe(expectedCanonical);
 
     const twitterSite = page.locator('meta[name="twitter:site"]');
+    await expect(twitterSite).toHaveCount(1);
     await expect(twitterSite).toHaveAttribute('content', '@zetxek');
 
     const twitterCreator = page.locator('meta[name="twitter:creator"]');
+    await expect(twitterCreator).toHaveCount(1);
     await expect(twitterCreator).toHaveAttribute('content', '@zetxek');
 
     await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute('content', /summary/i);
