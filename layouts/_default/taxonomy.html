@@ -4,11 +4,28 @@
     <div class="container">
       <div class="row">
         <div class="col-12">
-          <h1 class="mb-4">{{ .Title }}</h1>
-
           {{ $taxonomy := .Data.Plural }}
+          {{ $pages := .Pages }}
+          {{ $authorPage := . }}
+          {{ $authorName := .Title }}
+          {{ if and (eq $taxonomy "authors") .Data.Term }}
+            {{ with .Site.GetPage (printf "authors/%s" (.Data.Term | urlize)) }}
+              {{ $authorPage = . }}
+            {{ end }}
+            {{ with $authorPage.Params.name }}
+              {{ $authorName = . }}
+            {{ end }}
+          {{ end }}
+
+          <h1 class="mb-4">{{ $authorName }}</h1>
+
           {{ if eq $taxonomy "authors" }}
-            {{ partial "author-bio.html" . }}
+            {{ $stats := dict "count" (len $pages) }}
+            {{ if gt (len $pages) 0 }}
+              {{ $sorted := $pages.ByDate }}
+              {{ $stats = merge $stats (dict "firstDate" (index $sorted 0).Date "lastDate" (index $sorted (sub (len $sorted) 1)).Date) }}
+            {{ end }}
+            {{ partial "author-bio.html" (dict "page" $authorPage "showHeading" false "stats" $stats) }}
           {{ else if eq $taxonomy "series" }}
             {{ with .Content }}
               <div class="series-description mb-4">
@@ -20,7 +37,6 @@
           <div class="term-page">
             <div class="row">
               <div class="col-12 col-lg-8">
-                {{ $pages := .Pages }}
                 {{ if eq $taxonomy "series" }}
                   {{ $pagesWithOrder := where $pages "Params.series_order" "ne" nil }}
                   {{ if gt (len $pagesWithOrder) 0 }}
@@ -28,6 +44,35 @@
                   {{ else }}
                     {{ $pages = $pages.ByWeight }}
                   {{ end }}
+                {{ end }}
+                {{ if and (eq $taxonomy "authors") (eq (len $pages) 0) .Data.Term }}
+                  {{ $term := .Data.Term | urlize }}
+                  {{ $fallback := slice }}
+                  {{ range .Site.RegularPages }}
+                    {{ $match := false }}
+                    {{ with .Params.author }}
+                      {{ if eq ($term | urlize) (. | urlize) }}
+                        {{ $match = true }}
+                      {{ end }}
+                    {{ end }}
+                    {{ with .Params.authors }}
+                      {{ if reflect.IsSlice . }}
+                        {{ range . }}
+                          {{ if eq ($term | urlize) (. | urlize) }}
+                            {{ $match = true }}
+                          {{ end }}
+                        {{ end }}
+                      {{ else if reflect.IsString . }}
+                        {{ if eq ($term | urlize) (. | urlize) }}
+                          {{ $match = true }}
+                        {{ end }}
+                      {{ end }}
+                    {{ end }}
+                    {{ if $match }}
+                      {{ $fallback = $fallback | append . }}
+                    {{ end }}
+                  {{ end }}
+                  {{ $pages = $fallback }}
                 {{ end }}
                 {{ $paginator := .Paginate $pages }}
 
@@ -46,7 +91,25 @@
                           <span class="series-order badge bg-light text-dark ms-2">{{ i18n "series_part" | default "Part" }} {{ . }}</span>
                         {{ end }}
                       {{ end }}
-                      <div class="meta">{{ .Date.Format "Mon, Jan 2, 2006" }}</div>
+                      <div class="meta">
+                        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Mon, Jan 2, 2006" }}</time>
+                        {{ if gt .ReadingTime 0 }}
+                          <span>•</span>
+                          <span>{{ .ReadingTime }} {{ i18n "min_read" | default "min read" }}</span>
+                        {{ end }}
+                      </div>
+                      {{ if eq $taxonomy "authors" }}
+                        {{ with .Summary }}
+                          <p class="post-excerpt">{{ . | plainify | truncate 180 }}</p>
+                        {{ end }}
+                        {{ with .GetTerms "tags" }}
+                          <ul class="post-tags">
+                            {{ range . }}
+                              <li><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></li>
+                            {{ end }}
+                          </ul>
+                        {{ end }}
+                      {{ end }}
                     </li>
                   {{ end }}
                 </ul>
@@ -103,7 +166,11 @@
               </div>
 
               <div class="col-12 col-lg-4">
-                {{ partial "widgets/popular-tags.html" . }}
+                {{ if eq $taxonomy "authors" }}
+                  {{ partial "widgets/author-tags.html" (dict "pages" $pages "context" .) }}
+                {{ else }}
+                  {{ partial "widgets/popular-tags.html" . }}
+                {{ end }}
               </div>
             </div>
           </div>

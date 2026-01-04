@@ -22,6 +22,39 @@
               <span id="last-modified" class="last-modified">{{ i18n "last_updated" | default "Updated" }}: {{ .Lastmod.Format "Jan 2, 2006" }}</span>
             {{ end }}
           </div>
+          {{ $authorTerms := .GetTerms "authors" }}
+          {{ if $authorTerms }}
+          <div class="post-authors-inline">
+            <span class="post-authors-label">{{ i18n "authors" | default "Authors" }}:</span>
+            {{ range $index, $author := $authorTerms }}
+              {{ if gt $index 0 }}, {{ end }}<a href="{{ $author.RelPermalink }}"><strong>{{ $author.LinkTitle }}</strong></a>
+            {{ end }}
+          </div>
+          {{ else }}
+          {{ $authorNames := slice }}
+          {{ with .Params.author }}
+            {{ if reflect.IsString . }}
+              {{ $authorNames = $authorNames | append . }}
+            {{ end }}
+          {{ end }}
+          {{ with .Params.authors }}
+            {{ if reflect.IsSlice . }}
+              {{ range . }}
+                {{ if . }}{{ $authorNames = $authorNames | append . }}{{ end }}
+              {{ end }}
+            {{ else if reflect.IsString . }}
+              {{ $authorNames = $authorNames | append . }}
+            {{ end }}
+          {{ end }}
+          {{ if gt (len $authorNames) 0 }}
+          <div class="post-authors-inline">
+            <span class="post-authors-label">{{ i18n "authors" | default "Authors" }}:</span>
+            {{ range $index, $authorName := $authorNames }}
+              {{ if gt $index 0 }}, {{ end }}<a href="{{ (printf "/authors/%s/" ($authorName | urlize)) | relURL }}"><strong>{{ $authorName }}</strong></a>
+            {{ end }}
+          </div>
+          {{ end }}
+          {{ end }}
           {{ with .GetTerms "topics" }}
           <ul id="topics">
             {{ range . }}

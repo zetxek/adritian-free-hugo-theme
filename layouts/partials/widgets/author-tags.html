@@ -1,0 +1,49 @@
+{{/* Tags specific to the current author */}}
+{{ $pages := .pages }}
+{{ $context := .context }}
+{{ $site := $context.Site }}
+
+{{ if and $pages $site.Taxonomies.tags }}
+  {{ $tagCounts := dict }}
+  {{ $tagPages := dict }}
+  {{ range $pages }}
+    {{ with .GetTerms "tags" }}
+      {{ range . }}
+        {{ $key := .RelPermalink }}
+        {{ $tagCounts = merge $tagCounts (dict $key (add (index $tagCounts $key | default 0) 1)) }}
+        {{ $tagPages = merge $tagPages (dict $key .Page) }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+
+  {{ $tagItems := slice }}
+  {{ range $tagUrl, $count := $tagCounts }}
+    {{ with (index $tagPages $tagUrl) }}
+      {{ $tagItems = $tagItems | append (dict "page" . "count" $count) }}
+    {{ end }}
+  {{ end }}
+
+  {{ if gt (len $tagItems) 0 }}
+    {{ $sorted := sort $tagItems "count" "desc" }}
+    <div class="widget widget-popular-tags card border-0 shadow-sm mb-4">
+      <div class="card-body">
+        <h3 class="h5 card-title mb-3">{{ i18n "popular_tags" | default "Popular Tags" }}</h3>
+        <ul class="list-taxonomy widget-tags">
+          {{ range first 10 $sorted }}
+            <li>
+              <a href="{{ .page.RelPermalink }}">
+                {{ .page.Title }}
+                <span class="badge taxonomy-count">{{ .count }}</span>
+              </a>
+            </li>
+          {{ end }}
+        </ul>
+        <div class="mt-3">
+          <a href="{{ "tags" | absURL }}" class="btn btn-sm btn-outline-secondary">
+            {{ i18n "view_all_tags" | default "View all tags" }}
+          </a>
+        </div>
+      </div>
+    </div>
+  {{ end }}
+{{ end }}

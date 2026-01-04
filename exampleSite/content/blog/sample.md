@@ -6,6 +6,8 @@ type: 'blog'
 tags: 
   - sample
   - lorem-ipsum
+authors:
+  - adrian-moreno-pena
 ---
 
 Sample blog content. Like a lorem ipsum but saying something more interesting.

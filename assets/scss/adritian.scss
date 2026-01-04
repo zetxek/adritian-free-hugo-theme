@@ -511,7 +511,8 @@ footer_links .nav-item .nav-link::after {
   // Blog post meta section dark mode
   #blog-single #meta {
     #topics,
-    .tags {
+    .tags,
+    .authors {
       li a {
         background-color: #2a2a2a;
         color: #e0e0e0;
@@ -523,11 +524,25 @@ footer_links .nav-item .nav-link::after {
         }
       }
     }
+
+    .post-authors-inline {
+      color: rgba(255, 255, 255, 0.7);
+
+      a {
+        color: #fff;
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
   }
 
   // General tags styling for dark mode (consistency across all pages)
   ul.tags,
   ul.topics,
+  ul.authors,
   #topics,
   ul.list-taxonomy {
     li a {

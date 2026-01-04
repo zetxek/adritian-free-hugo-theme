@@ -1,26 +1,87 @@
 {{ $page := . }}
 {{ $compact := false }}
 {{ $count := 0 }}
-{{ with .page }}
-  {{ $page = . }}
-{{ end }}
-{{ with .compact }}
-  {{ $compact = . }}
-{{ end }}
-{{ with .count }}
-  {{ $count = . }}
+{{ $showHeading := true }}
+{{ $stats := dict }}
+{{ if reflect.IsMap . }}
+  {{ with index . "page" }}
+    {{ $page = . }}
+  {{ end }}
+  {{ with index . "Page" }}
+    {{ $page = . }}
+  {{ end }}
+  {{ with index . "compact" }}
+    {{ $compact = . }}
+  {{ end }}
+  {{ with index . "count" }}
+    {{ $count = . }}
+  {{ end }}
+  {{ if isset . "showHeading" }}
+    {{ $showHeading = index . "showHeading" }}
+  {{ end }}
+  {{ with index . "stats" }}
+    {{ $stats = . }}
+  {{ end }}
 {{ end }}
 
-{{ $name := $page.Params.name | default $page.Title }}
-{{ $role := $page.Params.role }}
-{{ $avatar := $page.Params.avatar | default $page.Params.image }}
-{{ $bio := $page.Params.bio }}
+{{ $authorPage := $page }}
+{{ $term := "" }}
+{{ with $page.Data.Term }}
+  {{ $term = . }}
+{{ else }}
+  {{ if $page.Title }}
+    {{ $term = $page.Title | urlize }}
+  {{ end }}
+{{ end }}
+{{ $needsFallback := and (not $page.Params.name) (not $page.Params.bio) (not $page.Params.role) (not $page.Params.avatar) (not $page.Params.image) (not $page.Params.links) (eq $page.Content "") }}
+{{ if and $needsFallback $term }}
+  {{ with $page.Site.GetPage (printf "authors/%s" ($term | urlize)) }}
+    {{ $authorPage = . }}
+  {{ end }}
+{{ end }}
+
+{{ $name := $authorPage.Params.name | default $authorPage.Title | default $page.Title }}
+{{ $role := $authorPage.Params.role }}
+{{ $avatar := $authorPage.Params.avatar | default $authorPage.Params.image }}
+{{ $bio := $authorPage.Params.bio }}
+{{ $links := $authorPage.Params.links }}
+{{ $content := $authorPage.Content }}
+
+{{ $initials := "" }}
+{{ if $name }}
+  {{ $parts := split $name " " }}
+  {{ if ge (len $parts) 2 }}
+    {{ $initials = printf "%s%s" (slicestr (index $parts 0) 0 1) (slicestr (index $parts 1) 0 1) }}
+  {{ else }}
+    {{ $initials = slicestr $name 0 1 }}
+  {{ end }}
+  {{ $initials = upper $initials }}
+{{ end }}
+
+{{ $postCount := 0 }}
+{{ $firstDate := "" }}
+{{ $lastDate := "" }}
+{{ if reflect.IsMap $stats }}
+  {{ with index $stats "count" }}
+    {{ $postCount = . }}
+  {{ end }}
+  {{ with index $stats "firstDate" }}
+    {{ $firstDate = . }}
+  {{ end }}
+  {{ with index $stats "lastDate" }}
+    {{ $lastDate = . }}
+  {{ end }}
+{{ end }}
 
 {{ if $compact }}
   <div class="card h-100 author-card">
     <div class="card-body d-flex gap-3">
-      {{ with $avatar }}
-        <img class="author-avatar" src="{{ . | relURL }}" alt="{{ $name }}" loading="lazy">
+      {{ if $avatar }}
+        <img class="author-avatar" src="{{ $avatar | relURL }}" alt="{{ $name }}" loading="lazy">
+      {{ else if $initials }}
+        <div class="author-avatar author-avatar-placeholder" role="img" aria-label="{{ $name }}">
+          {{ $initials }}
+        </div>
       {{ end }}
       <div class="author-card-body">
         <h3 class="card-title h5 mb-1">
@@ -41,20 +102,42 @@
 {{ else }}
   <div class="card author-bio mb-4">
     <div class="card-body d-flex flex-column flex-md-row gap-3">
-      {{ with $avatar }}
-        <img class="author-avatar" src="{{ . | relURL }}" alt="{{ $name }}" loading="lazy">
+      {{ if $avatar }}
+        <img class="author-avatar" src="{{ $avatar | relURL }}" alt="{{ $name }}" loading="lazy">
+      {{ else if $initials }}
+        <div class="author-avatar author-avatar-placeholder" role="img" aria-label="{{ $name }}">
+          {{ $initials }}
+        </div>
       {{ end }}
       <div class="author-bio-body">
-        <h2 class="h4 mb-1">{{ $name }}</h2>
+        {{ if $showHeading }}
+          <h2 class="h4 mb-1">{{ $name }}</h2>
+        {{ end }}
         {{ with $role }}
           <p class="text-muted mb-2">{{ . }}</p>
         {{ end }}
+        {{ if gt $postCount 0 }}
+          <div class="author-stats text-muted small mb-2">
+            <span>{{ $postCount }} {{ if eq $postCount 1 }}{{ i18n "post_singular" | default "post" }}{{ else }}{{ i18n "post_plural" | default "posts" }}{{ end }}</span>
+            {{ if $firstDate }}
+              <span>•</span>
+              <span>{{ i18n "blog_stats_first_post" | default "First post" }} {{ $firstDate.Format "Jan 2, 2006" }}</span>
+            {{ end }}
+            {{ if $lastDate }}
+              <span>•</span>
+              <span>{{ i18n "blog_stats_latest_post" | default "Latest post" }} {{ $lastDate.Format "Jan 2, 2006" }}</span>
+            {{ end }}
+          </div>
+        {{ end }}
         {{ if $bio }}
           <div class="author-bio-text mb-2">{{ $bio | markdownify }}</div>
-        {{ else if $page.Content }}
-          <div class="author-bio-text mb-2">{{ $page.Content }}</div>
         {{ end }}
-        {{ with $page.Params.links }}
+        {{ if $content }}
+          {{ if or (not $bio) (ne (trim ($content | plainify) " \n\t") (trim ($bio | plainify) " \n\t")) }}
+            <div class="author-bio-text mb-2">{{ $content }}</div>
+          {{ end }}
+        {{ end }}
+        {{ with $links }}
           {{ $baseURL := $page.Site.BaseURL | urls.Parse }}
           <ul class="list-inline mb-0 author-links">
             {{ range . }}

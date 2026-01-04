@@ -63,7 +63,12 @@
             </li>
             {{- else if eq $taxonomy "authors" -}}
             <li class="breadcrumb-item active" aria-current="page">
+                {{- $authorPage := $.Site.GetPage (printf "authors/%s" .) -}}
+                {{- if $authorPage -}}
+                <span class="breadcrumb-text">{{ $authorPage.Params.name | default $authorPage.Title }}</span>
+                {{- else -}}
                 <span class="breadcrumb-text">{{ humanize . }}</span>
+                {{- end -}}
             </li>
             {{- else if eq $taxonomy "series" -}}
             <li class="breadcrumb-item active" aria-current="page">

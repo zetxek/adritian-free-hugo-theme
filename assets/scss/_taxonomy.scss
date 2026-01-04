@@ -145,6 +145,7 @@
         color: $gray-600 !important;
         font-weight: 400;
         display: flex;
+        flex-wrap: wrap;
         align-items: center;
         gap: 0.5rem;
         margin-top: 0 !important;
@@ -152,6 +153,53 @@
         &::before {
           content: "📅";
           font-size: 0.875rem;
+        }
+      }
+
+      .post-excerpt {
+        margin: 0.5rem 0 0.75rem;
+        color: $gray-700;
+      }
+
+      .post-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        li {
+          margin: 0;
+          padding: 0;
+          border: none;
+          background: none;
+          list-style: none;
+
+          &::before {
+            content: none !important;
+            display: none !important;
+          }
+        }
+
+        a {
+          display: inline-flex;
+          align-items: center;
+          padding: 0.2rem 0.6rem;
+          font-size: 0.75rem !important;
+          font-weight: 500 !important;
+          border-radius: 999px;
+          border: 1px solid rgba(0, 0, 0, 0.08);
+          background-color: rgba(0, 0, 0, 0.03);
+          color: $gray-700 !important;
+          text-decoration: none;
+          margin: 0;
+
+          &:hover {
+            background-color: rgba($base-color, 0.08);
+            border-color: rgba($base-color, 0.2);
+            color: $base-color !important;
+          }
         }
       }
     }
@@ -234,6 +282,27 @@
   }
 }
 
+.author-avatar-placeholder {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: $base-color;
+  background-color: rgba($base-color, 0.12);
+  border: 1px solid rgba($base-color, 0.2);
+}
+
+.author-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  span {
+    white-space: nowrap;
+  }
+}
+
 .author-links a {
   color: $base-color;
 
@@ -261,6 +330,12 @@
     &:hover {
       color: lighten($dark-primary, 10%);
     }
+  }
+
+  .author-avatar-placeholder {
+    color: $dark-primary;
+    background-color: rgba($dark-primary, 0.18);
+    border-color: rgba($dark-primary, 0.3);
   }
 
   .taxonomy-page {
@@ -316,6 +391,20 @@
       .meta {
         color: $gray-500;
       }
+
+      .post-excerpt {
+        color: $gray-500;
+      }
+
+      .post-tags li a {
+        background-color: rgba(255, 255, 255, 0.08);
+        color: $dark-primary;
+        border-color: rgba(255, 255, 255, 0.12);
+
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.15);
+        }
+      }
     }
 
     .pagination {
@@ -361,6 +450,10 @@
 
       a {
         font-size: 1rem;
+      }
+
+      .post-tags {
+        gap: 0.35rem;
       }
     }
   }
