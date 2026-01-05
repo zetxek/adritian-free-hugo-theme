@@ -12,8 +12,8 @@ builds
 /tests/coverage-report
 playwright-report
 test-results
-exampleSite/public
-exampleSite/resources
+exampleSite/public/
+exampleSite/resources/
 exampleSite/.hugo_build.lock
 exampleSite/hugo_stats.json
 
