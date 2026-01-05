@@ -341,6 +341,22 @@ test.describe('New Blog Features', () => {
     });
   });
 
+  test.describe('Author metadata', () => {
+    test('should display authors section with links to author pages', async ({ page }) => {
+      await page.goto(`${BASE_URL}/blog/sample/`);
+
+      const authorsBlock = page.locator('.post-authors-inline');
+      await expect(authorsBlock).toBeVisible();
+      await expect(authorsBlock).toContainText(/Authors/i);
+
+      const authorLink = authorsBlock.locator('a').first();
+      await expect(authorLink).toBeVisible();
+
+      const href = await authorLink.getAttribute('href');
+      expect(href).toMatch(/\/authors\/.+/);
+    });
+  });
+
   test.describe('Performance', () => {
     test('should load page with all new features in under 5 seconds including network idle state', async ({ page }) => {
       const startTime = Date.now();

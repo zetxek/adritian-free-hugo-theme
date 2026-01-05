@@ -64,12 +64,13 @@ This theme supports several types of content, that can be displayed by using cus
    replace github.com/zetxek/adritian-free-hugo-theme => ../adritian-free-hugo-theme
    ```
 
-2. **Testing**: Always test changes with an actual site (such as the one in `exampleSite`) to ensure layouts and components work correctly.
+2. **Testing**: Always test changes with the content in `exampleSite`, and run the tests with `npm test`.
 
 3. **Code Style**:
    - Follow existing code patterns and conventions
    - Use meaningful commit messages
    - Keep changes minimal and focused
+   - Reuse Hugo functionality when possible, only add functionality to the theme when it's not supported by Hugo CMS directly
 
 
 ## Common Tasks for Agents
@@ -111,7 +112,7 @@ This theme supports several types of content, that can be displayed by using cus
 
 - Follow the git flow described in [CONTRIBUTING.md](./CONTRIBUTING.md)
 - Create descriptive pull request titles
-- Reference related issues in commits and PRs
+- Reference and link related issues in commits and PRs
 
 ## Testing Your Changes
 

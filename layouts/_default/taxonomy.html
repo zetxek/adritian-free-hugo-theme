@@ -19,12 +19,53 @@
 
           <h1 class="mb-4">{{ $authorName }}</h1>
 
+          {{ if eq $taxonomy "series" }}
+            {{ $pagesWithOrder := where $pages "Params.series_order" "ne" nil }}
+            {{ if gt (len $pagesWithOrder) 0 }}
+              {{ $pages = sort $pages "Params.series_order" "asc" }}
+            {{ else }}
+              {{ $pages = $pages.ByWeight }}
+            {{ end }}
+          {{ end }}
+          {{ if and (eq $taxonomy "authors") (eq (len $pages) 0) .Data.Term }}
+            {{ $term := .Data.Term | urlize }}
+            {{ $fallback := slice }}
+            {{ range .Site.RegularPages }}
+              {{ $match := false }}
+              {{ with .Params.author }}
+                {{ if eq ($term | urlize) (. | urlize) }}
+                  {{ $match = true }}
+                {{ end }}
+              {{ end }}
+              {{ with .Params.authors }}
+                {{ if reflect.IsSlice . }}
+                  {{ range . }}
+                    {{ if eq ($term | urlize) (. | urlize) }}
+                      {{ $match = true }}
+                    {{ end }}
+                  {{ end }}
+                {{ else if reflect.IsString . }}
+                  {{ if eq ($term | urlize) (. | urlize) }}
+                    {{ $match = true }}
+                  {{ end }}
+                {{ end }}
+              {{ end }}
+              {{ if $match }}
+                {{ $fallback = $fallback | append . }}
+              {{ end }}
+            {{ end }}
+            {{ $pages = $fallback }}
+          {{ end }}
+          {{ $stats := dict }}
           {{ if eq $taxonomy "authors" }}
-            {{ $stats := dict "count" (len $pages) }}
+            {{ $stats = dict "count" (len $pages) }}
             {{ if gt (len $pages) 0 }}
               {{ $sorted := $pages.ByDate }}
               {{ $stats = merge $stats (dict "firstDate" (index $sorted 0).Date "lastDate" (index $sorted (sub (len $sorted) 1)).Date) }}
             {{ end }}
+          {{ end }}
+
+          {{ if eq $taxonomy "authors" }}
             {{ partial "author-bio.html" (dict "page" $authorPage "showHeading" false "stats" $stats) }}
           {{ else if eq $taxonomy "series" }}
             {{ with .Content }}
@@ -37,43 +78,6 @@
           <div class="term-page">
             <div class="row">
               <div class="col-12 col-lg-8">
-                {{ if eq $taxonomy "series" }}
-                  {{ $pagesWithOrder := where $pages "Params.series_order" "ne" nil }}
-                  {{ if gt (len $pagesWithOrder) 0 }}
-                    {{ $pages = sort $pages "Params.series_order" "asc" }}
-                  {{ else }}
-                    {{ $pages = $pages.ByWeight }}
-                  {{ end }}
-                {{ end }}
-                {{ if and (eq $taxonomy "authors") (eq (len $pages) 0) .Data.Term }}
-                  {{ $term := .Data.Term | urlize }}
-                  {{ $fallback := slice }}
-                  {{ range .Site.RegularPages }}
-                    {{ $match := false }}
-                    {{ with .Params.author }}
-                      {{ if eq ($term | urlize) (. | urlize) }}
-                        {{ $match = true }}
-                      {{ end }}
-                    {{ end }}
-                    {{ with .Params.authors }}
-                      {{ if reflect.IsSlice . }}
-                        {{ range . }}
-                          {{ if eq ($term | urlize) (. | urlize) }}
-                            {{ $match = true }}
-                          {{ end }}
-                        {{ end }}
-                      {{ else if reflect.IsString . }}
-                        {{ if eq ($term | urlize) (. | urlize) }}
-                          {{ $match = true }}
-                        {{ end }}
-                      {{ end }}
-                    {{ end }}
-                    {{ if $match }}
-                      {{ $fallback = $fallback | append . }}
-                    {{ end }}
-                  {{ end }}
-                  {{ $pages = $fallback }}
-                {{ end }}
                 {{ $paginator := .Paginate $pages }}
 
                 {{ if eq $taxonomy "authors" }}
