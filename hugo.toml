@@ -65,9 +65,9 @@
 [outputs]
   page = ["HTML"]
   home = ["HTML", "RSS", "JSON"]
-  section = ["HTML"]
-  taxonomy = ["HTML"]
-  term = ["HTML"]
+  section = ["HTML", "RSS"]
+  taxonomy = ["HTML", "RSS"]
+  term = ["HTML", "RSS"]
   footer = []
 
 # Taxonomies

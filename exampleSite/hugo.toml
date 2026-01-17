@@ -27,7 +27,7 @@ pagerSize = 3
   # Empty configuration to prevent any output
 
 # Specifically disable generation of these kinds for the footer content
-disableKinds = ["footerSection", "RSS"]
+disableKinds = ["footerSection"]
 
 [module]
 [[module.imports]]

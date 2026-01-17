@@ -34,6 +34,16 @@
 
 <meta name="description" content="{{ i18n "head_description" }}" />
 <link rel="canonical" href="{{ .Permalink }}" />
+{{/* RSS Feed Discovery Links */}}
+{{- $siteTitle := i18n "head_title" | default .Site.Title -}}
+{{- with .Site.Home.OutputFormats.Get "RSS" }}
+<link rel="alternate" type="{{ .MediaType.Type }}" href="{{ .Permalink }}" title="{{ $siteTitle }}" />
+{{- end }}
+{{- if not .IsHome }}
+  {{- with .OutputFormats.Get "RSS" }}
+<link rel="alternate" type="{{ .MediaType.Type }}" href="{{ .Permalink }}" title="{{ $.Title }} - {{ $siteTitle }}" />
+  {{- end }}
+{{- end }}
 <meta name="generator-mode" content="{{ hugo.Environment }}" />
 {{- $critical := resources.Get "css/critical.css" | resources.Minify }}
 <style data-generator="critical-css">
