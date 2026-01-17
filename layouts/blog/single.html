@@ -50,7 +50,13 @@
           <div class="post-authors-inline">
             <span class="post-authors-label">{{ i18n "authors" | default "Authors" }}:</span>
             {{ range $index, $authorName := $authorNames }}
-              {{ if gt $index 0 }}, {{ end }}<a href="{{ (printf "/authors/%s/" ($authorName | urlize)) | relURL }}"><strong>{{ $authorName }}</strong></a>
+              {{- if gt $index 0 }}, {{ end -}}
+              {{- $authorSlug := $authorName | urlize -}}
+              {{- with $.Site.GetPage (printf "/authors/%s" $authorSlug) -}}
+                <a href="{{ .RelPermalink }}"><strong>{{ $authorName }}</strong></a>
+              {{- else -}}
+                <strong>{{ $authorName }}</strong>
+              {{- end -}}
             {{ end }}
           </div>
           {{ end }}

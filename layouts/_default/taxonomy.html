@@ -27,6 +27,9 @@
               {{ $pages = $pages.ByWeight }}
             {{ end }}
           {{ end }}
+          {{/* Fallback: if no pages found via taxonomy, search for posts with matching author param.
+               This handles edge cases where posts use author/authors param but aren't properly
+               linked to the taxonomy. This iteration is only triggered when .Pages is empty. */}}
           {{ if and (eq $taxonomy "authors") (eq (len $pages) 0) .Data.Term }}
             {{ $term := .Data.Term | urlize }}
             {{ $fallback := slice }}
