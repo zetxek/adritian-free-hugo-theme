@@ -536,6 +536,7 @@ showJobCard = true # Set to false to hide the job card
       unsafe = true
   [markup.highlight]
     lineNos = false
+    noClasses = false
     style = "github"
 
 [imaging]

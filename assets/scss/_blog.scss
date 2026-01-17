@@ -152,6 +152,50 @@
                 }
             }
         }
+
+        // Chroma syntax highlighting - GitHub theme (light mode)
+        .chroma {
+            background-color: #f6f8fa;
+
+            // Error
+            .err { color: #f6f8fa; background-color: #82071e; }
+            // Line styles
+            .lnlinks { outline: none; text-decoration: none; color: inherit; }
+            .lntd { vertical-align: top; padding: 0; margin: 0; border: 0; }
+            .lntable { border-spacing: 0; padding: 0; margin: 0; border: 0; }
+            .hl { background-color: #dedede; }
+            .lnt, .ln { white-space: pre; user-select: none; margin-right: 0.4em; padding: 0 0.4em; color: #7f7f7f; }
+            .line { display: flex; }
+            // Keywords
+            .k, .kc, .kd, .kn, .kp, .kr, .kt { color: #cf222e; }
+            // Names
+            .na, .nc, .nx { color: #1f2328; }
+            .no, .nd, .nt { color: #0550ae; }
+            .ni, .nb, .nf, .fm { color: #6639ba; }
+            .nl { color: #900; font-weight: bold; }
+            .nn { color: #24292e; }
+            .bp { color: #6a737d; }
+            // Variables
+            .nv, .vc, .vg, .vi, .vm { color: #953800; }
+            // Strings
+            .s, .sa, .sb, .sc, .dl, .sd, .s2, .se, .sh, .si, .sx, .sr, .s1 { color: #0a3069; }
+            .ss { color: #032f62; }
+            // Numbers
+            .m, .mb, .mf, .mh, .mi, .il, .mo { color: #0550ae; }
+            // Operators
+            .o, .ow { color: #0550ae; }
+            // Punctuation
+            .p { color: #1f2328; }
+            // Comments
+            .c, .ch, .cm, .c1, .cs, .cp, .cpf { color: #57606a; }
+            // Generic
+            .gd { color: #82071e; background-color: #ffebe9; }
+            .ge { color: #1f2328; }
+            .gi { color: #116329; background-color: #dafbe1; }
+            .go { color: #1f2328; }
+            .gl { text-decoration: underline; }
+            .w { color: #fff; }
+        }
     }
 
     .blog-sidebar {
@@ -413,6 +457,53 @@
                     background-color: transparent !important;
                     color: inherit !important;
                 }
+            }
+
+            // Dark mode syntax highlighting (github-dark theme colors)
+            .chroma {
+                background-color: #161b22;
+
+                // Keywords - coral red
+                .k, .kd, .kn, .kr, .kt { color: #ff7b72; }
+                // Keyword constants/pseudo - light blue
+                .kc, .kp { color: #79c0ff; }
+                // Strings - light blue
+                .s, .s1, .s2, .sb, .sc, .sd, .si, .sx { color: #a5d6ff; }
+                // String escapes/heredoc - cyan
+                .se, .sh, .sr, .sa, .dl { color: #79c0ff; }
+                // Numbers - light blue
+                .m, .mb, .mf, .mh, .mi, .il, .mo { color: #a5d6ff; }
+                // Functions - light purple
+                .nf, .fm { color: #d2a8ff; }
+                // Classes/decorators - orange
+                .nc, .ne { color: #f0883e; }
+                .nd { color: #d2a8ff; }
+                // Names - light gray/white
+                .na, .nx { color: #c9d1d9; }
+                .nb, .ni { color: #ffa657; }
+                .bp { color: #8b949e; }
+                // Variables - light blue
+                .nv, .vc, .vg, .vi, .vm, .no, .nl, .py { color: #79c0ff; }
+                // Tags (HTML) - green
+                .nt { color: #7ee787; }
+                // Namespace
+                .nn { color: #ff7b72; }
+                // Operators - coral red
+                .o, .ow { color: #ff7b72; }
+                // Punctuation - light gray
+                .p { color: #c9d1d9; }
+                // Comments - muted gray
+                .c, .ch, .cm, .c1, .cs, .cp, .cpf { color: #8b949e; font-style: italic; }
+                // Errors
+                .err { color: #f85149; }
+                // Generic
+                .gd { color: #ffa198; background-color: #490202; }
+                .gi { color: #56d364; background-color: #0f5323; }
+                .gh, .gu { color: #79c0ff; }
+                .gr, .gt { color: #ff7b72; }
+                .go, .gp { color: #8b949e; }
+                // Line numbers
+                .lnt, .ln { color: #6e7681; }
             }
 
             blockquote {

@@ -25,6 +25,7 @@
       unsafe = true
   [markup.highlight]
     lineNos = false
+    noClasses = false
     style = "github"
 
 [imaging]
