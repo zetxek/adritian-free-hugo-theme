@@ -20,6 +20,7 @@ exampleSite/hugo_stats.json
 # Local builds
 .hugo_build.lock
 public/
+resources/_gen/
 
 # idea
 .idea/

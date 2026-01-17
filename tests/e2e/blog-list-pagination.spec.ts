@@ -1,9 +1,57 @@
-import { test, expect } from '@playwright/test';
+import { test, expect, Page } from '@playwright/test';
 
 const BASE_URL = process.env.PLAYWRIGHT_BASE_URL || 'http://localhost:1313';
-const LAST_BLOG_PAGE = '/blog/page/6';
+
+/**
+ * Dynamically detects the last page number by following pagination links.
+ * This makes tests resilient to content changes without manual updates.
+ */
+async function getLastPageNumber(page: Page): Promise<number> {
+  await page.goto(`${BASE_URL}/blog`);
+  await page.waitForLoadState('networkidle');
+
+  // Navigate forward using the Next button until we reach the last page
+  let currentPage = 1;
+  while (true) {
+    const nextButton = page.locator('a.page-link[aria-label="Next"]:not([aria-disabled="true"])');
+    const nextButtonCount = await nextButton.count();
+
+    if (nextButtonCount === 0) {
+      // No active Next button - we're on the last page
+      break;
+    }
+
+    // Check if the Next button is disabled (aria-disabled attribute)
+    const ariaDisabled = await nextButton.getAttribute('aria-disabled');
+    if (ariaDisabled === 'true') {
+      break;
+    }
+
+    // Click Next to go to the next page
+    await nextButton.click();
+    await page.waitForLoadState('networkidle');
+    currentPage++;
+
+    // Safety limit to prevent infinite loops
+    if (currentPage > 50) {
+      break;
+    }
+  }
+
+  return currentPage;
+}
+
+// Module-level variable set by beforeAll hooks in each test suite
+let lastBlogPage: string;
 
 test.describe('Blog list pagination', () => {
+  test.beforeAll(async ({ browser }) => {
+    const page = await browser.newPage();
+    const lastPageNum = await getLastPageNumber(page);
+    lastBlogPage = `/blog/page/${lastPageNum}`;
+    await page.close();
+  });
+
   test.beforeEach(async ({ page }) => {
     // Navigate to the blog list page
     await page.goto(`${BASE_URL}/blog`);
@@ -101,7 +149,7 @@ test.describe('Blog list pagination', () => {
   });
 
   test('should disable next button on last page', async ({ page }) => {
-    await page.goto(`${BASE_URL}${LAST_BLOG_PAGE}`);
+    await page.goto(`${BASE_URL}${lastBlogPage}`);
     await page.waitForLoadState('networkidle');
 
     // Next button should be disabled
@@ -219,6 +267,16 @@ test.describe('Blog list pagination', () => {
 });
 
 test.describe('Blog list pagination - edge cases', () => {
+  test.beforeAll(async ({ browser }) => {
+    // Ensure lastBlogPage is set for this test suite
+    if (!lastBlogPage) {
+      const page = await browser.newPage();
+      const lastPageNum = await getLastPageNumber(page);
+      lastBlogPage = `/blog/page/${lastPageNum}`;
+      await page.close();
+    }
+  });
+
   test('should handle direct navigation to page 2', async ({ page }) => {
     // Navigate directly to page 2
     await page.goto(`${BASE_URL}/blog/page/2`);
@@ -241,7 +299,7 @@ test.describe('Blog list pagination - edge cases', () => {
 
   test('should handle direct navigation to last page', async ({ page }) => {
     // Navigate directly to the last page
-    await page.goto(`${BASE_URL}${LAST_BLOG_PAGE}`);
+    await page.goto(`${BASE_URL}${lastBlogPage}`);
     await page.waitForLoadState('networkidle');
 
     // Should load successfully
