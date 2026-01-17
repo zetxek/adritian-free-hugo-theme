@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-01-17T13:09:08Z",
-  "commit": "50617a6030036de7e9e148617587354bda69efcb",
+  "timestamp": "2026-01-17T13:09:25Z",
+  "commit": "0e952bf46e2efbc723d59876fb8dfab9e425fe9d",
   "scores": {
     "desktop": {
-      "performance": 100,
+      "performance": 99,
       "accessibility": 96,
       "best-practices": 100,
       "seo": 100
