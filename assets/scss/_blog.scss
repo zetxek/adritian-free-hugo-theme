@@ -100,6 +100,58 @@
                 padding: 0;
             }
         }
+
+        // Code block with copy button wrapper
+        .highlight-wrapper {
+            position: relative;
+            margin: 1.5rem 0;
+
+            .copy-code-btn {
+                position: absolute;
+                top: 0.5rem;
+                right: 0.5rem;
+                display: inline-flex;
+                align-items: center;
+                gap: 0.25rem;
+                padding: 0.25rem 0.5rem;
+                font-size: 0.75rem;
+                background: var(--bs-gray-200);
+                border: 1px solid var(--bs-gray-300);
+                border-radius: 4px;
+                cursor: pointer;
+                opacity: 0;
+                transition: opacity 0.2s ease, background-color 0.2s ease;
+                z-index: 10;
+
+                svg {
+                    width: 14px;
+                    height: 14px;
+                }
+
+                &:hover {
+                    background: var(--bs-gray-300);
+                }
+
+                &.copied {
+                    background: var(--bs-success);
+                    border-color: var(--bs-success);
+                    color: white;
+                }
+            }
+
+            &:hover .copy-code-btn,
+            &:focus-within .copy-code-btn {
+                opacity: 1;
+            }
+
+            .highlight {
+                margin: 0;
+
+                pre {
+                    margin: 0;
+                }
+            }
+        }
     }
 
     .blog-sidebar {
@@ -365,6 +417,23 @@
 
             blockquote {
                 color: var(--bs-gray-400);
+            }
+
+            // Dark mode copy button
+            .highlight-wrapper .copy-code-btn {
+                background: var(--bs-gray-700);
+                border-color: var(--bs-gray-600);
+                color: var(--bs-gray-200);
+
+                &:hover {
+                    background: var(--bs-gray-600);
+                }
+
+                &.copied {
+                    background: var(--bs-success);
+                    border-color: var(--bs-success);
+                    color: white;
+                }
             }
         }
 
