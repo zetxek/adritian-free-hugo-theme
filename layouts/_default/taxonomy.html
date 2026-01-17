@@ -30,10 +30,13 @@
           {{/* Fallback: if no pages found via taxonomy, search for posts with matching author param.
                This handles edge cases where posts use author/authors param but aren't properly
                linked to the taxonomy. This iteration is only triggered when .Pages is empty. */}}
-          {{ if and (eq $taxonomy "authors") (eq (len $pages) 0) .Data.Term }}
-            {{ $term := .Data.Term | urlize }}
-            {{ $fallback := slice }}
-            {{ range .Site.RegularPages }}
+                {{ if and (eq $taxonomy "authors") (eq (len $pages) 0) .Data.Term }}
+                  {{/* Edge-case fallback for legacy author/author[] params. This scans RegularPages,
+                       so keep it bounded for large sites. Configure with params.authorFallbackLimit. */}}
+                  {{ $term := .Data.Term | urlize }}
+                  {{ $fallback := slice }}
+                  {{ $fallbackLimit := .Site.Params.authorFallbackLimit | default 500 }}
+                  {{ range first $fallbackLimit .Site.RegularPages }}
               {{ $match := false }}
               {{ with .Params.author }}
                 {{ if eq ($term | urlize) (. | urlize) }}

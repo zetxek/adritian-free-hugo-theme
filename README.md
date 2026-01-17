@@ -420,6 +420,8 @@ Blog posts display author links automatically:
 
 The post meta section also labels Topics and Tags for clarity.
 
+Performance note: the fallback author matching scans up to `params.authorFallbackLimit` regular pages (default: 500). For large sites, prefer the `authors` taxonomy.
+
 #### (Job) Experience
 
 This functionality and content is especially suited for personal professional sites, showcasing the work experience: 
