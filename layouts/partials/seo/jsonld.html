@@ -107,6 +107,12 @@
   {{- end -}}
 
   {{- $pageImage := "" -}}
+  {{/* Prefer the page-level featured image from frontmatter.
+       Supported parameters (checked in this order):
+       - featuredImage        : Hugo-style camelCase alternative
+       - featured_image       : snake_case variant
+       - images (first entry) : standard Hugo images array
+   */}}
   {{- with .Params.featuredImage -}}
     {{- $pageImage = . -}}
   {{- end -}}
