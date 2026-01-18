@@ -138,6 +138,10 @@
         {{- if gt (len .) 0 -}}
           {{- $pageImage = index . 0 -}}
         {{- end -}}
+      {{- else -}}
+        {{- with .featured_image -}}
+          {{- $pageImage = . -}}
+        {{- end -}}
       {{- end -}}
     {{- end -}}
   {{- end -}}
