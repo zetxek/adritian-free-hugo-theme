@@ -107,9 +107,21 @@
   {{- end -}}
 
   {{- $pageImage := "" -}}
-  {{- with .Params.images -}}
-    {{- if isset . "featured_image" -}}
-      {{- $pageImage = .featured_image -}}
+  {{- with .Params.featuredImage -}}
+    {{- $pageImage = . -}}
+  {{- end -}}
+  {{- if not $pageImage -}}
+    {{- with .Params.featured_image -}}
+      {{- $pageImage = . -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if not $pageImage -}}
+    {{- with .Params.images -}}
+      {{- if reflect.IsSlice . -}}
+        {{- if gt (len .) 0 -}}
+          {{- $pageImage = index . 0 -}}
+        {{- end -}}
+      {{- end -}}
     {{- end -}}
   {{- end -}}
   {{- if and (not $pageImage) $siteImage -}}
