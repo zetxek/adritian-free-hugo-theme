@@ -3,8 +3,7 @@
 {{- $resources := .Resources.ByType "image" -}}
 {{/* Find featured image resources if the images parameter is empty. */}}
 {{- if not $imgParams }}
-  {{- $featured := $resources.GetMatch "*feature*" -}}
-  {{- if not $featured }}{{ $featured = $resources.GetMatch "{*cover*,*thumbnail*}" }}{{ end -}}
+  {{- $featured := $resources.GetMatch "{*feature*,*cover*,*thumbnail*}" -}}
   {{- with $featured }}
     {{- $imgs = $imgs | append (dict
       "Image" .

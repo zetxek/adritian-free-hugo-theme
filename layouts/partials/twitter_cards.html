@@ -14,7 +14,6 @@
   <meta name="twitter:description" content="{{ trim . "\n\r\t " }}">
 {{- end }}
 
-{{- $twitterSite := "" }}
 {{- with site.Params.social }}
   {{- if reflect.IsMap . }}
     {{- with .twitter }}
