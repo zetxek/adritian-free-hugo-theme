@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "favicons": "node scripts/generate-favicon-ico.js",
+    "favicons": "node scripts/generate-favicon-ico.mjs",
     "start": "npm run favicons && hugo server",
     "serve": "npm run favicons && hugo server --source exampleSite --themesDir ../.. --logLevel debug",
     "build": "npm run favicons && hugo build --source exampleSite --themesDir ../.. --logLevel debug --minify",

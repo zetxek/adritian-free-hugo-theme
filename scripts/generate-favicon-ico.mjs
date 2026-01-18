@@ -1,9 +1,13 @@
 #!/usr/bin/env node
 
-const fs = require('fs');
-const path = require('path');
-const pngToIco = require('png-to-ico');
-const { PNG } = require('pngjs');
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import pngToIco from 'png-to-ico';
+import { PNG } from 'pngjs';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const args = process.argv.slice(2);
 const getArgValue = (flag) => {
