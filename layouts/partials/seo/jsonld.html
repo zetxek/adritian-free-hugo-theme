@@ -106,6 +106,13 @@
     {{- $pageDescription = $pageDescription | plainify -}}
   {{- end -}}
 
+  {{/* Page image fallback order:
+       1. .Params.featuredImage
+       2. .Params.featured_image
+       3. .Params.images.featured_image (map format: images: { featured_image: '/path.png' })
+       4. .Params.images[0] (slice format: images: ['/path1.png', '/path2.png'])
+       5. Site-level image
+  */}}
   {{- $pageImage := "" -}}
   {{- with .Params.featuredImage -}}
     {{- $pageImage = . -}}
