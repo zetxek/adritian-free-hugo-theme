@@ -67,4 +67,68 @@ test('homepage includes canonical, twitter (from params.social), and JSON-LD sit
     expect(blogPosting).toBeTruthy();
     expect(blogPosting?.headline).toBe('New Theme Features Demo');
   });
+
+  test('blog post JSON-LD extracts image from images.featured_image (YAML format)', async ({ page }) => {
+    await page.goto(`${BASE_URL}/blog/test-image-yaml-format/`);
+
+    const jsonLd = await parseJsonLd(page);
+    const blogPosting = jsonLd.find(item => item['@type'] === 'BlogPosting');
+    expect(blogPosting).toBeTruthy();
+    expect(blogPosting?.headline).toBe('Test Post - YAML Image Format');
+    
+    // Verify image is correctly extracted from images.featured_image
+    expect(blogPosting?.image).toBeTruthy();
+    expect(Array.isArray(blogPosting?.image)).toBe(true);
+    const imageArray = blogPosting?.image as string[];
+    expect(imageArray.length).toBeGreaterThan(0);
+    expect(imageArray[0]).toContain('/img/blog/test-yaml-format.png');
+  });
+
+  test('blog post JSON-LD extracts image from featuredImage parameter', async ({ page }) => {
+    await page.goto(`${BASE_URL}/blog/test-image-featured-image/`);
+
+    const jsonLd = await parseJsonLd(page);
+    const blogPosting = jsonLd.find(item => item['@type'] === 'BlogPosting');
+    expect(blogPosting).toBeTruthy();
+    expect(blogPosting?.headline).toBe('Test Post - FeaturedImage Parameter');
+    
+    // Verify image is correctly extracted from featuredImage parameter
+    expect(blogPosting?.image).toBeTruthy();
+    expect(Array.isArray(blogPosting?.image)).toBe(true);
+    const imageArray = blogPosting?.image as string[];
+    expect(imageArray.length).toBeGreaterThan(0);
+    expect(imageArray[0]).toContain('/img/blog/test-featured-image.png');
+  });
+
+  test('blog post JSON-LD falls back to site-level image when no page image specified', async ({ page }) => {
+    await page.goto(`${BASE_URL}/blog/test-image-no-image/`);
+
+    const jsonLd = await parseJsonLd(page);
+    const blogPosting = jsonLd.find(item => item['@type'] === 'BlogPosting');
+    expect(blogPosting).toBeTruthy();
+    expect(blogPosting?.headline).toBe('Test Post - No Image Fallback');
+    
+    // Verify image falls back to site-level image from hugo.toml (params.images)
+    expect(blogPosting?.image).toBeTruthy();
+    expect(Array.isArray(blogPosting?.image)).toBe(true);
+    const imageArray = blogPosting?.image as string[];
+    expect(imageArray.length).toBeGreaterThan(0);
+    expect(imageArray[0]).toContain('/img/og-img.png');
+  });
+
+  test('blog post JSON-LD extracts image from images array format', async ({ page }) => {
+    await page.goto(`${BASE_URL}/blog/test-image-array-format/`);
+
+    const jsonLd = await parseJsonLd(page);
+    const blogPosting = jsonLd.find(item => item['@type'] === 'BlogPosting');
+    expect(blogPosting).toBeTruthy();
+    expect(blogPosting?.headline).toBe('Test Post - Images Array Format');
+    
+    // Verify image is correctly extracted from images array (first element)
+    expect(blogPosting?.image).toBeTruthy();
+    expect(Array.isArray(blogPosting?.image)).toBe(true);
+    const imageArray = blogPosting?.image as string[];
+    expect(imageArray.length).toBeGreaterThan(0);
+    expect(imageArray[0]).toContain('/img/blog/test-images-array.png');
+  });
 });
