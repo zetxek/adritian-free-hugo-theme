@@ -117,7 +117,11 @@
   {{- end -}}
   {{- if not $pageImage -}}
     {{- with .Params.images -}}
-      {{- if reflect.IsSlice . -}}
+      {{- if reflect.IsMap . -}}
+        {{- with .featured_image -}}
+          {{- $pageImage = . -}}
+        {{- end -}}
+      {{- else if reflect.IsSlice . -}}
         {{- if gt (len .) 0 -}}
           {{- $pageImage = index . 0 -}}
         {{- end -}}
