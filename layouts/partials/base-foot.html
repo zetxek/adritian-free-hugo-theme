@@ -24,6 +24,9 @@
 <script defer src='{{ "js/sticky-header.js" | absURL }}'></script>
 <script defer src='{{ "js/smooth-scroll-init.js" | absURL }}'></script>
 <script defer src='{{ "js/copy-code.js" | absURL }}'></script>
+{{- if or .Site.Params.lightbox (not (isset .Site.Params "lightbox")) }}
+<script defer src='{{ "js/lightbox.js" | absURL }}'></script>
+{{- end }}
 
 {{- $bootstrapJs := resources.Get "js/vendor/bootstrap.bundle.min.js" | fingerprint | resources.Copy "/assets/js/vendor/bootstrap.bundle.min.js" }}
 <script defer src="{{ $bootstrapJs.RelPermalink }}"></script>
