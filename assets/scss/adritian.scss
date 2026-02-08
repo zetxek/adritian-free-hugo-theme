@@ -609,3 +609,53 @@ footer_links .nav-item .nav-link::after {
 }
 
 /* end dark mode */
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  /* Disable scroll-triggered animations */
+  .rad-fade-down,
+  .rad-fade-in,
+  .rad-fade-in-long,
+  .rad-scale-down {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .rad-waiting {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* Disable page transition overlay */
+  .transition-overlay {
+    transition: none !important;
+    opacity: 0 !important;
+  }
+
+  .transition-active .transition-overlay {
+    opacity: 0 !important;
+  }
+
+  /* Disable hover transforms */
+  .related-post-item:hover,
+  .share-button:hover {
+    transform: none !important;
+  }
+
+  ul.tags li a:hover,
+  ul.topics li a:hover,
+  ul.list-taxonomy li a:hover {
+    transform: none !important;
+  }
+
+  /* Disable all transitions globally */
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
