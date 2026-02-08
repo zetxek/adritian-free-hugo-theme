@@ -1,0 +1,28 @@
+{{- if not .IsHome -}}
+{{- $items := slice -}}
+{{- $items = $items | append (dict "@type" "ListItem" "position" 1 "name" (.Site.Title | default "Home") "item" (.Site.BaseURL | strings.TrimRight "/")) -}}
+
+{{- $position := 2 -}}
+{{- if .Parent -}}
+  {{- /* Walk up the page tree to build breadcrumb chain */ -}}
+  {{- $ancestors := slice -}}
+  {{- $current := .Parent -}}
+  {{- range seq 10 -}}
+    {{- if and $current (not $current.IsHome) -}}
+      {{- $ancestors = $ancestors | append $current -}}
+      {{- $current = $current.Parent -}}
+    {{- end -}}
+  {{- end -}}
+  {{- /* Reverse to get root-first order */ -}}
+  {{- range $ancestors | collections.Reverse -}}
+    {{- $items = $items | append (dict "@type" "ListItem" "position" $position "name" (.LinkTitle | default .Title) "item" .Permalink) -}}
+    {{- $position = add $position 1 -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* Add the current page */ -}}
+{{- $items = $items | append (dict "@type" "ListItem" "position" $position "name" (.LinkTitle | default .Title) "item" .Permalink) -}}
+
+{{- $breadcrumb := dict "@context" "https://schema.org" "@type" "BreadcrumbList" "itemListElement" $items -}}
+<script type="application/ld+json">{{ $breadcrumb | jsonify | safeJS }}</script>
+{{- end -}}
