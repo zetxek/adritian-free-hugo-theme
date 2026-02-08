@@ -8,6 +8,9 @@
 <head>
     {{ partial "head.html" . }}
     {{ partial "head_custom.html" . }}
+    {{- if or .Site.Params.viewTransitions (not (isset .Site.Params "viewTransitions")) }}
+    <meta name="view-transition" content="same-origin" />
+    {{- end }}
 </head>
 
 <body class="{{- if .IsHome }}home{{- end }}{{- with .File }} page-{{- .ContentBaseName }}{{- end }}">

@@ -19,4 +19,57 @@ html[data-bs-theme="dark"] .transition-overlay {
 .transition-active .transition-overlay {
   opacity: 1;
   pointer-events: all;
-} 
+}
+
+/* View Transitions API (progressive enhancement) */
+@view-transition {
+  navigation: auto;
+}
+
+/* Assign transition names to key page elements */
+.header {
+  view-transition-name: header;
+}
+
+main {
+  view-transition-name: main-content;
+}
+
+footer {
+  view-transition-name: footer;
+}
+
+/* Customize the transition animation */
+::view-transition-old(main-content) {
+  animation: 0.2s ease-out fade-out;
+}
+
+::view-transition-new(main-content) {
+  animation: 0.3s ease-in fade-in;
+}
+
+/* Keep header/footer stable during transitions */
+::view-transition-old(header),
+::view-transition-new(header),
+::view-transition-old(footer),
+::view-transition-new(footer) {
+  animation: none;
+}
+
+@keyframes fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(main-content),
+  ::view-transition-new(main-content) {
+    animation: none;
+  }
+}
