@@ -1,5 +1,34 @@
 
+/* Reading progress bar */
+.reading-progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    z-index: 1031;
+    background: transparent;
+    pointer-events: none;
+}
 
+.reading-progress-fill {
+    height: 100%;
+    width: 0;
+    background: $base-color;
+    transition: width 0.1s linear;
+}
+
+@include color-mode(dark) {
+    .reading-progress-fill {
+        background: $dark-primary;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .reading-progress-fill {
+        transition: none;
+    }
+}
 
 .blog {
 

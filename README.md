@@ -23,6 +23,7 @@ A modern, fast and extensible Hugo theme for personal websites and professional 
 - 📑 **Table of Contents** - Auto-generated, sticky TOC for blog posts
 - 💬 **Comments integration** - Support for Disqus, Giscus, and Utterances
 - ⏱️ **Reading time display** - Estimated reading time for blog posts
+- 📊 **Reading progress bar** - Scroll progress indicator at the top of blog posts
 - 🏷️ **Enhanced taxonomy support** - Improved tags, categories, authors, and series display
 
 The theme focuses on accessibility, high performance, and usability (it's very easy to get started). It's extendable by adding your own styles or content types, and it has a solid foundation on which to build.
@@ -306,6 +307,7 @@ showRecentPosts = true       # show recent posts in the sidebar
 recentPostCount = 5          # number of recent posts to display
 listStyle = "summary"        # options: simple, summary
 listLayout = "default"       # options: default, cards
+readingProgress = true       # show a reading progress bar at the top of blog posts (default: true)
 ```
 
 **Configuration options:**
@@ -317,8 +319,18 @@ listLayout = "default"       # options: default, cards
 - `recentPostCount`: Number of recent posts to show in the sidebar
 - `listStyle`: Choose between `simple` (title and date only) or `summary` (includes excerpt)
 - `listLayout`: Choose between `default` (featured + list) or `cards` (stats header + card grid)
+- `readingProgress`: Show a thin progress bar at the top of blog posts indicating scroll position (default: `true`)
 
 ##### Blog Post Features
+
+**Reading Progress Bar**
+
+A thin progress bar appears at the top of each blog post, filling as the reader scrolls through the article. It is enabled by default and respects `prefers-reduced-motion`. To disable it:
+
+```toml
+[params.blog]
+readingProgress = false
+```
 
 **Related Posts**
 

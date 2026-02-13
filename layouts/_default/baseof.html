@@ -11,6 +11,7 @@
 </head>
 
 <body class="{{- if .IsHome }}home{{- end }}{{- with .File }} page-{{- .ContentBaseName }}{{- end }}">
+    {{ partial "reading-progress.html" . }}
     {{ partial "header.html" . }}
 
     <main class="container" role="main">

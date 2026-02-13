@@ -1,0 +1,35 @@
+{{- if and .IsPage (eq .Type "blog") }}
+{{- if or .Site.Params.blog.readingProgress (not (isset .Site.Params.blog "readingProgress")) }}
+<div class="reading-progress-bar" aria-hidden="true">
+  <div class="reading-progress-fill" id="reading-progress"></div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var bar = document.getElementById('reading-progress');
+  if (!bar) return;
+  var article = document.getElementById('main-content');
+  if (!article) return;
+
+  function update() {
+    var rect = article.getBoundingClientRect();
+    var total = rect.height - window.innerHeight;
+    if (total <= 0) { bar.style.width = '100%'; return; }
+    var progress = Math.min(Math.max(-rect.top / total, 0), 1);
+    bar.style.width = (progress * 100) + '%';
+  }
+
+  var ticking = false;
+  function requestTick() {
+    if (!ticking) {
+      requestAnimationFrame(function() { update(); ticking = false; });
+      ticking = true;
+    }
+  }
+
+  window.addEventListener('scroll', requestTick, { passive: true });
+  window.addEventListener('resize', requestTick);
+  update();
+});
+</script>
+{{- end }}
+{{- end }}
