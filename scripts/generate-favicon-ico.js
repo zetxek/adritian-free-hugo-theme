@@ -2,7 +2,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const pngToIco = require('png-to-ico');
+const { default: pngToIco } = require('png-to-ico');
 const { PNG } = require('pngjs');
 
 const args = process.argv.slice(2);
