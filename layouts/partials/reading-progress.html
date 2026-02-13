@@ -19,12 +19,15 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   var ticking = false;
-  window.addEventListener('scroll', function() {
+  function requestTick() {
     if (!ticking) {
       requestAnimationFrame(function() { update(); ticking = false; });
       ticking = true;
     }
-  }, { passive: true });
+  }
+
+  window.addEventListener('scroll', requestTick, { passive: true });
+  window.addEventListener('resize', requestTick);
   update();
 });
 </script>

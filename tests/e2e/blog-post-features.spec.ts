@@ -224,6 +224,42 @@ test.describe('New Blog Features', () => {
     });
   });
 
+  test.describe('Reading Progress Bar', () => {
+    test('should render the progress bar on blog post pages', async ({ page }) => {
+      await page.goto(`${BASE_URL}/blog/new-features-demo/`);
+      await page.waitForLoadState('networkidle');
+
+      const bar = page.locator('.reading-progress-bar');
+      await expect(bar).toBeAttached();
+
+      const fill = page.locator('#reading-progress');
+      await expect(fill).toBeAttached();
+    });
+
+    test('should update bar width when scrolling', async ({ page }) => {
+      await page.goto(`${BASE_URL}/blog/new-features-demo/`);
+      await page.waitForLoadState('networkidle');
+
+      const fill = page.locator('#reading-progress');
+
+      const widthBefore = await fill.evaluate((el: HTMLElement) => el.style.width);
+
+      await page.evaluate(() => window.scrollBy(0, 400));
+      await page.waitForTimeout(200);
+
+      const widthAfter = await fill.evaluate((el: HTMLElement) => el.style.width);
+      expect(widthAfter).not.toBe(widthBefore);
+    });
+
+    test('should not render the progress bar on non-blog pages', async ({ page }) => {
+      await page.goto(`${BASE_URL}/`);
+      await page.waitForLoadState('networkidle');
+
+      const bar = page.locator('.reading-progress-bar');
+      await expect(bar).not.toBeAttached();
+    });
+  });
+
   test.describe('Comments Integration (Structure)', () => {
     test('should have main content structure that supports comments section when configured', async ({ page }) => {
       // Note: Since comments aren't enabled in demo, this tests the structure
