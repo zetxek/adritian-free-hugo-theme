@@ -4,7 +4,7 @@
   <div class="reading-progress-fill" id="reading-progress"></div>
 </div>
 <script>
-(function() {
+document.addEventListener('DOMContentLoaded', function() {
   var bar = document.getElementById('reading-progress');
   if (!bar) return;
   var article = document.getElementById('main-content');
@@ -26,7 +26,7 @@
     }
   }, { passive: true });
   update();
-})();
+});
 </script>
 {{- end }}
 {{- end }}
