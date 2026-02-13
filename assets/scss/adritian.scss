@@ -632,10 +632,12 @@ footer_links .nav-item .nav-link::after {
   .transition-overlay {
     transition: none !important;
     opacity: 0 !important;
+    pointer-events: none !important;
   }
 
   .transition-active .transition-overlay {
     opacity: 0 !important;
+    pointer-events: none !important;
   }
 
   /* Disable hover transforms */
@@ -650,12 +652,4 @@ footer_links .nav-item .nav-link::after {
     transform: none !important;
   }
 
-  /* Disable all transitions globally */
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
 }

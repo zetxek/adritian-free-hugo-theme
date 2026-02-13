@@ -1,9 +1,36 @@
 // Respect prefers-reduced-motion
 if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
   // Show all elements immediately without animation
-  document.querySelectorAll('.rad-fade-down, .rad-fade-in, .rad-fade-in-long, .rad-scale-down').forEach(function(el) {
+  Array.from(document.querySelectorAll('.rad-fade-down, .rad-fade-in, .rad-fade-in-long, .rad-scale-down')).forEach(function(el) {
     el.classList.add('rad-animate');
   });
 } else {
-  let sectionIntersectOptions={rootMargin:"9999px 0px 0px 0px",threshold:.2};const onSectionIntersect=e=>{let t=0;animatedNodes.forEach(n=>{e.target.contains(n)&&(n.style.animationDelay=`${nodeDelayDelta*t+.1}s`,n.classList.add("rad-animate"),t++)})},onSectionIntersectChange=(e,t)=>{e.forEach(e=>{e.isIntersecting&&onSectionIntersect(e)})};let animationObserver=new IntersectionObserver(onSectionIntersectChange,sectionIntersectOptions);const animatedNodes=Array.from(document.querySelectorAll(".rad-fade-down, .rad-fade-in, .rad-fade-in-long, .rad-scale-down")),animatedSections=Array.from(document.querySelectorAll(".rad-animation-group")),nodeDelayDelta=.2,sectionDelayDelta=.2;animatedNodes.forEach((e,t)=>{e.classList.add("rad-waiting")}),animatedSections.forEach((e,t)=>{animationObserver.observe(e)});
+  const sectionIntersectOptions = { rootMargin: '9999px 0px 0px 0px', threshold: 0.2 };
+
+  const onSectionIntersect = (entry) => {
+    let delay = 0;
+    animatedNodes.forEach((node) => {
+      if (entry.target.contains(node)) {
+        node.style.animationDelay = `${nodeDelayDelta * delay + 0.1}s`;
+        node.classList.add('rad-animate');
+        delay++;
+      }
+    });
+  };
+
+  const onSectionIntersectChange = (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        onSectionIntersect(entry);
+      }
+    });
+  };
+
+  const animationObserver = new IntersectionObserver(onSectionIntersectChange, sectionIntersectOptions);
+  const animatedNodes = Array.from(document.querySelectorAll('.rad-fade-down, .rad-fade-in, .rad-fade-in-long, .rad-scale-down'));
+  const animatedSections = Array.from(document.querySelectorAll('.rad-animation-group'));
+  const nodeDelayDelta = 0.2;
+
+  animatedNodes.forEach((node) => { node.classList.add('rad-waiting'); });
+  animatedSections.forEach((section) => { animationObserver.observe(section); });
 }

@@ -28,6 +28,7 @@ A modern, fast and extensible Hugo theme for personal websites and professional 
 - 💬 **Comments integration** - Support for Disqus, Giscus, and Utterances
 - ⏱️ **Reading time display** - Estimated reading time for blog posts
 - 📊 **Reading progress bar** - Scroll progress indicator at the top of blog posts
+- ♿ **Reduced motion support** - Respects `prefers-reduced-motion` for accessible animations
 - 🏷️ **Enhanced taxonomy support** - Improved tags, categories, authors, and series display
 
 The theme focuses on accessibility, high performance, and usability (it's very easy to get started). It's extendable by adding your own styles or content types, and it has a solid foundation on which to build.
@@ -437,6 +438,24 @@ Blog posts display author links automatically:
 The post meta section also labels Topics and Tags for clarity.
 
 Performance note: the fallback author matching scans up to `params.authorFallbackLimit` regular pages (default: 500). For large sites, prefer the `authors` taxonomy.
+
+#### Reduced Motion Accessibility
+
+The theme respects the `prefers-reduced-motion` OS/browser setting for users who experience discomfort with animations.
+
+When reduced motion is enabled:
+
+- **Scroll-triggered animations** (`.rad-fade-down`, `.rad-fade-in`, etc.) show content immediately without any fade or motion effects
+- **Page transition overlay** is bypassed entirely — navigation happens instantly with no 300ms delay and no fullscreen overlay
+- **Hover transforms** on blog cards, share buttons, and taxonomy tags are disabled
+
+No configuration is required. The theme automatically detects the system preference via the `prefers-reduced-motion` CSS media query and the JavaScript `matchMedia` API.
+
+To test this feature:
+1. Enable "Reduce motion" in **macOS System Settings → Accessibility → Display** (or equivalent on your OS)
+2. All page content should be immediately visible with no scroll-in animations
+3. Navigation between pages should happen instantly with no fade overlay
+4. Hover effects on cards and buttons should have no movement
 
 #### (Job) Experience
 
