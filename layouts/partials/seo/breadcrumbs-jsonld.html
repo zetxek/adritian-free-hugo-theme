@@ -1,20 +1,10 @@
-{{- if not .IsHome -}}
+{{- if and (not .IsHome) (ne .Kind "404") -}}
 {{- $items := slice -}}
-{{- $items = $items | append (dict "@type" "ListItem" "position" 1 "name" (.Site.Title | default "Home") "item" (.Site.BaseURL | strings.TrimRight "/")) -}}
+{{- $items = $items | append (dict "@type" "ListItem" "position" 1 "name" "Home" "item" .Site.Home.Permalink) -}}
 
 {{- $position := 2 -}}
-{{- if .Parent -}}
-  {{- /* Walk up the page tree to build breadcrumb chain */ -}}
-  {{- $ancestors := slice -}}
-  {{- $current := .Parent -}}
-  {{- range seq 10 -}}
-    {{- if and $current (not $current.IsHome) -}}
-      {{- $ancestors = $ancestors | append $current -}}
-      {{- $current = $current.Parent -}}
-    {{- end -}}
-  {{- end -}}
-  {{- /* Reverse to get root-first order */ -}}
-  {{- range $ancestors | collections.Reverse -}}
+{{- range .Ancestors.Reverse -}}
+  {{- if not .IsHome -}}
     {{- $items = $items | append (dict "@type" "ListItem" "position" $position "name" (.LinkTitle | default .Title) "item" .Permalink) -}}
     {{- $position = add $position 1 -}}
   {{- end -}}
