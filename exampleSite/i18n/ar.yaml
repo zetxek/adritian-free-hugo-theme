@@ -207,6 +207,14 @@
   translation: "فيسبوك"
 - id: "share_email_label"
   translation: "البريد الإلكتروني"
+- id: "share_on_bluesky"
+  translation: "شارك على بلوسكاي"
+- id: "share_bluesky_label"
+  translation: "بلوسكاي"
+- id: "share_on_mastodon"
+  translation: "شارك على ماستودون"
+- id: "share_mastodon_label"
+  translation: "ماستودون"
 
 ## Table of Contents
 - id: "table_of_contents"
