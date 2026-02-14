@@ -1,0 +1,18 @@
+{{- if and (not .IsHome) (ne .Kind "404") -}}
+{{- $items := slice -}}
+{{- $items = $items | append (dict "@type" "ListItem" "position" 1 "name" "Home" "item" .Site.Home.Permalink) -}}
+
+{{- $position := 2 -}}
+{{- range .Ancestors.Reverse -}}
+  {{- if not .IsHome -}}
+    {{- $items = $items | append (dict "@type" "ListItem" "position" $position "name" (.LinkTitle | default .Title) "item" .Permalink) -}}
+    {{- $position = add $position 1 -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* Add the current page */ -}}
+{{- $items = $items | append (dict "@type" "ListItem" "position" $position "name" (.LinkTitle | default .Title) "item" .Permalink) -}}
+
+{{- $breadcrumb := dict "@context" "https://schema.org" "@type" "BreadcrumbList" "itemListElement" $items -}}
+<script type="application/ld+json">{{ $breadcrumb | jsonify | safeJS }}</script>
+{{- end -}}
