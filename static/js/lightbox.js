@@ -1,12 +1,13 @@
 (function() {
   'use strict';
 
-  var overlay, img, closeBtn;
+  var overlay, img, closeBtn, previousFocus, previousOverflow;
 
   function create() {
     overlay = document.createElement('div');
     overlay.className = 'lightbox-overlay';
     overlay.setAttribute('role', 'dialog');
+    overlay.setAttribute('aria-modal', 'true');
     overlay.setAttribute('aria-label', 'Image viewer');
 
     closeBtn = document.createElement('button');
@@ -30,6 +31,8 @@
 
   function open(src, alt) {
     if (!overlay) create();
+    previousFocus = document.activeElement;
+    previousOverflow = document.body.style.overflow;
     img.src = src;
     img.alt = alt || '';
     overlay.classList.add('lightbox-active');
@@ -41,22 +44,40 @@
   function close() {
     if (!overlay) return;
     overlay.classList.remove('lightbox-active');
-    document.body.style.overflow = '';
+    document.body.style.overflow = previousOverflow || '';
     document.removeEventListener('keydown', onKey);
+    if (previousFocus) previousFocus.focus();
   }
 
   function onKey(e) {
     if (e.key === 'Escape') close();
+    // Trap focus within the lightbox
+    if (e.key === 'Tab') {
+      e.preventDefault();
+      closeBtn.focus();
+    }
   }
 
-  // Attach to blog post and portfolio images
   document.addEventListener('DOMContentLoaded', function() {
-    var selectors = '.post-content img, .projects img, .showcase img';
+    var selectors = '.post-content img, .client-works-container img';
     document.querySelectorAll(selectors).forEach(function(el) {
-      if (el.closest('a')) return; // skip images already wrapped in links
+      if (el.closest('a')) return;
       el.style.cursor = 'zoom-in';
-      el.addEventListener('click', function() {
-        open(el.src, el.alt);
+      el.tabIndex = 0;
+      el.setAttribute('role', 'button');
+      var altText = el.getAttribute('alt') || '';
+      el.setAttribute('aria-label', altText ? 'View image: ' + altText : 'View image in lightbox');
+
+      function activate() {
+        var src = el.currentSrc || el.getAttribute('data-src') || el.src;
+        open(src, el.alt);
+      }
+      el.addEventListener('click', activate);
+      el.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          activate();
+        }
       });
     });
   });
