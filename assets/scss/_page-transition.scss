@@ -1,22 +1,56 @@
-.transition-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #fff;
-  z-index: 9999;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
+/* View Transitions API (progressive enhancement) */
+@view-transition {
+  navigation: auto;
 }
 
-/* For dark mode */
-html[data-bs-theme="dark"] .transition-overlay {
-  background-color: #181818;
+/* Assign transition names to key page elements */
+.header {
+  view-transition-name: header;
 }
 
-.transition-active .transition-overlay {
-  opacity: 1;
-  pointer-events: all;
-} 
+main {
+  view-transition-name: main-content;
+}
+
+.footer {
+  view-transition-name: footer;
+}
+
+/* Customize the transition animation */
+::view-transition-old(main-content) {
+  animation: 0.2s ease-out vt-fade-out;
+}
+
+::view-transition-new(main-content) {
+  animation: 0.3s ease-in vt-fade-in;
+}
+
+/* Keep header/footer stable during transitions */
+::view-transition-old(header),
+::view-transition-new(header),
+::view-transition-old(footer),
+::view-transition-new(footer) {
+  animation: none;
+}
+
+@keyframes vt-fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes vt-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  @view-transition {
+    navigation: none;
+  }
+
+  ::view-transition-old(main-content),
+  ::view-transition-new(main-content) {
+    animation: none;
+  }
+}
