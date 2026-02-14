@@ -29,7 +29,17 @@
     closeBtn.addEventListener('click', close);
   }
 
+  function isSafeURL(url) {
+    if (!url) return false;
+    // Allow relative URLs and http(s) only
+    if (url.startsWith('/') || url.startsWith('./') || url.startsWith('../')) return true;
+    if (url.startsWith('http://') || url.startsWith('https://')) return true;
+    if (url.startsWith('data:image/')) return true;
+    return false;
+  }
+
   function open(src, alt) {
+    if (!isSafeURL(src)) return;
     if (!overlay) create();
     previousFocus = document.activeElement;
     previousOverflow = document.body.style.overflow;
