@@ -28,6 +28,7 @@ A modern, fast and extensible Hugo theme for personal websites and professional 
 - 💬 **Comments integration** - Support for Disqus, Giscus, and Utterances
 - ⏱️ **Reading time display** - Estimated reading time for blog posts
 - 📊 **Reading progress bar** - Scroll progress indicator at the top of blog posts
+- ♿ **Reduced motion support** - Respects `prefers-reduced-motion` for accessible animations
 - 🏷️ **Enhanced taxonomy support** - Improved tags, categories, authors, and series display
 
 The theme focuses on accessibility, high performance, and usability (it's very easy to get started). It's extendable by adding your own styles or content types, and it has a solid foundation on which to build.
@@ -437,6 +438,10 @@ Blog posts display author links automatically:
 The post meta section also labels Topics and Tags for clarity.
 
 Performance note: the fallback author matching scans up to `params.authorFallbackLimit` regular pages (default: 500). For large sites, prefer the `authors` taxonomy.
+
+#### Reduced Motion Accessibility
+
+The theme automatically respects the `prefers-reduced-motion` OS/browser setting. When enabled, scroll-triggered animations show content immediately, the page transition overlay is skipped, and hover transforms are disabled. No configuration required.
 
 #### (Job) Experience
 
