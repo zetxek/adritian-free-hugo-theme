@@ -16,28 +16,19 @@ test.describe('View Transitions', () => {
     expect(vtn).toBe('main-content');
   });
 
-  test('view-transition-name is set on header', async ({ page }) => {
+  test('header does not have view-transition-name', async ({ page }) => {
+    // Header is excluded from view transitions because its height changes
+    // between sticky (scrolled) and non-sticky states
     await page.goto(BASE_URL);
     const header = page.locator('header.header');
     const vtn = await header.evaluate(el => getComputedStyle(el).viewTransitionName);
-    expect(vtn).toBe('header');
+    expect(vtn).not.toBe('header');
   });
 
-  test('view-transition-name is set on footer', async ({ page }) => {
-    test.skip(process.env.TEST_NO_MENUS === 'true', 'Skipping test because footer may differ without menus');
+  test('footer does not have view-transition-name', async ({ page }) => {
     await page.goto(BASE_URL);
     const footer = page.locator('footer.footer');
     const vtn = await footer.evaluate(el => getComputedStyle(el).viewTransitionName);
-    expect(vtn).toBe('footer');
-  });
-
-  test('blog post footer does NOT have view-transition-name', async ({ page }) => {
-    await page.goto(`${BASE_URL}/blog/`);
-    const blogFooters = page.locator('article footer, .blog-summary footer');
-    const count = await blogFooters.count();
-    if (count > 0) {
-      const vtn = await blogFooters.first().evaluate(el => getComputedStyle(el).viewTransitionName);
-      expect(vtn).not.toBe('footer');
-    }
+    expect(vtn).not.toBe('footer');
   });
 });

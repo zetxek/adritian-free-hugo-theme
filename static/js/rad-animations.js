@@ -5,13 +5,13 @@ if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     el.classList.add('rad-animate');
   });
 } else {
-  const sectionIntersectOptions = { rootMargin: '9999px 0px 0px 0px', threshold: 0.2 };
+  const sectionIntersectOptions = { rootMargin: '9999px 0px 100px 0px', threshold: 0.05 };
 
   const onSectionIntersect = (entry) => {
     let delay = 0;
     animatedNodes.forEach((node) => {
       if (entry.target.contains(node)) {
-        node.style.animationDelay = `${nodeDelayDelta * delay + 0.1}s`;
+        node.style.animationDelay = `${nodeDelayDelta * delay}s`;
         node.classList.add('rad-animate');
         delay++;
       }
@@ -29,7 +29,7 @@ if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
   const animationObserver = new IntersectionObserver(onSectionIntersectChange, sectionIntersectOptions);
   const animatedNodes = Array.from(document.querySelectorAll('.rad-fade-down, .rad-fade-in, .rad-fade-in-long, .rad-scale-down'));
   const animatedSections = Array.from(document.querySelectorAll('.rad-animation-group'));
-  const nodeDelayDelta = 0.2;
+  const nodeDelayDelta = 0.05;
 
   animatedNodes.forEach((node) => { node.classList.add('rad-waiting'); });
   animatedSections.forEach((section) => { animationObserver.observe(section); });
