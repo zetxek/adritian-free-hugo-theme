@@ -71,38 +71,52 @@ test.describe('New Blog Features', () => {
       await expect(sharingSection.locator('h3')).toContainText('Share this post');
     });
 
-    test('should display sharing buttons for Twitter, LinkedIn, Facebook, and Email', async ({ page }) => {
+    test('should display sharing buttons for Twitter, LinkedIn, Facebook, Bluesky, Mastodon, and Email', async ({ page }) => {
       await page.goto(`${BASE_URL}/blog/new-features-demo/`);
-      
+
       const sharingButtons = page.locator('.share-buttons');
       await expect(sharingButtons).toBeVisible();
-      
+
       // Check for each platform's button
       await expect(sharingButtons.locator('.share-twitter')).toBeVisible();
       await expect(sharingButtons.locator('.share-linkedin')).toBeVisible();
       await expect(sharingButtons.locator('.share-facebook')).toBeVisible();
+      await expect(sharingButtons.locator('.share-bluesky')).toBeVisible();
+      await expect(sharingButtons.locator('.share-mastodon')).toBeVisible();
       await expect(sharingButtons.locator('.share-email')).toBeVisible();
     });
 
-    test('should have correct share URLs for Twitter, LinkedIn, Facebook, and Email with proper parameters', async ({ page }) => {
+    test('should have correct share URLs for Twitter, LinkedIn, Facebook, Bluesky, Mastodon, and Email with proper parameters', async ({ page }) => {
       await page.goto(`${BASE_URL}/blog/new-features-demo/`);
-      
+
       // Check Twitter share link
       const twitterButton = page.locator('.share-twitter');
       const twitterHref = await twitterButton.getAttribute('href');
       expect(twitterHref).toContain('twitter.com/intent/tweet');
       expect(twitterHref).toContain('url=');
-      
+
       // Check LinkedIn share link
       const linkedinButton = page.locator('.share-linkedin');
       const linkedinHref = await linkedinButton.getAttribute('href');
       expect(linkedinHref).toContain('linkedin.com/sharing/share-offsite');
-      
+
       // Check Facebook share link
       const facebookButton = page.locator('.share-facebook');
       const facebookHref = await facebookButton.getAttribute('href');
       expect(facebookHref).toContain('facebook.com/sharer');
-      
+
+      // Check Bluesky share link
+      const blueskyButton = page.locator('.share-bluesky');
+      const blueskyHref = await blueskyButton.getAttribute('href');
+      expect(blueskyHref).toContain('bsky.app/intent/compose');
+      expect(blueskyHref).toContain('text=');
+
+      // Check Mastodon share link
+      const mastodonButton = page.locator('.share-mastodon');
+      const mastodonHref = await mastodonButton.getAttribute('href');
+      expect(mastodonHref).toContain('mastodonshare.com');
+      expect(mastodonHref).toContain('text=');
+
       // Check Email share link
       const emailButton = page.locator('.share-email');
       const emailHref = await emailButton.getAttribute('href');
@@ -111,11 +125,13 @@ test.describe('New Blog Features', () => {
 
     test('should have accessible ARIA labels on all sharing buttons for screen readers', async ({ page }) => {
       await page.goto(`${BASE_URL}/blog/new-features-demo/`);
-      
+
       // Check ARIA labels for accessibility
       await expect(page.locator('.share-twitter')).toHaveAttribute('aria-label', /Share on Twitter/i);
       await expect(page.locator('.share-linkedin')).toHaveAttribute('aria-label', /Share on LinkedIn/i);
       await expect(page.locator('.share-facebook')).toHaveAttribute('aria-label', /Share on Facebook/i);
+      await expect(page.locator('.share-bluesky')).toHaveAttribute('aria-label', /Share on Bluesky/i);
+      await expect(page.locator('.share-mastodon')).toHaveAttribute('aria-label', /Share on Mastodon/i);
       await expect(page.locator('.share-email')).toHaveAttribute('aria-label', /Share via Email/i);
     });
   });

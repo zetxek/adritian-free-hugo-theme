@@ -174,6 +174,28 @@
       }
     }
 
+    &.share-bluesky {
+      background: #0085ff;
+      color: white;
+      border-color: #0085ff;
+
+      &:hover {
+        background: #0070d6;
+        border-color: #0070d6;
+      }
+    }
+
+    &.share-mastodon {
+      background: #6364FF;
+      color: white;
+      border-color: #6364FF;
+
+      &:hover {
+        background: #4e4fdb;
+        border-color: #4e4fdb;
+      }
+    }
+
     &.share-email {
       background: var(--bs-gray-700);
       color: white;

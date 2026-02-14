@@ -23,7 +23,7 @@ A modern, fast and extensible Hugo theme for personal websites and professional 
 - ⚡ Vercel-ready with Analytics & Speed Insights support
 - 🖼️ Menus with icon support
 - 🔗 **Related posts** - Automatically display related content based on tags
-- 📤 **Social sharing buttons** - Built-in sharing for Twitter/X, LinkedIn, Facebook, and Email
+- 📤 **Social sharing buttons** - Built-in sharing for Twitter/X, LinkedIn, Facebook, Bluesky, Mastodon, and Email
 - 📑 **Table of Contents** - Auto-generated, sticky TOC for blog posts
 - 💬 **Comments integration** - Support for Disqus, Giscus, and Utterances
 - ⏱️ **Reading time display** - Estimated reading time for blog posts
@@ -365,6 +365,8 @@ Social sharing buttons are enabled by default for all blog posts. You can custom
   linkedin = true
   facebook = true
   email = true
+  bluesky = true    # opt-in: set to true to show
+  mastodon = true   # opt-in: set to true to show
 ```
 
 **Comments**

@@ -14,17 +14,19 @@ This document describes the new features added to the Adritian Hugo theme to mak
 
 ### 2. Social Sharing Buttons
 
-**What it does:** Adds sharing buttons for Twitter/X, LinkedIn, Facebook, and Email to all blog posts.
+**What it does:** Adds sharing buttons for Twitter/X, LinkedIn, Facebook, Bluesky, Mastodon, and Email to all blog posts.
 
-**How to use:** Enabled by default. To customize:
+**How to use:** Twitter/X, LinkedIn, Facebook, and Email are enabled by default. Bluesky and Mastodon are opt-in. To customize:
 
 ```toml
 [params.sharing]
-  enabled = true        # Set to false to disable
-  twitter = true        # Show/hide individual platforms
+  enabled = true        # Set to false to disable all sharing
+  twitter = true        # Show/hide individual platforms (enabled by default)
   linkedin = true
   facebook = true
   email = true
+  bluesky = true        # Opt-in: set to true to show
+  mastodon = true       # Opt-in: set to true to show
 ```
 
 ### 3. Table of Contents (TOC)

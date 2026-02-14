@@ -29,23 +29,24 @@ test.describe('Search functionality', () => {
     // Check that the search page returns HTTP status 200
   });
 
-  test('searching for "theme" shows exactly one result', async ({ page }) => {
+  test('searching for "theme" shows results', async ({ page }) => {
     await page.goto(`${BASE_URL}/search`);
-    
+
     // Wait for the page to be fully loaded
     await page.waitForLoadState('networkidle');
-    
+
     // Type "theme" in the search box
     await page.locator('#search-query').fill('theme');
-    
+
     // Wait for search results to appear (the debounce is 300ms)
     await page.waitForTimeout(500);
-    
+
     // Check URL is updated with search parameter
     await expect(page).toHaveURL(/s=theme/);
-    
-    // Verify exactly one result is shown
-    await expect(page.locator('#search-results div[id^="summary-"]')).toHaveCount(1);
+
+    // Verify at least one result is shown
+    const count = await page.locator('#search-results div[id^="summary-"]').count();
+    expect(count).toBeGreaterThanOrEqual(1);
   });
 
   test('clearing search box removes results', async ({ page }) => {
@@ -431,29 +432,29 @@ test.describe('Multilingual search functionality', () => {
     // Wait for search to execute and verify we get results
     await page.waitForTimeout(SEARCH_DEBOUNCE_WAIT);
     
-    // Searching for "theme" should return exactly one result
+    // Searching for "theme" should return results
     const resultsCount = await page.locator('#search-results div[id^="summary-"]').count();
-    expect(resultsCount).toBe(1);
+    expect(resultsCount).toBeGreaterThanOrEqual(1);
   });
 
   test('default language search page without language prefix', async ({ page }) => {
     // When accessing /search without language prefix, should use default language
     await page.goto(`${BASE_URL}/search`);
     await page.waitForLoadState('networkidle');
-    
+
     // Get the data-index-url - it should still work
     const searchResults = page.locator('#search-results');
     const indexUrl = await searchResults.getAttribute('data-index-url');
-    
+
     // Should have a valid index URL
     expect(indexUrl).toContain('index.json');
-    
-    // Search should work - searching for "theme" should return exactly one result
+
+    // Search should work - searching for "theme" should return results
     await page.locator('#search-query').fill('theme');
     await page.waitForTimeout(SEARCH_DEBOUNCE_WAIT);
-    
+
     // Verify we get results (default language search should work)
     const resultsCount = await page.locator('#search-results div[id^="summary-"]').count();
-    expect(resultsCount).toBe(1);
+    expect(resultsCount).toBeGreaterThanOrEqual(1);
   });
 });

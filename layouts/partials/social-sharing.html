@@ -45,8 +45,34 @@
     </a>
     {{ end }}
     
+    {{ if .Site.Params.sharing.bluesky }}
+    <a href="https://bsky.app/intent/compose?text={{ $shareTitle | urlquery }}%20{{ $shareUrl | urlquery }}"
+       target="_blank"
+       rel="noopener noreferrer"
+       aria-label="{{ i18n "share_on_bluesky" | default "Share on Bluesky" }}"
+       class="share-button share-bluesky">
+      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="20" viewBox="0 0 568 501" fill="currentColor">
+        <path d="M123.121 33.664C188.241 82.553 258.281 181.681 284 234.873C309.719 181.681 379.759 82.553 444.879 33.664C491.866-1.611 568-28.906 568 57.947C568 75.292 558.055 203.659 552.222 224.501C531.947 296.954 458.067 315.434 392.347 304.249C507.222 323.8 536.444 388.56 473.333 453.32C353.473 576.312 301.061 422.461 287.631 383.039C285.169 375.812 284.017 372.431 284 375.306C283.983 372.431 282.831 375.812 280.369 383.039C266.939 422.461 214.527 576.312 94.667 453.32C31.556 388.56 60.778 323.8 175.653 304.249C109.933 315.434 36.053 296.954 15.778 224.501C9.945 203.659 0 75.292 0 57.947C0-28.906 76.135-1.611 123.121 33.664Z"/>
+      </svg>
+      <span>{{ i18n "share_bluesky_label" | default "Bluesky" }}</span>
+    </a>
+    {{ end }}
+
+    {{ if .Site.Params.sharing.mastodon }}
+    <a href="https://mastodonshare.com/?text={{ $shareTitle | urlquery }}%20{{ $shareUrl | urlquery }}"
+       target="_blank"
+       rel="noopener noreferrer"
+       aria-label="{{ i18n "share_on_mastodon" | default "Share on Mastodon" }}"
+       class="share-button share-mastodon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M23.268 5.313c-.35-2.578-2.617-4.61-5.304-5.004C17.51.242 15.792 0 11.813 0h-.03c-3.98 0-4.835.242-5.288.309C3.882.692 1.496 2.518.917 5.127.64 6.412.61 7.837.661 9.143c.074 1.874.088 3.745.26 5.611.118 1.24.325 2.47.62 3.68.55 2.237 2.777 4.098 4.96 4.857 2.336.792 4.849.923 7.256.38.265-.061.527-.132.786-.213.585-.184 1.27-.39 1.774-.753a.057.057 0 0 0 .023-.043v-1.809a.052.052 0 0 0-.02-.041.053.053 0 0 0-.046-.01 20.282 20.282 0 0 1-4.709.545c-2.73 0-3.463-1.284-3.674-1.818a5.593 5.593 0 0 1-.319-1.433.053.053 0 0 1 .066-.054 19.648 19.648 0 0 0 4.581.564h.344c1.926 0 3.867-.15 5.75-.592 .056-.013.11-.03.163-.05 2.34-.604 4.568-2.497 4.8-4.616.034-.31.063-.622.082-.937.06-.96.04-1.92.04-2.878a46.726 46.726 0 0 0-.062-1.656zM19.08 14.14h-2.433V8.218c0-1.245-.527-1.879-1.567-1.879-1.155 0-1.734.75-1.734 2.236v3.23h-2.42V8.575c0-1.486-.58-2.236-1.735-2.236-1.04 0-1.567.634-1.567 1.879v5.922H5.192V8.048c0-1.244.318-2.235.953-2.975.657-.74 1.515-1.12 2.583-1.12 1.235 0 2.17.474 2.777 1.42l.599.997.598-.997c.607-.946 1.542-1.42 2.778-1.42 1.067 0 1.925.38 2.582 1.12.636.74.953 1.731.953 2.975v6.092h.065z"/>
+      </svg>
+      <span>{{ i18n "share_mastodon_label" | default "Mastodon" }}</span>
+    </a>
+    {{ end }}
+
     {{ if or .Site.Params.sharing.email (not (isset .Site.Params.sharing "email")) }}
-    <a href="mailto:?subject={{ $shareTitle }}&body={{ $shareDescription }}%0A%0A{{ $shareUrl }}" 
+    <a href="mailto:?subject={{ $shareTitle }}&body={{ $shareDescription }}%0A%0A{{ $shareUrl }}"
        aria-label="{{ i18n "share_via_email" | default "Share via Email" }}"
        class="share-button share-email">
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">

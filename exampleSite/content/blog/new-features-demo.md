@@ -29,6 +29,8 @@ Share your content easily on social media platforms! The theme now includes buil
 - Twitter/X
 - LinkedIn
 - Facebook
+- Bluesky (opt-in)
+- Mastodon (opt-in)
 - Email
 
 These buttons are automatically styled to match the theme's design and work seamlessly in both light and dark modes.
@@ -95,6 +97,8 @@ Social sharing is enabled by default, but you can customize which platforms appe
   linkedin = true
   facebook = true
   email = true
+  bluesky = true    # opt-in: set to true to show
+  mastodon = true   # opt-in: set to true to show
 ```
 
 ## Improved Taxonomy Support

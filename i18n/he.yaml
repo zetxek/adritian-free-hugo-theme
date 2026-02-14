@@ -223,6 +223,14 @@
   translation: "פייסבוק"
 - id: "share_email_label"
   translation: "אימייל"
+- id: "share_on_bluesky"
+  translation: "שתף בבלוסקיי"
+- id: "share_bluesky_label"
+  translation: "בלוסקיי"
+- id: "share_on_mastodon"
+  translation: "שתף במסטודון"
+- id: "share_mastodon_label"
+  translation: "מסטודון"
 
 ## Table of Contents
 - id: "table_of_contents"

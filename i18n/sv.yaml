@@ -218,6 +218,14 @@
   translation: "Facebook"
 - id: "share_email_label"
   translation: "E-post"
+- id: "share_on_bluesky"
+  translation: "Dela på Bluesky"
+- id: "share_bluesky_label"
+  translation: "Bluesky"
+- id: "share_on_mastodon"
+  translation: "Dela på Mastodon"
+- id: "share_mastodon_label"
+  translation: "Mastodon"
 
 ## Table of Contents
 - id: "table_of_contents"
