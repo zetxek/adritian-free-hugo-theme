@@ -441,21 +441,7 @@ Performance note: the fallback author matching scans up to `params.authorFallbac
 
 #### Reduced Motion Accessibility
 
-The theme respects the `prefers-reduced-motion` OS/browser setting for users who experience discomfort with animations.
-
-When reduced motion is enabled:
-
-- **Scroll-triggered animations** (`.rad-fade-down`, `.rad-fade-in`, etc.) show content immediately without any fade or motion effects
-- **Page transition overlay** is bypassed entirely — navigation happens instantly with no 300ms delay and no fullscreen overlay
-- **Hover transforms** on blog cards, share buttons, and taxonomy tags are disabled
-
-No configuration is required. The theme automatically detects the system preference via the `prefers-reduced-motion` CSS media query and the JavaScript `matchMedia` API.
-
-To test this feature:
-1. Enable "Reduce motion" in **macOS System Settings → Accessibility → Display** (or equivalent on your OS)
-2. All page content should be immediately visible with no scroll-in animations
-3. Navigation between pages should happen instantly with no fade overlay
-4. Hover effects on cards and buttons should have no movement
+The theme automatically respects the `prefers-reduced-motion` OS/browser setting. When enabled, scroll-triggered animations show content immediately, the page transition overlay is skipped, and hover transforms are disabled. No configuration required.
 
 #### (Job) Experience
 
