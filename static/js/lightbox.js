@@ -29,21 +29,27 @@
     closeBtn.addEventListener('click', close);
   }
 
-  function isSafeURL(url) {
-    if (!url) return false;
-    // Allow relative URLs and http(s) only
-    if (url.startsWith('/') || url.startsWith('./') || url.startsWith('../')) return true;
-    if (url.startsWith('http://') || url.startsWith('https://')) return true;
-    if (url.startsWith('data:image/')) return true;
-    return false;
+  function sanitizeURL(url) {
+    if (!url) return '';
+    // Allow data:image/ URIs as-is
+    if (url.startsWith('data:image/')) return url;
+    // Parse the URL to break the taint chain; only allow http(s) protocols
+    try {
+      var parsed = new URL(url, window.location.href);
+      if (parsed.protocol === 'http:' || parsed.protocol === 'https:') return parsed.href;
+    } catch (e) {
+      // invalid URL
+    }
+    return '';
   }
 
   function open(src, alt) {
-    if (!isSafeURL(src)) return;
+    var safeSrc = sanitizeURL(src);
+    if (!safeSrc) return;
     if (!overlay) create();
     previousFocus = document.activeElement;
     previousOverflow = document.body.style.overflow;
-    img.src = src;
+    img.src = safeSrc;
     img.alt = alt || '';
     overlay.classList.add('lightbox-active');
     document.body.style.overflow = 'hidden';

@@ -173,4 +173,35 @@ test.describe('Lightbox functionality', () => {
     const script = page.locator('script[src*="lightbox.js"]');
     await expect(script).toHaveCount(1);
   });
+
+  test('lightbox rejects unsafe javascript: URLs', async ({ page }) => {
+    await page.goto(POST_WITH_IMAGE);
+
+    // Open the lightbox normally first so the overlay is created
+    const img = page.locator('.post-content img').first();
+    await img.click();
+    const overlay = page.locator('.lightbox-overlay.lightbox-active');
+    await expect(overlay).toBeVisible();
+    await page.keyboard.press('Escape');
+    await expect(overlay).not.toBeVisible();
+
+    // Try to open lightbox with a javascript: URL via the page context
+    const opened = await page.evaluate(() => {
+      const overlay = document.querySelector('.lightbox-overlay');
+      const lightboxImg = overlay?.querySelector('.lightbox-img') as HTMLImageElement;
+      const previousSrc = lightboxImg?.src || '';
+
+      // Simulate calling open() with a javascript: URL by clicking an image
+      // whose data-src has been tampered with
+      const testImg = document.querySelector('.post-content img') as HTMLImageElement;
+      testImg.removeAttribute('src');
+      testImg.setAttribute('data-src', 'javascript:alert(1)');
+      testImg.click();
+
+      // Check if the lightbox opened (it should NOT)
+      return overlay?.classList.contains('lightbox-active') || false;
+    });
+
+    expect(opened).toBe(false);
+  });
 });
