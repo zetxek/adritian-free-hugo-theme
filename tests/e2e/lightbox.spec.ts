@@ -106,10 +106,71 @@ test.describe('Lightbox functionality', () => {
 
     const img = page.locator('.post-content img').first();
 
-    // Tab to the image to focus it
     await img.press('Enter');
 
     const overlay = page.locator('.lightbox-overlay.lightbox-active');
     await expect(overlay).toBeVisible();
+  });
+
+  test('lightbox opens with Space key on image', async ({ page }) => {
+    await page.goto(POST_WITH_IMAGE);
+
+    const img = page.locator('.post-content img').first();
+
+    await img.press(' ');
+
+    const overlay = page.locator('.lightbox-overlay.lightbox-active');
+    await expect(overlay).toBeVisible();
+  });
+
+  test('lightbox displays the correct image', async ({ page }) => {
+    await page.goto(POST_WITH_IMAGE);
+
+    const img = page.locator('.post-content img').first();
+    // Use the resolved src (absolute URL) since the browser resolves relative paths
+    const originalSrc = await img.evaluate((el: HTMLImageElement) => el.currentSrc || el.src);
+
+    await img.click();
+
+    const lightboxImg = page.locator('.lightbox-img');
+    await expect(lightboxImg).toHaveAttribute('src', originalSrc);
+  });
+
+  test('focus returns to image after closing lightbox', async ({ page }) => {
+    await page.goto(POST_WITH_IMAGE);
+
+    const img = page.locator('.post-content img').first();
+    await img.click();
+
+    const overlay = page.locator('.lightbox-overlay.lightbox-active');
+    await expect(overlay).toBeVisible();
+
+    await page.keyboard.press('Escape');
+    await expect(overlay).not.toBeVisible();
+
+    // Focus should return to the image that opened the lightbox
+    await expect(img).toBeFocused();
+  });
+
+  test('body scroll is locked while lightbox is open', async ({ page }) => {
+    await page.goto(POST_WITH_IMAGE);
+
+    const img = page.locator('.post-content img').first();
+    await img.click();
+
+    const overflow = await page.evaluate(() => document.body.style.overflow);
+    expect(overflow).toBe('hidden');
+
+    await page.keyboard.press('Escape');
+
+    const overflowAfter = await page.evaluate(() => document.body.style.overflow);
+    expect(overflowAfter).not.toBe('hidden');
+  });
+
+  test('lightbox script is loaded on the page', async ({ page }) => {
+    await page.goto(POST_WITH_IMAGE);
+
+    const script = page.locator('script[src*="lightbox.js"]');
+    await expect(script).toHaveCount(1);
   });
 });
