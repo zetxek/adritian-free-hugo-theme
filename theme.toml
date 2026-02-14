@@ -1,10 +1,10 @@
 # theme.toml template for a Hugo theme
 # See https://github.com/gohugoio/hugoThemes#themetoml for an example
 
-name = "Adritian-Free-Hugo-Theme"
+name = "Adritian"
 license = "MIT"
 licenselink = "https://github.com/zetxek/adritian-free-hugo-theme/blob/main/LICENSE"
-description = "Minimalistic and clean theme for Hugo, great for Single Page personal websites or landing pages. With custom types for blog, portfolio, and content shortcodes."
+description = "A fast, accessible Hugo theme for personal websites and portfolios. Features dark/light mode, multilingual (13 languages + RTL), blog with sidebar, search, skills showcase, SEO-optimized JSON-LD, and perfect Lighthouse scores. Built on Bootstrap 5 with zero jQuery."
 homepage = "https://github.com/zetxek/adritian-free-hugo-theme"
 demosite = "https://adritian-demo.vercel.app"
 min_version = "0.123.0"
@@ -12,7 +12,7 @@ min_version = "0.123.0"
 tags = [
     "responsive",
     "clean",
-    "light",
+    "minimal",
     "personal",
     "bootstrap",
     "blog",
@@ -25,9 +25,30 @@ tags = [
     "sass",
     "archive",
     "landing",
+    "search",
+    "seo",
+    "accessible",
+    "rtl",
 ]
 
-features = ["widgets", "blog", "portfolio", "dark-mode"]
+features = [
+    "dark-mode",
+    "blog",
+    "portfolio",
+    "multilingual",
+    "search",
+    "contact form",
+    "SEO / JSON-LD",
+    "skills showcase",
+    "shortcodes",
+    "print-friendly CV",
+    "RTL support",
+    "social sharing",
+    "comments",
+    "related posts",
+    "table of contents",
+    "reading time",
+]
 
 [author]
 name = "Adrián Moreno Peña"
