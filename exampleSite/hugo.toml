@@ -515,9 +515,9 @@ header = false
 mobileHeader = false
 ## by default we allow override AND automatic selection
 
-# Page transition settings
-[params.pageTransition]
-enabled = true  # Set to false to disable the page fade transition effect
+# View Transitions API - enabled by default
+# Set to false to disable the native View Transitions API
+# viewTransitions = false
 
 [params.sharing]
 bluesky = true

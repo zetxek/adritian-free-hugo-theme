@@ -101,6 +101,19 @@ lastmod: 2025-02-20  # Add this field
 ---
 ```
 
+### 6. View Transitions
+
+**What it does:** Provides smooth page-to-page transitions using the native [View Transitions API](https://developer.mozilla.org/en-US/docs/Web/API/View_Transition_API). Header and footer stay stable while main content fades between pages. Respects `prefers-reduced-motion` by disabling animations automatically.
+
+**How to use:** Enabled by default. To disable, add to your `hugo.toml`:
+
+```toml
+[params]
+viewTransitions = false
+```
+
+**Browser support:** Progressive enhancement — browsers without View Transitions API support will simply navigate normally.
+
 ## Styling
 
 All new features include:
