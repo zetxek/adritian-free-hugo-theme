@@ -47,4 +47,9 @@ main {
   @view-transition {
     navigation: none;
   }
+
+  ::view-transition-old(main-content),
+  ::view-transition-new(main-content) {
+    animation: none;
+  }
 }
