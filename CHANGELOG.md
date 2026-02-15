@@ -2,6 +2,29 @@
 
 This documentation tracks changes across versions, including new features, improvements, and breaking changes.
 
+## v1.9.3
+
+### New features
+
+- Reading progress bar for blog posts
+- Bluesky and Mastodon social sharing buttons
+- Native View Transitions API support for smooth page navigation
+- BreadcrumbList JSON-LD structured data for SEO
+- Lightweight image lightbox for blog and portfolio images
+
+### Accessibility
+
+- `prefers-reduced-motion` support: disables scroll-triggered animations, view transitions, and page transition overlays for users who prefer reduced motion
+
+### Bug fixes
+
+- Fix scroll animation timing and view transition conflicts (missing CSS keyframes, header height jump during transitions)
+- Fix png-to-ico import for ESM default export compatibility
+
+### Maintenance
+
+- Improved theme metadata for Hugo directory and GitHub discoverability
+
 ## v1.8.6
 
 ### Search improvements
