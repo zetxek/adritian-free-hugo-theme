@@ -49,66 +49,55 @@ jobs:
           GITHUB_CONTEXT: ${{ toJson(github) }}
 
       - name: Send pull-request
+        env:
+          PRIVATE_TOKEN_GITHUB: ${{ secrets.PRIVATE_TOKEN_GITHUB }}
         run: |
-          LATEST_TAG=$(cd theme-source && git describe --tags --always)  
+          LATEST_TAG=$(cd theme-source && git describe --tags --always)
           LATEST_COMMIT=$(cd theme-source && git rev-parse HEAD)
           SOURCE_REPOSITORY="zetxek/adritian-free-hugo-theme"
           REPOSITORY="zetxek/adritian-demo"
-          REPO_NAME=${{ github.event.pull_request.head.repo.full_name }}
-          FOLDER="bin/$REPOSITORY"
           PR_URL="https://github.com/$SOURCE_REPOSITORY/pull/$PR_NUMBER"
           BRANCH_NAME="theme-update/update-theme-to-$LATEST_TAG"
           BASE_BRANCH="main"
           ASSIGNEE="zetxek"
-          
+
           echo "Latest tag: $LATEST_TAG"
           echo "Latest commit: $LATEST_COMMIT"
           echo "PR URL: $PR_URL"
 
           git config --global --add --bool push.autoSetupRemote true
 
-          # Clone the remote repository and change working directory to the
-          # folder it was cloned to.
-          git clone \
-            --depth=1 \
-            --branch=main \
-            https://some-user:${{ secrets.PRIVATE_TOKEN_GITHUB }}@github.com/$REPOSITORY \
-            $FOLDER
-
-          cd $FOLDER
+          # Use the already-checked-out demo repository (avoids redundant clone
+          # and path resolution issues with nested subdirectories).
+          cd demo-repo
 
           # Setup the committers identity.
           git config user.email "actions@github.com"
           git config user.name "GitHub Actions - update theme module version"
 
+          # Set up remote with token for pushing
+          git remote set-url origin https://some-user:${PRIVATE_TOKEN_GITHUB}@github.com/$REPOSITORY
+
           # Create a new feature branch for the changes.
           echo "Working branch: $BRANCH_NAME"
           git checkout -b $BRANCH_NAME
-          
-          # Commit the changes and push the feature branch to origin
-          git config --global --add --bool push.autoSetupRemote true
-          echo "Committing all changes."
-          git add --all
 
-          COMMIT_MSG_THEME='chore: update theme module version to `'"$LATEST_TAG"'`'
-          echo 'Updating theme module: '"$COMMIT_MSG_THEME"
-          git commit -am "$COMMIT_MSG_THEME" && git push --force || echo "No changes to theme"
-
-          # Copy content from the checked-out theme source
-          cp ../../theme-source/exampleSite/hugo.toml hugo.toml
+          # Copy content from the checked-out theme source (one level up since
+          # we are now inside demo-repo/, and theme-source/ is a sibling dir).
+          cp ../theme-source/exampleSite/hugo.toml hugo.toml
           # Update URL
           sed -i -e "s/\"https\:\/\/www\.adrianmoreno\.info\"/\"https\:\/\/adritian-demo\.vercel\.app\/\"/g" hugo.toml
 
           COMMIT_MSG_CONFIG='chore: update config/content to `'"$LATEST_TAG"'` from https://github.com/zetxek/adritian-free-hugo-theme'
           echo "Committing content/config: $COMMIT_MSG_CONFIG"
-          git commit -am "$COMMIT_MSG_CONFIG"  && git push --force || echo "No changes to config"
+          git commit -am "$COMMIT_MSG_CONFIG" && git push --force || echo "No changes to config"
 
           echo "Pushing branch: $BRANCH_NAME"
           git push origin $BRANCH_NAME --force
 
           # Store the PAT in a file that can be accessed by the
           # GitHub CLI.
-          echo "${{ secrets.PRIVATE_TOKEN_GITHUB }}" > token.txt
+          echo "${PRIVATE_TOKEN_GITHUB}" > token.txt
 
           # Authorize GitHub CLI for the current repository and
           # create a pull-requests containing the updates.
