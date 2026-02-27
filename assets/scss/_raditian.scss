@@ -1492,6 +1492,22 @@ a.nav-link::after {
     margin-top: 40px;
 }
 
+/* imgShape variants for profile image */
+.profile-image--circle picture,
+.profile-image--circle img {
+    border-radius: 50%;
+    overflow: hidden;
+    aspect-ratio: 1;
+    object-fit: cover;
+}
+
+.profile-image--rounded picture,
+.profile-image--rounded img {
+    border-radius: 1rem;
+    overflow: hidden;
+    object-fit: cover;
+}
+
 .rad-showcase__bg img {
     margin-top: 0;
     margin-left: 100px;
