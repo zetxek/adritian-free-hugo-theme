@@ -17,7 +17,7 @@
     "@playwright/test": "^1.58.2",
     "@types/node": "^25.3.0",
     "@zetxek/adritian-theme-helper": "^1.0.5",
-    "autoprefixer": "^10.4.24",
+    "autoprefixer": "^10.4.27",
     "bootstrap": "^5.3.8",
     "npm-run-all": "^4.1.5",
     "postcss": "^8.5.6",
