@@ -82,6 +82,12 @@ jobs:
           echo "Working branch: $BRANCH_NAME"
           git checkout -b $BRANCH_NAME
 
+          # Commit any theme module or related changes (go.mod, etc.)
+          COMMIT_MSG_THEME='chore: update theme module to `'"$LATEST_TAG"'` from '"$PR_URL"
+          echo "Committing theme module changes: $COMMIT_MSG_THEME"
+          git add --all
+          git commit -am "$COMMIT_MSG_THEME" || echo "No theme module changes"
+
           # Copy content from the checked-out theme source (one level up since
           # we are now inside demo-repo/, and theme-source/ is a sibling dir).
           cp ../theme-source/exampleSite/hugo.toml hugo.toml
@@ -90,8 +96,9 @@ jobs:
 
           COMMIT_MSG_CONFIG='chore: update config/content to `'"$LATEST_TAG"'` from https://github.com/zetxek/adritian-free-hugo-theme'
           echo "Committing content/config: $COMMIT_MSG_CONFIG"
-          git commit -am "$COMMIT_MSG_CONFIG" && git push --force || echo "No changes to config"
+          git commit -am "$COMMIT_MSG_CONFIG" || echo "No changes to config"
 
+          # Push all commits at once
           echo "Pushing branch: $BRANCH_NAME"
           git push origin $BRANCH_NAME --force
 
