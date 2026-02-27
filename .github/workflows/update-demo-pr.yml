@@ -78,7 +78,9 @@ jobs:
 
   update-demo:
     needs: check-dependabot
-    if: needs.check-dependabot.outputs.should-run == 'true'
+    # Skip for fork PRs: PRIVATE_TOKEN_GITHUB is unavailable in pull_request context for forks.
+    # External contributor PRs are handled by update-demo-pr-external.yml instead.
+    if: needs.check-dependabot.outputs.should-run == 'true' && !github.event.pull_request.head.repo.fork
     env:
       SOURCE_BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
       PR_NUMBER: ${{ github.event.number }}

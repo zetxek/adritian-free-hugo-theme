@@ -149,7 +149,7 @@ This version introduces a brand new way of managing pages, and leveraging the ex
 
 The main changes are:
 
-- deprecation of `homepage.yml`. Stopped using some of its values (such as `.Site.Data.homepage.newsletter.enable`, given that the shortcodes can be rendered in any page, not only the home)
+- deprecation of `homepage.yml`. Stopped using some of its values (such as `hugo.Data.homepage.newsletter.enable`, given that the shortcodes can be rendered in any page, not only the home)
 - introduction of numerous shortcodes, to replicate the same experience (in any page)
 
 Aside from that:

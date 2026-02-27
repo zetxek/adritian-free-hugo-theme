@@ -29,7 +29,7 @@
 
       {{ $xp := where .Site.RegularPages.ByDate "Type" "experience" }}
       {{ if not $isShortcode }}
-        {{ $baseLangSite := .Sites.Default }}
+        {{ $baseLangSite := hugo.Sites.Default }}
         {{ $xp = $xp | lang.Merge (where $baseLangSite.RegularPages.ByDate.Reverse "Type" "experience") }}
       {{ end }}
 
@@ -80,7 +80,7 @@
         {{ $xpExtra := sub $xpCount $totalCount }}
         <em>And {{ $xpExtra }} more</em><br />
         <a href="{{ absURL "experience" | relLangURL }}" class="btn btn-primary btn-all-experience">
-          <i class="{{ .Site.Data.homepage.experience.button3.icon }}"></i>
+          <i class="{{ hugo.Data.homepage.experience.button3.icon }}"></i>
           {{ i18n "experience_button3" }}
         </a>
       </div>

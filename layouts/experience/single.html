@@ -6,7 +6,7 @@
   <div id="main-content" tabindex="-1">
     <div class="row flex-column-reverse flex-md-row rad-fade-down">
       <div class="col-12 col-md-5 mt-5 mt-sm-0">
-        {{ $baseLangSite := .Sites.Default }}
+        {{ $baseLangSite := hugo.Sites.Default }}
         {{ $currentPageID := .Page.File.UniqueID }}
         
         {{ $xp := (where .Site.RegularPages.ByDate.Reverse "Type" "experience") }}
