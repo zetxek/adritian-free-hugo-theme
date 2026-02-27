@@ -30,18 +30,18 @@ jobs:
           && sudo dpkg -i ${{ runner.temp }}/hugo.deb
       
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           submodules: recursive
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: lts/*
 
       - name: Cache Node Modules
         id: cache-node-modules
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: |
             node_modules
@@ -49,7 +49,7 @@ jobs:
         
       - name: Cache Playwright Browsers
         id: cache-playwright
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: |
             ~/.cache/ms-playwright
@@ -67,7 +67,7 @@ jobs:
     needs: prepare
     runs-on: ubuntu-latest
     env:
-      HUGO_VERSION: ${{ vars.HUGO_VERSION || '0.147.2' }}
+      HUGO_VERSION: ${{ vars.HUGO_VERSION || '0.157.0' }}
     steps:
       - name: Install Hugo CLI
         run: |
@@ -75,24 +75,24 @@ jobs:
           && sudo dpkg -i ${{ runner.temp }}/hugo.deb
       
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           submodules: recursive
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: lts/*
 
       - name: Restore Node Modules
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@v5
         with:
           path: |
             node_modules
           key: modules-${{ hashFiles('package-lock.json') }}
           
       - name: Restore Playwright Browsers
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@v5
         with:
           path: |
             ~/.cache/ms-playwright
@@ -114,7 +114,7 @@ jobs:
           echo "fail_count=$count" >> "$GITHUB_OUTPUT"
           echo $count
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: ${{ !cancelled() }}
         with:
           name: playwright-report-no-menus
@@ -128,7 +128,7 @@ jobs:
     needs: prepare
     runs-on: ubuntu-latest
     env:
-      HUGO_VERSION: ${{ vars.HUGO_VERSION || '0.147.2' }}
+      HUGO_VERSION: ${{ vars.HUGO_VERSION || '0.157.0' }}
     steps:
       - name: Install Hugo CLI
         run: |
@@ -136,26 +136,26 @@ jobs:
           && sudo dpkg -i ${{ runner.temp }}/hugo.deb
       
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           submodules: recursive
           ref: ${{ github.head_ref }}
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: lts/*
 
       - name: Restore Node Modules
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@v5
         with:
           path: |
             node_modules
           key: modules-${{ hashFiles('package-lock.json') }}
           
       - name: Restore Playwright Browsers
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@v5
         with:
           path: |
             ~/.cache/ms-playwright
@@ -178,7 +178,7 @@ jobs:
         run: ls -la tests/e2e/rtl-visual.spec.ts-snapshots/ || echo "No snapshots directory found"
 
       - name: Commit updated snapshots
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: stefanzweifel/git-auto-commit-action@v7
         with:
           commit_message: "chore: update visual regression snapshots from CI"
           file_pattern: "tests/e2e/*-snapshots/*.png"
@@ -193,7 +193,7 @@ jobs:
           echo "fail_count=$count" >> "$GITHUB_OUTPUT"
           echo $count
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: ${{ !cancelled() }}
         with:
           name: playwright-report-with-menus
@@ -216,13 +216,13 @@ jobs:
         url: ${{ steps.deployment.outputs.page_url }}
     steps:
         - name: Download no-menus report
-          uses: actions/download-artifact@v4
+          uses: actions/download-artifact@v8
           with:
             name: playwright-report-no-menus
             path: playwright-report-no-menus
 
         - name: Download with-menus report
-          uses: actions/download-artifact@v4
+          uses: actions/download-artifact@v8
           with:
             name: playwright-report-with-menus
             path: playwright-report-with-menus
@@ -236,7 +236,7 @@ jobs:
             
         - name: Upload combined artifact for pages
           if: always()
-          uses: actions/upload-pages-artifact@v3
+          uses: actions/upload-pages-artifact@v4
           with:
                 path: "./combined-report"
         
