@@ -29,7 +29,7 @@
 
       {{ $xp := where .Site.RegularPages.ByDate "Type" "experience" }}
       {{ if not $isShortcode }}
-        {{ $baseLangSite := .Sites.Default }}
+        {{ $baseLangSite := hugo.Sites.Default }}
         {{ $xp = $xp | lang.Merge (where $baseLangSite.RegularPages.ByDate.Reverse "Type" "experience") }}
       {{ end }}
 

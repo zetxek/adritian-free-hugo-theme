@@ -22,7 +22,7 @@ jobs:
   prepare:
     runs-on: ubuntu-latest
     env:
-      HUGO_VERSION: ${{ vars.HUGO_VERSION || '0.147.2' }}
+      HUGO_VERSION: ${{ vars.HUGO_VERSION || '0.157.0' }}
     steps:
       - name: Install Hugo CLI
         run: |
