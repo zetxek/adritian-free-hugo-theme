@@ -1349,6 +1349,7 @@ a.nav-link::after {
     -webkit-box-align: center;
     align-items: center;
     position: relative;
+    z-index: 1;
     margin-bottom: -20px;
     padding-top: 120px;
 }
