@@ -24,7 +24,7 @@ jobs:
     if: github.actor == 'dependabot[bot]'
     steps:
       - name: Add safe-to-test label to Dependabot PRs
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
@@ -82,11 +82,11 @@ jobs:
     env:
       SOURCE_BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
       PR_NUMBER: ${{ github.event.number }}
-      HUGO_VERSION: ${{ vars.HUGO_VERSION || '0.147.2' }}
+      HUGO_VERSION: ${{ vars.HUGO_VERSION || '0.157.0' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout source repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with: 
           repository: zetxek/adritian-free-hugo-theme
           ref: ${{ github.head_ref || github.ref_name }}
@@ -94,14 +94,14 @@ jobs:
           path: source-repo
           
       - name: Checkout demo repository  
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with: 
           repository: zetxek/adritian-demo
           token: ${{ secrets.PRIVATE_TOKEN_GITHUB }}
           path: demo-repo 
      
       - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v2
+        uses: peaceiris/actions-hugo@v3
         with:
           hugo-version: ${{ env.HUGO_VERSION }}
           extended: true
