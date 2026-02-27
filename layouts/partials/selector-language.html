@@ -2,10 +2,11 @@
 so far the placement can either be header or footer */}}
 {{- $placement := .Scratch.Get "selectorPlacement" }}
 {{- $direction := .Scratch.Get "dropdownDirection" }}
+{{ with .Rotate "language" }}
 <div id='{{ $placement }}-language-selector'
   class='d-grid gap-2 col-6 mx-auto nav-link dropdown {{ if  (eq $direction "up") }}dropup{{ end }} {{ if eq $placement "mobile-header" }}nav-link{{ end }}'>
-  {{ range .Site.Languages }}
-  {{ if eq . $.Site.Language }}
+  {{ range . }}
+  {{ if eq .Site.Language $.Site.Language }}
   <button class="btn btn-link py-2 px-0 px-lg-2 dropdown-toggle d-flex align-items-center show"
     id='btn-select-language-{{ $placement }}' type="button" aria-expanded="false"
     aria-controls="languages-dropdown-{{ $placement }}" aria-haspopup="true" data-bs-toggle="dropdown" data-bs-display="static"
@@ -15,15 +16,16 @@ so far the placement can either be header or footer */}}
   <ul class='dropdown-menu dropdown-menu-end {{ if  (eq $direction "up") }}dropup{{ end }}'
     id="languages-dropdown-{{ $placement }}" data-bs-popper="static">
     <li class="dropdown-item current selected">
-      <span>✔️ {{ .LanguageName }}</span>
+      <span>✔️ {{ .Site.Language.LanguageName }}</span>
     </li>
     {{ end }}
     {{ end }}
     {{ range $.Translations }}
     <li class="dropdown-item choice">
-      <a class="dropdown-item translation btn-link d-flex align-items-center show" title="{{ .Language.LanguageName }}"
-        href="{{ .Permalink }}">{{ .Language.LanguageName }}</a>
+      <a class="dropdown-item translation btn-link d-flex align-items-center show" title="{{ .Site.Language.LanguageName }}"
+        href="{{ .Permalink }}">{{ .Site.Language.LanguageName }}</a>
     </li>
     {{ end }}
   </ul>
 </div>
+{{ end }}
