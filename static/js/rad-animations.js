@@ -10,7 +10,7 @@ if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
   const onSectionIntersect = (entry) => {
     let delay = 0;
     animatedNodes.forEach((node) => {
-      if (entry.target.contains(node)) {
+      if (node === entry.target || entry.target.contains(node)) {
         node.style.animationDelay = `${nodeDelayDelta * delay}s`;
         node.classList.add('rad-animate');
         delay++;
