@@ -79,7 +79,7 @@
       <div class="all-experience-container">
         {{ $xpExtra := sub $xpCount $totalCount }}
         <em>And {{ $xpExtra }} more</em><br />
-        <a href="{{ absURL "experience" | relLangURL }}" class="btn btn-primary btn-all-experience">
+        <a href="{{ "experience" | relLangURL }}" class="btn btn-primary btn-all-experience">
           <i class="{{ hugo.Data.homepage.experience.button3.icon }}"></i>
           {{ i18n "experience_button3" }}
         </a>

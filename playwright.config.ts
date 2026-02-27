@@ -56,7 +56,7 @@ export default defineConfig ({
     ,
     outputDir: testResults,
     webServer: {
-        command: `cd exampleSite && hugo server --themesDir ../.. --buildDrafts --buildFuture --bind 0.0.0.0 --port ${port}`,
+        command: `cd exampleSite && hugo server --themesDir ../.. --buildDrafts --buildFuture --bind 0.0.0.0 --port ${port} --baseURL http://localhost:${port}/`,
         url: baseURL,
         reuseExistingServer: true,
     },
