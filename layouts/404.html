@@ -12,12 +12,13 @@
 
     {{/* Get available languages for redirect logic */}}
     {{- $languages := slice }}
-    {{- range .Site.Languages }}
-      {{- if ne .Lang "en" }}
-        {{- $languages = $languages | append .Lang }}
+    {{ with .Rotate "language" }}
+      {{- range . }}
+        {{- if ne .Site.Language "en" }}
+          {{- $languages = $languages | append .Lang }}
+        {{- end }}
       {{- end }}
     {{- end }}
-
     <script>
       (function() {
         // Available non-default languages from Hugo config
