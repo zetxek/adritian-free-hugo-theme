@@ -8,11 +8,11 @@
 {{- $formAction := "" -}}
 {{- $formMethod := "" -}}
 {{- if $isShortcode }}
-    {{- $formAction = .Get "form_action" | default .Site.Data.homepage.newsletter.form.action -}}
-    {{- $formMethod = .Get "form_method" | default .Site.Data.homepage.newsletter.form.method -}}
+    {{- $formAction = .Get "form_action" | default hugo.Data.homepage.newsletter.form.action -}}
+    {{- $formMethod = .Get "form_method" | default hugo.Data.homepage.newsletter.form.method -}}
 {{ else }}
-    {{- $formAction = .Site.Data.homepage.newsletter.form.action -}}
-    {{- $formMethod = .Site.Data.homepage.newsletter.form.method -}}
+    {{- $formAction = hugo.Data.homepage.newsletter.form.action -}}
+    {{- $formMethod = hugo.Data.homepage.newsletter.form.method -}}
 {{ end }}
 
 {{/*

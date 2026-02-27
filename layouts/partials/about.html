@@ -24,15 +24,15 @@
 {{- $imgScale := 0.5 -}}
 
 {{- if $isShortcode }}
-  {{- $imgSrc = .Get "imgSrc" | default .Site.Data.homepage.about.image.src -}}
-  {{- $imgWidth = .Get "imgWidth" | default .Site.Data.homepage.about.image.width -}}
-  {{- $imgHeight = .Get "imgHeight" | default .Site.Data.homepage.about.image.height -}}
-  {{- $imgScale = .Get "imgScale" | default .Site.Data.homepage.about.image.scale -}}
+  {{- $imgSrc = .Get "imgSrc" | default hugo.Data.homepage.about.image.src -}}
+  {{- $imgWidth = .Get "imgWidth" | default hugo.Data.homepage.about.image.width -}}
+  {{- $imgHeight = .Get "imgHeight" | default hugo.Data.homepage.about.image.height -}}
+  {{- $imgScale = .Get "imgScale" | default hugo.Data.homepage.about.image.scale -}}
 {{ else }}
-  {{- $imgSrc = .Site.Data.homepage.about.image.src -}}
-  {{- $imgWidth = .Site.Data.homepage.about.image.width -}}
-  {{- $imgHeight = .Site.Data.homepage.about.image.height -}}
-  {{- $imgScale = .Site.Data.homepage.about.image.scale -}}
+  {{- $imgSrc = hugo.Data.homepage.about.image.src -}}
+  {{- $imgWidth = hugo.Data.homepage.about.image.width -}}
+  {{- $imgHeight = hugo.Data.homepage.about.image.height -}}
+  {{- $imgScale = hugo.Data.homepage.about.image.scale -}}
 {{ end }}
 
 {{/* ---------------------------------------------------------------------------
@@ -47,8 +47,8 @@
   {{- $hAlign = .Get "h_align" | default "left" -}}
 {{ else }}
   {{- /* Support both v_align and text_align for backwards compatibility */ -}}
-  {{- $vAlign = .Site.Data.homepage.about.v_align | default .Site.Data.homepage.about.text_align | default "center" -}}
-  {{- $hAlign = .Site.Data.homepage.about.h_align | default "left" -}}
+  {{- $vAlign = hugo.Data.homepage.about.v_align | default hugo.Data.homepage.about.text_align | default "center" -}}
+  {{- $hAlign = hugo.Data.homepage.about.h_align | default "left" -}}
 {{ end }}
 
 {{/* ---------------------------------------------------------------------------
@@ -59,12 +59,12 @@
 {{- $btnText := "" -}}
 
 {{- if $isShortcode }}
-  {{- $btnURL = .Get "button_url" | default .Site.Data.homepage.about.button.URL -}}
-  {{- $btnIcon = .Get "button_icon" | default .Site.Data.homepage.about.button.icon -}}
+  {{- $btnURL = .Get "button_url" | default hugo.Data.homepage.about.button.URL -}}
+  {{- $btnIcon = .Get "button_icon" | default hugo.Data.homepage.about.button.icon -}}
   {{- $btnText = .Get "button_text" | default false -}}
 {{ else }}
-  {{- $btnURL = .Site.Data.homepage.about.button.URL -}}
-  {{- $btnIcon = .Site.Data.homepage.about.button.icon -}}
+  {{- $btnURL = hugo.Data.homepage.about.button.URL -}}
+  {{- $btnIcon = hugo.Data.homepage.about.button.icon -}}
   {{- $btnText = i18n "about_button" -}}
 {{ end }}
 

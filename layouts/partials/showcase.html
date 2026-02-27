@@ -35,27 +35,27 @@
       {{- $showcaseTitle = .Get "title" | default ( i18n "showcase_title" ) -}}
       {{- $showcaseSubtitle = .Get "subtitle" | default ( i18n "showcase_subtitle" ) -}}
       {{- $showcaseDescription = .Get "description" | default ( i18n "showcase_description" ) | safeHTML -}}
-      {{- $buttonURL = .Get "button_url" | default .Site.Data.homepage.showcase.button.URL -}}
-      {{- $buttonIcon = .Get "button_icon" | default .Site.Data.homepage.showcase.button.icon -}}
+      {{- $buttonURL = .Get "button_url" | default hugo.Data.homepage.showcase.button.URL -}}
+      {{- $buttonIcon = .Get "button_icon" | default hugo.Data.homepage.showcase.button.icon -}}
       {{- $buttonText = .Get "button_text" | default false -}}
-      {{- $imgSrc = .Get "imgSrc" | default .Site.Data.homepage.showcase.image.src -}}
-      {{- $imgWidth = .Get "imgWidth" | default .Site.Data.homepage.showcase.image.width -}}
-      {{- $imgHeight = .Get "imgHeight" | default .Site.Data.homepage.showcase.image.height -}}
-      {{- $imgScale = .Get "imgScale" | default .Site.Data.homepage.showcase.image.scale -}}
+      {{- $imgSrc = .Get "imgSrc" | default hugo.Data.homepage.showcase.image.src -}}
+      {{- $imgWidth = .Get "imgWidth" | default hugo.Data.homepage.showcase.image.width -}}
+      {{- $imgHeight = .Get "imgHeight" | default hugo.Data.homepage.showcase.image.height -}}
+      {{- $imgScale = .Get "imgScale" | default hugo.Data.homepage.showcase.image.scale -}}
       {{- $socialLinks = .Get "social_links" -}}
     {{ else }}
       {{/* Fallback site or i18n */}}
       {{- $showcaseTitle = i18n "showcase_title" -}}
       {{- $showcaseSubtitle = i18n "showcase_subtitle" -}}
       {{- $showcaseDescription = i18n "showcase_description" | safeHTML -}}
-      {{- $buttonURL = .Site.Data.homepage.showcase.button.URL -}}
-      {{- $buttonIcon = .Site.Data.homepage.showcase.button.icon -}}
+      {{- $buttonURL = hugo.Data.homepage.showcase.button.URL -}}
+      {{- $buttonIcon = hugo.Data.homepage.showcase.button.icon -}}
       {{- $buttonText = i18n "showcase_button" -}}
-      {{- $imgSrc = .Site.Data.homepage.showcase.image.src -}}
-      {{- $imgWidth = .Site.Data.homepage.showcase.image.width -}}
-      {{- $imgHeight = .Site.Data.homepage.showcase.image.height -}}
-      {{- $imgScale = .Site.Data.homepage.showcase.image.scale -}}
-      {{- $socialLinks = .Site.Data.homepage.showcase.socialLinks -}}
+      {{- $imgSrc = hugo.Data.homepage.showcase.image.src -}}
+      {{- $imgWidth = hugo.Data.homepage.showcase.image.width -}}
+      {{- $imgHeight = hugo.Data.homepage.showcase.image.height -}}
+      {{- $imgScale = hugo.Data.homepage.showcase.image.scale -}}
+      {{- $socialLinks = hugo.Data.homepage.showcase.socialLinks -}}
     {{ end }}
 
 
