@@ -86,7 +86,7 @@ jobs:
           COMMIT_MSG_THEME='chore: update theme module to `'"$LATEST_TAG"'` from '"$PR_URL"
           echo "Committing theme module changes: $COMMIT_MSG_THEME"
           git add --all
-          git commit -am "$COMMIT_MSG_THEME" || echo "No theme module changes"
+          git commit -m "$COMMIT_MSG_THEME" || echo "No theme module changes"
 
           # Copy content from the checked-out theme source (one level up since
           # we are now inside demo-repo/, and theme-source/ is a sibling dir).
@@ -96,7 +96,14 @@ jobs:
 
           COMMIT_MSG_CONFIG='chore: update config/content to `'"$LATEST_TAG"'` from https://github.com/zetxek/adritian-free-hugo-theme'
           echo "Committing content/config: $COMMIT_MSG_CONFIG"
-          git commit -am "$COMMIT_MSG_CONFIG" || echo "No changes to config"
+          git commit -m "$COMMIT_MSG_CONFIG" || echo "No changes to config"
+
+          # Skip push and PR creation if there are no commits ahead of the base branch
+          COMMITS_AHEAD=$(git rev-list --count origin/$BASE_BRANCH..HEAD 2>/dev/null || echo "0")
+          if [ "$COMMITS_AHEAD" -eq "0" ]; then
+            echo "No changes to push. Skipping PR creation."
+            exit 0
+          fi
 
           # Push all commits at once
           echo "Pushing branch: $BRANCH_NAME"
