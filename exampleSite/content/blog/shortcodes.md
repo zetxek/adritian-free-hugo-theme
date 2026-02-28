@@ -117,9 +117,9 @@ The shortcodes can be customized with different arguments:
 
 - `about-section`:
   - Content Arguments
-    - `intro_title` - Sets the main heading/title for the about section. Falls back to the title from site data if not provided.
+    - `title` - Sets the heading text for the about section. Falls back to the i18n value `about_title` if not provided.
 
-    - `intro_description` - Contains the HTML content or description text for the about section. Falls back to the content from site data if not provided.
+    - `content` - HTML content for the about section body. Falls back to the i18n value `about_content` if not provided.
 
     - `imgSrc` - Specifies the path to the image displayed in the about section. Falls back to the image defined in site data if not provided.
 
@@ -127,36 +127,25 @@ The shortcodes can be customized with different arguments:
 
     - `imgHeight` - Specifies the height for the image.
 
-    - `imgScale` - Specifies the scale used for the image (for example, `0.5` if the high resolution image is double the size of the smaller one) This is only considered if neither imgWidth nor imgHeight is used.
+    - `imgScale` - Specifies the scale used for the image (for example, `0.5` if the high resolution image is double the size of the smaller one). Only considered if neither `imgWidth` nor `imgHeight` is used.
 
-    - `v_align` - Controls the vertical alignment of the text content relative to the image. Accepts "center" (default), "top", or "bottom".
+    - `headingLevel` - Controls the HTML heading tag used for the section title. Accepts `"1"` through `"6"`. Defaults to `"2"` (`<h2>`), which is correct when the page already has an `<h1>` (e.g. a preceding `showcase-section`). Set to `"1"` if this is the first or only heading on the page to maintain a valid heading hierarchy.
+
+    - `v_align` - Controls the vertical alignment of the text content relative to the image. Accepts `"center"` (default), `"top"`, or `"bottom"`.
     - `text_align` - **Deprecated**: Use `v_align` instead. Maintains backwards compatibility.
-    - `h_align` - Controls the horizontal alignment of the text content. Accepts "left" (default), "center", or "right".
-    
+    - `h_align` - Controls the horizontal alignment of the text content. Accepts `"left"` (default), `"center"`, or `"right"`.
+
     **Alignment Examples**:
     - `v_align="center" h_align="left"` - Text vertically centered, left-aligned (default)
     - `v_align="top" h_align="center"` - Text at top, horizontally centered
     - `v_align="bottom" h_align="right"` - Text at bottom, right-aligned
 
-    - Primary Button Arguments
-      - `button1_enable` - Boolean value to show or hide the primary button. Defaults to the value from site data.
+    - Button Arguments
+      - `button_icon` - Icon class to display before the button text. Falls back to site data.
+      - `button_url` - Target URL for the button. Falls back to site data.
+      - `button_text` - Text label for the button. Falls back to the i18n value `about_button`. Leave empty to hide the button.
 
-      - `button1_icon` - icon class to display before the button text. Falls back to the icon from site data.
-
-      - `button1_url` - Target URL for the primary button. Falls back to the URL from site data.
-
-      - `button1_text` - Text label to display on the primary button. Falls back to the text from site data.
-
-    - Secondary Button Arguments
-      - `button2_enable` - Boolean value to show or hide the secondary button. Defaults to the value from site data.
-
-      - `button2_icon` - FontAwesome or icon class to display before the button text. Falls back to the icon from site data.
-
-      - `button2_url` - Target URL for the secondary button. Falls back to the URL from site data.
-
-      - `button2_text` - Text label to display on the secondary button. Falls back to the text from site data.
-
-  - `sectionId`: Optional. Overrides the default HTML id for the section. If not provided, the default id is used.
+  - `sectionId`: Optional. Overrides the default HTML id for the section. If not provided, the default id (`about`) is used.
 
   - `testimonial-section`:
     - `title`: The title of the testimonial section.

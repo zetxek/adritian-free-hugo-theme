@@ -119,20 +119,14 @@ h4 {
   h4 {
     font-size: 32px;
   }
-  p {
-    line-height: 28px;
-  }
 }
 
 p {
   font-size: 16px;
   font-weight: 300;
-  line-height: 28px;
-  color: #333;
-}
-
-p + p {
-  margin-top: -12px;
+  line-height: 1.5;
+  margin-bottom: 0.75rem;
+  color: #000;
 }
 
 b, strong{
@@ -184,8 +178,8 @@ span a:hover {
 .lead {
   font-size: 16px;
   font-weight: 300;
-  line-height: 1.2;
-  letter-spacing: -0px;
+  line-height: 1.5;
+  letter-spacing: 0;
   color: #000;
 }
 

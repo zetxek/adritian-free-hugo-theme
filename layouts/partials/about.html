@@ -69,10 +69,16 @@
 {{ end }}
 
 {{/*
-  sectionId: Optional argument to override the default HTML id for this section. If not provided, the default id is used. */}}
+  sectionId: Optional argument to override the default HTML id for this section. If not provided, the default id is used.
+  headingLevel: Optional heading level for the section title (1-6). Defaults to 2 (h2), since on the typical homepage
+  the showcase section already provides the page h1. Set to 1 if this section is the first/only heading on the page. */}}
 {{ $sectionId := "about" }}
 {{ with .Get "sectionId" }}
   {{ $sectionId = . }}
+{{ end }}
+{{ $headingLevel := "2" }}
+{{ with .Get "headingLevel" }}
+  {{ $headingLevel = . }}
 {{ end }}
 
 <section {{if $sectionId}} id="{{ $sectionId }}"{{end}} class="section rad-animation-group pb-0">
@@ -82,12 +88,12 @@
         {{ partial "lazypicture" (dict "src" $imgSrc "width" $imgWidth "height" $imgHeight "scale" $imgScale "class" "image-left-overflow")}}
       </div>
       <div class="col-12 col-md-6{{ if eq $vAlign "center" }} my-auto{{ else if eq $vAlign "top" }} align-self-start{{ else if eq $vAlign "bottom" }} align-self-end{{ end }}{{ if eq $hAlign "center" }} text-center{{ else if eq $hAlign "right" }} text-end{{ end }}">
-        <h1>{{ $title }}</h1>
-        <div class="about-me content lead">
+        <h{{ $headingLevel }}>{{ $title }}</h{{ $headingLevel }}>
+        <div class="about-me content">
           {{ $content }}
         </div>
         {{ if $btnText }}
-          <a href="{{ $btnURL | absURL }}" target="_blank" class="btn btn-primary">
+          <a href="{{ $btnURL | absURL }}" target="_blank" class="btn btn-primary mt-3">
             <i class="{{ $btnIcon }}"></i>
             {{ $btnText }}
           </a>
