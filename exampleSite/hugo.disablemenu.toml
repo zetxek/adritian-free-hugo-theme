@@ -1,0 +1,9 @@
+[params.languages.selector.disable]
+footer = true
+header = true
+mobileHeader = true
+
+[params.colorTheme.selector.disable]
+footer = true
+header = true
+mobileHeader = true
