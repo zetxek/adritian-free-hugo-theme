@@ -171,6 +171,7 @@ The shortcodes can be customized with different arguments:
     - `imgWidth` - Specifies the width for the image.
     - `imgHeight` - Specifies the height for the image.
     - `imgScale` - Specifies the scale used for the image (for example, `0.5` if the high resolution image is double the size of the smaller one) This is only considered if neither imgWidth nor imgHeight is used.
+    - `imgShape` - Optional. Clips the image to a predefined shape. Accepted values: `circle` (circular crop, `aspect-ratio: 1:1`) or `rounded` (softly rounded corners). Omit to keep the default rectangular display. Can also be set via `data/homepage.yaml` under `showcase.image.shape`.
   - **Social Media**:
     - `social_links`: Array of social media platform links to display at the bottom of the showcase. Each item should have a URL and icon property.
   - **Responsive Behavior**:

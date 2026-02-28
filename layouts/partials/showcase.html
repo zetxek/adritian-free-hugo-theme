@@ -28,6 +28,7 @@
     {{- $imgWidth := 0 -}}
     {{- $imgHeight := 0 -}}
     {{- $imgScale := 0.5 -}}
+    {{- $imgShape := "" -}}
     {{- $socialLinks := "" -}}
 
     {{- if $isShortcode }}
@@ -42,6 +43,7 @@
       {{- $imgWidth = .Get "imgWidth" | default hugo.Data.homepage.showcase.image.width -}}
       {{- $imgHeight = .Get "imgHeight" | default hugo.Data.homepage.showcase.image.height -}}
       {{- $imgScale = .Get "imgScale" | default hugo.Data.homepage.showcase.image.scale -}}
+      {{- $imgShape = .Get "imgShape" | default hugo.Data.homepage.showcase.image.shape -}}
       {{- $socialLinks = .Get "social_links" -}}
     {{ else }}
       {{/* Fallback site or i18n */}}
@@ -55,11 +57,9 @@
       {{- $imgWidth = hugo.Data.homepage.showcase.image.width -}}
       {{- $imgHeight = hugo.Data.homepage.showcase.image.height -}}
       {{- $imgScale = hugo.Data.homepage.showcase.image.scale -}}
+      {{- $imgShape = hugo.Data.homepage.showcase.image.shape -}}
       {{- $socialLinks = hugo.Data.homepage.showcase.socialLinks -}}
     {{ end }}
-
-
-        {{ warnf "showcase.html: Image x: %q" $imgSrc }}
 
     <div class="showcase-section row flex-column-reverse flex-md-row rad-fade-down rad-waiting rad-animate">
       <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
@@ -82,8 +82,8 @@
         </a>
         {{ end }}
       </div>
-      <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 profile-image">
-        {{ partial "lazypicture" (dict "src" $imgSrc "width" $imgWidth "height" $imgHeight "scale" $imgScale "class" "")}}
+      <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 profile-image{{ if $imgShape }} profile-image--{{ $imgShape }}{{ end }}">
+        {{ partial "lazypicture" (dict "src" $imgSrc "width" $imgWidth "height" $imgHeight "scale" $imgScale)}}
 
 <!-- future "right text -->
 
