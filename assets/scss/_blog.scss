@@ -491,8 +491,14 @@
             }
 
             // Dark mode syntax highlighting (github-dark theme colors)
-            .chroma {
+            // Use pre.chroma and .highlight .chroma to beat the higher-specificity
+            // `.highlight pre` rule that would otherwise win and render white text
+            // on a light background. An explicit color prevents inheritance from
+            // breaking due to the global `p { color: #000 }` rule.
+            pre.chroma,
+            .highlight .chroma {
                 background-color: #161b22;
+                color: var(--bs-body-color);
 
                 // Keywords - coral red
                 .k, .kd, .kn, .kr, .kt { color: #ff7b72; }
