@@ -61,17 +61,6 @@
       {{- $socialLinks = hugo.Data.homepage.showcase.socialLinks -}}
     {{ end }}
 
-    {{/* Map imgShape to CSS class on the wrapper and lazypicture */}}
-    {{- $imgClass := "" -}}
-    {{- if eq $imgShape "circle" -}}
-      {{- $imgClass = "showcase-img--circle" -}}
-    {{- else if eq $imgShape "rounded" -}}
-      {{- $imgClass = "showcase-img--rounded" -}}
-    {{- end -}}
-
-
-        {{ warnf "showcase.html: Image x: %q" $imgSrc }}
-
     <div class="showcase-section row flex-column-reverse flex-md-row rad-fade-down rad-waiting rad-animate">
       <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
         <h1 class="display-1">
@@ -94,7 +83,7 @@
         {{ end }}
       </div>
       <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 profile-image{{ if $imgShape }} profile-image--{{ $imgShape }}{{ end }}">
-        {{ partial "lazypicture" (dict "src" $imgSrc "width" $imgWidth "height" $imgHeight "scale" $imgScale "class" $imgClass)}}
+        {{ partial "lazypicture" (dict "src" $imgSrc "width" $imgWidth "height" $imgHeight "scale" $imgScale)}}
 
 <!-- future "right text -->
 
