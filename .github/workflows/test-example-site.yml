@@ -12,6 +12,10 @@ on:
     # Runs on pull requests targeting the default branch
     pull_request:
         branches: ["main"]
+    # Runs on pushes to main so the jobs appear as selectable status checks
+    # in branch protection rules ("Require status checks to pass")
+    push:
+        branches: ["main"]
     # Allows you to run this workflow manually from the Actions tab
     workflow_dispatch:
 env:
@@ -178,6 +182,7 @@ jobs:
         run: ls -la tests/e2e/rtl-visual.spec.ts-snapshots/ || echo "No snapshots directory found"
 
       - name: Commit updated snapshots
+        if: github.event_name == 'pull_request'
         uses: stefanzweifel/git-auto-commit-action@v7
         with:
           commit_message: "chore: update visual regression snapshots from CI"
