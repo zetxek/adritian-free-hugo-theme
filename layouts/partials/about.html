@@ -82,8 +82,8 @@
         {{ partial "lazypicture" (dict "src" $imgSrc "width" $imgWidth "height" $imgHeight "scale" $imgScale "class" "image-left-overflow")}}
       </div>
       <div class="col-12 col-md-6{{ if eq $vAlign "center" }} my-auto{{ else if eq $vAlign "top" }} align-self-start{{ else if eq $vAlign "bottom" }} align-self-end{{ end }}{{ if eq $hAlign "center" }} text-center{{ else if eq $hAlign "right" }} text-end{{ end }}">
-        <h1>{{ $title }}</h1>
-        <div class="about-me content lead">
+        <h2>{{ $title }}</h2>
+        <div class="about-me content">
           {{ $content }}
         </div>
         {{ if $btnText }}
