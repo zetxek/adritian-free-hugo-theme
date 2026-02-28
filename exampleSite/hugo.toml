@@ -148,6 +148,7 @@ disableIDs = false
 disableTags = false
 enable = true
 
+# Language selector visibility — set to true to hide in that location
 [params.languages.selector.disable]
 footer = false
 header = false
@@ -508,7 +509,7 @@ URL = "scss/adritian.scss"
 #  [params.colorTheme.selector.disable]
 #  footer = true
 
-
+# Color theme selector visibility — set to true to hide in that location
 [params.colorTheme.selector.disable]
 footer = false
 header = false
