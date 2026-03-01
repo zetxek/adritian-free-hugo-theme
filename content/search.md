@@ -17,7 +17,7 @@ This implementation uses Fusejs, jquery and mark.js
 
 ## Initial setup
 
-Search  depends on additional output content type of JSON in config.toml
+Search  depends on additional output content type of JSON in hugo.toml
 \```
 [outputs]
   home = ["HTML", "JSON"]

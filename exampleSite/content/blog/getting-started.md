@@ -361,14 +361,14 @@ Currently the theme content is spread over multiple folders and files. We are wo
 Some of the key files are:
 
 
-- `config.toml`: Main configuration for your Hugo site. Here you can set the site title, description, and theme specific settings such as:
+- `hugo.toml`: Main configuration for your Hugo site. Here you can set the site title, description, and theme specific settings such as:
     - menu structure (footer and header)
     - analytics (vercel, google)
     - blog settings (layout, sidebar contents, etc)
     - As well as some **required settings** for the theme to work properly (`module.mounts`, `params.plugins.css`)
 
 - `data/homepage.yml`: homepage structure, content and sections - including social links, and the hero section.
-- `assets/`: Where you can store static assets such as images, CSS, and JavaScript files (you can add custom CSS and JS files with the `params.plugins.css` in `config.toml`).
+- `assets/`: Where you can store static assets such as images, CSS, and JavaScript files (you can add custom CSS and JS files with the `params.plugins.css` in `hugo.toml`).
 - `content/`: This is where your content files will live. The theme-specific ones are:
     - `content/blog/`: For blog posts.
     - `content/portfolio/`: For portfolio items.

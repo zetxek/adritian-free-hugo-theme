@@ -327,7 +327,7 @@ The guide is very similar to [official "Quick Start"](https://gohugo.io/getting-
   ```
   To your `hugo.toml` file, and executing `hugo mod get -u`
   
-- Replace the `hugo.toml` file in the project's root directory with the contents of [themes/adritian-free-hugo-theme/exampleSite/config.toml](https://github.com/zetxek/adritian-free-hugo-theme/blob/main/exampleSite/hugo.toml). If you are using the git submodules, you can execute `cp themes/adritian-free-hugo-theme/exampleSite/hugo.toml hugo.toml` (*executed from the website root folder*), otherwise just copy and paste the contents.
+- Replace the `hugo.toml` file in the project's root directory with the contents of [themes/adritian-free-hugo-theme/exampleSite/hugo.toml](https://github.com/zetxek/adritian-free-hugo-theme/blob/main/exampleSite/hugo.toml). If you are using the git submodules, you can execute `cp themes/adritian-free-hugo-theme/exampleSite/hugo.toml hugo.toml` (*executed from the website root folder*), otherwise just copy and paste the contents.
 - Create the file `data/homepage.yml`, with the initial contents of the [`exampleSite/data/homepage.yml`](https://github.com/zetxek/adritian-free-hugo-theme/blob/main/exampleSite/data/homepage.yml). This will serve as your starting point to customize your home content ✍️
 - Start Hugo with `hugo server -D`
 - 🎉 The theme is alive on http://localhost:1313/
