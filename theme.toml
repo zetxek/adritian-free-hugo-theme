@@ -7,7 +7,7 @@ licenselink = "https://github.com/zetxek/adritian-free-hugo-theme/blob/main/LICE
 description = "A fast, accessible Hugo theme for personal websites and portfolios. Features dark/light mode, multilingual (13 languages + RTL), blog with sidebar, search, skills showcase, SEO-optimized JSON-LD, and perfect Lighthouse scores. Built on Bootstrap 5 with zero jQuery."
 homepage = "https://github.com/zetxek/adritian-free-hugo-theme"
 demosite = "https://adritian-demo.vercel.app"
-min_version = "0.123.0"
+min_version = "0.153.0"
 
 tags = [
     "responsive",
