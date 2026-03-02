@@ -32,8 +32,23 @@
   {{ i18n "head_title" }}
 </title>
 
-<meta name="description" content="{{ i18n "head_description" }}" />
+{{- $metaDescription := "" -}}
+{{- if .Description -}}
+  {{- $metaDescription = .Description -}}
+{{- else if and .IsPage .Summary -}}
+  {{- $metaDescription = .Summary | plainify | truncate 155 -}}
+{{- end -}}
+{{- if not $metaDescription -}}
+  {{- $metaDescription = i18n "head_description" -}}
+{{- end -}}
+<meta name="description" content="{{ $metaDescription }}" />
 <link rel="canonical" href="{{ .Permalink }}" />
+{{/* hreflang alternate links for multilingual sites */}}
+{{- if and hugo.IsMultilingual .IsTranslated }}
+  {{- range .AllTranslations }}
+  <link rel="alternate" hreflang="{{ .Language.LanguageCode }}" href="{{ .Permalink }}" />
+  {{- end }}
+{{- end }}
 {{/* RSS Feed Discovery Links */}}
 {{- $siteTitle := i18n "head_title" | default .Site.Title -}}
 {{- with .Site.Home.OutputFormats.Get "RSS" }}
