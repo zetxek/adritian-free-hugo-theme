@@ -154,6 +154,8 @@
     {{- $author = $person -}}
   {{- else if gt (len $organization) 0 -}}
     {{- $author = $organization -}}
+  {{- else if .Params.author -}}
+    {{- $author = dict "@type" "Person" "name" .Params.author -}}
   {{- end -}}
 
   {{- $blogPosting := dict "@context" "https://schema.org" "@type" "BlogPosting" "headline" $pageTitle "url" .Permalink "mainEntityOfPage" (dict "@type" "WebPage" "@id" .Permalink) -}}
