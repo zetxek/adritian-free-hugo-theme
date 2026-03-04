@@ -429,11 +429,6 @@ footer_links .nav-item .nav-link::after {
     color: #fff;
     border-color: #fff;
   }
-  .btn:focus-visible {
-    color: black;
-    background-color: white;
-    box-shadow: 0 0 0 0.2rem $primary;
-  }
   .btn-frameless.disabled,
   .btn-frameless.focus,
   .btn-frameless:disabled,
