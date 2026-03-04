@@ -1,7 +1,7 @@
 # Adritian Free Hugo Theme
 A modern, fast and extensible Hugo theme for personal websites and professional landing pages - with blog and portfolio support
 
-[![Hugo](https://img.shields.io/badge/Hugo-%3E%3D0.123-ff4088?logo=hugo)](https://gohugo.io/)
+[![Hugo](https://img.shields.io/badge/Hugo-%3E%3D0.153-ff4088?logo=hugo)](https://gohugo.io/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/zetxek/adritian-free-hugo-theme/blob/main/LICENSE)
 [![GitHub stars](https://img.shields.io/github/stars/zetxek/adritian-free-hugo-theme?style=social)](https://github.com/zetxek/adritian-free-hugo-theme/stargazers)
 [![GitHub release](https://img.shields.io/github/v/release/zetxek/adritian-free-hugo-theme)](https://github.com/zetxek/adritian-free-hugo-theme/releases)
@@ -86,7 +86,7 @@ Another alternative is to use [git submodules](https://gohugo.io/getting-started
 > **Note:** Before proceeding, **Ensure you have Go and Hugo installed** and that you have created a new Hugo project.
 As a pre-requirement, you will need Hugo set up and running. You can follow [the official guide for it](https://gohugo.io/categories/installation/).
 
-The theme has been tested with Hugo version `0.136` (extended version). If you get errors regarding missing functionalities, check if you have the latest version of Hugo available.
+The theme requires Hugo version `0.153.0` or newer (extended version). If you get errors regarding missing functionalities, check if you have the latest version of Hugo available.
 
 **Note:** as mentioned, the theme supports both Hugo modules and git submodules. You should use Hugo modules to install the theme in the most maintainable way. If you prefer git submodules you can follow these [older instructions](https://gohugobrasil.netlify.app/themes/installing-and-using-themes/) or the next ones as help:
 

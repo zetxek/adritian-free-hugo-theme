@@ -357,7 +357,7 @@ adritian-demo git:(master) ✗ hugo server -D
 Watching for changes in /Users/adrianmorenopena/tmp/theme-test/themes/adritian-free-hugo-theme/{archetypes,assets,data,exampleSite,i18n,layouts,static}
 Watching for config changes in /Users/adrianmorenopena/tmp/theme-test/themes/adritian-free-hugo-theme/exampleSite/hugo.toml
 Start building sites …
-hugo v0.136.2+extended darwin/arm64 BuildDate=2024-10-17T14:30:05Z VendorInfo=brew
+hugo v0.153.0+extended darwin/arm64 BuildDate=2025-01-21T10:00:00Z VendorInfo=brew
 
 
                    | EN | ES | FR
