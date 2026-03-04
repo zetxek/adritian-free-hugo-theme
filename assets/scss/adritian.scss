@@ -289,9 +289,10 @@ footer_links .nav-item .nav-link::after {
     // to be readable on the dark background (#181818).
     --bs-link-hover-color: #{$dark-primary};
     --bs-link-hover-color-rgb: #{red($dark-primary)}, #{green($dark-primary)}, #{blue($dark-primary)};
-    // Navbar theme variables for dark mode
-    --bd-violet-rgb: #{red($dark-primary)}, #{green($dark-primary)}, #{blue($dark-primary)};
-    --bd-violet-bg: #{$dark-primary};
+    // Keep navbar variables using the darker base color so nav link text
+    // (rgba(white, 0.85)) retains sufficient contrast against the gradient.
+    --bd-violet-rgb: #{red($base-color)}, #{green($base-color)}, #{blue($base-color)};
+    --bd-violet-bg: #{$base-color};
   }
 
   .btn:focus-visible{
