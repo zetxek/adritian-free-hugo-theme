@@ -16,6 +16,10 @@ $sidebar-link-color: #000; // increased contrast
   --bs-link-hover-color: #{darken($base-color, 15%)};
   --bs-link-hover-color-rgb: #{red(darken($base-color, 15%))}, #{green(darken($base-color, 15%))}, #{blue(darken($base-color, 15%))};
   --bs-link-decoration: none;
+
+  // Navbar theme variables — used by _navbar.scss for gradient and dropdown colours
+  --bd-violet-bg: #{$base-color};
+  --bd-violet-rgb: #{red($base-color)}, #{green($base-color)}, #{blue($base-color)};
 }
 
 // Explicit link override for all <a> tags

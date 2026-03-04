@@ -285,6 +285,13 @@ footer_links .nav-item .nav-link::after {
   body {
     color: #fff;
     background-color: #181818;
+    // Override link hover colour: the default darken($base-color, 15%) is too dark
+    // to be readable on the dark background (#181818).
+    --bs-link-hover-color: #{$dark-primary};
+    --bs-link-hover-color-rgb: #{red($dark-primary)}, #{green($dark-primary)}, #{blue($dark-primary)};
+    // Navbar theme variables for dark mode
+    --bd-violet-rgb: #{red($dark-primary)}, #{green($dark-primary)}, #{blue($dark-primary)};
+    --bd-violet-bg: #{$dark-primary};
   }
 
   .btn:focus-visible{
@@ -496,6 +503,7 @@ footer_links .nav-item .nav-link::after {
   .dropdown-item:focus,
   .dropdown-item:hover {
     background-color: $base-color;
+    color: $white;
   }
 
   // Blog post meta section dark mode
