@@ -62,8 +62,9 @@ test.describe('Search functionality', () => {
 
     await page.goto(`${BASE_URL}/search`);
     await page.locator('#search-query').fill('theme');
-    await page.waitForTimeout(SEARCH_DEBOUNCE_WAIT);
 
+    // Wait for the first result to be visible instead of relying on a fixed timeout
+    await expect(page.locator('#search-results div[id^="summary-"]').first()).toBeVisible();
     const resultsCount = await page.locator('#search-results div[id^="summary-"]').count();
     expect(resultsCount).toBeGreaterThanOrEqual(1);
 
