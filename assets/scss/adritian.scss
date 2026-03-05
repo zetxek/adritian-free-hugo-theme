@@ -285,6 +285,10 @@ footer_links .nav-item .nav-link::after {
   body {
     color: #fff;
     background-color: #181818;
+    // Override link hover colour: the default darken($base-color, 15%) is too dark
+    // to be readable on the dark background (#181818).
+    --bs-link-hover-color: #{$dark-primary};
+    --bs-link-hover-color-rgb: #{red($dark-primary)}, #{green($dark-primary)}, #{blue($dark-primary)};
   }
 
   .btn:focus-visible{
@@ -425,11 +429,6 @@ footer_links .nav-item .nav-link::after {
     color: #fff;
     border-color: #fff;
   }
-  .btn:focus-visible {
-    color: black;
-    background-color: white;
-    box-shadow: 0 0 0 0.2rem $primary;
-  }
   .btn-frameless.disabled,
   .btn-frameless.focus,
   .btn-frameless:disabled,
@@ -496,6 +495,7 @@ footer_links .nav-item .nav-link::after {
   .dropdown-item:focus,
   .dropdown-item:hover {
     background-color: $base-color;
+    color: $white;
   }
 
   // Blog post meta section dark mode
