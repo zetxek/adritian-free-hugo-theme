@@ -280,9 +280,17 @@ function executeSearch(searchQuery) {
 }
 
 function performSearch(pages, searchQuery) {
-  if (typeof Fuse !== "undefined") {
-    const fuse = new Fuse(pages, fuseOptions);
-    return fuse.search(searchQuery);
+  if (typeof Fuse === "function") {
+    try {
+      const fuse = new Fuse(pages, fuseOptions);
+      return fuse.search(searchQuery);
+    } catch (error) {
+      console.error(
+        "Error using Fuse for search, falling back to basic in-memory search:",
+        error,
+      );
+      // Intentionally fall through to the in-memory search implementation below
+    }
   }
 
   const normalizedQuery = searchQuery.toLowerCase();
