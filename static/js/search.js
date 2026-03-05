@@ -1,4 +1,18 @@
-summaryInclude = 60;
+const summaryInclude = 60;
+
+function sanitizeHtml(value) {
+  if (
+    typeof DOMPurify !== "undefined" &&
+    DOMPurify &&
+    typeof DOMPurify.sanitize === "function"
+  ) {
+    return DOMPurify.sanitize(value);
+  }
+
+  const fallbackContainer = document.createElement("div");
+  fallbackContainer.textContent = value || "";
+  return fallbackContainer.innerHTML;
+}
 
 const fuseOptions = {
   shouldSort: true,
@@ -27,7 +41,7 @@ function displayError(message) {
         "errorGeneric",
         "There was a problem with search. Please try again later.",
       );
-    const sanitizedMessage = DOMPurify.sanitize(resolvedMessage);
+    const sanitizedMessage = sanitizeHtml(resolvedMessage);
     searchResultsElement.innerHTML = `<div class="alert alert-danger">${sanitizedMessage}</div>`;
   } else {
     console.error("Search results container not found");
@@ -238,8 +252,7 @@ function executeSearch(searchQuery) {
         }
 
         const pages = data;
-        const fuse = new Fuse(pages, fuseOptions);
-        const result = fuse.search(searchQuery);
+        const result = performSearch(pages, searchQuery);
 
         // Clear previous results only when we have new results to show
         searchResults.innerHTML = "";
@@ -264,6 +277,42 @@ function executeSearch(searchQuery) {
     console.error("Error in search execution:", error);
     displayError();
   }
+}
+
+function performSearch(pages, searchQuery) {
+  if (typeof Fuse === "function") {
+    try {
+      const fuse = new Fuse(pages, fuseOptions);
+      return fuse.search(searchQuery);
+    } catch (error) {
+      console.error(
+        "Error using Fuse for search, falling back to basic in-memory search:",
+        error,
+      );
+      // Intentionally fall through to the in-memory search implementation below
+    }
+  }
+
+  const normalizedQuery = searchQuery.toLowerCase();
+  const searchableKeys = ["title", "contents", "tags", "categories"];
+
+  return pages
+    .filter((page) =>
+      searchableKeys.some((key) => {
+        const value = page && page[key];
+        if (Array.isArray(value)) {
+          return value.some(
+            (entry) =>
+              typeof entry === "string" &&
+              entry.toLowerCase().includes(normalizedQuery),
+          );
+        }
+        return (
+          typeof value === "string" && value.toLowerCase().includes(normalizedQuery)
+        );
+      }),
+    )
+    .map((item) => ({ item }));
 }
 
 function populateResults(result) {
