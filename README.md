@@ -255,6 +255,31 @@ Notes:
 - Canonical URLs are emitted automatically from each page permalink.
 - JSON-LD includes `WebSite` metadata for all pages and `BlogPosting` for blog posts.
 
+#### Responsive Images
+
+The theme includes a `responsive-image` partial and shortcode that generates a `<picture>` element with WebP srcset variants and lazy loading.
+
+For images stored in the `assets/` directory, Hugo Pipes produces srcset entries at 400w, 800w, and 1200w (WebP + original format). Images in `static/` or external URLs fall back to a plain `<img loading="lazy">`.
+
+**Featured post thumbnails** on the blog list page automatically use the partial — no configuration needed.
+
+**In blog post content**, use the shortcode:
+
+```
+{{</* responsive-image src="images/my-photo.jpg" alt="Description" */>}}
+```
+
+Parameters:
+
+| Parameter | Description | Default |
+|-----------|-------------|---------|
+| `src` | Image path relative to `assets/` (or a static/external URL) | required |
+| `alt` | Alt text | `""` |
+| `class` | CSS class(es) for the `<img>` | — |
+| `sizes` | `sizes` attribute for layout hint | `"100vw"` |
+
+For best results, place blog images in `assets/` (e.g. `assets/images/blog/`) rather than `static/` so Hugo Pipes can process them.
+
 #### Shortcodes
 
 The theme has multiple shortcodes available for use in the content, so you can customize your homepage (or any other page) as you want. You can read about them in the [shortcodes page](https://adritian-demo.vercel.app/blog/shortcodes). Since version `v1.7.0,` this is the preferred way to set up your theme content and translations, as that's the most flexible system.
