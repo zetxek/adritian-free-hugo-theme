@@ -1,0 +1,88 @@
+{{/*
+  Partial: responsive-image.html
+
+  Renders a responsive <picture> element with srcset/sizes and lazy loading.
+  For images in the assets/ directory, Hugo Pipes generates WebP + original
+  srcset variants. For static-path or external images, falls back to a plain
+  <img> with loading="lazy".
+
+  Parameters (pass as dict):
+    .src          - image path or URL (required)
+    .alt          - alt text (default: "")
+    .class        - CSS class(es) for <img> (optional)
+    .pictureClass - CSS class(es) for <picture> (optional)
+    .sizes        - sizes attribute (default: "100vw")
+    .page         - page context for page-bundle resources (optional)
+*/}}
+
+{{- $src := .src -}}
+{{- $alt := .alt | default "" -}}
+{{- $class := .class | default "" -}}
+{{- $pictureClass := .pictureClass | default "" -}}
+{{- $sizes := .sizes | default "100vw" -}}
+
+{{- $img := "" -}}
+
+{{/* 1. Try page-bundle resource if a page context is provided */}}
+{{- with .page -}}
+  {{- $img = .Resources.GetMatch (printf "*%s*" (path.Base $src)) -}}
+{{- end -}}
+
+{{/* 2. Try assets directory (strips leading slash) */}}
+{{- if not $img -}}
+  {{- $cleanSrc := strings.TrimPrefix "/" $src -}}
+  {{- $img = resources.Get $cleanSrc -}}
+{{- end -}}
+
+{{- if $img -}}
+  {{/* Build srcset entries only for widths ≤ original to avoid upscaling */}}
+  {{- $srcWebp := slice -}}
+  {{- $srcOrig := slice -}}
+  {{- $fallback := $img -}}
+
+  {{- range (slice 400 800 1200) -}}
+    {{- if le . $img.Width -}}
+      {{- $w := . -}}
+      {{- $rWebp := $img.Resize (printf "%dx webp q75" $w) -}}
+      {{- $rOrig := $img.Resize (printf "%dx q75" $w) -}}
+      {{- $srcWebp = $srcWebp | append (printf "%s %dw" $rWebp.RelPermalink $w) -}}
+      {{- $srcOrig = $srcOrig | append (printf "%s %dw" $rOrig.RelPermalink $w) -}}
+      {{- $fallback = $rOrig -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{/* If image is smaller than all target widths, use it at its native size */}}
+  {{- if not $srcWebp -}}
+    {{- $rWebp := $img.Resize (printf "%dx webp q75" $img.Width) -}}
+    {{- $srcWebp = slice (printf "%s %dw" $rWebp.RelPermalink $img.Width) -}}
+    {{- $srcOrig = slice (printf "%s %dw" $img.RelPermalink $img.Width) -}}
+  {{- end -}}
+
+  <picture{{ if $pictureClass }} class="{{ $pictureClass }}"{{ end }}>
+    <source
+      type="image/webp"
+      srcset="{{ delimit $srcWebp ", " }}"
+      sizes="{{ $sizes }}">
+    <source
+      type="{{ $fallback.MediaType.Type }}"
+      srcset="{{ delimit $srcOrig ", " }}"
+      sizes="{{ $sizes }}">
+    <img
+      src="{{ $fallback.RelPermalink }}"
+      width="{{ $fallback.Width }}"
+      height="{{ $fallback.Height }}"
+      alt="{{ $alt }}"
+      {{ if $class }}class="{{ $class }}"{{ end }}
+      loading="lazy"
+      decoding="async"
+      style="height: auto;">
+  </picture>
+{{- else -}}
+  {{/* Fallback: static files and external URLs — still get lazy loading */}}
+  <img
+    src="{{ $src }}"
+    alt="{{ $alt }}"
+    {{ if $class }}class="{{ $class }}"{{ end }}
+    loading="lazy"
+    decoding="async">
+{{- end -}}

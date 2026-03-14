@@ -1,0 +1,24 @@
+{{/*
+  Shortcode: responsive-image
+
+  Renders a responsive image with srcset/sizes and lazy loading.
+  For images in the assets/ directory, Hugo Pipes generates WebP + original
+  srcset variants. Falls back to a plain <img> for static/external images.
+
+  Usage:
+    {{< responsive-image src="images/photo.jpg" alt="A photo" >}}
+    {{< responsive-image src="images/photo.jpg" alt="A photo" sizes="(max-width: 600px) 100vw, 800px" class="my-class" >}}
+
+  Parameters:
+    src    - image path relative to assets/ directory (required)
+    alt    - alt text (default: "")
+    class  - CSS class(es) for <img> (optional)
+    sizes  - sizes attribute (default: "100vw")
+*/}}
+{{ partial "responsive-image.html" (dict
+  "src"   (.Get "src")
+  "alt"   (.Get "alt" | default "")
+  "class" (.Get "class" | default "")
+  "sizes" (.Get "sizes" | default "100vw")
+  "page"  .Page
+) }}
