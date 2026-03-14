@@ -31,7 +31,5 @@ test('responsive image renders <picture> with srcset in blog post', async ({ pag
   const sizes = await webpSource.getAttribute('sizes');
   expect(sizes).toContain('768px');
 
-  // Scroll the image into view and screenshot
   await img.scrollIntoViewIfNeeded();
-  await page.screenshot({ path: 'test-results/responsive-image-demo.png' });
 });

@@ -15,8 +15,12 @@
     class  - CSS class(es) for <img> (optional)
     sizes  - sizes attribute (default: "100vw")
 */}}
+{{- $src := .Get "src" -}}
+{{- if not $src -}}
+  {{- errorf "responsive-image shortcode: 'src' parameter is required (in %s)" .Page.File.Path -}}
+{{- end -}}
 {{ partial "responsive-image.html" (dict
-  "src"   (.Get "src")
+  "src"   $src
   "alt"   (.Get "alt" | default "")
   "class" (.Get "class" | default "")
   "sizes" (.Get "sizes" | default "100vw")

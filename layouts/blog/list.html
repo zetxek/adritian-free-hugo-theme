@@ -120,11 +120,13 @@
                           {{ with .Params.images }}
                             {{ if isset . "featured_image" }}
                               {{ partial "responsive-image.html" (dict
-                                "src"   .featured_image
-                                "alt"   $post.Title
-                                "class" "secondary-featured-img"
-                                "sizes" "200px"
-                                "page"  $post
+                                "src"    .featured_image
+                                "alt"    $post.Title
+                                "class"  "secondary-featured-img"
+                                "sizes"  "200px"
+                                "width"  "200"
+                                "height" "250"
+                                "page"   $post
                               ) }}
                             {{ else }}
                               <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg"

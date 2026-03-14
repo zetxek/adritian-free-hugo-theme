@@ -12,6 +12,8 @@
     .class        - CSS class(es) for <img> (optional)
     .pictureClass - CSS class(es) for <picture> (optional)
     .sizes        - sizes attribute (default: "100vw")
+    .width        - explicit width for static/external fallback <img> (optional)
+    .height       - explicit height for static/external fallback <img> (optional)
     .page         - page context for page-bundle resources (optional)
 */}}
 
@@ -20,12 +22,19 @@
 {{- $class := .class | default "" -}}
 {{- $pictureClass := .pictureClass | default "" -}}
 {{- $sizes := .sizes | default "100vw" -}}
+{{- $explicitWidth := .width | default "" -}}
+{{- $explicitHeight := .height | default "" -}}
+
+{{/* Require src */}}
+{{- if not $src -}}
+  {{- errorf "responsive-image.html: 'src' parameter is required" -}}
+{{- end -}}
 
 {{- $img := "" -}}
 
 {{/* 1. Try page-bundle resource if a page context is provided */}}
 {{- with .page -}}
-  {{- $img = .Resources.GetMatch (printf "*%s*" (path.Base $src)) -}}
+  {{- $img = .Resources.GetMatch (printf "*%s" (path.Base $src)) -}}
 {{- end -}}
 
 {{/* 2. Try assets directory (strips leading slash) */}}
@@ -38,7 +47,7 @@
   {{/* Build srcset entries only for widths ≤ original to avoid upscaling */}}
   {{- $srcWebp := slice -}}
   {{- $srcOrig := slice -}}
-  {{- $fallback := $img -}}
+  {{- $smallestOrig := "" -}}
 
   {{- range (slice 400 800 1200) -}}
     {{- if le . $img.Width -}}
@@ -47,7 +56,10 @@
       {{- $rOrig := $img.Resize (printf "%dx q75" $w) -}}
       {{- $srcWebp = $srcWebp | append (printf "%s %dw" $rWebp.RelPermalink $w) -}}
       {{- $srcOrig = $srcOrig | append (printf "%s %dw" $rOrig.RelPermalink $w) -}}
-      {{- $fallback = $rOrig -}}
+      {{/* Track the smallest processed variant for use as <img src> fallback */}}
+      {{- if not $smallestOrig -}}
+        {{- $smallestOrig = $rOrig -}}
+      {{- end -}}
     {{- end -}}
   {{- end -}}
 
@@ -56,7 +68,11 @@
     {{- $rWebp := $img.Resize (printf "%dx webp q75" $img.Width) -}}
     {{- $srcWebp = slice (printf "%s %dw" $rWebp.RelPermalink $img.Width) -}}
     {{- $srcOrig = slice (printf "%s %dw" $img.RelPermalink $img.Width) -}}
+    {{- $smallestOrig = $img -}}
   {{- end -}}
+
+  {{/* Use the original image's MediaType for the <source type> */}}
+  {{- $origMediaType := $img.MediaType.Type -}}
 
   <picture{{ if $pictureClass }} class="{{ $pictureClass }}"{{ end }}>
     <source
@@ -64,13 +80,13 @@
       srcset="{{ delimit $srcWebp ", " }}"
       sizes="{{ $sizes }}">
     <source
-      type="{{ $fallback.MediaType.Type }}"
+      type="{{ $origMediaType }}"
       srcset="{{ delimit $srcOrig ", " }}"
       sizes="{{ $sizes }}">
     <img
-      src="{{ $fallback.RelPermalink }}"
-      width="{{ $fallback.Width }}"
-      height="{{ $fallback.Height }}"
+      src="{{ $smallestOrig.RelPermalink }}"
+      width="{{ $smallestOrig.Width }}"
+      height="{{ $smallestOrig.Height }}"
       alt="{{ $alt }}"
       {{ if $class }}class="{{ $class }}"{{ end }}
       loading="lazy"
@@ -79,10 +95,15 @@
   </picture>
 {{- else -}}
   {{/* Fallback: static files and external URLs — still get lazy loading */}}
+  {{- if not (or (strings.HasPrefix $src "http://") (strings.HasPrefix $src "https://")) -}}
+    {{- warnf "responsive-image.html: image not found in assets/: %q" $src -}}
+  {{- end -}}
   <img
     src="{{ $src }}"
     alt="{{ $alt }}"
     {{ if $class }}class="{{ $class }}"{{ end }}
+    {{ if $explicitWidth }}width="{{ $explicitWidth }}"{{ end }}
+    {{ if $explicitHeight }}height="{{ $explicitHeight }}"{{ end }}
     loading="lazy"
     decoding="async">
 {{- end -}}
