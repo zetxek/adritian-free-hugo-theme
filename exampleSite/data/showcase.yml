@@ -5,28 +5,10 @@ sites:
     github: "zetxek"
     tags: [portfolio, blog, multilingual, dark-mode]
 
-  - name: "Chandan Pasunoori"
-    url: "https://www-chandanpasunoori-com.vercel.app"
-    description: "Software Architect and Polyglot Developer."
-    github: "chandanpasunoori"
-    tags: [portfolio]
-
   - name: "Jonathan Schnitzler"
     url: "https://joni32do.github.io"
     description: "Personal portfolio site."
     github: "Joni32do"
-    tags: [portfolio]
-
-  - name: "Fanny Jourdan"
-    url: "https://fanny-jourdan.github.io"
-    description: "Personal website."
-    github: "fanny-jourdan"
-    tags: [portfolio]
-
-  - name: "Mouhameth's Portfolio"
-    url: "https://mouhamethdk.github.io/resume/"
-    description: "Developer portfolio."
-    github: "mouhamethdk"
     tags: [portfolio]
 
   - name: "Nayan's Blog"
@@ -39,12 +21,6 @@ sites:
     url: "http://www.gianbiondi.com"
     description: "Personal site hosted with Firebase."
     github: "gxb5443"
-    tags: [portfolio]
-
-  - name: "Monica Caparas"
-    url: "https://mcaparas.github.io"
-    description: "Personal portfolio."
-    github: "mcaparas"
     tags: [portfolio]
 
   - name: "Ivo Pascal de Jong"
