@@ -11,6 +11,18 @@ sites:
     github: "Joni32do"
     tags: [portfolio]
 
+  - name: "Chandan Pasunoori"
+    url: "https://www-chandanpasunoori-com.vercel.app"
+    description: "Software Architect and Polyglot Developer."
+    github: "chandanpasunoori"
+    tags: [portfolio]
+
+  - name: "Monica Caparas"
+    url: "https://mcaparas.github.io"
+    description: "Personal portfolio."
+    github: "mcaparas"
+    tags: [portfolio]
+
   - name: "Nayan's Blog"
     url: "https://nayanjd.github.io"
     description: "A space of mine in this vast digital utopia."
