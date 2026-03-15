@@ -1,0 +1,103 @@
+{{ define "main" }}
+<div class="py-5">
+  <div class="row mb-4">
+    <div class="col">
+      <h1 class="display-5 fw-bold">{{ .Title }}</h1>
+      <p class="lead text-muted">{{ .Description }}</p>
+      {{ .Content }}
+    </div>
+  </div>
+
+  {{ $showcase := site.Data.showcase.sites }}
+  {{ $tags := slice }}
+  {{ range $showcase }}
+    {{ range .tags }}
+      {{ $tags = $tags | append . }}
+    {{ end }}
+  {{ end }}
+  {{ $tags = $tags | uniq | sort }}
+
+  {{/* Tag filter buttons */}}
+  <div class="mb-4 d-flex flex-wrap gap-2" id="showcase-filters">
+    <button class="btn btn-sm btn-primary active" data-filter="all">All</button>
+    {{ range $tags }}
+    <button class="btn btn-sm btn-outline-secondary" data-filter="{{ . }}">{{ . | title }}</button>
+    {{ end }}
+  </div>
+
+  {{/* Site cards */}}
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="showcase-grid">
+    {{ range $showcase }}
+    {{ $tags_str := delimit .tags " " }}
+    <div class="col showcase-item" data-tags="{{ $tags_str }}">
+      <div class="card h-100 shadow-sm">
+        <a href="{{ .url }}" target="_blank" rel="noopener noreferrer">
+          <img
+            src="https://api.microlink.io/?url={{ .url | urlize }}&screenshot=true&meta=false&embed=screenshot.url"
+            class="card-img-top"
+            alt="Screenshot of {{ .name }}"
+            loading="lazy"
+            style="height: 180px; object-fit: cover;"
+            onerror="this.style.display='none'"
+          >
+        </a>
+        <div class="card-body">
+          <h5 class="card-title">
+            <a href="{{ .url }}" target="_blank" rel="noopener noreferrer" class="text-decoration-none stretched-link">
+              {{ .name }}
+            </a>
+          </h5>
+          <p class="card-text text-muted small">{{ .description }}</p>
+        </div>
+        <div class="card-footer bg-transparent border-0 pb-3">
+          <div class="d-flex flex-wrap gap-1">
+            {{ range .tags }}
+            <span class="badge bg-secondary text-capitalize">{{ . }}</span>
+            {{ end }}
+          </div>
+          {{ with .github }}
+          <a href="https://github.com/{{ . }}" target="_blank" rel="noopener noreferrer" class="text-muted small mt-2 d-block">
+            @{{ . }} on GitHub
+          </a>
+          {{ end }}
+        </div>
+      </div>
+    </div>
+    {{ end }}
+  </div>
+
+  <div class="mt-5 p-4 bg-body-secondary rounded text-center">
+    <h4>Built something with Adritian?</h4>
+    <p class="text-muted">We'd love to feature your site here.</p>
+    <a href="https://github.com/zetxek/adritian-free-hugo-theme/issues/new?template=showcase-submission.md&title=Showcase+submission:+[your+site]"
+       class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+      Submit your site →
+    </a>
+  </div>
+</div>
+
+{{ define "footerfiles" }}
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const filters = document.querySelectorAll('#showcase-filters button');
+  const items = document.querySelectorAll('.showcase-item');
+
+  filters.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filters.forEach(b => {
+        b.classList.remove('active', 'btn-primary');
+        b.classList.add('btn-outline-secondary');
+      });
+      btn.classList.add('active', 'btn-primary');
+      btn.classList.remove('btn-outline-secondary');
+
+      const filter = btn.dataset.filter;
+      items.forEach(item => {
+        item.style.display = (filter === 'all' || item.dataset.tags.includes(filter)) ? '' : 'none';
+      });
+    });
+  });
+});
+</script>
+{{ end }}
+{{ end }}
