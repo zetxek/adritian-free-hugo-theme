@@ -5,6 +5,102 @@ sites:
     github: "zetxek"
     tags: [portfolio, blog, multilingual, dark-mode]
 
+  - name: "Alexander Clines"
+    url: "https://alexanderclines.com/"
+    description: "Software Engineering Manager at Apple, focused on AI integration."
+    github: "asclines"
+    tags: [portfolio, resume]
+
+  - name: "David Corto"
+    url: "https://davidcorto.es/"
+    description: "Senior Software Engineer & Tech Lead at Deporvillage. Multilingual site."
+    github: "dcorto"
+    tags: [portfolio, multilingual]
+
+  - name: "Tyler Jost"
+    url: "https://jost.engineer/"
+    description: "ML Engineer and computational biologist at Harvard Medical School."
+    github: "TylerJost"
+    tags: [portfolio, blog, resume]
+
+  - name: "Spying on Science"
+    url: "https://spyingonscience.com/"
+    description: "Biologist focused on limnology and water education."
+    github: "fobi42"
+    tags: [blog, portfolio, science]
+
+  - name: "Mark Sailes"
+    url: "https://sailes.co.uk"
+    description: "AWS serverless consulting — Lambda, Java, serverless architecture."
+    github: "marksailes"
+    tags: [business, blog]
+
+  - name: "David Freitag"
+    url: "https://www.davidfreitag.com"
+    description: "Senior Data Engineer with resume, courses, and presentations."
+    github: "dkfreitag"
+    tags: [portfolio, blog]
+
+  - name: "mwhyte.dev"
+    url: "https://mwhyte.dev"
+    description: "Software engineering blog covering methodologies, design patterns, and best practices."
+    github: "mwhyte-dev"
+    tags: [blog]
+
+  - name: "William Arnberg"
+    url: "https://williamarnberg.com"
+    description: "Game programmer specializing in engine and systems development."
+    github: "WilliamArnberg"
+    tags: [portfolio]
+
+  - name: "Talina Shrotriya"
+    url: "https://www.talinashrotriya.com/"
+    description: "Engineering Manager at Couchbase."
+    github: "Talina06"
+    tags: [portfolio]
+
+  - name: "Shaun Campbell"
+    url: "https://shauncampbell.ca"
+    description: "Head of Engineering at Scout Climate."
+    github: "shauncampbell"
+    tags: [portfolio]
+
+  - name: "Josh Friedson"
+    url: "https://jfriedson.github.io"
+    description: "Software engineer in San Diego, ML projects and certifications."
+    github: "jfriedson"
+    tags: [portfolio, resume]
+
+  - name: "Nigel Ong"
+    url: "https://nigel.ong/"
+    description: "IT support and software development services."
+    github: "nigel-ong"
+    tags: [portfolio, blog]
+
+  - name: "Nicholas Ng"
+    url: "https://www.nicholasng.me"
+    description: "Technical Program Manager portfolio."
+    github: "nicholasxng"
+    tags: [portfolio]
+
+  - name: "Ian Ames — Discover Deliver"
+    url: "https://discover-deliver.co.uk"
+    description: "User-centred digital transformation consulting."
+    github: "skipster2k2"
+    tags: [business, consulting]
+
+  - name: "Alona Liuzniak"
+    url: "https://veritasregit.ai/"
+    description: "Frankfurt-based AI developer specializing in Generative AI and RAG systems."
+    github: "Luosua"
+    tags: [portfolio]
+
+  - name: "Liam McKenna"
+    url: "https://liamdouglas.com"
+    description: "Computer science, game development, and graphics research."
+    github: "liamckenna"
+    tags: [portfolio]
+
   - name: "Jonathan Schnitzler"
     url: "https://joni32do.github.io"
     description: "Personal portfolio site."
