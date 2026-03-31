@@ -1,5 +1,33 @@
+{{ define "footerfiles" }}
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const filters = document.querySelectorAll('#showcase-filters button');
+  const items = document.querySelectorAll('.showcase-item');
+
+  filters.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filters.forEach(b => {
+        b.classList.remove('active', 'btn-primary');
+        b.classList.add('btn-outline-secondary');
+        b.setAttribute('aria-pressed', 'false');
+      });
+      btn.classList.add('active', 'btn-primary');
+      btn.classList.remove('btn-outline-secondary');
+      btn.setAttribute('aria-pressed', 'true');
+
+      const filter = btn.dataset.filter;
+      items.forEach(item => {
+        const tags = item.dataset.tags.split(' ');
+        item.style.display = (filter === 'all' || tags.includes(filter)) ? '' : 'none';
+      });
+    });
+  });
+});
+</script>
+{{ end }}
+
 {{ define "main" }}
-<div class="py-5">
+<div class="py-5" id="main-content" tabindex="-1">
   <div class="row mb-4">
     <div class="col">
       <h1 class="display-5 fw-bold">{{ .Title }}</h1>
@@ -8,7 +36,8 @@
     </div>
   </div>
 
-  {{ $showcase := site.Data.showcase.sites }}
+  {{ with site.Data.showcase }}
+  {{ $showcase := .sites }}
   {{ $tags := slice }}
   {{ range $showcase }}
     {{ range .tags }}
@@ -18,10 +47,10 @@
   {{ $tags = $tags | uniq | sort }}
 
   {{/* Tag filter buttons */}}
-  <div class="mb-4 d-flex flex-wrap gap-2" id="showcase-filters">
-    <button class="btn btn-sm btn-primary active" data-filter="all">All</button>
+  <div class="mb-4 d-flex flex-wrap gap-2" id="showcase-filters" role="group" aria-label="Filter sites by tag">
+    <button class="btn btn-sm btn-primary active" data-filter="all" aria-pressed="true">All</button>
     {{ range $tags }}
-    <button class="btn btn-sm btn-outline-secondary" data-filter="{{ . }}">{{ . | title }}</button>
+    <button class="btn btn-sm btn-outline-secondary" data-filter="{{ . }}" aria-pressed="false">{{ . | title }}</button>
     {{ end }}
   </div>
 
@@ -33,7 +62,7 @@
       <div class="card h-100 shadow-sm">
         <a href="{{ .url }}" target="_blank" rel="noopener noreferrer">
           <img
-            src="https://api.microlink.io/?url={{ .url | urlize }}&screenshot=true&meta=false&embed=screenshot.url"
+            src="https://api.microlink.io/?url={{ .url }}&screenshot=true&meta=false&embed=screenshot.url"
             class="card-img-top"
             alt="Screenshot of {{ .name }}"
             loading="lazy"
@@ -43,7 +72,7 @@
         </a>
         <div class="card-body">
           <h5 class="card-title">
-            <a href="{{ .url }}" target="_blank" rel="noopener noreferrer" class="text-decoration-none stretched-link">
+            <a href="{{ .url }}" target="_blank" rel="noopener noreferrer" class="text-decoration-none">
               {{ .name }}
             </a>
           </h5>
@@ -65,6 +94,9 @@
     </div>
     {{ end }}
   </div>
+  {{ else }}
+  <p class="text-muted">No showcase sites available yet.</p>
+  {{ end }}
 
   <div class="mt-5 p-4 bg-body-secondary rounded text-center">
     <h4>Built something with Adritian?</h4>
@@ -75,29 +107,4 @@
     </a>
   </div>
 </div>
-
-{{ define "footerfiles" }}
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-  const filters = document.querySelectorAll('#showcase-filters button');
-  const items = document.querySelectorAll('.showcase-item');
-
-  filters.forEach(btn => {
-    btn.addEventListener('click', () => {
-      filters.forEach(b => {
-        b.classList.remove('active', 'btn-primary');
-        b.classList.add('btn-outline-secondary');
-      });
-      btn.classList.add('active', 'btn-primary');
-      btn.classList.remove('btn-outline-secondary');
-
-      const filter = btn.dataset.filter;
-      items.forEach(item => {
-        item.style.display = (filter === 'all' || item.dataset.tags.includes(filter)) ? '' : 'none';
-      });
-    });
-  });
-});
-</script>
-{{ end }}
 {{ end }}
