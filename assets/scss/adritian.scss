@@ -245,6 +245,34 @@ html[data-bs-theme="dark"] {
       display: none;
     }
   }
+
+  // Global dark mode code block styles — ensures code blocks outside .blog
+  // (e.g. project pages, custom layouts) don't render white text on white bg.
+  // The blog-scoped overrides in _blog.scss layer on top of these.
+  pre {
+    background-color: var(--bs-secondary-bg, var(--bs-gray-900));
+    color: var(--bs-body-color);
+
+    code {
+      background-color: transparent;
+      color: inherit;
+    }
+  }
+
+  code {
+    background-color: var(--bs-tertiary-bg, var(--bs-gray-800));
+    color: var(--bs-code-color, var(--bs-body-color));
+  }
+
+  .highlight-wrapper .copy-code-btn {
+    background: var(--bs-gray-700);
+    border-color: var(--bs-gray-600);
+    color: var(--bs-gray-200);
+
+    &:hover {
+      background: var(--bs-gray-600);
+    }
+  }
 }
 
 html[data-bs-theme="light"] {
