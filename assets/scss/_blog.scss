@@ -337,6 +337,12 @@
         }
     }
 
+    // Responsive <picture> images — preserve aspect ratio by default
+    // while allowing specific classes (e.g. .secondary-featured-img) to override.
+    picture > img {
+        height: auto;
+    }
+
     // Secondary featured posts image styling
     .secondary-featured-img {
         width: 200px;

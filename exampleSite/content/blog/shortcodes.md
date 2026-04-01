@@ -222,7 +222,7 @@ The shortcodes can be customized with different arguments:
   <picture>
     <source type="image/webp" srcset="/images/photo_400.webp 400w, /images/photo_800.webp 800w" sizes="100vw">
     <source type="image/jpeg" srcset="/images/photo_400.jpg 400w, /images/photo_800.jpg 800w" sizes="100vw">
-    <img src="/images/photo_800.jpg" width="800" height="600" alt="A photo" loading="lazy" decoding="async" style="height: auto;">
+    <img src="/images/photo_800.jpg" width="800" height="600" alt="A photo" loading="lazy" decoding="async">
   </picture>
   ```
 

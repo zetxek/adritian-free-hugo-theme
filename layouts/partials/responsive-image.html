@@ -90,13 +90,14 @@
       alt="{{ $alt }}"
       {{ if $class }}class="{{ $class }}"{{ end }}
       loading="lazy"
-      decoding="async"
-      style="height: auto;">
+      decoding="async">
   </picture>
 {{- else -}}
   {{/* Fallback: static files and external URLs — still get lazy loading */}}
-  {{- if not (or (strings.HasPrefix $src "http://") (strings.HasPrefix $src "https://")) -}}
-    {{- warnf "responsive-image.html: image not found in assets/: %q" $src -}}
+  {{- $isExternal := or (strings.HasPrefix $src "http://") (strings.HasPrefix $src "https://") -}}
+  {{- $isStaticPath := strings.HasPrefix $src "/" -}}
+  {{- if not (or $isExternal $isStaticPath) -}}
+    {{- warnf "responsive-image.html: image %q not found in page bundle or assets/ — rendering as plain <img>" $src -}}
   {{- end -}}
   <img
     src="{{ $src }}"
