@@ -48,6 +48,7 @@ features = [
     "related posts",
     "table of contents",
     "reading time",
+    "community showcase",
 ]
 
 [author]

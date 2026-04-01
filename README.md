@@ -65,7 +65,7 @@ Other relevant repositories related to this theme are:
 1. A simpler [demo site for the theme, adritian-demo](https://adritian-demo.vercel.app/) ([and its code](https://github.com/zetxek/adritian-demo)), where the demo content comes from. Author page example: https://adritian-demo.vercel.app/authors/adrian-moreno-pena/.
 1. The same demo site, in a [git submodules integration](https://github.com/zetxek/adritian-git-submodule-demo).
 
-💡 For more inspiration, check this document's [showcase section](#showcase).
+💡 For more inspiration, check the [community showcase](https://adritian-demo.vercel.app/showcase) to see real websites built with Adritian.
 
 ✨ This theme is entirely free and open source. We welcome your ideas, feedback, and contributions! If you find it useful, please give it a GitHub star to show your support.
 
@@ -497,6 +497,38 @@ The experience can be displayed in several locations and different styles:
 | ![Experience list with shortcode](https://github.com/user-attachments/assets/7e974632-824c-494c-9dbc-67bb96992517) | ![Experience page](https://github.com/user-attachments/assets/ad53f815-2bd4-4723-a9a1-28be2c01461a) | ![Single experience page](https://github.com/user-attachments/assets/97a20b98-df5c-4e07-9b2e-d7aba75ec81b) | ![CV Experience](https://github.com/user-attachments/assets/7d2d7e4b-a23c-4be7-9617-da7232ea11a7) |
 | Experience list rendered via shortcode | Experience list in /experience | Experience item in in single page | Full-width print-friendly experience 
 | [🔗](https://adritian-demo.vercel.app/#experience-single) By using the shortcode `experience-section`: in a page (such as your homepage), with a limited number of experiences (controlled by the config parameter `homepageExperienceCount` in the file `hugo.toml`). The summary is displayed, as well as an introduction text and optional links | [🔗](https://adritian-demo.vercel.app/experience) Automatically, in the **Experience page**, in `/experience`, with a list of all experiences (no limit). The summary is displayed for each item, as well as a introduction text and optional links. | [🔗](https://adritian-demo.vercel.app/experience/job-1/) Individual experience page (such as `/experience/job-1`), where all details are displayed, and links to the other descriptions are available to navigate. | [🔗](https://adritian-demo.vercel.app/cv) Using the shortcode `experience-list` you can generate a list of experience that is not interactive - good for print-friendly layouts.
+
+## Showcase
+
+The theme includes a **showcase page** to display websites built with Adritian. See it live at [adritian-demo.vercel.app/showcase](https://adritian-demo.vercel.app/showcase).
+
+To add the showcase to your own site:
+
+1. Create `content/showcase.md` with `layout: "showcase"` in the frontmatter
+2. Create `data/showcase.yml` with your site entries:
+
+```yaml
+sites:
+  - name: "Site Name"
+    url: "https://example.com"
+    description: "Short description."
+    github: "username"
+    repo: "username/repo-name"
+    tags: [portfolio, blog]
+```
+
+3. Add a menu link in `hugo.toml` (optional):
+
+```toml
+[[languages.en.menus.header]]
+name = "Showcase"
+URL = "/showcase"
+weight = 5
+```
+
+The page features tag-based filtering, auto-generated screenshots via [microlink.io](https://microlink.io), and a community submission CTA linking to a GitHub issue template.
+
+**Built something with Adritian?** [Submit your site](https://github.com/zetxek/adritian-free-hugo-theme/issues/new?template=showcase-submission.md) to be featured!
 
 ## Troubleshooting
 
