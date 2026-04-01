@@ -15,6 +15,7 @@ test.describe('Responsive image shortcode (blog post)', () => {
     await expect(webpSource).toHaveCount(1);
     const webpSrcset = await webpSource.getAttribute('srcset');
     expect(webpSrcset).toContain('400w');
+    expect(webpSrcset).toContain('800w');
     expect(webpSrcset).toContain('.webp');
 
     // Original format source (accept any non-webp image type)
@@ -34,6 +35,8 @@ test.describe('Responsive image shortcode (blog post)', () => {
     // sizes attribute is set
     const sizes = await webpSource.getAttribute('sizes');
     expect(sizes).toContain('768px');
+
+    await img.scrollIntoViewIfNeeded();
   });
 });
 
