@@ -1,0 +1,111 @@
+{{ define "footerfiles" }}
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const filters = document.querySelectorAll('#showcase-filters button');
+  const items = document.querySelectorAll('.showcase-item');
+
+  filters.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filters.forEach(b => {
+        b.classList.remove('active', 'btn-primary');
+        b.classList.add('btn-outline-secondary');
+        b.setAttribute('aria-pressed', 'false');
+      });
+      btn.classList.add('active', 'btn-primary');
+      btn.classList.remove('btn-outline-secondary');
+      btn.setAttribute('aria-pressed', 'true');
+
+      const filter = btn.dataset.filter;
+      items.forEach(item => {
+        const tags = item.dataset.tags.split(' ');
+        item.style.display = (filter === 'all' || tags.includes(filter)) ? '' : 'none';
+      });
+    });
+  });
+});
+</script>
+{{ end }}
+
+{{ define "main" }}
+<div class="py-5" id="main-content" tabindex="-1">
+  <div class="row mb-4">
+    <div class="col">
+      <h1 class="display-5 fw-bold">{{ .Title }}</h1>
+      <p class="lead text-muted">{{ .Description }}</p>
+      {{ .Content }}
+    </div>
+  </div>
+
+  {{ with site.Data.showcase }}
+  {{ $showcase := .sites }}
+  {{ $tags := slice }}
+  {{ range $showcase }}
+    {{ range .tags }}
+      {{ $tags = $tags | append . }}
+    {{ end }}
+  {{ end }}
+  {{ $tags = $tags | uniq | sort }}
+
+  {{/* Tag filter buttons */}}
+  <div class="mb-4 d-flex flex-wrap gap-2" id="showcase-filters" role="group" aria-label="Filter sites by tag">
+    <button class="btn btn-sm btn-primary active" data-filter="all" aria-pressed="true">All</button>
+    {{ range $tags }}
+    <button class="btn btn-sm btn-outline-secondary" data-filter="{{ . }}" aria-pressed="false">{{ . | title }}</button>
+    {{ end }}
+  </div>
+
+  {{/* Site cards */}}
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="showcase-grid">
+    {{ range $showcase }}
+    {{ $tags_str := delimit .tags " " }}
+    <div class="col showcase-item" data-tags="{{ $tags_str }}">
+      <div class="card h-100 shadow-sm">
+        <a href="{{ .url }}" target="_blank" rel="noopener noreferrer">
+          <img
+            src="https://api.microlink.io/?url={{ .url }}&screenshot=true&meta=false&embed=screenshot.url"
+            class="card-img-top"
+            alt="Screenshot of {{ .name }}"
+            loading="lazy"
+            style="height: 180px; object-fit: cover;"
+            onerror="this.style.display='none'"
+          >
+        </a>
+        <div class="card-body">
+          <h5 class="card-title">
+            <a href="{{ .url }}" target="_blank" rel="noopener noreferrer" class="text-decoration-none">
+              {{ .name }}
+            </a>
+          </h5>
+          <p class="card-text text-muted small">{{ .description }}</p>
+        </div>
+        <div class="card-footer bg-transparent border-0 pb-3">
+          <div class="d-flex flex-wrap gap-1">
+            {{ range .tags }}
+            <span class="badge bg-secondary text-capitalize">{{ . }}</span>
+            {{ end }}
+          </div>
+          {{ with .repo }}
+          <a href="https://github.com/{{ . }}" target="_blank" rel="noopener noreferrer" class="text-muted small mt-2 d-inline-block">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 16 16" fill="currentColor" class="me-1"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+            Source
+          </a>
+          {{ end }}
+        </div>
+      </div>
+    </div>
+    {{ end }}
+  </div>
+  {{ else }}
+  <p class="text-muted">No showcase sites available yet.</p>
+  {{ end }}
+
+  <div class="mt-5 p-4 bg-body-secondary rounded text-center">
+    <h4>Built something with Adritian?</h4>
+    <p class="text-muted">We'd love to feature your site here.</p>
+    <a href="https://github.com/zetxek/adritian-free-hugo-theme/issues/new?template=showcase-submission.md&title=Showcase+submission:+[your+site]"
+       class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+      Submit your site →
+    </a>
+  </div>
+</div>
+{{ end }}

@@ -114,6 +114,30 @@ viewTransitions = false
 
 **Browser support:** Progressive enhancement — browsers without View Transitions API support will simply navigate normally.
 
+### 7. Community Showcase
+
+**What it does:** Provides a dedicated page to display websites built with the Adritian theme. Features a card grid with auto-generated screenshots (via microlink.io), tag-based filtering, and a submission CTA linking to a GitHub issue template.
+
+**How to use:**
+
+1. Create `content/showcase.md` with `layout: "showcase"` in the frontmatter
+2. Create `data/showcase.yml` with site entries (name, url, description, github, repo, tags)
+3. Optionally add a menu link in `hugo.toml`
+
+**Data format:**
+
+```yaml
+sites:
+  - name: "Site Name"
+    url: "https://example.com"
+    description: "Short description."
+    github: "username"
+    repo: "username/repo-name"
+    tags: [portfolio, blog]
+```
+
+**Features:** Tag filtering (client-side JS), `aria-pressed` for accessibility, `id="main-content"` for skip-to-content, graceful fallback when data file is missing.
+
 ## Styling
 
 All new features include:
