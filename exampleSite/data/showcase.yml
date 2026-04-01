@@ -3,136 +3,117 @@ sites:
     url: "https://www.adrianmoreno.info"
     description: "Engineering Leader based in Copenhagen. Personal site and portfolio of the theme author."
     github: "zetxek"
+    repo: "zetxek/adrianmoreno.info"
     tags: [portfolio, blog, multilingual, dark-mode]
-
-  - name: "Alexander Clines"
-    url: "https://alexanderclines.com/"
-    description: "Software Engineering Manager at Apple, focused on AI integration."
-    github: "asclines"
-    tags: [portfolio, resume]
 
   - name: "David Corto"
     url: "https://davidcorto.es/"
     description: "Senior Software Engineer & Tech Lead at Deporvillage. Multilingual site."
     github: "dcorto"
+    repo: "dcorto/dcorto.github.io"
     tags: [portfolio, multilingual]
 
   - name: "Tyler Jost"
     url: "https://jost.engineer/"
     description: "ML Engineer and computational biologist at Harvard Medical School."
     github: "TylerJost"
+    repo: "TylerJost/tylerjost.github.io"
     tags: [portfolio, blog, resume]
-
-  - name: "Spying on Science"
-    url: "https://spyingonscience.com/"
-    description: "Biologist focused on limnology and water education."
-    github: "fobi42"
-    tags: [blog, portfolio, science]
-
-  - name: "Mark Sailes"
-    url: "https://sailes.co.uk"
-    description: "AWS serverless consulting — Lambda, Java, serverless architecture."
-    github: "marksailes"
-    tags: [business, blog]
-
-  - name: "David Freitag"
-    url: "https://www.davidfreitag.com"
-    description: "Senior Data Engineer with resume, courses, and presentations."
-    github: "dkfreitag"
-    tags: [portfolio, blog]
-
-  - name: "mwhyte.dev"
-    url: "https://mwhyte.dev"
-    description: "Software engineering blog covering methodologies, design patterns, and best practices."
-    github: "mwhyte-dev"
-    tags: [blog]
 
   - name: "William Arnberg"
     url: "https://williamarnberg.com"
     description: "Game programmer specializing in engine and systems development."
     github: "WilliamArnberg"
+    repo: "WilliamArnberg/Portfolio"
     tags: [portfolio]
 
   - name: "Talina Shrotriya"
     url: "https://www.talinashrotriya.com/"
     description: "Engineering Manager at Couchbase."
     github: "Talina06"
+    repo: "Talina06/talina06.github.io"
     tags: [portfolio]
 
   - name: "Shaun Campbell"
     url: "https://shauncampbell.ca"
     description: "Head of Engineering at Scout Climate."
     github: "shauncampbell"
+    repo: "shauncampbell/shauncampbell_ca"
     tags: [portfolio]
 
   - name: "Josh Friedson"
     url: "https://jfriedson.github.io"
     description: "Software engineer in San Diego, ML projects and certifications."
     github: "jfriedson"
+    repo: "jfriedson/jfriedson.github.io"
     tags: [portfolio, resume]
-
-  - name: "Nigel Ong"
-    url: "https://nigel.ong/"
-    description: "IT support and software development services."
-    github: "nigel-ong"
-    tags: [portfolio, blog]
 
   - name: "Nicholas Ng"
     url: "https://www.nicholasng.me"
     description: "Technical Program Manager portfolio."
     github: "nicholasxng"
+    repo: "nicholasxng/nicholasng.me"
     tags: [portfolio]
 
   - name: "Ian Ames — Discover Deliver"
     url: "https://discover-deliver.co.uk"
     description: "User-centred digital transformation consulting."
     github: "skipster2k2"
+    repo: "skipster2k2/discover-deliver"
     tags: [business, consulting]
 
   - name: "Alona Liuzniak"
     url: "https://veritasregit.ai/"
     description: "Frankfurt-based AI developer specializing in Generative AI and RAG systems."
     github: "Luosua"
+    repo: "Luosua/portfolio"
     tags: [portfolio]
 
   - name: "Liam McKenna"
     url: "https://liamdouglas.com"
     description: "Computer science, game development, and graphics research."
     github: "liamckenna"
+    repo: "liamckenna/liamdouglas.com"
     tags: [portfolio]
 
   - name: "Jonathan Schnitzler"
     url: "https://joni32do.github.io"
     description: "Personal portfolio site."
     github: "Joni32do"
+    repo: "Joni32do/Joni32do.github.io"
     tags: [portfolio]
 
   - name: "Chandan Pasunoori"
     url: "https://www-chandanpasunoori-com.vercel.app"
     description: "Software Architect and Polyglot Developer."
     github: "chandanpasunoori"
+    repo: "chandanpasunoori/www.chandanpasunoori.com"
     tags: [portfolio]
 
   - name: "Monica Caparas"
     url: "https://mcaparas.github.io"
     description: "Personal portfolio."
     github: "mcaparas"
+    repo: "mcaparas/mcaparas.github.io"
     tags: [portfolio]
 
   - name: "Nayan's Blog"
     url: "https://nayanjd.github.io"
     description: "A space of mine in this vast digital utopia."
     github: "NayanJD"
+    repo: "NayanJD/nayanjd.github.io"
     tags: [blog]
 
   - name: "Gian Biondi"
     url: "http://www.gianbiondi.com"
     description: "Personal site hosted with Firebase."
     github: "gxb5443"
+    repo: "gxb5443/gianbiondi.com"
     tags: [portfolio]
 
   - name: "Ivo Pascal de Jong"
     url: "https://ivopascal.github.io"
     description: "Simple personal webpage."
     github: "ivopascal"
+    repo: "ivopascal/ivopascal.github.io"
     tags: [portfolio]
