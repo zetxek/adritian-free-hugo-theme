@@ -186,21 +186,26 @@ weight = 4
 #  weight = 4
 
 [[languages.en.menus.header]]
+name = "Showcase"
+URL = "/showcase"
+weight = 5
+
+[[languages.en.menus.header]]
 name = "How to"
 URL = "/blog"
-weight = 5
+weight = 6
 
 [[languages.en.menus.header]]
 pre = "email"
 name = "email"
 URL = "#contact"
-weight = 6
+weight = 7
 
 [[languages.en.menus.header]]
 pre = "search"
 name = "Search"
 URL = "/search"
-weight = 7
+weight = 8
 
 [[languages.en.menus.footer]]
 name = "Home"
@@ -253,22 +258,26 @@ weight = 4
 #  weight = 4
 
 [[languages.es.menus.header]]
-name = "Blog"
-URL = "/es/blog"
+name = "Showcase"
+URL = "/showcase"
 weight = 5
 
+[[languages.es.menus.header]]
+name = "Blog"
+URL = "/es/blog"
+weight = 6
 
 [[languages.es.menus.header]]
 pre = "email"
 name = "Contacto"
 URL = "/es/#contacto"
-weight = 6
+weight = 7
 
 [[languages.es.menus.header]]
 pre = "search"
 name = "Buscar"
 URL = "/search"
-weight = 7
+weight = 8
 
 [[languages.es.menus.footer]]
 name = "INICIO"
@@ -321,21 +330,26 @@ weight = 4
 #  weight = 4
 
 [[languages.fr.menus.header]]
+name = "Showcase"
+URL = "/showcase"
+weight = 5
+
+[[languages.fr.menus.header]]
 name = "Blog"
 URL = "/blog"
-weight = 5
+weight = 6
 
 [[languages.fr.menus.header]]
 pre = "email"
 name = "Contact"
 URL = "#contact"
-weight = 6
+weight = 7
 
 [[languages.fr.menus.header]]
 pre = "search"
 name = "Recherche"
 URL = "/search"
-weight = 7
+weight = 8
 [[languages.fr.menus.footer]]
 name = "ACCUEIL"
 URL = "/fr/"
@@ -382,19 +396,23 @@ name = 'أعمالي'
 URL = '/ar/#اعمالي'
 weight = 4
 [[languages.ar.menus.header]]
+name = "Showcase"
+URL = "/showcase"
+weight = 5
+[[languages.ar.menus.header]]
 name = "المدونة"
 URL = "/ar/blog"
-weight = 5
+weight = 6
 [[languages.ar.menus.header]]
 pre = "email"
 name = "تواصل"
 URL = "/ar/#تواصل"
-weight = 6
+weight = 7
 [[languages.ar.menus.header]]
 pre = "search"
 name = "بحث"
 URL = "/search"
-weight = 7
+weight = 8
 
 [[languages.ar.menus.footer]]
 name = "الرئيسية"
@@ -439,19 +457,23 @@ name = 'עבודות'
 URL = '/he/#עבודות'
 weight = 4
 [[languages.he.menus.header]]
+name = "Showcase"
+URL = "/showcase"
+weight = 5
+[[languages.he.menus.header]]
 name = "בלוג"
 URL = "/he/blog"
-weight = 5
+weight = 6
 [[languages.he.menus.header]]
 pre = "email"
 name = "צור קשר"
 URL = "/he/#צור-קשר"
-weight = 6
+weight = 7
 [[languages.he.menus.header]]
 pre = "search"
 name = "חיפוש"
 URL = "/search"
-weight = 7
+weight = 8
 
 [[languages.he.menus.footer]]
 name = "בית"
