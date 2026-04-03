@@ -47,6 +47,7 @@
               {{ $mainFeaturedPost := first 1 $featuredPosts }}
               {{ if $mainFeaturedPost }}
                 {{ range $mainFeaturedPost }}
+                  {{- $post := . -}}
                   <div class="p-4 p-md-5 mb-4 rounded text-body-emphasis bg-body-secondary">
                     <div class="row align-items-center">
                       <div class="col-lg-8 px-0">
@@ -66,7 +67,13 @@
                         {{ with .Params.images }}
                           {{ if isset . "featured_image" }}
                             <div class="col-lg-4 d-flex justify-content-center align-items-center mt-4 mt-lg-0">
-                              <img src="{{ .featured_image }}" alt="{{ $.Title }}" class="featured-thumbnail img-fluid rounded">
+                              {{ partial "responsive-image.html" (dict
+                                "src"   .featured_image
+                                "alt"   $post.Title
+                                "class" "featured-thumbnail img-fluid rounded"
+                                "sizes" "(max-width: 992px) 100vw, 33vw"
+                                "page"  $post
+                              ) }}
                             </div>
                           {{ end }}
                         {{ end }}
@@ -85,6 +92,7 @@
               
               {{ if $secondaryFeaturedPosts }}
                 {{ range $secondaryFeaturedPosts }}
+                  {{- $post := . -}}
                   <div class="col-md-6">
                     <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                       <div class="col p-4 d-flex flex-column position-static">
@@ -111,9 +119,17 @@
                         {{ if isset .Params "images" }}
                           {{ with .Params.images }}
                             {{ if isset . "featured_image" }}
-                              <img src="{{ .featured_image }}" width="200" height="250" alt="{{ $.Title }}" class="secondary-featured-img">
+                              {{ partial "responsive-image.html" (dict
+                                "src"    .featured_image
+                                "alt"    $post.Title
+                                "class"  "secondary-featured-img"
+                                "sizes"  "200px"
+                                "width"  "200"
+                                "height" "250"
+                                "page"   $post
+                              ) }}
                             {{ else }}
-                              <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" 
+                              <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg"
                                   role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice"
                                   focusable="false">
                                 <title>Placeholder</title>
@@ -123,7 +139,7 @@
                             {{ end }}
                           {{ end }}
                         {{ else }}
-                          <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" 
+                          <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg"
                               role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice"
                               focusable="false">
                             <title>Placeholder</title>

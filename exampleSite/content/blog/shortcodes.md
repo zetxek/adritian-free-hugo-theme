@@ -28,6 +28,7 @@ The theme provides custom shortcodes to allow you to customize your landing page
 - `showcase`: two-column block with a full-width image to the left, and a text snippet to the right. Great for a call to action or introduction of the person (assuming it's a personal website).
 - `text-section`: utility shortcode used to render text in some parts of the theme where it would otherwise be full-width, appearing "too floaty". See [the github issue #260 for context](https://github.com/zetxek/adritian-free-hugo-theme/issues/260).
 - `spacer`: Adds vertical spacing before the next element.
+- `responsive-image`: Renders a responsive `<picture>` element with WebP srcset and lazy loading.
 
 The shortcodes can be customized with different arguments:
 
@@ -200,6 +201,30 @@ The shortcodes can be customized with different arguments:
     - `{{</* spacer size="large" */>}}`: Adds substantial spacing
     - `{{</* spacer size="xlarge" */>}}`: Adds maximum spacing
   - `sectionId`: Optional. Overrides the default HTML id for the section. If not provided, the default id is used.
+
+- `responsive-image`:
+  - **Parameters**:
+    - `src`: Path to the image (required). Use a path relative to the `assets/` directory for full Hugo Pipes processing (WebP conversion + srcset). Static-path or external URLs fall back to a plain `<img>` with `loading="lazy"`.
+    - `alt`: Alt text for the image. Defaults to empty string.
+    - `class`: CSS class(es) to add to the `<img>` element.
+    - `sizes`: The `sizes` attribute for the browser's layout hint. Defaults to `"100vw"`.
+  - **How it works**:
+    - For images in `assets/`: generates a `<picture>` element with two `<source>` elements — one WebP srcset and one original-format srcset — at 400w, 800w, and 1200w (only up to the original image width to avoid upscaling). Includes `width`/`height` attributes on the `<img>` to prevent Cumulative Layout Shift (CLS).
+    - For images in `static/` or external URLs: renders a plain `<img loading="lazy" decoding="async">` with no processing.
+  - **Usage Examples**:
+    - `{{</* responsive-image src="images/photo.jpg" alt="A photo" */>}}`: Basic usage with an assets image
+    - `{{</* responsive-image src="images/hero.png" alt="Hero" sizes="(max-width: 768px) 100vw, 600px" */>}}`: Custom sizes hint
+    - `{{</* responsive-image src="images/cover.jpg" alt="Cover" class="my-image rounded" */>}}`: With CSS classes
+
+  Example output for an `assets/` image:
+
+  ```html
+  <picture>
+    <source type="image/webp" srcset="/images/photo_400.webp 400w, /images/photo_800.webp 800w" sizes="100vw">
+    <source type="image/jpeg" srcset="/images/photo_400.jpg 400w, /images/photo_800.jpg 800w" sizes="100vw">
+    <img src="/images/photo_800.jpg" width="800" height="600" alt="A photo" loading="lazy" decoding="async">
+  </picture>
+  ```
 
 You can see them in effect in:
 - [the homepage](/) [`(see source)`](https://raw.githubusercontent.com/zetxek/adritian-demo/refs/heads/main/content/home.md).
