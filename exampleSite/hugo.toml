@@ -258,7 +258,7 @@ weight = 4
 #  weight = 4
 
 [[languages.es.menus.header]]
-name = "Showcase"
+name = "Galería"
 URL = "/showcase"
 weight = 5
 
@@ -330,7 +330,7 @@ weight = 4
 #  weight = 4
 
 [[languages.fr.menus.header]]
-name = "Showcase"
+name = "Vitrine"
 URL = "/showcase"
 weight = 5
 
@@ -396,9 +396,10 @@ name = 'أعمالي'
 URL = '/ar/#اعمالي'
 weight = 4
 [[languages.ar.menus.header]]
-name = "Showcase"
+name = "معرض الأعمال"
 URL = "/showcase"
 weight = 5
+
 [[languages.ar.menus.header]]
 name = "المدونة"
 URL = "/ar/blog"
@@ -457,9 +458,10 @@ name = 'עבודות'
 URL = '/he/#עבודות'
 weight = 4
 [[languages.he.menus.header]]
-name = "Showcase"
+name = "תצוגה"
 URL = "/showcase"
 weight = 5
+
 [[languages.he.menus.header]]
 name = "בלוג"
 URL = "/he/blog"
