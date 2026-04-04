@@ -31,12 +31,12 @@
 
   function sanitizeURL(url) {
     if (!url) return '';
-    // Allow data:image/ URIs as-is
-    if (url.startsWith('data:image/')) return url;
     // Parse the URL to break the taint chain; only allow http(s) protocols
     try {
       var parsed = new URL(url, window.location.href);
-      if (parsed.protocol === 'http:' || parsed.protocol === 'https:') return parsed.href;
+      if (parsed.protocol === 'http:' || parsed.protocol === 'https:') {
+        return parsed.href;
+      }
     } catch (e) {
       // invalid URL
     }
