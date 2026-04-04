@@ -44,14 +44,14 @@
           <ul class="navbar-nav ml-lg-auto">
             {{- range .Site.Menus.header }}
             <li class="nav-item">
-              <a data-scroll class="nav-link" href="{{ .URL | relURL }}"
-                {{ if .Pre }}aria-label="{{ or .Name .Pre }}"{{ end }}
-                >{{ if .Pre }}
+              <a data-scroll class="nav-link" href="{{ .URL | relURL }}">
+                {{- if .Pre -}}
                   <i class="icon-{{ .Pre }}" aria-hidden="true"></i>
-                {{ else }}
+                  <span class="visually-hidden">{{ .Name | default .Pre }}</span>
+                {{- else -}}
                   {{ .Name | upper }}
-                {{ end }}</a
-              >
+                {{- end -}}
+              </a>
             </li>
             {{- end }}
             

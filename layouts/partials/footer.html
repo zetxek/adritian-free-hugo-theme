@@ -22,14 +22,14 @@
           <ul class="navbar-nav w-100 align-items-center justify-content-center justify-content-lg-start d-flex flex-wrap gap-2">
             {{ range .Site.Menus.footer }}
             <li class="nav-item">
-              <a class="nav-link" href="{{ .URL | relURL }}"
-                {{ if .Pre }}aria-label="{{ or .Name .Pre }}"{{ end }}
-                >{{ if .Pre }}
+              <a class="nav-link" href="{{ .URL | relURL }}">
+                {{- if .Pre -}}
                   <i class="icon-{{ .Pre }}" aria-hidden="true"></i>
-                {{ else }}
+                  <span class="visually-hidden">{{ .Name | default .Pre }}</span>
+                {{- else -}}
                   {{ .Name | upper }}
-                {{ end }}</a
-              >
+                {{- end -}}
+              </a>
             </li>
             {{ end }}
           </ul>
