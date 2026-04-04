@@ -40,7 +40,7 @@
 
 	{{ partial "header.html" . }}
 
-    <main id="main-content" tabindex="-1" role="main">
+    <main id="main-content" tabindex="-1">
     {{ $home := where (where .Site.Pages "Type" "home") "Lang" .Lang }}
     {{ $homeCount := len $home }}
 

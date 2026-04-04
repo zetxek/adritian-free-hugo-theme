@@ -1,4 +1,4 @@
-<footer class="footer w-100 d-print-none" role="contentinfo">
+<footer class="footer w-100 d-print-none">
 
 
     {{ $footer := where (where .Site.Pages "Type" "footer") "Lang" .Lang }}
@@ -18,17 +18,18 @@
             <span>{{ i18n "footer_notice" | safeHTML }}</span>
           </div>
         </div>
-        <nav class="footer_links col-12 col-lg-6 mb-3 mb-lg-0 text-center text-lg-start" role="navigation" aria-label='{{ i18n "footer_navigation" }}'>
+        <nav class="footer_links col-12 col-lg-6 mb-3 mb-lg-0 text-center text-lg-start" aria-label='{{ i18n "footer_navigation" }}'>
           <ul class="navbar-nav w-100 align-items-center justify-content-center justify-content-lg-start d-flex flex-wrap gap-2">
             {{ range .Site.Menus.footer }}
             <li class="nav-item">
-              <a class="nav-link" href="{{ .URL | relURL }}"
-                >{{ if .Pre }}
-                  <i class="icon-{{ .Pre }}" aria-label="{{ or .Name .Pre }}"></i>
-                {{ else }}
+              <a class="nav-link" href="{{ .URL | relURL }}">
+                {{- if .Pre -}}
+                  <i class="icon-{{ .Pre }}" aria-hidden="true"></i>
+                  <span class="visually-hidden">{{ .Name | default .Pre }}</span>
+                {{- else -}}
                   {{ .Name | upper }}
-                {{ end }}</a
-              >
+                {{- end -}}
+              </a>
             </li>
             {{ end }}
           </ul>

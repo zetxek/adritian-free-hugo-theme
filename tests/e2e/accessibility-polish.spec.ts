@@ -12,7 +12,7 @@ test.describe('Accessibility polish', () => {
   test('main landmark and skip target exist on skills page', async ({ page }) => {
     await page.goto(`${BASE_URL}/skills/`);
 
-    const mainLandmark = page.locator('main[role="main"]');
+    const mainLandmark = page.locator('main');
     await expect(mainLandmark).toBeVisible();
 
     const mainContent = page.locator('#main-content');
@@ -32,7 +32,7 @@ test.describe('Accessibility polish', () => {
     await page.goto(BASE_URL);
 
     await expect(page.locator('header nav[aria-label]')).toBeVisible();
-    await expect(page.locator('footer[role="contentinfo"]')).toBeVisible();
+    await expect(page.locator('footer')).toBeVisible();
     await expect(page.locator('footer nav[aria-label]')).toBeVisible();
   });
 

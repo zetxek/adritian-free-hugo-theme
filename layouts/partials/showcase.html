@@ -103,7 +103,7 @@
         {{- if $socialLinks -}}
           {{ range $socialLinks }}
           <a href="{{ .URL | absURL }}" target="_blank" rel="noopener noreferrer" aria-label="{{ .icon }}"
-            ><i class="icon-{{ .icon }}"></i
+            ><i class="icon-{{ .icon }}" aria-hidden="true"></i
           ></a>
           {{ end }}
         {{- end -}}
