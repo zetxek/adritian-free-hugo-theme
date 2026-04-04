@@ -16,7 +16,7 @@
 
 <header class="header fixed-top" id="header">
   <div class="container">
-    <nav class="navbar bd-navbar navbar-expand-lg navbar-light p-0" role="navigation" aria-label='{{ i18n "primary_navigation" }}'>
+    <nav class="navbar bd-navbar navbar-expand-lg navbar-light p-0" aria-label='{{ i18n "primary_navigation" }}'>
       <div class="container-fluid">
         <a class="navbar-brand mx-auto" href="{{ .Site.BaseURL | relLangURL }}">
             {{ if .Site.Params.logo }}
@@ -45,8 +45,9 @@
             {{- range .Site.Menus.header }}
             <li class="nav-item">
               <a data-scroll class="nav-link" href="{{ .URL | relURL }}"
+                {{ if .Pre }}aria-label="{{ or .Name .Pre }}"{{ end }}
                 >{{ if .Pre }}
-                  <i class="icon-{{ .Pre }}" aria-label="{{ or .Name .Pre }}"></i>
+                  <i class="icon-{{ .Pre }}" aria-hidden="true"></i>
                 {{ else }}
                   {{ .Name | upper }}
                 {{ end }}</a
