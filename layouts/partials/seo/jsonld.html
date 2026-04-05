@@ -156,6 +156,22 @@
     {{- $author = $organization -}}
   {{- else if .Params.author -}}
     {{- $author = dict "@type" "Person" "name" .Params.author -}}
+  {{- else if .Params.authors -}}
+    {{- if reflect.IsSlice .Params.authors -}}
+      {{- $authorList := slice -}}
+      {{- range .Params.authors -}}
+        {{- if . -}}
+          {{- $authorList = $authorList | append (dict "@type" "Person" "name" .) -}}
+        {{- end -}}
+      {{- end -}}
+      {{- if eq (len $authorList) 1 -}}
+        {{- $author = index $authorList 0 -}}
+      {{- else if gt (len $authorList) 1 -}}
+        {{- $author = $authorList -}}
+      {{- end -}}
+    {{- else -}}
+      {{- $author = dict "@type" "Person" "name" .Params.authors -}}
+    {{- end -}}
   {{- end -}}
 
   {{- $blogPosting := dict "@context" "https://schema.org" "@type" "BlogPosting" "headline" $pageTitle "url" .Permalink "mainEntityOfPage" (dict "@type" "WebPage" "@id" .Permalink) -}}

@@ -34,7 +34,7 @@
 
 {{- $metaDescription := "" -}}
 {{- if .Description -}}
-  {{- $metaDescription = .Description -}}
+  {{- $metaDescription = .Description | plainify | truncate 155 -}}
 {{- else if and .IsPage .Summary -}}
   {{- $metaDescription = .Summary | plainify | truncate 155 -}}
 {{- end -}}
@@ -46,7 +46,7 @@
 {{/* hreflang alternate links for multilingual sites */}}
 {{- if and hugo.IsMultilingual .IsTranslated }}
   {{- range .AllTranslations }}
-  <link rel="alternate" hreflang="{{ .Language.LanguageCode }}" href="{{ .Permalink }}" />
+  <link rel="alternate" hreflang="{{ .Language.LanguageCode | default .Lang }}" href="{{ .Permalink }}" />
   {{- end }}
 {{- end }}
 {{/* RSS Feed Discovery Links */}}

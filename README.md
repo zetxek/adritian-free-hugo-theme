@@ -250,10 +250,25 @@ Blog posts can provide a featured image for JSON-LD with front matter:
 featured_image = "/img/blog/my-post.png"
 ```
 
+Blog posts can also specify an author for JSON-LD structured data via front matter:
+
+```yaml
+author: "Jane Doe"
+# or multiple authors
+authors:
+  - "Jane Doe"
+  - "John Smith"
+```
+
+When `seo.person` or `seo.organization` are not configured at the site level, the theme falls back
+to the page's `author` or `authors` front matter for the BlogPosting schema.
+
 Notes:
 - Open Graph/Twitter cards are rendered by Hugo's embedded templates (`opengraph.html`, `twitter_cards.html`).
 - Canonical URLs are emitted automatically from each page permalink.
 - JSON-LD includes `WebSite` metadata for all pages and `BlogPosting` for blog posts.
+- **Meta descriptions** use a per-page fallback chain: page `description` front matter → auto-generated page summary (truncated to 155 characters) → site-wide i18n `head_description`. This ensures each page gets a unique, relevant description for search engines.
+- **hreflang alternate links** are automatically generated on multilingual sites for all translated pages, helping search engines serve the correct language version to users.
 
 #### Responsive Images
 
