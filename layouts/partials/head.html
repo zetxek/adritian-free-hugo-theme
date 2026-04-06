@@ -1,7 +1,9 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-{{- $themeColor := .Site.Params.themeColor | default "#478079" -}}
+{{- $colorSchemeName := .Site.Params.colorScheme | default "default" -}}
+{{- $colorSchemeData := index site.Data.colorSchemes $colorSchemeName -}}
+{{- $themeColor := .Site.Params.themeColor | default (cond (ne $colorSchemeData nil) $colorSchemeData.light "#478079") -}}
 <meta name="theme-color" content="{{ $themeColor }}" />
 {{ partial "head-favicons.html" . }}
 
@@ -99,27 +101,50 @@
       {{ end }} />
   </noscript>
 {{- end }}
+{{/* Resolve color scheme from config — defaults to "default" (current theme colors) */}}
+{{- $schemeName := .Site.Params.colorScheme | default "default" -}}
+{{- $scheme := index site.Data.colorSchemes $schemeName -}}
+{{- if not $scheme -}}
+  {{- warnf "Color scheme '%s' not found in data/colorSchemes.yaml, falling back to default" $schemeName -}}
+  {{- $scheme = index site.Data.colorSchemes "default" -}}
+{{- end -}}
 {{- range .Site.Params.plugins.scss }}
-  {{/* no external scss processing - as they need to be processed by the theme */}}
   {{- $scss := resources.Get .URL }}
   {{- $style := false }}
   {{- if $scss }}
+    {{/* Inject color scheme values into SCSS before compilation */}}
+    {{- $scss = $scss | resources.ExecuteAsTemplate (printf "scss/%s-%s" $schemeName (path.Base .URL)) (dict "scheme" $scheme) }}
     {{- $style = $scss | css.Sass }}
   {{- else }}
     {{- warnf "SCSS file not found: %s" .URL }}
   {{- end }}
   {{- if hugo.IsProduction }}
-    {{- $style = $scss | css.Sass | resources.Minify | resources.Fingerprint }}
+    {{- $style = $scss | resources.ExecuteAsTemplate (printf "scss/%s-%s" $schemeName (path.Base .URL)) (dict "scheme" $scheme) | css.Sass | resources.Minify | resources.Fingerprint }}
   {{- end }}
   {{- if $style }}
     <link
       rel="stylesheet"
       href="{{ $style.RelPermalink }}"
-      integrity="{{ $style.Data.Integrity }}"
-      crossorigin="anonymous" />
+      {{ if hugo.IsProduction }}
+        integrity="{{ $style.Data.Integrity }}" crossorigin="anonymous"
+      {{ end }} />
   {{- end }}
 {{- end }}
-
+{{/* Color scheme switcher: generate per-scheme CSS override stylesheets */}}
+{{- if .Site.Params.colorSchemeSwitcher.enable }}
+  {{- $overrideTpl := resources.Get "scss/scheme-override.scss" }}
+  {{- if $overrideTpl }}
+    {{- range $name, $schemeData := site.Data.colorSchemes }}
+      {{- $overrideScss := $overrideTpl | resources.ExecuteAsTemplate (printf "scss/scheme-override-%s.scss" $name) (dict "scheme" $schemeData "name" $name) }}
+      {{- $overrideCss := $overrideScss | css.Sass }}
+      {{- if hugo.IsProduction }}
+        {{- $overrideCss = $overrideScss | css.Sass | resources.Minify | resources.Fingerprint }}
+      {{- end }}
+      <link rel="stylesheet" href="{{ $overrideCss.RelPermalink }}" data-color-scheme="{{ $name }}"{{ if ne $name $schemeName }} disabled{{ end }}
+        {{ if hugo.IsProduction }}integrity="{{ $overrideCss.Data.Integrity }}" crossorigin="anonymous"{{ end }} />
+    {{- end }}
+  {{- end }}
+{{- end }}
 
 <!-- printed only it not disabled -->
 {{- if not .Site.Params.colorTheme.auto.disable }}
@@ -150,6 +175,13 @@
   <script defer src="{{ $colorModesScript.RelPermalink }}"></script>
 {{- else }}
   <!-- disabled color theme selector -->
+{{- end }}
+{{- if .Site.Params.colorSchemeSwitcher.enable }}
+  {{- $schemeSwitcherScript := resources.Get "js/color-scheme-switcher.js" }}
+  {{- if hugo.IsProduction }}
+    {{- $schemeSwitcherScript = $schemeSwitcherScript | resources.Minify | resources.Fingerprint }}
+  {{- end }}
+  <script defer src="{{ $schemeSwitcherScript.RelPermalink }}"></script>
 {{- end }}
 
 {{- if .Site.Params.analytics.googleTagManager.enabled }}

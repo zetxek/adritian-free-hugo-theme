@@ -79,6 +79,18 @@ description = 'This hugo theme (Adritian) is based on Bootstrap and has features
 images = ['/img/og-img.png']
 themeColor = '#478079'
 
+# Color scheme: default | ocean | forest | rose | slate | midnight | warm
+colorScheme = 'default'
+
+# Enable the live color scheme switcher (for the demo site)
+[params.colorSchemeSwitcher]
+enable = true
+
+# Color scheme selector visibility — set to true to hide in that location
+[params.colorSchemeSwitcher.selector.disable]
+footer = false
+header = false
+
 [params.seo]
 siteName = 'Adritian'
 siteDescription = 'This hugo theme (Adritian) is based on Bootstrap and has features that make it suitable for a personal site, a portfolio or other kind of Single Page Applications.'

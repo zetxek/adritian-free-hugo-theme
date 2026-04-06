@@ -67,8 +67,15 @@
             {{- if not .Site.Params.colorTheme.selector.disable.header }}
             <li class="dropdown theme-selector nav-item">
               {{ .Scratch.Set "selectorPlacement" "header" }}
-              {{ .Scratch.Set "dropdownDirection" "down" }}  
+              {{ .Scratch.Set "dropdownDirection" "down" }}
               {{ partial "selector-theme.html" . }}
+            </li>
+            {{- end }}
+            {{- if and .Site.Params.colorSchemeSwitcher.enable (not .Site.Params.colorSchemeSwitcher.selector.disable.header) }}
+            <li class="dropdown scheme-selector nav-item">
+              {{ .Scratch.Set "selectorPlacement" "header" }}
+              {{ .Scratch.Set "dropdownDirection" "down" }}
+              {{ partial "selector-scheme.html" . }}
             </li>
             {{- end }}
           </ul>
