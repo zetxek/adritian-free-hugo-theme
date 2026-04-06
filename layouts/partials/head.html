@@ -132,6 +132,18 @@
 {{- end }}
 {{/* Color scheme switcher: generate per-scheme CSS override stylesheets */}}
 {{- if .Site.Params.colorSchemeSwitcher.enable }}
+  {{/* Inline script: restore stored scheme before first paint to prevent flash (FOSC).
+       Mirrors the same anti-flash pattern used by the dark/light theme switcher. */}}
+  <script>
+    (function () {
+      var s = localStorage.getItem('colorScheme');
+      if (s) {
+        document.querySelectorAll('link[data-color-scheme]').forEach(function (l) {
+          l.disabled = l.getAttribute('data-color-scheme') !== s;
+        });
+      }
+    })();
+  </script>
   {{- $overrideTpl := resources.Get "scss/scheme-override.scss" }}
   {{- if $overrideTpl }}
     {{- range $name, $schemeData := site.Data.colorSchemes }}
