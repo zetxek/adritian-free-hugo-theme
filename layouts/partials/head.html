@@ -153,6 +153,7 @@
     (function () {
       var s = localStorage.getItem('colorScheme');
       if (s) {
+        document.documentElement.setAttribute('data-color-scheme', s);
         document.querySelectorAll('link[data-color-scheme]').forEach(function (l) {
           l.disabled = l.getAttribute('data-color-scheme') !== s;
         });
