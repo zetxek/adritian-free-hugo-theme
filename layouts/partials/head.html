@@ -114,12 +114,14 @@
   {{- if $scss }}
     {{/* Inject color scheme values into SCSS before compilation */}}
     {{- $scss = $scss | resources.ExecuteAsTemplate (printf "scss/%s-%s" $schemeName (path.Base .URL)) (dict "scheme" $scheme) }}
-    {{- $style = $scss | css.Sass }}
+    {{- if not hugo.IsProduction }}
+      {{- $style = $scss | css.Sass }}
+    {{- end }}
   {{- else }}
     {{- warnf "SCSS file not found: %s" .URL }}
   {{- end }}
   {{- if hugo.IsProduction }}
-    {{- $style = $scss | resources.ExecuteAsTemplate (printf "scss/%s-%s" $schemeName (path.Base .URL)) (dict "scheme" $scheme) | css.Sass | resources.Minify | resources.Fingerprint }}
+    {{- $style = $scss | css.Sass | resources.Minify | resources.Fingerprint }}
   {{- end }}
   {{- if $style }}
     <link
@@ -132,6 +134,19 @@
 {{- end }}
 {{/* Color scheme switcher: generate per-scheme CSS override stylesheets */}}
 {{- if .Site.Params.colorSchemeSwitcher.enable }}
+  {{- $overrideTpl := resources.Get "scss/scheme-override.scss" }}
+  {{- if $overrideTpl }}
+    {{- range $name, $schemeData := site.Data.colorSchemes }}
+      {{- $overrideScss := $overrideTpl | resources.ExecuteAsTemplate (printf "scss/scheme-override-%s.scss" $name) (dict "scheme" $schemeData "name" $name) }}
+      {{- if not hugo.IsProduction }}
+        {{- $overrideCss := $overrideScss | css.Sass }}
+        <link rel="stylesheet" href="{{ $overrideCss.RelPermalink }}" data-color-scheme="{{ $name }}"{{ if ne $name $schemeName }} disabled{{ end }} />
+      {{- else }}
+        {{- $overrideCss := $overrideScss | css.Sass | resources.Minify | resources.Fingerprint }}
+        <link rel="stylesheet" href="{{ $overrideCss.RelPermalink }}" data-color-scheme="{{ $name }}"{{ if ne $name $schemeName }} disabled{{ end }} integrity="{{ $overrideCss.Data.Integrity }}" crossorigin="anonymous" />
+      {{- end }}
+    {{- end }}
+  {{- end }}
   {{/* Inline script: restore stored scheme before first paint to prevent flash (FOSC).
        Mirrors the same anti-flash pattern used by the dark/light theme switcher. */}}
   <script>
@@ -144,18 +159,6 @@
       }
     })();
   </script>
-  {{- $overrideTpl := resources.Get "scss/scheme-override.scss" }}
-  {{- if $overrideTpl }}
-    {{- range $name, $schemeData := site.Data.colorSchemes }}
-      {{- $overrideScss := $overrideTpl | resources.ExecuteAsTemplate (printf "scss/scheme-override-%s.scss" $name) (dict "scheme" $schemeData "name" $name) }}
-      {{- $overrideCss := $overrideScss | css.Sass }}
-      {{- if hugo.IsProduction }}
-        {{- $overrideCss = $overrideScss | css.Sass | resources.Minify | resources.Fingerprint }}
-      {{- end }}
-      <link rel="stylesheet" href="{{ $overrideCss.RelPermalink }}" data-color-scheme="{{ $name }}"{{ if ne $name $schemeName }} disabled{{ end }}
-        {{ if hugo.IsProduction }}integrity="{{ $overrideCss.Data.Integrity }}" crossorigin="anonymous"{{ end }} />
-    {{- end }}
-  {{- end }}
 {{- end }}
 
 <!-- printed only it not disabled -->

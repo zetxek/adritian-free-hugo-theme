@@ -89,6 +89,24 @@ test.describe('Color scheme switcher', () => {
     expect(scheme).toBe('midnight');
   });
 
+  test('gracefully falls back to default if stored scheme is invalid', async ({ page }) => {
+    // Go to the page and inject a bad value before the reload happens
+    await page.goto(`${BASE_URL}/`);
+    await page.evaluate(() => localStorage.setItem('colorScheme', 'non-existent-theme'));
+
+    // Reload the page so the switcher runs with the bad value
+    await page.reload();
+    await page.waitForLoadState('networkidle');
+
+    // Verify fallback to default occurred
+    const scheme = await page.evaluate(() => document.documentElement.getAttribute('data-color-scheme'));
+    expect(scheme).toBe('default');
+
+    // Verify localStorage was corrected
+    const stored = await page.evaluate(() => localStorage.getItem('colorScheme'));
+    expect(stored).toBe('default');
+  });
+
   test('selecting a scheme enables its override stylesheet', async ({ page }) => {
     const btn = page.locator('#scheme-selector-header');
     await btn.click();
@@ -112,14 +130,31 @@ test.describe('Color scheme switcher', () => {
   test('active scheme button is marked as active', async ({ page }) => {
     const btn = page.locator('#scheme-selector-header');
     await btn.click();
-    await page.locator('[data-scheme-value="slate"]').first().click();
+    await page.locator('#scheme-dropdown-header [data-scheme-value="slate"]').click();
 
     // Reopen the dropdown
     await btn.click();
 
-    const slateBtn = page.locator('[data-scheme-value="slate"]').first();
+    const slateBtn = page.locator('#scheme-dropdown-header [data-scheme-value="slate"]');
     await expect(slateBtn).toHaveClass(/active/);
     await expect(slateBtn).toHaveAttribute('aria-pressed', 'true');
+  });
+
+  test('selecting a scheme synchronizes active state across all switchers globally', async ({ page }) => {
+    // Click header dropdown and select 'warm'
+    const headerBtn = page.locator('#scheme-selector-header');
+    await headerBtn.click();
+    await page.locator('#scheme-dropdown-header [data-scheme-value="warm"]').click();
+
+    // Now open the footer dropdown and verify 'warm' is active there too
+    const footerBtn = page.locator('#scheme-selector-footer');
+    // scroll footer button into view
+    await footerBtn.scrollIntoViewIfNeeded();
+    await footerBtn.click();
+
+    const footerWarmBtn = page.locator('#scheme-dropdown-footer [data-scheme-value="warm"]');
+    await expect(footerWarmBtn).toHaveClass(/active/);
+    await expect(footerWarmBtn).toHaveAttribute('aria-pressed', 'true');
   });
 
   test('footer scheme selector is visible', async ({ page }) => {
