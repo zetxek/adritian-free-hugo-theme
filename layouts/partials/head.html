@@ -114,14 +114,13 @@
   {{- if $scss }}
     {{/* Inject color scheme values into SCSS before compilation */}}
     {{- $scss = $scss | resources.ExecuteAsTemplate (printf "scss/%s-%s" $schemeName (path.Base .URL)) (dict "scheme" $scheme) }}
-    {{- if not hugo.IsProduction }}
+    {{- if hugo.IsProduction }}
+      {{- $style = $scss | css.Sass | resources.Minify | resources.Fingerprint }}
+    {{- else }}
       {{- $style = $scss | css.Sass }}
     {{- end }}
   {{- else }}
     {{- warnf "SCSS file not found: %s" .URL }}
-  {{- end }}
-  {{- if hugo.IsProduction }}
-    {{- $style = $scss | css.Sass | resources.Minify | resources.Fingerprint }}
   {{- end }}
   {{- if $style }}
     <link
@@ -151,12 +150,28 @@
        Mirrors the same anti-flash pattern used by the dark/light theme switcher. */}}
   <script>
     (function () {
-      var s = localStorage.getItem('colorScheme');
-      if (s) {
-        document.documentElement.setAttribute('data-color-scheme', s);
-        document.querySelectorAll('link[data-color-scheme]').forEach(function (l) {
-          l.disabled = l.getAttribute('data-color-scheme') !== s;
-        });
+      try {
+        var s = localStorage.getItem('colorScheme');
+        if (s) {
+          var found = false;
+          var links = document.querySelectorAll('link[data-color-scheme]');
+          links.forEach(function (l) {
+            if (l.getAttribute('data-color-scheme') === s) {
+              found = true;
+            }
+          });
+
+          if (!found && s !== 'default') {
+            s = 'default';
+          }
+
+          document.documentElement.setAttribute('data-color-scheme', s);
+          links.forEach(function (l) {
+            l.disabled = l.getAttribute('data-color-scheme') !== s;
+          });
+        }
+      } catch (e) {
+        // Ignore localStorage errors
       }
     })();
   </script>

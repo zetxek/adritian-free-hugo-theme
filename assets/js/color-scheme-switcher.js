@@ -9,28 +9,46 @@
   var STORAGE_KEY = 'colorScheme';
 
   function getStoredScheme() {
-    return localStorage.getItem(STORAGE_KEY);
+    try {
+      return localStorage.getItem(STORAGE_KEY);
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function setStoredScheme(name) {
+    try {
+      localStorage.setItem(STORAGE_KEY, name);
+    } catch (e) {
+      // Ignore errors (e.g. private browsing mode)
+    }
   }
 
   function setColorScheme(name) {
     // Disable all scheme override stylesheets
+    var found = false;
     document.querySelectorAll('link[data-color-scheme]').forEach(function (link) {
-      link.disabled = true;
+      if (link.getAttribute('data-color-scheme') === name) {
+        link.disabled = false;
+        found = true;
+      } else {
+        link.disabled = true;
+      }
     });
-    // Enable the selected one — fall back to 'default' if the name is unknown
+
+    // Fall back to 'default' if the name is unknown
     // (e.g. a stale value from a previous theme version stored in localStorage)
-    var target = document.querySelector('link[data-color-scheme="' + name + '"]');
-    if (!target && name !== 'default') {
+    if (!found && name !== 'default') {
       name = 'default';
-      target = document.querySelector('link[data-color-scheme="default"]');
-      localStorage.setItem(STORAGE_KEY, name);
+      document.querySelectorAll('link[data-color-scheme="default"]').forEach(function(link) {
+        link.disabled = false;
+      });
+      setStoredScheme(name);
     }
-    if (target) {
-      target.disabled = false;
-    }
+
     // Set attribute on html for any additional CSS hooks
     document.documentElement.setAttribute('data-color-scheme', name);
-    localStorage.setItem(STORAGE_KEY, name);
+    setStoredScheme(name);
 
     // Update switcher UI
     document.querySelectorAll('[data-scheme-value]').forEach(function (btn) {
