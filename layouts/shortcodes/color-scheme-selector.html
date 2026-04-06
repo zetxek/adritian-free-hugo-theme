@@ -17,10 +17,13 @@
     </button>
     <ul class="dropdown-menu" aria-labelledby="scheme-selector-shortcode-{{ $id }}">
       {{- range $name, $scheme := site.Data.colorSchemes }}
+      {{- if not (findRE "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$" $scheme.light) }}
+        {{- errorf "Invalid light color value for scheme '%s' in data/colorSchemes.yaml: %s. Must be a hex code (e.g., #FFFFFF)." $name $scheme.light }}
+      {{- end }}
       <li>
         <button type="button" class="dropdown-item d-flex align-items-center gap-2"
           data-scheme-value="{{ $name }}" aria-pressed="false">
-          <span style="display:inline-block;width:14px;height:14px;border-radius:50%;background-color:{{ $scheme.light }};border:1px solid rgba(0,0,0,0.15);flex-shrink:0"></span>
+          <span style="display:inline-block;width:14px;height:14px;border-radius:50%;background-color:{{ $scheme.light | safeCSS }};border:1px solid rgba(0,0,0,0.15);flex-shrink:0"></span>
           {{ $scheme.name }}
         </button>
       </li>

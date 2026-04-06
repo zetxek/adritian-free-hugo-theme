@@ -11,10 +11,16 @@
   <ul id="scheme-dropdown-{{ $placement }}" class="dropdown-menu dropdown-menu-end {{ if eq $direction "up" }}dropup{{ end }}"
     aria-labelledby="scheme-selector-{{ $placement }}" data-bs-popper="static">
     {{- range $name, $scheme := site.Data.colorSchemes }}
+    {{- if not (findRE "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$" $scheme.light) }}
+      {{- errorf "Invalid light color value for scheme '%s' in data/colorSchemes.yaml: %s. Must be a hex code (e.g., #FFFFFF)." $name $scheme.light }}
+    {{- end }}
+    {{- if not (findRE "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$" $scheme.dark) }}
+      {{- errorf "Invalid dark color value for scheme '%s' in data/colorSchemes.yaml: %s. Must be a hex code (e.g., #FFFFFF)." $name $scheme.dark }}
+    {{- end }}
     <li>
       <button type="button" class="dropdown-item d-flex align-items-center" data-scheme-value="{{ $name }}"
         aria-pressed="false">
-        <span class="scheme-swatch me-2" style="display:inline-block;width:14px;height:14px;border-radius:50%;background-color:{{ $scheme.light }};border:1px solid rgba(0,0,0,0.15);"></span>
+        <span class="scheme-swatch me-2" style="display:inline-block;width:14px;height:14px;border-radius:50%;background-color:{{ $scheme.light | safeCSS }};border:1px solid rgba(0,0,0,0.15);"></span>
         {{ $scheme.name }}
       </button>
     </li>
