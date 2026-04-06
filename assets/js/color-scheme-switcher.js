@@ -17,8 +17,14 @@
     document.querySelectorAll('link[data-color-scheme]').forEach(function (link) {
       link.disabled = true;
     });
-    // Enable the selected one
+    // Enable the selected one — fall back to 'default' if the name is unknown
+    // (e.g. a stale value from a previous theme version stored in localStorage)
     var target = document.querySelector('link[data-color-scheme="' + name + '"]');
+    if (!target && name !== 'default') {
+      name = 'default';
+      target = document.querySelector('link[data-color-scheme="default"]');
+      localStorage.setItem(STORAGE_KEY, name);
+    }
     if (target) {
       target.disabled = false;
     }

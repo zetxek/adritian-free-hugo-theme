@@ -152,17 +152,13 @@ test.describe('Color scheme shortcode', () => {
     await page.waitForLoadState('networkidle');
 
     const shortcodeSelector = page.locator('.color-scheme-selector-shortcode');
-    if (await shortcodeSelector.count() > 0) {
-      await expect(shortcodeSelector).toBeVisible();
-      const btn = shortcodeSelector.locator('[data-bs-toggle="dropdown"]');
-      await expect(btn).toBeVisible();
+    await expect(shortcodeSelector).toBeVisible();
 
-      // Open the shortcode dropdown
-      await btn.click();
-      await expect(btn).toHaveAttribute('aria-expanded', 'true');
-    } else {
-      // Skip if shortcode is not used in the demo content
-      test.info().annotations.push({ type: 'note', description: 'Shortcode not found in demo page — add {{< color-scheme-selector >}} to a page to test' });
-    }
+    const btn = shortcodeSelector.locator('[data-bs-toggle="dropdown"]');
+    await expect(btn).toBeVisible();
+
+    // Open the shortcode dropdown
+    await btn.click();
+    await expect(btn).toHaveAttribute('aria-expanded', 'true');
   });
 });
