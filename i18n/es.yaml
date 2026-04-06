@@ -44,6 +44,10 @@
 - id: "theme_auto"
   translation: "✨ Auto"
 
+## Color Scheme
+- id: "color_scheme"
+  translation: "Esquema de color"
+
 ## Search
 - id: "search_tags_label"
   translation: "Etiquetas"

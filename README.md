@@ -213,6 +213,41 @@ manifest = "/site.webmanifest"
 If you need custom names or colors in the manifest, place your own manifest file at the path above
 (or update `manifest` to point to a custom location).
 
+#### Color schemes
+
+The theme ships with 7 named color schemes that change the primary accent color across the entire site:
+
+| Scheme | Vibe |
+|--------|------|
+| `default` | Current look — teal (#478079) |
+| `ocean` | Blues and teals |
+| `forest` | Greens, earthy tones |
+| `rose` | Warm pinks and reds |
+| `slate` | Cool greys, neutral |
+| `midnight` | Deep dark with purple accents |
+| `warm` | Ambers and oranges |
+
+Set the scheme in your `hugo.toml`:
+
+```toml
+[params]
+colorScheme = "ocean"  # default | ocean | forest | rose | slate | midnight | warm
+```
+
+No other configuration is required — the scheme colors are applied at build time to every component
+(links, buttons, tags, progress bars, focus rings, etc.) in both light and dark modes.
+
+**Live scheme switcher (demo site):** To let visitors preview all schemes without rebuilding, enable the
+runtime switcher:
+
+```toml
+[params.colorSchemeSwitcher]
+enable = true
+```
+
+This adds a dropdown to the header and loads a small CSS override file per scheme for instant switching.
+See it in action on the [demo site](https://adritian-demo.vercel.app/).
+
 #### SEO and social metadata
 
 The theme leverages Hugo's embedded templates for Open Graph and Twitter cards, and adds JSON-LD

@@ -266,6 +266,10 @@
   translation: "Populære tags"
 - id: "view_all_tags"
   translation: "Se alle tags"
+## Color Scheme
+- id: "color_scheme"
+  translation: "Farveskema"
+
 ## Search
 - id: "search_tags_label"
   translation: "Tags"

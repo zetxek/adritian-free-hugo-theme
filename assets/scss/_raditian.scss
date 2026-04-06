@@ -1071,6 +1071,10 @@ textarea:focus {
         overflow-y: visible;
         max-height: unset;
     }
+    // Allow dropdown menus to overflow their nav-item container on desktop
+    .header .navbar .nav-item.dropdown {
+        overflow: visible;
+    }
 }
 
 .header .navbar .nav-item {

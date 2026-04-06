@@ -266,6 +266,10 @@
   translation: "Popularne tagi"
 - id: "view_all_tags"
   translation: "Zobacz wszystkie tagi"
+## Color Scheme
+- id: "color_scheme"
+  translation: "Schemat kolorów"
+
 ## Search
 - id: "search_tags_label"
   translation: "Tagi"

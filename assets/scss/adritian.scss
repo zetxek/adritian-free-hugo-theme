@@ -1,5 +1,8 @@
 @charset "UTF-8";
 
+{{ if .scheme }}$base-color: {{ .scheme.light }};
+$dark-primary: {{ .scheme.dark }};{{ end }}
+
 @import "variables";
 @import "theme-init";
 @import "bootstrap/bootstrap";
@@ -237,6 +240,13 @@ li.dropdown-item.choice a {
 
 .dropdown-menu button[aria-pressed="true"] {
   font-weight: bold;
+
+  // The active item's background is the scheme's own color, so the swatch
+  // (same color) would be invisible. Give it a white ring to stay readable.
+  .scheme-swatch {
+    border-color: rgba(255, 255, 255, 0.9) !important;
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.35);
+  }
 }
 
 html[data-bs-theme="dark"] {

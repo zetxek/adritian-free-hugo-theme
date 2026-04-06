@@ -1,0 +1,33 @@
+{{/* color-scheme-selector shortcode
+   Renders the color scheme picker inline in content.
+   Requires params.colorSchemeSwitcher.enable = true in site config.
+   The JS and CSS are already loaded by head.html when the switcher is enabled. */}}
+{{- $id := .Ordinal -}}
+{{- if .Site.Params.colorSchemeSwitcher.enable -}}
+<div class="color-scheme-selector-shortcode my-3">
+  <div class="dropdown d-inline-block">
+    <button class="btn btn-outline-secondary dropdown-toggle d-inline-flex align-items-center gap-2"
+      id="scheme-selector-shortcode-{{ $id }}"
+      type="button"
+      data-bs-toggle="dropdown"
+      data-bs-display="static"
+      aria-expanded="false"
+      aria-label='{{ i18n "color_scheme" }}'>
+      <span class="current-scheme">{{ i18n "color_scheme" }}</span>
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="scheme-selector-shortcode-{{ $id }}">
+      {{- range $name, $scheme := site.Data.colorSchemes }}
+      <li>
+        <button type="button" class="dropdown-item d-flex align-items-center gap-2"
+          data-scheme-value="{{ $name }}" aria-pressed="false">
+          <span style="display:inline-block;width:14px;height:14px;border-radius:50%;background-color:{{ $scheme.light }};border:1px solid rgba(0,0,0,0.15);flex-shrink:0"></span>
+          {{ $scheme.name }}
+        </button>
+      </li>
+      {{- end }}
+    </ul>
+  </div>
+</div>
+{{- else -}}
+<!-- color-scheme-selector shortcode: colorSchemeSwitcher.enable is false, nothing rendered -->
+{{- end -}}

@@ -266,6 +266,10 @@
   translation: "Populære tagger"
 - id: "view_all_tags"
   translation: "Se alle tagger"
+## Color Scheme
+- id: "color_scheme"
+  translation: "Fargeskjema"
+
 ## Search
 - id: "search_tags_label"
   translation: "Tagger"
