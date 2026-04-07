@@ -51,11 +51,21 @@
     setStoredScheme(name);
 
     // Update switcher UI
+    var currentDisplayName = null;
     document.querySelectorAll('[data-scheme-value]').forEach(function (btn) {
       var isActive = btn.getAttribute('data-scheme-value') === name;
       btn.classList.toggle('active', isActive);
       btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+      if (isActive) {
+        currentDisplayName = btn.getAttribute('data-scheme-name');
+      }
     });
+
+    if (currentDisplayName) {
+      document.querySelectorAll('.current-scheme').forEach(function (el) {
+        el.textContent = currentDisplayName;
+      });
+    }
   }
 
   // Restore scheme on page load
