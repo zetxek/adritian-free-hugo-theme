@@ -83,6 +83,10 @@ pre {
             opacity: 0.6;
             pointer-events: auto;
         }
+
+        .highlight pre {
+            padding-right: 3rem; // extra space so text doesn't collide with visible button
+        }
     }
 
     .highlight {
