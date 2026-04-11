@@ -41,7 +41,8 @@ pre {
         border-radius: 4px;
         color: inherit;
         cursor: pointer;
-        opacity: 0.4;
+        opacity: 0;
+        pointer-events: none;
         transition: opacity 0.2s ease, background-color 0.2s ease;
         z-index: 10;
 
@@ -73,12 +74,14 @@ pre {
     &:hover .copy-code-btn,
     &:focus-within .copy-code-btn {
         opacity: 1;
+        pointer-events: auto;
     }
 
-    // Touch devices: button always clearly visible since hover is unavailable
+    // Touch devices: always show button since hover is unavailable
     @media (hover: none) {
         .copy-code-btn {
             opacity: 0.6;
+            pointer-events: auto;
         }
     }
 
