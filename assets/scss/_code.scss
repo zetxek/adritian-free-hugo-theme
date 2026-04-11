@@ -37,12 +37,13 @@ pre {
         gap: 0.25rem;
         padding: 0.25rem 0.5rem;
         font-size: 0.75rem;
-        background: rgba(0, 0, 0, 0.07);
+        background-color: rgba(0, 0, 0, 0.07);
         border: 1px solid rgba(0, 0, 0, 0.1);
         border-radius: 4px;
         color: inherit;
         cursor: pointer;
         opacity: 0;
+        pointer-events: none;
         transition: opacity 0.2s ease, background-color 0.2s ease;
         z-index: 10;
 
@@ -52,11 +53,11 @@ pre {
         }
 
         &:hover {
-            background: rgba(0, 0, 0, 0.12);
+            background-color: rgba(0, 0, 0, 0.12);
         }
 
         &.copied {
-            background: var(--bs-success);
+            background-color: var(--bs-success);
             border-color: var(--bs-success);
             color: white;
         }
@@ -65,6 +66,7 @@ pre {
     &:hover .copy-code-btn,
     &:focus-within .copy-code-btn {
         opacity: 1;
+        pointer-events: auto;
     }
 
     .highlight {
@@ -139,16 +141,16 @@ pre {
     }
 
     .highlight-wrapper .copy-code-btn {
-        background: rgba(255, 255, 255, 0.1);
+        background-color: rgba(255, 255, 255, 0.1);
         border-color: rgba(255, 255, 255, 0.15);
         color: var(--bs-gray-300);
 
         &:hover {
-            background: rgba(255, 255, 255, 0.18);
+            background-color: rgba(255, 255, 255, 0.18);
         }
 
         &.copied {
-            background: var(--bs-success);
+            background-color: var(--bs-success);
             border-color: var(--bs-success);
             color: white;
         }
