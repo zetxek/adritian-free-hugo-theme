@@ -3,6 +3,11 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 {{- $colorSchemeName := .Site.Params.colorScheme | default "default" -}}
 {{- $colorSchemeData := index site.Data.colorSchemes $colorSchemeName -}}
+{{- /* params.primaryColor overrides both colorScheme and built-in defaults */}}
+{{- if and .Site.Params.primaryColor .Site.Params.primaryColor.light -}}
+  {{- $colorSchemeData = dict "light" .Site.Params.primaryColor.light "dark" (.Site.Params.primaryColor.dark | default .Site.Params.primaryColor.light) "name" "Custom" -}}
+  {{- $colorSchemeName = "custom" -}}
+{{- end -}}
 {{- $themeColor := .Site.Params.themeColor | default (cond (ne $colorSchemeData nil) $colorSchemeData.light "#478079") -}}
 <meta name="theme-color" content="{{ $themeColor }}" />
 {{ partial "head-favicons.html" . }}
@@ -102,9 +107,13 @@
   </noscript>
 {{- end }}
 {{/* Resolve color scheme from config — defaults to "default" (current theme colors) */}}
+{{/* params.primaryColor takes precedence over colorScheme if both are set */}}
 {{- $schemeName := .Site.Params.colorScheme | default "default" -}}
 {{- $scheme := index site.Data.colorSchemes $schemeName -}}
-{{- if not $scheme -}}
+{{- if and .Site.Params.primaryColor .Site.Params.primaryColor.light -}}
+  {{- $scheme = dict "light" .Site.Params.primaryColor.light "dark" (.Site.Params.primaryColor.dark | default .Site.Params.primaryColor.light) "name" "Custom" -}}
+  {{- $schemeName = "custom" -}}
+{{- else if not $scheme -}}
   {{- warnf "Color scheme '%s' not found in data/colorSchemes.yaml, falling back to default" $schemeName -}}
   {{- $scheme = index site.Data.colorSchemes "default" -}}
 {{- end -}}
