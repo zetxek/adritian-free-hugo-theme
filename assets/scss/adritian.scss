@@ -7,6 +7,7 @@
 @import "menu";
 @import "raditian";
 @import "blog";
+@import "code";
 @import "experience";
 @import "print";
 @import "search";
@@ -264,15 +265,6 @@ html[data-bs-theme="dark"] {
     color: var(--bs-code-color, var(--bs-body-color));
   }
 
-  .highlight-wrapper .copy-code-btn {
-    background: var(--bs-gray-700);
-    border-color: var(--bs-gray-600);
-    color: var(--bs-gray-200);
-
-    &:hover {
-      background: var(--bs-gray-600);
-    }
-  }
 }
 
 html[data-bs-theme="light"] {
