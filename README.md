@@ -276,6 +276,27 @@ enable = true
 
 This adds a dropdown to the header and footer and loads a small CSS override file per scheme for instant switching. See it in action on the [demo site](https://adritian-demo.vercel.app/).
 
+You can suppress the dropdown in one location without disabling it globally:
+
+```toml
+[params.colorSchemeSwitcher.selector.disable]
+header = false
+footer = true   # hide from footer only
+```
+
+You can also embed the picker inline on any page or post using the `color-scheme-selector` shortcode:
+
+```
+{{</* color-scheme-selector */>}}
+```
+
+> [!TIP]
+> **Useful during development.** Even if you don't plan to ship the switcher to visitors, enabling
+> it while you build your site lets you preview every scheme against your real content — profile
+> photo, blog posts, project thumbnails — without editing `hugo.toml` and restarting `hugo server`
+> each time. Once you've settled on a color, set `colorScheme` in your config and disable the
+> switcher for production.
+
 > [!NOTE]
 > The live switcher requires JavaScript. Theme users who want a static build-time color change
 > with no added JS should use Option 1 or 2 above and leave `colorSchemeSwitcher` disabled (the default).
