@@ -1,7 +1,14 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-{{- $themeColor := .Site.Params.themeColor | default "#478079" -}}
+{{- $colorSchemeName := .Site.Params.colorScheme | default "default" -}}
+{{- $colorSchemeData := index site.Data.colorSchemes $colorSchemeName -}}
+{{- /* params.primaryColor overrides both colorScheme and built-in defaults */}}
+{{- if and .Site.Params.primaryColor .Site.Params.primaryColor.light -}}
+  {{- $colorSchemeData = dict "light" .Site.Params.primaryColor.light "dark" (.Site.Params.primaryColor.dark | default .Site.Params.primaryColor.light) "name" "Custom" -}}
+  {{- $colorSchemeName = "custom" -}}
+{{- end -}}
+{{- $themeColor := .Site.Params.themeColor | default (cond (ne $colorSchemeData nil) $colorSchemeData.light "#478079") -}}
 <meta name="theme-color" content="{{ $themeColor }}" />
 {{ partial "head-favicons.html" . }}
 
@@ -99,27 +106,85 @@
       {{ end }} />
   </noscript>
 {{- end }}
+{{/* Resolve color scheme from config — defaults to "default" (current theme colors) */}}
+{{/* params.primaryColor takes precedence over colorScheme if both are set */}}
+{{- $schemeName := .Site.Params.colorScheme | default "default" -}}
+{{- $scheme := index site.Data.colorSchemes $schemeName -}}
+{{- if and .Site.Params.primaryColor .Site.Params.primaryColor.light -}}
+  {{- $scheme = dict "light" .Site.Params.primaryColor.light "dark" (.Site.Params.primaryColor.dark | default .Site.Params.primaryColor.light) "name" "Custom" -}}
+  {{- $schemeName = "custom" -}}
+{{- else if not $scheme -}}
+  {{- warnf "Color scheme '%s' not found in data/colorSchemes.yaml, falling back to default" $schemeName -}}
+  {{- $scheme = index site.Data.colorSchemes "default" -}}
+{{- end -}}
 {{- range .Site.Params.plugins.scss }}
-  {{/* no external scss processing - as they need to be processed by the theme */}}
   {{- $scss := resources.Get .URL }}
   {{- $style := false }}
   {{- if $scss }}
-    {{- $style = $scss | css.Sass }}
+    {{/* Inject color scheme values into SCSS before compilation */}}
+    {{- $scss = $scss | resources.ExecuteAsTemplate (printf "scss/%s-%s" $schemeName (path.Base .URL)) (dict "scheme" $scheme) }}
+    {{- if hugo.IsProduction }}
+      {{- $style = $scss | css.Sass | resources.Minify | resources.Fingerprint }}
+    {{- else }}
+      {{- $style = $scss | css.Sass }}
+    {{- end }}
   {{- else }}
     {{- warnf "SCSS file not found: %s" .URL }}
-  {{- end }}
-  {{- if hugo.IsProduction }}
-    {{- $style = $scss | css.Sass | resources.Minify | resources.Fingerprint }}
   {{- end }}
   {{- if $style }}
     <link
       rel="stylesheet"
       href="{{ $style.RelPermalink }}"
-      integrity="{{ $style.Data.Integrity }}"
-      crossorigin="anonymous" />
+      {{ if hugo.IsProduction }}
+        integrity="{{ $style.Data.Integrity }}" crossorigin="anonymous"
+      {{ end }} />
   {{- end }}
 {{- end }}
+{{/* Color scheme switcher: generate per-scheme CSS override stylesheets */}}
+{{- if .Site.Params.colorSchemeSwitcher.enable }}
+  {{- $overrideTpl := resources.Get "scss/scheme-override.scss" }}
+  {{- if $overrideTpl }}
+    {{- range $name, $schemeData := site.Data.colorSchemes }}
+      {{- $overrideScss := $overrideTpl | resources.ExecuteAsTemplate (printf "scss/scheme-override-%s.scss" $name) (dict "scheme" $schemeData "name" $name) }}
+      {{- if not hugo.IsProduction }}
+        {{- $overrideCss := $overrideScss | css.Sass }}
+        <link rel="stylesheet" href="{{ $overrideCss.RelPermalink }}" data-color-scheme="{{ $name }}"{{ if ne $name $schemeName }} disabled{{ end }} />
+      {{- else }}
+        {{- $overrideCss := $overrideScss | css.Sass | resources.Minify | resources.Fingerprint }}
+        <link rel="stylesheet" href="{{ $overrideCss.RelPermalink }}" data-color-scheme="{{ $name }}"{{ if ne $name $schemeName }} disabled{{ end }} integrity="{{ $overrideCss.Data.Integrity }}" crossorigin="anonymous" />
+      {{- end }}
+    {{- end }}
+  {{- end }}
+  {{/* Inline script: restore stored scheme before first paint to prevent flash (FOSC).
+       Mirrors the same anti-flash pattern used by the dark/light theme switcher. */}}
+  <script>
+    (function () {
+      try {
+        var s = localStorage.getItem('colorScheme');
+        if (s) {
+          var found = false;
+          var links = document.querySelectorAll('link[data-color-scheme]');
+          links.forEach(function (l) {
+            if (l.getAttribute('data-color-scheme') === s) {
+              found = true;
+            }
+          });
 
+          if (!found && s !== 'default') {
+            s = 'default';
+          }
+
+          document.documentElement.setAttribute('data-color-scheme', s);
+          links.forEach(function (l) {
+            l.disabled = l.getAttribute('data-color-scheme') !== s;
+          });
+        }
+      } catch (e) {
+        // Ignore localStorage errors
+      }
+    })();
+  </script>
+{{- end }}
 
 <!-- printed only it not disabled -->
 {{- if not .Site.Params.colorTheme.auto.disable }}
@@ -150,6 +215,13 @@
   <script defer src="{{ $colorModesScript.RelPermalink }}"></script>
 {{- else }}
   <!-- disabled color theme selector -->
+{{- end }}
+{{- if .Site.Params.colorSchemeSwitcher.enable }}
+  {{- $schemeSwitcherScript := resources.Get "js/color-scheme-switcher.js" }}
+  {{- if hugo.IsProduction }}
+    {{- $schemeSwitcherScript = $schemeSwitcherScript | resources.Minify | resources.Fingerprint }}
+  {{- end }}
+  <script defer src="{{ $schemeSwitcherScript.RelPermalink }}"></script>
 {{- end }}
 
 {{- if .Site.Params.analytics.googleTagManager.enabled }}

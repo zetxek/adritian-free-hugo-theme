@@ -213,6 +213,94 @@ manifest = "/site.webmanifest"
 If you need custom names or colors in the manifest, place your own manifest file at the path above
 (or update `manifest` to point to a custom location).
 
+#### Color schemes
+
+The theme ships with 7 named color schemes that change the primary accent color across the entire site:
+
+| Scheme | Light color | Dark color | Vibe |
+|--------|-------------|------------|------|
+| `default` | `#478079` | `#66b2a9` | Current look — teal |
+| `ocean` | `#1a6b8a` | `#4db8d4` | Blues and teals |
+| `forest` | `#2d7a3f` | `#5cb85c` | Greens, earthy tones |
+| `rose` | `#b5495b` | `#e07689` | Warm pinks and reds |
+| `slate` | `#546e7a` | `#90a4ae` | Cool greys, neutral |
+| `midnight` | `#3f3d99` | `#7c7ae6` | Deep dark with purple accents |
+| `warm` | `#c17817` | `#e8a94f` | Ambers and oranges |
+
+Colors are applied at build time to every component (links, buttons, tags, progress bars, focus rings, etc.) in both light and dark modes. No JavaScript is required.
+
+**Option 1 — Use a named built-in scheme:**
+
+```toml
+[params]
+colorScheme = "ocean"  # default | ocean | forest | rose | slate | midnight | warm
+```
+
+**Option 2 — Set your own brand colors directly:**
+
+```toml
+[params.primaryColor]
+light = "#c0392b"  # your brand primary color (used in light mode)
+dark  = "#e74c3c"  # brighter variant for dark mode (improves contrast)
+```
+
+`params.primaryColor` takes precedence over `colorScheme` when both are set. The `dark` value is optional — if omitted it falls back to the `light` value (though providing a brighter shade improves dark-mode readability).
+
+**Option 3 — Add a custom named scheme:**
+
+Add a file at `data/colorSchemes.yaml` in your Hugo site (Hugo merges it with the theme's own):
+
+```yaml
+mybrand:
+  name: "My Brand"
+  light: "#c0392b"
+  dark:  "#e74c3c"
+```
+
+Then select it in `hugo.toml`:
+
+```toml
+[params]
+colorScheme = "mybrand"
+```
+
+This approach also makes the scheme available in the [live switcher](#live-switcher) if you enable it.
+
+**Live scheme switcher:** To let visitors switch between schemes without rebuilding, enable the
+runtime switcher:
+
+```toml
+[params.colorSchemeSwitcher]
+enable = true
+```
+
+This adds a dropdown to the header and footer and loads a small CSS override file per scheme for instant switching. See it in action on the [demo site](https://adritian-demo.vercel.app/).
+
+You can suppress the dropdown in one location without disabling it globally:
+
+```toml
+[params.colorSchemeSwitcher.selector.disable]
+header = false
+footer = true   # hide from footer only
+```
+
+You can also embed the picker inline on any page or post using the `color-scheme-selector` shortcode:
+
+```
+{{</* color-scheme-selector */>}}
+```
+
+> [!TIP]
+> **Useful during development.** Even if you don't plan to ship the switcher to visitors, enabling
+> it while you build your site lets you preview every scheme against your real content — profile
+> photo, blog posts, project thumbnails — without editing `hugo.toml` and restarting `hugo server`
+> each time. Once you've settled on a color, set `colorScheme` in your config and disable the
+> switcher for production.
+
+> [!NOTE]
+> The live switcher requires JavaScript. Theme users who want a static build-time color change
+> with no added JS should use Option 1 or 2 above and leave `colorSchemeSwitcher` disabled (the default).
+
 #### SEO and social metadata
 
 The theme leverages Hugo's embedded templates for Open Graph and Twitter cards, and adds JSON-LD

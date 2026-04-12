@@ -92,7 +92,7 @@ test.describe('Theme basic functionality', () => {
   });
 });
 
-test('footer_right should contain exactly 2 dropdown element for language and theme', async ({ page }) => {
+test('footer_right should contain dropdown elements for language, theme, and color scheme', async ({ page }) => {
  test.skip(process.env.TEST_NO_MENUS === 'true', 'Skipping test because TEST_NO_MENUS is true');
 
   await page.goto(`${BASE_URL}/disable-menu/`);
@@ -101,8 +101,8 @@ test('footer_right should contain exactly 2 dropdown element for language and th
   await expect(page.locator('footer')).toBeAttached();
   await expect(page.locator('footer .footer_right')).toBeAttached();
 
-  // Verify exactly 2 dropdown elements exist within footer_right
-  await expect(page.locator('footer .footer_right .dropdown')).toHaveCount(2);
+  // Verify exactly 3 dropdown elements exist within footer_right: language, theme, color scheme
+  await expect(page.locator('footer .footer_right .dropdown')).toHaveCount(3);
 });
 
 

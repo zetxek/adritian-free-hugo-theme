@@ -1,0 +1,29 @@
+{{- $placement := .Scratch.Get "selectorPlacement" }}
+{{- $direction := .Scratch.Get "dropdownDirection" }}
+<div id='{{ $placement }}-scheme-selector'
+  class='d-grid gap-2 col-6 mx-auto nav-link dropdown {{ if eq $direction "up" }}dropup{{ end }} {{ if eq $placement "mobile-header" }}nav-link{{ end }}'>
+  <button class="btn btn-link py-2 px-0 px-lg-2 dropdown-toggle d-flex align-items-center"
+    id='scheme-selector-{{ $placement }}' type="button" aria-expanded="false"
+    aria-controls="scheme-dropdown-{{ $placement }}" aria-haspopup="true" data-bs-toggle="dropdown"
+    data-bs-display="static" aria-label='{{ i18n "color_scheme" }}'>
+    <span class="current-scheme">{{ i18n "color_scheme" }}</span>
+  </button>
+  <ul id="scheme-dropdown-{{ $placement }}" class="dropdown-menu dropdown-menu-end {{ if eq $direction "up" }}dropup{{ end }}"
+    aria-labelledby="scheme-selector-{{ $placement }}" data-bs-popper="static">
+    {{- range $name, $scheme := site.Data.colorSchemes }}
+    {{- if not (findRE "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$" $scheme.light) }}
+      {{- errorf "Invalid light color value for scheme '%s' in data/colorSchemes.yaml: %s. Must be a hex code (e.g., #FFFFFF)." $name $scheme.light }}
+    {{- end }}
+    {{- if not (findRE "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$" $scheme.dark) }}
+      {{- errorf "Invalid dark color value for scheme '%s' in data/colorSchemes.yaml: %s. Must be a hex code (e.g., #FFFFFF)." $name $scheme.dark }}
+    {{- end }}
+    <li>
+      <button type="button" class="dropdown-item d-flex align-items-center" data-scheme-value="{{ $name }}"
+        aria-pressed="false" data-scheme-name="{{ $scheme.name }}">
+        <span class="scheme-swatch me-2" aria-hidden="true" style="display:inline-block;width:14px;height:14px;border-radius:50%;background-color:{{ $scheme.light | safeCSS }};border:1px solid rgba(0,0,0,0.15);"></span>
+        {{ $scheme.name }}
+      </button>
+    </li>
+    {{- end }}
+  </ul>
+</div>
