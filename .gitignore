@@ -25,3 +25,7 @@ resources/_gen/
 # idea
 .idea/
 *.tar.gz
+public_test/
+.playwright-mcp/
+.claude/
+navbar-*.png
