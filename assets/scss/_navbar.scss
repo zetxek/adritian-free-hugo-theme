@@ -121,11 +121,9 @@
 
     // More dropdown for overflow handling
     .more-dropdown {
-        display: none; // Hidden by default, shown via JS when needed
-
-        &.show {
-            display: block;
-        }
+        // Hidden by default to prevent flash before JS runs.
+        // navbar-overflow.js sets inline style.display=list-item when overflow occurs.
+        display: none;
 
         // Replace Bootstrap's tiny triangle caret (4×8px borders) with a
         // chevron glyph that reads as an icon at the navbar font size.

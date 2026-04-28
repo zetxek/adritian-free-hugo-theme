@@ -125,12 +125,22 @@
     var navbarCollapse = document.getElementById('navbarSupportedContent');
     if (!navbarCollapse) return;
 
-    var buffer = overflowMode === 'dropdown' ? 120 : 20; // buffer for More button or spacing
+    // Buffer reserves room for the More button (dropdown mode) or trailing spacing.
+    // Measure the actual rendered button so localized labels don't clip.
+    var buffer = 20;
+    if (overflowMode === 'dropdown') {
+      var moreItemEl = document.getElementById('navbar-more-item');
+      if (moreItemEl) {
+        var prevDisplay = moreItemEl.style.display;
+        moreItemEl.style.display = 'list-item';
+        var measured = moreItemEl.getBoundingClientRect().width;
+        moreItemEl.style.display = prevDisplay;
+        buffer = measured > 0 ? Math.ceil(measured) + 8 : 120;
+      } else {
+        buffer = 120;
+      }
+    }
     var availableWidth = navbarCollapse.offsetWidth - buffer;
-    
-    // Check if the current state of items is not overflowing, and we are not forced
-    // to do anything, just let it be. But wait, if they are already in the More 
-    // dropdown, we have to reset them first to measure, which we do.
 
 
     // Check for debug mode via URL parameter
