@@ -1,0 +1,433 @@
+- generic [active] [ref=e1]:
+  - link "Skip to main content" [ref=e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - banner [ref=e3]:
+    - navigation "Primary navigation" [ref=e5]:
+      - generic [ref=e6]:
+        - link "Adritian Demo" [ref=e7] [cursor=pointer]:
+          - /url: /
+          - generic [ref=e8]: Adritian
+          - generic [ref=e9]: Demo
+        - list [ref=e11]:
+          - listitem [ref=e12]:
+            - link "HOME" [ref=e13] [cursor=pointer]:
+              - /url: /
+          - listitem [ref=e14]:
+            - link "ABOUT" [ref=e15] [cursor=pointer]:
+              - /url: /#about
+          - listitem [ref=e16]:
+            - link "SKILLS" [ref=e17] [cursor=pointer]:
+              - /url: /skills
+          - listitem [ref=e18]:
+            - link "PORTFOLIO" [ref=e19] [cursor=pointer]:
+              - /url: /#client-and-work-section
+          - listitem [ref=e20]:
+            - link "SHOWCASE" [ref=e21] [cursor=pointer]:
+              - /url: /showcase
+          - listitem [ref=e22]:
+            - link "HOW TO" [ref=e23] [cursor=pointer]:
+              - /url: /blog
+          - listitem [ref=e24]:
+            - link "email" [ref=e25] [cursor=pointer]:
+              - /url: /#contact
+              - generic [ref=e26]: 
+              - generic [ref=e27]: email
+          - listitem [ref=e28]:
+            - link "Search" [ref=e29] [cursor=pointer]:
+              - /url: /search
+              - generic [ref=e30]: 
+              - generic [ref=e31]: Search
+          - listitem [ref=e32]:
+            - button "Language" [ref=e34] [cursor=pointer]:
+              - generic [ref=e35]: Language
+          - listitem [ref=e36]:
+            - button "Toggle theme (light)" [ref=e38] [cursor=pointer]:
+              - generic [ref=e39]: ☀️ Light
+          - listitem [ref=e40]:
+            - button "Color scheme" [ref=e42] [cursor=pointer]:
+              - generic [ref=e43]: Color scheme
+  - main [ref=e44]:
+    - generic [ref=e45]:
+      - generic [ref=e48]:
+        - generic [ref=e49]:
+          - heading "Showcase section" [level=1] [ref=e50]
+          - heading "Subtitle - coming from home.md" [level=2] [ref=e51]:
+            - generic [ref=e52]:
+              - text: Subtitle - coming from
+              - code [ref=e53]: home.md
+          - generic [ref=e54]:
+            - strong [ref=e55]: Strong
+            - text: ","
+            - emphasis [ref=e56]: italic
+            - text: and normal text. This comes from
+            - link "home.md" [ref=e57] [cursor=pointer]:
+              - /url: https://github.com/zetxek/adritian-demo/blob/main/content/home/home.md?plain=1
+              - code [ref=e58]: home.md
+            - text: ", using the"
+            - code [ref=e59]: showcase-section
+            - link "shortcode" [ref=e60] [cursor=pointer]:
+              - /url: ""
+            - text: .
+            - text: Below you can see the social links, provided by the
+            - code [ref=e61]: platform-links
+            - text: shortcode.
+        - generic [ref=e67]:
+          - link "square-facebook" [ref=e68] [cursor=pointer]:
+            - /url: https://facebook.com/yourpage
+            - generic [ref=e69]: 
+          - link "square-twitter" [ref=e70] [cursor=pointer]:
+            - /url: https://twitter.com/yourpage
+            - generic [ref=e71]: 
+          - link "linkedin" [ref=e72] [cursor=pointer]:
+            - /url: https://www.linkedin.com/in/adrianmoreno/
+            - generic [ref=e73]: 
+          - link "square-github" [ref=e74] [cursor=pointer]:
+            - /url: https://github.com/zetxek
+            - generic [ref=e75]: 
+          - link "x-twitter" [ref=e76] [cursor=pointer]:
+            - /url: https://twitter.com/zetxek
+            - generic [ref=e77]: 
+          - link "dribbble" [ref=e78] [cursor=pointer]:
+            - /url: http://localhost:1314/
+            - generic [ref=e79]: 
+          - link "behance" [ref=e80] [cursor=pointer]:
+            - /url: http://localhost:1314/
+            - generic [ref=e81]: 
+          - link "youtube" [ref=e82] [cursor=pointer]:
+            - /url: http://localhost:1314/
+            - generic [ref=e83]: 
+          - link "instagram" [ref=e84] [cursor=pointer]:
+            - /url: https://www.instagram.com/zetxek/
+            - generic [ref=e85]: 
+          - link "square-facebook" [ref=e86] [cursor=pointer]:
+            - /url: https://www.facebook.com/zetxek/
+            - generic [ref=e87]: 
+          - link "codepen" [ref=e88] [cursor=pointer]:
+            - /url: http://localhost:1314/
+            - generic [ref=e89]: 
+          - link "yelp" [ref=e90] [cursor=pointer]:
+            - /url: https://www.yelp.com/
+            - generic [ref=e91]: 
+          - link "bluesky" [ref=e92] [cursor=pointer]:
+            - /url: https://www.bluesky.com/
+            - generic [ref=e93]: 
+          - link "threads" [ref=e94] [cursor=pointer]:
+            - /url: https://www.threads.net/
+            - generic [ref=e95]: 
+          - link "face-smile" [ref=e96] [cursor=pointer]:
+            - /url: https://www.adrianmoreno.info/
+            - generic [ref=e97]: 
+          - link "user" [ref=e98] [cursor=pointer]:
+            - /url: https://www.adrianmoreno.info/
+            - generic [ref=e99]: 
+          - link "quote-left" [ref=e100] [cursor=pointer]:
+            - /url: https://www.adrianmoreno.info/
+            - generic [ref=e101]: 
+          - link "cloud-arrow-down" [ref=e102] [cursor=pointer]:
+            - /url: https://www.adrianmoreno.info/
+            - generic [ref=e103]: 
+          - link "square-xing" [ref=e104] [cursor=pointer]:
+            - /url: https://www.adrianmoreno.info/
+            - generic [ref=e105]: 
+      - generic [ref=e111]:
+        - heading "About me" [level=2] [ref=e112]
+        - generic [ref=e113]:
+          - text: This content is using the
+          - code [ref=e114]: about-section
+          - text: shortcode.
+          - text: You can write
+          - code [ref=e115]: HTML
+          - text: ", as long as you"
+          - emphasis [ref=e116]: wrap it
+          - text: accordingly.
+        - link " Check my skills" [ref=e117] [cursor=pointer]:
+          - /url: http://localhost:1314/skills
+          - generic [ref=e118]: 
+          - text: Check my skills
+      - generic [ref=e122]:
+        - heading "Formal Education (education-list)" [level=2] [ref=e123]
+        - generic [ref=e124]:
+          - generic [ref=e126]:
+            - generic [ref=e127]: 2009-2012
+            - generic [ref=e128]: High School of Hard Knocks
+            - generic [ref=e129]: High School Diploma, Sciences, Math, Computer & Business Studies
+          - generic [ref=e131]:
+            - generic [ref=e132]: 2012-2017
+            - generic [ref=e133]: University of Life
+            - generic [ref=e134]: Bachelor of Applied Science (BASc), Electrical Engineering
+      - generic [ref=e136]:
+        - generic [ref=e137]:
+          - heading "My job experience (title)" [level=2] [ref=e138]
+          - link "2024-now CIO Internet Affairs Inc. . Stavanger, Norway" [ref=e140] [cursor=pointer]:
+            - /url: /experience/job-3/
+            - generic [ref=e142]:
+              - generic [ref=e143]: 2024-now
+              - generic [ref=e144]: CIO
+              - generic [ref=e145]: Internet Affairs Inc. . Stavanger, Norway
+          - link "2024-ahora Director Ejecutivo Internet Affairs Inc.. Stavanger, Noruega" [ref=e147] [cursor=pointer]:
+            - /url: /experience/job-3.es-copy/
+            - generic [ref=e149]:
+              - generic [ref=e150]: 2024-ahora
+              - generic [ref=e151]: Director Ejecutivo
+              - generic [ref=e152]: Internet Affairs Inc.. Stavanger, Noruega
+          - link "2023-2024 Chief Intern Internet Affairs Inc. . Stavanger, Norway" [ref=e154] [cursor=pointer]:
+            - /url: /experience/job-2/
+            - generic [ref=e156]:
+              - generic [ref=e157]: 2023-2024
+              - generic [ref=e158]: Chief Intern
+              - generic [ref=e159]: Internet Affairs Inc. . Stavanger, Norway
+          - link "logo 2022-2024 Junior Intern Internet Affairs Inc. . Stavanger, Norway" [ref=e161] [cursor=pointer]:
+            - /url: /experience/job-1/
+            - generic [ref=e162]:
+              - img "logo" [ref=e163]
+              - generic [ref=e164]:
+                - generic [ref=e165]: 2022-2024
+                - generic [ref=e166]: Junior Intern
+                - generic [ref=e167]: Internet Affairs Inc. . Stavanger, Norway
+        - generic [ref=e169]:
+          - generic [ref=e170]:
+            - heading "Intro (intro_title)" [level=2] [ref=e171]
+            - generic [ref=e172]:
+              - text: Description (intro_description).
+              - text: You can use HTML,with
+              - strong [ref=e173]: strong
+              - text: formatting, or lists
+              - list [ref=e174]:
+                - listitem [ref=e175]: one
+                - listitem [ref=e176]: two
+          - generic [ref=e177]:
+            - link "(1) Visit Example" [ref=e179] [cursor=pointer]:
+              - /url: https://example.com
+              - text: (1) Visit Example
+            - link "(2) Skills" [ref=e181] [cursor=pointer]:
+              - /url: http://localhost:1314/skills
+            - link "View all" [ref=e183] [cursor=pointer]:
+              - /url: http://localhost:1314/experience
+      - generic [ref=e186]:
+        - heading "Experience (as list)" [level=2] [ref=e187]
+        - generic [ref=e188]:
+          - generic [ref=e190]:
+            - generic [ref=e191]: 2024-now
+            - generic [ref=e192]: CIO
+            - generic [ref=e193]: Internet Affairs Inc. . Stavanger, Norway
+          - generic [ref=e194]:
+            - 'heading "Job #3" [level=1] [ref=e195]'
+            - 'heading "3rd job: CIO" [level=2] [ref=e196]'
+            - paragraph [ref=e197]: As Chief Information Officer at Internet Affairs Inc., I lead the strategic transformation of our digital infrastructure and cybersecurity initiatives. My team of 150+ IT professionals works tirelessly to protect and optimize our global network spanning 23 countries.
+            - paragraph [ref=e198]: During my tenure, I’ve spearheaded the implementation of a revolutionary blockchain-based verification system that reduced fraudulent transactions by 87% while improving processing speeds by 300%. This initiative saved the company $12M annually and earned us the prestigious “Digital Innovation Award 2024”.
+            - paragraph [ref=e199]: I’m particularly proud of our “Green Computing” program which has successfully migrated 75% of our data centers to renewable energy sources. This environmental initiative not only reduced our carbon footprint by 45% but also resulted in a 30% reduction in operational costs.
+            - paragraph [ref=e200]: In my role, I also serve as a member of the executive board, helping shape the company’s long-term technology vision and ensuring our IT strategy aligns perfectly with our business objectives. Currently leading an ambitious AI integration project that promises to revolutionize our customer service capabilities.
+        - generic [ref=e201]:
+          - generic [ref=e203]:
+            - generic [ref=e204]: 2024-ahora
+            - generic [ref=e205]: Director Ejecutivo
+            - generic [ref=e206]: Internet Affairs Inc.. Stavanger, Noruega
+          - generic [ref=e207]:
+            - 'heading "Trabajo #3" [level=1] [ref=e208]'
+            - heading "Arreglando el mundo, un byte a la vez" [level=2] [ref=e209]
+            - paragraph [ref=e210]: ¡Adquisición hostil - ¿quién es el jefe ahora?!
+        - generic [ref=e211]:
+          - generic [ref=e213]:
+            - generic [ref=e214]: 2023-2024
+            - generic [ref=e215]: Chief Intern
+            - generic [ref=e216]: Internet Affairs Inc. . Stavanger, Norway
+          - generic [ref=e217]:
+            - 'heading "Job #2" [level=1] [ref=e218]'
+            - 'heading "2nd job: Chief Intern" [level=2] [ref=e219]'
+            - paragraph [ref=e220]: As Chief Intern at Internet Affairs Inc., I led several key initiatives that helped streamline our internal processes and boost productivity. Working closely with cross-functional teams, I developed and implemented an automated documentation system that reduced report generation time by 65% and improved accuracy by 40%.
+            - paragraph [ref=e221]: During my internship, I spearheaded the company’s first-ever “Innovation Lab” program, where I mentored junior interns and coordinated weekly brainstorming sessions. This initiative resulted in three patent-pending solutions and garnered attention from senior management. The program has since been adopted as a permanent fixture in the company’s internship structure.
+            - paragraph [ref=e222]: My most significant achievement was the successful implementation of a machine learning algorithm that optimized our resource allocation system. This project not only improved resource utilization by 35% but also led to my eventual promotion to CIO. I also actively participated in community outreach programs, organizing coding workshops for local high school students and contributing to the company’s STEM education initiatives.
+        - generic [ref=e223]:
+          - generic [ref=e224]:
+            - img "logo" [ref=e225]
+            - generic [ref=e226]:
+              - generic [ref=e227]: 2022-2024
+              - generic [ref=e228]: Junior Intern
+              - generic [ref=e229]: Internet Affairs Inc. . Stavanger, Norway
+          - generic [ref=e230]:
+            - 'heading "Job #1" [level=1] [ref=e231]'
+            - 'heading "1st job: Junior Intern" [level=2] [ref=e232]'
+            - paragraph [ref=e233]: The beginning of a great career. As a Junior Intern at Internet Affairs Inc., I had the opportunity to work on various projects that helped me develop my technical and professional skills. Working alongside experienced developers, I contributed to the company’s core web applications and learned industry best practices in software development.
+            - paragraph [ref=e234]: During my internship, I took the initiative to create an internal documentation wiki that improved knowledge sharing across teams. This project taught me valuable lessons in technical writing and collaboration. I also participated in code reviews and daily stand-ups, gaining firsthand experience in agile development methodologies.
+            - paragraph [ref=e235]: My most notable achievement was developing an automated testing script that reduced QA time by 25%. This project not only improved team efficiency but also demonstrated my ability to identify problems and implement effective solutions. Additionally, I actively participated in the company’s mentorship program, where I helped onboard new interns and shared my growing knowledge with peers.
+            - paragraph [ref=e236]: Through these experiences, I built a strong foundation in software development and professional collaboration, setting the stage for my advancement to more senior roles within the company.
+      - generic [ref=e238]:
+        - heading "A selection of my work" [level=2] [ref=e239]
+        - generic [ref=e242]:
+          - link "Link to the client site for Ztos (opens in a new window)" [ref=e244] [cursor=pointer]:
+            - /url: https://www.adrianmoreno.info
+          - link "Link to the client site for Zoo (opens in a new window)" [ref=e247] [cursor=pointer]:
+            - /url: https://www.adrianmoreno.info
+          - link "Link to the client site for Kanba (opens in a new window)" [ref=e250] [cursor=pointer]:
+            - /url: https://www.adrianmoreno.info
+          - link "Link to the client site for Goldline (opens in a new window)" [ref=e253] [cursor=pointer]:
+            - /url: https://www.adrianmoreno.info
+          - link "Link to the client site for Earth 2.0 (opens in a new window)" [ref=e256] [cursor=pointer]:
+            - /url: https://www.adrianmoreno.info
+          - link "Link to the client site for Asgardia (opens in a new window)" [ref=e259] [cursor=pointer]:
+            - /url: https://www.adrianmoreno.info
+        - generic [ref=e261]:
+          - generic [ref=e262]:
+            - heading "Swiss Fintech Website" [level=3] [ref=e263]
+            - generic [ref=e264]:
+              - paragraph [ref=e265]:
+                - text: Here you can add additional context, description, links, etc. The content you see here comes from the contents of the
+                - code [ref=e266]: content/projects
+                - text: folder.
+              - paragraph [ref=e267]:
+                - text: This project is in the file
+                - code [ref=e268]: projects/swiss-fintech.md
+                - text: .
+              - paragraph [ref=e269]: "In the markdown file frontmatter you can also define additional parameters, such as the link:"
+              - generic [ref=e270]:
+                - button "Copy code to clipboard":
+                  - img
+                - code [ref=e273]:
+                  - generic [ref=e275]: "link: \"https://www.adrianmoreno.info\" # optional URL to link the logo to"
+                  - generic [ref=e278]: "params:"
+                  - generic [ref=e280]: "button:"
+                  - generic [ref=e282]: "icon: \"icon-arrow-right\""
+                  - generic [ref=e284]: "btnText: \"Case Study\""
+                  - generic [ref=e286]: "URL: \"https://www.adrianmoreno.info\""
+                  - generic [ref=e288]: "image:"
+                  - generic [ref=e290]: "src: \"images/works/swissfintech.jpg\""
+                  - generic [ref=e292]: "scale: 0.5"
+            - link "Case Study" [ref=e295] [cursor=pointer]:
+              - /url: https://www.adrianmoreno.info
+              - text: Case Study
+          - button "View image in lightbox" [ref=e298]
+        - generic [ref=e299]:
+          - button "View image in lightbox" [ref=e302]
+          - generic [ref=e303]:
+            - heading "Robo Advisor" [level=3] [ref=e304]
+            - paragraph [ref=e306]: Robo Advisor is a Swiss Wealth Manager and wants to create the best digital experience for its UNHW clients across the world. We started with a whiteboard.
+            - link "Case Study" [ref=e307] [cursor=pointer]:
+              - /url: https://www.adrianmoreno.info
+              - text: Case Study
+        - generic [ref=e308]:
+          - generic [ref=e309]:
+            - heading "Radity Finance - UI Kit" [level=3] [ref=e310]
+            - paragraph [ref=e312]: We have been receiving a lot of requests for a Finance Kit recently due to the popularity of Fintech.
+            - link "Case Study" [ref=e313] [cursor=pointer]:
+              - /url: https://www.adrianmoreno.info
+              - text: Case Study
+          - button "View image in lightbox" [ref=e316]
+      - generic [ref=e318]:
+        - heading "What they say about me" [level=2] [ref=e319]
+        - generic [ref=e320]:
+          - generic [ref=e321]:
+            - generic [ref=e322]: 
+            - paragraph [ref=e323]: Working with this colleague has been an absolute pleasure. Their dedication, professionalism, and positive attitude make them an invaluable asset to our team. They consistently go above and beyond to ensure that projects are completed on time and to the highest standard. Their ability to collaborate effectively and support their colleagues is truly commendable. I am continually impressed by their innovative thinking and problem-solving skills. This colleague is not just a team member but a true inspiration and a driving force behind our team’s success.
+            - generic [ref=e324]:
+              - img "What they say about me" [ref=e326]
+              - generic [ref=e327]:
+                - heading "Ferdinand Shermand" [level=3] [ref=e328]
+                - generic [ref=e329]: Butterfly collector
+          - generic [ref=e330]:
+            - generic [ref=e331]: 
+            - paragraph [ref=e332]: I had the pleasure of working with this freelancer on several projects, and their performance has been nothing short of outstanding. They bring a high level of expertise, creativity, and dedication to every task. Their ability to understand project requirements and deliver exceptional results on time is truly impressive. They are a reliable and proactive professional who consistently exceeds expectations. I highly recommend this freelancer to anyone seeking top-notch skills and a collaborative partner.
+            - generic [ref=e333]:
+              - img "What they say about me" [ref=e335]
+              - generic [ref=e336]:
+                - heading "International Interrogations" [level=3] [ref=e337]
+                - generic [ref=e338]: Internal Intern
+          - generic [ref=e339]:
+            - generic [ref=e340]: 
+            - paragraph [ref=e341]:
+              - text: The content of this section comes from the
+              - code [ref=e342]: content/testimonial
+              - text: folder contents. This that you see is in
+              - code [ref=e343]: content/testimonial/graziella-nutella.md
+              - text: .
+            - paragraph [ref=e344]: "You can also use parameters for configuration:"
+            - generic [ref=e345]:
+              - button "Copy code to clipboard":
+                - img
+              - code [ref=e348]:
+                - generic [ref=e350]: "name: \"Nutting Hill\" # place/city/country for the experience. Fill-in."
+                - generic [ref=e352]: "position: \"Nutcracker\" # from-to, for example \"2022-2024\". Fill-in."
+                - generic [ref=e355]: "params:"
+                - generic [ref=e357]: "image:"
+                - generic [ref=e359]: "src: \"images/testimonials/testimonial1.png\" # example: \"images/clients/asgardia.png\""
+                - generic [ref=e361]: "scale: 0.5"
+            - generic [ref=e362]:
+              - img "What they say about me" [ref=e364]
+              - generic [ref=e365]:
+                - heading "Nutting Hill" [level=3] [ref=e366]
+                - generic [ref=e367]: Nutcracker
+      - heading "Extra home content" [level=2] [ref=e369]
+      - paragraph [ref=e370]:
+        - text: Additional content added after the
+        - code [ref=e371]: section
+        - text: blocks, in the
+        - code [ref=e372]: home.md
+        - text: file.
+      - paragraph [ref=e373]: Here you could freestyle, add other shortcodes, … Or just let the content empty, and rely on the shortcode sections alone.
+      - generic [ref=e378]:
+        - heading "Extra (centered) content" [level=2] [ref=e379]
+        - generic [ref=e380]:
+          - text: You can also use the
+          - code [ref=e381]: text-section
+          - text: shortcode to add centered texts
+  - contentinfo [ref=e382]:
+    - generic [ref=e385]:
+      - heading "Reach out" [level=2] [ref=e386]
+      - generic [ref=e387]:
+        - generic [ref=e389]:
+          - generic [ref=e390]:
+            - textbox "Your name" [ref=e392]
+            - textbox "Your e-mail" [ref=e394]
+          - textbox "Your phone" [ref=e397]
+          - textbox "Your text" [ref=e400]
+          - button "Send message" [ref=e403] [cursor=pointer]
+        - generic [ref=e404]:
+          - heading "My phone" [level=3] [ref=e405]
+          - link "555 666 777" [ref=e407] [cursor=pointer]:
+            - /url: tel:+555666777
+          - heading "My mail" [level=3] [ref=e408]
+          - link "demo@demosite.com" [ref=e410] [cursor=pointer]:
+            - /url: mailto:demo@demosite.com
+          - heading "My location" [level=3] [ref=e411]
+          - text: 🇩🇰 Denmark
+    - generic [ref=e415]:
+      - heading "Stay updated" [level=2] [ref=e416]
+      - generic [ref=e418]:
+        - textbox "Enter your email" [ref=e419]:
+          - /placeholder: " Enter your email "
+        - button "Subscribe" [ref=e420] [cursor=pointer]
+      - text: We respect your privacy and won't share your data.
+    - generic [ref=e424]:
+      - heading "Extra footer content" [level=2] [ref=e425]
+      - generic [ref=e426]:
+        - paragraph [ref=e427]:
+          - text: Additional content added after the
+          - code [ref=e428]: section
+          - text: blocks.
+        - paragraph [ref=e429]: Here you could freestyle, add other shortcodes, … Or just let the content empty, and rely on the shortcode sections alone.
+        - paragraph [ref=e430]:
+          - text: To make the text nicely wrapped in the footer, the shortcode
+          - code [ref=e431]: text-section
+          - text: is used.
+    - generic [ref=e434]:
+      - generic [ref=e436]: © Adritian. Free Hugo theme by Adrián Moreno Peña.
+      - navigation "Footer navigation" [ref=e437]:
+        - list [ref=e438]:
+          - listitem [ref=e439]:
+            - link "HOME" [ref=e440] [cursor=pointer]:
+              - /url: /
+          - listitem [ref=e441]:
+            - link "ABOUT" [ref=e442] [cursor=pointer]:
+              - /url: /#about
+          - listitem [ref=e443]:
+            - link "PORTFOLIO" [ref=e444] [cursor=pointer]:
+              - /url: /#portfolio
+          - listitem [ref=e445]:
+            - link "CONTACT" [ref=e446] [cursor=pointer]:
+              - /url: /#contact
+      - generic [ref=e448]:
+        - button "Language" [ref=e450] [cursor=pointer]:
+          - generic [ref=e451]: Language
+        - button "Toggle theme (light)" [ref=e453] [cursor=pointer]:
+          - generic [ref=e454]: ☀️ Light
+        - button "Color scheme" [ref=e456] [cursor=pointer]:
+          - generic [ref=e457]: Color scheme

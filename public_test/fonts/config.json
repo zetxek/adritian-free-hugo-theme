@@ -1,0 +1,222 @@
+{
+  "name": "adritian-icons",
+  "css_prefix_text": "icon-",
+  "css_use_suffix": false,
+  "hinting": true,
+  "units_per_em": 1000,
+  "ascent": 850,
+  "glyphs": [
+    {
+      "uid": "22cf3e1e61eb72f5709bdd9ba87fb460",
+      "css": "threads",
+      "code": 59392,
+      "src": "fa6brands"
+    },
+    {
+      "uid": "f17c7d2c6d0538532c9b1bfe27bc6086",
+      "css": "bluesky",
+      "code": 59393,
+      "src": "fa6brands"
+    },
+    {
+      "uid": "7bd660dcae7933286cc6cd48008a350f",
+      "css": "x-twitter",
+      "code": 59394,
+      "src": "fa6brands"
+    },
+    {
+      "uid": "78a202510fab97ccf154c90c63017fc7",
+      "css": "square-twitter",
+      "code": 61569,
+      "src": "fa6brands"
+    },
+    {
+      "uid": "80533f94e92fbff05d81c4198edb1f8b",
+      "css": "behance",
+      "code": 61876,
+      "src": "fa6brands"
+    },
+    {
+      "uid": "789b202e8bb7dfd894d7de63433472cc",
+      "css": "dribbble",
+      "code": 61821,
+      "src": "fa6brands"
+    },
+    {
+      "uid": "f9bc495af91e43a90d3ea50a7e951006",
+      "css": "instagram",
+      "code": 61805,
+      "src": "fa6brands"
+    },
+    {
+      "uid": "da346ddd4a063e1059216662e6d0a761",
+      "css": "user",
+      "code": 61447,
+      "src": "fa5solid"
+    },
+    {
+      "uid": "0225237a65185e82049f6cf4af0c0a5f",
+      "css": "face-smile",
+      "code": 61720,
+      "src": "fa6regular"
+    },
+    {
+      "uid": "de7a531bc39f744ea8d7dde2bc4cec7d",
+      "css": "youtube",
+      "code": 61799,
+      "src": "fa6brands"
+    },
+    {
+      "uid": "0d6904fd6d71bb15eb031f2a1808383d",
+      "css": "quote-left",
+      "code": 61709,
+      "src": "fa6solid"
+    },
+    {
+      "uid": "a58032f4aafd0eec54803075f5b320d4",
+      "css": "email",
+      "code": 59395,
+      "src": "zocial"
+    },
+    {
+      "uid": "e812a789980550da24341fcbb4e52a52",
+      "css": "codepen",
+      "code": 61899,
+      "src": "fa6brands"
+    },
+    {
+      "uid": "1b5d1a165d2a0faed2aebda42e980ec4",
+      "css": "square-facebook",
+      "code": 61570,
+      "src": "fa6brands"
+    },
+    {
+      "uid": "4d8f2dbd4bf4f195e759c1121b364c8f",
+      "css": "square-github",
+      "code": 61586,
+      "src": "fa6brands"
+    },
+    {
+      "uid": "91fb752fe999405a8dde5220cfb532a4",
+      "css": "linkedin",
+      "code": 61580,
+      "src": "fa6brands"
+    },
+    {
+      "uid": "682603a472a824287f24a93476cce10c",
+      "css": "yelp",
+      "code": 61929,
+      "src": "fa6brands"
+    },
+    {
+      "uid": "4b1676624d44038d36d33bd538d549fe",
+      "css": "download",
+      "code": 61465,
+      "src": "fa6solid"
+    },
+    {
+      "uid": "1c9c53430169877cd218b79d3b1780bd",
+      "css": "file-pdf",
+      "code": 61889,
+      "src": "fa6solid"
+    },
+    {
+      "uid": "6c1121466423a9681a8408e889f5695d",
+      "css": "circle-arrow-left",
+      "code": 61608,
+      "src": "fa6solid"
+    },
+    {
+      "uid": "919ee1a7ee21d14e4d40122937a33160",
+      "css": "circle-arrow-right",
+      "code": 61609,
+      "src": "fa6solid"
+    },
+    {
+      "uid": "304f96ad84267f3857957b12d15ac009",
+      "css": "circle-arrow-up",
+      "code": 61610,
+      "src": "fa6solid"
+    },
+    {
+      "uid": "c9c307d1fa78fa912df2b7a1c7b1f53b",
+      "css": "circle-arrow-down",
+      "code": 61611,
+      "src": "fa6solid"
+    },
+    {
+      "uid": "6d60d32286fd0fd7967089117ba49da5",
+      "css": "cloud-arrow-down",
+      "code": 62337,
+      "src": "fa6solid"
+    },
+    {
+      "uid": "14fb7c860f56db56ef65c1d41a31488d",
+      "css": "square-arrow-up-right",
+      "code": 61772,
+      "src": "fa6solid"
+    },
+    {
+      "uid": "89815b2565674eb5018b3bd9b07b12d4",
+      "css": "circle-info",
+      "code": 61530,
+      "src": "fa6solid"
+    },
+    {
+      "uid": "dcf0306d04831e66595e9ff59f9f95c7",
+      "css": "table-list",
+      "code": 61451,
+      "src": "fa6solid"
+    },
+    {
+      "uid": "4bef0175d5b8f8b2a32bfeddf99621b5",
+      "css": "square-xing",
+      "code": 61801,
+      "src": "fa6brands"
+    },
+    {
+      "uid": "d1daf4965871e9f5774809ff067eb2a1",
+      "css": "medium",
+      "code": 62010,
+      "src": "fa5brands"
+    },
+    {
+      "uid": "6dc762948858f158982bd0ff5bf82a13",
+      "css": "meetup",
+      "code": 62176,
+      "src": "fa6brands"
+    },
+    {
+      "uid": "e58f71a3b371f724de2fc2cad9f6db22",
+      "css": "stack-overflow",
+      "code": 61804,
+      "src": "fa6brands"
+    },
+    {
+      "uid": "c6856fc28332f168e75ba0e10ebd2a03",
+      "css": "tiktok",
+      "code": 59396,
+      "src": "fa6brands"
+    },
+    {
+      "uid": "id8wp0cygl9trzbhlbd9o0fygiesi629",
+      "css": "search",
+      "code": 59397,
+      "src": "modernpics"
+    },
+    {
+      "uid": "da1cfcf95ecf3727f4f9870f036fbe47",
+      "css": "freelancermap",
+      "code": 59392,
+      "src": "custom_icons",
+      "selected": false,
+      "svg": {
+        "path": "M500 0C223.8 0 0 223.8 0 500S223.8 1000 500 1000L499.5 941.8H500C744 941.8 941.8 744 941.8 500H1000C1000 223.8 776.2 0 500 0M500 883.6C288.2 883.6 116.4 711.8 116.4 500S288.2 116.3 500 116.3 883.6 288.1 883.6 499.9 711.8 883.5 500 883.5ZM763.6 692C912.6 481.6 770.8 266.5 644.2 208.1 493.8 232 358.4 371.6 342.9 537.7 460.3 738.4 697.2 713.6 763.7 692M350.7 631.6C361.7 699.8 380.9 766.9 421.6 816.5 564.3 853.4 690.4 783.9 752.6 706.4 621.3 767.4 475 732.4 350.8 631.6M196.1 378C117 586.1 251.3 758.9 390.9 807.3 346.1 752.7 313.7 675.5 305.4 599 245.8 539.4 204.9 463.7 196 378M596.3 188.8C467.5 146.8 344.1 196.7 273.7 263.6 275.5 350 289.3 417.5 311.5 474.8 342 329.8 459.5 210.6 596.3 188.8",
+        "width": 1000
+      },
+      "search": [
+        "freelancermap"
+      ]
+    }
+  ]
+}

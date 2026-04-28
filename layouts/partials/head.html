@@ -1,14 +1,19 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-{{- $colorSchemeName := .Site.Params.colorScheme | default "default" -}}
-{{- $colorSchemeData := index site.Data.colorSchemes $colorSchemeName -}}
-{{- /* params.primaryColor overrides both colorScheme and built-in defaults */}}
+{{- /* Resolve color scheme from config — defaults to "default" (current theme colors).
+       params.primaryColor takes precedence over colorScheme if both are set. */}}
+{{- $schemeName := .Site.Params.colorScheme | default "default" -}}
+{{- $scheme := index site.Data.colorSchemes $schemeName -}}
 {{- if and .Site.Params.primaryColor .Site.Params.primaryColor.light -}}
-  {{- $colorSchemeData = dict "light" .Site.Params.primaryColor.light "dark" (.Site.Params.primaryColor.dark | default .Site.Params.primaryColor.light) "name" "Custom" -}}
-  {{- $colorSchemeName = "custom" -}}
+  {{- $scheme = dict "light" .Site.Params.primaryColor.light "dark" (.Site.Params.primaryColor.dark | default .Site.Params.primaryColor.light) "name" "Custom" -}}
+  {{- $schemeName = "custom" -}}
+{{- else if not $scheme -}}
+  {{- warnf "Color scheme '%s' not found in data/colorSchemes.yaml, falling back to default" $schemeName -}}
+  {{- $schemeName = "default" -}}
+  {{- $scheme = index site.Data.colorSchemes "default" -}}
 {{- end -}}
-{{- $themeColor := .Site.Params.themeColor | default (cond (ne $colorSchemeData nil) $colorSchemeData.light "#478079") -}}
+{{- $themeColor := .Site.Params.themeColor | default (cond (ne $scheme nil) $scheme.light "#478079") -}}
 <meta name="theme-color" content="{{ $themeColor }}" />
 {{ partial "head-favicons.html" . }}
 
@@ -106,17 +111,6 @@
       {{ end }} />
   </noscript>
 {{- end }}
-{{/* Resolve color scheme from config — defaults to "default" (current theme colors) */}}
-{{/* params.primaryColor takes precedence over colorScheme if both are set */}}
-{{- $schemeName := .Site.Params.colorScheme | default "default" -}}
-{{- $scheme := index site.Data.colorSchemes $schemeName -}}
-{{- if and .Site.Params.primaryColor .Site.Params.primaryColor.light -}}
-  {{- $scheme = dict "light" .Site.Params.primaryColor.light "dark" (.Site.Params.primaryColor.dark | default .Site.Params.primaryColor.light) "name" "Custom" -}}
-  {{- $schemeName = "custom" -}}
-{{- else if not $scheme -}}
-  {{- warnf "Color scheme '%s' not found in data/colorSchemes.yaml, falling back to default" $schemeName -}}
-  {{- $scheme = index site.Data.colorSchemes "default" -}}
-{{- end -}}
 {{- range .Site.Params.plugins.scss }}
   {{- $scss := resources.Get .URL }}
   {{- $style := false }}
@@ -222,6 +216,15 @@
     {{- $schemeSwitcherScript = $schemeSwitcherScript | resources.Minify | resources.Fingerprint }}
   {{- end }}
   <script defer src="{{ $schemeSwitcherScript.RelPermalink }}"></script>
+{{- end }}
+
+{{- $navbarOverflowMode := .Site.Params.navbarOverflow.mode | default "dropdown" }}
+{{- if ne $navbarOverflowMode "none" }}
+  {{- $navbarOverflowScript := resources.Get "js/navbar-overflow.js" }}
+  {{- if hugo.IsProduction }}
+    {{- $navbarOverflowScript = $navbarOverflowScript | resources.Minify | resources.Fingerprint }}
+  {{- end }}
+  <script defer src="{{ $navbarOverflowScript.RelPermalink }}" data-navbar-overflow-mode="{{ $navbarOverflowMode }}"></script>
 {{- end }}
 
 {{- if .Site.Params.analytics.googleTagManager.enabled }}

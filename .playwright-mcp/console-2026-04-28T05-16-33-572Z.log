@@ -1,0 +1,21 @@
+[      88ms] [LOG] Dark mode toggle script loaded @ http://127.0.0.1:1314/js/color-modes.js:9
+[      95ms] [ERROR] Access to manifest at 'http://localhost:1313/site.webmanifest' from origin 'http://127.0.0.1:1314' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ http://127.0.0.1:1314/?force-overflow=true:0
+[      95ms] [ERROR] Failed to load resource: net::ERR_FAILED @ http://localhost:1313/site.webmanifest:0
+[     101ms] [ERROR] Access to manifest at 'http://localhost:1313/site.webmanifest' from origin 'http://127.0.0.1:1314' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ http://127.0.0.1:1314/?force-overflow=true:0
+[     101ms] [ERROR] Failed to load resource: net::ERR_FAILED @ http://localhost:1313/site.webmanifest:0
+[  139510ms] [LOG] Dark mode toggle script loaded @ http://127.0.0.1:1314/js/color-modes.js:9
+[  139528ms] [ERROR] Access to manifest at 'http://localhost:1313/site.webmanifest' from origin 'http://127.0.0.1:1314' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ http://127.0.0.1:1314/?force-overflow=true:0
+[  139528ms] [ERROR] Failed to load resource: net::ERR_FAILED @ http://localhost:1313/site.webmanifest:0
+[  196922ms] [LOG] Dark mode toggle script loaded @ http://127.0.0.1:1314/js/color-modes.js:9
+[  196942ms] [ERROR] Access to manifest at 'http://localhost:1313/site.webmanifest' from origin 'http://127.0.0.1:1314' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ http://127.0.0.1:1314/?force-overflow=true:0
+[  196942ms] [ERROR] Failed to load resource: net::ERR_FAILED @ http://localhost:1313/site.webmanifest:0
+[  370632ms] [LOG] Dark mode toggle script loaded @ http://127.0.0.1:1314/js/color-modes.min.84082362b66e0b7eb747585dca632fdf5f2b5ae6482cebeed067d3681cdfe255.js:4
+[  370708ms] [WARNING] Manifest: property 'start_url' ignored, should be same origin as document. @ https://adritian-demo.vercel.app/site.webmanifest:0
+[  536699ms] [ERROR] Access to manifest at 'http://localhost:1313/site.webmanifest' from origin 'http://127.0.0.1:1314' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ http://127.0.0.1:1314/?force-overflow=true:0
+[  536700ms] [ERROR] Failed to load resource: net::ERR_FAILED @ http://localhost:1313/site.webmanifest:0
+[  536737ms] [LOG] Dark mode toggle script loaded @ http://127.0.0.1:1314/js/color-modes.js:9
+[  536810ms] [ERROR] Access to manifest at 'http://localhost:1313/site.webmanifest' from origin 'http://127.0.0.1:1314' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ http://127.0.0.1:1314/?force-overflow=true:0
+[  536810ms] [ERROR] Failed to load resource: net::ERR_FAILED @ http://localhost:1313/site.webmanifest:0
+[  547686ms] [LOG] Dark mode toggle script loaded @ http://127.0.0.1:1314/js/color-modes.js:9
+[  547701ms] [ERROR] Access to manifest at 'http://localhost:1313/site.webmanifest' from origin 'http://127.0.0.1:1314' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ http://127.0.0.1:1314/?force-overflow=true:0
+[  547701ms] [ERROR] Failed to load resource: net::ERR_FAILED @ http://localhost:1313/site.webmanifest:0

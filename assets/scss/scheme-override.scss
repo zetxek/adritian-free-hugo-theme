@@ -77,6 +77,14 @@ $dark-primary: {{ .scheme.dark }};
   // Experience
   .experience__company { color: $base-color; }
 
+  // Experience hover effect
+  .experience:hover a,
+  .experience.selected a,
+  .experience a:hover,
+  .experience a:active {
+    background-color: $base-color;
+  }
+
   // Taxonomy tags and counts
   .taxonomy-count {
     background-color: $base-color;
@@ -104,11 +112,36 @@ $dark-primary: {{ .scheme.dark }};
 
   // Bullet color
   .rad-timeline-content ul li { color: $base-color; }
+
+  // Table of Contents
+  .table-of-contents {
+    border-left-color: $base-color;
+    box-shadow: 0 2px 8px rgba(red($base-color), green($base-color), blue($base-color), 0.15);
+  }
+  .table-of-contents #TableOfContents ul li a:hover {
+    color: $base-color;
+  }
+
+  // Related Posts
+  .related-post-item:hover {
+    box-shadow: 0 4px 12px rgba(red($base-color), green($base-color), blue($base-color), 0.15);
+  }
+  .related-post-item a h4 {
+    color: $base-color;
+  }
+  .related-post-item a:hover h4 {
+    color: darken($base-color, 15%);
+  }
+  .related-post-item .post-tags .tag {
+    background: $base-color;
+  }
 }
 
 // Dark mode overrides
 [data-color-scheme="{{ .name }}"][data-bs-theme="dark"],
 html[data-bs-theme="dark"][data-color-scheme="{{ .name }}"] {
+  --bs-link-color: #{$dark-primary};
+  --bs-link-color-rgb: #{red($dark-primary)}, #{green($dark-primary)}, #{blue($dark-primary)};
   --bs-link-hover-color: #{$dark-primary};
   --bs-link-hover-color-rgb: #{red($dark-primary)}, #{green($dark-primary)}, #{blue($dark-primary)};
 
@@ -131,6 +164,14 @@ html[data-bs-theme="dark"][data-color-scheme="{{ .name }}"] {
   .reading-progress-fill { background: $dark-primary; }
   .experience__company { color: $dark-primary; }
   .skill-bar-fill { background-color: $dark-primary; }
+
+  // Experience hover effect
+  .experience:hover a,
+  .experience.selected a,
+  .experience a:hover,
+  .experience a:active {
+    background-color: $dark-primary;
+  }
 
   .taxonomy-count {
     background-color: $dark-primary;

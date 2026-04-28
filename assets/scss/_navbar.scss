@@ -118,6 +118,33 @@
     .dropdown-menu-end {
         --bs-dropdown-min-width: 8rem;
     }
+
+    // More dropdown for overflow handling
+    .more-dropdown {
+        display: none; // Hidden by default, shown via JS when needed
+
+        &.show {
+            display: block;
+        }
+
+        // Replace Bootstrap's tiny triangle caret (4×8px borders) with a
+        // chevron glyph that reads as an icon at the navbar font size.
+        > .dropdown-toggle::after {
+            content: "\25BE"; // ▾
+            border: 0;
+            width: auto;
+            height: auto;
+            margin-left: .35em;
+            font-size: .75em;
+            line-height: 1;
+            vertical-align: middle;
+            transition: transform .2s ease-in-out;
+        }
+
+        > .dropdown-toggle[aria-expanded="true"]::after {
+            transform: rotate(180deg);
+        }
+    }
 }
 
 @include color-mode(dark) {

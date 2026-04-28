@@ -1,0 +1,5 @@
+[      93ms] [ERROR] Access to manifest at 'http://localhost:1313/site.webmanifest' from origin 'http://127.0.0.1:1314' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ http://127.0.0.1:1314/?force-overflow=true:0
+[      93ms] [ERROR] Failed to load resource: net::ERR_FAILED @ http://localhost:1313/site.webmanifest:0
+[     114ms] [LOG] Dark mode toggle script loaded @ http://127.0.0.1:1314/js/color-modes.js:9
+[     131ms] [ERROR] Access to manifest at 'http://localhost:1313/site.webmanifest' from origin 'http://127.0.0.1:1314' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ http://127.0.0.1:1314/?force-overflow=true:0
+[     131ms] [ERROR] Failed to load resource: net::ERR_FAILED @ http://localhost:1313/site.webmanifest:0

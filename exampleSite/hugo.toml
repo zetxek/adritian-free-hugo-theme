@@ -576,6 +576,10 @@ featured_sort_by_date = false
 [params.experience]
 showJobCard = true # Set to false to hide the job card
 
+# Navbar overflow handling - options: "dropdown" | "footer" | "none"
+[params.navbarOverflow]
+mode = "dropdown" # "dropdown" moves items to More dropdown, "footer" moves to footer, "none" disables
+
 
 # Performance optimizations
 [markup]
