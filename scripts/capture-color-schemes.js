@@ -13,13 +13,16 @@ const path = require('node:path');
 const yaml = require('js-yaml');
 const { chromium } = require('playwright');
 const sharp = require('sharp');
-const { computePairLayout } = require('./lib/composite-layout.js');
+const { computePairLayout, computeTriptychLayout } = require('./lib/composite-layout.js');
 
 const REPO_ROOT = path.resolve(__dirname, '..');
 const SCHEMES_YAML = path.join(REPO_ROOT, 'data', 'colorSchemes.yaml');
 const RAW_DIR = path.join(REPO_ROOT, 'exampleSite', 'static', 'img', 'blog', 'raw');
 const PAIR_DIR = path.join(REPO_ROOT, 'exampleSite', 'static', 'img', 'blog');
 const PAIR_GUTTER = 16;
+const IMAGES_DIR = path.join(REPO_ROOT, 'images');
+const TRIPTYCH_SCHEMES = ['ocean', 'default', 'warm'];
+const TRIPTYCH_TARGET_WIDTH = 1500;
 const SITE_URL = process.env.CAPTURE_SITE_URL || 'http://localhost:1313/';
 const VIEWPORT = { width: 1280, height: 800 };
 
@@ -107,10 +110,52 @@ async function buildPairComposites(schemes) {
   }
 }
 
+async function buildTriptychs() {
+  console.log(`Building light + dark triptychs (${TRIPTYCH_SCHEMES.join(' / ')})`);
+  const layout = computeTriptychLayout({
+    panelWidth: VIEWPORT.width,
+    panelHeight: VIEWPORT.height,
+    targetWidth: TRIPTYCH_TARGET_WIDTH,
+  });
+
+  for (const mode of ['light', 'dark']) {
+    const inputs = TRIPTYCH_SCHEMES.map((scheme, i) => ({
+      input: path.join(RAW_DIR, `color-scheme-${scheme}-${mode}.png`),
+      ...layout.positions[i],
+    }));
+
+    const outName = mode === 'light' ? 'screenshot.png' : 'screenshot-dark.png';
+    const outPath = path.join(IMAGES_DIR, outName);
+
+    // Two-step: composite full-resolution canvas first, then resize.
+    // sharp applies .resize() before .composite() when chained on a create canvas,
+    // which causes "Image to composite must have same dimensions or smaller".
+    const composed = await sharp({
+      create: {
+        width: layout.totalWidth,
+        height: layout.totalHeight,
+        channels: 4,
+        background: { r: 255, g: 255, b: 255, alpha: 1 },
+      },
+    })
+      .composite(inputs)
+      .png()
+      .toBuffer();
+
+    await sharp(composed)
+      .resize(layout.targetWidth, layout.targetHeight)
+      .png({ compressionLevel: 9 })
+      .toFile(outPath);
+
+    console.log(`  ✓ ${path.relative(REPO_ROOT, outPath)} (${layout.targetWidth}×${layout.targetHeight})`);
+  }
+}
+
 async function main() {
   const schemes = loadSchemeNames();
   await captureAll(schemes);
   await buildPairComposites(schemes);
+  await buildTriptychs();
   console.log('Done.');
 }
 
