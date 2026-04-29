@@ -88,15 +88,51 @@ jobs:
           git add --all
           git commit -m "$COMMIT_MSG_THEME" || echo "No theme module changes"
 
-          # Copy content from the checked-out theme source (one level up since
+          # Sync content from the checked-out theme source (one level up since
           # we are now inside demo-repo/, and theme-source/ is a sibling dir).
-          cp ../theme-source/exampleSite/hugo.toml hugo.toml
-          # Update URL
-          sed -i -e "s/\"https\:\/\/www\.adrianmoreno\.info\"/\"https\:\/\/adritian-demo\.vercel\.app\/\"/g" hugo.toml
+          CONTENT_SOURCE="../theme-source/exampleSite"
+          
+          # Sync content directories (blog posts, pages, etc.)
+          if [ -d "$CONTENT_SOURCE/content" ]; then
+            rsync -a --delete "$CONTENT_SOURCE/content/" content/
+            echo "✅ Synced content/"
+          fi
+          
+          # Sync assets (images, etc. referenced by content)
+          if [ -d "$CONTENT_SOURCE/assets" ]; then
+            rsync -a --delete "$CONTENT_SOURCE/assets/" assets/
+            echo "✅ Synced assets/"
+          fi
+          
+          # Sync data files
+          if [ -d "$CONTENT_SOURCE/data" ]; then
+            rsync -a --delete "$CONTENT_SOURCE/data/" data/
+            echo "✅ Synced data/"
+          fi
+          
+          # Sync static files
+          if [ -d "$CONTENT_SOURCE/static" ]; then
+            rsync -a --delete "$CONTENT_SOURCE/static/" static/
+            echo "✅ Synced static/"
+          fi
+          
+          # Sync i18n overrides
+          if [ -d "$CONTENT_SOURCE/i18n" ]; then
+            rsync -a --delete "$CONTENT_SOURCE/i18n/" i18n/
+            echo "✅ Synced i18n/"
+          fi
+          
+          # Sync hugo.toml with URL adjustment for preview
+          if [ -f "$CONTENT_SOURCE/hugo.toml" ]; then
+            cp "$CONTENT_SOURCE/hugo.toml" hugo.toml
+            sed -i -E 's|^baseURL[[:space:]]*=[[:space:]]*".*"|baseURL = "https://adritian-demo.vercel.app/"|' hugo.toml
+            echo "✅ Synced hugo.toml"
+          fi
 
-          COMMIT_MSG_CONFIG='chore: update config/content to `'"$LATEST_TAG"'` from https://github.com/zetxek/adritian-free-hugo-theme'
-          echo "Committing content/config: $COMMIT_MSG_CONFIG"
-          git commit -m "$COMMIT_MSG_CONFIG" || echo "No changes to config"
+          COMMIT_MSG_CONTENT='chore: sync content/config to `'"$LATEST_TAG"'` from https://github.com/zetxek/adritian-free-hugo-theme'
+          echo "Committing content/config: $COMMIT_MSG_CONTENT"
+          git add --all
+          git commit -m "$COMMIT_MSG_CONTENT" || echo "No changes to content/config"
 
           # Skip push and PR creation if there are no commits ahead of the base branch
           COMMITS_AHEAD=$(git rev-list --count origin/$BASE_BRANCH..HEAD 2>/dev/null || echo "0")

@@ -200,8 +200,49 @@ jobs:
           
           hugo mod tidy
 
-          # Commit changes
-          git add go.mod go.sum
+          # Sync content from theme's exampleSite to demo repo
+          echo "📦 Syncing content from theme exampleSite..."
+          CONTENT_SOURCE="../source-repo/exampleSite"
+          
+          # Sync content directories (blog posts, pages, etc.)
+          if [ -d "$CONTENT_SOURCE/content" ]; then
+            rsync -a --delete "$CONTENT_SOURCE/content/" content/
+            echo "✅ Synced content/"
+          fi
+          
+          # Sync assets (images, etc. referenced by content)
+          if [ -d "$CONTENT_SOURCE/assets" ]; then
+            rsync -a --delete "$CONTENT_SOURCE/assets/" assets/
+            echo "✅ Synced assets/"
+          fi
+          
+          # Sync data files
+          if [ -d "$CONTENT_SOURCE/data" ]; then
+            rsync -a --delete "$CONTENT_SOURCE/data/" data/
+            echo "✅ Synced data/"
+          fi
+          
+          # Sync static files
+          if [ -d "$CONTENT_SOURCE/static" ]; then
+            rsync -a --delete "$CONTENT_SOURCE/static/" static/
+            echo "✅ Synced static/"
+          fi
+          
+          # Sync i18n overrides
+          if [ -d "$CONTENT_SOURCE/i18n" ]; then
+            rsync -a --delete "$CONTENT_SOURCE/i18n/" i18n/
+            echo "✅ Synced i18n/"
+          fi
+          
+          # Sync hugo.toml with URL adjustment for preview
+          if [ -f "$CONTENT_SOURCE/hugo.toml" ]; then
+            cp "$CONTENT_SOURCE/hugo.toml" hugo.toml
+            sed -i -E 's|^baseURL[[:space:]]*=[[:space:]]*".*"|baseURL = "https://adritian-demo.vercel.app/"|' hugo.toml
+            echo "✅ Synced hugo.toml"
+          fi
+
+          # Commit all changes (theme module + content)
+          git add --all
           if [ -n "$PR_NUMBER" ]; then
             COMMIT_MSG="preview: theme PR #$PR_NUMBER ($SHORT_COMMIT)"
           else
