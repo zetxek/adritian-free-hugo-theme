@@ -8,9 +8,7 @@ function computePairLayout({ width, height, gutter }) {
 }
 
 function computeTriptychLayout({ panelWidth, panelHeight, targetWidth }) {
-  // Add 1px padding to avoid libvips "same dimensions or smaller" rejection
-  // when a panel's right edge exactly meets the canvas right edge.
-  const totalWidth = panelWidth * 3 + 1;
+  const totalWidth = panelWidth * 3;
   const totalHeight = panelHeight;
   const result = {
     totalWidth,
