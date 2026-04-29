@@ -41,22 +41,24 @@ Some of the best applications for the theme are for minimalistic websites, singl
 
 ## Live demo & Preview
 
-You can see it live at [www.adrianmoreno.info](https://www.adrianmoreno.info) (my personal website), as well as in these screenshots of the homepage, in the dark and light variations of the theme:
+You can see it live at [www.adrianmoreno.info](https://www.adrianmoreno.info) (my personal website), as well as in these screenshots of the homepage, shown across three of the theme's seven built-in color schemes (Ocean, Default, Warm) in both light and dark modes:
 
 <table>
 	<tbody>
 	<tr>
 		<td>
-			<img src="https://user-images.githubusercontent.com/240085/230632835-74349170-d610-4731-8fac-62c413e6b3f5.png" alt="Light version of the Hugo theme Adritian"/>
-</td>
+			<img src="https://raw.githubusercontent.com/zetxek/adritian-free-hugo-theme/main/images/screenshot.png" alt="Adritian theme homepage in three color schemes (Ocean, Default, Warm) — light mode"/>
+		</td>
+	</tr>
+	<tr>
 		<td>
-			<img src="https://raw.githubusercontent.com/zetxek/adritian-free-hugo-theme/main/images/screenshot-dark-fullscroll.jpeg" alt="Dark version of the Hugo theme Adritian"/>
-</td>
+			<img src="https://raw.githubusercontent.com/zetxek/adritian-free-hugo-theme/main/images/screenshot-dark.png" alt="Adritian theme homepage in three color schemes (Ocean, Default, Warm) — dark mode"/>
+		</td>
 	</tr>
 	</tbody>
 </table>
 
-The dark color variation is selected automatically based on browser settings, and a color switcher is available in the footer and the mobile menu for visitors to override.
+The dark color variation is selected automatically based on browser settings, and a color switcher is available in the footer and the mobile menu for visitors to override. The theme ships with **7 built-in color schemes** — see them all in the [color schemes blog post](https://adritian-demo.vercel.app/blog/color-schemes/).
 
 Other relevant repositories related to this theme are:
 
@@ -226,6 +228,8 @@ The theme ships with 7 named color schemes that change the primary accent color 
 | `slate` | `#546e7a` | `#90a4ae` | Cool greys, neutral |
 | `midnight` | `#3f3d99` | `#7c7ae6` | Deep dark with purple accents |
 | `warm` | `#c17817` | `#e8a94f` | Ambers and oranges |
+
+👉 **See all 7 schemes side-by-side (light + dark), with code samples and a live switcher demo, in the [Color schemes blog post](https://adritian-demo.vercel.app/blog/color-schemes/).**
 
 Colors are applied at build time to every component (links, buttons, tags, progress bars, focus rings, etc.) in both light and dark modes. No JavaScript is required.
 
