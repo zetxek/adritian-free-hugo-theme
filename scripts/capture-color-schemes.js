@@ -12,10 +12,14 @@ const fs = require('node:fs');
 const path = require('node:path');
 const yaml = require('js-yaml');
 const { chromium } = require('playwright');
+const sharp = require('sharp');
+const { computePairLayout } = require('./lib/composite-layout.js');
 
 const REPO_ROOT = path.resolve(__dirname, '..');
 const SCHEMES_YAML = path.join(REPO_ROOT, 'data', 'colorSchemes.yaml');
 const RAW_DIR = path.join(REPO_ROOT, 'exampleSite', 'static', 'img', 'blog', 'raw');
+const PAIR_DIR = path.join(REPO_ROOT, 'exampleSite', 'static', 'img', 'blog');
+const PAIR_GUTTER = 16;
 const SITE_URL = process.env.CAPTURE_SITE_URL || 'http://localhost:1313/';
 const VIEWPORT = { width: 1280, height: 800 };
 
@@ -29,8 +33,7 @@ function ensureDir(dir) {
   fs.mkdirSync(dir, { recursive: true });
 }
 
-async function captureAll() {
-  const schemes = loadSchemeNames();
+async function captureAll(schemes) {
   console.log(`Capturing ${schemes.length} schemes × 2 modes = ${schemes.length * 2} screenshots`);
   ensureDir(RAW_DIR);
 
@@ -72,9 +75,43 @@ async function captureAll() {
   }
 }
 
+async function buildPairComposites(schemes) {
+  console.log(`Building ${schemes.length} light/dark composites`);
+  const layout = computePairLayout({
+    width: VIEWPORT.width,
+    height: VIEWPORT.height,
+    gutter: PAIR_GUTTER,
+  });
+
+  for (const scheme of schemes) {
+    const lightPath = path.join(RAW_DIR, `color-scheme-${scheme}-light.png`);
+    const darkPath = path.join(RAW_DIR, `color-scheme-${scheme}-dark.png`);
+    const outPath = path.join(PAIR_DIR, `color-scheme-${scheme}.png`);
+
+    await sharp({
+      create: {
+        width: layout.totalWidth,
+        height: layout.totalHeight,
+        channels: 4,
+        background: { r: 255, g: 255, b: 255, alpha: 1 },
+      },
+    })
+      .composite([
+        { input: lightPath, ...layout.leftPosition },
+        { input: darkPath, ...layout.rightPosition },
+      ])
+      .png({ compressionLevel: 9 })
+      .toFile(outPath);
+
+    console.log(`  ✓ ${path.relative(REPO_ROOT, outPath)}`);
+  }
+}
+
 async function main() {
-  await captureAll();
-  console.log('Done capturing raw screenshots.');
+  const schemes = loadSchemeNames();
+  await captureAll(schemes);
+  await buildPairComposites(schemes);
+  console.log('Done.');
 }
 
 main().catch((err) => {
