@@ -122,10 +122,10 @@ jobs:
             echo "✅ Synced i18n/"
           fi
           
-          # Sync hugo.toml with URL adjustment
+          # Sync hugo.toml with URL adjustment for preview
           if [ -f "$CONTENT_SOURCE/hugo.toml" ]; then
             cp "$CONTENT_SOURCE/hugo.toml" hugo.toml
-            sed -i -e "s/\"https\:\/\/www\.adrianmoreno\.info\"/\"https\:\/\/adritian-demo\.vercel\.app\/\"/g" hugo.toml
+            sed -i -E 's|^baseURL[[:space:]]*=[[:space:]]*".*"|baseURL = "https://adritian-demo.vercel.app/"|' hugo.toml
             echo "✅ Synced hugo.toml"
           fi
 

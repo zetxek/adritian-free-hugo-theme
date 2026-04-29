@@ -22,9 +22,9 @@ Now, both the internal PR workflow and the external PR workflow (for fork contri
 
 ## What Gets Synced
 
-When you open a PR, the following directories from `exampleSite` are copied to the demo repo:
+When you open a PR, the following files and directories from `exampleSite` are copied to the demo repo:
 
-| Directory | Purpose |
+| Path | Purpose |
 |-----------|---------|
 | `content/` | Blog posts, pages, portfolio items, testimonials |
 | `assets/` | Images and resources referenced by shortcodes |
