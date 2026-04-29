@@ -196,3 +196,14 @@
 
 <script type="application/ld+json">{{ $blogPosting | jsonify | safeJS }}</script>
 {{- end -}}
+
+{{/* Allow per-page granular SEO schema overrides via front matter 'schema' parameter */}}
+{{- with .Params.schema -}}
+  {{- if reflect.IsSlice . -}}
+    {{- range . -}}
+      <script type="application/ld+json">{{ . | jsonify | safeJS }}</script>
+    {{- end -}}
+  {{- else if reflect.IsMap . -}}
+    <script type="application/ld+json">{{ . | jsonify | safeJS }}</script>
+  {{- end -}}
+{{- end -}}
