@@ -11,7 +11,8 @@
     "test:e2e": "export TEST_NO_MENUS=false; playwright test",
     "test:e2e:no-menus": "export TEST_NO_MENUS=true; playwright test",
     "test:e2e:ui": "playwright test --ui",
-    "test:e2e:debug": "playwright test --debug"
+    "test:e2e:debug": "playwright test --debug",
+    "screenshots:colors": "node scripts/capture-color-schemes.js"
   },
   "devDependencies": {
     "@playwright/test": "^1.59.1",
@@ -19,14 +20,16 @@
     "@zetxek/adritian-theme-helper": "^1.0.5",
     "autoprefixer": "^10.5.0",
     "bootstrap": "^5.3.8",
+    "js-yaml": "^4.1.1",
     "npm-run-all": "^4.1.5",
+    "png-to-ico": "^3.0.1",
     "postcss": "^8.5.10",
     "postcss-cli": "^11.0.0",
-    "png-to-ico": "^3.0.1",
-    "prettier-plugin-go-template": "^0.0.15"
+    "prettier-plugin-go-template": "^0.0.15",
+    "sharp": "^0.34.5"
   },
   "dependencies": {
-    "fuse.js": "^7.3.0",
-    "dompurify": "^3.4.1"
+    "dompurify": "^3.4.1",
+    "fuse.js": "^7.3.0"
   }
 }
