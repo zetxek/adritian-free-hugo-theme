@@ -25,11 +25,13 @@ If you have the [live switcher enabled](#live-switcher), you can try all the sch
 
 Each scheme defines two hex values: a primary color for **light mode** and a brighter variant for **dark mode** (to maintain readability on dark backgrounds).
 
+For each scheme below, the screenshot shows the same homepage hero in light mode (left) and dark mode (right), so you can see exactly how the accent color reads against both backgrounds.
+
 ### Default
 
 The original teal palette the theme ships with.
 
-![Default color scheme — teal accent](/img/blog/color-scheme-default.png)
+![Default color scheme — light mode (left) and dark mode (right)](/img/blog/color-scheme-default.png)
 
 | Mode | Color |
 |------|-------|
@@ -42,7 +44,7 @@ The original teal palette the theme ships with.
 
 Deep blues and bright teals — well-suited to technology and developer portfolios.
 
-![Ocean color scheme — blue/teal accent](/img/blog/color-scheme-ocean.png)
+![Ocean color scheme — light mode (left) and dark mode (right)](/img/blog/color-scheme-ocean.png)
 
 | Mode | Color |
 |------|-------|
@@ -55,7 +57,7 @@ Deep blues and bright teals — well-suited to technology and developer portfoli
 
 Earthy greens for a natural, calm aesthetic.
 
-![Forest color scheme — green accent](/img/blog/color-scheme-forest.png)
+![Forest color scheme — light mode (left) and dark mode (right)](/img/blog/color-scheme-forest.png)
 
 | Mode | Color |
 |------|-------|
@@ -68,7 +70,7 @@ Earthy greens for a natural, calm aesthetic.
 
 Warm pinks and reds — great for creative, fashion, or lifestyle sites.
 
-![Rose color scheme — pink/red accent](/img/blog/color-scheme-rose.png)
+![Rose color scheme — light mode (left) and dark mode (right)](/img/blog/color-scheme-rose.png)
 
 | Mode | Color |
 |------|-------|
@@ -81,7 +83,7 @@ Warm pinks and reds — great for creative, fashion, or lifestyle sites.
 
 Neutral blue-greys for a professional, understated look.
 
-![Slate color scheme — grey/blue accent](/img/blog/color-scheme-slate.png)
+![Slate color scheme — light mode (left) and dark mode (right)](/img/blog/color-scheme-slate.png)
 
 | Mode | Color |
 |------|-------|
@@ -94,7 +96,7 @@ Neutral blue-greys for a professional, understated look.
 
 Deep indigo with violet highlights — striking in dark mode.
 
-![Midnight color scheme — purple accent](/img/blog/color-scheme-midnight.png)
+![Midnight color scheme — light mode (left) and dark mode (right)](/img/blog/color-scheme-midnight.png)
 
 | Mode | Color |
 |------|-------|
@@ -107,7 +109,7 @@ Deep indigo with violet highlights — striking in dark mode.
 
 Ambers and burnt oranges — ideal for food, travel, or personal branding.
 
-![Warm color scheme — amber/orange accent](/img/blog/color-scheme-warm.png)
+![Warm color scheme — light mode (left) and dark mode (right)](/img/blog/color-scheme-warm.png)
 
 | Mode | Color |
 |------|-------|
