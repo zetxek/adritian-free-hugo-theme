@@ -138,6 +138,11 @@ enabled = false
 code = "GTM-XXXXX"
 enabled = false
 
+[params.analytics.plausible]
+enabled = false
+domain = "" # e.g. example.com
+# script = "https://plausible.io/js/script.js" # optional override
+
 [build]
 writeStats = true
 

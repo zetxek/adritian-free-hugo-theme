@@ -8,6 +8,13 @@
 {{- if .Site.Params.analytics.googleTagManager.enabled }}
   <link rel="preconnect" href="https://www.googletagmanager.com" />
 {{- end }}
+
+{{- if .Site.Params.analytics.plausible.enabled }}
+  {{- $plausibleDomain := .Site.Params.analytics.plausible.domain | default .Site.BaseURL -}}
+  {{- $plausibleScript := .Site.Params.analytics.plausible.script | default "https://plausible.io/js/script.js" -}}
+  <script defer data-domain="{{ $plausibleDomain }}" src="{{ $plausibleScript }}"></script>
+{{- end }}
+
 {{- if .Site.Params.analytics.googleAnalytics.enabled }}
   {{- if .Site.Params.analytics.googleAnalytics.code }}
     <!-- Google tag (gtag.js) - moved to bottom for non-blocking -->
