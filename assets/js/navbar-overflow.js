@@ -81,7 +81,7 @@
 
     moreButton = document.createElement('button');
     moreButton.id = MORE_BUTTON_ID;
-    moreButton.className = 'btn btn-link nav-link dropdown-toggle';
+    moreButton.className = 'btn btn-link py-2 px-0 px-lg-2 dropdown-toggle d-flex align-items-center';
     moreButton.type = 'button';
     moreButton.setAttribute('data-bs-toggle', 'dropdown');
     moreButton.setAttribute('data-bs-auto-close', 'outside');
