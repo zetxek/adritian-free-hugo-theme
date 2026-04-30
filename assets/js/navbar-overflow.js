@@ -17,6 +17,11 @@
   var navbarToggler = null;
   var resizeTimeout = null;
   var overflowMode = 'dropdown';
+  // Tracks <li> dropdown items moved (not cloned) into the More dropdown so
+  // resetAllItems can return them to their original <ul.dropdown-menu>. Moving
+  // preserves the click handlers bound directly by color-scheme-switcher.js,
+  // color-modes.js, etc. — cloning would silently break them.
+  var movedDropdownItems = [];
 
   function init() {
     // Determine overflow mode from script tag data attribute
@@ -204,76 +209,72 @@
   function moveItemToMore(item) {
     if (!moreDropdown) return;
 
-    // Create a dropdown item for the nav item
+    // Dropdown items (language/theme/scheme selectors) get inlined with a
+    // section header. Bootstrap 5 has no native nested-dropdown support, so a
+    // nested toggle wouldn't open. We also MOVE the original <li> items rather
+    // than cloning so handlers bound directly by color-scheme-switcher.js etc.
+    // keep working.
+    if (item.classList.contains('dropdown')) {
+      var dropdownMenu = item.querySelector('.dropdown-menu');
+      if (dropdownMenu) {
+        var labelText = getDropdownLabel(item);
+        if (labelText) {
+          var headerLi = document.createElement('li');
+          headerLi.className = 'overflow-section-header';
+          var header = document.createElement('h6');
+          header.className = 'dropdown-header';
+          header.textContent = labelText;
+          headerLi.appendChild(header);
+          moreDropdown.appendChild(headerLi);
+        }
+
+        Array.from(dropdownMenu.children).forEach(function (li) {
+          movedDropdownItems.push({ item: li, originalParent: dropdownMenu });
+          moreDropdown.appendChild(li);
+        });
+
+        item.dataset.inMore = 'true';
+        item.style.display = 'none';
+        return;
+      }
+    }
+
+    // Plain nav items: clone the link (it has no JS-bound handlers worth
+    // preserving — links navigate via href).
     var link = item.querySelector('a, button');
     if (!link) return;
 
     var dropdownItem = document.createElement('li');
     var dropdownLink = link.cloneNode(true);
 
-    // Change IDs so they don't duplicate
     if (dropdownLink.id) {
       dropdownLink.id = dropdownLink.id + '-more';
     }
-    // Also remove any data-bs-display static, so popper works for sub-menus if we want, or leave it.
-    
-    // For dropup vs dropdown
     dropdownLink.classList.remove('dropup');
-    var elementsWithIds = dropdownItem.querySelectorAll('[id]');
-    elementsWithIds.forEach(function(el) { el.id = el.id + '-more'; });
-
-    // Remove dropdown-toggle class from cloned link
     dropdownLink.classList.remove('dropdown-toggle');
     dropdownLink.removeAttribute('data-bs-toggle');
     dropdownLink.removeAttribute('aria-expanded');
     dropdownLink.removeAttribute('aria-haspopup');
 
-    // For dropdown items, we need to handle them specially
-    if (item.classList.contains('dropdown')) {
-      // This is a dropdown (language, theme, scheme selector)
-      // We need to move the entire dropdown structure
-      var dropdownMenu = item.querySelector('.dropdown-menu');
-      if (dropdownMenu) {
-        // Create a nested dropdown structure
-        dropdownLink.classList.add('dropdown-toggle');
-        dropdownLink.setAttribute('data-bs-toggle', 'dropdown');
-        dropdownLink.setAttribute('aria-expanded', 'false');
-        dropdownLink.setAttribute('aria-haspopup', 'true');
+    dropdownItem.appendChild(dropdownLink);
 
-        var nestedDropdown = document.createElement('ul');
-        nestedDropdown.className = 'dropdown-menu dropdown-menu-end';
-
-        // Copy all dropdown items
-        var dropdownItems = dropdownMenu.querySelectorAll('.dropdown-item');
-        dropdownItems.forEach(function (di) {
-          var clonedDi = di.cloneNode(true);
-          nestedDropdown.appendChild(clonedDi);
-        });
-
-        // if the original link had aria-controls, update it
-        if (dropdownLink.hasAttribute('aria-controls')) {
-          dropdownLink.setAttribute('aria-controls', dropdownLink.getAttribute('aria-controls') + '-more');
-        }
-        nestedDropdown.id = (dropdownMenu.id || 'nested-dropdown') + '-more';
-
-        dropdownItem.appendChild(dropdownLink);
-        dropdownItem.appendChild(nestedDropdown);
-        dropdownItem.classList.add('dropdown');
-      } else {
-        dropdownItem.appendChild(dropdownLink);
-      }
-    } else {
-      dropdownItem.appendChild(dropdownLink);
-    }
-
-    // Store original item reference for restoration
     item.dataset.inMore = 'true';
-
-    // Add to More dropdown
     moreDropdown.appendChild(dropdownItem);
-
-    // Hide original item
     item.style.display = 'none';
+  }
+
+  function getDropdownLabel(item) {
+    var labelEl = item.querySelector('.current-scheme, .current-theme, .label');
+    if (labelEl && labelEl.textContent.trim()) {
+      return labelEl.textContent.trim();
+    }
+    var toggle = item.querySelector('.dropdown-toggle, [data-bs-toggle="dropdown"]');
+    if (toggle) {
+      var aria = toggle.getAttribute('aria-label');
+      if (aria) return aria.trim();
+      if (toggle.textContent.trim()) return toggle.textContent.trim();
+    }
+    return '';
   }
 
   function moveItemToFooter(item) {
@@ -322,8 +323,18 @@
       delete item.dataset.inFooter;
     });
 
+    // Return moved <li> dropdown items to their original parent BEFORE
+    // clearing the More dropdown — otherwise we'd destroy elements that still
+    // own live event handlers.
+    movedDropdownItems.forEach(function (entry) {
+      if (entry.originalParent && entry.item) {
+        entry.originalParent.appendChild(entry.item);
+      }
+    });
+    movedDropdownItems = [];
+
     if (moreDropdown) {
-      // Clear More dropdown
+      // Clear More dropdown (now contains only headers and clones)
       while (moreDropdown.firstChild) {
         moreDropdown.removeChild(moreDropdown.firstChild);
       }

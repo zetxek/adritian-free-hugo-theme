@@ -83,7 +83,7 @@ test.describe('Navbar overflow handler', () => {
     await expect(itemsInMoreCount).toBeGreaterThan(0);
   });
 
-  test('More dropdown handles nested dropdowns (language, theme, scheme)', async ({ page }) => {
+  test('More dropdown inlines selector items with section headers', async ({ page }) => {
     test.skip(process.env.TEST_NO_MENUS === 'true', 'Skipping test because TEST_NO_MENUS is true');
 
     await page.goto(`${BASE_URL}?force-overflow=true`);
@@ -94,21 +94,45 @@ test.describe('Navbar overflow handler', () => {
     const moreDropdown = page.locator('#navbar-more-dropdown');
     await expect(moreDropdown).toBeVisible();
 
-    // Check that nested dropdowns are present
-    // Language dropdown
-    const languageDropdown = moreDropdown.locator('li.dropdown').filter({ hasText: /Language/i });
-    const hasLanguage = await languageDropdown.count() > 0;
+    // Selector dropdowns (language/theme/scheme) get inlined into the More
+    // dropdown as flat items grouped under .dropdown-header rows. Bootstrap 5
+    // doesn't support nested toggles, so the previous nested structure was
+    // broken. Verify at least one section header is rendered AND that actual
+    // dropdown items follow.
+    const headers = moreDropdown.locator('.dropdown-header');
+    await expect(await headers.count()).toBeGreaterThan(0);
 
-    // Theme dropdown
-    const themeDropdown = moreDropdown.locator('li.dropdown').filter({ hasText: /Light|Dark|Auto/i });
-    const hasTheme = await themeDropdown.count() > 0;
+    const items = moreDropdown.locator('.dropdown-item');
+    await expect(await items.count()).toBeGreaterThan(0);
+  });
 
-    // Color scheme dropdown
-    const schemeDropdown = moreDropdown.locator('li.dropdown').filter({ hasText: /Default|Forest|Midnight|Ocean|Rose|Slate|Warm/i });
-    const hasScheme = await schemeDropdown.count() > 0;
+  test('Color scheme item inside More dropdown actually changes the scheme', async ({ page }) => {
+    test.skip(process.env.TEST_NO_MENUS === 'true', 'Skipping test because TEST_NO_MENUS is true');
 
-    // At least one of these should be in the More dropdown
-    await expect(hasLanguage || hasTheme || hasScheme).toBeTruthy();
+    // Tall viewport keeps the absolutely-positioned dropdown menu in view so
+    // Playwright's auto-scroll can reach the items.
+    await page.setViewportSize({ width: 1280, height: 1400 });
+    await page.goto(`${BASE_URL}?force-overflow=true`);
+    await page.click('#navbar-more-button');
+
+    const moreDropdown = page.locator('#navbar-more-dropdown');
+    await expect(moreDropdown).toBeVisible();
+
+    // Pick a non-default scheme that should be present (Forest is in the
+    // included data file).
+    const schemeButton = moreDropdown.locator('[data-scheme-value="forest"]').first();
+    if (await schemeButton.count() === 0) {
+      test.skip(true, 'forest scheme not available in this build');
+    }
+    // force:true bypasses the viewport check — the dropdown is rendered
+    // outside the visible area but the element itself is interactable.
+    await schemeButton.click({ force: true });
+
+    // The switcher applies the choice to <html data-color-scheme="..."> and
+    // persists it under localStorage key "colorScheme". This proves the click
+    // handler bound directly to the original <button> element survived being
+    // moved into the More dropdown.
+    await expect(page.locator('html')).toHaveAttribute('data-color-scheme', 'forest', { timeout: 2000 });
   });
 
   test('More dropdown items are clickable and navigate correctly', async ({ page }) => {
