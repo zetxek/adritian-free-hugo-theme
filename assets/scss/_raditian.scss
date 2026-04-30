@@ -728,6 +728,21 @@ textarea:focus {
     max-width: 100%;
 }
 
+/* Fix for card images to preserve aspect ratio on mobile */
+.picture-works img,
+.portfolio-project img,
+.clients__item img,
+.card img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Ensure responsive images in lazypicture maintain aspect ratio */
+picture img.lozad {
+    max-width: 100%;
+    height: auto;
+}
+
 .section div[class*="col-"] img.image-left-overflow {
     margin-left: 0;
 }
