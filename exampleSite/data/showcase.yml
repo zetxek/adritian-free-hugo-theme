@@ -117,3 +117,9 @@ sites:
     github: "ivopascal"
     repo: "ivopascal/ivopascal.github.io"
     tags: [portfolio]
+
+  - name: "Filip Vencelides"
+    url: "https://vencelides.cz/"
+    description: "Software Engineer / Game Dev Enthusiast – personal site and portfolio."
+    github: "FlashX64"
+    tags: [portfolio, dark-mode]
