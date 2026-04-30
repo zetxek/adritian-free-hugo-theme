@@ -122,4 +122,5 @@ sites:
     url: "https://vencelides.cz/"
     description: "Software Engineer / Game Dev Enthusiast – personal site and portfolio."
     github: "FlashX64"
+    repo: "FlashX64/vencelides.cz"
     tags: [portfolio, dark-mode]
