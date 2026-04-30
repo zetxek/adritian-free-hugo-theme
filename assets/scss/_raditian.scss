@@ -726,15 +726,6 @@ textarea:focus {
 
 .section div[class*="col-"] img {
     max-width: 100%;
-}
-
-/* Fix for card images to preserve aspect ratio on mobile */
-.picture-works img,
-.portfolio-project img,
-.clients__item img,
-.card img,
-picture img.lozad {
-    max-width: 100%;
     height: auto;
 }
 
