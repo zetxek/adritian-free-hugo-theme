@@ -271,6 +271,10 @@
   translation: "תגיות פופולריות"
 - id: "view_all_tags"
   translation: "צפה בכל התגיות"
+## Color Scheme
+- id: "color_scheme"
+  translation: "ערכת צבעים"
+
 ## Search
 - id: "search_tags_label"
   translation: "תגיות"

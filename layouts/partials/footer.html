@@ -49,6 +49,11 @@
             {{ .Scratch.Set "dropdownDirection" "up" }}
             {{ partial "selector-theme.html" . }}
             {{- end }}
+            {{- if and .Site.Params.colorSchemeSwitcher.enable (not .Site.Params.colorSchemeSwitcher.selector.disable.footer) }}
+            {{ .Scratch.Set "selectorPlacement" "footer" }}
+            {{ .Scratch.Set "dropdownDirection" "up" }}
+            {{ partial "selector-scheme.html" . }}
+            {{- end }}
           </div>
         </div>
       </div>

@@ -18,7 +18,7 @@ test.describe('List style functionality', () => {
     await expect(articleSummary.first().locator('h2.post-title')).toBeVisible();
     await expect(articleSummary.first().locator('.post-meta')).toBeVisible();
     await expect(articleSummary.first().locator('.post-summary')).toBeVisible();
-    await expect(articleSummary.first().locator('.btn-outline-secondary')).toBeVisible();
+    await expect(articleSummary.first().locator('a.btn-outline-secondary')).toBeVisible();
   });
 
 }); 

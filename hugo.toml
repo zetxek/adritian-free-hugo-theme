@@ -95,11 +95,15 @@ disableKinds = ["footer"]
     target = "assets"
 
   [[module.mounts]]
+    source = "data"
+    target = "data"
+
+  [[module.mounts]]
     source = "i18n"
     target = "i18n"
 
   [[module.mounts]]
-    source = "layouts" 
+    source = "layouts"
     target = "layouts"
 
   [[module.mounts]]

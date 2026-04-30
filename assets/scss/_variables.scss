@@ -1,7 +1,7 @@
-// Base colors
-$base-color: #478079; // #478079 - Your theme's primary color
+// Base colors (use !default so Hugo template injection can override)
+$base-color: #478079 !default;
 $primary: $base-color;
-$dark-primary: #66b2a9; // Brighter primary color for dark mode - enhanced contrast
+$dark-primary: #66b2a9 !default;
 
 // Link colors
 $link-color: $base-color;
