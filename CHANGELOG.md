@@ -2,6 +2,27 @@
 
 This documentation tracks changes across versions, including new features, improvements, and breaking changes.
 
+## v1.9.13
+
+### New features
+
+- **Runtime color scheme switcher** — toggle between light and dark modes with a footer/header selector and automatic system preference detection (#507)
+- **Cross-repo content sync for PR previews** — theme preview workflows now sync `exampleSite` content (blog posts, pages, assets, etc.) to the demo repo, so content changes get a live Vercel preview URL before merging (#519)
+
+### Bug fixes
+
+- Make code copy button hover-only on all pages, not just blog (#506, #510)
+
+### Maintenance
+
+- Dependency updates: `dompurify` (3.3.3 → 3.4.1), `postcss` (8.5.8 → 8.5.10), `autoprefixer` (10.4.27 → 10.5.0), `@types/node`
+
+## v1.9.12
+
+### Bug fixes
+
+- Fix SEO: hreflang alternate links for multilingual sites, per-page meta descriptions, and BlogPosting structured data author fallback (#482)
+
 ## v1.9.11
 
 ### Security
