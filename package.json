@@ -15,7 +15,7 @@
     "screenshots:colors": "node scripts/capture-color-schemes.js"
   },
   "devDependencies": {
-    "@playwright/test": "^1.59.1",
+    "@playwright/test": "^1.60.0",
     "@types/node": "^25.6.2",
     "@zetxek/adritian-theme-helper": "^1.0.5",
     "autoprefixer": "^10.5.0",
