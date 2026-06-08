@@ -61,7 +61,7 @@ Once you have a site created, you can add the theme to your site by following th
 
 ```
 baseURL = "<your website url>"
-languageCode = "en"
+locale = "en"
 
 [module]
 [module.hugoVersion]
@@ -153,9 +153,9 @@ target = "assets/css/bootstrap-print.css"
 [languages]
   [languages.en]
     disabled = false
-    languageCode = 'en'
-    languageDirection = 'ltr'
-    languageName = 'English'
+    locale = 'en'
+    direction = 'ltr'
+    label = 'English'
     title = ''
     weight = 0
 
@@ -201,9 +201,9 @@ target = "assets/css/bootstrap-print.css"
 
   [languages.es]
     disabled = false
-    languageCode = 'es'
-    languageDirection = 'ltr'
-    languageName = 'Español'
+    locale = 'es'
+    direction = 'ltr'
+    label = 'Español'
     title = ''
     weight = 0
       [[languages.es.menus.header]]
@@ -247,9 +247,9 @@ target = "assets/css/bootstrap-print.css"
 
   [languages.fr]
     disabled = false
-    languageCode = 'fr'
-    languageDirection = 'ltr'
-    languageName = 'Français'
+    locale = 'fr'
+    direction = 'ltr'
+    label = 'Français'
     title = ''
     weight = 0
 

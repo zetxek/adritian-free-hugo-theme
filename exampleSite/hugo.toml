@@ -1,6 +1,6 @@
 baseURL = "https://adritian-demo.vercel.app/"
 title = "Adritian Demo"
-languageCode = "en"
+locale = "en"
 
 [pagination]
 pagerSize = 3
@@ -169,9 +169,9 @@ mobileHeader = false
 [languages]
 [languages.en]
 disabled = false
-languageCode = 'en'
-languageDirection = 'ltr'
-languageName = 'English'
+locale = 'en'
+direction = 'ltr'
+label = 'English'
 title = ''
 weight = 0
 
@@ -242,9 +242,9 @@ weight = 4
 
 [languages.es]
 disabled = false
-languageCode = 'es'
-languageDirection = 'ltr'
-languageName = 'Español'
+locale = 'es'
+direction = 'ltr'
+label = 'Español'
 title = ''
 weight = 0
 [[languages.es.menus.header]]
@@ -313,9 +313,9 @@ weight = 4
 
 [languages.fr]
 disabled = false
-languageCode = 'fr'
-languageDirection = 'ltr'
-languageName = 'Français'
+locale = 'fr'
+direction = 'ltr'
+label = 'Français'
 title = ''
 weight = 0
 
@@ -384,9 +384,9 @@ weight = 4
 
 [languages.ar]
 disabled = false
-languageCode = 'ar'
-languageDirection = 'rtl'
-languageName = 'العربية'
+locale = 'ar'
+direction = 'rtl'
+label = 'العربية'
 title = ''
 weight = 0
 
@@ -446,9 +446,9 @@ weight = 4
 
 [languages.he]
 disabled = false
-languageCode = 'he'
-languageDirection = 'rtl'
-languageName = 'עברית'
+locale = 'he'
+direction = 'rtl'
+label = 'עברית'
 title = ''
 weight = 0
 

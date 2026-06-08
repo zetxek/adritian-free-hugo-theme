@@ -154,7 +154,7 @@ See the content in the  `i18n` folder to edit the translations, and the configur
 - **Arabic** (`ar`) - with full RTL support
 - **Hebrew** (`he`) - with full RTL support
 
-The theme includes comprehensive RTL (Right-to-Left) language support for Arabic and Hebrew. When a language is configured with `languageDirection = 'rtl'` in `hugo.toml`, the theme automatically applies RTL styling to all components including navigation, forms, tables, code blocks, blockquotes, breadcrumbs, and more. Images can be automatically mirrored using the `rtl-mirror` class, or prevented from mirroring with `rtl-no-mirror`.
+The theme includes comprehensive RTL (Right-to-Left) language support for Arabic and Hebrew. When a language is configured with `direction = 'rtl'` in `hugo.toml`, the theme automatically applies RTL styling to all components including navigation, forms, tables, code blocks, blockquotes, breadcrumbs, and more. Images can be automatically mirrored using the `rtl-mirror` class, or prevented from mirroring with `rtl-no-mirror`.
 
 The example site has 3 enabled languages by default (`en`, `es`, and `fr`). You can enable additional languages by adding them to your `hugo.toml` configuration, or disable the provided ones (by setting `disabled` to `true` on the languages you don't need).
 
