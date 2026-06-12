@@ -26,7 +26,7 @@
     "postcss": "^8.5.15",
     "postcss-cli": "^11.0.0",
     "prettier-plugin-go-template": "^0.0.15",
-    "sharp": "^0.34.5"
+    "sharp": "^0.35.1"
   },
   "dependencies": {
     "dompurify": "^3.4.8",
