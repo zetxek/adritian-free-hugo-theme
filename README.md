@@ -151,6 +151,7 @@ See the content in the  `i18n` folder to edit the translations, and the configur
 - **Swedish** (`sv`)
 - **Norwegian** (`no`)
 - **Polish** (`pl`)
+- **Korean** (`ko`)
 - **Arabic** (`ar`) - with full RTL support
 - **Hebrew** (`he`) - with full RTL support
 
