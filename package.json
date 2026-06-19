@@ -16,7 +16,7 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.60.0",
-    "@types/node": "^25.9.3",
+    "@types/node": "^26.0.0",
     "@zetxek/adritian-theme-helper": "^1.0.5",
     "autoprefixer": "^10.5.0",
     "bootstrap": "^5.3.8",
