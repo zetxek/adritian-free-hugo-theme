@@ -7,6 +7,13 @@ if (!BASE_URL.startsWith('http')) {
 }
 
 test.describe('Language switching functionality', () => {
+  test.beforeEach(async ({ page }) => {
+    // Disable view-transition animations on cross-document navigation: Chromium's
+    // CSS View Transitions otherwise keep the outgoing/incoming page mid-transition
+    // long enough that Playwright's click actionability check never settles.
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+  });
+
   test('switches between languages and verifies lang attribute', async ({ page }) => {
     test.skip(process.env.TEST_NO_MENUS === 'true', 'Skipping test because TEST_NO_MENUS is true');
 

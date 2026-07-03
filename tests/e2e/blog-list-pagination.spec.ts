@@ -7,6 +7,11 @@ const BASE_URL = process.env.PLAYWRIGHT_BASE_URL || 'http://localhost:1313';
  * This makes tests resilient to content changes without manual updates.
  */
 async function getLastPageNumber(page: Page): Promise<number> {
+  // Disable view-transition animations on cross-document navigation: Chromium's
+  // CSS View Transitions (see assets/scss/_page-transition.scss) otherwise keep
+  // the outgoing/incoming page mid-transition long enough that Playwright's
+  // click actionability check ("visible, enabled and stable") never settles.
+  await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.goto(`${BASE_URL}/blog`);
   await page.waitForLoadState('networkidle');
 
@@ -27,9 +32,13 @@ async function getLastPageNumber(page: Page): Promise<number> {
       break;
     }
 
-    // Click Next to go to the next page
-    await nextButton.click();
-    await page.waitForLoadState('networkidle');
+    // Click Next to go to the next page. Wait on the URL change (not
+    // 'networkidle', which races with the view-transition repaint) to avoid
+    // the click's actionability check stalling on the transition animation.
+    await Promise.all([
+      page.waitForURL(/\/blog\/page\/\d+\/?$/),
+      nextButton.click(),
+    ]);
     currentPage++;
 
     // Safety limit to prevent infinite loops
@@ -53,6 +62,7 @@ test.describe('Blog list pagination', () => {
   });
 
   test.beforeEach(async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'reduce' });
     // Navigate to the blog list page
     await page.goto(`${BASE_URL}/blog`);
     await page.waitForLoadState('networkidle');
