@@ -88,7 +88,9 @@ Another alternative is to use [git submodules](https://gohugo.io/getting-started
 > **Note:** Before proceeding, **Ensure you have Go and Hugo installed** and that you have created a new Hugo project.
 As a pre-requirement, you will need Hugo set up and running. You can follow [the official guide for it](https://gohugo.io/categories/installation/).
 
-The theme requires Hugo version `0.153.0` or newer (extended version). If you get errors regarding missing functionalities, check if you have the latest version of Hugo available.
+The theme requires Hugo version `0.158.0` or newer (extended version). If you get errors regarding missing functionalities, check if you have the latest version of Hugo available.
+
+> **Note:** the multilingual config in `exampleSite/hugo.toml` (`direction`, `label`, `locale` per language) uses key names Hugo introduced in `v0.158.0`. On older Hugo versions these keys are silently ignored rather than raising an error, which shows up as missing language labels and incorrect `dir`/RTL rendering — so if you copy that config, make sure you're on `0.158.0`+.
 
 **Note:** as mentioned, the theme supports both Hugo modules and git submodules. You should use Hugo modules to install the theme in the most maintainable way. If you prefer git submodules you can follow these [older instructions](https://gohugobrasil.netlify.app/themes/installing-and-using-themes/) or the next ones as help:
 
