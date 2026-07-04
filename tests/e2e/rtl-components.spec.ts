@@ -8,8 +8,12 @@ import {
 } from '../utils/rtl-helpers';
 
 test.describe('RTL Component-Specific Tests', () => {
-  test.beforeEach(async () => {
+  test.beforeEach(async ({ page }) => {
     test.skip(process.env.TEST_NO_MENUS === 'true', 'Skipping test because TEST_NO_MENUS is true');
+    // Disable view-transition animations on cross-document navigation: Chromium's
+    // CSS View Transitions otherwise keep the outgoing/incoming page mid-transition
+    // long enough that Playwright's actionability checks never settle.
+    await page.emulateMedia({ reducedMotion: 'reduce' });
   });
 
   test('Breadcrumb RTL rendering', async ({ page }) => {

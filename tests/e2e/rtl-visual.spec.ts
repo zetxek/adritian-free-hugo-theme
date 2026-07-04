@@ -5,6 +5,10 @@ import { getLTRPage, getRTLPage } from '../utils/rtl-helpers';
 test.describe('RTL Visual Regression Tests', () => {
   test.beforeEach(async ({ page }) => {
     test.skip(process.env.TEST_NO_MENUS === 'true', 'Skipping test because TEST_NO_MENUS is true');
+    // Disable view-transition animations on cross-document navigation: Chromium's
+    // CSS View Transitions otherwise keep the outgoing/incoming page mid-transition
+    // long enough that Playwright's scroll-into-view stability check never settles.
+    await page.emulateMedia({ reducedMotion: 'reduce' });
   });
 
   test('Homepage visual comparison LTR vs RTL', async ({ page }) => {
