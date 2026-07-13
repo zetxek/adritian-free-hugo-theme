@@ -1,6 +1,6 @@
 ## Meta tags
 - id: "meta_title"
-  translation: "أدريتيان - قالب هوغو عالي الأداء من إنشاء أدريان مورينو"
+  translation: ""
 - id: "meta_description"
   translation: "قالب هوغو هذا (أدريتيان) مبني على Bootstrap ويحتوي على ميزات تجعله مناسبًا لموقع شخصي أو محفظة أعمال أو أنواع أخرى من تطبيقات الصفحة الواحدة."
 - id: "meta_keywords"
@@ -46,7 +46,7 @@
 
 ## Homepage head title
 - id: "head_title"
-  translation: "موقع تجريبي لأدريتيان - قالب هوغو عالي الأداء من إنشاء أدريان مورينو"
+  translation: ""
 
 - id: "head_description"
   translation: ""

@@ -1,6 +1,6 @@
 ## Meta tags
 - id: "meta_title"
-  translation: "Adritian - et høytytende Hugo-tema av Adrián Moreno"
+  translation: ""
 - id: "meta_description"
   translation: "Dette Hugo-temaet (Adritian) er basert på Bootstrap og har funksjoner som gjør det egnet for et personlig nettsted, en portefølje eller andre typer Single Page-applikasjoner."
 - id: "meta_keywords"
@@ -46,7 +46,7 @@
 
 ## Homepage head title
 - id: "head_title"
-  translation: "Demonstrasjonsside for Adritian - et høytytende Hugo-tema av Adrián Moreno"
+  translation: ""
 
 - id: "head_description"
   translation: ""

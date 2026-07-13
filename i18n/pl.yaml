@@ -1,6 +1,6 @@
 ## Meta tags
 - id: "meta_title"
-  translation: "Adritian - wysokowydajny motyw Hugo autorstwa Adriána Moreno"
+  translation: ""
 - id: "meta_description"
   translation: "Ten motyw Hugo (Adritian) jest oparty na Bootstrap i ma funkcje, które sprawiają, że nadaje się do osobistej strony internetowej, portfolio lub innych rodzajów aplikacji jednostronicowych."
 - id: "meta_keywords"
@@ -46,7 +46,7 @@
 
 ## Homepage head title
 - id: "head_title"
-  translation: "Strona demonstracyjna Adritian - wysokowydajny motyw Hugo autorstwa Adriána Moreno"
+  translation: ""
 
 - id: "head_description"
   translation: ""

@@ -1,6 +1,6 @@
 ## Meta tags
 - id: "meta_title"
-  translation: "Adritian - um tema Hugo de alto desempenho por Adrián Moreno"
+  translation: ""
 - id: "meta_description"
   translation: "Este tema Hugo (Adritian) é baseado em Bootstrap e tem recursos que o tornam adequado para um site pessoal, um portfólio ou outros tipos de aplicações de página única."
 - id: "meta_keywords"
@@ -46,7 +46,7 @@
 
 ## Homepage head title
 - id: "head_title"
-  translation: "Site demo para Adritian - um tema Hugo de alto desempenho por Adrián Moreno"
+  translation: ""
 
 - id: "head_description"
   translation: ""

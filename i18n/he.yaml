@@ -1,6 +1,6 @@
 ## Meta tags
 - id: "meta_title"
-  translation: "אדריטיאן - תבנית הוגו בביצועים גבוהים מאת אדריאן מורנו"
+  translation: ""
 - id: "meta_description"
   translation: "תבנית הוגו זו (אדריטיאן) מבוססת על Bootstrap ומכילה תכונות שהופכות אותה למתאימה לאתר אישי, לתיק עבודות או לסוגים אחרים של יישומי עמוד יחיד."
 - id: "meta_keywords"
@@ -46,7 +46,7 @@
 
 ## Homepage head title
 - id: "head_title"
-  translation: "אתר דמו לאדריטיאן - תבנית הוגו בביצועים גבוהים מאת אדריאן מורנו"
+  translation: ""
 
 - id: "head_description"
   translation: ""

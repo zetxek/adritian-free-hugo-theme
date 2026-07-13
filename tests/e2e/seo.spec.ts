@@ -131,4 +131,35 @@ test('homepage includes canonical, twitter (from params.social), and JSON-LD sit
     expect(imageArray.length).toBeGreaterThan(0);
     expect(imageArray[0]).toContain('/img/blog/test-images-array.png');
   });
+
+  test('homepage has meta description from site config', async ({ page }) => {
+    await page.goto(BASE_URL);
+    const metaDesc = page.locator('meta[name="description"]');
+    await expect(metaDesc).toHaveCount(1);
+    const content = await metaDesc.getAttribute('content');
+    expect(content).toBeTruthy();
+    expect(content!.length).toBeGreaterThan(0);
+    expect(content).not.toContain('Adritian demo site');
+  });
+
+  test('blog post meta description uses page description or summary', async ({ page }) => {
+    await page.goto(`${BASE_URL}/blog/new-features-demo/`);
+    const metaDesc = page.locator('meta[name="description"]');
+    await expect(metaDesc).toHaveCount(1);
+    const content = await metaDesc.getAttribute('content');
+    expect(content).toBeTruthy();
+  });
+
+  test('homepage title does not contain demo-specific text', async ({ page }) => {
+    await page.goto(BASE_URL);
+    const title = await page.title();
+    expect(title).not.toContain('Demo site for');
+    expect(title).not.toContain('Adritian');
+  });
+
+  test('blog post title format: PageTitle | SiteTitle', async ({ page }) => {
+    await page.goto(`${BASE_URL}/blog/new-features-demo/`);
+    const title = await page.title();
+    expect(title).toContain('New Theme Features Demo');
+  });
 });
