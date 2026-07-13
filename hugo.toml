@@ -2,7 +2,7 @@
 
   [module.hugoVersion]
     extended = true
-    min = "0.92.0"
+    min = "0.156.0"
 
 # Related content configuration
 [related]
