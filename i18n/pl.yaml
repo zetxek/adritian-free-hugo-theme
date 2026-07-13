@@ -49,7 +49,7 @@
   translation: "Strona demonstracyjna Adritian - wysokowydajny motyw Hugo autorstwa Adriána Moreno"
 
 - id: "head_description"
-  translation: "Ten motyw Hugo (Adritian) jest oparty na Bootstrap i ma funkcje, które sprawiają, że nadaje się do osobistej strony internetowej, portfolio lub innych rodzajów aplikacji jednostronicowych."
+  translation: ""
 
 ## Homepage showcase
 - id: "showcase_title"

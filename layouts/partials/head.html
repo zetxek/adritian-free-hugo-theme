@@ -49,9 +49,16 @@
   {{- $metaDescription = .Description | plainify | truncate 155 -}}
 {{- else if and .IsPage .Summary -}}
   {{- $metaDescription = .Summary | plainify | truncate 155 -}}
+{{- else if .Site.Params.seo.siteDescription -}}
+  {{- $metaDescription = .Site.Params.seo.siteDescription | plainify | truncate 155 -}}
+{{- else if .Site.Params.description -}}
+  {{- $metaDescription = .Site.Params.description | plainify | truncate 155 -}}
 {{- end -}}
 {{- if not $metaDescription -}}
   {{- $metaDescription = i18n "head_description" -}}
+{{- end -}}
+{{- if and .IsHome (not $metaDescription) -}}
+  {{- warnf "No meta description set: add [params] description or [params.seo] siteDescription to your hugo.toml for SEO. See issue #560" -}}
 {{- end -}}
 <meta name="description" content="{{ $metaDescription }}" />
 <link rel="canonical" href="{{ .Permalink }}" />

@@ -49,7 +49,7 @@
   translation: "Demo-Website für Adritian - ein hochleistungsfähiges Hugo-Theme von Adrián Moreno"
 
 - id: "head_description"
-  translation: "Dieses Hugo-Theme (Adritian) basiert auf Bootstrap und hat Funktionen, die es für eine persönliche Website, ein Portfolio oder andere Arten von Single-Page-Anwendungen geeignet machen."
+  translation: ""
 
 ## Homepage showcase
 - id: "showcase_title"

@@ -83,7 +83,7 @@
   translation: "Adritian 데모 사이트 - Adrián Moreno가 만든 고성능 Hugo 테마"
 
 - id: "head_description"
-  translation: "이 Hugo 테마(Adritian)는 Bootstrap을 기반으로 하며, 개인 사이트나 포트폴리오, 그 밖의 싱글 페이지 애플리케이션에 적합한 기능을 갖추고 있습니다."
+  translation: ""
 
 ## Homepage showcase
 - id: "showcase_title"

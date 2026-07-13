@@ -75,7 +75,7 @@ target = "assets/css/bootstrap-print.css"
 
 [params]
 title = 'Adritian - a high performance hugo theme by Adrián Moreno'
-description = 'This hugo theme (Adritian) is based on Bootstrap and has features that make it suitable for a personal site, a portfolio or other kind of Single Page Applications.'
+description = 'Adritian demo site — a high performance Hugo theme'
 images = ['/img/og-img.png']
 themeColor = '#478079'
 
@@ -93,7 +93,7 @@ header = false
 
 [params.seo]
 siteName = 'Adritian'
-siteDescription = 'This hugo theme (Adritian) is based on Bootstrap and has features that make it suitable for a personal site, a portfolio or other kind of Single Page Applications.'
+siteDescription = 'Adritian demo site — a high performance Hugo theme'
 siteImage = '/img/og-img.png'
 
 [params.social]
