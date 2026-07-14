@@ -142,6 +142,14 @@ test('homepage includes canonical, twitter (from params.social), and JSON-LD sit
     expect(content).not.toContain('Adritian demo site');
   });
 
+  test('homepage meta description matches exampleSite siteDescription', async ({ page }) => {
+    await page.goto(BASE_URL);
+    const metaDesc = page.locator('meta[name="description"]');
+    await expect(metaDesc).toHaveCount(1);
+    const content = await metaDesc.getAttribute('content');
+    expect(content).toBe('Adritian Demo — a high performance Hugo theme');
+  });
+
   test('blog post meta description uses page description or summary', async ({ page }) => {
     await page.goto(`${BASE_URL}/blog/new-features-demo/`);
     const metaDesc = page.locator('meta[name="description"]');
