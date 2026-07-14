@@ -74,8 +74,8 @@ target = "assets/css/bootstrap-print.css"
 
 
 [params]
-title = 'Adritian - a high performance hugo theme by Adrián Moreno'
-description = 'Adritian demo site — a high performance Hugo theme'
+title = 'Adritian Demo'
+description = 'Adritian Demo — a high performance Hugo theme'
 images = ['/img/og-img.png']
 themeColor = '#478079'
 
@@ -93,7 +93,7 @@ header = false
 
 [params.seo]
 siteName = 'Adritian'
-siteDescription = 'Adritian demo site — a high performance Hugo theme'
+siteDescription = 'Adritian Demo — a high performance Hugo theme'
 siteImage = '/img/og-img.png'
 
 [params.social]
@@ -172,7 +172,6 @@ disabled = false
 locale = 'en'
 direction = 'ltr'
 label = 'English'
-title = ''
 weight = 0
 
 [languages.en.menus]
@@ -245,7 +244,6 @@ disabled = false
 locale = 'es'
 direction = 'ltr'
 label = 'Español'
-title = ''
 weight = 0
 [[languages.es.menus.header]]
 name = "INICIO"
@@ -316,7 +314,6 @@ disabled = false
 locale = 'fr'
 direction = 'ltr'
 label = 'Français'
-title = ''
 weight = 0
 
 [languages.fr.menus]
@@ -387,7 +384,6 @@ disabled = false
 locale = 'ar'
 direction = 'rtl'
 label = 'العربية'
-title = ''
 weight = 0
 
 [languages.ar.menus]
@@ -449,7 +445,6 @@ disabled = false
 locale = 'he'
 direction = 'rtl'
 label = 'עברית'
-title = ''
 weight = 0
 
 [languages.he.menus]
