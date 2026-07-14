@@ -1,6 +1,33 @@
-# Changelog
+# Upgrading
 
-This documentation tracks changes across versions, including new features, improvements, and breaking changes.
+This documentation tracks breaking changes and upgrade steps across versions.
+
+## Upgrading to v1.10.0
+
+### Breaking: Title and description i18n
+
+The `<title>` tag and `<meta name="description">` now use `.Site.Title` and `.Site.Params.description` directly instead of falling back to i18n keys (`head_title`, `head_description`).
+
+The `head_title` and `head_description` i18n keys are now empty strings in all 14 language files. If you previously relied on `i18n/*.yaml` files to set translated site titles or descriptions, migrate to Hugo's standard per-language config in your `hugo.toml`:
+
+```toml
+# hugo.toml
+[languages.en]
+title = "My Site"
+weight = 1
+
+[languages.en.params]
+description = "My personal portfolio"
+
+[languages.de]
+title = "Meine Website"
+weight = 2
+
+[languages.de.params]
+description = "Mein persönliches Portfolio"
+```
+
+This is the standard Hugo approach (used by PaperMod, Stack, geekdoc, and others) and keeps your translations in your own config — safe from theme updates. See [PR #561](https://github.com/zetxek/adritian-free-hugo-theme/pull/561) for full details.
 
 ## v1.8.6: Google Tag Manager config key standardized
 
