@@ -79,6 +79,12 @@ description = 'Adritian Demo — a high performance Hugo theme'
 images = ['/img/og-img.png']
 themeColor = '#478079'
 
+# Header logo text. Optional — falls back to .Site.Title when unset.
+# Useful when your SEO/page `title` (long, keyword-rich) should differ
+# from the short brand text shown in the header. See PR #561.
+logo_text1 = 'Adritian'
+logo_text2 = 'Theme'
+
 # Color scheme: default | ocean | forest | rose | slate | midnight | warm
 colorScheme = 'default'
 

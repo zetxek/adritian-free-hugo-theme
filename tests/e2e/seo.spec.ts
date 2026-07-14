@@ -170,4 +170,19 @@ test('homepage includes canonical, twitter (from params.social), and JSON-LD sit
     const title = await page.title();
     expect(title).toContain('New Theme Features Demo');
   });
+
+  test('header logo uses logo_text1/logo_text2 params, independent of Site.Title', async ({ page }) => {
+    await page.goto(BASE_URL);
+
+    // exampleSite sets params.logo_text1 = 'Adritian' and logo_text2 = 'Theme',
+    // distinct from title = 'Adritian Demo'. Regression test for the header
+    // logo collapsing onto the (often long, SEO-oriented) page title — see PR #561.
+    const logo = page.locator('.navbar-brand');
+    await expect(logo).toHaveCount(1);
+    const logoText = (await logo.innerText()).trim().replace(/\s+/g, ' ');
+    expect(logoText).toBe('Adritian Theme');
+
+    const title = await page.title();
+    expect(title).toBe('Adritian Demo');
+  });
 });
