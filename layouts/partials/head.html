@@ -39,7 +39,7 @@
 {{- if and .IsHome (not .Site.Title) -}}
   {{- warnf "Site title is empty or still at default 'Adritian' — set [params] title or site title in your hugo.toml for proper page titles. See issue #561" -}}
 {{- end -}}
-<title>{{ if .IsHome }}{{ else }}{{ if .Title }}{{ .Title }} | {{ end }}{{ end }}{{ .Site.Title }}</title>
+<title>{{ if .IsHome }}{{ else }}{{ if .Title }}{{ .Title }} | {{ end }}{{ end }}{{ .Site.Title | default .Site.BaseURL | default "Hugo Site" }}</title>
 
 {{- $metaDescription := "" -}}
 {{- if .Description -}}
