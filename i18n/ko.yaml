@@ -1,54 +1,35 @@
 ## Meta tags
 - id: "meta_title"
   translation: ""
-- id: "meta_description"
-  translation: "이 Hugo 테마(Adritian)는 Bootstrap을 기반으로 하며, 개인 사이트나 포트폴리오, 그 밖의 싱글 페이지 애플리케이션에 적합한 기능을 갖추고 있습니다."
-- id: "meta_keywords"
-  translation: "hugo, 테마, bootstrap, adritian, adrian moreno, 개인 사이트, 포트폴리오, 싱글 페이지 애플리케이션"
-- id: "meta_author"
-  translation: "Adrián Moreno Peña"
-- id: "meta_image"
-  translation: "/img/general/og-image.jpg"
-
 ## Header
 
 - id: "logo_alt"
-  translation: "Adritian 로고"
-
+  translation: ""
 - id: "logo_text1"
-  translation: "Adritian"
-
+  translation: ""
 - id: "logo_text2"
-  translation: "데모"
-
+  translation: ""
 ## General
 - id: "skipToMainContent"
   translation: "본문으로 건너뛰기"
-
 - id: "toggle_navigation"
   translation: "내비게이션 토글"
-
 ## Footer
 - id: "footer_notice"
-  translation: "© Adritian. Adrián Moreno Peña가 만든 무료 Hugo 테마."
-
+  translation: ""
 - id: "language"
   translation: "언어"
-
 - id: "toggle_theme"
   translation: "테마 전환"
-
 - id: "theme_light"
   translation: "☀️ 라이트"
 - id: "theme_dark"
   translation: "🌑 다크"
 - id: "theme_auto"
   translation: "✨ 자동"
-
 ## Color Scheme
 - id: "color_scheme"
   translation: "색상 구성"
-
 ## Search
 - id: "search_tags_label"
   translation: "태그"
@@ -76,152 +57,97 @@
   translation: "제목 없음"
 - id: "search_no_preview"
   translation: "미리보기를 사용할 수 없습니다"
-
-
 ## Homepage head title
 - id: "head_title"
   translation: ""
-
 - id: "head_description"
   translation: ""
-
 ## Homepage showcase
 - id: "showcase_title"
-  translation: "데모에 오신 것을 환영합니다"
-
+  translation: ""
 - id: "showcase_subtitle"
-  translation: "예시를 함께 살펴봅시다"
-
+  translation: ""
 - id: "showcase_description"
-  translation: "Hugo 정적 사이트 생성기를 위한 고성능 테마입니다. 이 예시 콘텐츠는 로케일 파일에서 수정할 수 있습니다(테마가 다국어 번역을 지원하기 때문입니다)."
-
+  translation: ""
 - id: "showcase_button"
   translation: "문의하기"
-
-  ## not visible but used for accessibility
-- id: "showcase_image_alt"
-  translation: "Cool Name 님의 사진"
-
 ## Homepage about
 - id: "about_title"
   translation: "저는 누구일까요?"
-
 - id: "about_content"
-  translation: '<p class="lead">여기에 자신에 대한 정보를 추가할 수 있습니다. 예를 들어 경력을 설명하는 짧은 소개글을 넣어보세요. 학업이나 전공 배경, 선호하는 작업 분야 등을 적을 수 있습니다.</p>'
-
+  translation: ""
 - id: "about_button"
   translation: "소개"
-
 ## Homepage education
 - id: "education_title"
   translation: "학력"
-
 ## Homepage experience
 - id: "experience_button"
   translation: "LinkedIn"
-
 - id: "experience_button_url"
-  translation: "https://www.linkedin.com/in/adrianmoreno/"
-
+  translation: ""
 - id: "experience_button2"
   translation: "이력서 다운로드"
-
 - id: "experience_button2_url"
-  translation: "/img/general/user-smile-fill.svg"
-
+  translation: ""
 - id: "experience_button3"
   translation: "전체 보기"
-
 - id: "experience_button3_url"
   translation: "/experience"
-
 ## Homepage client & work
 - id: "client_work_title"
   translation: "고객 & 작업"
-
 ## Homepage newsletter
 - id: "newsletter_title"
   translation: "뉴스레터"
-
 - id: "newsletter_button"
   translation: "구독"
-
 - id: "newsletter_placeholder"
   translation: "이메일 주소"
-
 - id: "newsletter_success_message"
   translation: "뉴스레터를 구독해 주셔서 감사합니다!"
-
 - id: "newsletter_error_message"
   translation: "오류가 발생했습니다. 다시 시도해 주세요."
-
 - id: "newsletter_note"
   translation: "회원님의 이메일을 다른 곳과 공유하지 않습니다."
-
 ## Homepage testimonials
 - id: "testimonials_title"
   translation: "추천사"
-
 ## Homepage contact
 - id: "contact_title"
   translation: "문의"
-
 - id: "contact_button"
   translation: "메시지 보내기"
-
 - id: "contact_form_name"
   translation: "이름"
-
 - id: "contact_form_email"
   translation: "이메일 주소"
-
 - id: "contact_form_message"
   translation: "여기에 메시지를 입력하세요"
-
 - id: "contact_phone_title"
   translation: "전화번호"
-
-- id: "contact_phone_number"
-  translation: "i18n/ko.yaml에 정의됨 (contact_phone_number)"
-
 - id: "contact_email_title"
   translation: "이메일"
-
-- id: "contact_email_email"
-  translation: 'i18n/ko.yaml에 정의됨 (contact_email_email)'
-
 - id: "contact_address_title"
   translation: "주소"
-
-- id: "contact_address_address"
-  translation: "i18n/ko.yaml에 정의됨 (contact_address_address)"
-
 ## Blog
 - id: "read_more"
   translation: "더 읽기"
-
 - id: "published_on"
   translation: "게시일 "
-
 - id: "continue_reading"
   translation: "계속 읽기"
-
 ## Blog Stats (for list-cards layout)
 - id: "blog_stats_posts"
   translation: "게시글"
-
 - id: "blog_stats_last_updated"
   translation: "마지막 업데이트"
-
 - id: "blog_stats_first_post"
   translation: "첫 게시글"
-
 - id: "blog_stats_topics"
   translation: "주제"
-
 - id: "blog_stats_latest_post"
   translation: "최신 게시글"
-
 ## 404 Page
 - id: "404_title"
   translation: "페이지를 찾을 수 없습니다"
@@ -229,11 +155,9 @@
   translation: "죄송합니다. 찾으시는 페이지를 찾을 수 없습니다."
 - id: "404_button"
   translation: "홈으로 돌아가기"
-
 ## Related Posts
 - id: "related_posts"
   translation: "관련 게시글"
-
 ## Social Sharing
 - id: "share_this_post"
   translation: "이 게시글 공유하기"
@@ -261,21 +185,17 @@
   translation: "Mastodon에 공유"
 - id: "share_mastodon_label"
   translation: "Mastodon"
-
 ## Table of Contents
 - id: "table_of_contents"
   translation: "목차"
-
 ## Comments
 - id: "comments"
   translation: "댓글"
-
 ## Reading time and metadata
 - id: "min_read"
   translation: "분 읽기"
 - id: "last_updated"
   translation: "업데이트됨"
-
 ## Taxonomy
 - id: "categories"
   translation: "카테고리"
@@ -301,9 +221,7 @@
   translation: "인기 태그"
 - id: "view_all_tags"
   translation: "모든 태그 보기"
-
 - id: "primary_navigation"
   translation: "주요 내비게이션"
-
 - id: "footer_navigation"
   translation: "푸터 내비게이션"

@@ -1,53 +1,34 @@
 ## Meta tags
 - id: "meta_title"
   translation: ""
-- id: "meta_description"
-  translation: "Este tema de Hugo (Adritian) está basado en Bootstrap y tiene características que lo hacen adecuado para un sitio personal, un portafolio u otros tipos de aplicaciones de una sola página."
-- id: "meta_keywords"
-  translation: "hugo, tema, bootstrap, adritian, adrian moreno, sitio personal, portafolio, aplicación de una sola página"
-- id: "meta_author"
-  translation: "Adrián Moreno Peña"
-- id: "meta_image"
-  translation: "/img/general/og-image.jpg"
-
 ## Header
 - id: "logo_alt"
-  translation: "Adritian logo"
-
+  translation: ""
 - id: "logo_text1"
-  translation: "Adritian"
-
+  translation: ""
 - id: "logo_text2"
-  translation: "Demo"
-
+  translation: ""
 ## General
 - id: "skipToMainContent"
   translation: "Saltar al contenido principal"
-
 - id: "toggle_navigation"
   translation: "Mostrar navegación"
-
 ## Footer
 - id: "footer_notice"
-  translation: "© Adritian. Tema gratuito de Hugo por Adrián Moreno Peña."
-
+  translation: ""
 - id: "language"
   translation: "Idioma"
-
 - id: "toggle_theme"
   translation: "Seleccionar esquema de color"
-
 - id: "theme_light"
   translation: "☀️ Claro"
 - id: "theme_dark"
   translation: "🌑 Oscuro"
 - id: "theme_auto"
   translation: "✨ Auto"
-
 ## Color Scheme
 - id: "color_scheme"
   translation: "Esquema de color"
-
 ## Search
 - id: "search_tags_label"
   translation: "Etiquetas"
@@ -75,41 +56,29 @@
   translation: "Sin título"
 - id: "search_no_preview"
   translation: "Vista previa no disponible"
-
-
 ## Homepage head title
 - id: "head_title"
   translation: ""
-
 - id: "head_description"
   translation: ""
-
 ## Blog
 - id: "read_more"
   translation: "Leer más"
-
 - id: "published_on"
   translation: "Publicado el "
-
 - id: "continue_reading"
   translation: "Continuar leyendo"
-
 ## Blog Stats (for list-cards layout)
 - id: "blog_stats_posts"
   translation: "Publicaciones"
-
 - id: "blog_stats_last_updated"
   translation: "Última actualización"
-
 - id: "blog_stats_first_post"
   translation: "Primera publicación"
-
 - id: "blog_stats_topics"
   translation: "Temas"
-
 - id: "blog_stats_latest_post"
   translation: "Última publicación"
-
 ## 404 Page
 - id: "404_title"  
   translation: "Página no encontrada"
@@ -117,11 +86,9 @@
   translation: "Lo sentimos, pero la página que buscabas no pudo ser encontrada."
 - id: "404_button"
   translation: "Volver al inicio"
-
 ## Related Posts
 - id: "related_posts"
   translation: "Publicaciones relacionadas"
-
 ## Social Sharing
 - id: "share_this_post"
   translation: "Compartir esta publicación"
@@ -149,21 +116,17 @@
   translation: "Compartir en Mastodon"
 - id: "share_mastodon_label"
   translation: "Mastodon"
-
 ## Table of Contents
 - id: "table_of_contents"
   translation: "Tabla de contenidos"
-
 ## Comments
 - id: "comments"
   translation: "Comentarios"
-
 ## Reading time and metadata
 - id: "min_read"
   translation: "min de lectura"
 - id: "last_updated"
   translation: "Actualizado"
-
 ## Taxonomy
 - id: "categories"
   translation: "Categorías"
@@ -189,9 +152,7 @@
   translation: "Etiquetas populares"
 - id: "view_all_tags"
   translation: "Ver todas las etiquetas"
-
 - id: "primary_navigation"
   translation: "Navegación principal"
-
 - id: "footer_navigation"
   translation: "Navegación del pie"

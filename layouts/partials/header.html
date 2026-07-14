@@ -22,12 +22,12 @@
             {{ if .Site.Params.logo }}
             <img
             src="{{ .Site.Params.logo | absURL }}"
-            alt="{{ i18n "logo_alt" }}"
+            alt="{{ .Site.Title }} logo"
             class="logo"
             />
             {{ end }}
-          <span>{{ i18n "logo_text1" }}</span>
-          <span>{{ i18n "logo_text2" }}</span>
+          <span>{{ .Site.Title }}</span>
+          <span>{{ .Site.Params.logo_text2 | default "" }}</span>
         </a>
         <button
           class="navbar-toggler collapsed"
