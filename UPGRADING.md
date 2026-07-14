@@ -29,6 +29,19 @@ description = "Mein persönliches Portfolio"
 
 This is the standard Hugo approach (used by PaperMod, Stack, geekdoc, and others) and keeps your translations in your own config — safe from theme updates. See [PR #561](https://github.com/zetxek/adritian-free-hugo-theme/pull/561) for full details.
 
+### Header logo text no longer comes from i18n
+
+The header logo (`logo_text1`/`logo_text2`) previously came from the `i18n/*.yaml` `logo_text1` key, which is now empty. The logo now falls back to `.Site.Title` by default — but if your site title (used for `<title>` and SEO) differs from what you want shown in the header logo, set `logo_text1` explicitly:
+
+```toml
+# hugo.toml
+[params]
+logo_text1 = "My Brand"
+logo_text2 = "Subtitle"
+```
+
+`logo_text1` takes precedence over `.Site.Title` for the header only; the `<title>` tag and meta tags are unaffected.
+
 ## v1.8.6: Google Tag Manager config key standardized
 
 ### Analytics key standardization
