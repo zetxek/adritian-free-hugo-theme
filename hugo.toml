@@ -51,24 +51,12 @@
       precision = 0
 
 
-# Exclude content with type "footer" from being rendered as HTML pages
-[outputFormats]
-  [outputFormats.footer]
-    mediaType = "text/html"
-    isHTML = true
-    isPlainText = false
-    noUgly = true
-    permalinkable = false
-    path = "footer"
-
-# Disable HTML generation for content with type "footer"
 [outputs]
   page = ["HTML"]
   home = ["HTML", "RSS", "JSON"]
   section = ["HTML", "RSS"]
   taxonomy = ["HTML", "RSS"]
   term = ["HTML", "RSS"]
-  footer = []
 
 # Taxonomies
 [taxonomies]
@@ -78,13 +66,7 @@
   series = "series"
   topic = "topics"
 
-# Disable specific content kinds to prevent footer from being rendered
-disableKinds = ["footer"]
-
-# Configure content by path to prevent footer directory from generating HTML
 [params]
-  [params.disabledContent]
-    paths = ["footer"]
 
   [[module.mounts]]
     source = "archetypes"
