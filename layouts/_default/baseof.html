@@ -8,8 +8,7 @@
 <head>
     {{ partial "head.html" . }}
     {{ partial "head_custom.html" . }}
-    {{- $viewTransitions := .Site.Params.viewTransitions -}}
-    {{- if or $viewTransitions (eq $viewTransitions nil) }}
+    {{- if ne .Site.Params.viewTransitions false }}
     <meta name="view-transition" content="same-origin" />
     {{- end }}
 </head>
