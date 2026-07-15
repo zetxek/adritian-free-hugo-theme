@@ -11,30 +11,45 @@
  * This test runs a real `hugo build` against exampleSite and asserts none
  * of the removed debug-log patterns reappear in the build output.
  *
+ * Playwright auto-discovers every tests/**\/*.test.js file (testDir is
+ * './tests') and runs it in parallel with the browser specs, alongside a
+ * live `hugo server` that's also serving exampleSite/ for those specs. So
+ * this build must NOT touch exampleSite/public or exampleSite/resources —
+ * doing so previously corrupted the live dev server mid-test-run and broke
+ * nearly every e2e spec in CI. Output and the resource cache are redirected
+ * to isolated temp directories instead; exampleSite/ itself is never
+ * written to.
+ *
  * No browser required — suitable for CI/CD pre-e2e checks.
  */
 
 const assert = require('assert');
 const fs = require('fs');
+const os = require('os');
 const path = require('path');
 const { spawnSync } = require('child_process');
 
 const themeDir = path.resolve(__dirname, '../..');
 const exampleSiteDir = path.join(themeDir, 'exampleSite');
 
-// Clean cached build artifacts so this is a true from-scratch build.
-for (const dir of ['public', 'resources']) {
-  fs.rmSync(path.join(exampleSiteDir, dir), { recursive: true, force: true });
-}
-for (const file of ['.hugo_build.lock', 'hugo_stats.json']) {
-  fs.rmSync(path.join(exampleSiteDir, file), { force: true });
-}
+const destDir = fs.mkdtempSync(path.join(os.tmpdir(), 'no-debug-logging-dest-'));
+const resourceDir = fs.mkdtempSync(path.join(os.tmpdir(), 'no-debug-logging-resources-'));
 
-const result = spawnSync(
-  'hugo',
-  ['--minify', '--themesDir', '../..'],
-  { encoding: 'utf8', cwd: exampleSiteDir },
-);
+let result;
+try {
+  result = spawnSync(
+    'hugo',
+    ['--minify', '--themesDir', '../..', '--destination', destDir],
+    {
+      encoding: 'utf8',
+      cwd: exampleSiteDir,
+      env: { ...process.env, HUGO_RESOURCEDIR: resourceDir },
+    },
+  );
+} finally {
+  fs.rmSync(destDir, { recursive: true, force: true });
+  fs.rmSync(resourceDir, { recursive: true, force: true });
+}
 
 assert.strictEqual(
   result.status,
@@ -75,13 +90,5 @@ assert.ok(
   `Expected a small number of WARN lines, found ${warnCount}. ` +
     `This may indicate a new per-page debug logging regression.`,
 );
-
-// Clean up build artifacts produced by this test run.
-for (const dir of ['public', 'resources']) {
-  fs.rmSync(path.join(exampleSiteDir, dir), { recursive: true, force: true });
-}
-for (const file of ['.hugo_build.lock', 'hugo_stats.json']) {
-  fs.rmSync(path.join(exampleSiteDir, file), { force: true });
-}
 
 console.log(`✅ no-debug-logging test passed (${warnCount} legitimate WARN line(s), 0 debug-dump lines)`);
