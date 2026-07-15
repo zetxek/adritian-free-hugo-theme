@@ -176,6 +176,9 @@ direction = 'ltr'
 label = 'English'
 weight = 0
 
+[languages.en.params.footer]
+notice = '© Adritian. Free Hugo theme by Adrián Moreno Peña.'
+
 [languages.en.menus]
 [[languages.en.menus.header]]
 name = "Home"
@@ -247,6 +250,10 @@ locale = 'es'
 direction = 'ltr'
 label = 'Español'
 weight = 0
+
+[languages.es.params.footer]
+notice = '© Adritian. Tema gratuito de Hugo por Adrián Moreno Peña.'
+
 [[languages.es.menus.header]]
 name = "INICIO"
 URL = "/es/"
@@ -318,6 +325,9 @@ direction = 'ltr'
 label = 'Français'
 weight = 0
 
+[languages.fr.params.footer]
+notice = '© Adritian. Thème gratuit Hugo par Adrián Moreno Peña.'
+
 [languages.fr.menus]
 [[languages.fr.menus.header]]
 name = "ACCUEIL"
@@ -388,6 +398,9 @@ direction = 'rtl'
 label = 'العربية'
 weight = 0
 
+[languages.ar.params.footer]
+notice = '© أدريتيان. قالب هوغو مجاني من إنشاء أدريان مورينو بينيا.'
+
 [languages.ar.menus]
 [[languages.ar.menus.header]]
 name = "الرئيسية"
@@ -448,6 +461,9 @@ locale = 'he'
 direction = 'rtl'
 label = 'עברית'
 weight = 0
+
+[languages.he.params.footer]
+notice = '© אדריטיאן. תבנית הוגו חינמית מאת אדריאן מורנו פניה.'
 
 [languages.he.menus]
 [[languages.he.menus.header]]
