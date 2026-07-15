@@ -89,8 +89,8 @@ function buildSite(extraConfig) {
 }
 
 // --- viewTransitions: marker is the bare substring "view-transition" in
-// the built home page. Hugo's minified HTML output omits attribute-value
-// quotes (name=view-transition, not name="view-transition"), so the
+// the built home page. Some Hugo builds (e.g. with --minify) may omit
+// attribute-value quotes (name=view-transition, not name="view-transition"), so the
 // assertion must not depend on quoting. ---
 
 const vtUnset = buildSite('');
