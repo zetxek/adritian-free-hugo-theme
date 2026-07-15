@@ -82,8 +82,9 @@ themeColor = '#478079'
 # Header logo text. Optional — falls back to .Site.Title when unset.
 # Useful when your SEO/page `title` (long, keyword-rich) should differ
 # from the short brand text shown in the header. See PR #561.
-logo_text1 = 'Adritian'
-logo_text2 = 'Theme'
+# (the snake_case logo_text1/logo_text2 names still work as a fallback)
+logoText1 = 'Adritian'
+logoText2 = 'Theme'
 
 # Color scheme: default | ocean | forest | rose | slate | midnight | warm
 colorScheme = 'default'
@@ -570,7 +571,7 @@ showRecentPosts = true
 recentPostCount = 5
 listStyle = "summary"  # options: simple, summary
 listLayout = "default" # options: default, cards
-featured_sort_by_weight = true
+featuredSortByWeight = true  # snake_case featured_sort_by_weight still works as a fallback
 featured_sort_by_date = false
 
 

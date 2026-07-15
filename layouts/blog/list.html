@@ -34,7 +34,11 @@
             <div class="featured-post-container">
               {{ $featuredPosts := where $allPosts ".Params.featured" true }}
               {{ if isset .Site.Params "blog" }}
-                {{ if isset .Site.Params.blog "featured_sort_by_weight" }}
+                {{ if isset .Site.Params.blog "featuredSortByWeight" }}
+                  {{ if .Site.Params.blog.featuredSortByWeight }}
+                    {{ $featuredPosts = sort $featuredPosts "Weight" }}
+                  {{ end }}
+                {{ else if isset .Site.Params.blog "featured_sort_by_weight" }}
                   {{ if .Site.Params.blog.featured_sort_by_weight }}
                     {{ $featuredPosts = sort $featuredPosts "Weight" }}
                   {{ end }}

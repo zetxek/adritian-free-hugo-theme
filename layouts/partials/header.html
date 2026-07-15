@@ -19,7 +19,8 @@
     <nav class="navbar bd-navbar navbar-expand-lg navbar-light p-0" aria-label='{{ i18n "primary_navigation" }}'>
       <div class="container-fluid">
         <a class="navbar-brand mx-auto" href="{{ .Site.BaseURL | relLangURL }}">
-            {{ $logoText1 := .Site.Params.logo_text1 | default .Site.Title }}
+            {{ $logoText1 := .Site.Params.logoText1 | default .Site.Params.logo_text1 | default .Site.Title }}
+            {{ $logoText2 := .Site.Params.logoText2 | default .Site.Params.logo_text2 | default "" }}
             {{ if .Site.Params.logo }}
             <img
             src="{{ .Site.Params.logo | absURL }}"
@@ -28,7 +29,7 @@
             />
             {{ end }}
           <span>{{ $logoText1 }}</span>
-          <span>{{ .Site.Params.logo_text2 | default "" }}</span>
+          <span>{{ $logoText2 }}</span>
         </a>
         <button
           class="navbar-toggler collapsed"
