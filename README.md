@@ -362,8 +362,29 @@ Notes:
 - Open Graph/Twitter cards are rendered by Hugo's embedded templates (`opengraph.html`, `twitter_cards.html`).
 - Canonical URLs are emitted automatically from each page permalink.
 - JSON-LD includes `WebSite` metadata for all pages and `BlogPosting` for blog posts.
-- **Meta descriptions** use a per-page fallback chain: page `description` front matter → auto-generated page summary (truncated to 155 characters) → site-wide i18n `head_description`. This ensures each page gets a unique, relevant description for search engines.
+- **Meta descriptions** use a per-page fallback chain: page `description` front matter → auto-generated page summary (truncated to 155 characters) → `params.seo.siteDescription` → `params.description` → i18n `head_description` (now empty). This ensures each page gets a unique, relevant description for search engines.
 - **hreflang alternate links** are automatically generated on multilingual sites for all translated pages, helping search engines serve the correct language version to users.
+
+> [!IMPORTANT]
+> **Title & description i18n migration.** The `head_title` and `head_description` i18n keys are now empty. If you previously relied on i18n yaml files for translated site titles or descriptions, migrate to Hugo's standard per-language config in your `hugo.toml`:
+>
+> ```toml
+> [languages.en]
+> title = "My Site"
+> weight = 1
+>
+> [languages.en.params]
+> description = "My personal portfolio"
+>
+> [languages.de]
+> title = "Meine Website"
+> weight = 2
+>
+> [languages.de.params]
+> description = "Mein persönliches Portfolio"
+> ```
+>
+> This is the standard Hugo approach (used by PaperMod, Stack, geekdoc, and others) and keeps your translations in your own config — safe from theme updates.
 
 #### Responsive Images
 

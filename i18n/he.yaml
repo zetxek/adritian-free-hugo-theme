@@ -1,197 +1,122 @@
 ## Meta tags
 - id: "meta_title"
-  translation: "אדריטיאן - תבנית הוגו בביצועים גבוהים מאת אדריאן מורנו"
-- id: "meta_description"
-  translation: "תבנית הוגו זו (אדריטיאן) מבוססת על Bootstrap ומכילה תכונות שהופכות אותה למתאימה לאתר אישי, לתיק עבודות או לסוגים אחרים של יישומי עמוד יחיד."
-- id: "meta_keywords"
-  translation: "הוגו, תבנית, בוטסטרפ, אדריטיאן, אדריאן מורנו, אתר אישי, תיק עבודות, יישום עמוד יחיד"
-- id: "meta_author"
-  translation: "אדריאן מורנו פניה"
-- id: "meta_image"
-  translation: "/img/general/og-image.jpg"
-
+  translation: ""
 ## Header
 - id: "logo_alt"
-  translation: "לוגו אדריטיאן"
-
+  translation: ""
 - id: "logo_text1"
-  translation: "אדריטיאן"
-
+  translation: ""
 - id: "logo_text2"
-  translation: "דמו"
-
+  translation: ""
 ## General
 - id: "skipToMainContent"
   translation: "דלג לתוכן הראשי"
-
 - id: "toggle_navigation"
   translation: "החלף ניווט"
-
 ## Footer
 - id: "footer_notice"
-  translation: "© אדריטיאן. תבנית הוגו חינמית מאת אדריאן מורנו פניה."
-
+  translation: ""
 - id: "language"
   translation: "שפה"
-
 - id: "toggle_theme"
   translation: "החלף ערכת נושא"
-
 - id: "theme_light"
   translation: "☀️ בהיר"
 - id: "theme_dark"
   translation: "🌑 כהה"
 - id: "theme_auto"
   translation: "✨ אוטומטי"
-
 ## Homepage head title
 - id: "head_title"
-  translation: "אתר דמו לאדריטיאן - תבנית הוגו בביצועים גבוהים מאת אדריאן מורנו"
-
+  translation: ""
 - id: "head_description"
-  translation: "תבנית הוגו זו (אדריטיאן) מבוססת על Bootstrap ומכילה תכונות שהופכות אותה למתאימה לאתר אישי, לתיק עבודות או לסוגים אחרים של יישומי עמוד יחיד."
-
+  translation: ""
 ## Homepage showcase
 - id: "showcase_title"
-  translation: "ברוכים הבאים לדמו"
-
+  translation: ""
 - id: "showcase_subtitle"
-  translation: "בואו נצלול לדוגמה"
-
+  translation: ""
 - id: "showcase_description"
-  translation: "זוהי תבנית בביצועים גבוהים למחולל האתרים הסטטי הוגו. ניתן לערוך תוכן לדוגמה זה בקבצי התרגום (מכיוון שהתבנית תומכת בתרגומים)."
-
+  translation: ""
 - id: "showcase_button"
   translation: "צור קשר"
-
-  ## not visible but used for accessibility
-- id: "showcase_image_alt"
-  translation: "תמונה של שם מגניב"
-
 ## Homepage about
 - id: "about_title"
   translation: "מי אני?"
-
 - id: "about_content"
-  translation: '<p class="lead">
-      כאן תוכלו להוסיף מידע על עצמכם. קטע קצר שמתאר את הניסיון שלכם, לדוגמה.
-      <br/>
-      תוכלו להסביר משהו על הרקע האקדמי/הלימודי שלכם, וכן על תחומי העבודה המועדפים עליכם.
-      </p>'
-
+  translation: ""
 - id: "about_button"
   translation: "אודותיי"
-
 ## Homepage education
 - id: "education_title"
   translation: "השכלה"
-
 ## Homepage experience
 - id: "experience_button"
   translation: "לינקדאין"
-
 - id: "experience_button_url"
-  translation: "https://www.linkedin.com/in/adrianmoreno/"
-
+  translation: ""
 - id: "experience_button2"
   translation: "הורד קורות חיים"
-
 - id: "experience_button2_url"
-  translation: "/img/general/user-smile-fill.svg"
-
+  translation: ""
 - id: "experience_button3"
   translation: "הצג הכל"
-
 - id: "experience_button3_url"
   translation: "/experience"
-
 ## Homepage client & work
 - id: "client_work_title"
   translation: "לקוחות ועבודות"
-
 ## Homepage newsletter
 - id: "newsletter_title"
   translation: "ניוזלטר"
-
 - id: "newsletter_button"
   translation: "הירשם"
-
 - id: "newsletter_placeholder"
   translation: "האימייל שלך"
-
 - id: "newsletter_success_message"
   translation: "תודה שנרשמת לניוזלטר שלי!"
-
 - id: "newsletter_error_message"
   translation: "אירעה שגיאה. אנא נסה שוב."
-
 - id: "newsletter_note"
   translation: "לעולם לא נשתף את האימייל שלך עם אף אחד אחר."
-
 ## Homepage testimonials
 - id: "testimonials_title"
   translation: "המלצות"
-
 ## Homepage contact
 - id: "contact_title"
   translation: "צור קשר"
-
 - id: "contact_button"
   translation: "שלח הודעה"
-
 - id: "contact_form_name"
   translation: "שם מלא"
-
 - id: "contact_form_email"
   translation: "כתובת אימייל"
-
 - id: "contact_form_message"
   translation: "הקלד את ההודעה שלך כאן"
-
 - id: "contact_phone_title"
   translation: "מספר טלפון"
-
-- id: "contact_phone_number"
-  translation: "מוגדר ב-i18n/he.yaml (contact_phone_number)"
-
 - id: "contact_email_title"
   translation: "אימייל"
-
-- id: "contact_email_email"
-  translation: "מוגדר ב-i18n/he.yaml (contact_email_email)"
-
 - id: "contact_address_title"
   translation: "כתובת"
-
-- id: "contact_address_address"
-  translation: "מוגדר ב-i18n/he.yaml (contact_address_address)"
-
 ## Blog
 - id: "read_more"
   translation: "קרא עוד"
-
 - id: "published_on"
   translation: "פורסם ב-"
-
 - id: "continue_reading"
   translation: "המשך לקרוא"
-
 ## Blog Stats (for list-cards layout)
 - id: "blog_stats_posts"
   translation: "פוסטים"
-
 - id: "blog_stats_last_updated"
   translation: "עודכן לאחרונה"
-
 - id: "blog_stats_first_post"
   translation: "פוסט ראשון"
-
 - id: "blog_stats_topics"
   translation: "נושאים"
-
 - id: "blog_stats_latest_post"
   translation: "פוסט אחרון"
-
 ## 404 Page
 - id: "404_title"
   translation: "הדף לא נמצא"
@@ -199,11 +124,9 @@
   translation: "מצטערים, אך הדף שחיפשת לא נמצא."
 - id: "404_button"
   translation: "חזרה לדף הבית"
-
 ## Related Posts
 - id: "related_posts"
   translation: "פוסטים קשורים"
-
 ## Social Sharing
 - id: "share_this_post"
   translation: "שתף פוסט זה"
@@ -231,21 +154,17 @@
   translation: "שתף במסטודון"
 - id: "share_mastodon_label"
   translation: "מסטודון"
-
 ## Table of Contents
 - id: "table_of_contents"
   translation: "תוכן העניינים"
-
 ## Comments
 - id: "comments"
   translation: "תגובות"
-
 ## Reading time and metadata
 - id: "min_read"
   translation: "דקות קריאה"
 - id: "last_updated"
   translation: "עודכן"
-
 ## Taxonomy
 - id: "categories"
   translation: "קטגוריות"
@@ -274,7 +193,6 @@
 ## Color Scheme
 - id: "color_scheme"
   translation: "ערכת צבעים"
-
 ## Search
 - id: "search_tags_label"
   translation: "תגיות"
@@ -302,9 +220,7 @@
   translation: "ללא כותרת"
 - id: "search_no_preview"
   translation: "אין תצוגה מקדימה"
-
 - id: "primary_navigation"
   translation: "ניווט ראשי"
-
 - id: "footer_navigation"
   translation: "ניווט תחתון"

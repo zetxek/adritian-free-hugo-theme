@@ -36,22 +36,33 @@
 {{- end }}
 
 
-<title>
-  {{ if .IsHome }}
-  {{ else }}
-    {{ if .Title }}{{ .Title }} |{{ end }}
-  {{ end }}
-  {{ i18n "head_title" }}
-</title>
+{{- if and .IsHome (not .Site.Title) -}}
+  {{- warnf "Site title is empty or still at default 'Adritian' — set [params] title or site title in your hugo.toml for proper page titles. See issue #561" -}}
+{{- end -}}
+<title>{{ if .IsHome }}{{ else }}{{ if .Title }}{{ .Title }} | {{ end }}{{ end }}{{ .Site.Title | default .Site.BaseURL | default "Hugo Site" }}</title>
 
 {{- $metaDescription := "" -}}
 {{- if .Description -}}
   {{- $metaDescription = .Description | plainify | truncate 155 -}}
 {{- else if and .IsPage .Summary -}}
   {{- $metaDescription = .Summary | plainify | truncate 155 -}}
+{{- else -}}
+  {{- with .Site.Params.seo -}}
+    {{- with .siteDescription -}}
+      {{- $metaDescription = . | plainify | truncate 155 -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if not $metaDescription -}}
+    {{- with .Site.Params.description -}}
+      {{- $metaDescription = . | plainify | truncate 155 -}}
+    {{- end -}}
+  {{- end -}}
 {{- end -}}
 {{- if not $metaDescription -}}
   {{- $metaDescription = i18n "head_description" -}}
+{{- end -}}
+{{- if and .IsHome (not $metaDescription) -}}
+  {{- warnf "No meta description set: add [params] description or [params.seo] siteDescription to your hugo.toml for SEO. See issue #560" -}}
 {{- end -}}
 <meta name="description" content="{{ $metaDescription }}" />
 <link rel="canonical" href="{{ .Permalink }}" />
@@ -62,7 +73,7 @@
   {{- end }}
 {{- end }}
 {{/* RSS Feed Discovery Links */}}
-{{- $siteTitle := i18n "head_title" | default .Site.Title -}}
+{{- $siteTitle := .Site.Title -}}
 {{- with .Site.Home.OutputFormats.Get "RSS" }}
 <link rel="alternate" type="{{ .MediaType.Type }}" href="{{ .Permalink }}" title="{{ $siteTitle }}" />
 {{- end }}

@@ -20,6 +20,9 @@
 {{- if not $siteDescription -}}
   {{- $siteDescription = i18n "head_description" -}}
 {{- end -}}
+{{- if and .IsHome (not $siteDescription) -}}
+  {{- warnf "No site description set for JSON-LD: add [params] description or [params.seo] siteDescription to your hugo.toml for SEO. See issue #560" -}}
+{{- end -}}
 
 {{- $siteUrl := .Site.BaseURL -}}
 

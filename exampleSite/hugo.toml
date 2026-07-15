@@ -74,10 +74,16 @@ target = "assets/css/bootstrap-print.css"
 
 
 [params]
-title = 'Adritian - a high performance hugo theme by Adrián Moreno'
-description = 'This hugo theme (Adritian) is based on Bootstrap and has features that make it suitable for a personal site, a portfolio or other kind of Single Page Applications.'
+title = 'Adritian Demo'
+description = 'Adritian Demo — a high performance Hugo theme'
 images = ['/img/og-img.png']
 themeColor = '#478079'
+
+# Header logo text. Optional — falls back to .Site.Title when unset.
+# Useful when your SEO/page `title` (long, keyword-rich) should differ
+# from the short brand text shown in the header. See PR #561.
+logo_text1 = 'Adritian'
+logo_text2 = 'Theme'
 
 # Color scheme: default | ocean | forest | rose | slate | midnight | warm
 colorScheme = 'default'
@@ -93,7 +99,7 @@ header = false
 
 [params.seo]
 siteName = 'Adritian'
-siteDescription = 'This hugo theme (Adritian) is based on Bootstrap and has features that make it suitable for a personal site, a portfolio or other kind of Single Page Applications.'
+siteDescription = 'Adritian Demo — a high performance Hugo theme'
 siteImage = '/img/og-img.png'
 
 [params.social]
@@ -172,7 +178,6 @@ disabled = false
 locale = 'en'
 direction = 'ltr'
 label = 'English'
-title = ''
 weight = 0
 
 [languages.en.menus]
@@ -245,7 +250,6 @@ disabled = false
 locale = 'es'
 direction = 'ltr'
 label = 'Español'
-title = ''
 weight = 0
 [[languages.es.menus.header]]
 name = "INICIO"
@@ -316,7 +320,6 @@ disabled = false
 locale = 'fr'
 direction = 'ltr'
 label = 'Français'
-title = ''
 weight = 0
 
 [languages.fr.menus]
@@ -387,7 +390,6 @@ disabled = false
 locale = 'ar'
 direction = 'rtl'
 label = 'العربية'
-title = ''
 weight = 0
 
 [languages.ar.menus]
@@ -449,7 +451,6 @@ disabled = false
 locale = 'he'
 direction = 'rtl'
 label = 'עברית'
-title = ''
 weight = 0
 
 [languages.he.menus]

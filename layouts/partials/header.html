@@ -19,15 +19,16 @@
     <nav class="navbar bd-navbar navbar-expand-lg navbar-light p-0" aria-label='{{ i18n "primary_navigation" }}'>
       <div class="container-fluid">
         <a class="navbar-brand mx-auto" href="{{ .Site.BaseURL | relLangURL }}">
+            {{ $logoText1 := .Site.Params.logo_text1 | default .Site.Title }}
             {{ if .Site.Params.logo }}
             <img
             src="{{ .Site.Params.logo | absURL }}"
-            alt="{{ i18n "logo_alt" }}"
+            alt="{{ $logoText1 }} logo"
             class="logo"
             />
             {{ end }}
-          <span>{{ i18n "logo_text1" }}</span>
-          <span>{{ i18n "logo_text2" }}</span>
+          <span>{{ $logoText1 }}</span>
+          <span>{{ .Site.Params.logo_text2 | default "" }}</span>
         </a>
         <button
           class="navbar-toggler collapsed"
