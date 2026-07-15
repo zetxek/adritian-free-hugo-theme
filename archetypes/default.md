@@ -1,5 +1,5 @@
 +++
-title = "{{ replace .Name "-" " " | title }}"
+title = "{{ .Name | replaceRE `[_-]` ` ` | title }}"
 date = {{ .Date }}
 draft = true
 +++

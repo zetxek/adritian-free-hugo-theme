@@ -77,7 +77,27 @@ try {
     `Generated archetype is missing "draft = true".\nContent:\n${content}`,
   );
 
-  console.log('✅ default-archetype test passed (title/date/draft present in hugo new output)');
+  // Title formatting must replace both hyphens and underscores with spaces
+  // (per code review feedback on #567 — the initial version only handled
+  // hyphens, so "my_post" rendered as "My_post" instead of "My Post").
+  const mixedRelPath = 'content/my_hyphen-and_underscore-test.md';
+  const mixedResult = spawnSync(
+    'hugo',
+    ['new', mixedRelPath, '--themesDir', path.join(themeDir, '..')],
+    { encoding: 'utf8', cwd: tmpSite },
+  );
+  assert.strictEqual(
+    mixedResult.status,
+    0,
+    `hugo new (mixed separators) failed (exit ${mixedResult.status}).\nstdout: ${mixedResult.stdout}\nstderr: ${mixedResult.stderr}`,
+  );
+  const mixedContent = fs.readFileSync(path.join(tmpSite, mixedRelPath), 'utf8');
+  assert.ok(
+    /^title\s*=\s*"My Hyphen and Underscore Test"$/m.test(mixedContent),
+    `Expected title to replace both hyphens and underscores with spaces.\nContent:\n${mixedContent}`,
+  );
+
+  console.log('✅ default-archetype test passed (title/date/draft present, hyphens and underscores both formatted correctly)');
 } finally {
   fs.rmSync(tmpSite, { recursive: true, force: true });
 }
