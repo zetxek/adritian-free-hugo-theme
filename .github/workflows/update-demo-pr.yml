@@ -115,16 +115,22 @@ jobs:
           LATEST_COMMIT=${{ github.event.pull_request.head.sha || github.sha }}
           SHORT_COMMIT=${LATEST_COMMIT:0:8}
           
-          # Handle both PR events and manual workflow dispatch
+          # Handle both PR events and manual workflow dispatch.
+          # NOTE: the branch name is intentionally stable per source PR (or per
+          # source branch for manual dispatch) and does NOT include the commit
+          # SHA. This ensures each source PR maps to a single preview PR in the
+          # demo repo: new commits force-push to the same branch and update the
+          # existing preview PR instead of opening a new one. The short commit
+          # SHA is still surfaced in the PR title/body/commit for reference.
           if [ -n "$PR_NUMBER" ]; then
             PR_URL="https://github.com/$SOURCE_REPOSITORY/pull/$PR_NUMBER"
-            BRANCH_NAME="theme-update/pr-$PR_NUMBER-$SHORT_COMMIT"
+            BRANCH_NAME="theme-update/pr-$PR_NUMBER"
             PR_TITLE="preview: theme PR #$PR_NUMBER ($SHORT_COMMIT)"
           else
             # For manual workflow dispatch, use branch name instead
             BRANCH_REF="${{ github.head_ref || github.ref_name }}"
             PR_URL="https://github.com/$SOURCE_REPOSITORY/tree/$BRANCH_REF"
-            BRANCH_NAME="theme-update/branch-$BRANCH_REF-$SHORT_COMMIT"
+            BRANCH_NAME="theme-update/branch-$BRANCH_REF"
             PR_TITLE="preview: theme branch $BRANCH_REF ($SHORT_COMMIT)"
           fi
           
