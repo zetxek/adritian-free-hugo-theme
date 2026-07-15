@@ -11,14 +11,12 @@ enableRobotsTXT = true
 pagerSize = 3
 
 
-# Exclude footer section from generating list pages (index.html and index.xml)
 [outputs]
   page = ["HTML"]
   home = ["HTML", "RSS", "JSON"]
   section = ["HTML", "RSS"]
   taxonomy = ["HTML", "RSS"]
   term = ["HTML", "RSS"]
-  footer = []
 
 [taxonomies]
   tag = "tags"
@@ -26,13 +24,6 @@ pagerSize = 3
   author = "authors"
   series = "series"
   topic = "topics"
-
-# Explicitly prevent the footer section from generating any output
-[outputFormats.footerSection]
-  # Empty configuration to prevent any output
-
-# Specifically disable generation of these kinds for the footer content
-disableKinds = ["footerSection"]
 
 [module]
 [[module.imports]]
