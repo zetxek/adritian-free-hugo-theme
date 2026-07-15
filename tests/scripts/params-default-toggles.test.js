@@ -115,21 +115,21 @@ assert.ok(
 // --- readingProgress: marker is "reading-progress-bar" on a blog single
 // page (the partial only fires for .IsPage + .Type "blog"). ---
 
-const rpUnset = buildSite('');
+const rpUnset = vtUnset;
 assert.ok(
-  rpUnset.blogPost.includes('reading-progress-bar'),
+  /<div[^>]*class=(?:"reading-progress-bar"|reading-progress-bar)\b/i.test(rpUnset.blogPost),
   'Expected reading-progress-bar to be present when readingProgress is unset (default-on).',
 );
 
 const rpTrue = buildSite('[params.blog]\nreadingProgress = true');
 assert.ok(
-  rpTrue.blogPost.includes('reading-progress-bar'),
+  /<div[^>]*class=(?:"reading-progress-bar"|reading-progress-bar)\b/i.test(rpTrue.blogPost),
   'Expected reading-progress-bar to be present when readingProgress = true.',
 );
 
 const rpFalse = buildSite('[params.blog]\nreadingProgress = false');
 assert.ok(
-  !rpFalse.blogPost.includes('reading-progress-bar'),
+  !/<div[^>]*class=(?:"reading-progress-bar"|reading-progress-bar)\b/i.test(rpFalse.blogPost),
   'Expected reading-progress-bar to be ABSENT when readingProgress = false — ' +
     'this is exactly the bug from #575 (isset with a camelCase key is always false in Hugo).',
 );
