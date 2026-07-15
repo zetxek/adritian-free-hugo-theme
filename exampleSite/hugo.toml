@@ -2,6 +2,11 @@ baseURL = "https://adritian-demo.vercel.app/"
 title = "Adritian Demo"
 locale = "en"
 
+# Required for the theme's layouts/robots.txt to be rendered — Hugo ignores
+# a custom robots.txt template unless this is explicitly enabled.
+# https://gohugo.io/templates/robots/
+enableRobotsTXT = true
+
 [pagination]
 pagerSize = 3
 
