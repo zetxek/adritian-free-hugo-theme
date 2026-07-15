@@ -1,5 +1,5 @@
 {{- if and .IsPage (eq .Type "blog") }}
-{{- if or .Site.Params.blog.readingProgress (not (isset .Site.Params.blog "readingProgress")) }}
+{{- if ne .Site.Params.blog.readingProgress false }}
 <div class="reading-progress-bar" aria-hidden="true">
   <div class="reading-progress-fill" id="reading-progress"></div>
 </div>
