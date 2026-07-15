@@ -4,9 +4,6 @@
     {{ $footer := where (where .Site.Pages "Type" "footer") "Lang" .Lang }}
 
     {{ range (sort $footer "Date" "desc") }}
-      {{ if .File }}
-        {{ warnf "[FOOTER] Path: %s | Lang: %s | IsDraft: %t | Type: %s | Section: %s | Kind: %s" .File.Path .Lang .Draft .Type .Section .Kind }}
-      {{ end }}        
       {{ .Content | safeHTML }}
     {{ end }}
 
