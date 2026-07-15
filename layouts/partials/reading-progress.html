@@ -1,7 +1,5 @@
 {{- if and .IsPage (eq .Type "blog") }}
-{{/* Hugo lowercases config keys, so isset with a camelCase literal is always false; use a nil sentinel on case-insensitive dot access instead. See issue #575. */}}
-{{- $readingProgress := .Site.Params.blog.readingProgress -}}
-{{- if or $readingProgress (eq $readingProgress nil) }}
+{{- if ne .Site.Params.blog.readingProgress false }}
 <div class="reading-progress-bar" aria-hidden="true">
   <div class="reading-progress-fill" id="reading-progress"></div>
 </div>
