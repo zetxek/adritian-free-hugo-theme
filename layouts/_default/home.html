@@ -12,7 +12,9 @@
     {{ partial "head.html" . }}
 
     {{ partial "head_custom.html" . }}
-    {{- if or .Site.Params.viewTransitions (not (isset .Site.Params "viewTransitions")) }}
+    {{/* Hugo lowercases config keys, so isset with a camelCase literal is always false; use a nil sentinel on case-insensitive dot access instead. See issue #575. */}}
+    {{- $viewTransitions := .Site.Params.viewTransitions -}}
+    {{- if or $viewTransitions (eq $viewTransitions nil) }}
     <meta name="view-transition" content="same-origin" />
     {{- end }}
 </head>
