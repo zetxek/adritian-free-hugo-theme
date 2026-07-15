@@ -1,3 +1,8 @@
+# Required for layouts/robots.txt to be rendered — Hugo ignores a custom
+# robots.txt template unless this is explicitly enabled.
+# https://gohugo.io/templates/robots/
+enableRobotsTXT = true
+
 [module]
 
   [module.hugoVersion]
