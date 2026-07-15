@@ -120,8 +120,8 @@ jobs:
           # source branch for manual dispatch) and does NOT include the commit
           # SHA. This ensures each source PR maps to a single preview PR in the
           # demo repo: new commits force-push to the same branch and update the
-          # existing preview PR instead of opening a new one. The short commit
-          # SHA is still surfaced in the PR title/body/commit for reference.
+          # existing preview PR instead of opening a new one.
+          # The short commit SHA is recorded in the commit message and in a PR comment; consider also updating the PR title/body when reusing an existing PR.
           if [ -n "$PR_NUMBER" ]; then
             PR_URL="https://github.com/$SOURCE_REPOSITORY/pull/$PR_NUMBER"
             BRANCH_NAME="theme-update/pr-$PR_NUMBER"
