@@ -1,6 +1,6 @@
 name: Update Example Site
 permissions:
-  contents: read
+  contents: write
   id-token: write
   pages: write
   pull-requests: write
