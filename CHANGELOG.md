@@ -2,6 +2,72 @@
 
 This documentation tracks changes across versions, including new features, improvements, and breaking changes.
 
+## v1.10.2
+
+### Security
+
+- Dependency updates: `dompurify` (3.4.11 → 3.4.13) — fixes DOM clobbering via `ownerDocument` and hooks bypassing the clone guard during `IN_PLACE` sanitization; `shell-quote` (1.8.4 → 1.10.0) in both the theme and `exampleSite` (#583, #584)
+
+### Bug fixes
+
+- Newsletter: render inline markup in note and status messages (#585)
+- CI: grant `contents: write` to the update-example-site workflow (#580)
+
+### Maintenance
+
+- Dependency updates: `autoprefixer` (10.5.2 → 10.5.4), `postcss` (8.5.19 → 8.5.25), `js-yaml` (5.2.1 → 5.2.3), `fuse.js` (7.4.2 → 7.5.0)
+
+## v1.10.1
+
+### Bug fixes
+
+- Respect an explicit `false` for `readingProgress` and `viewTransitions` (#576)
+- Set `enableRobotsTXT` so `layouts/robots.txt` actually renders (#563)
+- Restore default archetype scaffolding (#567)
+- Remove inert config for suppressing footer section output (#569)
+- Remove leftover debug `warnf` logging from home/footer templates (#565)
+- Preview workflow: one preview PR per source PR, via a stable demo branch name (#574)
+
+### Maintenance
+
+- Modernize i18n files to a flat key-value format (#573)
+
+## v1.10.0
+
+### Bug fixes
+
+- Meta description fallback chain now checks page params before i18n (#561)
+
+### Maintenance
+
+- Dependency updates: `postcss` (8.5.15 → 8.5.16), `autoprefixer` (10.5.0 → 10.5.2), `@types/node`, `png-to-ico`, `@playwright/test`
+
+## v1.9.15
+
+### Bug fixes
+
+- Set the minimum Hugo version to 0.156.0 in `hugo.toml` (#558)
+
+### Maintenance
+
+- Dependency updates: `js-yaml` (4.2.0 → 5.2.1), `dompurify` (3.4.10 → 3.4.11), `sharp`, `@types/node`, `@playwright/test`
+
+## v1.9.14
+
+### New features
+
+- **Korean (ko) translation** (#541)
+
+### Bug fixes
+
+- Fix mobile card image aspect ratio (#523)
+- exampleSite: fix deprecation warnings on Hugo 0.162.1 (#535)
+
+### Maintenance
+
+- Add Filip Vencelides to the showcase (#522)
+- Dependency updates: `dompurify` (3.4.1 → 3.4.10), `postcss` (8.5.10 → 8.5.15), `fuse.js` (7.3.0 → 7.4.2), `js-yaml` (4.1.1 → 4.2.0), `sharp`, `shell-quote`, `@types/node`, `@playwright/test`
+
 ## v1.9.13
 
 ### New features
