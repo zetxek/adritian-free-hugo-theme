@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-08-08T10:54:13Z",
-  "commit": "5188dfd12490cd82869c93cb30710f21cea33f2b",
+  "timestamp": "2026-08-08T11:08:57Z",
+  "commit": "fc4d72255dd565d6cbe5eb78e43888c075efe853",
   "scores": {
     "desktop": {
       "performance": 98,
@@ -9,7 +9,7 @@
       "seo": 100
     },
     "mobile": {
-      "performance": 79,
+      "performance": 78,
       "accessibility": 96,
       "best-practices": 100,
       "seo": 100
