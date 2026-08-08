@@ -28,7 +28,11 @@
      prose. Both are plain text by nature.
 
      These values come from the site's own shortcode parameters and i18n files,
-     never from visitor input. */ -}}
+     never from visitor input.
+
+     Each shortcode parameter falls back to its i18n value when omitted, which
+     is what the shortcode documentation already promises but the template did
+     not do — an omitted parameter previously rendered as empty text. */ -}}
 {{- $title := "" -}}
 {{- $placeholder := "" -}}
 {{- $button := "" -}}
@@ -36,12 +40,12 @@
 {{- $errorMessage := "" -}}
 {{- $note := "" -}}
 {{- if $isShortcode -}}
-  {{- $title = .Get "newsletter_title" -}}
-  {{- $placeholder = .Get "newsletter_placeholder" -}}
-  {{- $button = .Get "newsletter_button" -}}
-  {{- $successMessage = .Get "newsletter_success_message" | safeHTML -}}
-  {{- $errorMessage = .Get "newsletter_error_message" | safeHTML -}}
-  {{- $note = .Get "newsletter_note" | safeHTML -}}
+  {{- $title = .Get "newsletter_title" | default (i18n "newsletter_title") -}}
+  {{- $placeholder = .Get "newsletter_placeholder" | default (i18n "newsletter_placeholder") -}}
+  {{- $button = .Get "newsletter_button" | default (i18n "newsletter_button") -}}
+  {{- $successMessage = .Get "newsletter_success_message" | default (i18n "newsletter_success_message") | safeHTML -}}
+  {{- $errorMessage = .Get "newsletter_error_message" | default (i18n "newsletter_error_message") | safeHTML -}}
+  {{- $note = .Get "newsletter_note" | default (i18n "newsletter_note") | safeHTML -}}
 {{- else -}}
   {{- $title = i18n "newsletter_title" -}}
   {{- $placeholder = i18n "newsletter_placeholder" -}}
@@ -79,10 +83,14 @@
             >
             <button type="submit" id="rad-subscription-submit" class="btn btn-light btn-rounded">{{ $button }}</button>
           </form>
-          <div id="rad-subscription-success" class="d-none">
+          {{- /* These panels are revealed by JavaScript after the form is
+                 submitted. Without live-region roles the outcome is never
+                 announced to assistive technology: status for the confirmation,
+                 alert for the failure, which is the more urgent of the two. */ -}}
+          <div id="rad-subscription-success" class="d-none" role="status" aria-live="polite">
             <p class="lead">{{ $successMessage }}</p>
           </div>
-          <div id="rad-subscription-fail" class="d-none">
+          <div id="rad-subscription-fail" class="d-none" role="alert" aria-live="assertive">
             <p>{{ $errorMessage }}</p>
           </div>
           <script src='{{ "js/subscription.js" | absURL }}'></script>

@@ -16,6 +16,7 @@ test.describe('Newsletter section', () => {
   test('renders the form with the configured action and labels', async ({ page }) => {
     const form = page.locator('#rad-subscription');
     await expect(form).toBeVisible();
+    await expect(form).toHaveAttribute('action', '/');
     await expect(form).toHaveAttribute('method', 'POST');
 
     const email = form.locator('#rad-subscription-email');
@@ -46,8 +47,29 @@ test.describe('Newsletter section', () => {
     );
   });
 
-  test('success and error panels start hidden', async ({ page }) => {
-    await expect(page.locator('#rad-subscription-success')).toBeHidden();
-    await expect(page.locator('#rad-subscription-fail')).toBeHidden();
+  test('success and error panels start hidden but present', async ({ page }) => {
+    const success = page.locator('#rad-subscription-success');
+    const fail = page.locator('#rad-subscription-fail');
+
+    // toBeHidden() alone also passes when an element is absent from the DOM, so
+    // assert presence first — otherwise this test would still pass if the
+    // panels were removed entirely.
+    await expect(success).toBeAttached();
+    await expect(fail).toBeAttached();
+
+    await expect(success).toBeHidden();
+    await expect(fail).toBeHidden();
+  });
+
+  test('outcome panels are live regions so results are announced', async ({ page }) => {
+    // JavaScript reveals these after submission; without live-region roles the
+    // outcome is never announced to assistive technology.
+    const success = page.locator('#rad-subscription-success');
+    await expect(success).toHaveAttribute('role', 'status');
+    await expect(success).toHaveAttribute('aria-live', 'polite');
+
+    const fail = page.locator('#rad-subscription-fail');
+    await expect(fail).toHaveAttribute('role', 'alert');
+    await expect(fail).toHaveAttribute('aria-live', 'assertive');
   });
 });
