@@ -6,7 +6,7 @@ This documentation tracks changes across versions, including new features, impro
 
 ### Security
 
-- Dependency updates: `dompurify` (3.4.11 → 3.4.13) — fixes DOM clobbering via `ownerDocument` and hooks bypassing the clone guard during `IN_PLACE` sanitization; `shell-quote` (1.8.4 → 1.10.0) in both the theme and `exampleSite` (#583, #584)
+- Dependency updates: `dompurify` (3.4.11 → 3.4.13) — fixes DOM clobbering via `ownerDocument` and hooks bypassing the clone guard during `IN_PLACE` sanitization; `shell-quote` (1.8.4 → 1.10.0) in both the theme and `exampleSite`; `brace-expansion` (1.1.12 → 1.1.18) (#583, #584, #588)
 
 ### Bug fixes
 
