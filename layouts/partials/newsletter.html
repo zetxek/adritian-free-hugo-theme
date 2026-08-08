@@ -15,6 +15,42 @@
     {{- $formMethod = hugo.Data.homepage.newsletter.form.method -}}
 {{ end }}
 
+{{- /* Display strings.
+     Resolved once here rather than branching on $isShortcode at each use site.
+
+     The three prose strings are marked safe so they can carry inline markup —
+     most commonly a link to a privacy policy in the note, which the GDPR
+     expects at the point where an address is collected. Without this they
+     render as literal "<a href=...>" text on the page.
+
+     Not marked safe: the placeholder, which is interpolated into an HTML
+     attribute, and the button label, which is a control label rather than
+     prose. Both are plain text by nature.
+
+     These values come from the site's own shortcode parameters and i18n files,
+     never from visitor input. */ -}}
+{{- $title := "" -}}
+{{- $placeholder := "" -}}
+{{- $button := "" -}}
+{{- $successMessage := "" -}}
+{{- $errorMessage := "" -}}
+{{- $note := "" -}}
+{{- if $isShortcode -}}
+  {{- $title = .Get "newsletter_title" -}}
+  {{- $placeholder = .Get "newsletter_placeholder" -}}
+  {{- $button = .Get "newsletter_button" -}}
+  {{- $successMessage = .Get "newsletter_success_message" | safeHTML -}}
+  {{- $errorMessage = .Get "newsletter_error_message" | safeHTML -}}
+  {{- $note = .Get "newsletter_note" | safeHTML -}}
+{{- else -}}
+  {{- $title = i18n "newsletter_title" -}}
+  {{- $placeholder = i18n "newsletter_placeholder" -}}
+  {{- $button = i18n "newsletter_button" -}}
+  {{- $successMessage = i18n "newsletter_success_message" | safeHTML -}}
+  {{- $errorMessage = i18n "newsletter_error_message" | safeHTML -}}
+  {{- $note = i18n "newsletter_note" | safeHTML -}}
+{{- end -}}
+
 {{/*
   sectionId: Optional argument to override the default HTML id for this section. If not provided, the default id is used. */}}
 {{ $sectionId := "newsletter" }}
@@ -26,13 +62,7 @@
   <div class="container d-flex justify-content-center align-items-center">
     <div class="row">
       <div class="col-12 text-center">
-        <h2>
-          {{ if $isShortcode }} 
-            {{ .Get "newsletter_title" }} 
-          {{ else }} 
-            {{ i18n "newsletter_title" }}
-          {{ end }}
-        </h2>
+        <h2>{{ $title }}</h2>
         <div class="rad-subscription-group">
           <form
             id="rad-subscription"
@@ -44,44 +74,20 @@
               type="email"
               class="form-control"
               aria-describedby="emailHelp"
-              placeholder='{{ if $isShortcode }} {{ .Get "newsletter_placeholder" }} {{ else }} {{ i18n "newsletter_placeholder" }} {{ end }}'
-              aria-label='{{ if $isShortcode }} {{ .Get "newsletter_placeholder" }} {{ else }} {{ i18n "newsletter_placeholder" }} {{ end }}'
+              placeholder="{{ $placeholder }}"
+              aria-label="{{ $placeholder }}"
             >
-            <button type="submit" id="rad-subscription-submit" class="btn btn-light btn-rounded">
-              {{ if $isShortcode }} 
-                {{ .Get "newsletter_button" }} 
-              {{ else }} 
-                {{ i18n "newsletter_button" }} 
-              {{ end }}
-            </button>
+            <button type="submit" id="rad-subscription-submit" class="btn btn-light btn-rounded">{{ $button }}</button>
           </form>
           <div id="rad-subscription-success" class="d-none">
-            <p class="lead">
-              {{ if $isShortcode }} 
-                {{ .Get "newsletter_success_message" }} 
-              {{ else }} 
-                {{ i18n "newsletter_success_message" }} 
-              {{ end }}
-            </p>
+            <p class="lead">{{ $successMessage }}</p>
           </div>
           <div id="rad-subscription-fail" class="d-none">
-            <p>
-              {{ if $isShortcode }} 
-                {{ .Get "newsletter_error_message" }} 
-              {{ else }} 
-                {{ i18n "newsletter_error_message" }} 
-              {{ end }}
-            </p>
+            <p>{{ $errorMessage }}</p>
           </div>
           <script src='{{ "js/subscription.js" | absURL }}'></script>
         </div>
-        <small id="emailHelp" class="form-text text-muted">
-          {{ if $isShortcode }} 
-            {{ .Get "newsletter_note" }} 
-          {{ else }} 
-            {{ i18n "newsletter_note" }}
-          {{ end }}
-        </small>
+        <small id="emailHelp" class="form-text text-muted">{{ $note }}</small>
       </div>
     </div>
   </div>
