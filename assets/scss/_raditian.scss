@@ -427,9 +427,28 @@ input[type="email"]::placeholder {
     color: #fff;
 }
 
+/* Bootstrap draws its own .form-control:focus glow on the email input, and the
+   pill below draws the focus ring for the group as a whole. Left alone the two
+   stack into a double outline. The dark colour mode already suppressed the
+   Bootstrap glow; do it in every colour mode, since .section--cta is black
+   regardless of the active one. */
+.rad-subscription-group input[type="email"]:focus,
+.rad-subscription-group input[type="email"]:active {
+    outline: none;
+    box-shadow: none;
+}
+
+/* Focus ring for the pill. Drawn as a box-shadow rather than a thicker border:
+   the group is a fixed 56px with border-box sizing, so growing the border
+   shifts its contents by a pixel.
+
+   White (the section's own foreground, at 21:1 on the black .section--cta)
+   rather than a themed colour — $primary is configurable per site and can land
+   anywhere on the contrast scale against black. It also no longer reads as
+   alarm red, which looked like a validation error on an untouched field. */
 .rad-subscription-group:has(input[type="email"]:focus),
 .rad-subscription-group:has(input[type="email"]:active) {
-    border: 2px solid rgba(233, 62, 52, 0.5);
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.4);
 }
 
 .rad-subscription-group input[type="email"]::-webkit-input-placeholder,

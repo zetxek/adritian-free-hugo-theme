@@ -61,6 +61,36 @@ test.describe('Newsletter section', () => {
     await expect(fail).toBeHidden();
   });
 
+  test('focusing the email field draws exactly one focus ring', async ({ page }) => {
+    // Bootstrap's .form-control:focus glow and the pill's own ring used to
+    // stack into a double outline, because the glow was only suppressed in the
+    // dark colour mode — .section--cta is black in every mode, so light-mode
+    // visitors saw both of them at once.
+    const email = page.locator('#rad-subscription-email');
+    await email.focus();
+
+    await expect(email).toHaveCSS('box-shadow', 'none');
+
+    const ring = await page
+      .locator('.rad-subscription-group')
+      .evaluate((el) => getComputedStyle(el).boxShadow);
+    expect(ring).not.toBe('none');
+  });
+
+  test('the focus ring is not alarm red', async ({ page }) => {
+    // A red ring on an untouched field reads as a validation error. White is
+    // the one colour guaranteed to stay legible here whatever $primary a site
+    // configures, because .section--cta is black in every colour mode.
+    await page.locator('#rad-subscription-email').focus();
+
+    const ring = await page
+      .locator('.rad-subscription-group')
+      .evaluate((el) => getComputedStyle(el).boxShadow);
+
+    expect(ring).toContain('255, 255, 255');
+    expect(ring).not.toContain('233, 62, 52');
+  });
+
   test('outcome panels are live regions so results are announced', async ({ page }) => {
     // JavaScript reveals these after submission; without live-region roles the
     // outcome is never announced to assistive technology.
