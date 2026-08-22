@@ -80,7 +80,7 @@
 {{- end -}}
 
 {{- $webSite := dict "@context" "https://schema.org" "@type" "WebSite" "name" $siteTitle "url" $siteUrl "description" $siteDescription -}}
-{{- with .Site.LanguageCode -}}
+{{- with .Site.Language.Locale -}}
   {{- $webSite = merge $webSite (dict "inLanguage" .) -}}
 {{- end -}}
 {{- if $siteImage -}}

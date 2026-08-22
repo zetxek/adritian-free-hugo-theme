@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{- $.Lang }}" dir="{{ .Site.Language.LanguageDirection | default "ltr" }}"
+<html lang="{{- $.Lang }}" dir="{{ .Site.Language.Direction | default "ltr" }}"
     {{- if .Site.Params.colorTheme.auto.disable }}
     data-bs-theme="{{ .Site.Params.colorTheme.forced.theme }}"
     theme-forced="true"

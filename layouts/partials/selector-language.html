@@ -16,14 +16,14 @@ so far the placement can either be header or footer */}}
   <ul class='dropdown-menu dropdown-menu-end {{ if  (eq $direction "up") }}dropup{{ end }}'
     id="languages-dropdown-{{ $placement }}" data-bs-popper="static">
     <li class="dropdown-item current selected">
-      <span>✔️ {{ .Site.Language.LanguageName }}</span>
+      <span>✔️ {{ .Site.Language.Label }}</span>
     </li>
     {{ end }}
     {{ end }}
     {{ range $.Translations }}
     <li class="dropdown-item choice">
-      <a class="dropdown-item translation btn-link d-flex align-items-center show" title="{{ .Site.Language.LanguageName }}"
-        href="{{ .Permalink }}">{{ .Site.Language.LanguageName }}</a>
+      <a class="dropdown-item translation btn-link d-flex align-items-center show" title="{{ .Site.Language.Label }}"
+        href="{{ .Permalink }}">{{ .Site.Language.Label }}</a>
     </li>
     {{ end }}
   </ul>
