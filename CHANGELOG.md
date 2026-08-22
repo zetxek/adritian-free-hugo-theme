@@ -12,7 +12,7 @@ This documentation tracks changes across versions, including new features, impro
 
 ### Maintenance
 
-- Test suite honours `TEST_BASE_URL` everywhere instead of hardcoding port 1313, so it no longer runs against an unrelated Hugo server that happens to occupy that port
+- Every e2e test file now honours `TEST_BASE_URL` instead of hardcoding port 1313; combined with `PLAYWRIGHT_PORT`, the suite can be pointed at a free port rather than silently reusing an unrelated Hugo server that already occupies 1313
 
 ## v1.10.2
 
