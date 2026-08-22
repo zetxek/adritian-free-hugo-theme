@@ -61,35 +61,48 @@ test.describe('Newsletter section', () => {
     await expect(fail).toBeHidden();
   });
 
-  test('focusing the email field draws exactly one focus ring', async ({ page }) => {
-    // Bootstrap's .form-control:focus glow and the pill's own ring used to
-    // stack into a double outline, because the glow was only suppressed in the
-    // dark colour mode — .section--cta is black in every mode, so light-mode
-    // visitors saw both of them at once.
-    const email = page.locator('#rad-subscription-email');
-    await email.focus();
+  for (const colorScheme of ['light', 'dark'] as const) {
+    test(`focusing the email field draws exactly one focus ring (${colorScheme} mode)`, async ({ page }) => {
+      // Bootstrap's .form-control:focus glow and the pill's own ring used to
+      // stack into a double outline, because the glow was only suppressed in the
+      // dark colour mode — .section--cta is black in every mode, so light-mode
+      // visitors saw both of them at once. Both modes are exercised explicitly
+      // so a regression in either one fails this test instead of hiding behind
+      // whatever colour scheme happens to be the test runner's default.
+      await page.emulateMedia({ colorScheme });
+      await page.goto(BASE_URL);
+      await expect(page.locator('html')).toHaveAttribute('data-bs-theme', colorScheme);
 
-    await expect(email).toHaveCSS('box-shadow', 'none');
+      const email = page.locator('#rad-subscription-email');
+      await email.focus();
 
-    const ring = await page
-      .locator('.rad-subscription-group')
-      .evaluate((el) => getComputedStyle(el).boxShadow);
-    expect(ring).not.toBe('none');
-  });
+      await expect(email).toHaveCSS('box-shadow', 'none');
+      await expect(email).toHaveCSS('outline-style', 'none');
 
-  test('the focus ring is not alarm red', async ({ page }) => {
-    // A red ring on an untouched field reads as a validation error. White is
-    // the one colour guaranteed to stay legible here whatever $primary a site
-    // configures, because .section--cta is black in every colour mode.
-    await page.locator('#rad-subscription-email').focus();
+      const ring = await page
+        .locator('.rad-subscription-group')
+        .evaluate((el) => getComputedStyle(el).boxShadow);
+      expect(ring).not.toBe('none');
+    });
 
-    const ring = await page
-      .locator('.rad-subscription-group')
-      .evaluate((el) => getComputedStyle(el).boxShadow);
+    test(`the focus ring is not alarm red (${colorScheme} mode)`, async ({ page }) => {
+      // A red ring on an untouched field reads as a validation error. White is
+      // the one colour guaranteed to stay legible here whatever $primary a site
+      // configures, because .section--cta is black in every colour mode.
+      await page.emulateMedia({ colorScheme });
+      await page.goto(BASE_URL);
+      await expect(page.locator('html')).toHaveAttribute('data-bs-theme', colorScheme);
 
-    expect(ring).toContain('255, 255, 255');
-    expect(ring).not.toContain('233, 62, 52');
-  });
+      await page.locator('#rad-subscription-email').focus();
+
+      const ring = await page
+        .locator('.rad-subscription-group')
+        .evaluate((el) => getComputedStyle(el).boxShadow);
+
+      expect(ring).toContain('255, 255, 255');
+      expect(ring).not.toContain('233, 62, 52');
+    });
+  }
 
   test('outcome panels are live regions so results are announced', async ({ page }) => {
     // JavaScript reveals these after submission; without live-region roles the

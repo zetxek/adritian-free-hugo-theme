@@ -455,6 +455,16 @@ input[type="email"]::placeholder {
     box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.4);
 }
 
+/* forced-colors mode (e.g. Windows High Contrast) forces box-shadow to none,
+   so the pill ring above disappears — and outline: none further up already
+   removed the browser's own indicator. Restore one explicitly. */
+@media (forced-colors: active) {
+    .rad-subscription-group input[type="email"]:focus-visible {
+        outline: 2px solid Highlight;
+        outline-offset: 2px;
+    }
+}
+
 .rad-subscription-group input[type="email"]::-webkit-input-placeholder,
 .rad-subscription-group input[type="email"]::-moz-placeholder,
 .rad-subscription-group input[type="email"]::-ms-input-placeholder,
