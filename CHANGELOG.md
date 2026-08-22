@@ -2,6 +2,18 @@
 
 This documentation tracks changes across versions, including new features, improvements, and breaking changes.
 
+## v1.10.3
+
+### Bug fixes
+
+- Enforce the real minimum Hugo version (0.158.0) in `hugo.toml`, so builds on 0.156/0.157 fail loudly instead of silently rendering the wrong `dir` for RTL languages and empty language-switcher labels
+- Restore the print stylesheet, which was silently dropped from the CSS bundle because `bootstrap-print-css` was never declared as a dependency
+- Replace Hugo template APIs deprecated in 0.156/0.158 (`LanguageDirection`, `LanguageName`, `LanguageCode`, `site.Data`), removing the deprecation warnings from every build
+
+### Maintenance
+
+- Test suite honours `TEST_BASE_URL` everywhere instead of hardcoding port 1313, so it no longer runs against an unrelated Hugo server that happens to occupy that port
+
 ## v1.10.2
 
 ### Bug fixes
