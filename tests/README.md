@@ -186,8 +186,22 @@ Tests use the Playwright configuration in `playwright.config.ts` which:
   ```bash
   TEST_NO_MENUS=true npm run test:e2e
   ```
+- **`PLAYWRIGHT_PORT`**: Port the Hugo server is started on (default: `1313`)
 
 All test files validate that `TEST_BASE_URL` starts with `http://` or `https://` for security.
+
+### If port 1313 is already in use
+
+`playwright.config.ts` sets `reuseExistingServer: true`, so if any other Hugo
+server is already listening on the test port, Playwright will reuse it and the
+whole suite silently runs against the wrong site. If you keep an unrelated Hugo
+server running locally, point the suite at a free port instead — set both
+variables, since `PLAYWRIGHT_PORT` moves the server and `TEST_BASE_URL` moves
+the requests:
+
+```bash
+PLAYWRIGHT_PORT=1414 TEST_BASE_URL=http://localhost:1414 npm run test:e2e
+```
 
 ## Writing New Tests
 

@@ -10,7 +10,7 @@
   </button>
   <ul id="scheme-dropdown-{{ $placement }}" class="dropdown-menu dropdown-menu-end {{ if eq $direction "up" }}dropup{{ end }}"
     aria-labelledby="scheme-selector-{{ $placement }}" data-bs-popper="static">
-    {{- range $name, $scheme := site.Data.colorSchemes }}
+    {{- range $name, $scheme := hugo.Data.colorSchemes }}
     {{- if not (findRE "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$" $scheme.light) }}
       {{- errorf "Invalid light color value for scheme '%s' in data/colorSchemes.yaml: %s. Must be a hex code (e.g., #FFFFFF)." $name $scheme.light }}
     {{- end }}

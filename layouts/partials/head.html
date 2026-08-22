@@ -4,14 +4,14 @@
 {{- /* Resolve color scheme from config — defaults to "default" (current theme colors).
        params.primaryColor takes precedence over colorScheme if both are set. */}}
 {{- $schemeName := .Site.Params.colorScheme | default "default" -}}
-{{- $scheme := index site.Data.colorSchemes $schemeName -}}
+{{- $scheme := index hugo.Data.colorSchemes $schemeName -}}
 {{- if and .Site.Params.primaryColor .Site.Params.primaryColor.light -}}
   {{- $scheme = dict "light" .Site.Params.primaryColor.light "dark" (.Site.Params.primaryColor.dark | default .Site.Params.primaryColor.light) "name" "Custom" -}}
   {{- $schemeName = "custom" -}}
 {{- else if not $scheme -}}
   {{- warnf "Color scheme '%s' not found in data/colorSchemes.yaml, falling back to default" $schemeName -}}
   {{- $schemeName = "default" -}}
-  {{- $scheme = index site.Data.colorSchemes "default" -}}
+  {{- $scheme = index hugo.Data.colorSchemes "default" -}}
 {{- end -}}
 {{- $themeColor := .Site.Params.themeColor | default (cond (ne $scheme nil) $scheme.light "#478079") -}}
 <meta name="theme-color" content="{{ $themeColor }}" />
@@ -69,7 +69,7 @@
 {{/* hreflang alternate links for multilingual sites */}}
 {{- if and hugo.IsMultilingual .IsTranslated }}
   {{- range .AllTranslations }}
-  <link rel="alternate" hreflang="{{ .Language.LanguageCode | default .Lang }}" href="{{ .Permalink }}" />
+  <link rel="alternate" hreflang="{{ .Language.Locale | default .Lang }}" href="{{ .Permalink }}" />
   {{- end }}
 {{- end }}
 {{/* RSS Feed Discovery Links */}}
@@ -149,7 +149,7 @@
 {{- if .Site.Params.colorSchemeSwitcher.enable }}
   {{- $overrideTpl := resources.Get "scss/scheme-override.scss" }}
   {{- if $overrideTpl }}
-    {{- range $name, $schemeData := site.Data.colorSchemes }}
+    {{- range $name, $schemeData := hugo.Data.colorSchemes }}
       {{- $overrideScss := $overrideTpl | resources.ExecuteAsTemplate (printf "scss/scheme-override-%s.scss" $name) (dict "scheme" $schemeData "name" $name) }}
       {{- if not hugo.IsProduction }}
         {{- $overrideCss := $overrideScss | css.Sass }}
