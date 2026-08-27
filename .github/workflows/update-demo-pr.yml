@@ -84,7 +84,7 @@ jobs:
     env:
       SOURCE_BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
       PR_NUMBER: ${{ github.event.number }}
-      HUGO_VERSION: ${{ vars.HUGO_VERSION || '0.157.0' }}
+      HUGO_VERSION: ${{ vars.HUGO_VERSION || '0.158.0' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout source repository

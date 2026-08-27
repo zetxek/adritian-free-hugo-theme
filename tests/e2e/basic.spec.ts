@@ -107,7 +107,7 @@ test('footer_right should contain dropdown elements for language, theme, and col
 
 
 test('should load all homepage images correctly', async ({ page }) => {
-  await page.goto('http://localhost:1313');
+  await page.goto(BASE_URL);
   
   // Wait for network to be idle (most images loaded)
   await page.waitForLoadState('networkidle');

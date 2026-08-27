@@ -2,20 +2,24 @@
 
 This documentation tracks changes across versions, including new features, improvements, and breaking changes.
 
+## v1.10.3
+
+### Bug fixes
+
+- Enforce the real minimum Hugo version (0.158.0) in `hugo.toml`, so builds on 0.156/0.157 fail loudly instead of silently rendering the wrong `dir` for RTL languages and empty language-switcher labels
+- Restore the print stylesheet, which was silently dropped from the CSS bundle because `bootstrap-print-css` was never declared as a dependency
+- Replace Hugo template APIs deprecated in 0.156/0.158 (`LanguageDirection`, `LanguageName`, `LanguageCode`, `site.Data`), removing the deprecation warnings from every build
+
+### Maintenance
+
+- Every e2e test file now honours `TEST_BASE_URL` instead of hardcoding port 1313; combined with `PLAYWRIGHT_PORT`, the suite can be pointed at a free port rather than silently reusing an unrelated Hugo server that already occupies 1313
+
 ## v1.10.2
-
-### Security
-
-- Dependency updates: `dompurify` (3.4.11 → 3.4.13) — fixes DOM clobbering via `ownerDocument` and hooks bypassing the clone guard during `IN_PLACE` sanitization; `shell-quote` (1.8.4 → 1.10.0) in both the theme and `exampleSite` (#583, #584)
 
 ### Bug fixes
 
 - Newsletter: render inline markup in note and status messages (#585)
 - CI: grant `contents: write` to the update-example-site workflow (#580)
-
-### Maintenance
-
-- Dependency updates: `autoprefixer` (10.5.2 → 10.5.4), `postcss` (8.5.19 → 8.5.25), `js-yaml` (5.2.1 → 5.2.3), `fuse.js` (7.4.2 → 7.5.0)
 
 ## v1.10.1
 
@@ -38,19 +42,11 @@ This documentation tracks changes across versions, including new features, impro
 
 - Meta description fallback chain now checks page params before i18n (#561)
 
-### Maintenance
-
-- Dependency updates: `postcss` (8.5.15 → 8.5.16), `autoprefixer` (10.5.0 → 10.5.2), `@types/node`, `png-to-ico`, `@playwright/test`
-
 ## v1.9.15
 
 ### Bug fixes
 
 - Set the minimum Hugo version to 0.156.0 in `hugo.toml` (#558)
-
-### Maintenance
-
-- Dependency updates: `js-yaml` (4.2.0 → 5.2.1), `dompurify` (3.4.10 → 3.4.11), `sharp`, `@types/node`, `@playwright/test`
 
 ## v1.9.14
 
@@ -66,7 +62,6 @@ This documentation tracks changes across versions, including new features, impro
 ### Maintenance
 
 - Add Filip Vencelides to the showcase (#522)
-- Dependency updates: `dompurify` (3.4.1 → 3.4.10), `postcss` (8.5.10 → 8.5.15), `fuse.js` (7.3.0 → 7.4.2), `js-yaml` (4.1.1 → 4.2.0), `sharp`, `shell-quote`, `@types/node`, `@playwright/test`
 
 ## v1.9.13
 
