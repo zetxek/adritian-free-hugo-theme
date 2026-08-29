@@ -18,14 +18,14 @@
             </li>
             {{- end -}}
             {{- range .Ancestors.Reverse -}}
-            {{- if not .IsHome }}
+            {{- if not .IsHome -}}
             <li class="breadcrumb-item">
                 <a href="{{ .RelPermalink }}" class="breadcrumb-link">
                     <span class="breadcrumb-text">{{ partial "breadcrumb-label.html" . }}</span>
                 </a>
             </li>
             {{- end -}}
-            {{- end }}
+            {{- end -}}
             <li class="breadcrumb-item active" aria-current="page">
                 {{- if .Params.LastSegmentURL -}}
                 <a href="{{ .Params.LastSegmentURL }}" class="breadcrumb-link">
