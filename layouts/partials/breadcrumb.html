@@ -13,7 +13,7 @@
             <li class="breadcrumb-item">
                 <a href="{{ .Site.Home.RelPermalink }}" class="breadcrumb-link">
                     <span class="breadcrumb-icon" aria-hidden="true">🏠</span>
-                    <span class="breadcrumb-text">{{ .Site.Home.Title }}</span>
+                    <span class="breadcrumb-text">{{ i18n "home" | default "Home" }}</span>
                 </a>
             </li>
             {{- end -}}
