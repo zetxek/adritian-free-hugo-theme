@@ -18,7 +18,7 @@ If you prefer to manually set your site, you need to replace the contents of you
 
 ```
 baseURL = "<your website url>"
-locale = "en"
+languageCode = "en"
 
 [module]
 [module.hugoVersion]
@@ -110,9 +110,9 @@ target = "assets/css/bootstrap-print.css"
 [languages]
   [languages.en]
     disabled = false
-    locale = 'en'
-    direction = 'ltr'
-    label = 'English'
+    languageCode = 'en'
+    languageDirection = 'ltr'
+    languageName = 'English'
     title = ''
     weight = 0
 
@@ -158,9 +158,9 @@ target = "assets/css/bootstrap-print.css"
 
   [languages.es]
     disabled = false
-    locale = 'es'
-    direction = 'ltr'
-    label = 'Español'
+    languageCode = 'es'
+    languageDirection = 'ltr'
+    languageName = 'Español'
     title = ''
     weight = 0
       [[languages.es.menus.header]]
@@ -204,9 +204,9 @@ target = "assets/css/bootstrap-print.css"
 
   [languages.fr]
     disabled = false
-    locale = 'fr'
-    direction = 'ltr'
-    label = 'Français'
+    languageCode = 'fr'
+    languageDirection = 'ltr'
+    languageName = 'Français'
     title = ''
     weight = 0
 
