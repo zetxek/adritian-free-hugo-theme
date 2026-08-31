@@ -1,22 +1,19 @@
 baseURL = "https://adritian-demo.vercel.app/"
-title = "Adritian Demo"
-locale = "en"
-
-# Required for the theme's layouts/robots.txt to be rendered — Hugo ignores
-# a custom robots.txt template unless this is explicitly enabled.
-# https://gohugo.io/templates/robots/
-enableRobotsTXT = true
+title = "Demo site for Adritian - a high performance hugo theme by Adrián Moreno"
+languageCode = "en"
 
 [pagination]
 pagerSize = 3
 
 
+# Exclude footer section from generating list pages (index.html and index.xml)
 [outputs]
   page = ["HTML"]
   home = ["HTML", "RSS", "JSON"]
   section = ["HTML", "RSS"]
   taxonomy = ["HTML", "RSS"]
   term = ["HTML", "RSS"]
+  footer = []
 
 [taxonomies]
   tag = "tags"
@@ -24,6 +21,13 @@ pagerSize = 3
   author = "authors"
   series = "series"
   topic = "topics"
+
+# Explicitly prevent the footer section from generating any output
+[outputFormats.footerSection]
+  # Empty configuration to prevent any output
+
+# Specifically disable generation of these kinds for the footer content
+disableKinds = ["footerSection"]
 
 [module]
 [[module.imports]]
@@ -70,32 +74,14 @@ target = "assets/css/bootstrap-print.css"
 
 
 [params]
-title = 'Adritian Demo'
-description = 'Adritian Demo — a high performance Hugo theme'
+title = 'Adritian - a high performance hugo theme by Adrián Moreno'
+description = 'This hugo theme (Adritian) is based on Bootstrap and has features that make it suitable for a personal site, a portfolio or other kind of Single Page Applications.'
 images = ['/img/og-img.png']
 themeColor = '#478079'
 
-# Header logo text. Optional — falls back to .Site.Title when unset.
-# Useful when your SEO/page `title` (long, keyword-rich) should differ
-# from the short brand text shown in the header. See PR #561.
-logo_text1 = 'Adritian'
-logo_text2 = 'Theme'
-
-# Color scheme: default | ocean | forest | rose | slate | midnight | warm
-colorScheme = 'default'
-
-# Enable the live color scheme switcher (for the demo site)
-[params.colorSchemeSwitcher]
-enable = true
-
-# Color scheme selector visibility — set to true to hide in that location
-[params.colorSchemeSwitcher.selector.disable]
-footer = false
-header = false
-
 [params.seo]
 siteName = 'Adritian'
-siteDescription = 'Adritian Demo — a high performance Hugo theme'
+siteDescription = 'This hugo theme (Adritian) is based on Bootstrap and has features that make it suitable for a personal site, a portfolio or other kind of Single Page Applications.'
 siteImage = '/img/og-img.png'
 
 [params.social]
@@ -171,13 +157,11 @@ mobileHeader = false
 [languages]
 [languages.en]
 disabled = false
-locale = 'en'
-direction = 'ltr'
-label = 'English'
+languageCode = 'en'
+languageDirection = 'ltr'
+languageName = 'English'
+title = 'Demo site for Adritian - a high performance hugo theme by Adrián Moreno'
 weight = 0
-
-[languages.en.params.footer]
-notice = '© Adritian. Free Hugo theme by Adrián Moreno Peña.'
 
 [languages.en.menus]
 [[languages.en.menus.header]]
@@ -246,14 +230,11 @@ weight = 4
 
 [languages.es]
 disabled = false
-locale = 'es'
-direction = 'ltr'
-label = 'Español'
+languageCode = 'es'
+languageDirection = 'ltr'
+languageName = 'Español'
+title = 'Sitio demo de Adritian - un tema Hugo de alto rendimiento por Adrián Moreno'
 weight = 0
-
-[languages.es.params.footer]
-notice = '© Adritian. Tema gratuito de Hugo por Adrián Moreno Peña.'
-
 [[languages.es.menus.header]]
 name = "INICIO"
 URL = "/es/"
@@ -309,7 +290,7 @@ URL = "/es/#about"
 weight = 2
 
 [[languages.es.menus.footer]]
-name = "Portfolio"
+name = "Portafolio"
 URL = "/es/#client-and-work-section"
 weight = 3
 
@@ -320,13 +301,11 @@ weight = 4
 
 [languages.fr]
 disabled = false
-locale = 'fr'
-direction = 'ltr'
-label = 'Français'
+languageCode = 'fr'
+languageDirection = 'ltr'
+languageName = 'Français'
+title = 'Site de démonstration pour Adritian - un thème Hugo haute performance par Adrián Moreno'
 weight = 0
-
-[languages.fr.params.footer]
-notice = '© Adritian. Thème gratuit Hugo par Adrián Moreno Peña.'
 
 [languages.fr.menus]
 [[languages.fr.menus.header]]
@@ -351,7 +330,7 @@ weight = 4
 #  weight = 4
 
 [[languages.fr.menus.header]]
-name = "Vitrine"
+name = "Showcase"
 URL = "/showcase"
 weight = 5
 
@@ -393,13 +372,11 @@ weight = 4
 
 [languages.ar]
 disabled = false
-locale = 'ar'
-direction = 'rtl'
-label = 'العربية'
+languageCode = 'ar'
+languageDirection = 'rtl'
+languageName = 'العربية'
+title = 'موقع تجريبي لأدريتيان - قالب هوغو عالي الأداء من إنشاء أدريان مورينو'
 weight = 0
-
-[languages.ar.params.footer]
-notice = '© أدريتيان. قالب هوغو مجاني من إنشاء أدريان مورينو بينيا.'
 
 [languages.ar.menus]
 [[languages.ar.menus.header]]
@@ -457,13 +434,11 @@ weight = 4
 
 [languages.he]
 disabled = false
-locale = 'he'
-direction = 'rtl'
-label = 'עברית'
+languageCode = 'he'
+languageDirection = 'rtl'
+languageName = 'עברית'
+title = 'אתר דמו לאדריטיאן - תבנית הוגו בביצועים גבוהים מאת אדריאן מורנו'
 weight = 0
-
-[languages.he.params.footer]
-notice = '© אדריטיאן. תבנית הוגו חינמית מאת אדריאן מורנו פניה.'
 
 [languages.he.menus]
 [[languages.he.menus.header]]
@@ -588,10 +563,6 @@ featured_sort_by_date = false
 
 [params.experience]
 showJobCard = true # Set to false to hide the job card
-
-# Navbar overflow handling - options: "dropdown" | "footer" | "none"
-[params.navbarOverflow]
-mode = "dropdown" # "dropdown" moves items to More dropdown, "footer" moves to footer, "none" disables
 
 
 # Performance optimizations
