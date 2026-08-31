@@ -160,6 +160,15 @@ jobs:
             - name: Create output directory
               run: mkdir -p ${{ github.workspace }}/tmp/artifacts
                 
+            - name: Pre-compress text assets
+              # http-server --gzip serves pre-compressed .gz files (it does NOT
+              # compress on the fly). Without this, Lighthouse reports
+              # "Enable text compression" and penalizes the mobile score, even
+              # though production (Vercel) serves brotli.
+              run: |
+                find ./public -type f \( -name "*.html" -o -name "*.css" -o -name "*.js" -o -name "*.xml" -o -name "*.svg" -o -name "*.json" \) -exec gzip -k9 {} \;
+                echo "Pre-compressed $(find ./public -name '*.gz' | wc -l) files"
+
             - name: Start local server
               run: |
                 npx http-server ./public -p 8080 --gzip &
