@@ -162,7 +162,7 @@ jobs:
                 
             - name: Start local server
               run: |
-                npx http-server ./public -p 8080 &
+                npx http-server ./public -p 8080 --gzip &
                 SERVER_PID=$!
                 echo "Started http-server with PID: $SERVER_PID"
                 
