@@ -1,9 +1,10 @@
 # Adritian Free Hugo Theme
 A modern, fast and extensible Hugo theme for personal websites and professional landing pages - with blog and portfolio support
 
-[![Hugo](https://img.shields.io/badge/Hugo-%3E%3D0.153-ff4088?logo=hugo)](https://gohugo.io/)
+[![Hugo](https://img.shields.io/badge/Hugo-%3E%3D0.158.0-ff4088?logo=hugo)](https://gohugo.io/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/zetxek/adritian-free-hugo-theme/blob/main/LICENSE)
 [![GitHub stars](https://img.shields.io/github/stars/zetxek/adritian-free-hugo-theme)](https://github.com/zetxek/adritian-free-hugo-theme/stargazers)
+[![GitHub last commit](https://img.shields.io/github/last-commit/zetxek/adritian-free-hugo-theme)](https://github.com/zetxek/adritian-free-hugo-theme/commits/main)
 [![GitHub release](https://img.shields.io/github/v/release/zetxek/adritian-free-hugo-theme)](https://github.com/zetxek/adritian-free-hugo-theme/releases)
 [![Vercel Deploy](https://deploy-badge.vercel.app/vercel/adritian-demo?name=demo)](https://adritian-demo.vercel.app/)
 [![Test example site](https://github.com/zetxek/adritian-free-hugo-theme/actions/workflows/test-example-site.yml/badge.svg)](https://github.com/zetxek/adritian-free-hugo-theme/actions/workflows/test-example-site.yml)
