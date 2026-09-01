@@ -52,10 +52,12 @@ $dark-primary: {{ .scheme.dark }};{{ end }}
 @import "bootstrap/helpers/position"; // .fixed-top on the site header
 @import "bootstrap/helpers/stretched-link";
 @import "bootstrap/helpers/visually-hidden";
+@import "bootstrap/helpers/icon-link"; // .icon-link/.icon-link-hover on blog list read-more links
 
 // Utilities API: generates the d-*, m-*, p-*, gap-*, text-*, flex utility
 // classes used liberally throughout layouts/partials/*.html. Must be
-// imported last, mirroring Bootstrap's own bootstrap.scss ordering.
+// imported last among the Bootstrap imports, mirroring Bootstrap's own
+// bootstrap.scss ordering (theme partials below are imported afterwards).
 @import "bootstrap/utilities/api";
 
 @import "navbar";

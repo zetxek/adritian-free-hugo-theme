@@ -171,7 +171,7 @@ jobs:
 
             - name: Start local server
               run: |
-                npx http-server ./public -p 8080 --gzip &
+                npx http-server@14.1.1 ./public -p 8080 --gzip &
                 SERVER_PID=$!
                 echo "Started http-server with PID: $SERVER_PID"
                 
