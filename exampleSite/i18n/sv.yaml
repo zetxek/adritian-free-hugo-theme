@@ -1,0 +1,301 @@
+## Meta tags
+- id: "meta_title"
+  translation: "Adritian - ett högpresterande Hugo-tema av Adrián Moreno"
+- id: "meta_description"
+  translation: "Detta Hugo-tema (Adritian) är baserat på Bootstrap och har funktioner som gör det lämpligt för en personlig webbplats, en portfölj eller andra typer av Single Page-applikationer."
+- id: "meta_keywords"
+  translation: "hugo, tema, bootstrap, adritian, adrian moreno, personlig webbplats, portfölj, single page-applikation"
+- id: "meta_author"
+  translation: "Adrián Moreno Peña"
+- id: "meta_image"
+  translation: "/img/general/og-image.jpg"
+
+## Header
+- id: "logo_alt"
+  translation: "Adritian-logotyp"
+
+- id: "logo_text1"
+  translation: "Adritian"
+
+- id: "logo_text2"
+  translation: "Demo"
+
+## General
+- id: "skipToMainContent"
+  translation: "Hoppa till huvudinnehåll"
+
+- id: "toggle_navigation"
+  translation: "Växla navigering"
+
+## Footer
+- id: "footer_notice"
+  translation: "© Adritian. Gratis Hugo-tema av Adrián Moreno Peña."
+
+- id: "language"
+  translation: "Språk"
+
+- id: "toggle_theme"
+  translation: "Växla tema"
+
+- id: "theme_light"
+  translation: "☀️ Ljust"
+- id: "theme_dark"
+  translation: "🌑 Mörkt"
+- id: "theme_auto"
+  translation: "✨ Auto"
+
+## Homepage head title
+- id: "head_title"
+  translation: "Demonstrationssida för Adritian - ett högpresterande Hugo-tema av Adrián Moreno"
+
+- id: "head_description"
+  translation: "Detta Hugo-tema (Adritian) är baserat på Bootstrap och har funktioner som gör det lämpligt för en personlig webbplats, en portfölj eller andra typer av Single Page-applikationer."
+
+## Homepage showcase
+- id: "showcase_title"
+  translation: "Välkommen till demon"
+
+- id: "showcase_subtitle"
+  translation: "Låt oss dyka in i ett exempel"
+
+- id: "showcase_description"
+  translation: "Detta är ett högpresterande tema för den statiska webbplatsgeneratorn Hugo."
+
+- id: "showcase_button"
+  translation: "Kontakt"
+
+- id: "showcase_image_alt"
+  translation: "En bild av Cool Name"
+
+## Homepage about
+- id: "about_title"
+  translation: "Vem är jag?"
+
+- id: "about_content"
+  translation: "Här kan du lägga till lite information om dig själv."
+
+- id: "about_button"
+  translation: "Om mig"
+
+## Homepage education
+- id: "education_title"
+  translation: "Utbildning"
+
+## Homepage experience
+- id: "experience_button"
+  translation: "LinkedIn"
+
+- id: "experience_button_url"
+  translation: "https://www.linkedin.com/in/adrianmoreno/"
+
+- id: "experience_button2"
+  translation: "Ladda ner CV"
+
+- id: "experience_button2_url"
+  translation: "/img/general/user-smile-fill.svg"
+
+- id: "experience_button3"
+  translation: "Visa alla"
+
+- id: "experience_button3_url"
+  translation: "/experience"
+
+## Homepage client & work
+- id: "client_work_title"
+  translation: "Kunder & Arbete"
+
+## Homepage newsletter
+- id: "newsletter_title"
+  translation: "Nyhetsbrev"
+
+- id: "newsletter_button"
+  translation: "Prenumerera"
+
+- id: "newsletter_placeholder"
+  translation: "Din e-post"
+
+- id: "newsletter_success_message"
+  translation: "Tack för att du prenumererar på mitt nyhetsbrev!"
+
+- id: "newsletter_error_message"
+  translation: "Ett fel uppstod. Försök igen."
+
+- id: "newsletter_note"
+  translation: "Vi kommer aldrig att dela din e-post med andra."
+
+## Homepage testimonials
+- id: "testimonials_title"
+  translation: "Rekommendationer"
+
+## Homepage contact
+- id: "contact_title"
+  translation: "Kontakt"
+
+- id: "contact_button"
+  translation: "Skicka meddelande"
+
+- id: "contact_form_name"
+  translation: "Fullständigt namn"
+
+- id: "contact_form_email"
+  translation: "E-postadress"
+
+- id: "contact_form_message"
+  translation: "Skriv ditt meddelande här"
+
+- id: "contact_phone_title"
+  translation: "Telefonnummer"
+
+- id: "contact_phone_number"
+  translation: "Definierat i i18n/sv.yaml (contact_phone_number)"
+
+- id: "contact_email_title"
+  translation: "E-post"
+
+- id: "contact_email_email"
+  translation: "Definierat i i18n/sv.yaml (contact_email_email)"
+
+- id: "contact_address_title"
+  translation: "Adress"
+
+- id: "contact_address_address"
+  translation: "Definierat i i18n/sv.yaml (contact_address_address)"
+
+## Blog
+- id: "read_more"
+  translation: "Läs mer"
+
+- id: "published_on"
+  translation: "Publicerad den "
+
+- id: "continue_reading"
+  translation: "Fortsätt läsa"
+
+## Blog Stats (for list-cards layout)
+- id: "blog_stats_posts"
+  translation: "Inlägg"
+
+- id: "blog_stats_last_updated"
+  translation: "Senast uppdaterad"
+
+- id: "blog_stats_first_post"
+  translation: "Första inlägget"
+
+- id: "blog_stats_topics"
+  translation: "Ämnen"
+
+- id: "blog_stats_latest_post"
+  translation: "Senaste inlägget"
+
+## 404 Page
+- id: "404_title"
+  translation: "Sidan hittades inte"
+- id: "404_description"
+  translation: "Tyvärr, men sidan du letade efter kunde inte hittas."
+- id: "404_button"
+  translation: "Tillbaka till startsidan"
+
+## Related Posts
+- id: "related_posts"
+  translation: "Relaterade inlägg"
+
+## Social Sharing
+- id: "share_this_post"
+  translation: "Dela detta inlägg"
+- id: "share_on_twitter"
+  translation: "Dela på Twitter"
+- id: "share_on_linkedin"
+  translation: "Dela på LinkedIn"
+- id: "share_on_facebook"
+  translation: "Dela på Facebook"
+- id: "share_via_email"
+  translation: "Dela via e-post"
+- id: "share_twitter_label"
+  translation: "Twitter"
+- id: "share_linkedin_label"
+  translation: "LinkedIn"
+- id: "share_facebook_label"
+  translation: "Facebook"
+- id: "share_email_label"
+  translation: "E-post"
+- id: "share_on_bluesky"
+  translation: "Dela på Bluesky"
+- id: "share_bluesky_label"
+  translation: "Bluesky"
+- id: "share_on_mastodon"
+  translation: "Dela på Mastodon"
+- id: "share_mastodon_label"
+  translation: "Mastodon"
+
+## Table of Contents
+- id: "table_of_contents"
+  translation: "Innehållsförteckning"
+
+## Comments
+- id: "comments"
+  translation: "Kommentarer"
+
+## Reading time and metadata
+- id: "min_read"
+  translation: "min läsningstid"
+- id: "last_updated"
+  translation: "Uppdaterad"
+
+## Taxonomy
+- id: "categories"
+  translation: "Kategorier"
+- id: "post_singular"
+  translation: "inlägg"
+- id: "post_plural"
+  translation: "inlägg"
+- id: "tags"
+  translation: "Taggar"
+- id: "authors"
+  translation: "Författare"
+- id: "series"
+  translation: "Serier"
+- id: "author_posts"
+  translation: "Inlägg av denna författare"
+- id: "series_posts"
+  translation: "Inlägg i serien"
+- id: "series_part"
+  translation: "Del"
+- id: "recent_posts"
+  translation: "Senaste inläggen"
+- id: "popular_tags"
+  translation: "Populära taggar"
+- id: "view_all_tags"
+  translation: "Visa alla taggar"
+## Search
+- id: "search_tags_label"
+  translation: "Taggar"
+- id: "search_categories_label"
+  translation: "Kategorier"
+- id: "search_filter_by_tag"
+  translation: "Filtrera sökresultat efter tagg"
+- id: "search_filter_by_category"
+  translation: "Filtrera sökresultat efter kategori"
+- id: "search_title"
+  translation: "Sök på webbplatsen"
+- id: "search_placeholder"
+  translation: "Skriv för att söka..."
+- id: "search_results_heading"
+  translation: "Matchande sidor"
+- id: "search_min_chars"
+  translation: "Ange minst 2 tecken för att söka"
+- id: "search_no_matches"
+  translation: "Inga träffar hittades"
+- id: "search_loading"
+  translation: "Laddar..."
+- id: "search_error_generic"
+  translation: "Ett problem uppstod med sökningen. Försök igen senare."
+- id: "search_untitled"
+  translation: "Utan titel"
+- id: "search_no_preview"
+  translation: "Ingen förhandsvisning tillgänglig"
+
+- id: "primary_navigation"
+  translation: "Primär navigering"
+
+- id: "footer_navigation"
+  translation: "Sidfotsnavigering"

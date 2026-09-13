@@ -1,0 +1,193 @@
+## Meta tags
+- id: "meta_title"
+  translation: "Adritian - un tema Hugo de alto rendimiento por Adrián Moreno"
+- id: "meta_description"
+  translation: "Este tema de Hugo (Adritian) está basado en Bootstrap y tiene características que lo hacen adecuado para un sitio personal, un portafolio u otros tipos de aplicaciones de una sola página."
+- id: "meta_keywords"
+  translation: "hugo, tema, bootstrap, adritian, adrian moreno, sitio personal, portafolio, aplicación de una sola página"
+- id: "meta_author"
+  translation: "Adrián Moreno Peña"
+- id: "meta_image"
+  translation: "/img/general/og-image.jpg"
+
+## Header
+- id: "logo_alt"
+  translation: "Adritian logo"
+
+- id: "logo_text1"
+  translation: "Adritian"
+
+- id: "logo_text2"
+  translation: "Demo"
+
+## General
+- id: "skipToMainContent"
+  translation: "Saltar al contenido principal"
+
+- id: "toggle_navigation"
+  translation: "Mostrar navegación"
+
+## Footer
+- id: "footer_notice"
+  translation: "© Adritian. Tema gratuito de Hugo por Adrián Moreno Peña."
+
+- id: "language"
+  translation: "Idioma"
+
+- id: "toggle_theme"
+  translation: "Seleccionar esquema de color"
+
+- id: "theme_light"
+  translation: "☀️ Claro"
+- id: "theme_dark"
+  translation: "🌑 Oscuro"
+- id: "theme_auto"
+  translation: "✨ Auto"
+
+## Search
+- id: "search_tags_label"
+  translation: "Etiquetas"
+- id: "search_categories_label"
+  translation: "Categorías"
+- id: "search_filter_by_tag"
+  translation: "Filtrar resultados de búsqueda por etiqueta"
+- id: "search_filter_by_category"
+  translation: "Filtrar resultados de búsqueda por categoría"
+- id: "search_title"
+  translation: "Buscar en el sitio"
+- id: "search_placeholder"
+  translation: "Escribe para buscar..."
+- id: "search_results_heading"
+  translation: "Páginas coincidentes"
+- id: "search_min_chars"
+  translation: "Introduce al menos 2 caracteres para buscar"
+- id: "search_no_matches"
+  translation: "No se encontraron coincidencias"
+- id: "search_loading"
+  translation: "Cargando..."
+- id: "search_error_generic"
+  translation: "Hubo un problema con la búsqueda. Inténtalo de nuevo más tarde."
+- id: "search_untitled"
+  translation: "Sin título"
+- id: "search_no_preview"
+  translation: "Vista previa no disponible"
+
+
+## Homepage head title
+- id: "head_title"
+  translation: "Sitio demo de Adritian - un tema Hugo de alto rendimiento por Adrián Moreno"
+
+- id: "head_description"
+  translation: "Este tema de Hugo (Adritian) está basado en Bootstrap y tiene características que lo hacen adecuado para un sitio personal, un portafolio u otros tipos de aplicaciones de una sola página."
+
+## Blog
+- id: "read_more"
+  translation: "Leer más"
+
+- id: "published_on"
+  translation: "Publicado el "
+
+- id: "continue_reading"
+  translation: "Continuar leyendo"
+
+## Blog Stats (for list-cards layout)
+- id: "blog_stats_posts"
+  translation: "Publicaciones"
+
+- id: "blog_stats_last_updated"
+  translation: "Última actualización"
+
+- id: "blog_stats_first_post"
+  translation: "Primera publicación"
+
+- id: "blog_stats_topics"
+  translation: "Temas"
+
+- id: "blog_stats_latest_post"
+  translation: "Última publicación"
+
+## 404 Page
+- id: "404_title"  
+  translation: "Página no encontrada"
+- id: "404_description"
+  translation: "Lo sentimos, pero la página que buscabas no pudo ser encontrada."
+- id: "404_button"
+  translation: "Volver al inicio"
+
+## Related Posts
+- id: "related_posts"
+  translation: "Publicaciones relacionadas"
+
+## Social Sharing
+- id: "share_this_post"
+  translation: "Compartir esta publicación"
+- id: "share_on_twitter"
+  translation: "Compartir en Twitter"
+- id: "share_on_linkedin"
+  translation: "Compartir en LinkedIn"
+- id: "share_on_facebook"
+  translation: "Compartir en Facebook"
+- id: "share_via_email"
+  translation: "Compartir por correo electrónico"
+- id: "share_twitter_label"
+  translation: "Twitter"
+- id: "share_linkedin_label"
+  translation: "LinkedIn"
+- id: "share_facebook_label"
+  translation: "Facebook"
+- id: "share_email_label"
+  translation: "Correo"
+- id: "share_on_bluesky"
+  translation: "Compartir en Bluesky"
+- id: "share_bluesky_label"
+  translation: "Bluesky"
+- id: "share_on_mastodon"
+  translation: "Compartir en Mastodon"
+- id: "share_mastodon_label"
+  translation: "Mastodon"
+
+## Table of Contents
+- id: "table_of_contents"
+  translation: "Tabla de contenidos"
+
+## Comments
+- id: "comments"
+  translation: "Comentarios"
+
+## Reading time and metadata
+- id: "min_read"
+  translation: "min de lectura"
+- id: "last_updated"
+  translation: "Actualizado"
+
+## Taxonomy
+- id: "categories"
+  translation: "Categorías"
+- id: "post_singular"
+  translation: "artículo"
+- id: "post_plural"
+  translation: "artículos"
+- id: "tags"
+  translation: "Etiquetas"
+- id: "authors"
+  translation: "Autores"
+- id: "series"
+  translation: "Series"
+- id: "author_posts"
+  translation: "Artículos de este autor"
+- id: "series_posts"
+  translation: "Artículos de la serie"
+- id: "series_part"
+  translation: "Parte"
+- id: "recent_posts"
+  translation: "Publicaciones recientes"
+- id: "popular_tags"
+  translation: "Etiquetas populares"
+- id: "view_all_tags"
+  translation: "Ver todas las etiquetas"
+
+- id: "primary_navigation"
+  translation: "Navegación principal"
+
+- id: "footer_navigation"
+  translation: "Navegación del pie"
