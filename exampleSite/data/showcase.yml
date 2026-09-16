@@ -124,3 +124,8 @@ sites:
     github: "FlashX64"
     repo: "FlashX64/vencelides.cz"
     tags: [portfolio, dark-mode]
+
+  - name: "Johannes Engelke"
+    url: "https://johannes-engelke.de"
+    description: "Customer Experience Consultant with 20 years in IT, DevOps, and Cloud Transformation. Specialized in SAP Sales & Service Cloud V2."
+    tags: [portfolio, multilingual]
