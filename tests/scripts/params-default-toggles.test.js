@@ -134,4 +134,36 @@ assert.ok(
     'this is exactly the bug from #575 (isset with a camelCase key is always false in Hugo).',
 );
 
+// --- plausible: opt-in analytics toggle (default-off, unlike the two
+// default-on features above). Marker is the literal Plausible script tag on
+// the home page. Also covers the module-safety case: a downstream site with
+// no [params.analytics] section at all (the "unset" build below) must not
+// error and must not emit the tag. ---
+
+const plausibleUnset = buildSite('');
+assert.ok(
+  !plausibleUnset.home.includes('plausible.io/js/script.js'),
+  'Expected no Plausible script when [params.analytics.plausible] is entirely unset ' +
+    '(this also exercises that a missing [params.analytics] section does not error the build).',
+);
+
+const plausibleFalse = buildSite('[params.analytics.plausible]\nenabled = false');
+assert.ok(
+  !plausibleFalse.home.includes('plausible.io/js/script.js'),
+  'Expected no Plausible script when plausible.enabled = false.',
+);
+
+const plausibleTrue = buildSite(
+  '[params.analytics.plausible]\nenabled = true\ndomain = "example.com"',
+);
+assert.ok(
+  plausibleTrue.home.includes('data-domain="example.com"'),
+  'Expected Plausible script with data-domain="example.com" when enabled = true with an explicit domain.',
+);
+assert.ok(
+  plausibleTrue.home.includes('plausible.io/js/script.js'),
+  'Expected the default Plausible script src when no override is configured.',
+);
+
 console.log('✅ params-default-toggles test passed (viewTransitions and readingProgress both respect unset/true/false)');
+console.log('✅ plausible analytics toggle respects unset/true/false and defaults to disabled');

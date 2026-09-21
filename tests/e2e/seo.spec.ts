@@ -171,6 +171,25 @@ test('homepage includes canonical, twitter (from params.social), and JSON-LD sit
     expect(title).toContain('New Theme Features Demo');
   });
 
+  test('blog post front-matter "schema" param renders an additional JSON-LD block', async ({ page }) => {
+    // exampleSite/content/blog/seo-features.md sets a FAQPage `schema` front
+    // matter object; it must render alongside (not instead of) the automatic
+    // WebSite/BlogPosting JSON-LD.
+    await page.goto(`${BASE_URL}/blog/seo-features/`);
+
+    const jsonLd = await parseJsonLd(page);
+
+    const blogPosting = jsonLd.find(item => item['@type'] === 'BlogPosting');
+    expect(blogPosting).toBeTruthy();
+
+    const faqPage = jsonLd.find(item => item['@type'] === 'FAQPage');
+    expect(faqPage).toBeTruthy();
+    expect(faqPage?.['@context']).toBe('https://schema.org');
+    const mainEntity = faqPage?.mainEntity as Array<Record<string, unknown>>;
+    expect(Array.isArray(mainEntity)).toBe(true);
+    expect(mainEntity[0].name).toBe('Can I add my own JSON-LD to a page?');
+  });
+
   test('header logo uses logo_text1/logo_text2 params, independent of Site.Title', async ({ page }) => {
     await page.goto(BASE_URL);
 

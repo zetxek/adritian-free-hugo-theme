@@ -309,6 +309,31 @@ You can also embed the picker inline on any page or post using the `color-scheme
 > The live switcher requires JavaScript. Theme users who want a static build-time color change
 > with no added JS should use Option 1 or 2 above and leave `colorSchemeSwitcher` disabled (the default).
 
+#### Analytics
+
+The theme supports Vercel (Page Insights, Analytics), Google (Tag Manager, Analytics) and
+Plausible out of the box. All are opt-in and disabled by default. Configure them in your site
+`hugo.toml`:
+
+```toml
+[params.analytics]
+vercelPageInsights = false
+vercelAnalytics = false
+
+[params.analytics.googleAnalytics]
+code = "UA-XXXXX-Y"
+enabled = false
+
+[params.analytics.googleTagManager]
+code = "GTM-XXXXX"
+enabled = false
+
+[params.analytics.plausible]
+enabled = false
+domain = "" # e.g. example.com - defaults to the site's host when empty
+# script = "https://plausible.io/js/script.js" # optional override, e.g. for a self-hosted instance
+```
+
 #### SEO and social metadata
 
 The theme leverages Hugo's embedded templates for Open Graph and Twitter cards, and adds JSON-LD
@@ -358,6 +383,22 @@ authors:
 
 When `seo.person` or `seo.organization` are not configured at the site level, the theme falls back
 to the page's `author` or `authors` front matter for the BlogPosting schema.
+
+Any page can also emit its own additional JSON-LD block(s) via a `schema` front matter parameter,
+on top of the automatic `WebSite`/`BlogPosting` metadata. It accepts either a single object or a
+list of objects:
+
+```yaml
+schema:
+  "@context": "https://schema.org"
+  "@type": "FAQPage"
+  mainEntity:
+    - "@type": "Question"
+      name: "Is this a real question?"
+      acceptedAnswer:
+        "@type": "Answer"
+        text: "Yes."
+```
 
 Notes:
 - Open Graph/Twitter cards are rendered by Hugo's embedded templates (`opengraph.html`, `twitter_cards.html`).
