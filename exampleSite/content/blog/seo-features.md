@@ -8,15 +8,6 @@ tags:
   - guide
   - seo
 description: 'Learn how the Adritian theme handles SEO out of the box: per-page meta descriptions, hreflang alternate links for multilingual sites, and JSON-LD structured data for blog posts.'
-schema:
-  "@context": "https://schema.org"
-  "@type": "FAQPage"
-  mainEntity:
-    - "@type": "Question"
-      name: "Can I add my own JSON-LD to a page?"
-      acceptedAnswer:
-        "@type": "Answer"
-        text: "Yes, using the schema front matter parameter shown on this page."
 ---
 
 The Adritian theme includes built-in SEO features that help search engines understand and properly index your content. This post covers what's available and how to get the most out of it.
@@ -115,27 +106,6 @@ images:
   featured_image: '/img/blog/my-post.png'
 ---
 ```
-
-### Per-Page Schema Overrides
-
-Need a schema type the theme doesn't generate automatically, like `FAQPage`, `Product`, or `Event`? Add a `schema` front matter parameter with a single object or a list of objects, and each one is rendered as its own `<script type="application/ld+json">` block, alongside the automatic `WebSite`/`BlogPosting` output:
-
-```yaml
----
-title: 'My Blog Post'
-schema:
-  "@context": "https://schema.org"
-  "@type": "FAQPage"
-  mainEntity:
-    - "@type": "Question"
-      name: "Is this a real question?"
-      acceptedAnswer:
-        "@type": "Answer"
-        text: "Yes."
----
-```
-
-This page itself uses this exact pattern -- check its front matter or view the page source to see the generated `FAQPage` schema.
 
 ## No Configuration Required
 

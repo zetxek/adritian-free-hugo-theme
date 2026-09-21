@@ -384,22 +384,6 @@ authors:
 When `seo.person` or `seo.organization` are not configured at the site level, the theme falls back
 to the page's `author` or `authors` front matter for the BlogPosting schema.
 
-Any page can also emit its own additional JSON-LD block(s) via a `schema` front matter parameter,
-on top of the automatic `WebSite`/`BlogPosting` metadata. It accepts either a single object or a
-list of objects:
-
-```yaml
-schema:
-  "@context": "https://schema.org"
-  "@type": "FAQPage"
-  mainEntity:
-    - "@type": "Question"
-      name: "Is this a real question?"
-      acceptedAnswer:
-        "@type": "Answer"
-        text: "Yes."
-```
-
 Notes:
 - Open Graph/Twitter cards are rendered by Hugo's embedded templates (`opengraph.html`, `twitter_cards.html`).
 - Canonical URLs are emitted automatically from each page permalink.
