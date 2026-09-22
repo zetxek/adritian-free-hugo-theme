@@ -359,6 +359,38 @@ authors:
 When `seo.person` or `seo.organization` are not configured at the site level, the theme falls back
 to the page's `author` or `authors` front matter for the BlogPosting schema.
 
+##### Per-page JSON-LD schema
+
+Any page can add its own JSON-LD (e.g. `FAQPage`, `Product`, `Event`) via a `schema` front-matter
+param. It is appended after the theme's own JSON-LD (`WebSite`, `Person`/`Organization`,
+`BlogPosting`) — it does not replace it.
+
+The value **must be a raw JSON string**, not a YAML/TOML map. Use a YAML block scalar (`|`) so the
+JSON is parsed at build time and fails the build if it's invalid:
+
+```yaml
+schema: |
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do I preview content changes before merging?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Open a PR against the theme repo — the preview workflow syncs exampleSite content to a live demo deploy automatically."
+        }
+      }
+    ]
+  }
+```
+
+Why a string and not a map: Hugo lowercases every front-matter param key, including nested and
+quoted ones, so a YAML/TOML map with `mainEntity` or `acceptedAnswer` would be exposed to templates
+as `mainentity` / `acceptedanswer`. schema.org properties are case-sensitive, so that map would
+render invalid JSON-LD. A raw JSON string keeps its casing intact through `transform.Unmarshal`.
+
 Notes:
 - Open Graph/Twitter cards are rendered by Hugo's embedded templates (`opengraph.html`, `twitter_cards.html`).
 - Canonical URLs are emitted automatically from each page permalink.
