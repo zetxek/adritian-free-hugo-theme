@@ -100,10 +100,10 @@ test.describe('Navbar overflow handler', () => {
     // broken. Verify at least one section header is rendered AND that actual
     // dropdown items follow.
     const headers = moreDropdown.locator('.dropdown-header');
-    await expect(await headers.count()).toBeGreaterThan(0);
+    await expect(headers.first()).toBeAttached();
 
     const items = moreDropdown.locator('.dropdown-item');
-    await expect(await items.count()).toBeGreaterThan(0);
+    await expect(items.first()).toBeAttached();
   });
 
   test('Color scheme item inside More dropdown actually changes the scheme', async ({ page }) => {
@@ -306,8 +306,9 @@ test.describe('Navbar overflow footer mode', () => {
 
     // Verify that there is at least one item moved to the footer
     const footerOverflowItems = page.locator('.footer_links .navbar-nav .overflow-footer-item');
+    await expect(footerOverflowItems.first()).toBeAttached();
     const count = await footerOverflowItems.count();
-    await expect(count).toBeGreaterThan(0);
+    expect(count).toBeGreaterThan(0);
 
     // Verify original item is hidden in the header
     const hiddenOriginals = page.locator('.header .navbar-nav > li[data-in-footer="true"]');
@@ -332,6 +333,38 @@ test.describe('Navbar overflow footer mode', () => {
       const id = await elementsWithId.nth(i).getAttribute('id');
       expect(id).toMatch(/-footer$/);
     }
+  });
+
+  test('Overflow is re-measured when webfonts finish loading', async ({ page }) => {
+    test.skip(process.env.TEST_NO_MENUS === 'true', 'Skipping test');
+
+    // Hold document.fonts.ready until the test releases it, to simulate webfonts
+    // arriving after the initial (fallback metrics) measurement.
+    await page.addInitScript(() => {
+      let release: (value?: unknown) => void = () => {};
+      const p = new Promise((r) => { release = r; });
+      (window as any).__releaseFonts = release;
+      Object.defineProperty(document.fonts, 'ready', { get: () => p, configurable: true });
+    });
+
+    // Wide enough that nothing overflows with the fallback-font metrics
+    await page.setViewportSize({ width: 2400, height: 900 });
+    await page.goto(`${BASE_URL}/?`);
+
+    // Wait for the handler's initial 50ms timer to have fired (a later timer fires after it)
+    await page.evaluate(() => new Promise((r) => setTimeout(r, 150)));
+
+    const footerOverflowItems = page.locator('.footer_links .navbar-nav .overflow-footer-item');
+    await expect(footerOverflowItems).toHaveCount(0);
+
+    // Simulate the "real font" layout being wider than the navbar container
+    await page.addStyleTag({ content: '.header .navbar-nav .nav-link { letter-spacing: 1em !important; }' });
+    await page.evaluate(() => (window as any).__releaseFonts());
+
+    await expect(footerOverflowItems.first()).toBeAttached({ timeout: 10000 });
+
+    const hiddenOriginals = page.locator('.header .navbar-nav > li[data-in-footer="true"]');
+    await expect(hiddenOriginals).toHaveCount(await footerOverflowItems.count());
   });
 });
 
