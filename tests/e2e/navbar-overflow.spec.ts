@@ -338,33 +338,46 @@ test.describe('Navbar overflow footer mode', () => {
   test('Overflow is re-measured when webfonts finish loading', async ({ page }) => {
     test.skip(process.env.TEST_NO_MENUS === 'true', 'Skipping test');
 
-    // Hold document.fonts.ready until the test releases it, to simulate webfonts
-    // arriving after the initial (fallback metrics) measurement.
+    // Hold document.fonts.ready until the test releases it, and count footer-nav
+    // mutations so a re-run of the handler can be detected without relying on
+    // font-specific item widths.
     await page.addInitScript(() => {
       let release: (value?: unknown) => void = () => {};
-      const p = new Promise((r) => { release = r; });
+      const pending = new Promise((r) => { release = r; });
       (window as any).__releaseFonts = release;
-      Object.defineProperty(document.fonts, 'ready', { get: () => p, configurable: true });
+      Object.defineProperty(document.fonts, 'ready', { get: () => pending, configurable: true });
+
+      (window as any).__footerMutations = 0;
+      document.addEventListener('DOMContentLoaded', () => {
+        const footerNav = document.querySelector('.footer_links .navbar-nav');
+        if (!footerNav) return;
+        new MutationObserver((records) => {
+          (window as any).__footerMutations += records.length;
+        }).observe(footerNav, { childList: true });
+      });
     });
 
-    // Wide enough that nothing overflows with the fallback-font metrics
-    await page.setViewportSize({ width: 2400, height: 900 });
-    await page.goto(`${BASE_URL}/?`);
+    // force-overflow makes the first (fallback-metrics) pass move every item to the footer
+    await page.goto(`${BASE_URL}/?force-overflow=true`);
 
-    // Wait for the handler's initial 50ms timer to have fired (a later timer fires after it)
-    await page.evaluate(() => new Promise((r) => setTimeout(r, 150)));
+    // The observer target must exist, otherwise the mutation count could never grow
+    await expect(page.locator('.footer_links .navbar-nav')).toBeAttached();
 
     const footerOverflowItems = page.locator('.footer_links .navbar-nav .overflow-footer-item');
-    await expect(footerOverflowItems).toHaveCount(0);
+    await expect(footerOverflowItems.first()).toBeAttached();
 
-    // Simulate the "real font" layout being wider than the navbar container
-    await page.addStyleTag({ content: '.header .navbar-nav .nav-link { letter-spacing: 1em !important; }' });
+    const mutationsBefore = await page.evaluate(() => (window as any).__footerMutations);
+    expect(mutationsBefore).toBeGreaterThan(0);
+
+    // The webfonts "arrive": the handler must re-measure, which rebuilds the footer items
     await page.evaluate(() => (window as any).__releaseFonts());
 
-    await expect(footerOverflowItems.first()).toBeAttached({ timeout: 10000 });
+    await expect
+      .poll(() => page.evaluate(() => (window as any).__footerMutations), { timeout: 10000 })
+      .toBeGreaterThan(mutationsBefore);
 
+    await expect(footerOverflowItems.first()).toBeAttached();
     const hiddenOriginals = page.locator('.header .navbar-nav > li[data-in-footer="true"]');
     await expect(hiddenOriginals).toHaveCount(await footerOverflowItems.count());
   });
 });
-
