@@ -16,6 +16,7 @@ permissions:
 on:
   pull_request:
     branches: [main]
+    types: [opened, synchronize, reopened, closed]
   workflow_dispatch:
 
 jobs:
@@ -80,7 +81,8 @@ jobs:
     needs: check-dependabot
     # Skip for fork PRs: PRIVATE_TOKEN_GITHUB is unavailable in pull_request context for forks.
     # External contributor PRs are handled by update-demo-pr-external.yml instead.
-    if: needs.check-dependabot.outputs.should-run == 'true' && !github.event.pull_request.head.repo.fork
+    # Skip on PR close: there's nothing to preview anymore, see cleanup-demo-preview.
+    if: needs.check-dependabot.outputs.should-run == 'true' && !github.event.pull_request.head.repo.fork && github.event.action != 'closed'
     env:
       SOURCE_BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
       PR_NUMBER: ${{ github.event.number }}
@@ -306,4 +308,38 @@ jobs:
             echo "✅ Pull-request created!"
           fi
 
-          
+  cleanup-demo-preview:
+    # Runs when the source PR is closed (merged or not) so a stale preview branch
+    # pinned to a now-unresolvable commit doesn't keep failing Vercel builds.
+    if: github.event_name == 'pull_request' && github.event.action == 'closed' && !github.event.pull_request.head.repo.fork
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.PRIVATE_TOKEN_GITHUB }}
+      PR_NUMBER: ${{ github.event.number }}
+    steps:
+      - name: Close preview PR and delete branch in demo repository
+        shell: bash
+        run: |
+          DEMO_REPOSITORY="zetxek/adritian-demo"
+          SOURCE_REPOSITORY="zetxek/adritian-free-hugo-theme"
+          BRANCH_NAME="theme-update/pr-$PR_NUMBER"
+          PR_URL="https://github.com/$SOURCE_REPOSITORY/pull/$PR_NUMBER"
+
+          echo "Source PR #$PR_NUMBER closed - cleaning up preview branch $BRANCH_NAME in $DEMO_REPOSITORY"
+
+          # Close any open preview PR for this branch (idempotent: no-op if none exists)
+          PREVIEW_PR=$(gh pr list --repo "$DEMO_REPOSITORY" --state open --head "$BRANCH_NAME" --json number | jq '.[0].number // empty')
+          if [ -n "$PREVIEW_PR" ]; then
+            gh pr comment "$PREVIEW_PR" --repo "$DEMO_REPOSITORY" --body "Source PR $PR_URL was closed without merging, so the pinned theme revision no longer resolves. Removing this preview." || echo "Could not comment on preview PR #$PREVIEW_PR, continuing..."
+            gh pr close "$PREVIEW_PR" --repo "$DEMO_REPOSITORY" || echo "Could not close preview PR #$PREVIEW_PR, continuing..."
+          else
+            echo "No open preview PR found for branch $BRANCH_NAME, skipping close"
+          fi
+
+          # Delete the preview branch (idempotent: no-op if already gone, e.g. squash-merged)
+          if gh api "repos/$DEMO_REPOSITORY/git/refs/heads/$BRANCH_NAME" >/dev/null 2>&1; then
+            gh api -X DELETE "repos/$DEMO_REPOSITORY/git/refs/heads/$BRANCH_NAME" || echo "Could not delete branch $BRANCH_NAME, continuing..."
+            echo "✅ Deleted branch $BRANCH_NAME"
+          else
+            echo "Branch $BRANCH_NAME does not exist, skipping delete"
+          fi
