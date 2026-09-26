@@ -55,6 +55,17 @@ jobs:
         run: |
           git push origin ${{ env.BRANCH_NAME }}
 
+      - name: Close superseded PRs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr list --state open --json number,headRefName --limit 100 | \
+          jq -r --arg branch "${{ env.BRANCH_NAME }}" '.[] | select(.headRefName | startswith("update/exampleSite-")) | select(.headRefName != $branch) | .number' | \
+          while read -r pr_number; do
+            gh pr close "$pr_number" --comment 'Superseded by a newer ExampleSite content update.' --delete-branch
+          done
+          exit 0
+
       - name: Create Pull Request
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
