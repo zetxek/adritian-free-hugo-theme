@@ -4,8 +4,9 @@
  * Usage:
  *   node scripts/generate-screenshots.mjs [url]
  *
- * Defaults to https://www.adrianmoreno.info (production site with rich content).
- * For local dev: node scripts/generate-screenshots.mjs http://localhost:1313
+ * Defaults to http://localhost:1414, the exampleSite (demo content) served with:
+ *   hugo server --source exampleSite --themesDir ../.. --port 1414
+ * A non-default port avoids capturing whatever else is listening on 1313.
  *
  * Generates:
  *   images/screenshot.png                    - 2708x1596 diagonal composite (light + dark)
@@ -21,7 +22,7 @@ import fs from 'fs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const imagesDir = path.join(__dirname, '..', 'images');
-const baseURL = process.argv[2] || 'https://www.adrianmoreno.info';
+const baseURL = process.argv[2] || 'http://localhost:1414';
 
 async function waitForPageReady(page) {
   await page.waitForLoadState('networkidle');
@@ -41,6 +42,34 @@ async function waitForPageReady(page) {
     });
   });
   await page.waitForTimeout(1000);
+}
+
+/**
+ * Sections below the fold stay at opacity 0 until rad-animations.js sees them
+ * intersect the viewport, and a fullPage screenshot never scrolls. Walk down the
+ * page one viewport at a time so every section is revealed (and lazy images load),
+ * then return to the top and let the entry animations finish.
+ */
+async function revealScrollContent(page) {
+  await page.evaluate(async () => {
+    const step = Math.max(window.innerHeight / 2, 200);
+    for (let y = 0; y < document.documentElement.scrollHeight; y += step) {
+      window.scrollTo(0, y);
+      await new Promise((r) => setTimeout(r, 150));
+    }
+    window.scrollTo(0, document.documentElement.scrollHeight);
+    await new Promise((r) => setTimeout(r, 150));
+    window.scrollTo(0, 0);
+  });
+  await page.waitForLoadState('networkidle');
+  await page.waitForTimeout(1500);
+
+  const hidden = await page.evaluate(
+    () => document.querySelectorAll('.rad-waiting:not(.rad-animate)').length,
+  );
+  if (hidden > 0) {
+    throw new Error(`${hidden} section(s) still hidden after scrolling; screenshot would miss content`);
+  }
 }
 
 async function setTheme(page, theme) {
@@ -185,6 +214,7 @@ async function main() {
     await page.goto(baseURL, { waitUntil: 'networkidle' });
     await setTheme(page, theme);
     await waitForPageReady(page);
+    await revealScrollContent(page);
     await page.screenshot({
       path: path.join(imagesDir, fname),
       type: 'jpeg',
