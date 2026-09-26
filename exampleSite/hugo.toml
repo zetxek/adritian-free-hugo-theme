@@ -136,7 +136,8 @@ source = "icons/favicon.png"
 [params.analytics]
 ## Analytics parameters.
 ### Supported so far: Vercel (Page Insights, Analytics)
-### And Google (Tag Manager, Analytics)
+### Google (Tag Manager, Analytics)
+### And Plausible
 
 # controls vercel page insights - disabled by default
 # to enable, just set to true
@@ -151,6 +152,12 @@ enabled = false
 [params.analytics.googleTagManager]
 code = "GTM-XXXXX"
 enabled = false
+
+# plausible analytics. to enable, set "enabled" to true and set your site's domain
+[params.analytics.plausible]
+enabled = false
+domain = "" # e.g. example.com - defaults to the site's host when empty
+# script = "https://plausible.io/js/script.js" # optional override, e.g. for a self-hosted instance
 
 [build]
 writeStats = true
