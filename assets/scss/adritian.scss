@@ -1,12 +1,70 @@
 @charset "UTF-8";
 
+{{ if .scheme }}$base-color: {{ .scheme.light }};
+$dark-primary: {{ .scheme.dark }};{{ end }}
+
 @import "variables";
 @import "theme-init";
-@import "bootstrap/bootstrap";
+
+// Bootstrap: selective imports of only the modules the theme's own
+// layouts/partials use, instead of the full framework (~89% of the full
+// Bootstrap CSS build was unused). Downstream sites' content classes are
+// intentionally NOT considered here — only theme-level markup is. When
+// adding new theme markup that needs a Bootstrap component, add its
+// matching partial import below.
+
+// Configuration (required by every component; mixins/utilities emit no
+// CSS on their own, so importing them in full carries no size cost)
+@import "bootstrap/functions";
+@import "bootstrap/variables";
+@import "bootstrap/variables-dark";
+@import "bootstrap/maps";
+@import "bootstrap/mixins";
+@import "bootstrap/utilities";
+
+// Base layout & typography (blockquote/list/heading styling used by
+// arbitrary rendered blog/markdown content across downstream sites)
+@import "bootstrap/root";
+@import "bootstrap/reboot";
+@import "bootstrap/type";
+@import "bootstrap/images";
+@import "bootstrap/containers";
+@import "bootstrap/grid";
+
+// Forms: search box, contact form, newsletter form
+@import "bootstrap/forms/form-control";
+@import "bootstrap/forms/form-text";
+@import "bootstrap/forms/input-group";
+
+@import "bootstrap/buttons";
+@import "bootstrap/transitions"; // .fade/.collapsing animation used by navbar collapse & dropdowns
+@import "bootstrap/dropdown"; // language/theme/color-scheme selectors
+@import "bootstrap/nav";
+@import "bootstrap/navbar"; // main site nav (collapse + dropdown JS)
+@import "bootstrap/card"; // blog/experience/showcase cards
+@import "bootstrap/breadcrumb"; // blog/page breadcrumbs (used in layouts/)
+@import "bootstrap/progress"; // skills showcase progress bars
+@import "bootstrap/pagination"; // Hugo's _internal/pagination.html output
+@import "bootstrap/alert"; // search "no results", newsletter fail state
+@import "bootstrap/badge"; // taxonomy counts, showcase tags
+
+// Helpers actually referenced in layouts/
+@import "bootstrap/helpers/position"; // .fixed-top on the site header
+@import "bootstrap/helpers/stretched-link";
+@import "bootstrap/helpers/visually-hidden";
+@import "bootstrap/helpers/icon-link"; // .icon-link/.icon-link-hover on blog list read-more links
+
+// Utilities API: generates the d-*, m-*, p-*, gap-*, text-*, flex utility
+// classes used liberally throughout layouts/partials/*.html. Must be
+// imported last among the Bootstrap imports, mirroring Bootstrap's own
+// bootstrap.scss ordering (theme partials below are imported afterwards).
+@import "bootstrap/utilities/api";
+
 @import "navbar";
 @import "menu";
 @import "raditian";
 @import "blog";
+@import "code";
 @import "experience";
 @import "print";
 @import "search";
@@ -119,20 +177,14 @@ h4 {
   h4 {
     font-size: 32px;
   }
-  p {
-    line-height: 28px;
-  }
 }
 
 p {
   font-size: 16px;
   font-weight: 300;
-  line-height: 28px;
-  color: #333;
-}
-
-p + p {
-  margin-top: -12px;
+  line-height: 1.5;
+  margin-bottom: 0.75rem;
+  color: #000;
 }
 
 b, strong{
@@ -184,8 +236,8 @@ span a:hover {
 .lead {
   font-size: 16px;
   font-weight: 300;
-  line-height: 1.2;
-  letter-spacing: -0px;
+  line-height: 1.5;
+  letter-spacing: 0;
   color: #000;
 }
 
@@ -243,6 +295,13 @@ li.dropdown-item.choice a {
 
 .dropdown-menu button[aria-pressed="true"] {
   font-weight: bold;
+
+  // The active item's background is the scheme's own color, so the swatch
+  // (same color) would be invisible. Give it a white ring to stay readable.
+  .scheme-swatch {
+    border-color: rgba(255, 255, 255, 0.9) !important;
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.35);
+  }
 }
 
 html[data-bs-theme="dark"] {
@@ -251,6 +310,7 @@ html[data-bs-theme="dark"] {
       display: none;
     }
   }
+
 }
 
 html[data-bs-theme="light"] {
@@ -291,6 +351,10 @@ footer_links .nav-item .nav-link::after {
   body {
     color: #fff;
     background-color: #181818;
+    // Override link hover colour: the default darken($base-color, 15%) is too dark
+    // to be readable on the dark background (#181818).
+    --bs-link-hover-color: #{$dark-primary};
+    --bs-link-hover-color-rgb: #{red($dark-primary)}, #{green($dark-primary)}, #{blue($dark-primary)};
   }
 
   .btn:focus-visible{
@@ -431,11 +495,6 @@ footer_links .nav-item .nav-link::after {
     color: #fff;
     border-color: #fff;
   }
-  .btn:focus-visible {
-    color: black;
-    background-color: white;
-    box-shadow: 0 0 0 0.2rem $primary;
-  }
   .btn-frameless.disabled,
   .btn-frameless.focus,
   .btn-frameless:disabled,
@@ -502,6 +561,7 @@ footer_links .nav-item .nav-link::after {
   .dropdown-item:focus,
   .dropdown-item:hover {
     background-color: $base-color;
+    color: $white;
   }
 
   // Blog post meta section dark mode

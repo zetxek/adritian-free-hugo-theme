@@ -18,7 +18,7 @@ If you prefer to manually set your site, you need to replace the contents of you
 
 ```
 baseURL = "<your website url>"
-languageCode = "en"
+locale = "en"
 
 [module]
 [module.hugoVersion]
@@ -110,9 +110,9 @@ target = "assets/css/bootstrap-print.css"
 [languages]
   [languages.en]
     disabled = false
-    languageCode = 'en'
-    languageDirection = 'ltr'
-    languageName = 'English'
+    locale = 'en'
+    direction = 'ltr'
+    label = 'English'
     title = ''
     weight = 0
 
@@ -158,9 +158,9 @@ target = "assets/css/bootstrap-print.css"
 
   [languages.es]
     disabled = false
-    languageCode = 'es'
-    languageDirection = 'ltr'
-    languageName = 'Español'
+    locale = 'es'
+    direction = 'ltr'
+    label = 'Español'
     title = ''
     weight = 0
       [[languages.es.menus.header]]
@@ -204,9 +204,9 @@ target = "assets/css/bootstrap-print.css"
 
   [languages.fr]
     disabled = false
-    languageCode = 'fr'
-    languageDirection = 'ltr'
-    languageName = 'Français'
+    locale = 'fr'
+    direction = 'ltr'
+    label = 'Français'
     title = ''
     weight = 0
 
@@ -327,7 +327,7 @@ The guide is very similar to [official "Quick Start"](https://gohugo.io/getting-
   ```
   To your `hugo.toml` file, and executing `hugo mod get -u`
   
-- Replace the `hugo.toml` file in the project's root directory with the contents of [themes/adritian-free-hugo-theme/exampleSite/config.toml](https://github.com/zetxek/adritian-free-hugo-theme/blob/main/exampleSite/hugo.toml). If you are using the git submodules, you can execute `cp themes/adritian-free-hugo-theme/exampleSite/hugo.toml hugo.toml` (*executed from the website root folder*), otherwise just copy and paste the contents.
+- Replace the `hugo.toml` file in the project's root directory with the contents of [themes/adritian-free-hugo-theme/exampleSite/hugo.toml](https://github.com/zetxek/adritian-free-hugo-theme/blob/main/exampleSite/hugo.toml). If you are using the git submodules, you can execute `cp themes/adritian-free-hugo-theme/exampleSite/hugo.toml hugo.toml` (*executed from the website root folder*), otherwise just copy and paste the contents.
 - Create the file `data/homepage.yml`, with the initial contents of the [`exampleSite/data/homepage.yml`](https://github.com/zetxek/adritian-free-hugo-theme/blob/main/exampleSite/data/homepage.yml). This will serve as your starting point to customize your home content ✍️
 - Start Hugo with `hugo server -D`
 - 🎉 The theme is alive on http://localhost:1313/
@@ -357,7 +357,7 @@ adritian-demo git:(master) ✗ hugo server -D
 Watching for changes in /Users/adrianmorenopena/tmp/theme-test/themes/adritian-free-hugo-theme/{archetypes,assets,data,exampleSite,i18n,layouts,static}
 Watching for config changes in /Users/adrianmorenopena/tmp/theme-test/themes/adritian-free-hugo-theme/exampleSite/hugo.toml
 Start building sites …
-hugo v0.136.2+extended darwin/arm64 BuildDate=2024-10-17T14:30:05Z VendorInfo=brew
+hugo v0.153.0+extended darwin/arm64 BuildDate=2025-01-21T10:00:00Z VendorInfo=brew
 
 
                    | EN | ES | FR

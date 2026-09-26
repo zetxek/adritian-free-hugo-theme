@@ -24,7 +24,7 @@ jobs:
     if: github.actor == 'dependabot[bot]'
     steps:
       - name: Add safe-to-test label to Dependabot PRs
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
@@ -78,15 +78,17 @@ jobs:
 
   update-demo:
     needs: check-dependabot
-    if: needs.check-dependabot.outputs.should-run == 'true'
+    # Skip for fork PRs: PRIVATE_TOKEN_GITHUB is unavailable in pull_request context for forks.
+    # External contributor PRs are handled by update-demo-pr-external.yml instead.
+    if: needs.check-dependabot.outputs.should-run == 'true' && !github.event.pull_request.head.repo.fork
     env:
       SOURCE_BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
       PR_NUMBER: ${{ github.event.number }}
-      HUGO_VERSION: ${{ vars.HUGO_VERSION || '0.147.2' }}
+      HUGO_VERSION: ${{ vars.HUGO_VERSION || '0.158.0' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout source repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with: 
           repository: zetxek/adritian-free-hugo-theme
           ref: ${{ github.head_ref || github.ref_name }}
@@ -94,14 +96,14 @@ jobs:
           path: source-repo
           
       - name: Checkout demo repository  
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with: 
           repository: zetxek/adritian-demo
           token: ${{ secrets.PRIVATE_TOKEN_GITHUB }}
           path: demo-repo 
      
       - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v2
+        uses: peaceiris/actions-hugo@v3
         with:
           hugo-version: ${{ env.HUGO_VERSION }}
           extended: true
@@ -113,16 +115,22 @@ jobs:
           LATEST_COMMIT=${{ github.event.pull_request.head.sha || github.sha }}
           SHORT_COMMIT=${LATEST_COMMIT:0:8}
           
-          # Handle both PR events and manual workflow dispatch
+          # Handle both PR events and manual workflow dispatch.
+          # NOTE: the branch name is intentionally stable per source PR (or per
+          # source branch for manual dispatch) and does NOT include the commit
+          # SHA. This ensures each source PR maps to a single preview PR in the
+          # demo repo: new commits force-push to the same branch and update the
+          # existing preview PR instead of opening a new one.
+          # The short commit SHA is recorded in the commit message and in a PR comment; consider also updating the PR title/body when reusing an existing PR.
           if [ -n "$PR_NUMBER" ]; then
             PR_URL="https://github.com/$SOURCE_REPOSITORY/pull/$PR_NUMBER"
-            BRANCH_NAME="theme-update/pr-$PR_NUMBER-$SHORT_COMMIT"
+            BRANCH_NAME="theme-update/pr-$PR_NUMBER"
             PR_TITLE="preview: theme PR #$PR_NUMBER ($SHORT_COMMIT)"
           else
             # For manual workflow dispatch, use branch name instead
             BRANCH_REF="${{ github.head_ref || github.ref_name }}"
             PR_URL="https://github.com/$SOURCE_REPOSITORY/tree/$BRANCH_REF"
-            BRANCH_NAME="theme-update/branch-$BRANCH_REF-$SHORT_COMMIT"
+            BRANCH_NAME="theme-update/branch-$BRANCH_REF"
             PR_TITLE="preview: theme branch $BRANCH_REF ($SHORT_COMMIT)"
           fi
           
@@ -198,8 +206,49 @@ jobs:
           
           hugo mod tidy
 
-          # Commit changes
-          git add go.mod go.sum
+          # Sync content from theme's exampleSite to demo repo
+          echo "📦 Syncing content from theme exampleSite..."
+          CONTENT_SOURCE="../source-repo/exampleSite"
+          
+          # Sync content directories (blog posts, pages, etc.)
+          if [ -d "$CONTENT_SOURCE/content" ]; then
+            rsync -a --delete "$CONTENT_SOURCE/content/" content/
+            echo "✅ Synced content/"
+          fi
+          
+          # Sync assets (images, etc. referenced by content)
+          if [ -d "$CONTENT_SOURCE/assets" ]; then
+            rsync -a --delete "$CONTENT_SOURCE/assets/" assets/
+            echo "✅ Synced assets/"
+          fi
+          
+          # Sync data files
+          if [ -d "$CONTENT_SOURCE/data" ]; then
+            rsync -a --delete "$CONTENT_SOURCE/data/" data/
+            echo "✅ Synced data/"
+          fi
+          
+          # Sync static files
+          if [ -d "$CONTENT_SOURCE/static" ]; then
+            rsync -a --delete "$CONTENT_SOURCE/static/" static/
+            echo "✅ Synced static/"
+          fi
+          
+          # Sync i18n overrides
+          if [ -d "$CONTENT_SOURCE/i18n" ]; then
+            rsync -a --delete "$CONTENT_SOURCE/i18n/" i18n/
+            echo "✅ Synced i18n/"
+          fi
+          
+          # Sync hugo.toml with URL adjustment for preview
+          if [ -f "$CONTENT_SOURCE/hugo.toml" ]; then
+            cp "$CONTENT_SOURCE/hugo.toml" hugo.toml
+            sed -i -E 's|^baseURL[[:space:]]*=[[:space:]]*".*"|baseURL = "https://adritian-demo.vercel.app/"|' hugo.toml
+            echo "✅ Synced hugo.toml"
+          fi
+
+          # Commit all changes (theme module + content)
+          git add --all
           if [ -n "$PR_NUMBER" ]; then
             COMMIT_MSG="preview: theme PR #$PR_NUMBER ($SHORT_COMMIT)"
           else

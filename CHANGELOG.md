@@ -2,6 +2,174 @@
 
 This documentation tracks changes across versions, including new features, improvements, and breaking changes.
 
+## v1.10.3
+
+### Bug fixes
+
+- Enforce the real minimum Hugo version (0.158.0) in `hugo.toml`, so builds on 0.156/0.157 fail loudly instead of silently rendering the wrong `dir` for RTL languages and empty language-switcher labels
+- Restore the print stylesheet, which was silently dropped from the CSS bundle because `bootstrap-print-css` was never declared as a dependency
+- Replace Hugo template APIs deprecated in 0.156/0.158 (`LanguageDirection`, `LanguageName`, `LanguageCode`, `site.Data`), removing the deprecation warnings from every build
+
+### Maintenance
+
+- Every e2e test file now honours `TEST_BASE_URL` instead of hardcoding port 1313; combined with `PLAYWRIGHT_PORT`, the suite can be pointed at a free port rather than silently reusing an unrelated Hugo server that already occupies 1313
+
+## v1.10.2
+
+### Bug fixes
+
+- Newsletter: render inline markup in note and status messages (#585)
+- CI: grant `contents: write` to the update-example-site workflow (#580)
+
+## v1.10.1
+
+### Bug fixes
+
+- Respect an explicit `false` for `readingProgress` and `viewTransitions` (#576)
+- Set `enableRobotsTXT` so `layouts/robots.txt` actually renders (#563)
+- Restore default archetype scaffolding (#567)
+- Remove inert config for suppressing footer section output (#569)
+- Remove leftover debug `warnf` logging from home/footer templates (#565)
+- Preview workflow: one preview PR per source PR, via a stable demo branch name (#574)
+
+### Maintenance
+
+- Modernize i18n files to a flat key-value format (#573)
+
+## v1.10.0
+
+### Bug fixes
+
+- Meta description fallback chain now checks page params before i18n (#561)
+
+## v1.9.15
+
+### Bug fixes
+
+- Set the minimum Hugo version to 0.156.0 in `hugo.toml` (#558)
+
+## v1.9.14
+
+### New features
+
+- **Korean (ko) translation** (#541)
+
+### Bug fixes
+
+- Fix mobile card image aspect ratio (#523)
+- exampleSite: fix deprecation warnings on Hugo 0.162.1 (#535)
+
+### Maintenance
+
+- Add Filip Vencelides to the showcase (#522)
+
+## v1.9.13
+
+### New features
+
+- **Runtime color scheme switcher** — toggle between light and dark modes with a footer/header selector and automatic system preference detection (#507)
+- **Cross-repo content sync for PR previews** — theme preview workflows now sync `exampleSite` content (blog posts, pages, assets, etc.) to the demo repo, so content changes get a live Vercel preview URL before merging (#519)
+
+### Bug fixes
+
+- Make code copy button hover-only on all pages, not just blog (#506, #510)
+
+### Maintenance
+
+- Dependency updates: `dompurify` (3.3.3 → 3.4.1), `postcss` (8.5.8 → 8.5.10), `autoprefixer` (10.4.27 → 10.5.0), `@types/node`
+
+## v1.9.12
+
+### Bug fixes
+
+- Fix SEO: hreflang alternate links for multilingual sites, per-page meta descriptions, and BlogPosting structured data author fallback (#482)
+
+## v1.9.11
+
+### Security
+
+- Fix DOM text reinterpreted as HTML in lightbox — harden `sanitizeURL` and restore safe `data:image/` support (#505)
+
+### Accessibility
+
+- Improve semantic HTML tags and accessibility across multiple components (#504)
+
+### New features
+
+- Showcase menu link added to exampleSite navigation for all 5 languages (#503)
+
+### Maintenance
+
+- Dependency updates: `@types/node`, `fuse.js`, `@playwright/test`
+
+## v1.9.10
+
+### New features
+
+- **Responsive images with srcset and lazy loading** — new `responsive-image` partial and shortcode that generates `<picture>` elements with WebP srcset variants (400w/800w/1200w) via Hugo Pipes; falls back to plain `<img loading="lazy">` for static/external URLs (closes #415, #494)
+- Blog list featured thumbnails automatically use the responsive image partial
+- Documentation added to README and shortcodes reference page
+
+## v1.9.9
+
+### New features
+
+- **Community showcase page** with verified sites built with Adritian (#497) — card grid with tag filters, auto-screenshots via microlink.io, and a submit CTA
+- Dark mode code block styles extended to all layouts, not just blog pages
+
+### Maintenance
+
+- Dependency updates: `dompurify`, `postcss`, `picomatch`, `@types/node`
+
+## v1.9.8
+
+### Bug fixes
+
+- Harden search runtime when Fuse.js or DOMPurify are unavailable — graceful fallback instead of crash (#488)
+- Fix color selector hover contrast in dark and light mode (#486)
+- Fix duplicate `btn:focus-visible` rule that turned buttons white in dark mode
+
+### Maintenance
+
+- Bump Hugo minimum version to `0.153.0` (#481)
+- Updated documentation to reflect minimum version (#483)
+- CI: run tests on push to main for branch protection checks (#478)
+
+## v1.9.7
+
+### New features
+
+- `imgShape` parameter for `showcase-section` shortcode: `circle` (circular crop), `rounded` (soft corners), or omit for default behavior (#463)
+
+## v1.9.6
+
+### Bug fixes
+
+- Fix dark mode code blocks — invisible text due to CSS specificity conflict between `.highlight pre` and `.chroma` selectors (#477)
+
+## v1.9.5
+
+### Bug fixes
+
+- Improve typography consistency across sections — fix heading semantics (`h1` → `h2` in about section), line-height, and font-weight inconsistencies (#474)
+- Fix Hugo deprecation warnings (#470, #471)
+
+### New features
+
+- `headingLevel` parameter for `about-section` shortcode — set to `"1"` for standalone pages where about is the primary heading
+
+## v1.9.4
+
+### Bug fixes
+
+- Fix platform links not clickable after v1.9.3 — animation observer and z-index stacking issue (#459, #464)
+- Fix Hugo v0.157.0 deprecation warnings (#462, #465)
+
+### Maintenance
+
+- Bump GitHub action workflows (#468)
+- Fix workflow failures for external contributor (fork) PRs (#469)
+
 ## v1.9.3
 
 ### New features
@@ -149,7 +317,7 @@ This version introduces a brand new way of managing pages, and leveraging the ex
 
 The main changes are:
 
-- deprecation of `homepage.yml`. Stopped using some of its values (such as `.Site.Data.homepage.newsletter.enable`, given that the shortcodes can be rendered in any page, not only the home)
+- deprecation of `homepage.yml`. Stopped using some of its values (such as `hugo.Data.homepage.newsletter.enable`, given that the shortcodes can be rendered in any page, not only the home)
 - introduction of numerous shortcodes, to replicate the same experience (in any page)
 
 Aside from that:

@@ -49,6 +49,33 @@ test.describe('Search functionality', () => {
     expect(count).toBeGreaterThanOrEqual(1);
   });
 
+  test('search still works when Fuse and DOMPurify scripts are unavailable', async ({ page }) => {
+    const consoleErrors: string[] = [];
+    page.on('console', msg => {
+      if (msg.type() === 'error') {
+        consoleErrors.push(msg.text());
+      }
+    });
+
+    await page.route('**/js/fuse.min.js', route => route.abort());
+    await page.route('**/js/purify.min.js', route => route.abort());
+
+    await page.goto(`${BASE_URL}/search`);
+    await page.locator('#search-query').fill('theme');
+
+    // Wait for the first result to be visible instead of relying on a fixed timeout
+    await expect(page.locator('#search-results div[id^="summary-"]').first()).toBeVisible();
+    const resultsCount = await page.locator('#search-results div[id^="summary-"]').count();
+    expect(resultsCount).toBeGreaterThanOrEqual(1);
+
+    await expect(page.locator('#search-results .spinner-border')).toHaveCount(0);
+
+    const undefinedDependencyErrors = consoleErrors.filter(error =>
+      (/Fuse/i.test(error) || /DOMPurify/i.test(error)) && /not defined/i.test(error)
+    );
+    expect(undefinedDependencyErrors).toHaveLength(0);
+  });
+
   test('clearing search box removes results', async ({ page }) => {
     await page.goto(`${BASE_URL}/search`);
     

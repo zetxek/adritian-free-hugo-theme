@@ -16,7 +16,7 @@
      --------------------------------------------------------------------------- */}}
 {{- $testimonials := (where .Site.RegularPages.ByDate "Type" "testimonial") -}}
 {{- if not $isShortcode }}
-  {{- $baseLangSite := .Sites.Default -}}
+  {{- $baseLangSite := hugo.Sites.Default -}}
   {{- $testimonials = $testimonials | lang.Merge (where $baseLangSite.RegularPages.ByDate "Type" "testimonial") -}}
 {{- end -}}
 

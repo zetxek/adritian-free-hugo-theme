@@ -28,6 +28,8 @@ The theme provides custom shortcodes to allow you to customize your landing page
 - `showcase`: two-column block with a full-width image to the left, and a text snippet to the right. Great for a call to action or introduction of the person (assuming it's a personal website).
 - `text-section`: utility shortcode used to render text in some parts of the theme where it would otherwise be full-width, appearing "too floaty". See [the github issue #260 for context](https://github.com/zetxek/adritian-free-hugo-theme/issues/260).
 - `spacer`: Adds vertical spacing before the next element.
+- `responsive-image`: Renders a responsive `<picture>` element with WebP srcset and lazy loading.
+- `color-scheme-selector`: Displays the color scheme picker inline (requires `params.colorSchemeSwitcher.enable = true`).
 
 The shortcodes can be customized with different arguments:
 
@@ -117,9 +119,9 @@ The shortcodes can be customized with different arguments:
 
 - `about-section`:
   - Content Arguments
-    - `intro_title` - Sets the main heading/title for the about section. Falls back to the title from site data if not provided.
+    - `title` - Sets the heading text for the about section. Falls back to the i18n value `about_title` if not provided.
 
-    - `intro_description` - Contains the HTML content or description text for the about section. Falls back to the content from site data if not provided.
+    - `content` - HTML content for the about section body. Falls back to the i18n value `about_content` if not provided.
 
     - `imgSrc` - Specifies the path to the image displayed in the about section. Falls back to the image defined in site data if not provided.
 
@@ -127,36 +129,25 @@ The shortcodes can be customized with different arguments:
 
     - `imgHeight` - Specifies the height for the image.
 
-    - `imgScale` - Specifies the scale used for the image (for example, `0.5` if the high resolution image is double the size of the smaller one) This is only considered if neither imgWidth nor imgHeight is used.
+    - `imgScale` - Specifies the scale used for the image (for example, `0.5` if the high resolution image is double the size of the smaller one). Only considered if neither `imgWidth` nor `imgHeight` is used.
 
-    - `v_align` - Controls the vertical alignment of the text content relative to the image. Accepts "center" (default), "top", or "bottom".
+    - `headingLevel` - Controls the HTML heading tag used for the section title. Accepts `"1"` through `"6"`. Defaults to `"2"` (`<h2>`), which is correct when the page already has an `<h1>` (e.g. a preceding `showcase-section`). Set to `"1"` if this is the first or only heading on the page to maintain a valid heading hierarchy.
+
+    - `v_align` - Controls the vertical alignment of the text content relative to the image. Accepts `"center"` (default), `"top"`, or `"bottom"`.
     - `text_align` - **Deprecated**: Use `v_align` instead. Maintains backwards compatibility.
-    - `h_align` - Controls the horizontal alignment of the text content. Accepts "left" (default), "center", or "right".
-    
+    - `h_align` - Controls the horizontal alignment of the text content. Accepts `"left"` (default), `"center"`, or `"right"`.
+
     **Alignment Examples**:
     - `v_align="center" h_align="left"` - Text vertically centered, left-aligned (default)
     - `v_align="top" h_align="center"` - Text at top, horizontally centered
     - `v_align="bottom" h_align="right"` - Text at bottom, right-aligned
 
-    - Primary Button Arguments
-      - `button1_enable` - Boolean value to show or hide the primary button. Defaults to the value from site data.
+    - Button Arguments
+      - `button_icon` - Icon class to display before the button text. Falls back to site data.
+      - `button_url` - Target URL for the button. Falls back to site data.
+      - `button_text` - Text label for the button. Falls back to the i18n value `about_button`. Leave empty to hide the button.
 
-      - `button1_icon` - icon class to display before the button text. Falls back to the icon from site data.
-
-      - `button1_url` - Target URL for the primary button. Falls back to the URL from site data.
-
-      - `button1_text` - Text label to display on the primary button. Falls back to the text from site data.
-
-    - Secondary Button Arguments
-      - `button2_enable` - Boolean value to show or hide the secondary button. Defaults to the value from site data.
-
-      - `button2_icon` - FontAwesome or icon class to display before the button text. Falls back to the icon from site data.
-
-      - `button2_url` - Target URL for the secondary button. Falls back to the URL from site data.
-
-      - `button2_text` - Text label to display on the secondary button. Falls back to the text from site data.
-
-  - `sectionId`: Optional. Overrides the default HTML id for the section. If not provided, the default id is used.
+  - `sectionId`: Optional. Overrides the default HTML id for the section. If not provided, the default id (`about`) is used.
 
   - `testimonial-section`:
     - `title`: The title of the testimonial section.
@@ -182,6 +173,7 @@ The shortcodes can be customized with different arguments:
     - `imgWidth` - Specifies the width for the image.
     - `imgHeight` - Specifies the height for the image.
     - `imgScale` - Specifies the scale used for the image (for example, `0.5` if the high resolution image is double the size of the smaller one) This is only considered if neither imgWidth nor imgHeight is used.
+    - `imgShape` - Optional. Clips the image to a predefined shape. Accepted values: `circle` (circular crop, `aspect-ratio: 1:1`) or `rounded` (softly rounded corners). Omit to keep the default rectangular display. Can also be set via `data/homepage.yaml` under `showcase.image.shape`.
   - **Social Media**:
     - `social_links`: Array of social media platform links to display at the bottom of the showcase. Each item should have a URL and icon property.
   - **Responsive Behavior**:
@@ -210,6 +202,40 @@ The shortcodes can be customized with different arguments:
     - `{{</* spacer size="large" */>}}`: Adds substantial spacing
     - `{{</* spacer size="xlarge" */>}}`: Adds maximum spacing
   - `sectionId`: Optional. Overrides the default HTML id for the section. If not provided, the default id is used.
+
+- `responsive-image`:
+  - **Parameters**:
+    - `src`: Path to the image (required). Use a path relative to the `assets/` directory for full Hugo Pipes processing (WebP conversion + srcset). Static-path or external URLs fall back to a plain `<img>` with `loading="lazy"`.
+    - `alt`: Alt text for the image. Defaults to empty string.
+    - `class`: CSS class(es) to add to the `<img>` element.
+    - `sizes`: The `sizes` attribute for the browser's layout hint. Defaults to `"100vw"`.
+  - **How it works**:
+    - For images in `assets/`: generates a `<picture>` element with two `<source>` elements — one WebP srcset and one original-format srcset — at 400w, 800w, and 1200w (only up to the original image width to avoid upscaling). Includes `width`/`height` attributes on the `<img>` to prevent Cumulative Layout Shift (CLS).
+    - For images in `static/` or external URLs: renders a plain `<img loading="lazy" decoding="async">` with no processing.
+  - **Usage Examples**:
+    - `{{</* responsive-image src="images/photo.jpg" alt="A photo" */>}}`: Basic usage with an assets image
+    - `{{</* responsive-image src="images/hero.png" alt="Hero" sizes="(max-width: 768px) 100vw, 600px" */>}}`: Custom sizes hint
+    - `{{</* responsive-image src="images/cover.jpg" alt="Cover" class="my-image rounded" */>}}`: With CSS classes
+
+  Example output for an `assets/` image:
+
+  ```html
+  <picture>
+    <source type="image/webp" srcset="/images/photo_400.webp 400w, /images/photo_800.webp 800w" sizes="100vw">
+    <source type="image/jpeg" srcset="/images/photo_400.jpg 400w, /images/photo_800.jpg 800w" sizes="100vw">
+    <img src="/images/photo_800.jpg" width="800" height="600" alt="A photo" loading="lazy" decoding="async">
+  </picture>
+  ```
+
+### `color-scheme-selector`
+
+Renders the color scheme picker inline in any page or blog post. The picker is only rendered when `params.colorSchemeSwitcher.enable = true` in the site config.
+
+**Usage**: `{{</* color-scheme-selector */>}}`
+
+**Live example** (switch the color scheme here):
+
+{{< color-scheme-selector >}}
 
 You can see them in effect in:
 - [the homepage](/) [`(see source)`](https://raw.githubusercontent.com/zetxek/adritian-demo/refs/heads/main/content/home.md).

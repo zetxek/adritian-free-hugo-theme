@@ -14,6 +14,8 @@ images:
 
 This article is a guide to help you create your own version of the site using [Adritian](https://github.com/zetxek/adritian-free-hugo-theme). It will cover the main steps to get started with the theme, and how to customize it to your needs.
 
+{{< responsive-image src="images/experience/internet-affairs.png" alt="Adritian theme demo" sizes="(max-width: 768px) 100vw, 600px" >}}
+
 ### Creating a site
 
 This theme is for the content management system [Hugo](https://gohugo.io/), so that will be a pre-requirement.
@@ -59,7 +61,7 @@ Once you have a site created, you can add the theme to your site by following th
 
 ```
 baseURL = "<your website url>"
-languageCode = "en"
+locale = "en"
 
 [module]
 [module.hugoVersion]
@@ -151,9 +153,9 @@ target = "assets/css/bootstrap-print.css"
 [languages]
   [languages.en]
     disabled = false
-    languageCode = 'en'
-    languageDirection = 'ltr'
-    languageName = 'English'
+    locale = 'en'
+    direction = 'ltr'
+    label = 'English'
     title = ''
     weight = 0
 
@@ -199,9 +201,9 @@ target = "assets/css/bootstrap-print.css"
 
   [languages.es]
     disabled = false
-    languageCode = 'es'
-    languageDirection = 'ltr'
-    languageName = 'Español'
+    locale = 'es'
+    direction = 'ltr'
+    label = 'Español'
     title = ''
     weight = 0
       [[languages.es.menus.header]]
@@ -245,9 +247,9 @@ target = "assets/css/bootstrap-print.css"
 
   [languages.fr]
     disabled = false
-    languageCode = 'fr'
-    languageDirection = 'ltr'
-    languageName = 'Français'
+    locale = 'fr'
+    direction = 'ltr'
+    label = 'Français'
     title = ''
     weight = 0
 
@@ -361,14 +363,14 @@ Currently the theme content is spread over multiple folders and files. We are wo
 Some of the key files are:
 
 
-- `config.toml`: Main configuration for your Hugo site. Here you can set the site title, description, and theme specific settings such as:
+- `hugo.toml`: Main configuration for your Hugo site. Here you can set the site title, description, and theme specific settings such as:
     - menu structure (footer and header)
     - analytics (vercel, google)
     - blog settings (layout, sidebar contents, etc)
     - As well as some **required settings** for the theme to work properly (`module.mounts`, `params.plugins.css`)
 
 - `data/homepage.yml`: homepage structure, content and sections - including social links, and the hero section.
-- `assets/`: Where you can store static assets such as images, CSS, and JavaScript files (you can add custom CSS and JS files with the `params.plugins.css` in `config.toml`).
+- `assets/`: Where you can store static assets such as images, CSS, and JavaScript files (you can add custom CSS and JS files with the `params.plugins.css` in `hugo.toml`).
 - `content/`: This is where your content files will live. The theme-specific ones are:
     - `content/blog/`: For blog posts.
     - `content/portfolio/`: For portfolio items.

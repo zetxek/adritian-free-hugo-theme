@@ -1,0 +1,127 @@
+## Meta tags
+"meta_title": ""
+## Header
+
+"logo_alt": ""
+"logo_text1": ""
+"logo_text2": ""
+## General
+"home": "홈"
+"skipToMainContent": "본문으로 건너뛰기"
+"toggle_navigation": "내비게이션 토글"
+## Footer
+"footer_notice": ""
+"language": "언어"
+"toggle_theme": "테마 전환"
+"theme_light": "☀️ 라이트"
+"theme_dark": "🌑 다크"
+"theme_auto": "✨ 자동"
+## Color Scheme
+"color_scheme": "색상 구성"
+## Search
+"search_tags_label": "태그"
+"search_categories_label": "카테고리"
+"search_filter_by_tag": "태그로 검색 결과 필터링"
+"search_filter_by_category": "카테고리로 검색 결과 필터링"
+"search_title": "사이트 검색"
+"search_placeholder": "검색어를 입력하세요..."
+"search_results_heading": "일치하는 페이지"
+"search_min_chars": "검색하려면 최소 2자 이상 입력하세요"
+"search_no_matches": "일치하는 결과가 없습니다"
+"search_loading": "불러오는 중..."
+"search_error_generic": "검색 중 문제가 발생했습니다. 잠시 후 다시 시도해 주세요."
+"search_untitled": "제목 없음"
+"search_no_preview": "미리보기를 사용할 수 없습니다"
+## Homepage head title
+"head_title": ""
+"head_description": ""
+## Homepage showcase
+"showcase_title": ""
+"showcase_subtitle": ""
+"showcase_description": ""
+"showcase_button": "문의하기"
+## Homepage about
+"about_title": "저는 누구일까요?"
+"about_content": ""
+"about_button": "소개"
+## Homepage education
+"education_title": "학력"
+## Homepage experience
+"experience_button": "LinkedIn"
+"experience_button_url": ""
+"experience_button2": "이력서 다운로드"
+"experience_button2_url": ""
+"experience_button3": "전체 보기"
+"experience_button3_url": "/experience"
+## Homepage client & work
+"client_work_title": "고객 & 작업"
+## Homepage newsletter
+"newsletter_title": "뉴스레터"
+"newsletter_button": "구독"
+"newsletter_placeholder": "이메일 주소"
+"newsletter_success_message": "뉴스레터를 구독해 주셔서 감사합니다!"
+"newsletter_error_message": "오류가 발생했습니다. 다시 시도해 주세요."
+"newsletter_note": "회원님의 이메일을 다른 곳과 공유하지 않습니다."
+## Homepage testimonials
+"testimonials_title": "추천사"
+## Homepage contact
+"contact_title": "문의"
+"contact_button": "메시지 보내기"
+"contact_form_name": "이름"
+"contact_form_email": "이메일 주소"
+"contact_form_message": "여기에 메시지를 입력하세요"
+"contact_phone_title": "전화번호"
+"contact_email_title": "이메일"
+"contact_address_title": "주소"
+## Blog
+"read_more": "더 읽기"
+"published_on": "게시일 "
+"continue_reading": "계속 읽기"
+## Blog Stats (for list-cards layout)
+"blog_stats_posts": "게시글"
+"blog_stats_last_updated": "마지막 업데이트"
+"blog_stats_first_post": "첫 게시글"
+"blog_stats_topics": "주제"
+"blog_stats_latest_post": "최신 게시글"
+## 404 Page
+"404_title": "페이지를 찾을 수 없습니다"
+"404_description": "죄송합니다. 찾으시는 페이지를 찾을 수 없습니다."
+"404_button": "홈으로 돌아가기"
+## Related Posts
+"related_posts": "관련 게시글"
+## Social Sharing
+"share_this_post": "이 게시글 공유하기"
+"share_on_twitter": "Twitter에 공유"
+"share_on_linkedin": "LinkedIn에 공유"
+"share_on_facebook": "Facebook에 공유"
+"share_via_email": "이메일로 공유"
+"share_twitter_label": "Twitter"
+"share_linkedin_label": "LinkedIn"
+"share_facebook_label": "Facebook"
+"share_email_label": "이메일"
+"share_on_bluesky": "Bluesky에 공유"
+"share_bluesky_label": "Bluesky"
+"share_on_mastodon": "Mastodon에 공유"
+"share_mastodon_label": "Mastodon"
+## Table of Contents
+"table_of_contents": "목차"
+## Comments
+"comments": "댓글"
+## Reading time and metadata
+"min_read": "분 읽기"
+"last_updated": "업데이트됨"
+## Taxonomy
+"categories": "카테고리"
+"post_singular": "게시글"
+"post_plural": "게시글"
+"tags": "태그"
+"authors": "작성자"
+"series": "시리즈"
+"author_posts": "이 작성자의 게시글"
+"series_posts": "시리즈 게시글"
+"series_part": "파트"
+"recent_posts": "최근 게시글"
+"popular_tags": "인기 태그"
+"view_all_tags": "모든 태그 보기"
+"primary_navigation": "주요 내비게이션"
+"footer_navigation": "푸터 내비게이션"

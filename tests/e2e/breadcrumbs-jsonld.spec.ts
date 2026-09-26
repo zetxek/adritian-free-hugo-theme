@@ -55,3 +55,24 @@ test.describe('BreadcrumbList JSON-LD', () => {
     expect(breadcrumb).toBeNull();
   });
 });
+
+test.describe('Breadcrumbs with renamed section URL', () => {
+  // exampleSite/content/book/_index.md sets `url: /books/`, so the section
+  // renders at /books/ while its content lives under content/book/. Crumbs
+  // must use the section permalink, not the raw content-folder path.
+  test('page in renamed section links to the section permalink', async ({ page }) => {
+    await page.goto(`${BASE_URL}/book/example-book/`);
+
+    // Visible breadcrumb
+    const sectionCrumb = page.locator('.breadcrumbs .breadcrumb-link', { hasText: 'Books' });
+    await expect(sectionCrumb).toHaveAttribute('href', /\/books\/$/);
+
+    // JSON-LD BreadcrumbList
+    const breadcrumb = await getBreadcrumbJsonLd(page);
+    expect(breadcrumb).not.toBeNull();
+    expect(breadcrumb.itemListElement).toHaveLength(3);
+    expect(breadcrumb.itemListElement[1].name).toBe('Books');
+    expect(breadcrumb.itemListElement[1].item).toContain('/books/');
+    expect(breadcrumb.itemListElement[1].item).not.toContain('/book/');
+  });
+});

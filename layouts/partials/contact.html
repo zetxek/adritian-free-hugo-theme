@@ -31,11 +31,11 @@
 {{ $form_action := "" }}
 {{ $form_method := "" }}
 {{ if $isShortcode }}
-  {{ $form_action = .Get "form_action" | default .Site.Data.homepage.contact.form_action }}
-  {{ $form_method = .Get "form_method" | default .Site.Data.homepage.contact.form_method }}
+  {{ $form_action = .Get "form_action" | default hugo.Data.homepage.contact.form_action }}
+  {{ $form_method = .Get "form_method" | default hugo.Data.homepage.contact.form_method }}
 {{ else }}
-  {{ $form_action = .Site.Data.homepage.contact.form_action }}
-  {{ $form_method = .Site.Data.homepage.contact.form_method }}
+  {{ $form_action = hugo.Data.homepage.contact.form_action }}
+  {{ $form_method = hugo.Data.homepage.contact.form_method }}
 {{ end }}
 
 {{/*----------------------------------------------
@@ -43,9 +43,9 @@
 ------------------------------------------------*/}}
 {{ $name_placeholder := "" }}
 {{ if $isShortcode }}
-  {{ $name_placeholder = .Get "contact_form_name" | default (.Get "name_placeholder") | default .Site.Data.homepage.contact.form_name_placeholder | default (i18n "contact_name_placeholder") }}
+  {{ $name_placeholder = .Get "contact_form_name" | default (.Get "name_placeholder") | default hugo.Data.homepage.contact.form_name_placeholder | default (i18n "contact_name_placeholder") }}
 {{ else }}
-  {{ $name_placeholder = .Site.Data.homepage.contact.form_name_placeholder | default (i18n "contact_name_placeholder") }}
+  {{ $name_placeholder = hugo.Data.homepage.contact.form_name_placeholder | default (i18n "contact_name_placeholder") }}
 {{ end }}
 {{ $name_placeholder_attr := "" }}
 {{ if $name_placeholder }}
@@ -54,9 +54,9 @@
 
 {{ $email_placeholder := "" }}
 {{ if $isShortcode }}
-  {{ $email_placeholder = .Get "contact_form_email" | default (.Get "email_placeholder") | default .Site.Data.homepage.contact.form_email_placeholder | default (i18n "contact_email_placeholder") }}
+  {{ $email_placeholder = .Get "contact_form_email" | default (.Get "email_placeholder") | default hugo.Data.homepage.contact.form_email_placeholder | default (i18n "contact_email_placeholder") }}
 {{ else }}
-  {{ $email_placeholder = .Site.Data.homepage.contact.form_email_placeholder | default (i18n "contact_email_placeholder") }}
+  {{ $email_placeholder = hugo.Data.homepage.contact.form_email_placeholder | default (i18n "contact_email_placeholder") }}
 {{ end }}
 {{ $email_placeholder_attr := "" }}
 {{ if $email_placeholder }}
@@ -65,9 +65,9 @@
 
 {{ $phone_placeholder := "" }}
 {{ if $isShortcode }}
-  {{ $phone_placeholder = .Get "contact_form_phone" | default (.Get "phone_placeholder") | default .Site.Data.homepage.contact.form_phone_placeholder | default (i18n "contact_phone_placeholder") }}
+  {{ $phone_placeholder = .Get "contact_form_phone" | default (.Get "phone_placeholder") | default hugo.Data.homepage.contact.form_phone_placeholder | default (i18n "contact_phone_placeholder") }}
 {{ else }}
-  {{ $phone_placeholder = .Site.Data.homepage.contact.form_phone_placeholder | default (i18n "contact_phone_placeholder") }}
+  {{ $phone_placeholder = hugo.Data.homepage.contact.form_phone_placeholder | default (i18n "contact_phone_placeholder") }}
 {{ end }}
 {{ $phone_placeholder_attr := "" }}
 {{ if $phone_placeholder }}
@@ -76,9 +76,9 @@
 
 {{ $message_placeholder := "" }}
 {{ if $isShortcode }}
-  {{ $message_placeholder = .Get "contact_form_message" | default (.Get "message_placeholder") | default .Site.Data.homepage.contact.form_message_placeholder | default (i18n "contact_message_placeholder") }}
+  {{ $message_placeholder = .Get "contact_form_message" | default (.Get "message_placeholder") | default hugo.Data.homepage.contact.form_message_placeholder | default (i18n "contact_message_placeholder") }}
 {{ else }}
-  {{ $message_placeholder = .Site.Data.homepage.contact.form_message_placeholder | default (i18n "contact_message_placeholder") }}
+  {{ $message_placeholder = hugo.Data.homepage.contact.form_message_placeholder | default (i18n "contact_message_placeholder") }}
 {{ end }}
 {{ $message_placeholder_attr := "" }}
 {{ if $message_placeholder }}
@@ -98,9 +98,9 @@
 ------------------------------------------------*/}}
 {{ $button_text := "" }}
 {{ if $isShortcode }}
-  {{ $button_text = .Get "contact_button" | default (.Get "button_text") | default .Site.Data.homepage.contact.button_text | default (i18n "contact_button_text") }}
+  {{ $button_text = .Get "contact_button" | default (.Get "button_text") | default hugo.Data.homepage.contact.button_text | default (i18n "contact_button_text") }}
 {{ else }}
-  {{ $button_text = .Site.Data.homepage.contact.button_text | default (i18n "contact_button_text") }}
+  {{ $button_text = hugo.Data.homepage.contact.button_text | default (i18n "contact_button_text") }}
 {{ end }}
 
 {{/*----------------------------------------------
@@ -111,15 +111,15 @@
 {{ $email := "" }}
 {{ $location := "" }}
 {{ if $isShortcode }}
-  {{ $phone = .Get "contact_phone_number" | default (.Get "phone") | default .Site.Data.homepage.contact.phone }}
-  {{ $phone_display = .Get "contact_phone_number" | default (.Get "phone_display") | default .Site.Data.homepage.contact.phone_display | default $phone }}
-  {{ $email = .Get "contact_email_email" | default (.Get "email") | default .Site.Data.homepage.contact.email }}
-  {{ $location = .Get "contact_address_address" | default (.Get "location") | default .Site.Data.homepage.contact.location }}
+  {{ $phone = .Get "contact_phone_number" | default (.Get "phone") | default hugo.Data.homepage.contact.phone }}
+  {{ $phone_display = .Get "contact_phone_number" | default (.Get "phone_display") | default hugo.Data.homepage.contact.phone_display | default $phone }}
+  {{ $email = .Get "contact_email_email" | default (.Get "email") | default hugo.Data.homepage.contact.email }}
+  {{ $location = .Get "contact_address_address" | default (.Get "location") | default hugo.Data.homepage.contact.location }}
 {{ else }}
-  {{ $phone = .Site.Data.homepage.contact.phone }}
-  {{ $phone_display = .Site.Data.homepage.contact.phone_display | default $phone }}
-  {{ $email = .Site.Data.homepage.contact.email }}
-  {{ $location = .Site.Data.homepage.contact.location }}
+  {{ $phone = hugo.Data.homepage.contact.phone }}
+  {{ $phone_display = hugo.Data.homepage.contact.phone_display | default $phone }}
+  {{ $email = hugo.Data.homepage.contact.email }}
+  {{ $location = hugo.Data.homepage.contact.location }}
 {{ end }}
 
 {{/*----------------------------------------------
@@ -129,13 +129,13 @@
 {{ $email_heading := "" }}
 {{ $location_heading := "" }}
 {{ if $isShortcode }}
-  {{ $phone_heading = .Get "contact_phone_title" | default (.Get "phone_heading") | default .Site.Data.homepage.contact.phone_heading | default (i18n "contact_phone_heading") }}
-  {{ $email_heading = .Get "contact_email_title" | default (.Get "email_heading") | default .Site.Data.homepage.contact.email_heading | default (i18n "contact_email_heading") }}
-  {{ $location_heading = .Get "contact_address_title" | default (.Get "location_heading") | default .Site.Data.homepage.contact.location_heading | default (i18n "contact_location_heading") }}
+  {{ $phone_heading = .Get "contact_phone_title" | default (.Get "phone_heading") | default hugo.Data.homepage.contact.phone_heading | default (i18n "contact_phone_heading") }}
+  {{ $email_heading = .Get "contact_email_title" | default (.Get "email_heading") | default hugo.Data.homepage.contact.email_heading | default (i18n "contact_email_heading") }}
+  {{ $location_heading = .Get "contact_address_title" | default (.Get "location_heading") | default hugo.Data.homepage.contact.location_heading | default (i18n "contact_location_heading") }}
 {{ else }}
-  {{ $phone_heading = .Site.Data.homepage.contact.phone_heading | default (i18n "contact_phone_heading") }}
-  {{ $email_heading = .Site.Data.homepage.contact.email_heading | default (i18n "contact_email_heading") }}
-  {{ $location_heading = .Site.Data.homepage.contact.location_heading | default (i18n "contact_location_heading") }}
+  {{ $phone_heading = hugo.Data.homepage.contact.phone_heading | default (i18n "contact_phone_heading") }}
+  {{ $email_heading = hugo.Data.homepage.contact.email_heading | default (i18n "contact_email_heading") }}
+  {{ $location_heading = hugo.Data.homepage.contact.location_heading | default (i18n "contact_location_heading") }}
 {{ end }}
 
 <section {{if $sectionId}} id="{{ $sectionId }}"{{end}} class="section section--contact pt-0">

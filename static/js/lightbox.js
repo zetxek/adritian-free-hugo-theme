@@ -31,12 +31,14 @@
 
   function sanitizeURL(url) {
     if (!url) return '';
-    // Allow data:image/ URIs as-is
-    if (url.startsWith('data:image/')) return url;
-    // Parse the URL to break the taint chain; only allow http(s) protocols
+    // Parse the URL to break the taint chain; only allow safe protocols
     try {
       var parsed = new URL(url, window.location.href);
-      if (parsed.protocol === 'http:' || parsed.protocol === 'https:') return parsed.href;
+      var isSafeProtocol = ['http:', 'https:'].indexOf(parsed.protocol) !== -1;
+      var isSafeImageData = parsed.protocol === 'data:' && parsed.href.startsWith('data:image/');
+      if (isSafeProtocol || isSafeImageData) {
+        return parsed.href;
+      }
     } catch (e) {
       // invalid URL
     }

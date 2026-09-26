@@ -6,27 +6,31 @@
     "build": "npm run favicons && hugo build --source exampleSite --themesDir ../.. --logLevel debug --minify",
     "build:performance": "npm run optimize:performance && npm run build",
     "optimize:performance": "node scripts/optimize-performance.js",
-    "test:scripts": "node tests/scripts/generate-favicon-ico.test.js",
+    "test:scripts": "node tests/scripts/generate-favicon-ico.test.js && node tests/scripts/no-debug-logging.test.js && node tests/scripts/default-archetype.test.js && node tests/scripts/i18n-format.test.js && node tests/scripts/params-default-toggles.test.js",
     "test": "npm-run-all build --continue-on-error test:scripts test:e2e test:e2e:no-menus",
     "test:e2e": "export TEST_NO_MENUS=false; playwright test",
     "test:e2e:no-menus": "export TEST_NO_MENUS=true; playwright test",
     "test:e2e:ui": "playwright test --ui",
-    "test:e2e:debug": "playwright test --debug"
+    "test:e2e:debug": "playwright test --debug",
+    "screenshots:colors": "node scripts/capture-color-schemes.js"
   },
   "devDependencies": {
-    "@playwright/test": "^1.58.2",
-    "@types/node": "^25.2.3",
+    "@playwright/test": "^1.62.1",
+    "@types/node": "^26.4.0",
     "@zetxek/adritian-theme-helper": "^1.0.5",
-    "autoprefixer": "^10.4.24",
+    "autoprefixer": "^10.5.4",
     "bootstrap": "^5.3.8",
+    "bootstrap-print-css": "^1.0.1",
+    "js-yaml": "^5.4.1",
     "npm-run-all": "^4.1.5",
-    "postcss": "^8.5.6",
+    "png-to-ico": "^3.0.2",
+    "postcss": "^8.5.26",
     "postcss-cli": "^11.0.0",
-    "png-to-ico": "^3.0.1",
-    "prettier-plugin-go-template": "^0.0.15"
+    "prettier-plugin-go-template": "^0.0.15",
+    "sharp": "^0.35.4"
   },
   "dependencies": {
-    "fuse.js": "^7.1.0",
-    "dompurify": "^3.3.1"
+    "dompurify": "^3.4.14",
+    "fuse.js": "^7.5.0"
   }
 }

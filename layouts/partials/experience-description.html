@@ -34,12 +34,12 @@
 
 {{- if $isShortcode }}
   {{- $btn1Enable = true -}}
-  {{- $btn1Icon = .Get "button1_icon" | default .Site.Data.homepage.experience.button.icon -}}
+  {{- $btn1Icon = .Get "button1_icon" | default hugo.Data.homepage.experience.button.icon -}}
   {{- $btn1URL = .Get "button1_url" | default ( i18n "experience_button_url" ) -}}
   {{- $btn1Text = .Get "button1_text" | default ( i18n "experience_button" ) -}}
 {{ else }}
-  {{- $btn1Enable = .Site.Data.homepage.experience.button.enable -}}
-  {{- $btn1Icon = .Site.Data.homepage.experience.button.icon -}}
+  {{- $btn1Enable = hugo.Data.homepage.experience.button.enable -}}
+  {{- $btn1Icon = hugo.Data.homepage.experience.button.icon -}}
   {{- $btn1URL = i18n "experience_button_url" -}}
   {{- $btn1Text = i18n "experience_button" -}}
 {{ end }}
@@ -59,12 +59,12 @@
   {{- if eq $hideViewAll "true" -}}
     {{- $btn2Enable = false -}}
   {{- end -}}
-  {{- $btn2Icon = .Get "button2_icon" | default .Site.Data.homepage.experience.button2.icon -}}
+  {{- $btn2Icon = .Get "button2_icon" | default hugo.Data.homepage.experience.button2.icon -}}
   {{- $btn2URL = .Get "button2_url" | default ( i18n "experience_button2_url" ) -}}
   {{- $btn2Text = .Get "button2_text" | default ( i18n "experience_button2" ) -}}
 {{ else }}
-  {{- $btn2Enable = .Site.Data.homepage.experience.button2.enable -}}
-  {{- $btn2Icon = .Site.Data.homepage.experience.button2.icon -}}
+  {{- $btn2Enable = hugo.Data.homepage.experience.button2.enable -}}
+  {{- $btn2Icon = hugo.Data.homepage.experience.button2.icon -}}
   {{- $btn2URL = i18n "experience_button2_url" -}}
   {{- $btn2Text = i18n "experience_button2" -}}
 {{ end }}
@@ -84,12 +84,12 @@
   {{- if eq $hideViewAll "true" -}}
     {{- $btn3Enable = false -}}
   {{- end -}}
-  {{- $btn3Icon = .Get "button3_icon" | default .Site.Data.homepage.experience.button3.icon -}}
+  {{- $btn3Icon = .Get "button3_icon" | default hugo.Data.homepage.experience.button3.icon -}}
   {{- $btn3URL = .Get "button3_url" | default ( i18n "experience_button3_url" ) -}}
   {{- $btn3Text = .Get "button3_text" | default ( i18n "experience_button3" ) -}}
 {{ else }}
-  {{- $btn3Enable = .Site.Data.homepage.experience.button3.enable -}}
-  {{- $btn3Icon = .Site.Data.homepage.experience.button3.icon -}}
+  {{- $btn3Enable = hugo.Data.homepage.experience.button3.enable -}}
+  {{- $btn3Icon = hugo.Data.homepage.experience.button3.icon -}}
   {{- $btn3URL = i18n "experience_button3_url" -}}
   {{- $btn3Text = i18n "experience_button3" -}}
 {{ end }}

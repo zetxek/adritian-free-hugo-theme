@@ -1,9 +1,12 @@
 # Adritian Free Hugo Theme
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/zetxek/adritian-demo) [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fzetxek%2Fadritian-demo&project-name=my-adritian-site&repository-name=my-adritian-site&env=HUGO_VERSION&envDescription=Hugo%20version%20to%20build%20with%20%280.153.0%20or%20newer%29&envLink=https%3A%2F%2Fgithub.com%2Fgohugoio%2Fhugo%2Freleases) [![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/zetxek/adritian-demo) [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/zetxek/adritian-demo) [![Use this template for GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Use%20this%20template-2ea44f?logo=github)](https://github.com/zetxek/adritian-demo/generate)
+
 A modern, fast and extensible Hugo theme for personal websites and professional landing pages - with blog and portfolio support
 
-[![Hugo](https://img.shields.io/badge/Hugo-%3E%3D0.123-ff4088?logo=hugo)](https://gohugo.io/)
+[![Hugo](https://img.shields.io/badge/Hugo-%3E%3D0.158.0-ff4088?logo=hugo)](https://gohugo.io/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/zetxek/adritian-free-hugo-theme/blob/main/LICENSE)
-[![GitHub stars](https://img.shields.io/github/stars/zetxek/adritian-free-hugo-theme?style=social)](https://github.com/zetxek/adritian-free-hugo-theme/stargazers)
+[![GitHub stars](https://img.shields.io/github/stars/zetxek/adritian-free-hugo-theme)](https://github.com/zetxek/adritian-free-hugo-theme/stargazers)
+[![GitHub last commit](https://img.shields.io/github/last-commit/zetxek/adritian-free-hugo-theme)](https://github.com/zetxek/adritian-free-hugo-theme/commits/main)
 [![GitHub release](https://img.shields.io/github/v/release/zetxek/adritian-free-hugo-theme)](https://github.com/zetxek/adritian-free-hugo-theme/releases)
 [![Vercel Deploy](https://deploy-badge.vercel.app/vercel/adritian-demo?name=demo)](https://adritian-demo.vercel.app/)
 [![Test example site](https://github.com/zetxek/adritian-free-hugo-theme/actions/workflows/test-example-site.yml/badge.svg)](https://github.com/zetxek/adritian-free-hugo-theme/actions/workflows/test-example-site.yml)
@@ -41,22 +44,24 @@ Some of the best applications for the theme are for minimalistic websites, singl
 
 ## Live demo & Preview
 
-You can see it live at [www.adrianmoreno.info](https://www.adrianmoreno.info) (my personal website), as well as in these screenshots of the homepage, in the dark and light variations of the theme:
+You can see it live at [www.adrianmoreno.info](https://www.adrianmoreno.info) (my personal website), as well as in these screenshots of the homepage, shown across three of the theme's seven built-in color schemes (Ocean, Default, Warm) in both light and dark modes:
 
 <table>
 	<tbody>
 	<tr>
 		<td>
-			<img src="https://raw.githubusercontent.com/zetxek/adritian-free-hugo-theme/main/images/screenshot-light-fullscroll.jpeg" alt="Light version of the Hugo theme Adritian"/>
-</td>
+			<img src="https://raw.githubusercontent.com/zetxek/adritian-free-hugo-theme/main/images/screenshot.png" alt="Adritian theme homepage in three color schemes (Ocean, Default, Warm) — light mode"/>
+		</td>
+	</tr>
+	<tr>
 		<td>
-			<img src="https://raw.githubusercontent.com/zetxek/adritian-free-hugo-theme/main/images/screenshot-dark-fullscroll.jpeg" alt="Dark version of the Hugo theme Adritian"/>
-</td>
+			<img src="https://raw.githubusercontent.com/zetxek/adritian-free-hugo-theme/main/images/screenshot-dark.png" alt="Adritian theme homepage in three color schemes (Ocean, Default, Warm) — dark mode"/>
+		</td>
 	</tr>
 	</tbody>
 </table>
 
-The dark color variation is selected automatically based on browser settings, and a color switcher is available in the footer and the mobile menu for visitors to override.
+The dark color variation is selected automatically based on browser settings, and a color switcher is available in the footer and the mobile menu for visitors to override. The theme ships with **7 built-in color schemes** — see them all in the [color schemes blog post](https://adritian-demo.vercel.app/blog/color-schemes/).
 
 Other relevant repositories related to this theme are:
 
@@ -65,7 +70,7 @@ Other relevant repositories related to this theme are:
 1. A simpler [demo site for the theme, adritian-demo](https://adritian-demo.vercel.app/) ([and its code](https://github.com/zetxek/adritian-demo)), where the demo content comes from. Author page example: https://adritian-demo.vercel.app/authors/adrian-moreno-pena/.
 1. The same demo site, in a [git submodules integration](https://github.com/zetxek/adritian-git-submodule-demo).
 
-💡 For more inspiration, check this document's [showcase section](#showcase).
+💡 For more inspiration, check the [community showcase](https://adritian-demo.vercel.app/showcase) to see real websites built with Adritian.
 
 ✨ This theme is entirely free and open source. We welcome your ideas, feedback, and contributions! If you find it useful, please give it a GitHub star to show your support.
 
@@ -86,7 +91,9 @@ Another alternative is to use [git submodules](https://gohugo.io/getting-started
 > **Note:** Before proceeding, **Ensure you have Go and Hugo installed** and that you have created a new Hugo project.
 As a pre-requirement, you will need Hugo set up and running. You can follow [the official guide for it](https://gohugo.io/categories/installation/).
 
-The theme has been tested with Hugo version `0.136` (extended version). If you get errors regarding missing functionalities, check if you have the latest version of Hugo available.
+The theme requires Hugo version `0.158.0` or newer (extended version). If you get errors regarding missing functionalities, check if you have the latest version of Hugo available.
+
+> **Note:** the multilingual config in `exampleSite/hugo.toml` (`direction`, `label`, `locale` per language) uses key names Hugo introduced in `v0.158.0`. On older Hugo versions these keys are silently ignored rather than raising an error, which shows up as missing language labels and incorrect `dir`/RTL rendering — so if you copy that config, make sure you're on `0.158.0`+.
 
 **Note:** as mentioned, the theme supports both Hugo modules and git submodules. You should use Hugo modules to install the theme in the most maintainable way. If you prefer git submodules you can follow these [older instructions](https://gohugobrasil.netlify.app/themes/installing-and-using-themes/) or the next ones as help:
 
@@ -149,10 +156,11 @@ See the content in the  `i18n` folder to edit the translations, and the configur
 - **Swedish** (`sv`)
 - **Norwegian** (`no`)
 - **Polish** (`pl`)
+- **Korean** (`ko`)
 - **Arabic** (`ar`) - with full RTL support
 - **Hebrew** (`he`) - with full RTL support
 
-The theme includes comprehensive RTL (Right-to-Left) language support for Arabic and Hebrew. When a language is configured with `languageDirection = 'rtl'` in `hugo.toml`, the theme automatically applies RTL styling to all components including navigation, forms, tables, code blocks, blockquotes, breadcrumbs, and more. Images can be automatically mirrored using the `rtl-mirror` class, or prevented from mirroring with `rtl-no-mirror`.
+The theme includes comprehensive RTL (Right-to-Left) language support for Arabic and Hebrew. When a language is configured with `direction = 'rtl'` in `hugo.toml`, the theme automatically applies RTL styling to all components including navigation, forms, tables, code blocks, blockquotes, breadcrumbs, and more. Images can be automatically mirrored using the `rtl-mirror` class, or prevented from mirroring with `rtl-no-mirror`.
 
 The example site has 3 enabled languages by default (`en`, `es`, and `fr`). You can enable additional languages by adding them to your `hugo.toml` configuration, or disable the provided ones (by setting `disabled` to `true` on the languages you don't need).
 
@@ -213,6 +221,96 @@ manifest = "/site.webmanifest"
 If you need custom names or colors in the manifest, place your own manifest file at the path above
 (or update `manifest` to point to a custom location).
 
+#### Color schemes
+
+The theme ships with 7 named color schemes that change the primary accent color across the entire site:
+
+| Scheme | Light color | Dark color | Vibe |
+|--------|-------------|------------|------|
+| `default` | `#478079` | `#66b2a9` | Current look — teal |
+| `ocean` | `#1a6b8a` | `#4db8d4` | Blues and teals |
+| `forest` | `#2d7a3f` | `#5cb85c` | Greens, earthy tones |
+| `rose` | `#b5495b` | `#e07689` | Warm pinks and reds |
+| `slate` | `#546e7a` | `#90a4ae` | Cool greys, neutral |
+| `midnight` | `#3f3d99` | `#7c7ae6` | Deep dark with purple accents |
+| `warm` | `#c17817` | `#e8a94f` | Ambers and oranges |
+
+👉 **See all 7 schemes side-by-side (light + dark), with code samples and a live switcher demo, in the [Color schemes blog post](https://adritian-demo.vercel.app/blog/color-schemes/).**
+
+Colors are applied at build time to every component (links, buttons, tags, progress bars, focus rings, etc.) in both light and dark modes. No JavaScript is required.
+
+**Option 1 — Use a named built-in scheme:**
+
+```toml
+[params]
+colorScheme = "ocean"  # default | ocean | forest | rose | slate | midnight | warm
+```
+
+**Option 2 — Set your own brand colors directly:**
+
+```toml
+[params.primaryColor]
+light = "#c0392b"  # your brand primary color (used in light mode)
+dark  = "#e74c3c"  # brighter variant for dark mode (improves contrast)
+```
+
+`params.primaryColor` takes precedence over `colorScheme` when both are set. The `dark` value is optional — if omitted it falls back to the `light` value (though providing a brighter shade improves dark-mode readability).
+
+**Option 3 — Add a custom named scheme:**
+
+Add a file at `data/colorSchemes.yaml` in your Hugo site (Hugo merges it with the theme's own):
+
+```yaml
+mybrand:
+  name: "My Brand"
+  light: "#c0392b"
+  dark:  "#e74c3c"
+```
+
+Then select it in `hugo.toml`:
+
+```toml
+[params]
+colorScheme = "mybrand"
+```
+
+This approach also makes the scheme available in the [live switcher](#live-switcher) if you enable it.
+
+**Live scheme switcher:** To let visitors switch between schemes without rebuilding, enable the
+runtime switcher:
+
+```toml
+[params.colorSchemeSwitcher]
+enable = true
+```
+
+This adds a dropdown to the header and footer and loads a small CSS override file per scheme for instant switching. See it in action on the [demo site](https://adritian-demo.vercel.app/).
+
+You can suppress the dropdown in one location without disabling it globally:
+
+```toml
+[params.colorSchemeSwitcher.selector.disable]
+header = false
+footer = true   # hide from footer only
+```
+
+You can also embed the picker inline on any page or post using the `color-scheme-selector` shortcode:
+
+```
+{{</* color-scheme-selector */>}}
+```
+
+> [!TIP]
+> **Useful during development.** Even if you don't plan to ship the switcher to visitors, enabling
+> it while you build your site lets you preview every scheme against your real content — profile
+> photo, blog posts, project thumbnails — without editing `hugo.toml` and restarting `hugo server`
+> each time. Once you've settled on a color, set `colorScheme` in your config and disable the
+> switcher for production.
+
+> [!NOTE]
+> The live switcher requires JavaScript. Theme users who want a static build-time color change
+> with no added JS should use Option 1 or 2 above and leave `colorSchemeSwitcher` disabled (the default).
+
 #### SEO and social metadata
 
 The theme leverages Hugo's embedded templates for Open Graph and Twitter cards, and adds JSON-LD
@@ -250,10 +348,71 @@ Blog posts can provide a featured image for JSON-LD with front matter:
 featured_image = "/img/blog/my-post.png"
 ```
 
+Blog posts can also specify an author for JSON-LD structured data via front matter:
+
+```yaml
+author: "Jane Doe"
+# or multiple authors
+authors:
+  - "Jane Doe"
+  - "John Smith"
+```
+
+When `seo.person` or `seo.organization` are not configured at the site level, the theme falls back
+to the page's `author` or `authors` front matter for the BlogPosting schema.
+
 Notes:
 - Open Graph/Twitter cards are rendered by Hugo's embedded templates (`opengraph.html`, `twitter_cards.html`).
 - Canonical URLs are emitted automatically from each page permalink.
 - JSON-LD includes `WebSite` metadata for all pages and `BlogPosting` for blog posts.
+- **Meta descriptions** use a per-page fallback chain: page `description` front matter → auto-generated page summary (truncated to 155 characters) → `params.seo.siteDescription` → `params.description` → i18n `head_description` (now empty). This ensures each page gets a unique, relevant description for search engines.
+- **hreflang alternate links** are automatically generated on multilingual sites for all translated pages, helping search engines serve the correct language version to users.
+
+> [!IMPORTANT]
+> **Title & description i18n migration.** The `head_title` and `head_description` i18n keys are now empty. If you previously relied on i18n yaml files for translated site titles or descriptions, migrate to Hugo's standard per-language config in your `hugo.toml`:
+>
+> ```toml
+> [languages.en]
+> title = "My Site"
+> weight = 1
+>
+> [languages.en.params]
+> description = "My personal portfolio"
+>
+> [languages.de]
+> title = "Meine Website"
+> weight = 2
+>
+> [languages.de.params]
+> description = "Mein persönliches Portfolio"
+> ```
+>
+> This is the standard Hugo approach (used by PaperMod, Stack, geekdoc, and others) and keeps your translations in your own config — safe from theme updates.
+
+#### Responsive Images
+
+The theme includes a `responsive-image` partial and shortcode that generates a `<picture>` element with WebP srcset variants and lazy loading.
+
+For images stored in the `assets/` directory, Hugo Pipes produces srcset entries at 400w, 800w, and 1200w (WebP + original format). Images in `static/` or external URLs fall back to a plain `<img loading="lazy">`.
+
+**Featured post thumbnails** on the blog list page automatically use the partial — no configuration needed.
+
+**In blog post content**, use the shortcode:
+
+```
+{{</* responsive-image src="images/my-photo.jpg" alt="Description" */>}}
+```
+
+Parameters:
+
+| Parameter | Description | Default |
+|-----------|-------------|---------|
+| `src` | Image path relative to `assets/` (or a static/external URL) | required |
+| `alt` | Alt text | `""` |
+| `class` | CSS class(es) for the `<img>` | — |
+| `sizes` | `sizes` attribute for layout hint | `"100vw"` |
+
+For best results, place blog images in `assets/` (e.g. `assets/images/blog/`) rather than `static/` so Hugo Pipes can process them.
 
 #### Shortcodes
 
@@ -497,6 +656,38 @@ The experience can be displayed in several locations and different styles:
 | ![Experience list with shortcode](https://github.com/user-attachments/assets/7e974632-824c-494c-9dbc-67bb96992517) | ![Experience page](https://github.com/user-attachments/assets/ad53f815-2bd4-4723-a9a1-28be2c01461a) | ![Single experience page](https://github.com/user-attachments/assets/97a20b98-df5c-4e07-9b2e-d7aba75ec81b) | ![CV Experience](https://github.com/user-attachments/assets/7d2d7e4b-a23c-4be7-9617-da7232ea11a7) |
 | Experience list rendered via shortcode | Experience list in /experience | Experience item in in single page | Full-width print-friendly experience 
 | [🔗](https://adritian-demo.vercel.app/#experience-single) By using the shortcode `experience-section`: in a page (such as your homepage), with a limited number of experiences (controlled by the config parameter `homepageExperienceCount` in the file `hugo.toml`). The summary is displayed, as well as an introduction text and optional links | [🔗](https://adritian-demo.vercel.app/experience) Automatically, in the **Experience page**, in `/experience`, with a list of all experiences (no limit). The summary is displayed for each item, as well as a introduction text and optional links. | [🔗](https://adritian-demo.vercel.app/experience/job-1/) Individual experience page (such as `/experience/job-1`), where all details are displayed, and links to the other descriptions are available to navigate. | [🔗](https://adritian-demo.vercel.app/cv) Using the shortcode `experience-list` you can generate a list of experience that is not interactive - good for print-friendly layouts.
+
+## Showcase
+
+The theme includes a **showcase page** to display websites built with Adritian. See it live at [adritian-demo.vercel.app/showcase](https://adritian-demo.vercel.app/showcase).
+
+To add the showcase to your own site:
+
+1. Create `content/showcase.md` with `layout: "showcase"` in the frontmatter
+2. Create `data/showcase.yml` with your site entries:
+
+```yaml
+sites:
+  - name: "Site Name"
+    url: "https://example.com"
+    description: "Short description."
+    github: "username"
+    repo: "username/repo-name"
+    tags: [portfolio, blog]
+```
+
+3. Add a menu link in `hugo.toml` (optional):
+
+```toml
+[[languages.en.menus.header]]
+name = "Showcase"
+URL = "/showcase"
+weight = 5
+```
+
+The page features tag-based filtering, auto-generated screenshots via [microlink.io](https://microlink.io), and a community submission CTA linking to a GitHub issue template.
+
+**Built something with Adritian?** [Submit your site](https://github.com/zetxek/adritian-free-hugo-theme/issues/new?template=showcase-submission.md) to be featured!
 
 ## Troubleshooting
 

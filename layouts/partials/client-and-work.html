@@ -19,7 +19,7 @@
      --------------------------------------------------------------------------- */}}
 {{- $clients := slice -}}
 {{- if not $isShortcode -}}
-  {{- $baseLangSite := .Sites.Default -}}
+  {{- $baseLangSite := hugo.Sites.Default -}}
   {{- $clients = (where .Site.RegularPages.ByDate.Reverse "Type" "client-work" | lang.Merge (where $baseLangSite.RegularPages.ByDate.Reverse "Type" "client-work") ) -}}
 {{- else -}}
   {{- $clients = (where .Site.RegularPages.ByDate.Reverse "Type" "client-work") -}}

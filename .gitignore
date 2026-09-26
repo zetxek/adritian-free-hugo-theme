@@ -25,3 +25,10 @@ resources/_gen/
 # idea
 .idea/
 *.tar.gz
+public_test/
+.playwright-mcp/
+.claude/
+navbar-*.png
+
+# Color scheme capture raw outputs (composites are committed)
+exampleSite/static/img/blog/raw/

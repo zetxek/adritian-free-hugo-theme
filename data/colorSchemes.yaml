@@ -1,0 +1,34 @@
+default:
+  name: "Default"
+  light: "#478079"
+  dark: "#66b2a9"
+
+ocean:
+  name: "Ocean"
+  light: "#1a6b8a"
+  dark: "#4db8d4"
+
+forest:
+  name: "Forest"
+  light: "#2d7a3f"
+  dark: "#5cb85c"
+
+rose:
+  name: "Rose"
+  light: "#b5495b"
+  dark: "#e07689"
+
+slate:
+  name: "Slate"
+  light: "#546e7a"
+  dark: "#90a4ae"
+
+midnight:
+  name: "Midnight"
+  light: "#3f3d99"
+  dark: "#7c7ae6"
+
+warm:
+  name: "Warm"
+  light: "#c17817"
+  dark: "#e8a94f"
