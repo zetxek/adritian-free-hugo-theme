@@ -18,7 +18,9 @@ test.describe('Contact Form Functionality', () => {
   test('contact form placeholders are visible', async ({ page }) => {
     // Check that all form fields have visible placeholders
     const nameInput = page.locator('form input[name="full_name"]');
-    const emailInput = page.locator('form input[name="email"]');
+    // Scoped to the contact form: the newsletter form's email input also
+    // carries name="email", so an unscoped selector matches both.
+    const emailInput = page.locator('form.contact__form input[name="email"]');
     const phoneInput = page.locator('form input[name="phone"]');
     const messageTextarea = page.locator('form textarea[name="message"]');
     
@@ -49,7 +51,9 @@ test.describe('Contact Form Functionality', () => {
   test('contact form placeholders match values from shortcode', async ({ page }) => {
     // Get the form field elements
     const nameInput = page.locator('form input[name="full_name"]');
-    const emailInput = page.locator('form input[name="email"]');
+    // Scoped to the contact form: the newsletter form's email input also
+    // carries name="email", so an unscoped selector matches both.
+    const emailInput = page.locator('form.contact__form input[name="email"]');
     const phoneInput = page.locator('form input[name="phone"]');
     const messageTextarea = page.locator('form textarea[name="message"]');
     
@@ -96,7 +100,7 @@ test.describe('Contact Form Functionality', () => {
     
     // Check specific form field styling
     await expect(page.locator('input[name="full_name"]')).toHaveClass(/form-control/);
-    await expect(page.locator('input[name="email"]')).toHaveClass(/form-control/);
+    await expect(page.locator('.contact__form input[name="email"]')).toHaveClass(/form-control/);
     await expect(page.locator('input[name="phone"]')).toHaveClass(/form-control/);
     await expect(page.locator('textarea[name="message"]')).toHaveClass(/form-control/);
     

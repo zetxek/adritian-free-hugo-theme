@@ -23,6 +23,15 @@ test.describe('Newsletter section', () => {
     await expect(email).toHaveAttribute('placeholder', 'Enter your email');
     await expect(email).toHaveAttribute('aria-label', 'Enter your email');
 
+    // Without a name the browser omits the field from a native (no-JS) form
+    // submission entirely, silently breaking the progressive-enhancement
+    // fallback that the form's action/method promise. `required` gives that
+    // fallback native validation, and autocomplete lets password managers and
+    // browsers fill the field.
+    await expect(email).toHaveAttribute('name', 'email');
+    await expect(email).toHaveAttribute('autocomplete', 'email');
+    await expect(email).toHaveAttribute('required', '');
+
     await expect(form.locator('#rad-subscription-submit')).toHaveText('Subscribe');
   });
 
