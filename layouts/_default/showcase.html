@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function () {
     </div>
   </div>
 
-  {{ with site.Data.showcase }}
+  {{ with hugo.Data.showcase }}
   {{ $showcase := .sites }}
   {{ $tags := slice }}
   {{ range $showcase }}

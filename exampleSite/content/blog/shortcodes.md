@@ -29,6 +29,7 @@ The theme provides custom shortcodes to allow you to customize your landing page
 - `text-section`: utility shortcode used to render text in some parts of the theme where it would otherwise be full-width, appearing "too floaty". See [the github issue #260 for context](https://github.com/zetxek/adritian-free-hugo-theme/issues/260).
 - `spacer`: Adds vertical spacing before the next element.
 - `responsive-image`: Renders a responsive `<picture>` element with WebP srcset and lazy loading.
+- `color-scheme-selector`: Displays the color scheme picker inline (requires `params.colorSchemeSwitcher.enable = true`).
 
 The shortcodes can be customized with different arguments:
 
@@ -225,6 +226,16 @@ The shortcodes can be customized with different arguments:
     <img src="/images/photo_800.jpg" width="800" height="600" alt="A photo" loading="lazy" decoding="async">
   </picture>
   ```
+
+### `color-scheme-selector`
+
+Renders the color scheme picker inline in any page or blog post. The picker is only rendered when `params.colorSchemeSwitcher.enable = true` in the site config.
+
+**Usage**: `{{</* color-scheme-selector */>}}`
+
+**Live example** (switch the color scheme here):
+
+{{< color-scheme-selector >}}
 
 You can see them in effect in:
 - [the homepage](/) [`(see source)`](https://raw.githubusercontent.com/zetxek/adritian-demo/refs/heads/main/content/home.md).

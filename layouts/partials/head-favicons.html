@@ -63,7 +63,7 @@
   {{- end }}
 {{- end }}
 {{- if not $manifest }}
-  {{- $siteTitle := .Site.Title | default "Adritian" -}}
+  {{- $siteTitle := .Site.Title | default "" -}}
   {{- $manifestData := dict
     "name" $siteTitle
     "short_name" $siteTitle

@@ -2,6 +2,88 @@
 
 This documentation tracks changes across versions, including new features, improvements, and breaking changes.
 
+## v1.10.3
+
+### Bug fixes
+
+- Enforce the real minimum Hugo version (0.158.0) in `hugo.toml`, so builds on 0.156/0.157 fail loudly instead of silently rendering the wrong `dir` for RTL languages and empty language-switcher labels
+- Restore the print stylesheet, which was silently dropped from the CSS bundle because `bootstrap-print-css` was never declared as a dependency
+- Replace Hugo template APIs deprecated in 0.156/0.158 (`LanguageDirection`, `LanguageName`, `LanguageCode`, `site.Data`), removing the deprecation warnings from every build
+
+### Maintenance
+
+- Every e2e test file now honours `TEST_BASE_URL` instead of hardcoding port 1313; combined with `PLAYWRIGHT_PORT`, the suite can be pointed at a free port rather than silently reusing an unrelated Hugo server that already occupies 1313
+
+## v1.10.2
+
+### Bug fixes
+
+- Newsletter: render inline markup in note and status messages (#585)
+- CI: grant `contents: write` to the update-example-site workflow (#580)
+
+## v1.10.1
+
+### Bug fixes
+
+- Respect an explicit `false` for `readingProgress` and `viewTransitions` (#576)
+- Set `enableRobotsTXT` so `layouts/robots.txt` actually renders (#563)
+- Restore default archetype scaffolding (#567)
+- Remove inert config for suppressing footer section output (#569)
+- Remove leftover debug `warnf` logging from home/footer templates (#565)
+- Preview workflow: one preview PR per source PR, via a stable demo branch name (#574)
+
+### Maintenance
+
+- Modernize i18n files to a flat key-value format (#573)
+
+## v1.10.0
+
+### Bug fixes
+
+- Meta description fallback chain now checks page params before i18n (#561)
+
+## v1.9.15
+
+### Bug fixes
+
+- Set the minimum Hugo version to 0.156.0 in `hugo.toml` (#558)
+
+## v1.9.14
+
+### New features
+
+- **Korean (ko) translation** (#541)
+
+### Bug fixes
+
+- Fix mobile card image aspect ratio (#523)
+- exampleSite: fix deprecation warnings on Hugo 0.162.1 (#535)
+
+### Maintenance
+
+- Add Filip Vencelides to the showcase (#522)
+
+## v1.9.13
+
+### New features
+
+- **Runtime color scheme switcher** — toggle between light and dark modes with a footer/header selector and automatic system preference detection (#507)
+- **Cross-repo content sync for PR previews** — theme preview workflows now sync `exampleSite` content (blog posts, pages, assets, etc.) to the demo repo, so content changes get a live Vercel preview URL before merging (#519)
+
+### Bug fixes
+
+- Make code copy button hover-only on all pages, not just blog (#506, #510)
+
+### Maintenance
+
+- Dependency updates: `dompurify` (3.3.3 → 3.4.1), `postcss` (8.5.8 → 8.5.10), `autoprefixer` (10.4.27 → 10.5.0), `@types/node`
+
+## v1.9.12
+
+### Bug fixes
+
+- Fix SEO: hreflang alternate links for multilingual sites, per-page meta descriptions, and BlogPosting structured data author fallback (#482)
+
 ## v1.9.11
 
 ### Security

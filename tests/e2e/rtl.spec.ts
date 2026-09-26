@@ -17,6 +17,13 @@ test.describe('RTL (Right-to-Left) language support', () => {
     }
   });
 
+  test.beforeEach(async ({ page }) => {
+    // Disable view-transition animations on cross-document navigation: Chromium's
+    // CSS View Transitions otherwise keep the outgoing/incoming page mid-transition
+    // long enough that Playwright's actionability checks never settle.
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+  });
+
   test('Arabic page has RTL direction attribute', async ({ page }) => {
     test.skip(process.env.TEST_NO_MENUS === 'true', 'Skipping test because TEST_NO_MENUS is true');
 
