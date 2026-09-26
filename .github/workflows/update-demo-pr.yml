@@ -16,12 +16,13 @@ permissions:
 on:
   pull_request:
     branches: [main]
+    types: [opened, synchronize, reopened, closed]
   workflow_dispatch:
 
 jobs:
   label-dependabot:
     runs-on: ubuntu-latest
-    if: github.actor == 'dependabot[bot]'
+    if: github.actor == 'dependabot[bot]' && github.event.action != 'closed'
     steps:
       - name: Add safe-to-test label to Dependabot PRs
         uses: actions/github-script@v8
@@ -80,7 +81,7 @@ jobs:
     needs: check-dependabot
     # Skip for fork PRs: PRIVATE_TOKEN_GITHUB is unavailable in pull_request context for forks.
     # External contributor PRs are handled by update-demo-pr-external.yml instead.
-    if: needs.check-dependabot.outputs.should-run == 'true' && !github.event.pull_request.head.repo.fork
+    if: needs.check-dependabot.outputs.should-run == 'true' && !github.event.pull_request.head.repo.fork && github.event.action != 'closed'
     env:
       SOURCE_BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
       PR_NUMBER: ${{ github.event.number }}
@@ -306,4 +307,41 @@ jobs:
             echo "✅ Pull-request created!"
           fi
 
-          
+  cleanup-demo-preview:
+    name: Close stale demo preview PR
+    if: github.event.action == 'closed' && !github.event.pull_request.head.repo.fork
+    runs-on: ubuntu-latest
+    env:
+      PR_NUMBER: ${{ github.event.number }}
+    steps:
+      - name: Close preview PR and delete preview branch in demo repo
+        shell: bash
+        run: |
+          DEMO_REPOSITORY="zetxek/adritian-demo"
+
+          if [ -z "$PR_NUMBER" ]; then
+            echo "No PR number available (manual workflow dispatch) - nothing to clean up"
+            exit 0
+          fi
+
+          BRANCH_NAME="theme-update/pr-$PR_NUMBER"
+          echo "Source PR #$PR_NUMBER closed - cleaning up preview branch: $BRANCH_NAME"
+
+          # Setup GitHub CLI
+          echo "${{ secrets.PRIVATE_TOKEN_GITHUB }}" > token.txt
+          gh auth login --with-token < token.txt
+
+          # Look for an open preview PR for this branch
+          PR_EXISTS=$(gh pr list --repo "$DEMO_REPOSITORY" --state open --head "$BRANCH_NAME" --json number | jq '.[0].number // empty')
+          echo "PR_EXISTS: $PR_EXISTS"
+
+          if [ -n "$PR_EXISTS" ]; then
+            echo "Closing stale preview PR #$PR_EXISTS..."
+            gh pr comment "$PR_EXISTS" --repo "$DEMO_REPOSITORY" --body "Closing this preview: the source PR was closed, and the pinned theme commit stops being resolvable once its branch is deleted, so future builds of this preview would fail."
+            gh pr close "$PR_EXISTS" --repo "$DEMO_REPOSITORY" --delete-branch
+            echo "✅ Preview PR closed and branch deleted!"
+          else
+            echo "No open preview PR found - trying to delete leftover branch $BRANCH_NAME..."
+            gh api --method DELETE "repos/$DEMO_REPOSITORY/git/refs/heads/$BRANCH_NAME" || true
+            echo "✅ Nothing left to clean up (or branch already gone)"
+          fi
