@@ -100,10 +100,10 @@ test.describe('Navbar overflow handler', () => {
     // broken. Verify at least one section header is rendered AND that actual
     // dropdown items follow.
     const headers = moreDropdown.locator('.dropdown-header');
-    await expect(await headers.count()).toBeGreaterThan(0);
+    await expect(headers.first()).toBeAttached();
 
     const items = moreDropdown.locator('.dropdown-item');
-    await expect(await items.count()).toBeGreaterThan(0);
+    await expect(items.first()).toBeAttached();
   });
 
   test('Color scheme item inside More dropdown actually changes the scheme', async ({ page }) => {
@@ -306,8 +306,9 @@ test.describe('Navbar overflow footer mode', () => {
 
     // Verify that there is at least one item moved to the footer
     const footerOverflowItems = page.locator('.footer_links .navbar-nav .overflow-footer-item');
+    await expect(footerOverflowItems.first()).toBeAttached();
     const count = await footerOverflowItems.count();
-    await expect(count).toBeGreaterThan(0);
+    expect(count).toBeGreaterThan(0);
 
     // Verify original item is hidden in the header
     const hiddenOriginals = page.locator('.header .navbar-nav > li[data-in-footer="true"]');
@@ -333,5 +334,50 @@ test.describe('Navbar overflow footer mode', () => {
       expect(id).toMatch(/-footer$/);
     }
   });
-});
 
+  test('Overflow is re-measured when webfonts finish loading', async ({ page }) => {
+    test.skip(process.env.TEST_NO_MENUS === 'true', 'Skipping test');
+
+    // Hold document.fonts.ready until the test releases it, and count footer-nav
+    // mutations so a re-run of the handler can be detected without relying on
+    // font-specific item widths.
+    await page.addInitScript(() => {
+      let release: (value?: unknown) => void = () => {};
+      const pending = new Promise((r) => { release = r; });
+      (window as any).__releaseFonts = release;
+      Object.defineProperty(document.fonts, 'ready', { get: () => pending, configurable: true });
+
+      (window as any).__footerMutations = 0;
+      document.addEventListener('DOMContentLoaded', () => {
+        const footerNav = document.querySelector('.footer_links .navbar-nav');
+        if (!footerNav) return;
+        new MutationObserver((records) => {
+          (window as any).__footerMutations += records.length;
+        }).observe(footerNav, { childList: true });
+      });
+    });
+
+    // force-overflow makes the first (fallback-metrics) pass move every item to the footer
+    await page.goto(`${BASE_URL}/?force-overflow=true`);
+
+    // The observer target must exist, otherwise the mutation count could never grow
+    await expect(page.locator('.footer_links .navbar-nav')).toBeAttached();
+
+    const footerOverflowItems = page.locator('.footer_links .navbar-nav .overflow-footer-item');
+    await expect(footerOverflowItems.first()).toBeAttached();
+
+    const mutationsBefore = await page.evaluate(() => (window as any).__footerMutations);
+    expect(mutationsBefore).toBeGreaterThan(0);
+
+    // The webfonts "arrive": the handler must re-measure, which rebuilds the footer items
+    await page.evaluate(() => (window as any).__releaseFonts());
+
+    await expect
+      .poll(() => page.evaluate(() => (window as any).__footerMutations), { timeout: 10000 })
+      .toBeGreaterThan(mutationsBefore);
+
+    await expect(footerOverflowItems.first()).toBeAttached();
+    const hiddenOriginals = page.locator('.header .navbar-nav > li[data-in-footer="true"]');
+    await expect(hiddenOriginals).toHaveCount(await footerOverflowItems.count());
+  });
+});
