@@ -1,5 +1,5 @@
 # Adritian Free Hugo Theme
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/zetxek/adritian-demo)
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/zetxek/adritian-demo) [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fzetxek%2Fadritian-demo&project-name=my-adritian-site&repository-name=my-adritian-site&env=HUGO_VERSION&envDescription=Hugo%20version%20to%20build%20with%20%280.153.0%20or%20newer%29&envLink=https%3A%2F%2Fgithub.com%2Fgohugoio%2Fhugo%2Freleases)
 
 A modern, fast and extensible Hugo theme for personal websites and professional landing pages - with blog and portfolio support
 
