@@ -332,6 +332,7 @@ jobs:
     env:
       GH_TOKEN: ${{ secrets.PRIVATE_TOKEN_GITHUB }}
       PR_NUMBER: ${{ github.event.number }}
+      MERGED: ${{ github.event.pull_request.merged }}
     steps:
       - name: Close preview PR and delete branch in demo repository
         shell: bash
@@ -346,7 +347,12 @@ jobs:
           # Close any open preview PR for this branch (idempotent: no-op if none exists)
           PREVIEW_PR=$(gh pr list --repo "$DEMO_REPOSITORY" --state open --head "$BRANCH_NAME" --json number | jq '.[0].number // empty')
           if [ -n "$PREVIEW_PR" ]; then
-            gh pr comment "$PREVIEW_PR" --repo "$DEMO_REPOSITORY" --body "Source PR $PR_URL was closed without merging, so the pinned theme revision no longer resolves. Removing this preview." || echo "Could not comment on preview PR #$PREVIEW_PR, continuing..."
+            if [ "$MERGED" == "true" ]; then
+              REASON="Source PR $PR_URL was merged, so the preview is no longer needed and is being removed."
+            else
+              REASON="Source PR $PR_URL was closed without merging, so the pinned theme revision no longer resolves. Removing this preview."
+            fi
+            gh pr comment "$PREVIEW_PR" --repo "$DEMO_REPOSITORY" --body "$REASON" || echo "Could not comment on preview PR #$PREVIEW_PR, continuing..."
             gh pr close "$PREVIEW_PR" --repo "$DEMO_REPOSITORY" || echo "Could not close preview PR #$PREVIEW_PR, continuing..."
           else
             echo "No open preview PR found for branch $BRANCH_NAME, skipping close"
@@ -354,8 +360,11 @@ jobs:
 
           # Delete the preview branch (idempotent: no-op if already gone, e.g. squash-merged)
           if gh api "repos/$DEMO_REPOSITORY/git/refs/heads/$BRANCH_NAME" >/dev/null 2>&1; then
-            gh api -X DELETE "repos/$DEMO_REPOSITORY/git/refs/heads/$BRANCH_NAME" || echo "Could not delete branch $BRANCH_NAME, continuing..."
-            echo "✅ Deleted branch $BRANCH_NAME"
+            if gh api -X DELETE "repos/$DEMO_REPOSITORY/git/refs/heads/$BRANCH_NAME"; then
+              echo "✅ Deleted branch $BRANCH_NAME"
+            else
+              echo "Could not delete branch $BRANCH_NAME, continuing..."
+            fi
           else
             echo "Branch $BRANCH_NAME does not exist, skipping delete"
           fi
@@ -394,6 +403,39 @@ jobs:
               esac
             done
             printf '%s' "$out"
+          }
+
+          # Look up the source PR's state, distinguishing "confirmed gone" from
+          # "the API call itself failed" so a transient outage (rate limit, 5xx,
+          # token problem, network) can't be misread as a dead PR.
+          # Echoes one of: open, closed, missing, error (failure detail goes to stderr).
+          check_pr_state() {
+            local pr="$1" out rc
+            out=$(gh api "repos/$SOURCE_REPOSITORY/pulls/$pr" --jq .state 2>&1)
+            rc=$?
+            if [ $rc -eq 0 ]; then
+              printf '%s' "$out"
+            elif [[ "$out" == *"HTTP 404"* ]]; then
+              printf 'missing'
+            else
+              echo "API lookup failed for PR #$pr: $out" >&2
+              printf 'error'
+            fi
+          }
+
+          # Same idea for the source branch existence check.
+          check_branch_state() {
+            local branch_name="$1" out rc
+            out=$(gh api "repos/$SOURCE_REPOSITORY/branches/$branch_name" 2>&1)
+            rc=$?
+            if [ $rc -eq 0 ]; then
+              printf 'open'
+            elif [[ "$out" == *"HTTP 404"* ]]; then
+              printf 'missing'
+            else
+              echo "API lookup failed for branch $branch_name: $out" >&2
+              printf 'error'
+            fi
           }
 
           scanned=0
@@ -444,13 +486,27 @@ jobs:
             fi
 
             is_live="false"
+            lookup_failed="false"
             if [ -n "$source_pr" ]; then
-              state=$(gh api "repos/$SOURCE_REPOSITORY/pulls/$source_pr" --jq .state 2>/dev/null)
-              [ "$state" == "open" ] && is_live="true"
+              pr_state=$(check_pr_state "$source_pr")
+              case "$pr_state" in
+                open) is_live="true" ;;
+                closed|missing) is_live="false" ;;
+                *) lookup_failed="true" ;;
+              esac
             else
-              if gh api "repos/$SOURCE_REPOSITORY/branches/$source_branch" >/dev/null 2>&1; then
-                is_live="true"
-              fi
+              branch_state=$(check_branch_state "$source_branch")
+              case "$branch_state" in
+                open) is_live="true" ;;
+                missing) is_live="false" ;;
+                *) lookup_failed="true" ;;
+              esac
+            fi
+
+            if [ "$lookup_failed" == "true" ]; then
+              echo "FAILED to determine liveness for $branch, skipping (will retry next run)"
+              failed=$((failed + 1))
+              continue
             fi
 
             if [ "$is_live" == "true" ]; then
@@ -466,12 +522,18 @@ jobs:
             fi
 
             if [ -n "$source_pr" ]; then
-              reason="Source PR https://github.com/$SOURCE_REPOSITORY/pull/$source_pr is closed, so the pinned theme revision no longer resolves. Removing this stale preview."
+              reason="Source PR https://github.com/$SOURCE_REPOSITORY/pull/$source_pr is no longer open, so the pinned theme revision no longer resolves. Removing this stale preview."
             else
               reason="Source branch $source_branch no longer exists in $SOURCE_REPOSITORY, so the pinned theme revision no longer resolves. Removing this stale preview."
             fi
 
-            preview_pr=$(gh pr list --repo "$DEMO_REPOSITORY" --state open --head "$branch" --json number --jq '.[0].number // empty' 2>/dev/null)
+            preview_pr_out=$(gh pr list --repo "$DEMO_REPOSITORY" --state open --head "$branch" --json number --jq '.[0].number // empty' 2>&1)
+            if [ $? -ne 0 ]; then
+              echo "FAILED to look up preview PR for branch $branch, skipping (will retry next run): $preview_pr_out"
+              failed=$((failed + 1))
+              continue
+            fi
+            preview_pr="$preview_pr_out"
 
             # deleted/closed_prs only count writes that actually happened;
             # deletions is the action budget and must advance in dry runs too,
