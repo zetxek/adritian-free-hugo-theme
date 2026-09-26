@@ -8,6 +8,29 @@ tags:
   - ci-cd
   - workflows
 description: 'How the Adritian theme automatically syncs exampleSite content to the demo repo when a PR is opened, so every change gets a live preview.'
+schema: |
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do I preview content changes before merging?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Open a PR against the theme repository. The internal or external preview workflow syncs your exampleSite content to the demo repo and Vercel deploys a live preview URL for the PR."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What happens if I delete content in my PR?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The sync uses rsync -a --delete, so removals in exampleSite are reflected in the preview deploy too."
+        }
+      }
+    ]
+  }
 ---
 
 When contributing content changes to the Adritian theme — a new blog post, updated homepage copy, or a new shortcode example — you can now see exactly how it will look on the live demo site **before the PR is merged**.
