@@ -75,11 +75,14 @@
           >
             <input
               id="rad-subscription-email"
+              name="email"
               type="email"
               class="form-control"
               aria-describedby="emailHelp"
               placeholder="{{ $placeholder }}"
               aria-label="{{ $placeholder }}"
+              autocomplete="email"
+              required
             >
             <button type="submit" id="rad-subscription-submit" class="btn btn-light btn-rounded">{{ $button }}</button>
           </form>
