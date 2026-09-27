@@ -1,0 +1,301 @@
+## Meta tags
+- id: "meta_title"
+  translation: "Adritian - wysokowydajny motyw Hugo autorstwa Adriána Moreno"
+- id: "meta_description"
+  translation: "Ten motyw Hugo (Adritian) jest oparty na Bootstrap i ma funkcje, które sprawiają, że nadaje się do osobistej strony internetowej, portfolio lub innych rodzajów aplikacji jednostronicowych."
+- id: "meta_keywords"
+  translation: "hugo, motyw, bootstrap, adritian, adrian moreno, osobista strona, portfolio, aplikacja jednostronicowa"
+- id: "meta_author"
+  translation: "Adrián Moreno Peña"
+- id: "meta_image"
+  translation: "/img/general/og-image.jpg"
+
+## Header
+- id: "logo_alt"
+  translation: "Logo Adritian"
+
+- id: "logo_text1"
+  translation: "Adritian"
+
+- id: "logo_text2"
+  translation: "Demo"
+
+## General
+- id: "skipToMainContent"
+  translation: "Przejdź do głównej treści"
+
+- id: "toggle_navigation"
+  translation: "Przełącz nawigację"
+
+## Footer
+- id: "footer_notice"
+  translation: "© Adritian. Darmowy motyw Hugo autorstwa Adriána Moreno Peña."
+
+- id: "language"
+  translation: "Język"
+
+- id: "toggle_theme"
+  translation: "Przełącz motyw"
+
+- id: "theme_light"
+  translation: "☀️ Jasny"
+- id: "theme_dark"
+  translation: "🌑 Ciemny"
+- id: "theme_auto"
+  translation: "✨ Auto"
+
+## Homepage head title
+- id: "head_title"
+  translation: "Strona demonstracyjna Adritian - wysokowydajny motyw Hugo autorstwa Adriána Moreno"
+
+- id: "head_description"
+  translation: "Ten motyw Hugo (Adritian) jest oparty na Bootstrap i ma funkcje, które sprawiają, że nadaje się do osobistej strony internetowej, portfolio lub innych rodzajów aplikacji jednostronicowych."
+
+## Homepage showcase
+- id: "showcase_title"
+  translation: "Witamy w demo"
+
+- id: "showcase_subtitle"
+  translation: "Przyjrzyjmy się przykładowi"
+
+- id: "showcase_description"
+  translation: "To jest wysokowydajny motyw dla generatora statycznych stron Hugo."
+
+- id: "showcase_button"
+  translation: "Kontakt"
+
+- id: "showcase_image_alt"
+  translation: "Zdjęcie Cool Name"
+
+## Homepage about
+- id: "about_title"
+  translation: "Kim jestem?"
+
+- id: "about_content"
+  translation: "Tutaj możesz dodać kilka informacji o sobie."
+
+- id: "about_button"
+  translation: "O mnie"
+
+## Homepage education
+- id: "education_title"
+  translation: "Edukacja"
+
+## Homepage experience
+- id: "experience_button"
+  translation: "LinkedIn"
+
+- id: "experience_button_url"
+  translation: "https://www.linkedin.com/in/adrianmoreno/"
+
+- id: "experience_button2"
+  translation: "Pobierz CV"
+
+- id: "experience_button2_url"
+  translation: "/img/general/user-smile-fill.svg"
+
+- id: "experience_button3"
+  translation: "Zobacz wszystko"
+
+- id: "experience_button3_url"
+  translation: "/experience"
+
+## Homepage client & work
+- id: "client_work_title"
+  translation: "Klienci i Praca"
+
+## Homepage newsletter
+- id: "newsletter_title"
+  translation: "Newsletter"
+
+- id: "newsletter_button"
+  translation: "Subskrybuj"
+
+- id: "newsletter_placeholder"
+  translation: "Twój e-mail"
+
+- id: "newsletter_success_message"
+  translation: "Dziękujemy za subskrypcję mojego newslettera!"
+
+- id: "newsletter_error_message"
+  translation: "Wystąpił błąd. Spróbuj ponownie."
+
+- id: "newsletter_note"
+  translation: "Nigdy nie udostępnimy Twojego e-maila innym."
+
+## Homepage testimonials
+- id: "testimonials_title"
+  translation: "Referencje"
+
+## Homepage contact
+- id: "contact_title"
+  translation: "Kontakt"
+
+- id: "contact_button"
+  translation: "Wyślij wiadomość"
+
+- id: "contact_form_name"
+  translation: "Pełne imię i nazwisko"
+
+- id: "contact_form_email"
+  translation: "Adres e-mail"
+
+- id: "contact_form_message"
+  translation: "Wpisz swoją wiadomość tutaj"
+
+- id: "contact_phone_title"
+  translation: "Numer telefonu"
+
+- id: "contact_phone_number"
+  translation: "Zdefiniowano w i18n/pl.yaml (contact_phone_number)"
+
+- id: "contact_email_title"
+  translation: "E-mail"
+
+- id: "contact_email_email"
+  translation: "Zdefiniowano w i18n/pl.yaml (contact_email_email)"
+
+- id: "contact_address_title"
+  translation: "Adres"
+
+- id: "contact_address_address"
+  translation: "Zdefiniowano w i18n/pl.yaml (contact_address_address)"
+
+## Blog
+- id: "read_more"
+  translation: "Czytaj więcej"
+
+- id: "published_on"
+  translation: "Opublikowano "
+
+- id: "continue_reading"
+  translation: "Kontynuuj czytanie"
+
+## Blog Stats (for list-cards layout)
+- id: "blog_stats_posts"
+  translation: "Posty"
+
+- id: "blog_stats_last_updated"
+  translation: "Ostatnia aktualizacja"
+
+- id: "blog_stats_first_post"
+  translation: "Pierwszy post"
+
+- id: "blog_stats_topics"
+  translation: "Tematy"
+
+- id: "blog_stats_latest_post"
+  translation: "Najnowszy post"
+
+## 404 Page
+- id: "404_title"
+  translation: "Strona nie znaleziona"
+- id: "404_description"
+  translation: "Przepraszamy, ale strona, której szukałeś, nie została znaleziona."
+- id: "404_button"
+  translation: "Powrót do strony głównej"
+
+## Related Posts
+- id: "related_posts"
+  translation: "Powiązane wpisy"
+
+## Social Sharing
+- id: "share_this_post"
+  translation: "Udostępnij ten wpis"
+- id: "share_on_twitter"
+  translation: "Udostępnij na Twitterze"
+- id: "share_on_linkedin"
+  translation: "Udostępnij na LinkedIn"
+- id: "share_on_facebook"
+  translation: "Udostępnij na Facebooku"
+- id: "share_via_email"
+  translation: "Udostępnij przez e-mail"
+- id: "share_twitter_label"
+  translation: "Twitter"
+- id: "share_linkedin_label"
+  translation: "LinkedIn"
+- id: "share_facebook_label"
+  translation: "Facebook"
+- id: "share_email_label"
+  translation: "E-mail"
+- id: "share_on_bluesky"
+  translation: "Udostępnij na Bluesky"
+- id: "share_bluesky_label"
+  translation: "Bluesky"
+- id: "share_on_mastodon"
+  translation: "Udostępnij na Mastodon"
+- id: "share_mastodon_label"
+  translation: "Mastodon"
+
+## Table of Contents
+- id: "table_of_contents"
+  translation: "Spis treści"
+
+## Comments
+- id: "comments"
+  translation: "Komentarze"
+
+## Reading time and metadata
+- id: "min_read"
+  translation: "min czytania"
+- id: "last_updated"
+  translation: "Zaktualizowano"
+
+## Taxonomy
+- id: "categories"
+  translation: "Kategorie"
+- id: "post_singular"
+  translation: "post"
+- id: "post_plural"
+  translation: "posty"
+- id: "tags"
+  translation: "Tagi"
+- id: "authors"
+  translation: "Autorzy"
+- id: "series"
+  translation: "Serie"
+- id: "author_posts"
+  translation: "Posty tego autora"
+- id: "series_posts"
+  translation: "Posty z serii"
+- id: "series_part"
+  translation: "Część"
+- id: "recent_posts"
+  translation: "Najnowsze wpisy"
+- id: "popular_tags"
+  translation: "Popularne tagi"
+- id: "view_all_tags"
+  translation: "Zobacz wszystkie tagi"
+## Search
+- id: "search_tags_label"
+  translation: "Tagi"
+- id: "search_categories_label"
+  translation: "Kategorie"
+- id: "search_filter_by_tag"
+  translation: "Filtruj wyniki wyszukiwania według tagu"
+- id: "search_filter_by_category"
+  translation: "Filtruj wyniki wyszukiwania według kategorii"
+- id: "search_title"
+  translation: "Szukaj w witrynie"
+- id: "search_placeholder"
+  translation: "Wpisz, aby wyszukać..."
+- id: "search_results_heading"
+  translation: "Pasujące strony"
+- id: "search_min_chars"
+  translation: "Wpisz co najmniej 2 znaki, aby wyszukać"
+- id: "search_no_matches"
+  translation: "Nie znaleziono wyników"
+- id: "search_loading"
+  translation: "Ładowanie..."
+- id: "search_error_generic"
+  translation: "Wystąpił problem z wyszukiwaniem. Spróbuj ponownie później."
+- id: "search_untitled"
+  translation: "Bez tytułu"
+- id: "search_no_preview"
+  translation: "Brak podglądu"
+
+- id: "primary_navigation"
+  translation: "Nawigacja główna"
+
+- id: "footer_navigation"
+  translation: "Nawigacja w stopce"

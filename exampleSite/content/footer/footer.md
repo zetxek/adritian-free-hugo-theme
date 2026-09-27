@@ -29,7 +29,7 @@ draft = false
     newsletter_button="Subscribe"
     newsletter_success_message="Thank you for subscribing!"
     newsletter_error_message="Something went wrong, please try again."
-    newsletter_note="We respect your privacy and will <strong>never</strong> share your data."
+    newsletter_note="We respect your privacy and won't share your data."
     form_action="/"
     form_method="POST"
 >}}

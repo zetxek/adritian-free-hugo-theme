@@ -1,0 +1,306 @@
+## Meta tags
+- id: "meta_title"
+  translation: "أدريتيان - قالب هوغو عالي الأداء من إنشاء أدريان مورينو"
+- id: "meta_description"
+  translation: "قالب هوغو هذا (أدريتيان) مبني على Bootstrap ويحتوي على ميزات تجعله مناسبًا لموقع شخصي أو محفظة أعمال أو أنواع أخرى من تطبيقات الصفحة الواحدة."
+- id: "meta_keywords"
+  translation: "هوغو، قالب، بوتستراب، أدريتيان، أدريان مورينو، موقع شخصي، محفظة أعمال، تطبيق صفحة واحدة"
+- id: "meta_author"
+  translation: "أدريان مورينو بينيا"
+- id: "meta_image"
+  translation: "/img/general/og-image.jpg"
+
+## Header
+- id: "logo_alt"
+  translation: "شعار أدريتيان"
+
+- id: "logo_text1"
+  translation: "أدريتيان"
+
+- id: "logo_text2"
+  translation: "تجريبي"
+
+## General
+- id: "skipToMainContent"
+  translation: "انتقل إلى المحتوى الرئيسي"
+
+- id: "toggle_navigation"
+  translation: "تبديل التنقل"
+
+## Footer
+- id: "footer_notice"
+  translation: "© أدريتيان. قالب هوغو مجاني من إنشاء أدريان مورينو بينيا."
+
+- id: "language"
+  translation: "اللغة"
+
+- id: "toggle_theme"
+  translation: "تبديل السمة"
+
+- id: "theme_light"
+  translation: "☀️ فاتح"
+- id: "theme_dark"
+  translation: "🌑 داكن"
+- id: "theme_auto"
+  translation: "✨ تلقائي"
+
+## Homepage head title
+- id: "head_title"
+  translation: "موقع تجريبي لأدريتيان - قالب هوغو عالي الأداء من إنشاء أدريان مورينو"
+
+- id: "head_description"
+  translation: "قالب هوغو هذا (أدريتيان) مبني على Bootstrap ويحتوي على ميزات تجعله مناسبًا لموقع شخصي أو محفظة أعمال أو أنواع أخرى من تطبيقات الصفحة الواحدة."
+
+## Homepage showcase
+- id: "showcase_title"
+  translation: "مرحبًا بكم في العرض التجريبي"
+
+- id: "showcase_subtitle"
+  translation: "لنستعرض مثالاً"
+
+- id: "showcase_description"
+  translation: "هذا قالب عالي الأداء لمولد المواقع الثابتة هوغو. يمكن تحرير هذا المحتوى النموذجي في ملفات الترجمة (حيث يدعم القالب الترجمات)."
+
+- id: "showcase_button"
+  translation: "تواصل"
+
+  ## not visible but used for accessibility
+- id: "showcase_image_alt"
+  translation: "صورة لاسم رائع"
+
+## Homepage about
+- id: "about_title"
+  translation: "من أنا؟"
+
+- id: "about_content"
+  translation: '<p class="lead">
+      هنا يمكنك إضافة بعض المعلومات عنك. مقتطف صغير يصف خبرتك، على سبيل المثال.
+      <br/>
+      يمكنك شرح شيء عن خلفيتك الأكاديمية/الدراسية، وكذلك مجالات العمل المفضلة لديك.
+      </p>'
+
+- id: "about_button"
+  translation: "عني"
+
+## Homepage education
+- id: "education_title"
+  translation: "التعليم"
+
+## Homepage experience
+- id: "experience_button"
+  translation: "لينكد إن"
+
+- id: "experience_button_url"
+  translation: "https://www.linkedin.com/in/adrianmoreno/"
+
+- id: "experience_button2"
+  translation: "تحميل السيرة الذاتية"
+
+- id: "experience_button2_url"
+  translation: "/img/general/user-smile-fill.svg"
+
+- id: "experience_button3"
+  translation: "عرض الكل"
+
+- id: "experience_button3_url"
+  translation: "/experience"
+
+## Homepage client & work
+- id: "client_work_title"
+  translation: "العملاء والأعمال"
+
+## Homepage newsletter
+- id: "newsletter_title"
+  translation: "النشرة الإخبارية"
+
+- id: "newsletter_button"
+  translation: "اشترك"
+
+- id: "newsletter_placeholder"
+  translation: "بريدك الإلكتروني"
+
+- id: "newsletter_success_message"
+  translation: "شكرًا لاشتراكك في نشرتي الإخبارية!"
+
+- id: "newsletter_error_message"
+  translation: "حدث خطأ. يرجى المحاولة مرة أخرى."
+
+- id: "newsletter_note"
+  translation: "لن نشارك بريدك الإلكتروني مع أي شخص آخر."
+
+## Homepage testimonials
+- id: "testimonials_title"
+  translation: "الشهادات"
+
+## Homepage contact
+- id: "contact_title"
+  translation: "تواصل معي"
+
+- id: "contact_button"
+  translation: "إرسال رسالة"
+
+- id: "contact_form_name"
+  translation: "الاسم الكامل"
+
+- id: "contact_form_email"
+  translation: "عنوان البريد الإلكتروني"
+
+- id: "contact_form_message"
+  translation: "اكتب رسالتك هنا"
+
+- id: "contact_phone_title"
+  translation: "رقم الهاتف"
+
+- id: "contact_phone_number"
+  translation: "محدد في i18n/ar.yaml (contact_phone_number)"
+
+- id: "contact_email_title"
+  translation: "البريد الإلكتروني"
+
+- id: "contact_email_email"
+  translation: "محدد في i18n/ar.yaml (contact_email_email)"
+
+- id: "contact_address_title"
+  translation: "العنوان"
+
+- id: "contact_address_address"
+  translation: "محدد في i18n/ar.yaml (contact_address_address)"
+
+## Blog
+- id: "read_more"
+  translation: "اقرأ المزيد"
+
+- id: "published_on"
+  translation: "نُشر في "
+
+- id: "continue_reading"
+  translation: "متابعة القراءة"
+
+## Blog Stats (for list-cards layout)
+- id: "blog_stats_posts"
+  translation: "المقالات"
+
+- id: "blog_stats_last_updated"
+  translation: "آخر تحديث"
+
+- id: "blog_stats_first_post"
+  translation: "أول مقال"
+
+- id: "blog_stats_topics"
+  translation: "المواضيع"
+
+- id: "blog_stats_latest_post"
+  translation: "آخر مقال"
+
+## 404 Page
+- id: "404_title"
+  translation: "الصفحة غير موجودة"
+- id: "404_description"
+  translation: "عذرًا، الصفحة التي تبحث عنها غير موجودة."
+- id: "404_button"
+  translation: "العودة إلى الصفحة الرئيسية"
+
+## Related Posts
+- id: "related_posts"
+  translation: "مقالات ذات صلة"
+
+## Social Sharing
+- id: "share_this_post"
+  translation: "شارك هذا المقال"
+- id: "share_on_twitter"
+  translation: "شارك على تويتر"
+- id: "share_on_linkedin"
+  translation: "شارك على لينكد إن"
+- id: "share_on_facebook"
+  translation: "شارك على فيسبوك"
+- id: "share_via_email"
+  translation: "شارك عبر البريد الإلكتروني"
+- id: "share_twitter_label"
+  translation: "تويتر"
+- id: "share_linkedin_label"
+  translation: "لينكد إن"
+- id: "share_facebook_label"
+  translation: "فيسبوك"
+- id: "share_email_label"
+  translation: "البريد الإلكتروني"
+- id: "share_on_bluesky"
+  translation: "شارك على بلوسكاي"
+- id: "share_bluesky_label"
+  translation: "بلوسكاي"
+- id: "share_on_mastodon"
+  translation: "شارك على ماستودون"
+- id: "share_mastodon_label"
+  translation: "ماستودون"
+
+## Table of Contents
+- id: "table_of_contents"
+  translation: "جدول المحتويات"
+
+## Comments
+- id: "comments"
+  translation: "التعليقات"
+
+## Reading time and metadata
+- id: "min_read"
+  translation: "دقيقة قراءة"
+- id: "last_updated"
+  translation: "آخر تحديث"
+
+## Taxonomy
+- id: "categories"
+  translation: "التصنيفات"
+- id: "post_singular"
+  translation: "منشور"
+- id: "post_plural"
+  translation: "منشورات"
+- id: "tags"
+  translation: "الوسوم"
+- id: "authors"
+  translation: "المؤلفون"
+- id: "series"
+  translation: "سلاسل"
+- id: "author_posts"
+  translation: "مقالات هذا المؤلف"
+- id: "series_posts"
+  translation: "مقالات السلسلة"
+- id: "series_part"
+  translation: "جزء"
+- id: "recent_posts"
+  translation: "المقالات الأخيرة"
+- id: "popular_tags"
+  translation: "العلامات الشائعة"
+- id: "view_all_tags"
+  translation: "عرض جميع العلامات"
+## Search
+- id: "search_tags_label"
+  translation: "الوسوم"
+- id: "search_categories_label"
+  translation: "التصنيفات"
+- id: "search_filter_by_tag"
+  translation: "تصفية نتائج البحث حسب الوسم"
+- id: "search_filter_by_category"
+  translation: "تصفية نتائج البحث حسب التصنيف"
+- id: "search_title"
+  translation: "ابحث في الموقع"
+- id: "search_placeholder"
+  translation: "اكتب للبحث..."
+- id: "search_results_heading"
+  translation: "صفحات مطابقة"
+- id: "search_min_chars"
+  translation: "يرجى إدخال حرفين على الأقل للبحث"
+- id: "search_no_matches"
+  translation: "لم يتم العثور على نتائج"
+- id: "search_loading"
+  translation: "جاري التحميل..."
+- id: "search_error_generic"
+  translation: "حدثت مشكلة في البحث. يرجى المحاولة لاحقًا."
+- id: "search_untitled"
+  translation: "بدون عنوان"
+- id: "search_no_preview"
+  translation: "لا توجد معاينة"
+
+- id: "primary_navigation"
+  translation: "التنقل الرئيسي"
+
+- id: "footer_navigation"
+  translation: "تنقل التذييل"
