@@ -2,6 +2,23 @@
 
 This documentation tracks changes across versions, including new features, improvements, and breaking changes.
 
+## v1.11.0
+
+### New features
+
+- Opt-in Plausible Analytics via `[params.analytics.plausible]` (`enabled`, `domain`, optional `script` for self-hosted instances); `domain` falls back to the site's host (#626)
+- Per-page JSON-LD schema override: set a `schema` front matter param to a raw JSON string (YAML `|` block or TOML `"""`). A raw string is required because Hugo lowercases front matter keys, which would break case-sensitive schema.org properties. Invalid JSON fails the build (#627)
+
+### Bug fixes
+
+- Newsletter: keep element ids unique when a page and the footer both render the block (#635)
+- i18n: add missing homepage section keys to the `es` and `fr` locales (#612)
+
+### Maintenance
+
+- Docs: raise the documented minimum Hugo version to 0.158.0 (#634)
+- CI: sync `exampleSite` into adritian-demo on push to `main`, and open ExampleSite update PRs with a PAT so checks run without approval (#633, #614)
+
 ## v1.10.3
 
 ### Bug fixes
