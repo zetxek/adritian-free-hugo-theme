@@ -18,7 +18,7 @@
     "@playwright/test": "^1.63.0",
     "@types/node": "^26.5.0",
     "@zetxek/adritian-theme-helper": "^1.0.5",
-    "autoprefixer": "^10.5.5",
+    "autoprefixer": "^10.6.1",
     "bootstrap": "^5.3.8",
     "bootstrap-print-css": "^1.0.1",
     "js-yaml": "^5.4.1",
