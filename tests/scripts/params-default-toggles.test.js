@@ -165,5 +165,21 @@ assert.ok(
   'Expected the default Plausible script src when no override is configured.',
 );
 
+const plausibleFallback = buildSite('[params.analytics.plausible]\nenabled = true');
+assert.ok(
+  plausibleFallback.home.includes('data-domain="localhost"'),
+  'Expected data-domain to fall back to the baseURL hostname (no scheme, port or slash) when domain is empty.',
+);
+
+const plausibleCustomScript = buildSite(
+  '[params.analytics.plausible]\nenabled = true\ndomain = "example.com"\n' +
+    'script = "https://stats.example.com/js/script.js"',
+);
+assert.ok(
+  plausibleCustomScript.home.includes('stats.example.com/js/script.js') &&
+    !plausibleCustomScript.home.includes('plausible.io/js/script.js'),
+  'Expected the configured script override to replace the default Plausible src.',
+);
+
 console.log('✅ params-default-toggles test passed (viewTransitions and readingProgress both respect unset/true/false)');
 console.log('✅ plausible analytics toggle respects unset/true/false and defaults to disabled');

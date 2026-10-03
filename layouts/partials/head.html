@@ -24,7 +24,7 @@
 {{- if .Site.Params.analytics.plausible.enabled }}
   {{- $plausibleDomain := .Site.Params.analytics.plausible.domain -}}
   {{- if not $plausibleDomain -}}
-    {{- $plausibleDomain = (urls.Parse .Site.BaseURL).Host -}}
+    {{- $plausibleDomain = (urls.Parse .Site.BaseURL).Hostname -}}
   {{- end -}}
   {{- $plausibleScript := .Site.Params.analytics.plausible.script | default "https://plausible.io/js/script.js" -}}
   <script defer data-domain="{{ $plausibleDomain }}" src="{{ $plausibleScript }}"></script>
