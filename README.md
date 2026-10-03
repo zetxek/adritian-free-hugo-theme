@@ -451,6 +451,12 @@ _(optional, if you want to use the contact form)_ edit the key `contact` in your
 
 It can be rendered in any page via the `contact-section` shortcode.
 
+#### Newsletter form
+
+Rendered via the `newsletter-section` shortcode. The theme's own footer includes one copy of this shortcode on every page (see `exampleSite/content/footer/footer.md`), so a page that also adds its own `{{</* newsletter-section */>}}` ends up with two instances in the same document.
+
+To keep every id unique when that happens, the footer's own copy always keeps its original, unsuffixed ids (`rad-subscription`, `rad-subscription-email`, ...), and a content page's own instance is automatically suffixed `-content` (`rad-subscription-content`, ...) whenever the site's footer also renders a newsletter block. If a site only ever renders the newsletter block once — the common case — nothing changes: that single instance keeps the classic unsuffixed ids either way. Pass `id_suffix="something"` on a shortcode call to pick your own suffix, or `id_suffix=""` to force the legacy unsuffixed ids back onto a content-page instance.
+
 #### Blog
 
 Two layouts are available for the blog:

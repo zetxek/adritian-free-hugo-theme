@@ -400,8 +400,14 @@ input[type="email"]::placeholder {
     align-items: center;
 }
 
-.rad-subscription-group #rad-subscription-fail,
-.rad-subscription-group #rad-subscription-success {
+/* Attribute selectors, not #rad-subscription-fail / #rad-subscription-success:
+   a page can render this block twice (its own shortcode plus the footer's),
+   and each instance's ids carry a suffix to stay unique — see
+   layouts/partials/newsletter.html — so the fixed part of the id survives
+   only as an ending, matching the [id$="..."] pattern static/js/subscription.js
+   already relies on for the same reason. */
+.rad-subscription-group [id$="-fail"],
+.rad-subscription-group [id$="-success"] {
     -webkit-box-flex: 1;
     flex: 1;
     display: -webkit-box;
@@ -412,8 +418,8 @@ input[type="email"]::placeholder {
     align-items: center;
 }
 
-.rad-subscription-group #rad-subscription-fail p,
-.rad-subscription-group #rad-subscription-success p {
+.rad-subscription-group [id$="-fail"] p,
+.rad-subscription-group [id$="-success"] p {
     color: #fff;
     margin-bottom: 0;
     width: 100%;
