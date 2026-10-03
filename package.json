@@ -30,7 +30,7 @@
     "sharp": "^0.35.5"
   },
   "dependencies": {
-    "dompurify": "^3.4.14",
+    "dompurify": "^3.4.16",
     "fuse.js": "^7.5.0"
   }
 }
