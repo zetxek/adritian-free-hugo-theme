@@ -7,10 +7,12 @@ permissions:
   checks: write
   statuses: write
   actions: write
+## Pulls adritian-demo's content back into exampleSite (demo -> theme).
+## Manual only: exampleSite is the source of truth, and every push to main
+## syncs it into adritian-demo (see update-demo-main.yml). A scheduled run
+## would revert theme changes whenever the demo lags behind.
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '0 0 * * 0'  # Every Sunday at midnight
 
 jobs:
   update-example-site:
@@ -28,7 +30,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v6
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.PRIVATE_TOKEN_GITHUB }}
 
       - name: Install Node.js dependencies
         run: npm i
@@ -51,13 +53,24 @@ jobs:
 
       - name: Push changes
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PRIVATE_TOKEN_GITHUB }}
         run: |
           git push origin ${{ env.BRANCH_NAME }}
 
-      - name: Create Pull Request
+      - name: Close superseded PRs
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr list --state open --json number,headRefName --limit 100 | \
+          jq -r --arg branch "${{ env.BRANCH_NAME }}" '.[] | select(.headRefName | startswith("update/exampleSite-")) | select(.headRefName != $branch) | .number' | \
+          while read -r pr_number; do
+            gh pr close "$pr_number" --comment 'Superseded by a newer ExampleSite content update.' --delete-branch
+          done
+          exit 0
+
+      - name: Create Pull Request
+        env:
+          GITHUB_TOKEN: ${{ secrets.PRIVATE_TOKEN_GITHUB }}
         run: |
           PR_TITLE="ExampleSite content update (${DATE})"
           PR_BODY="This automated PR updates the example site with the latest content from [adritian-demo](https://github.com/zetxek/adritian-demo).
