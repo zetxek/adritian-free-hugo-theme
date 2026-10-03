@@ -49,13 +49,15 @@ jobs:
           git config --global user.name 'GitHub Actions'
           git config --global user.email 'actions@github.com'
           git add .
-          git commit -m "Update example site content"
+          git commit -m "Update example site content" || echo "No changes to commit"
 
       - name: Push changes
         env:
           GITHUB_TOKEN: ${{ secrets.PRIVATE_TOKEN_GITHUB }}
         run: |
-          git push origin ${{ env.BRANCH_NAME }}
+          # The branch name is date-based and therefore reused when the workflow
+          # is dispatched twice in one day, so a forced update is the intended behaviour.
+          git push --force origin ${{ env.BRANCH_NAME }}
 
       - name: Close superseded PRs
         env:
@@ -80,4 +82,10 @@ jobs:
           <code>
           $(git diff --stat HEAD~1)
           </code>"
-          gh pr create --title "$PR_TITLE" --body "$PR_BODY" --base main --head "${{ env.BRANCH_NAME }}"
+          PR_EXISTS=$(gh pr list --state open --base main --head "${{ env.BRANCH_NAME }}" --json number | jq '.[0].number // empty')
+          if [ -n "$PR_EXISTS" ]; then
+            echo "PR already exists for ${{ env.BRANCH_NAME }}, refreshing it..."
+            gh pr comment "$PR_EXISTS" --body "Branch refreshed by a re-run of the ExampleSite content update workflow."
+          else
+            gh pr create --title "$PR_TITLE" --body "$PR_BODY" --base main --head "${{ env.BRANCH_NAME }}"
+          fi
