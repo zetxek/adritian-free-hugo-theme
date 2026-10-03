@@ -84,6 +84,17 @@ The shortcodes can be customized with different arguments:
     - `newsletter_error_message`: Message displayed to users if subscription fails. Falls back to i18n value "newsletter_error_message".
     - `newsletter_note`: Small text/disclaimer shown below the form (typically mentions privacy policy). Falls back to i18n value "newsletter_note".
   - `sectionId`: Optional. Overrides the default HTML id for the section. If not provided, the default id is used.
+  - `id_suffix`: Optional. Overrides the automatic id suffixing this shortcode uses to avoid duplicate ids when a page renders the newsletter block more than once (e.g. `id_suffix=""` forces the classic unsuffixed ids). See the newsletter section in this README for the full rule.
+
+  **Live demo** (this page also carries the footer's own newsletter block further down, so this is a second instance on the same page — its ids are automatically suffixed `-content` to stay unique, while the footer's instance below keeps its original ids):
+
+  {{< newsletter-section
+      newsletter_title="Try it out"
+      newsletter_placeholder="you@example.com"
+      newsletter_button="Subscribe"
+      form_action="/api/subscribe-shortcodes-demo"
+      form_method="POST"
+  >}}
 
 - `experience-section`:
   - `title`: The title of the experience section.

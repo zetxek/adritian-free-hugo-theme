@@ -1,4 +1,6 @@
 # Adritian Free Hugo Theme
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/zetxek/adritian-demo) [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fzetxek%2Fadritian-demo&project-name=my-adritian-site&repository-name=my-adritian-site&env=HUGO_VERSION&envDescription=Hugo%20version%20to%20build%20with%20%280.158.0%20or%20newer%29&envLink=https%3A%2F%2Fgithub.com%2Fgohugoio%2Fhugo%2Freleases) [![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/zetxek/adritian-demo) [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/zetxek/adritian-demo) [![Use this template for GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Use%20this%20template-2ea44f?logo=github)](https://github.com/zetxek/adritian-demo/generate)
+
 A modern, fast and extensible Hugo theme for personal websites and professional landing pages - with blog and portfolio support
 
 [![Hugo](https://img.shields.io/badge/Hugo-%3E%3D0.158.0-ff4088?logo=hugo)](https://gohugo.io/)
@@ -309,6 +311,31 @@ You can also embed the picker inline on any page or post using the `color-scheme
 > The live switcher requires JavaScript. Theme users who want a static build-time color change
 > with no added JS should use Option 1 or 2 above and leave `colorSchemeSwitcher` disabled (the default).
 
+#### Analytics
+
+The theme supports Vercel (Page Insights, Analytics), Google (Tag Manager, Analytics) and
+Plausible out of the box. All are opt-in and disabled by default. Configure them in your site
+`hugo.toml`:
+
+```toml
+[params.analytics]
+vercelPageInsights = false
+vercelAnalytics = false
+
+[params.analytics.googleAnalytics]
+code = "UA-XXXXX-Y"
+enabled = false
+
+[params.analytics.googleTagManager]
+code = "GTM-XXXXX"
+enabled = false
+
+[params.analytics.plausible]
+enabled = false
+domain = "" # e.g. example.com - defaults to the site's host when empty
+# script = "https://plausible.io/js/script.js" # optional override, e.g. for a self-hosted instance
+```
+
 #### SEO and social metadata
 
 The theme leverages Hugo's embedded templates for Open Graph and Twitter cards, and adds JSON-LD
@@ -480,6 +507,12 @@ Animations are automatically disabled when the user has `prefers-reduced-motion:
 _(optional, if you want to use the contact form)_ edit the key `contact` in your `homepage.yml` file, to customize your mail address. Sign up in [formspree](https://formspree.io) to redirect mails to your own.
 
 It can be rendered in any page via the `contact-section` shortcode.
+
+#### Newsletter form
+
+Rendered via the `newsletter-section` shortcode. The theme's own footer includes one copy of this shortcode on every page (see `exampleSite/content/footer/footer.md`), so a page that also adds its own `{{</* newsletter-section */>}}` ends up with two instances in the same document.
+
+To keep every id unique when that happens, the footer's own copy always keeps its original, unsuffixed ids (`rad-subscription`, `rad-subscription-email`, ...), and a content page's own instance is automatically suffixed `-content` (`rad-subscription-content`, ...) whenever the site's footer also renders a newsletter block. If a site only ever renders the newsletter block once — the common case — nothing changes: that single instance keeps the classic unsuffixed ids either way. Pass `id_suffix="something"` on a shortcode call to pick your own suffix, or `id_suffix=""` to force the legacy unsuffixed ids back onto a content-page instance.
 
 #### Blog
 
