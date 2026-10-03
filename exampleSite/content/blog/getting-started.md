@@ -65,8 +65,9 @@ locale = "en"
 
 [module]
 [module.hugoVersion]
-# We use hugo.Deps to list dependencies, which was added in Hugo 0.92.0
-min = "0.92.0"
+# The theme needs Hugo extended 0.158.0+ (for the locale, direction and label language keys)
+extended = true
+min = "0.158.0"
 
 [[module.imports]]
 path="github.com/zetxek/adritian-free-hugo-theme"

@@ -53,6 +53,11 @@
     // Handle overflow on load (after a short delay to ensure DOM is fully rendered)
     setTimeout(handleOverflow, 50);
 
+    // Re-measure once webfonts have settled, since the first pass may have used fallback font metrics
+    if (document.fonts && document.fonts.ready && typeof document.fonts.ready.then === 'function') {
+      document.fonts.ready.then(function () { handleOverflow(); });
+    }
+
     // Handle overflow on resize (debounced)
     window.addEventListener('resize', function () {
       clearTimeout(resizeTimeout);
