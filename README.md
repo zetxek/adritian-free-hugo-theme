@@ -471,6 +471,32 @@ Parameters:
 
 For best results, place blog images in `assets/` (e.g. `assets/images/blog/`) rather than `static/` so Hugo Pipes can process them.
 
+#### Critical CSS
+
+If `assets/css/critical.css` exists and is non-empty, its content is inlined into `<head>` as:
+
+```html
+<style data-generator="critical-css" data-critical>
+  /* ... */
+</style>
+```
+
+The theme ships a placeholder (an empty comment) at that path, so nothing is emitted until you populate it.
+
+The `data-critical` attribute marks the block so the [`critical`](https://github.com/addyosmani/critical) npm package recognises it as its own prior output and skips it when collecting a page's input CSS. That only works for `critical`'s *static* engine — its *render* engine instead walks the stylesheets of the already-loaded page, so it does **not** skip this block. If you regenerate `critical.css` by pointing `critical --engine render` at a built page that still has this block inlined, it re-collects the same rules every time the file grows. Measured on the reference site (issue #524): 29,769 B → 201,935 B over five runs, with ~3,820 of 4,121 rules duplicated and per-page HTML growing from 60 KB to 235 KB.
+
+To regenerate `critical.css` safely, feed `critical` a copy of the built page with the block stripped out first (`npm i -D critical` in your site root; the render engine also needs a browser — `npx playwright install chromium`):
+
+```sh
+hugo build
+cp public/index.html public/index.critical-source.html
+perl -0pe 's/<style data-generator="?critical-css"?[^>]*>.*?<\/style>//s' -i public/index.critical-source.html
+./node_modules/.bin/critical public/index.critical-source.html --engine render --out assets/css/critical.css
+rm public/index.critical-source.html
+```
+
+Keeping the copy inside `public/` (rather than moving it elsewhere) is what lets its relative stylesheet URLs resolve. Running this twice in a row should produce the same `critical.css` both times — if it doesn't, the block wasn't fully stripped.
+
 #### Shortcodes
 
 The theme has multiple shortcodes available for use in the content, so you can customize your homepage (or any other page) as you want. You can read about them in the [shortcodes page](https://adritian-demo.vercel.app/blog/shortcodes). Since version `v1.7.0,` this is the preferred way to set up your theme content and translations, as that's the most flexible system.
