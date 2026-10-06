@@ -7,7 +7,7 @@ enableRobotsTXT = true
 
   [module.hugoVersion]
     extended = true
-    min = "0.158.0"
+    min = "0.163.0"
 
 # Related content configuration
 [related]
@@ -35,8 +35,13 @@ enableRobotsTXT = true
 
 [imaging]
   resampleFilter = "Lanczos"
-  quality = 85
   anchor = "Smart"
+  [imaging.jpeg]
+    quality = 85
+  [imaging.webp]
+    quality = 85
+  [imaging.avif]
+    quality = 85
 
 [minify]
   disableCSS = false

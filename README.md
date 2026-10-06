@@ -1,9 +1,9 @@
 # Adritian Free Hugo Theme
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/zetxek/adritian-demo) [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fzetxek%2Fadritian-demo&project-name=my-adritian-site&repository-name=my-adritian-site&env=HUGO_VERSION&envDescription=Hugo%20version%20to%20build%20with%20%280.158.0%20or%20newer%29&envLink=https%3A%2F%2Fgithub.com%2Fgohugoio%2Fhugo%2Freleases) [![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/zetxek/adritian-demo) [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/zetxek/adritian-demo) [![Use this template for GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Use%20this%20template-2ea44f?logo=github)](https://github.com/zetxek/adritian-demo/generate)
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/zetxek/adritian-demo) [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fzetxek%2Fadritian-demo&project-name=my-adritian-site&repository-name=my-adritian-site&env=HUGO_VERSION&envDescription=Hugo%20version%20to%20build%20with%20%280.163.0%20or%20newer%29&envLink=https%3A%2F%2Fgithub.com%2Fgohugoio%2Fhugo%2Freleases) [![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/zetxek/adritian-demo) [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/zetxek/adritian-demo) [![Use this template for GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Use%20this%20template-2ea44f?logo=github)](https://github.com/zetxek/adritian-demo/generate)
 
 A modern, fast and extensible Hugo theme for personal websites and professional landing pages - with blog and portfolio support
 
-[![Hugo](https://img.shields.io/badge/Hugo-%3E%3D0.158.0-ff4088?logo=hugo)](https://gohugo.io/)
+[![Hugo](https://img.shields.io/badge/Hugo-%3E%3D0.163.0-ff4088?logo=hugo)](https://gohugo.io/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/zetxek/adritian-free-hugo-theme/blob/main/LICENSE)
 [![GitHub stars](https://img.shields.io/github/stars/zetxek/adritian-free-hugo-theme)](https://github.com/zetxek/adritian-free-hugo-theme/stargazers)
 [![GitHub last commit](https://img.shields.io/github/last-commit/zetxek/adritian-free-hugo-theme)](https://github.com/zetxek/adritian-free-hugo-theme/commits/main)
@@ -91,7 +91,7 @@ Another alternative is to use [git submodules](https://gohugo.io/getting-started
 > **Note:** Before proceeding, **Ensure you have Go and Hugo installed** and that you have created a new Hugo project.
 As a pre-requirement, you will need Hugo set up and running. You can follow [the official guide for it](https://gohugo.io/categories/installation/).
 
-The theme requires Hugo version `0.158.0` or newer (extended version). If you get errors regarding missing functionalities, check if you have the latest version of Hugo available.
+The theme requires Hugo version `0.163.0` or newer (extended version). If you get errors regarding missing functionalities, check if you have the latest version of Hugo available.
 
 > **Note:** the multilingual config in `exampleSite/hugo.toml` (`direction`, `label`, `locale` per language) uses key names Hugo introduced in `v0.158.0`. On older Hugo versions these keys are silently ignored rather than raising an error, which shows up as missing language labels and incorrect `dir`/RTL rendering — so if you copy that config, make sure you're on `0.158.0`+.
 

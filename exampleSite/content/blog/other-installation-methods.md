@@ -22,9 +22,9 @@ locale = "en"
 
 [module]
 [module.hugoVersion]
-# The theme needs Hugo extended 0.158.0+ (for the locale, direction and label language keys)
+# The theme needs Hugo extended 0.163.0+ (for per-format image quality and the locale, direction and label language keys)
 extended = true
-min = "0.158.0"
+min = "0.163.0"
 
 [[module.imports]]
 path="github.com/zetxek/adritian-free-hugo-theme"
