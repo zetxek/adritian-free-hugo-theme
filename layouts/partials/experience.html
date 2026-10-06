@@ -1,6 +1,16 @@
 {{ $contextType := printf "%T" . }}
 {{ $isShortcode := (eq $contextType "*hugolib.ShortcodeWithPage") }}
 
+{{/* On the /experience/ list page this partial is the page's main content, so the section title
+   is the page-level h1. On the homepage and when embedded through the experience-section
+   shortcode it stays a section h2. */}}
+{{ $isPageContent := false }}
+{{ if not $isShortcode }}
+  {{ if not .IsHome }}
+    {{ $isPageContent = true }}
+  {{ end }}
+{{ end }}
+
 {{/*
   sectionId: Optional argument to override the default HTML id for this section. If not provided, the default id is used.
   hideViewAll: Optional argument to hide the "View All" button. Set to "true" to hide the button. */}}
@@ -19,13 +29,13 @@
 <section {{if $sectionId}} id="{{ $sectionId }}"{{end}} class="section-experience section section--border-bottom rad-animation-group flex-grow-1">
   <div class="row flex-column-reverse flex-md-row rad-fade-down">
     <div class="experience-list col-12 col-md-6">
-      <h2>
-        {{ if $isShortcode }}
-          {{ .Get "title" | default "" }}
-        {{ else }}
-          {{ i18n "experience_title" }}
-        {{ end }}
-      </h2>
+      {{ $listTitle := "" }}
+      {{ if $isShortcode }}
+        {{ $listTitle = .Get "title" | default "" }}
+      {{ else }}
+        {{ $listTitle = i18n "experience_title" }}
+      {{ end }}
+      {{ with $listTitle }}{{ if $isPageContent }}<h1>{{ . }}</h1>{{ else }}<h2>{{ . }}</h2>{{ end }}{{ end }}
 
       {{ $xp := where .Site.RegularPages.ByDate "Type" "experience" }}
       {{ if not $isShortcode }}
@@ -67,7 +77,7 @@
               </div>
             </div>
             <div class="experience__description d-none d-print-block">
-              <h1>{{ .Params.title }}</h1>
+              {{ if $isPageContent }}<h2>{{ .Params.title }}</h2>{{ else }}<h3>{{ .Params.title }}</h3>{{ end }}
               {{ .Content | safeHTML | transform.Plainify }}
             </div>
           </div>
