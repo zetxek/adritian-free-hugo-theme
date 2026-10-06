@@ -110,10 +110,12 @@
 {{- end }}
 
 {{- if gt (len $cssResources) 0 }}
-  {{- $cssBundle := $cssResources | resources.Concat "css/bundle.css" }}
-  {{- $css := $cssBundle }}
+  {{/* templates.Defer runs this block after the whole site is rendered, so
+       a PostCSS/PurgeCSS step in a site's pipeline sees complete hugo_stats.json. */}}
+  {{- with (templates.Defer (dict "key" "adritian-css-bundle" "data" $cssResources)) }}
+  {{- $css := . | resources.Concat "css/bundle.css" }}
   {{- if hugo.IsProduction }}
-    {{- $css = $css | minify | fingerprint | resources.PostProcess }}
+    {{- $css = $css | minify | fingerprint }}
   {{- end }}
   <link
     rel="preload"
@@ -131,6 +133,7 @@
         integrity="{{ $css.Data.Integrity }}" crossorigin="anonymous"
       {{ end }} />
   </noscript>
+  {{- end }}
 {{- end }}
 {{- range .Site.Params.plugins.scss }}
   {{- $scss := resources.Get .URL }}
