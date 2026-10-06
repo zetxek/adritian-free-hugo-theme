@@ -2,6 +2,17 @@
 
 This documentation tracks changes across versions, including new features, improvements, and breaking changes.
 
+## v1.12.0
+
+### Breaking changes
+
+- Minimum Hugo version is now 0.163.0 (was 0.158.0). Older versions ignore the per-format image quality keys below, which would silently lower image quality to the default 75 (#649)
+
+### Bug fixes
+
+- Replace `imaging.quality`, deprecated in Hugo 0.163, with `imaging.jpeg.quality`, `imaging.webp.quality` and `imaging.avif.quality` (all 85, as before) (#648, #649)
+- Social sharing: no longer runs `isset` on a nil map when a site has no `[params.sharing]`, which logged `calling IsSet with unsupported type "invalid"` warnings on every build. Behaviour is unchanged (#648, #649)
+
 ## v1.11.0
 
 ### New features
