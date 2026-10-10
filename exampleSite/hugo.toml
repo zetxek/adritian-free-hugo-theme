@@ -613,8 +613,13 @@ mode = "dropdown" # "dropdown" moves items to More dropdown, "footer" moves to f
 
 [imaging]
   resampleFilter = "Lanczos"
-  quality = 85
   anchor = "Smart"
+  [imaging.jpeg]
+    quality = 85
+  [imaging.webp]
+    quality = 85
+  [imaging.avif]
+    quality = 85
 
 [minify]
   disableCSS = false
