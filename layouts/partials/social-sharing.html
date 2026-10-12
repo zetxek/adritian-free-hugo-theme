@@ -1,12 +1,13 @@
 {{ $shareUrl := .Permalink }}
 {{ $shareTitle := .Title }}
 {{ $shareDescription := .Description | default .Summary }}
+{{ $sharing := .Site.Params.sharing | default dict }}
 
-{{ if or .Site.Params.sharing.enabled (not (isset .Site.Params.sharing "enabled")) }}
+{{ if or $sharing.enabled (not (isset $sharing "enabled")) }}
 <aside class="social-sharing light-border-top" aria-labelledby="social-sharing-title">
   <h3 id="social-sharing-title">{{ i18n "share_this_post" | default "Share this post" }}</h3>
   <div class="share-buttons">
-    {{ if or .Site.Params.sharing.twitter (not (isset .Site.Params.sharing "twitter")) }}
+    {{ if or $sharing.twitter (not (isset $sharing "twitter")) }}
     <a href="https://twitter.com/intent/tweet?url={{ $shareUrl | urlquery }}&text={{ $shareTitle | urlquery }}" 
        target="_blank" 
        rel="noopener noreferrer"
@@ -19,7 +20,7 @@
     </a>
     {{ end }}
     
-    {{ if or .Site.Params.sharing.linkedin (not (isset .Site.Params.sharing "linkedin")) }}
+    {{ if or $sharing.linkedin (not (isset $sharing "linkedin")) }}
     <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ $shareUrl | urlquery }}" 
        target="_blank" 
        rel="noopener noreferrer"
@@ -32,7 +33,7 @@
     </a>
     {{ end }}
     
-    {{ if or .Site.Params.sharing.facebook (not (isset .Site.Params.sharing "facebook")) }}
+    {{ if or $sharing.facebook (not (isset $sharing "facebook")) }}
     <a href="https://www.facebook.com/sharer/sharer.php?u={{ $shareUrl }}" 
        target="_blank" 
        rel="noopener noreferrer"
@@ -45,7 +46,7 @@
     </a>
     {{ end }}
     
-    {{ if .Site.Params.sharing.bluesky }}
+    {{ if $sharing.bluesky }}
     <a href="https://bsky.app/intent/compose?text={{ $shareTitle | urlquery }}%20{{ $shareUrl | urlquery }}"
        target="_blank"
        rel="noopener noreferrer"
@@ -58,7 +59,7 @@
     </a>
     {{ end }}
 
-    {{ if .Site.Params.sharing.mastodon }}
+    {{ if $sharing.mastodon }}
     <a href="https://mastodonshare.com/?text={{ $shareTitle | urlquery }}%20{{ $shareUrl | urlquery }}"
        target="_blank"
        rel="noopener noreferrer"
@@ -71,7 +72,7 @@
     </a>
     {{ end }}
 
-    {{ if or .Site.Params.sharing.email (not (isset .Site.Params.sharing "email")) }}
+    {{ if or $sharing.email (not (isset $sharing "email")) }}
     <a href="mailto:?subject={{ $shareTitle }}&body={{ $shareDescription }}%0A%0A{{ $shareUrl }}"
        aria-label="{{ i18n "share_via_email" | default "Share via Email" }}"
        class="share-button share-email">
