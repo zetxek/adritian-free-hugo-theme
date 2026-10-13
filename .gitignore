@@ -28,7 +28,6 @@ resources/_gen/
 public_test/
 .playwright-mcp/
 .claude/
-navbar-*.png
 
 # Color scheme capture raw outputs (composites are committed)
 exampleSite/static/img/blog/raw/
