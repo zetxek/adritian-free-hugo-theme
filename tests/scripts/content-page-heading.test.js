@@ -5,8 +5,9 @@
  * Regression test: exampleSite content must not declare its own page-level
  * `<h1>` in the body.
  *
- * `layouts/_default/single.html` already renders the page title as the page's
- * single `<h1>` (`<h1 id=blog-post-title>`). A markdown ATX h1 — or a setext
+ * The single-page layouts already render the page title as the page's single
+ * `<h1>`: `layouts/blog/single.html` as `<h1 id=blog-post-title>` and
+ * `layouts/_default/single.html` as `<h1 id=title>`. A markdown ATX h1 — or a setext
  * `===` h1 — in the body therefore renders a *second*, visually identical
  * heading directly below the title: an invalid heading structure for
  * assistive tech and a duplicated top-level heading for search engines.
@@ -72,16 +73,23 @@ function findBodyH1s(file) {
     const lineNumber = index + offset + 1;
     const trimmed = rawLine.trim();
 
-    // Fenced code blocks: opening and closing markers use the same character.
-    const fenceMatch = /^(`{3,}|~{3,})/.exec(trimmed);
+    // Fenced code blocks: a fence is indented at most 3 spaces (4+ is indented
+    // code). It closes on the same character, at least as long as the opener,
+    // with nothing but whitespace after it.
+    const fenceMatch = /^ {0,3}(`{3,}|~{3,})(.*)$/.exec(rawLine);
     if (fence) {
-      if (fenceMatch && fenceMatch[1][0] === fence) {
+      if (
+        fenceMatch &&
+        fenceMatch[1][0] === fence.char &&
+        fenceMatch[1].length >= fence.length &&
+        fenceMatch[2].trim() === ''
+      ) {
         fence = null;
       }
       return;
     }
     if (fenceMatch) {
-      fence = fenceMatch[1][0];
+      fence = { char: fenceMatch[1][0], length: fenceMatch[1].length };
       return;
     }
 
@@ -90,7 +98,8 @@ function findBodyH1s(file) {
       return;
     }
 
-    if (/^#(?!#)\s+\S/.test(trimmed)) {
+    // `#` alone is an empty h1; `##` and `#tag` (no space) are not h1s.
+    if (/^#(?:\s|$)/.test(trimmed)) {
       offenders.push({ lineNumber, text: trimmed });
       return;
     }
@@ -98,7 +107,12 @@ function findBodyH1s(file) {
     // Setext h1: a non-empty text line underlined with `=`.
     if (/^=+\s*$/.test(trimmed)) {
       const previous = lines[index - 1];
-      if (previous && previous.trim() !== '' && !/^=+\s*$/.test(previous.trim())) {
+      if (
+        previous &&
+        previous.trim() !== '' &&
+        !/^(?: {4,}|\t)/.test(previous) &&
+        !/^=+\s*$/.test(previous.trim())
+      ) {
         offenders.push({ lineNumber, text: `${previous.trim()}  (setext underline at line ${lineNumber})` });
       }
     }
@@ -124,8 +138,9 @@ assert.strictEqual(
   0,
   [
     'exampleSite content defines its own page-level <h1>, which duplicates the',
-    'page title rendered by layouts/_default/single.html. Demote these headings',
-    'to `##` or remove them if they repeat the title:',
+    'page title rendered by layouts/blog/single.html (blog posts) or',
+    'layouts/_default/single.html (other pages). Demote these headings to `##`',
+    'or remove them if they repeat the title:',
     ...failures.map(
       ({ file, offenders }) =>
         `\n  ${file}\n${offenders.map(({ lineNumber, text }) => `    line ${lineNumber}: ${text}`).join('\n')}`,
