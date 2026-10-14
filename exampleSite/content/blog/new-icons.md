@@ -8,8 +8,6 @@ weight = 100
   featured_image= '/img/blog/new-icon-3.png'
 +++
 
-# How to Add Custom Icons to the Adritian Theme
-
 {{< toc >}}
 
 This guide will walk you through adding custom icons to your Adritian Hugo theme. Whether you need new social media icons, brand logos, or custom symbols, follow these steps to integrate them seamlessly.
