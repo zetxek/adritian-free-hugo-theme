@@ -93,10 +93,23 @@
   {{- end }}
 {{- end }}
 <meta name="generator-mode" content="{{ hugo.Environment }}" />
-{{- $critical := resources.Get "css/critical.css" | resources.Minify }}
-<style data-generator="critical-css">
-{{- $critical.Content | safeCSS }}
+{{/* The data-critical attribute is how the `critical` npm package recognises this
+     block as its own prior output and skips it when collecting a page's input CSS —
+     but only its *static* engine honours that marker. Its *render* engine walks the
+     stylesheets of the loaded page instead, so it does NOT skip this block: a site
+     that regenerates assets/css/critical.css by pointing `critical` at a built page
+     that still has this block inlined will re-collect these same rules on every run.
+     See the README "Critical CSS" section for the regeneration recipe (strip this
+     block from a copy of the built page before feeding it to `critical`). */}}
+{{- $critical := resources.Get "css/critical.css" }}
+{{- if $critical }}
+  {{- $critical = $critical | resources.Minify }}
+  {{- with $critical.Content }}
+<style data-generator="critical-css" data-critical>
+{{ . | safeCSS }}
 </style>
+  {{- end }}
+{{- end }}
 
 {{- $cssResources := slice }}
 {{- range .Site.Params.plugins.css }}
