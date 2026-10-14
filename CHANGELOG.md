@@ -2,6 +2,20 @@
 
 This documentation tracks changes across versions, including new features, improvements, and breaking changes.
 
+## v1.12.1
+
+### Bug fixes
+
+- Replace `resources.PostProcess`, deprecated in Hugo 0.164, with `templates.Defer` when building the CSS bundle. The warning is gone and the bundle is byte-identical; PostCSS/PurgeCSS still sees a complete `hugo_stats.json` (#653, #654)
+- Critical CSS: the `<style data-generator="critical-css">` block is only emitted when there is CSS to inline, instead of an empty element in every page head. The block is now marked `data-critical`, and the README documents how to regenerate critical CSS without re-collecting the inlined block (#647)
+- exampleSite: re-encode `internet-affairs.png` as a real PNG. It held JPEG bytes, which Hugo 0.168 rejects during resize (#660)
+- exampleSite: replace the deprecated `imaging.quality` with per-format keys (#658)
+- exampleSite: remove the duplicated page-level `<h1>` from the icons guide (#659)
+
+### Maintenance
+
+- Tests: commit the navbar RTL snapshot so fresh checkouts have a baseline (#650), and add a guard against duplicated page-level headings in exampleSite content (#659)
+
 ## v1.12.0
 
 ### Breaking changes
