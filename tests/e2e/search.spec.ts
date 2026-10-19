@@ -23,7 +23,10 @@ test.describe('Search functionality', () => {
   test('search page loads correctly', async ({ page }) => {
     const response = await page.goto(`${BASE_URL}/search`);
     await expect(page).toHaveTitle(/Search/);
-    await expect(page.locator('h2.mb-4.text-center')).toHaveText('Search the Site');
+    const heading = page.locator('h1');
+    await expect(heading).toHaveCount(1);
+    await expect(heading).toHaveText('Search the Site');
+    await expect(page.locator('#main-content h1')).toHaveText('Search the Site');
     await expect(page.locator('#search-query')).toBeVisible();
     
     // Check that the search page returns HTTP status 200
