@@ -51,6 +51,13 @@ html[dir="rtl"] body {
   }
 
   // Skip to content link
+  // Hide it off the right edge: in RTL, overflow on the left is scrollable,
+  // so the base `left: -9999px` would make the page ~10000px wide.
+  .skip-to-content-link {
+    left: auto;
+    right: -9999px;
+  }
+
   .skip-to-content-link:focus {
     // Use logical properties so centering works consistently in RTL
     left: auto;
