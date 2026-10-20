@@ -58,12 +58,13 @@
       <div class="experience">
         <a href="{{ .Permalink | relURL }}" class="experience__link">
           <div class="experience__header">
+            {{ $company := .Params.company }}
             {{ $img := resources.Get .Params.companyLogo }}
             {{ with $img }}
               {{ $imgWebp := $img.Resize (printf "%dx%d webp q75 Lanczos picture" $img.Width $img.Height) }}
               <img 
                 src="{{ $imgWebp.RelPermalink }}" 
-                alt="{{ .Params.company }} logo"
+                alt="{{ $company }} logo"
                 class="experience__company-logo"
                 loading="lazy"
               />
