@@ -26,10 +26,11 @@
             {{ range $index, $element := first $xpCount (sort $xp "Date" "desc") }}
             <div class="experience row">
                 <div class="experience__header col-12 col-md-3 d-flex align-items-start">
+                    {{ $company := .Params.company }}
                     {{ $img := resources.Get .Params.companyLogo }}
                     {{ with $img }}
                     {{ $imgWebp := $img.Resize (printf "%dx%d webp q75 Lanczos picture" $img.Width $img.Height) }}
-                    <img src="{{ $imgWebp.RelPermalink }}" alt="{{ .Params.company }} logo"
+                    <img src="{{ $imgWebp.RelPermalink }}" alt="{{ $company }} logo"
                         class="experience__company-logo" loading="lazy">
                     {{ end }}
                     <div class="experience__meta">
