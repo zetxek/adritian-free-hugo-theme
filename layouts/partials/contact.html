@@ -86,6 +86,21 @@
 {{ end }}
 
 {{/*----------------------------------------------
+ accessible names for the form controls
+------------------------------------------------*/}}
+{{/* The controls below carry no <label> (the form is placeholder-only by
+ design), so their accessible name comes from aria-label. The placeholder
+ chain above cannot be the only source: a site that passes no shortcode
+ parameter resolves it to "", which leaves the control with no name at
+ all. These four fall back to the translated keys that exist in every
+ locale file (unlike the contact_*_placeholder keys, which no locale
+ defines), mirroring how newsletter.html labels its email input. */}}
+{{ $name_label := $name_placeholder | default (i18n "contact_form_name") }}
+{{ $email_label := $email_placeholder | default (i18n "contact_form_email") }}
+{{ $phone_label := $phone_placeholder | default (i18n "contact_phone_title") }}
+{{ $message_label := $message_placeholder | default (i18n "contact_form_message") }}
+
+{{/*----------------------------------------------
     TEXTAREA ROWS
 ------------------------------------------------*/}}
 {{ $message_rows := 2 }}
@@ -148,20 +163,20 @@
                     <form action="{{ $form_action }}" method="{{ $form_method }}" class="contact__form">
                         <div class="row">
                             <div class="col-12 col-sm-6">
-                                <input type="text" name="full_name" class="form-control" {{ $name_placeholder_attr | safeHTMLAttr }}>
+                                <input type="text" name="full_name" class="form-control" aria-label="{{ $name_label }}" {{ $name_placeholder_attr | safeHTMLAttr }}>
                             </div>
                             <div class="col-12 col-sm-6">
-                                <input type="email" name="email" class="form-control" {{ $email_placeholder_attr | safeHTMLAttr }}>
+                                <input type="email" name="email" class="form-control" aria-label="{{ $email_label }}" {{ $email_placeholder_attr | safeHTMLAttr }}>
                             </div>
                         </div>
                         <div class="row pt-4">
                             <div class="col-12">
-                                <input type="tel" name="phone" class="form-control" {{ $phone_placeholder_attr | safeHTMLAttr }}>
+                                <input type="tel" name="phone" class="form-control" aria-label="{{ $phone_label }}" {{ $phone_placeholder_attr | safeHTMLAttr }}>
                             </div>
                         </div>
                         <div class="row pt-4">
                             <div class="col-12">
-                                <textarea name="message" class="form-control" rows="{{ $message_rows }}" {{ $message_placeholder_attr | safeHTMLAttr }}></textarea>
+                                <textarea name="message" class="form-control" rows="{{ $message_rows }}" aria-label="{{ $message_label }}" {{ $message_placeholder_attr | safeHTMLAttr }}></textarea>
                             </div>
                         </div>
                         <div class="row pt-4">
