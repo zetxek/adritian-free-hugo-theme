@@ -9,12 +9,6 @@ $link-hover-color: darken($base-color, 15%);
 $link-decoration: none;
 $sidebar-link-color: #000; // increased contrast
 
-// Inline code: Bootstrap's default pink (#d63384) is 4.27:1 on the light code
-// background, below WCAG AA (4.5:1). Use Bootstrap's pink-600 (6.1:1) instead,
-// and keep the dark-mode color it would otherwise derive from the default.
-$code-color: #ab296a;
-$code-color-dark: #e685b5;
-
 // Create CSS custom properties for Bootstrap
 :root {
   --bs-link-color: #{$base-color};
