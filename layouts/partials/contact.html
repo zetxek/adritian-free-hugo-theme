@@ -161,17 +161,19 @@
             <div class="row pt-2">
                 <div class="col-12 col-lg-7">
                     <form action="{{ $form_action }}" method="{{ $form_method }}" class="contact__form">
+                        {{/* autocomplete: WCAG 2.1 1.3.5 Identify Input Purpose (AA). The message
+                           textarea has no autocomplete token - free-form text has none. */}}
                         <div class="row">
                             <div class="col-12 col-sm-6">
-                                <input type="text" name="full_name" class="form-control" aria-label="{{ $name_label }}" {{ $name_placeholder_attr | safeHTMLAttr }}>
+                                <input type="text" name="full_name" class="form-control" autocomplete="name" aria-label="{{ $name_label }}" {{ $name_placeholder_attr | safeHTMLAttr }}>
                             </div>
                             <div class="col-12 col-sm-6">
-                                <input type="email" name="email" class="form-control" aria-label="{{ $email_label }}" {{ $email_placeholder_attr | safeHTMLAttr }}>
+                                <input type="email" name="email" class="form-control" autocomplete="email" aria-label="{{ $email_label }}" {{ $email_placeholder_attr | safeHTMLAttr }}>
                             </div>
                         </div>
                         <div class="row pt-4">
                             <div class="col-12">
-                                <input type="tel" name="phone" class="form-control" aria-label="{{ $phone_label }}" {{ $phone_placeholder_attr | safeHTMLAttr }}>
+                                <input type="tel" name="phone" class="form-control" autocomplete="tel" aria-label="{{ $phone_label }}" {{ $phone_placeholder_attr | safeHTMLAttr }}>
                             </div>
                         </div>
                         <div class="row pt-4">
