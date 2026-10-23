@@ -2,7 +2,8 @@
 'use strict';
 
 /**
- * Regression test for layouts/partials/contact.html's accessible names.
+ * Regression test for layouts/partials/contact.html's accessible names and
+ * autocomplete attributes.
  *
  * On a default site (no shortcode parameters, no locale overrides), the
  * four contact-form controls (full_name, email, phone, message) rendered
@@ -13,6 +14,10 @@
  * contact_phone_title / contact_form_message keys (which DO exist in every
  * locale) when no placeholder value is available — mirroring how
  * newsletter.html labels its email input.
+ *
+ * It also covers WCAG 2.1 1.3.5 Identify Input Purpose (AA): full_name,
+ * email and phone must carry a hardcoded autocomplete="name"/"email"/"tel",
+ * while the free-form message textarea must carry none at all.
  *
  * Builds two standalone temp sites (own hugo.toml, classic --themesDir theme
  * import) and lets the theme's REAL templates render — no custom layout
@@ -34,6 +39,7 @@ const themeName = path.basename(themeDir);
 
 // Tolerant of Hugo's --minify stripping attribute-value quotes.
 const ARIA_LABEL_RE = /aria-label=["']?([^"'>]*)["']?/;
+const AUTOCOMPLETE_RE = /autocomplete=["']?([^"'>]*)["']?/;
 const CONTROL_RE = /<(?:input[^>]*name=["']?(?:full_name|email|phone)["']?[^>]*|textarea[^>]*name=["']?message["']?[^>]*)>/g;
 
 function extractAriaLabels(html) {
@@ -43,6 +49,26 @@ function extractAriaLabels(html) {
     assert.ok(m, `Contact form control has no aria-label attribute at all: ${tag}`);
     return { tag, ariaLabel: m[1] };
   });
+}
+
+// Expects labels in full_name, email, phone, message order (as produced by
+// extractAriaLabels). Returns the three input autocomplete values, and
+// separately asserts the message textarea carries none at all.
+function extractAutocomplete(labels) {
+  const [nameTag, emailTag, phoneTag, messageTag] = labels.map((l) => l.tag);
+
+  const autocompleteValues = [nameTag, emailTag, phoneTag].map((tag) => {
+    const m = AUTOCOMPLETE_RE.exec(tag);
+    assert.ok(m, `Contact form input has no autocomplete attribute at all: ${tag}`);
+    return m[1];
+  });
+
+  assert.ok(
+    !messageTag.includes('autocomplete='),
+    `Expected message textarea to carry NO autocomplete attribute, got: ${messageTag}`,
+  );
+
+  return autocompleteValues;
 }
 
 function buildSite(siteLabel, shortcodeLine) {
@@ -115,6 +141,16 @@ assert.deepStrictEqual(
     `got ${JSON.stringify(defaultActual)}.`,
 );
 
+const defaultAutocompleteExpected = ['name', 'email', 'tel'];
+const defaultAutocompleteActual = extractAutocomplete(defaultLabels);
+
+assert.deepStrictEqual(
+  defaultAutocompleteActual,
+  defaultAutocompleteExpected,
+  `Expected default-site autocomplete ${JSON.stringify(defaultAutocompleteExpected)} (full_name, email, phone order), ` +
+    `got ${JSON.stringify(defaultAutocompleteActual)}.`,
+);
+
 // --- Site B: explicit shortcode parameters -> placeholder chain wins ---
 
 const customShortcode =
@@ -140,4 +176,17 @@ assert.deepStrictEqual(
     `got ${JSON.stringify(customActual)}.`,
 );
 
-console.log('✅ contact-form-labels test passed (4 controls carry a non-empty aria-label, defaults and overrides both correct)');
+const customAutocompleteExpected = ['name', 'email', 'tel'];
+const customAutocompleteActual = extractAutocomplete(customLabels);
+
+assert.deepStrictEqual(
+  customAutocompleteActual,
+  customAutocompleteExpected,
+  `Expected custom-parameter autocomplete ${JSON.stringify(customAutocompleteExpected)} (full_name, email, phone order), ` +
+    `got ${JSON.stringify(customAutocompleteActual)}.`,
+);
+
+console.log(
+  '✅ contact-form-labels test passed (4 controls carry a non-empty aria-label, full_name/email/phone carry the correct ' +
+    'hardcoded autocomplete value, the message textarea carries none, defaults and overrides both correct)',
+);
