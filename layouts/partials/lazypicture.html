@@ -5,6 +5,8 @@
 {{/*.alt alternate text*/}}
 {{/*.class is added to the image*/}}
 {{/*.pictureclass is added to the picture*/}}
+{{/*.sizes is the rendered width hint (HTML sizes attribute); with it the browser picks the smallest file that fits*/}}
+{{/*.eager loads the image right away (no lazy loading); use it for above-the-fold images*/}}
 
 {{ $img := resources.Get .src }}
 {{ if $img }}
@@ -50,13 +52,28 @@
             {{ $imgOri2 := $img.Resize (printf "%s q75 Lanczos picture" $target2) }}
             {{ $imgWebp2 := $img.Resize (printf "%s webp q75 Lanczos picture" $target2) }}
 
+            {{- if .sizes }}
+            <source srcset="{{ $imgWebp.RelPermalink }} {{ $imgWebp.Width }}w, {{ $imgWebp2.RelPermalink }} {{ $imgWebp2.Width }}w" sizes="{{ .sizes }}" type="image/webp" />
+            <source srcset="{{ $imgOri.RelPermalink }} {{ $imgOri.Width }}w, {{ $imgOri2.RelPermalink }} {{ $imgOri2.Width }}w" sizes="{{ .sizes }}" type="{{ $imgOri.MediaType.Type }}">
+            {{- else }}
             <source srcset="{{ $imgWebp.RelPermalink }} 1x, {{ $imgWebp2.RelPermalink }} 2x" type="image/webp" />
             <source srcset="{{ $imgOri.RelPermalink }} 1x, {{ $imgOri2.RelPermalink }} 2x" type="{{ $imgOri.MediaType.Type }}">
+            {{- end }}
         {{- else }}
             <source srcset="{{ $imgWebp.RelPermalink }} 1x" type="image/webp" />
             <source srcset="{{ $imgOri.RelPermalink }} 1x" type="{{ $imgOri.MediaType.Type }}">
         {{- end }}
 
+        {{- if .eager }}
+        <img
+                width="{{ $imgOri.Width }}"
+                height="{{ $imgOri.Height }}"
+                class="img-responsive {{ .class }}"
+                src="{{ $imgOri.RelPermalink }}"
+                alt='{{ .alt }}'
+                fetchpriority="high"
+        />
+        {{- else }}
         <img
                 width="{{ $imgOri.Width }}"
                 height="{{ $imgOri.Height }}"
@@ -67,6 +84,7 @@
                 loading="lazy"
                 decoding="async"
         />
+        {{- end }}
     </picture>
 {{ else }}
     {{ warnf "lazypicture.html: Image src was not found: %q" .src }}
