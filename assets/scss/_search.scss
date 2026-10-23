@@ -1,6 +1,18 @@
 // Search page styles
 .search-section {
   padding: 4rem 0;
+
+  // The search page's page-level heading is an <h1> so the page has a
+  // top-level heading for assistive tech and crawlers. The theme's heading
+  // sizes are element-based, so this keeps the size the heading had while
+  // it was an <h2> — the change is visual-output neutral.
+  h1 {
+    font-size: 32px;
+
+    @media (min-width: 992px) {
+      font-size: 36px;
+    }
+  }
 }
 
 #search-results {
@@ -56,7 +68,7 @@
     background-color: #181818 !important;
     color: #f8f9fa;
 
-    h2, h3 {
+    h1, h2, h3 {
       color: #f8f9fa;
     }
   }
