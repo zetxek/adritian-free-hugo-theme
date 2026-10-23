@@ -152,7 +152,7 @@
           <div id="rad-subscription{{ $idSuffix }}-fail" class="d-none" role="alert" aria-live="assertive">
             <p>{{ $errorMessage }}</p>
           </div>
-          <script src='{{ "js/subscription.js" | absURL }}'></script>
+          <script defer src='{{ "js/subscription.js" | absURL }}'></script>
         </div>
         <small id="emailHelp{{ $idSuffix }}" class="form-text text-muted">{{ $note }}</small>
       </div>
