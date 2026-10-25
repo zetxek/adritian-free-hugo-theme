@@ -39,10 +39,6 @@ const ALIAS_RE = /<meta[^>]*http-equiv=["']?refresh["']?/i;
 // Opening <h1>..<h6> through its matching close tag. Headings never nest, so
 // a lazy match to the same-level close tag is safe.
 const HEADING_RE = /<h([1-6])\b[^>]*>([\s\S]*?)<\/h\1\s*>/gi;
-// Template blocks (e.g. the search-result <script type=text/x-js-template>)
-// are inert until cloned; strip all script bodies so only rendered markup counts.
-const SCRIPT_RE = /<script\b[^>]*>[\s\S]*?<\/script\s*>/gi;
-const COMMENT_RE = /<!--[\s\S]*?-->/g;
 
 /** Recursively collect every .html file under `dir`. */
 function collectHtmlFiles(dir) {
@@ -55,19 +51,61 @@ function collectHtmlFiles(dir) {
   });
 }
 
+// Some markup is inert until a browser clones or runs it: HTML comments and
+// <script> bodies (the search page carries its result card in a
+// <script type="text/x-js-template">). Those regions are skipped by index range
+// instead of being edited out of the string, so only rendered markup is counted.
+function inertRanges(html) {
+  const lower = html.toLowerCase();
+  const ranges = [];
+  const addRange = (start, terminator, terminatorLength) => {
+    const found = lower.indexOf(terminator, start + 1);
+    const stop = found === -1 ? lower.length : found + terminatorLength;
+    ranges.push([start, stop]);
+    return stop;
+  };
+  let cursor = lower.indexOf('<!--');
+  while (cursor !== -1) {
+    cursor = addRange(cursor, '-->', 3);
+    cursor = lower.indexOf('<!--', cursor);
+  }
+  cursor = lower.indexOf('<script');
+  while (cursor !== -1) {
+    cursor = addRange(cursor, '</script', 9);
+    cursor = lower.indexOf('<script', cursor);
+  }
+  return ranges;
+}
+
+function isInert(ranges, position) {
+  return ranges.some(([start, stop]) => position >= start && position < stop);
+}
+
+/** The visible text of a heading: its inner HTML with the tags taken out. */
 function headingText(inner) {
-  return inner
-    .replace(/<[^>]*>/g, '')
-    .replace(/\s+/g, ' ')
-    .trim();
+  let text = '';
+  let depth = 0;
+  for (const char of inner) {
+    if (char === '<') {
+      depth += 1;
+    } else if (char === '>') {
+      depth = Math.max(0, depth - 1);
+    } else if (depth === 0) {
+      text += char;
+    }
+  }
+  return text.replace(/\s+/g, ' ').trim();
 }
 
 /** Every heading jump of more than one level on one page. */
 function findSkips(html) {
-  const body = html.replace(COMMENT_RE, '').replace(SCRIPT_RE, '');
+  const inert = inertRanges(html);
   const skips = [];
   let previous = null;
-  for (const m of body.matchAll(HEADING_RE)) {
+  for (const m of html.matchAll(HEADING_RE)) {
+    if (isInert(inert, m.index)) {
+      continue;
+    }
     const level = Number(m[1]);
     const text = headingText(m[2]);
     if (previous && level > previous.level + 1) {
