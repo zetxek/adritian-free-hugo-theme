@@ -16,7 +16,7 @@ This article is a guide to help you create your own version of the site using [A
 
 {{< responsive-image src="images/experience/internet-affairs.png" alt="Adritian theme demo" sizes="(max-width: 768px) 100vw, 600px" >}}
 
-### Creating a site
+## Creating a site
 
 This theme is for the content management system [Hugo](https://gohugo.io/), so that will be a pre-requirement.
 Make sure that you install the `extended` version of Hugo, as the theme uses SCSS for styling, as well as image optimization.

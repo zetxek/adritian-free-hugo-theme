@@ -18,7 +18,7 @@
               {{ $paginator := .Paginate (.Pages.ByDate.Reverse) }}
               {{ range $paginator.Pages }}
                 <article class="post mb-4">
-                  <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
+                  <h2 class="post-list-title"><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
                   {{ if .Summary }}
                     <div>{{ .Summary | safeHTML }}</div>
                   {{ end }}

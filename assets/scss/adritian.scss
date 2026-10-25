@@ -179,10 +179,42 @@ h4 {
 }
 
 @media (min-width: 992px) {
-  h3,
-  h4 {
-    font-size: 32px;
-  }
+ h3,
+ h4 {
+   font-size: 32px;
+ }
+}
+
+// Heading hierarchy: section headings that follow the page's <h1> are <h2> so the document
+// outline never skips a level (Lighthouse's heading-order audit, and screen-reader users).
+// The theme sizes headings by element, so each of these keeps the h3/h4 rendering it had
+// before: 20px / weight 600 / 8px margin, 32px / 10px from the 992px breakpoint up.
+// (The blog sidebar and social-sharing headings keep their own component rules, which now
+// match `h2, h3`; the list/term cards keep their rendering through the `.h5` size class.)
+.four-o-four #error-title,
+.posts-list .post-list-title {
+ font-size: 20px;
+ font-weight: 600;
+ margin-bottom: 8px;
+}
+
+@media (min-width: 992px) {
+ .four-o-four #error-title,
+ .posts-list .post-list-title {
+   font-size: 32px;
+   margin-bottom: 10px;
+ }
+}
+
+// The search-results card heading keeps its .card-title margin (0.5rem at every width);
+// only the element-driven size and weight need restoring.
+#search-results h2.card-title {
+ font-size: 20px;
+ font-weight: 600;
+
+ @media (min-width: 992px) {
+   font-size: 32px;
+ }
 }
 
 p {
@@ -632,6 +664,7 @@ footer_links .nav-item .nav-link::after {
       -webkit-backdrop-filter: blur(10px);
       backdrop-filter: blur(10px);
 
+      h2,
       h3 {
         color: #fff;
         text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
