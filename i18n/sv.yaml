@@ -125,3 +125,11 @@
 "search_no_preview": "Ingen förhandsvisning tillgänglig"
 "primary_navigation": "Primär navigering"
 "footer_navigation": "Sidfotsnavigering"
+
+## Projects
+"projects_visit": "Besök webbplats"
+"projects_source": "Källkod"
+"projects_related": "Relaterade länkar"
+"projects_kind_open_source": "Öppen källkod"
+"projects_kind_professional": "Professionella"
+"projects_kind_side_project": "Sidoprojekt"

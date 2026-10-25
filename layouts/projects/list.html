@@ -1,0 +1,47 @@
+{{/* Projects section page (/projects/).
+     Groups projects by the optional `kind` front matter value (for example
+     "open-source", "professional", "side-project"). Projects without `kind`
+     are listed in one group with no heading. Order inside a group follows
+     Hugo's default: weight, then date. */}}
+{{ define "main" }}
+<div class="list flex-grow-1">
+  <section id="main-content" tabindex="-1" class="section list-projects">
+    <div class="container">
+      <h1 class="mb-4">{{ .Title }}</h1>
+      {{ with .Content }}<div class="lead mb-5">{{ . }}</div>{{ end }}
+
+      {{ $kinds := slice }}
+      {{ range .Pages }}{{ $kinds = $kinds | append (.Params.kind | default "") }}{{ end }}
+      {{ $kinds = $kinds | uniq }}
+
+      {{ range $kind := $kinds }}
+        {{ $pages := slice }}
+        {{ range $.Pages }}{{ if eq (.Params.kind | default "") $kind }}{{ $pages = $pages | append . }}{{ end }}{{ end }}
+        <div class="projects-group mb-5">
+          {{ with $kind }}
+            <h2 class="h3 mb-4">{{ i18n (printf "projects_kind_%s" (replace . "-" "_")) | default (humanize .) }}</h2>
+          {{ end }}
+          <div class="row g-4">
+            {{ range $pages }}
+              <div class="col-12 col-md-6 col-lg-4 rad-animation-group rad-fade-down">
+                <article class="card h-100 project-card">
+                  {{ with .Params.image.src }}
+                    {{ partial "lazypicture" (dict "src" . "width" 600 "class" "card-img-top img-fluid" "alt" "") }}
+                  {{ end }}
+                  <div class="card-body">
+                    <h3 class="card-title h5">
+                      <a href="{{ .RelPermalink }}" class="stretched-link">{{ .Title }}</a>
+                    </h3>
+                    {{ with .Params.role }}<p class="project-meta small mb-2">{{ . }}</p>{{ end }}
+                    <p class="card-text mb-0">{{ .Summary | plainify | truncate 160 }}</p>
+                  </div>
+                </article>
+              </div>
+            {{ end }}
+          </div>
+        </div>
+      {{ end }}
+    </div>
+  </section>
+</div>
+{{ end }}

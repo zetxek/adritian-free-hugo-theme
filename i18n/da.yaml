@@ -125,3 +125,11 @@
 "search_no_preview": "Ingen forhåndsvisning tilgængelig"
 "primary_navigation": "Primær navigation"
 "footer_navigation": "Fodnavigation"
+
+## Projects
+"projects_visit": "Besøg hjemmeside"
+"projects_source": "Kildekode"
+"projects_related": "Relaterede links"
+"projects_kind_open_source": "Open source"
+"projects_kind_professional": "Professionelle"
+"projects_kind_side_project": "Sideprojekter"
