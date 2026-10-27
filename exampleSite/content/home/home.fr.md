@@ -62,7 +62,7 @@ draft = false
     button1_icon="icon-globe"
     button2_text="Autre Bouton (2)"
     button3_text="Tout voir"
-    button3_url="/es/experience"
+    button3_url="/experience"
     sectionId="experience-professionnelle"
 >}}
 

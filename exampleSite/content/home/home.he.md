@@ -63,7 +63,7 @@ draft = false
     button1_icon="icon-globe"
     button2_text="כפתור נוסף (2)"
     button3_text="הצג הכל"
-    button3_url="/he/experience"
+    hideViewAll="true"
     sectionId="ניסיון"
 >}}
 
