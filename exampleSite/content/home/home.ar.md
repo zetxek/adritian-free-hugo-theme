@@ -63,7 +63,7 @@ draft = false
     button1_icon="icon-globe"
     button2_text="زر آخر (2)"
     button3_text="عرض الكل"
-    button3_url="/ar/experience"
+    hideViewAll="true"
     sectionId="الخبرة"
 >}}
 
