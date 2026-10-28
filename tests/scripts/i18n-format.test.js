@@ -12,6 +12,13 @@
  * theme's i18n for its 5 active locales. Building a fresh standalone site
  * is the only way to verify the theme's own i18n/*.yaml files directly.
  *
+ * It also runs a static census: every `i18n "key"` / `T "key"` literal
+ * referenced from layouts/** must be defined in at least one i18n/*.yaml
+ * locale, except for an explicit allowlist of intentional site-override
+ * hooks. A lookup that names a key no locale defines renders as an empty
+ * string — e.g. contact.html once rendered an empty submit button and three
+ * empty <h3> headings because its fallbacks named drifted keys.
+ *
  * No browser required — suitable for CI/CD pre-e2e checks.
  */
 
@@ -73,7 +80,73 @@ try {
     `Expected flat-format translation for "toggle_navigation" not found.\nOutput:\n${output}`,
   );
 
-  console.log('✅ i18n-format test passed (theme i18n/*.yaml resolves correctly in a standalone site)');
+  // --- Static census: every key referenced from layouts/ is defined somewhere ---
+
+  // Keys deliberately left undefined in the theme: a site may define them in
+  // its own i18n/ to opt in, and the templates fall back gracefully if not.
+  const ALLOWED_UNDEFINED_KEYS = new Set([
+    'contact_name_placeholder', // sites may define it to customise the contact-form name placeholder
+    'contact_email_placeholder', // sites may define it to customise the contact-form email placeholder
+    'contact_phone_placeholder', // sites may define it to customise the contact-form phone placeholder
+    'contact_message_placeholder', // sites may define it to customise the contact-form message placeholder
+    'theme_auto_short', // hook inside an aria-hidden="true" d-none icon span of the theme switcher
+    'theme_dark_short', // hook inside an aria-hidden="true" d-none icon span of the theme switcher
+    'theme_light_short', // hook inside an aria-hidden="true" d-none icon span of the theme switcher
+    'experience_description', // intro-description override a site can translate
+  ]);
+
+  function walk(dir) {
+    return fs.readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
+      const full = path.join(dir, entry.name);
+      return entry.isDirectory() ? walk(full) : [full];
+    });
+  }
+
+  const referencedKeys = new Set();
+  for (const file of walk(path.join(themeDir, 'layouts'))) {
+    const source = fs.readFileSync(file, 'utf8');
+    for (const m of source.matchAll(/\b(?:i18n|T)\s+"([^"]+)"/g)) {
+      referencedKeys.add(m[1]);
+    }
+  }
+
+  const i18nDir = path.join(themeDir, 'i18n');
+  const localeFiles = fs.readdirSync(i18nDir).filter((f) => f.endsWith('.yaml'));
+  const definedKeys = new Set();
+  for (const file of localeFiles) {
+    const source = fs.readFileSync(path.join(i18nDir, file), 'utf8');
+    for (const m of source.matchAll(/^\s*"([^"]+)"\s*:/gm)) {
+      definedKeys.add(m[1]);
+    }
+  }
+
+  assert.ok(
+    referencedKeys.size > 90,
+    `Expected the layouts/ census to find more than 90 referenced i18n keys, found ${referencedKeys.size}. ` +
+      'A broken walk or regex could silently turn this guard into a no-op.',
+  );
+  assert.strictEqual(
+    localeFiles.length,
+    14,
+    `Expected 14 i18n/*.yaml locale files, found ${localeFiles.length}: ${JSON.stringify(localeFiles)}.`,
+  );
+
+  const undefinedKeys = [...referencedKeys]
+    .filter((key) => !definedKeys.has(key) && !ALLOWED_UNDEFINED_KEYS.has(key))
+    .sort();
+
+  assert.deepStrictEqual(
+    undefinedKeys,
+    [],
+    `layouts/ references i18n keys that no i18n/*.yaml locale defines: ${undefinedKeys.join(', ')}. ` +
+      'They render as an empty string. Fix the key name, add it to the locales, or (if it is an ' +
+      'intentional site-override hook) add it to ALLOWED_UNDEFINED_KEYS with a reason.',
+  );
+
+  console.log(
+    `✅ i18n-format test passed (theme i18n/*.yaml resolves correctly in a standalone site; all ${referencedKeys.size} ` +
+      `keys referenced from layouts/ are defined in one of ${localeFiles.length} locales or allowlisted)`,
+  );
 } finally {
   fs.rmSync(tmpSite, { recursive: true, force: true });
 }
