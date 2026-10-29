@@ -23,6 +23,10 @@
  * No browser required — suitable for CI/CD pre-e2e checks. The build output
  * and resource cache go to temp dirs; hugo_stats.json writing is disabled so
  * nothing is written into exampleSite/.
+ *
+ * It also checks, on the same walk, that every taxonomy list page (`/tags/`,
+ * `/es/categories/`, ...) shows its own locale's name for the taxonomy in its
+ * `<h1>` — see the block above TAXONOMY_LABEL_KEYS.
  */
 
 const assert = require('assert');
@@ -116,6 +120,45 @@ function findSkips(html) {
   return skips;
 }
 
+// --- Taxonomy list pages name themselves from the locale ---------------------
+//
+// `layouts/_default/terms.html` renders the `<h1>` of a taxonomy list page
+// (`/tags/`, `/es/categories/`, ...). It used to keep Hugo's synthesized
+// `.Title` for `tags` and `categories` while overriding it with `i18n` for
+// `authors` and `series` only, so a Spanish `/es/tags/` shipped an English
+// "Tags" `<h1>` next to the breadcrumb's localized "Etiquetas" — the breadcrumb
+// resolves its label with `i18n $plural` (layouts/partials/breadcrumb-label.html),
+// which is the idiom the template now mirrors.
+//
+// Every bundled locale defines all four keys, so each taxonomy list page's
+// `<h1>` must equal its own language's value; a taxonomy with no key (`topics`,
+// a site's custom taxonomy) still falls back to `.Title` and is not checked.
+const TAXONOMY_LABEL_KEYS = ['tags', 'categories', 'authors', 'series'];
+const TAXONOMY_PAGE_RE = /class=["']section list-taxonomy["']/;
+const HTML_LANG_RE = /<html[^>]*\blang=["']?([A-Za-z-]+)/;
+
+/** The value a locale file gives a key, read straight out of i18n/<lang>.yaml. */
+function readI18nValue(lang, key) {
+  const file = path.join(themeDir, 'i18n', `${lang}.yaml`);
+  if (!fs.existsSync(file)) {
+    return null;
+  }
+  const source = fs.readFileSync(file, 'utf8');
+  const match = source.match(new RegExp(`^"${key}":\\s*"([^"]*)"`, 'm'));
+  return match ? match[1] : null;
+}
+
+/** The visible text of a page's first heading, whatever its level. */
+function firstHeadingText(html) {
+  const inert = inertRanges(html);
+  for (const m of html.matchAll(HEADING_RE)) {
+    if (!isInert(inert, m.index)) {
+      return headingText(m[2]);
+    }
+  }
+  return null;
+}
+
 const destDir = fs.mkdtempSync(path.join(os.tmpdir(), 'heading-order-out-'));
 const resourceDir = fs.mkdtempSync(path.join(os.tmpdir(), 'heading-order-resources-'));
 
@@ -137,17 +180,40 @@ try {
 
   let scanned = 0;
   const failures = [];
+  const taxonomyFailures = [];
+  let taxonomyChecked = 0;
 
   for (const file of collectHtmlFiles(destDir)) {
-    const html = fs.readFileSync(file, 'utf8');
-    if (ALIAS_RE.test(html)) {
-      continue;
-    }
-    scanned += 1;
-    const page = '/' + path.relative(destDir, file).split(path.sep).join('/');
-    for (const { from, to } of findSkips(html)) {
-      failures.push(`  ${page}: h${from.level} "${from.text}" -> h${to.level} "${to.text}"`);
-    }
+  const html = fs.readFileSync(file, 'utf8');
+  if (ALIAS_RE.test(html)) {
+  continue;
+  }
+  scanned += 1;
+  const page = '/' + path.relative(destDir, file).split(path.sep).join('/');
+  for (const { from, to } of findSkips(html)) {
+  failures.push(` ${page}: h${from.level} "${from.text}" -> h${to.level} "${to.text}"`);
+  }
+
+  // Taxonomy list pages must show the locale's own name for the taxonomy.
+  if (TAXONOMY_PAGE_RE.test(html)) {
+  const langMatch = html.match(HTML_LANG_RE);
+  const lang = langMatch ? langMatch[1] : null;
+  const taxKey = TAXONOMY_LABEL_KEYS.find((key) =>
+  page.split('/').includes(key),
+  );
+  if (lang && taxKey) {
+  const expected = readI18nValue(lang, taxKey);
+  const actual = firstHeadingText(html);
+  if (expected) {
+  taxonomyChecked += 1;
+  if (actual !== expected) {
+  taxonomyFailures.push(
+  ` ${page}: expected h1 "${expected}" (i18n "${taxKey}" of i18n/${lang}.yaml), got "${actual}"`,
+  );
+  }
+  }
+  }
+  }
   }
 
   assert.ok(
@@ -164,7 +230,23 @@ try {
       `than the one before it):\n${failures.join('\n')}`,
   );
 
-  console.log(`✅ heading-order test passed (${scanned} pages scanned, no heading level skipped)`);
+  assert.ok(
+ taxonomyChecked >= 8,
+ `Expected to check at least 8 taxonomy list pages, checked ${taxonomyChecked}. ` +
+ 'A broken page/taxonomy matcher could silently turn this check into a no-op.',
+ );
+
+ assert.strictEqual(
+ taxonomyFailures.length,
+ 0,
+ `${taxonomyFailures.length} taxonomy list page(s) do not show their own ` +
+ `locale's name for the taxonomy:\n${taxonomyFailures.join('\n')}`,
+ );
+
+ console.log(
+ `✅ heading-order test passed (${scanned} pages scanned, no heading level skipped, ` +
+ `${taxonomyChecked} taxonomy list pages localized)`,
+ );
 } finally {
   fs.rmSync(destDir, { recursive: true, force: true });
   fs.rmSync(resourceDir, { recursive: true, force: true });

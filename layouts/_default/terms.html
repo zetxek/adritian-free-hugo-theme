@@ -5,12 +5,11 @@
       <div class="row">
         <div class="col-12">
           {{ $taxonomy := .Data.Plural }}
-          {{ $title := .Title }}
-          {{ if eq $taxonomy "authors" }}
-            {{ $title = (i18n "authors" | default $title) }}
-          {{ else if eq $taxonomy "series" }}
-            {{ $title = (i18n "series" | default $title) }}
-          {{ end }}
+          {{/* Name the page after the taxonomy in the current language, the same way
+               layouts/partials/breadcrumb-label.html does for the breadcrumb on this
+               very page (`i18n $plural`, falling back to the page title when the site
+               does not translate that taxonomy). */}}
+          {{ $title := i18n $taxonomy | default .Title }}
           <h1 class="mb-4">{{ $title }}</h1>
 
           <div class="taxonomy-page">
