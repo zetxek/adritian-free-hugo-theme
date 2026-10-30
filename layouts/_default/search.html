@@ -19,14 +19,21 @@
     </noscript>
     
     <div class="mb-5">
-      <form action="{{ "search" | relLangURL }}" data-index-url="{{ "index.json" | relLangURL }}">
-        <div class="input-group">
-          <input id="search-query" name="s" class="form-control form-control-lg" type="search" placeholder="{{ i18n "search_placeholder" }}" autocomplete="off" aria-label="Search" />
-          <button type="submit" class="input-group-text">
-            <i class="icon-circle-arrow-right"></i>
-          </button>
-        </div>
-      </form>
+    {{/* Accessible name for both of the form's controls. The submit button is
+         icon-only, so without an explicit label it is exposed to assistive
+         technology with no name at all. Kept in one place because the theme
+         defines no locale key that reads as a search control label (the
+         `search_*` keys are headings, status messages and the placeholder),
+         and the surrounding strings stay localized either way. */}}
+    {{ $searchLabel := "Search" }}
+    <form action="{{ "search" | relLangURL }}" data-index-url="{{ "index.json" | relLangURL }}">
+    <div class="input-group">
+    <input id="search-query" name="s" class="form-control form-control-lg" type="search" placeholder="{{ i18n "search_placeholder" }}" autocomplete="off" aria-label="{{ $searchLabel }}" />
+    <button type="submit" class="input-group-text" aria-label="{{ $searchLabel }}">
+    <i class="icon-circle-arrow-right"></i>
+    </button>
+    </div>
+    </form>
     </div>
     
     <div id="search-results" class="card border-0" data-index-url="{{ "index.json" | relLangURL }}">

@@ -30,9 +30,31 @@ test.describe('Search functionality', () => {
     await expect(page.locator('#search-query')).toBeVisible();
     
     // Check that the search page returns HTTP status 200
-  });
+    });
 
-  test('searching for "theme" shows results', async ({ page }) => {
+    test('search form controls have accessible names', async ({ page }) => {
+    await page.goto(`${BASE_URL}/search`);
+
+    // The search form is the page's whole purpose; it holds exactly two
+    // interactive controls (the query input and the icon-only submit button).
+    const form = page.locator('#main-content form');
+    await expect(form).toHaveCount(1);
+
+    const controls = form.locator('input, button');
+    await expect(controls).toHaveCount(2);
+
+    // Both controls must have an accessible name. The submit button only
+    // contains an icon, so an explicit label is what names it.
+    for (const control of await controls.all()) {
+    await expect(control).toHaveAccessibleName(/search/i);
+    }
+
+    // The button has to be reachable by its name, i.e. it is exposed to
+    // assistive technology as "Search" and nothing else claims that name.
+    await expect(page.getByRole('button', { name: 'Search', exact: true })).toHaveCount(1);
+    });
+
+    test('searching for "theme" shows results', async ({ page }) => {
     await page.goto(`${BASE_URL}/search`);
 
     // Wait for the page to be fully loaded
