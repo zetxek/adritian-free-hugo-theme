@@ -1330,10 +1330,14 @@ a.nav-link::after {
 }
 
 .footer__copy {
-    color: rgba(255, 255, 255, 0.6);
-    white-space: nowrap;
-    font-size: 12px;
-    font-weight: 300;
+ color: rgba(255, 255, 255, 0.6);
+ // Wraps instead of being clipped: `nowrap` pushed a long notice past the
+ // viewport on phones (html/body set overflow hidden, so the tail was
+ // unreachable) — WCAG 1.4.10 Reflow. Normal-length notices still fit on one
+ // line at desktop widths.
+ white-space: normal;
+ font-size: 12px;
+ font-weight: 300;
 }
 
 .footer .navbar-nav {
