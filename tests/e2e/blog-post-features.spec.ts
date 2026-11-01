@@ -68,7 +68,7 @@ test.describe('New Blog Features', () => {
       await expect(sharingSection).toBeVisible();
       
       // Check heading
-      await expect(sharingSection.locator('h3')).toContainText('Share this post');
+      await expect(sharingSection.locator('h2')).toContainText('Share this post');
     });
 
     test('should display sharing buttons for Twitter, LinkedIn, Facebook, Bluesky, Mastodon, and Email', async ({ page }) => {
@@ -144,7 +144,7 @@ test.describe('New Blog Features', () => {
       await expect(tocSection).toBeVisible();
       
       // Check heading
-      await expect(tocSection.locator('h3')).toContainText('Table of Contents');
+      await expect(tocSection.locator('h2')).toContainText('Table of Contents');
     });
 
     test('should contain navigation links with anchor href attributes pointing to page sections', async ({ page }) => {
@@ -345,13 +345,32 @@ test.describe('New Blog Features', () => {
   });
 
   test.describe('Accessibility', () => {
-    test('should use proper h3 heading hierarchy for related posts, social sharing, and table of contents sections', async ({ page }) => {
-      await page.goto(`${BASE_URL}/blog/new-features-demo/`);
-      
-      // Check that section headings are h3
-      await expect(page.locator('.related-posts h3')).toBeVisible();
-      await expect(page.locator('.social-sharing h3')).toBeVisible();
-      await expect(page.locator('.table-of-contents h3')).toBeVisible();
+    test('should keep a sequential heading outline (no heading level is skipped)', async ({ page }) => {
+    await page.goto(`${BASE_URL}/blog/new-features-demo/`);
+
+    // The two sections that follow the post's <h1> are level 2, so the outline
+    // reads h1 -> h2 instead of jumping to h3.
+    await expect(page.locator('.social-sharing h2')).toBeVisible();
+    await expect(page.locator('.table-of-contents h2')).toBeVisible();
+    // Related posts keeps its own level: it is nested inside the post body.
+    await expect(page.locator('.related-posts h3')).toBeVisible();
+
+    // Every heading on the rendered page, then assert no jump deeper than one level.
+    const levels = await page.evaluate(() =>
+    Array.from(document.querySelectorAll('h1,h2,h3,h4,h5,h6')).map((h) => ({
+    level: Number(h.tagName[1]),
+    text: (h.textContent || '').trim().slice(0, 40),
+    })),
+    );
+    expect(levels.length).toBeGreaterThan(3);
+    for (let i = 1; i < levels.length; i++) {
+    const previous = levels[i - 1];
+    const current = levels[i];
+    expect(
+    current.level,
+    `heading "${current.text}" (h${current.level}) follows "${previous.text}" (h${previous.level}) and skips a level`,
+    ).toBeLessThanOrEqual(previous.level + 1);
+    }
     });
 
     test('should allow keyboard navigation and focus on social sharing buttons', async ({ page }) => {
