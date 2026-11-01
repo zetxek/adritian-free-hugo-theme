@@ -125,3 +125,11 @@
 "search_no_preview": "لا توجد معاينة"
 "primary_navigation": "التنقل الرئيسي"
 "footer_navigation": "تنقل التذييل"
+
+## Projects
+"projects_visit": "زيارة الموقع"
+"projects_source": "الشيفرة المصدرية"
+"projects_related": "روابط ذات صلة"
+"projects_kind_open_source": "مفتوح المصدر"
+"projects_kind_professional": "مهنية"
+"projects_kind_side_project": "مشاريع جانبية"

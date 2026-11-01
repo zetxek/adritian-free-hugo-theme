@@ -125,3 +125,11 @@
 "search_no_preview": "Geen voorbeeld beschikbaar"
 "primary_navigation": "Primaire navigatie"
 "footer_navigation": "Voetnavigatie"
+
+## Projects
+"projects_visit": "Bezoek website"
+"projects_source": "Broncode"
+"projects_related": "Gerelateerde links"
+"projects_kind_open_source": "Open source"
+"projects_kind_professional": "Professioneel"
+"projects_kind_side_project": "Zijprojecten"
