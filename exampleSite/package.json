@@ -8,7 +8,7 @@
       "autoprefixer": "project",
       "bootstrap": "project",
       "bootstrap-print-css": "github.com/zetxek/adritian-free-hugo-theme",
-      "npm-run-all": "project",
+      "npm-run-all2": "project",
       "postcss": "project",
       "postcss-cli": "project"
     }
@@ -21,7 +21,7 @@
     "autoprefixer": "^10.4.17",
     "bootstrap": "^5.3.3",
     "bootstrap-print-css": "^1.0.0",
-    "npm-run-all": "^4.1.5",
+    "npm-run-all2": "^8.0.4",
     "postcss": "^8.5.26",
     "postcss-cli": "^11.0.0"
   },
