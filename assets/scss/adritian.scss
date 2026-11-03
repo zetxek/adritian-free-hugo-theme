@@ -208,7 +208,7 @@ h4 {
 
 // The search-results card heading keeps its .card-title margin (0.5rem at every width);
 // only the element-driven size and weight need restoring.
-#search-results h2.card-title {
+.search-results-wrapper h2.card-title {
  font-size: 20px;
  font-weight: 600;
 
