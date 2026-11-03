@@ -56,7 +56,9 @@ function collectHtmlFiles(dir) {
 // <script type="text/x-js-template">). Those regions are skipped by index range
 // instead of being edited out of the string, so only rendered markup is counted.
 function inertRanges(html) {
-  const lower = html.toLowerCase();
+  // ASCII-only, so the copy keeps the same length and offsets as `html`
+  // (full Unicode lowercasing can expand characters such as "İ").
+  const lower = html.replace(/[A-Z]+/g, (letters) => letters.toLowerCase());
   const ranges = [];
   const addRange = (start, terminator, terminatorLength) => {
     const found = lower.indexOf(terminator, start + 1);
