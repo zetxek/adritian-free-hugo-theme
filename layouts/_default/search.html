@@ -29,9 +29,12 @@
       </form>
     </div>
     
-    <div id="search-results" class="card border-0" data-index-url="{{ "index.json" | relLangURL }}">
+    <!-- search.js replaces the contents of #search-results, so the heading lives outside it -->
+    <div class="search-results-wrapper card border-0">
       <div class="card-body">
-        <h3 class="card-title">{{ i18n "search_results_heading" }}</h3>
+        <h2 class="card-title">{{ i18n "search_results_heading" }}</h2>
+      </div>
+      <div id="search-results" data-index-url="{{ "index.json" | relLangURL }}">
         <!-- Results will appear here -->
       </div>
     </div>
@@ -40,7 +43,7 @@
 <!-- this template is sucked in by search.js and appended to the search-results div above. So editing here will adjust style -->
 <script id="search-result-template" type="text/x-js-template">
   <div id="summary-${key}" class="mb-4 p-3 border-bottom" data-tags="${tags}" data-categories="${categories}">
-    <h4 class="mb-1"><a href="${link}" class="text-decoration-none">${title}</a></h4>
+    <h3 class="mb-1"><a href="${link}" class="text-decoration-none">${title}</a></h3>
     <p class="mb-2 text-muted small">${snippet}</p>
   </div>
 </script>
