@@ -1,7 +1,7 @@
 <aside class="blog-sidebar">
   {{ if .Site.Params.blog.showCategories }}
   <div class="sidebar-section categories">
-    <h3>{{ i18n "categories" | default "Categories" }}</h3>
+    <h2>{{ i18n "categories" | default "Categories" }}</h2>
     {{ if .Site.Taxonomies.tags }}
     <ul class="tags">
       {{ range $name, $taxonomy := .Site.Taxonomies.tags }}
@@ -16,7 +16,7 @@
 
   {{ if .Site.Params.blog.showRecentPosts }}
   <div class="sidebar-section recent-posts">
-    <h3>{{ i18n "recent_posts" | default "Recent Posts" }}</h3>
+    <h2>{{ i18n "recent_posts" | default "Recent Posts" }}</h2>
     <ul>
       {{ range first .Site.Params.blog.recentPostCount (where .Site.RegularPages "Type" "blog") }}
       <li>
