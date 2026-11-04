@@ -136,11 +136,12 @@
                 padding: 1.5rem;
             }
 
+            h2,
             h3 {
-                margin-bottom: 1rem;
-                font-size: 1.2rem;
-                font-weight: 600;
-                color: var(--bs-gray-900);
+              margin-bottom: 1rem;
+              font-size: 1.2rem;
+              font-weight: 600;
+              color: var(--bs-gray-900);
             }
 
             ul {
@@ -371,12 +372,13 @@
         }
 
         .blog-sidebar {
-            .sidebar-section {
-                background: var(--bs-gray-800);
+          .sidebar-section {
+            background: var(--bs-gray-800);
 
-                h3 {
-                    color: var(--bs-white);
-                }
+            h2,
+            h3 {
+              color: var(--bs-white);
+            }
 
                 /* Remove the general black color for all links */
                 /* ul li a {

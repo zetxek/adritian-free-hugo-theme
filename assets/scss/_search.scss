@@ -15,13 +15,15 @@
   }
 }
 
-#search-results {
+.search-results-wrapper {
   margin-top: 2rem;
-  
+
   .card-body {
     padding: 1.5rem;
   }
+}
 
+#search-results {
   // Style for the "Please enter a word or phrase above" message
   .alert {
     margin: 1.5rem;
@@ -94,14 +96,16 @@
     border-color: $base-color;
   }
 
-  #search-results {
+  .search-results-wrapper {
     background-color: #222222;
-    
+
     .card-body {
       background-color: #222222;
       border-color: #333333;
     }
-    
+  }
+
+  #search-results {
     .alert {
       background-color: transparent;
       border-color: transparent;
