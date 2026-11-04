@@ -18,9 +18,13 @@
         {{ $pages := slice }}
         {{ range $.Pages }}{{ if eq (.Params.kind | default "") $kind }}{{ $pages = $pages | append . }}{{ end }}{{ end }}
         <div class="projects-group mb-5">
-          {{ with $kind }}
-            <h2 class="h3 mb-4">{{ i18n (printf "projects_kind_%s" (replace . "-" "_")) | default (humanize .) }}</h2>
-          {{ end }}
+        {{/* A card title sits one level below the heading above it: h3 under a
+        group's h2, and h2 when the group has no heading of its own (otherwise the
+        page skips from its h1 straight to an h3). The tags stay static — Go's
+        html/template escapes a tag name built from a variable. */}}
+        {{ with $kind }}
+        <h2 class="h3 mb-4">{{ i18n (printf "projects_kind_%s" (replace . "-" "_")) | default (humanize .) }}</h2>
+        {{ end }}
           <div class="row g-4">
             {{ range $pages }}
               <div class="col-12 col-md-6 col-lg-4 rad-animation-group rad-fade-down">
@@ -29,9 +33,9 @@
                     {{ partial "lazypicture" (dict "src" . "width" 600 "class" "card-img-top img-fluid" "alt" "") }}
                   {{ end }}
                   <div class="card-body">
-                    <h3 class="card-title h5">
-                      <a href="{{ .RelPermalink }}" class="stretched-link">{{ .Title }}</a>
-                    </h3>
+                  {{ if $kind }}<h3 class="card-title h5">{{ else }}<h2 class="card-title h5">{{ end }}
+                  <a href="{{ .RelPermalink }}" class="stretched-link">{{ .Title }}</a>
+                  {{ if $kind }}</h3>{{ else }}</h2>{{ end }}
                     {{ with .Params.role }}<p class="project-meta small mb-2">{{ . }}</p>{{ end }}
                     <p class="card-text mb-0">{{ .Summary | plainify | truncate 160 }}</p>
                   </div>
