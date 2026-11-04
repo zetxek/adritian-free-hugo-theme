@@ -29,9 +29,12 @@
       </form>
     </div>
     
-    <div id="search-results" class="card border-0" data-index-url="{{ "index.json" | relLangURL }}">
+    <!-- search.js replaces the contents of #search-results, so the heading lives outside it -->
+    <div class="search-results-wrapper card border-0">
       <div class="card-body">
         <h2 class="card-title">{{ i18n "search_results_heading" }}</h2>
+      </div>
+      <div id="search-results" data-index-url="{{ "index.json" | relLangURL }}">
         <!-- Results will appear here -->
       </div>
     </div>
