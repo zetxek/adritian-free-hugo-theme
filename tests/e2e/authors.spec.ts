@@ -54,7 +54,7 @@ test.describe('Author taxonomy', () => {
 
     const widget = page.locator('.widget-popular-tags');
     await expect(widget).toBeVisible();
-    await expect(widget.locator('h3.card-title')).toHaveText('Popular Tags');
+    await expect(widget.locator('h2.card-title')).toHaveText('Popular Tags');
 
     const viewAllButton = widget.locator('a.btn-outline-secondary', { hasText: 'View all tags' });
     await expect(viewAllButton).toBeVisible();

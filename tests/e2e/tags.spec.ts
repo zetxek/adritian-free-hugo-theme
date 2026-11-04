@@ -59,8 +59,8 @@ test.describe('Popular tags widget', () => {
     const widget = page.locator('.widget-popular-tags');
     await expect(widget).toBeVisible();
     
-    // Verify the widget title
-    await expect(widget.locator('h3.card-title')).toHaveText('Popular Tags');
+    // Verify the widget title (an <h2> so the outline never skips a level)
+    await expect(widget.locator('h2.card-title')).toHaveText('Popular Tags');
   });
 
   test('popular tags widget shows tag counts', async ({ page }) => {
