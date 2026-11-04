@@ -72,6 +72,10 @@ test.describe('Search functionality', () => {
     // Verify at least one result is shown
     const count = await page.locator('#search-results div[id^="summary-"]').count();
     expect(count).toBeGreaterThanOrEqual(1);
+
+    // The results heading survives the render, and result titles sit one level below it
+    await expect(page.locator('.search-results-wrapper h2.card-title')).toHaveText('Matching pages');
+    await expect(page.locator('#search-results div[id^="summary-"] h3').first()).toBeVisible();
   });
 
   test('search still works when Fuse and DOMPurify scripts are unavailable', async ({ page }) => {
