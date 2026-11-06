@@ -68,7 +68,9 @@
       for (const element of activeTheme) {
         element.textContent = btnToActive[0].textContent
       }
-      const themeSwitcherLabel = `${themeSwitcherText[0].textContent} (${btnToActive[0].dataset.bsThemeValue})`
+      const visibleLabel = (activeTheme[0]?.textContent ?? '').trim()
+      const helperText = (themeSwitcherText[0]?.textContent ?? '').trim()
+      const themeSwitcherLabel = helperText ? `${visibleLabel} — ${helperText}` : visibleLabel
       for (const element of themeSwitcher) {
         element.setAttribute('aria-label', themeSwitcherLabel)
       }
