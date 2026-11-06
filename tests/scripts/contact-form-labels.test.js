@@ -19,7 +19,17 @@
  * email and phone must carry a hardcoded autocomplete="name"/"email"/"tel",
  * while the free-form message textarea must carry none at all.
  *
- * Builds two standalone temp sites (own hugo.toml, classic --themesDir theme
+ * It also covers the last-resort i18n fallbacks for the submit button and the
+ * contact-info headings. Those lookups used to name keys that exist in no
+ * locale file (contact_button_text, contact_phone_heading,
+ * contact_email_heading, contact_location_heading), so a site that didn't
+ * pass the shortcode parameters rendered an empty submit button and three
+ * empty <h3> headings. They now fall back to contact_button,
+ * contact_phone_title, contact_email_title and contact_address_title — the
+ * keys every locale defines, and the names of the shortcode parameters they
+ * back.
+ *
+ * Builds three standalone temp sites (own hugo.toml, classic --themesDir theme
  * import) and lets the theme's REAL templates render — no custom layout
  * override. Each site needs a content/home/home.md with `type: home`, since
  * layouts/_default/home.html only renders content of that type.
@@ -40,6 +50,9 @@ const themeName = path.basename(themeDir);
 // Tolerant of Hugo's --minify stripping attribute-value quotes.
 const ARIA_LABEL_RE = /aria-label=["']?([^"'>]*)["']?/;
 const AUTOCOMPLETE_RE = /autocomplete=["']?([^"'>]*)["']?/;
+const BUTTON_RE = /<button[^>]*type=["']?submit["']?[^>]*>([\s\S]*?)<\/button>/;
+const CONTACT_INFO_RE = /<div[^>]*class=["']?[^"'>]*contact__info[^"'>]*["']?[^>]*>([\s\S]*?)<\/section>/;
+const H3_RE = /<h3[^>]*>([\s\S]*?)<\/h3>/g;
 const CONTROL_RE = /<(?:input[^>]*name=["']?(?:full_name|email|phone)["']?[^>]*|textarea[^>]*name=["']?message["']?[^>]*)>/g;
 
 function extractAriaLabels(html) {
@@ -151,6 +164,25 @@ assert.deepStrictEqual(
     `got ${JSON.stringify(defaultAutocompleteActual)}.`,
 );
 
+const buttonMatch = BUTTON_RE.exec(defaultHtml);
+assert.ok(
+  buttonMatch,
+  'Expected a <button type="submit"> in the default-site contact form, found none. ' +
+    'A broken selector could silently turn this test into a no-op.',
+);
+
+const buttonText = buttonMatch[1].trim();
+assert.ok(
+  buttonText.length > 0,
+  `Expected the default-site submit button to have non-empty text, got: ${buttonMatch[0]}. ` +
+    'Its last-resort i18n lookup probably names a key no locale defines.',
+);
+assert.ok(
+  buttonText.includes('Send message'),
+  `Expected the default-site submit button to fall back to the "contact_button" locale value "Send message", ` +
+    `got "${buttonText}".`,
+);
+
 // --- Site B: explicit shortcode parameters -> placeholder chain wins ---
 
 const customShortcode =
@@ -186,7 +218,49 @@ assert.deepStrictEqual(
     `got ${JSON.stringify(customAutocompleteActual)}.`,
 );
 
+// --- Site C: contact info values, no heading parameters -> localized headings ---
+
+const infoShortcode =
+  '{{< contact-section contact_phone_number="+45 11 22 33 44" contact_email_email="a@b.dk" ' +
+  'contact_address_address="Copenhagen" >}}';
+
+const infoHtml = buildSite('info', infoShortcode);
+const infoMatch = CONTACT_INFO_RE.exec(infoHtml);
+
+assert.ok(
+  infoMatch,
+  'Expected a .contact__info block on the contact-info site, found none. ' +
+    'A broken selector could silently turn this test into a no-op.',
+);
+
+const infoHeadings = [...infoMatch[1].matchAll(H3_RE)].map((m) => m[1].trim());
+
+assert.strictEqual(
+  infoHeadings.length,
+  3,
+  `Expected exactly 3 <h3> headings in the contact-info block (phone, email, address), found ${infoHeadings.length}: ` +
+    `${JSON.stringify(infoHeadings)}.`,
+);
+
+for (const heading of infoHeadings) {
+  assert.ok(
+    heading.length > 0,
+    `Expected every contact-info <h3> heading to be non-empty, got ${JSON.stringify(infoHeadings)}. ` +
+      'Its last-resort i18n lookup probably names a key no locale defines.',
+  );
+}
+
+const infoExpected = ['Phone Number', 'Email', 'Address'];
+
+assert.deepStrictEqual(
+  infoHeadings,
+  infoExpected,
+  `Expected contact-info headings ${JSON.stringify(infoExpected)} (contact_phone_title, contact_email_title, ` +
+    `contact_address_title), got ${JSON.stringify(infoHeadings)}.`,
+);
+
 console.log(
   '✅ contact-form-labels test passed (4 controls carry a non-empty aria-label, full_name/email/phone carry the correct ' +
-    'hardcoded autocomplete value, the message textarea carries none, defaults and overrides both correct)',
+    'hardcoded autocomplete value, the message textarea carries none, defaults and overrides both correct, the submit ' +
+    'button and the 3 contact-info headings fall back to defined locale keys)',
 );
