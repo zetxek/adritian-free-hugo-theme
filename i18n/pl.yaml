@@ -125,3 +125,11 @@
 "search_no_preview": "Brak podglądu"
 "primary_navigation": "Nawigacja główna"
 "footer_navigation": "Nawigacja w stopce"
+
+## Projects
+"projects_visit": "Odwiedź stronę"
+"projects_source": "Kod źródłowy"
+"projects_related": "Powiązane linki"
+"projects_kind_open_source": "Open source"
+"projects_kind_professional": "Zawodowe"
+"projects_kind_side_project": "Projekty poboczne"

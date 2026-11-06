@@ -125,3 +125,11 @@
 "search_no_preview": "Keine Vorschau verfügbar"
 "primary_navigation": "Hauptnavigation"
 "footer_navigation": "Navigation in der Fußzeile"
+
+## Projects
+"projects_visit": "Website besuchen"
+"projects_source": "Quellcode"
+"projects_related": "Weiterführende Links"
+"projects_kind_open_source": "Open Source"
+"projects_kind_professional": "Beruflich"
+"projects_kind_side_project": "Nebenprojekte"
