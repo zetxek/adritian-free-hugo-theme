@@ -125,3 +125,11 @@
 "search_no_preview": "אין תצוגה מקדימה"
 "primary_navigation": "ניווט ראשי"
 "footer_navigation": "ניווט תחתון"
+
+## Projects
+"projects_visit": "לאתר"
+"projects_source": "קוד מקור"
+"projects_related": "קישורים קשורים"
+"projects_kind_open_source": "קוד פתוח"
+"projects_kind_professional": "מקצועיים"
+"projects_kind_side_project": "פרויקטים צדדיים"

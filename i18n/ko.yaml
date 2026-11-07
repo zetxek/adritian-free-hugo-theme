@@ -126,3 +126,11 @@
 "view_all_tags": "모든 태그 보기"
 "primary_navigation": "주요 내비게이션"
 "footer_navigation": "푸터 내비게이션"
+
+## Projects
+"projects_visit": "웹사이트 방문"
+"projects_source": "소스 코드"
+"projects_related": "관련 링크"
+"projects_kind_open_source": "오픈 소스"
+"projects_kind_professional": "업무 프로젝트"
+"projects_kind_side_project": "사이드 프로젝트"
