@@ -113,9 +113,9 @@
 ------------------------------------------------*/}}
 {{ $button_text := "" }}
 {{ if $isShortcode }}
-  {{ $button_text = .Get "contact_button" | default (.Get "button_text") | default hugo.Data.homepage.contact.button_text | default (i18n "contact_button_text") }}
+  {{ $button_text = .Get "contact_button" | default (.Get "button_text") | default hugo.Data.homepage.contact.button_text | default (i18n "contact_button") }}
 {{ else }}
-  {{ $button_text = hugo.Data.homepage.contact.button_text | default (i18n "contact_button_text") }}
+  {{ $button_text = hugo.Data.homepage.contact.button_text | default (i18n "contact_button") }}
 {{ end }}
 
 {{/*----------------------------------------------
@@ -144,13 +144,13 @@
 {{ $email_heading := "" }}
 {{ $location_heading := "" }}
 {{ if $isShortcode }}
-  {{ $phone_heading = .Get "contact_phone_title" | default (.Get "phone_heading") | default hugo.Data.homepage.contact.phone_heading | default (i18n "contact_phone_heading") }}
-  {{ $email_heading = .Get "contact_email_title" | default (.Get "email_heading") | default hugo.Data.homepage.contact.email_heading | default (i18n "contact_email_heading") }}
-  {{ $location_heading = .Get "contact_address_title" | default (.Get "location_heading") | default hugo.Data.homepage.contact.location_heading | default (i18n "contact_location_heading") }}
+  {{ $phone_heading = .Get "contact_phone_title" | default (.Get "phone_heading") | default hugo.Data.homepage.contact.phone_heading | default (i18n "contact_phone_title") }}
+  {{ $email_heading = .Get "contact_email_title" | default (.Get "email_heading") | default hugo.Data.homepage.contact.email_heading | default (i18n "contact_email_title") }}
+  {{ $location_heading = .Get "contact_address_title" | default (.Get "location_heading") | default hugo.Data.homepage.contact.location_heading | default (i18n "contact_address_title") }}
 {{ else }}
-  {{ $phone_heading = hugo.Data.homepage.contact.phone_heading | default (i18n "contact_phone_heading") }}
-  {{ $email_heading = hugo.Data.homepage.contact.email_heading | default (i18n "contact_email_heading") }}
-  {{ $location_heading = hugo.Data.homepage.contact.location_heading | default (i18n "contact_location_heading") }}
+  {{ $phone_heading = hugo.Data.homepage.contact.phone_heading | default (i18n "contact_phone_title") }}
+  {{ $email_heading = hugo.Data.homepage.contact.email_heading | default (i18n "contact_email_title") }}
+  {{ $location_heading = hugo.Data.homepage.contact.location_heading | default (i18n "contact_address_title") }}
 {{ end }}
 
 <section {{if $sectionId}} id="{{ $sectionId }}"{{end}} class="section section--contact pt-0">
