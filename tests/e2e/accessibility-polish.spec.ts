@@ -115,3 +115,85 @@ test.describe('Footer notice reflow', () => {
  expect(measurement!.inkRight).toBeLessThanOrEqual(measurement!.columnRight);
  });
 });
+
+// WCAG 2.1 1.4.3 (Contrast, Minimum): link and secondary text must reach 4.5:1
+// in both colour schemes. Computed here from the rendered styles (no axe).
+test.describe('Colour contrast AA (links and secondary text)', () => {
+  const MIN_CONTRAST = 4.5;
+
+  // Per page: one text link and one secondary/meta text element. The skills
+  // page has no link inside <main>, so its link is the primary navigation.
+  const targets = [
+    { path: '/', link: 'main a.btn-frameless', meta: 'main .experience__date' },
+    { path: '/blog/', link: 'main a[href^="/blog/"]', meta: 'main .post-date' },
+    { path: '/tags/hugo/', link: 'main li.post > a', meta: 'main li.post .meta' },
+    { path: '/skills/', link: 'header .navbar a.nav-link:visible', meta: 'main .skill-level' },
+    // #emailHelp-content is muted text inside the black .section--cta band.
+    { path: '/blog/shortcodes/', link: 'header .navbar a.nav-link:visible', meta: '#emailHelp-content' },
+    ];
+
+  for (const scheme of ['light', 'dark'] as const) {
+    for (const target of targets) {
+      test(`${target.path} link and meta text pass AA in ${scheme} mode`, async ({ page }) => {
+        await page.emulateMedia({ colorScheme: scheme });
+        await page.goto(`${BASE_URL}${target.path}`);
+        // Entrance animations fade elements in; measure the settled colours.
+        await page.addStyleTag({
+          content: '.rad-animate, .rad-animation-group { opacity: 1 !important; transform: none !important; }',
+        });
+
+        const contrastOf = (selector: string) =>
+          page.locator(selector).first().evaluate((el: HTMLElement) => {
+            type Rgba = [number, number, number, number];
+            const parse = (value: string): Rgba => {
+              const m = value.match(/rgba?\(([^)]+)\)/);
+              if (!m) return [0, 0, 0, 0];
+              const p = m[1].split(/[\s,/]+/).filter(Boolean).map(Number);
+              return [p[0], p[1], p[2], p.length > 3 ? p[3] : 1];
+            };
+            const over = (top: Rgba, base: Rgba): Rgba => {
+              const a = top[3] + base[3] * (1 - top[3]);
+              if (a === 0) return [0, 0, 0, 0];
+              const mix = (i: number) => (top[i] * top[3] + base[i] * base[3] * (1 - top[3])) / a;
+              return [mix(0), mix(1), mix(2), a];
+            };
+            const luminance = ([r, g, b]: Rgba) => {
+              const [lr, lg, lb] = [r, g, b].map((c) => {
+                const s = c / 255;
+                return s <= 0.03928 ? s / 12.92 : Math.pow((s + 0.055) / 1.055, 2.4);
+              });
+              return 0.2126 * lr + 0.7152 * lg + 0.0722 * lb;
+            };
+
+            // Effective background: composite ancestors' backgrounds, innermost first.
+            let background: Rgba = [0, 0, 0, 0];
+            for (let node: HTMLElement | null = el; node; node = node.parentElement) {
+              background = over(background, parse(getComputedStyle(node).backgroundColor));
+              if (background[3] >= 1) break;
+            }
+            background = over(background, [255, 255, 255, 1]); // canvas default
+
+            const style = getComputedStyle(el);
+            const foreground = over(parse(style.color), background);
+            const [hi, lo] = [luminance(foreground), luminance(background)].sort((a, b) => b - a);
+            return {
+              ratio: (hi + 0.05) / (lo + 0.05),
+              fg: style.color,
+              bg: `rgb(${background.slice(0, 3).map(Math.round).join(', ')})`,
+              text: (el.textContent ?? '').trim().slice(0, 40),
+            };
+          });
+
+        for (const [kind, selector] of [['link', target.link], ['meta', target.meta]] as const) {
+          // A selector that matches nothing must fail, not pass as a no-op.
+          await expect(page.locator(selector).first(), `${kind} "${selector}" exists`).toBeVisible();
+          const result = await contrastOf(selector);
+          expect(
+            result.ratio,
+            `${kind} "${result.text}" (${selector}) ${result.fg} on ${result.bg} in ${scheme} mode: ${result.ratio.toFixed(2)}:1`,
+          ).toBeGreaterThanOrEqual(MIN_CONTRAST);
+        }
+      });
+    }
+  }
+});
