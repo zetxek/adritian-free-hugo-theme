@@ -8,6 +8,12 @@
     .experience__company {
         color: var(--bs-link-color, #{$dark-primary});
     }
+
+    .experience.selected a,
+    .experience:hover a,
+    .experience:active a {
+        background-color: #2f625c;
+    }
 }
 
 .experience__location {

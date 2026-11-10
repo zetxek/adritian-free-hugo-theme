@@ -855,7 +855,15 @@ textarea:focus {
 
 .section--cta .h2,
 .section--cta h2 {
-    color: #fff;
+ color: #fff;
+}
+
+// Muted/secondary text on the black call-to-action band: the Bootstrap
+// .text-muted / .form-text utilities keep the light-scheme body colour
+// (rgba(33,37,41,.75)) and render at 1.22:1 on #000. White at 75% is 13.9:1.
+.section--cta .text-muted,
+.section--cta .form-text {
+ color: rgba(255, 255, 255, 0.75) !important;
 }
 
 .section--contact {

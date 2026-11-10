@@ -1,5 +1,7 @@
 // Base colors (use !default so Hugo template injection can override)
-$base-color: #478079 !default;
+// Brand/teal accent darkened so it reaches WCAG 2.1 AA 4.5:1 on the theme light surfaces
+// (#ffffff 4.79, #fcfcfc 4.79 - #f8f9fa 4.67); the previous #478079 measured 4.30:1 on #f8f9fa.
+$base-color: #41766f !default;
 $primary: $base-color;
 $dark-primary: #66b2a9 !default;
 
