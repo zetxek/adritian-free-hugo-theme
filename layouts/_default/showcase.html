@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function () {
     {{ $tags_str := delimit .tags " " }}
     <div class="col showcase-item" data-tags="{{ $tags_str }}">
       <div class="card h-100 shadow-sm">
-        <a href="{{ .url }}" target="_blank" rel="noopener noreferrer">
+        <a href="{{ .url }}" target="_blank" rel="noopener noreferrer" aria-label="Screenshot of {{ .name }}">
           <img
             src="https://api.microlink.io/?url={{ .url }}&screenshot=true&meta=false&embed=screenshot.url"
             class="card-img-top"
