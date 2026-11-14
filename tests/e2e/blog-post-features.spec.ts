@@ -452,4 +452,25 @@ test.describe('New Blog Features', () => {
       await expect(relatedPosts).toBeAttached();
     });
   });
+
+  test.describe('Continue reading navigation', () => {
+    test('should expose the prev/next post links as a named navigation landmark', async ({ page }) => {
+      await page.goto(`${BASE_URL}/blog/new-features-demo/`);
+      await page.waitForLoadState('networkidle');
+
+      // The prev/next post links are page navigation. As a plain <aside> inside
+      // <article> they were an *unnamed* complementary landmark nested inside
+      // another landmark (axe: landmark-complementary-is-top-level), so assistive
+      // technology announced a nameless complementary region instead of navigation.
+      const continueReading = page.getByRole('navigation', { name: /continue reading/i });
+      await expect(continueReading).toHaveCount(1);
+
+      // Still real navigation with real destinations, not an empty landmark.
+      await expect(continueReading.locator('a')).not.toHaveCount(0);
+      await expect(continueReading).toContainText(/continue reading/i);
+
+      // And it must no longer be rendered as a complementary landmark.
+      await expect(page.locator('aside.content-browser')).toHaveCount(0);
+    });
+  });
 });
