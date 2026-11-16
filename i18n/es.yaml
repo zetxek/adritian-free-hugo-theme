@@ -125,3 +125,11 @@
 "view_all_tags": "Ver todas las etiquetas"
 "primary_navigation": "Navegación principal"
 "footer_navigation": "Navegación del pie"
+
+## Projects
+"projects_visit": "Visitar web"
+"projects_source": "Código fuente"
+"projects_related": "Enlaces relacionados"
+"projects_kind_open_source": "Código abierto"
+"projects_kind_professional": "Profesionales"
+"projects_kind_side_project": "Proyectos personales"
