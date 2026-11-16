@@ -1,0 +1,36 @@
+{{/* Single project page. Optional front matter: role, status, link (website),
+     repo (source code), related (list of URLs), image.src, button (legacy
+     homepage-portfolio button, shown when set). */}}
+{{ define "main" }}
+<section id="main-content" tabindex="-1" class="section project-single">
+  <div class="container">
+    <h1 id="title">{{ .Title }}</h1>
+
+    {{ $meta := slice }}
+    {{ with .Params.role }}{{ $meta = $meta | append . }}{{ end }}
+    {{ with .Params.status }}{{ $meta = $meta | append . }}{{ end }}
+    {{ with $meta }}<p class="project-meta">{{ delimit . " · " }}</p>{{ end }}
+
+    <div class="project-links mb-4">
+      {{ with .Params.link }}<a href="{{ . }}" class="btn btn-primary me-2 mb-2" rel="noopener">{{ i18n "projects_visit" }}</a>{{ end }}
+      {{ with .Params.repo }}<a href="{{ . }}" class="btn btn-outline-primary me-2 mb-2" rel="noopener">{{ i18n "projects_source" }}</a>{{ end }}
+      {{ with .Params.button }}{{ if .URL }}<a href="{{ .URL | absURL }}" class="btn btn-outline-primary me-2 mb-2">{{ .btnText }}</a>{{ end }}{{ end }}
+    </div>
+
+    {{ with .Params.image.src }}
+      {{ partial "lazypicture" (dict "src" . "width" 1200 "class" "img-fluid mb-4" "alt" "") }}
+    {{ end }}
+
+    <article id="content">
+      {{ .Content }}
+    </article>
+
+    {{ with .Params.related }}
+      <h2 class="h4 mt-5">{{ i18n "projects_related" }}</h2>
+      <ul class="project-related">
+        {{ range . }}<li><a href="{{ . }}" rel="noopener">{{ . | replaceRE "^https?://(www\\.)?" "" }}</a></li>{{ end }}
+      </ul>
+    {{ end }}
+  </div>
+</section>
+{{ end }}
