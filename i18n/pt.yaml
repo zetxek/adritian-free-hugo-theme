@@ -125,3 +125,11 @@
 "search_no_preview": "Nenhuma prévia disponível"
 "primary_navigation": "Navegação principal"
 "footer_navigation": "Navegação do rodapé"
+
+## Projects
+"projects_visit": "Visitar site"
+"projects_source": "Código-fonte"
+"projects_related": "Links relacionados"
+"projects_kind_open_source": "Código aberto"
+"projects_kind_professional": "Profissionais"
+"projects_kind_side_project": "Projetos pessoais"
