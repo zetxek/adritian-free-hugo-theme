@@ -77,13 +77,11 @@
 {{- $btn3Icon := "" -}}
 {{- $btn3URL := "" -}}
 {{- $btn3Text := "" -}}
+{{- $hideViewAll := false -}}
 
 {{- if $isShortcode }}
   {{- $btn3Enable = true -}}
-  {{- $hideViewAll := .Get "hideViewAll" -}}
-  {{- if eq $hideViewAll "true" -}}
-    {{- $btn3Enable = false -}}
-  {{- end -}}
+  {{- $hideViewAll = eq (.Get "hideViewAll") "true" -}}
   {{- $btn3Icon = .Get "button3_icon" | default hugo.Data.homepage.experience.button3.icon -}}
   {{- $btn3URL = .Get "button3_url" | default ( i18n "experience_button3_url" ) -}}
   {{- $btn3Text = .Get "button3_text" | default ( i18n "experience_button3" ) -}}
@@ -125,6 +123,13 @@
     {{- $btn3Enable = true -}}
     {{- $btn3Text = . -}}
   {{ end }}
+
+    {{/* hideViewAll wins over the button3 params above: the param merge re-enables
+    the button whenever a button3_text is present, which used to make
+    hideViewAll="true" a no-op. */}}
+    {{- if $hideViewAll -}}
+    {{- $btn3Enable = false -}}
+    {{- end -}}
 
 <div class="container-experience">
   <div class="row">
