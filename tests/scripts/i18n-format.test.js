@@ -27,6 +27,7 @@ const fs = require('fs');
 const os = require('os');
 const path = require('path');
 const { spawnSync } = require('child_process');
+const yaml = require('js-yaml');
 
 const themeDir = path.resolve(__dirname, '../..');
 const themeName = path.basename(themeDir);
@@ -93,7 +94,25 @@ try {
     'theme_dark_short', // hook inside an aria-hidden="true" d-none icon span of the theme switcher
     'theme_light_short', // hook inside an aria-hidden="true" d-none icon span of the theme switcher
     'experience_description', // intro-description override a site can translate
+    'contact_button_text', // legacy name kept as a site override above contact_button
+    'contact_phone_heading', // legacy name kept as a site override above contact_phone_title
+    'contact_email_heading', // legacy name kept as a site override above contact_email_title
+    'contact_location_heading', // legacy name kept as a site override above contact_address_title
   ]);
+
+  // Keys contact.html falls back to for its submit button and contact-info
+  // headings. Every locale must define them, or that locale renders them empty.
+  const CONTACT_FALLBACK_KEYS = [
+    'contact_button',
+    'contact_phone_title',
+    'contact_email_title',
+    'contact_address_title',
+  ];
+
+  const EXPECTED_LOCALE_FILES = [
+    'ar.yaml', 'da.yaml', 'de.yaml', 'en.yaml', 'es.yaml', 'fr.yaml', 'he.yaml',
+    'it.yaml', 'ko.yaml', 'nl.yaml', 'no.yaml', 'pl.yaml', 'pt.yaml', 'sv.yaml',
+  ];
 
   function walk(dir) {
     return fs.readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
@@ -102,22 +121,38 @@ try {
     });
   }
 
+  // Go templates accept both "interpreted" and `raw` string literals.
+  function lookupKeys(source) {
+    return [...source.matchAll(/\b(?:i18n|T)\s+(?:"([^"]+)"|`([^`]+)`)/g)].map((m) => m[1] || m[2]);
+  }
+
+  assert.deepStrictEqual(
+    lookupKeys('{{ i18n "quoted_key" }} {{ T `raw_key` }} {{ i18n `raw_key_2` | default "x" }}'),
+    ['quoted_key', 'raw_key', 'raw_key_2'],
+    'The lookup census must recognise both "quoted" and `raw` i18n keys.',
+  );
+
   const referencedKeys = new Set();
   for (const file of walk(path.join(themeDir, 'layouts'))) {
-    const source = fs.readFileSync(file, 'utf8');
-    for (const m of source.matchAll(/\b(?:i18n|T)\s+"([^"]+)"/g)) {
-      referencedKeys.add(m[1]);
+    for (const key of lookupKeys(fs.readFileSync(file, 'utf8'))) {
+      referencedKeys.add(key);
     }
   }
 
   const i18nDir = path.join(themeDir, 'i18n');
-  const localeFiles = fs.readdirSync(i18nDir).filter((f) => f.endsWith('.yaml'));
+  const localeFiles = fs.readdirSync(i18nDir).filter((f) => f.endsWith('.yaml')).sort();
   const definedKeys = new Set();
+  const keysByLocale = new Map();
   for (const file of localeFiles) {
-    const source = fs.readFileSync(path.join(i18nDir, file), 'utf8');
-    for (const m of source.matchAll(/^\s*"([^"]+)"\s*:/gm)) {
-      definedKeys.add(m[1]);
-    }
+    // Parse as YAML so quoted and unquoted keys are both recognised.
+    const parsed = yaml.load(fs.readFileSync(path.join(i18nDir, file), 'utf8')) || {};
+    assert.ok(
+      typeof parsed === 'object' && !Array.isArray(parsed),
+      `Expected i18n/${file} to be a flat key-value map, got ${Array.isArray(parsed) ? 'an array' : typeof parsed}.`,
+    );
+    const keys = new Set(Object.keys(parsed));
+    keysByLocale.set(file, keys);
+    for (const key of keys) definedKeys.add(key);
   }
 
   assert.ok(
@@ -125,10 +160,23 @@ try {
     `Expected the layouts/ census to find more than 90 referenced i18n keys, found ${referencedKeys.size}. ` +
       'A broken walk or regex could silently turn this guard into a no-op.',
   );
-  assert.strictEqual(
-    localeFiles.length,
-    14,
-    `Expected 14 i18n/*.yaml locale files, found ${localeFiles.length}: ${JSON.stringify(localeFiles)}.`,
+  assert.deepStrictEqual(
+    localeFiles,
+    EXPECTED_LOCALE_FILES,
+    `Expected exactly these i18n/*.yaml locale files: ${JSON.stringify(EXPECTED_LOCALE_FILES)}, ` +
+      `found ${JSON.stringify(localeFiles)}. Update EXPECTED_LOCALE_FILES when adding or removing a locale.`,
+  );
+
+  const missingContactKeys = [];
+  for (const [file, keys] of keysByLocale) {
+    for (const key of CONTACT_FALLBACK_KEYS) {
+      if (!keys.has(key)) missingContactKeys.push(`${file}:${key}`);
+    }
+  }
+  assert.deepStrictEqual(
+    missingContactKeys,
+    [],
+    `Every locale must define the contact.html fallback keys; missing: ${missingContactKeys.join(', ')}.`,
   );
 
   const undefinedKeys = [...referencedKeys]

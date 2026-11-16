@@ -29,9 +29,12 @@
  * keys every locale defines, and the names of the shortcode parameters they
  * back.
  *
- * Builds three standalone temp sites (own hugo.toml, classic --themesDir theme
+ * Legacy key names (contact_button_text, contact_*_heading) are still read
+ * first, so sites that defined them in their own i18n/ keep their text.
+ *
+ * Builds several standalone temp sites (own hugo.toml, classic --themesDir theme
  * import) and lets the theme's REAL templates render — no custom layout
- * override. Each site needs a content/home/home.md with `type: home`, since
+ * override. A site with home content needs a content/home/home.md with `type: home`, since
  * layouts/_default/home.html only renders content of that type.
  *
  * No browser required — suitable for CI/CD pre-e2e checks. Never writes into
@@ -84,7 +87,12 @@ function extractAutocomplete(labels) {
   return autocompleteValues;
 }
 
-function buildSite(siteLabel, shortcodeLine) {
+// shortcodeLine: rendered from content/home/home.md. Pass null to build a site
+// with no home content, which renders params.sections through the partial
+// directly (the non-shortcode path).
+// options.extraConfig: extra hugo.toml lines.
+// options.siteI18nEn: contents of the site's own i18n/en.yaml.
+function buildSite(siteLabel, shortcodeLine, options = {}) {
   const tmpSite = fs.mkdtempSync(path.join(os.tmpdir(), 'contact-form-labels-'));
   const destDir = fs.mkdtempSync(path.join(os.tmpdir(), 'contact-form-labels-out-'));
   try {
@@ -95,16 +103,25 @@ function buildSite(siteLabel, shortcodeLine) {
         "languageCode = 'en-us'",
         `title = 'Contact Form Labels Test - ${siteLabel}'`,
         `theme = '${themeName}'`,
+        ...(options.extraConfig || []),
         '',
       ].join('\n'),
     );
 
-    fs.mkdirSync(path.join(tmpSite, 'content', 'home'), { recursive: true });
+    fs.mkdirSync(path.join(tmpSite, 'content'), { recursive: true });
 
-    fs.writeFileSync(
-      path.join(tmpSite, 'content', 'home', 'home.md'),
-      ['---', 'title: Home', 'type: home', '---', '', shortcodeLine, ''].join('\n'),
-    );
+    if (shortcodeLine !== null) {
+      fs.mkdirSync(path.join(tmpSite, 'content', 'home'), { recursive: true });
+      fs.writeFileSync(
+        path.join(tmpSite, 'content', 'home', 'home.md'),
+        ['---', 'title: Home', 'type: home', '---', '', shortcodeLine, ''].join('\n'),
+      );
+    }
+
+    if (options.siteI18nEn) {
+      fs.mkdirSync(path.join(tmpSite, 'i18n'), { recursive: true });
+      fs.writeFileSync(path.join(tmpSite, 'i18n', 'en.yaml'), options.siteI18nEn);
+    }
 
     const result = spawnSync(
       'hugo',
@@ -177,8 +194,9 @@ assert.ok(
   `Expected the default-site submit button to have non-empty text, got: ${buttonMatch[0]}. ` +
     'Its last-resort i18n lookup probably names a key no locale defines.',
 );
-assert.ok(
-  buttonText.includes('Send message'),
+assert.strictEqual(
+  buttonText,
+  'Send message',
   `Expected the default-site submit button to fall back to the "contact_button" locale value "Send message", ` +
     `got "${buttonText}".`,
 );
@@ -259,8 +277,69 @@ assert.deepStrictEqual(
     `contact_address_title), got ${JSON.stringify(infoHeadings)}.`,
 );
 
+function extractButtonText(html, siteLabel) {
+  const m = BUTTON_RE.exec(html);
+  assert.ok(m, `Expected a <button type="submit"> on the ${siteLabel} site, found none.`);
+  return m[1].trim();
+}
+
+function extractInfoHeadings(html, siteLabel) {
+  const m = CONTACT_INFO_RE.exec(html);
+  assert.ok(m, `Expected a .contact__info block on the ${siteLabel} site, found none.`);
+  return [...m[1].matchAll(H3_RE)].map((h) => h[1].trim());
+}
+
+// --- Site D: no home content -> params.sections renders the partial directly ---
+// Covers the non-shortcode branch. With no shortcode, phone/email/address come
+// only from hugo.Data, which this site lacks, so only the button is asserted.
+
+const sectionsHtml = buildSite('sections', null, { extraConfig: ['[params]', 'sections = ["contact"]'] });
+
+assert.strictEqual(
+  extractButtonText(sectionsHtml, 'params.sections'),
+  'Send message',
+  'Expected the non-shortcode submit button to fall back to the "contact_button" locale value "Send message".',
+);
+
+// --- Site E: site i18n still defines the legacy key names -> they win ---
+// Sites that customised contact_button_text / contact_*_heading before the
+// fallback keys were corrected keep their translations.
+
+const legacyI18n = [
+  'contact_button_text: "Legacy send"',
+  'contact_phone_heading: "Legacy phone"',
+  'contact_email_heading: "Legacy email"',
+  'contact_location_heading: "Legacy location"',
+  '',
+].join('\n');
+
+const legacyShortcodeHtml = buildSite('legacy-shortcode', infoShortcode, { siteI18nEn: legacyI18n });
+
+assert.strictEqual(
+  extractButtonText(legacyShortcodeHtml, 'legacy-shortcode'),
+  'Legacy send',
+  'Expected a site-defined "contact_button_text" translation to keep overriding the default button text.',
+);
+assert.deepStrictEqual(
+  extractInfoHeadings(legacyShortcodeHtml, 'legacy-shortcode'),
+  ['Legacy phone', 'Legacy email', 'Legacy location'],
+  'Expected site-defined contact_*_heading translations to keep overriding the default headings.',
+);
+
+const legacySectionsHtml = buildSite('legacy-sections', null, {
+  extraConfig: ['[params]', 'sections = ["contact"]'],
+  siteI18nEn: legacyI18n,
+});
+
+assert.strictEqual(
+  extractButtonText(legacySectionsHtml, 'legacy-sections'),
+  'Legacy send',
+  'Expected a site-defined "contact_button_text" translation to override the non-shortcode button text too.',
+);
+
 console.log(
   '✅ contact-form-labels test passed (4 controls carry a non-empty aria-label, full_name/email/phone carry the correct ' +
     'hardcoded autocomplete value, the message textarea carries none, defaults and overrides both correct, the submit ' +
-    'button and the 3 contact-info headings fall back to defined locale keys)',
+    'button and the 3 contact-info headings fall back to defined locale keys on both the shortcode and params.sections ' +
+    'paths, and legacy site-defined key names still override them)',
 );
