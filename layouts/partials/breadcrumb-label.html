@@ -1,0 +1,35 @@
+{{- /*
+Resolves the display label for a breadcrumb crumb, given a page context.
+
+Taxonomy list pages (Kind "taxonomy") use the site's i18n label for the
+taxonomy (e.g. "Tags", "Categories"), falling back to a humanized plural.
+
+Taxonomy term pages (Kind "term") use a humanized term by default. Author
+terms prefer the linked author content page's `name` param, when present,
+so the display name (e.g. "Adrián Moreno Peña") is used instead of the
+raw slug.
+
+Every other page (sections, regular pages) uses .LinkTitle, which Hugo
+defaults to .Title when unset.
+*/ -}}
+{{- $page := . -}}
+{{- $label := "" -}}
+{{- if eq $page.Kind "taxonomy" -}}
+  {{- $plural := $page.Data.Plural -}}
+  {{- $label = i18n $plural | default (humanize $plural) -}}
+{{- else if eq $page.Kind "term" -}}
+  {{- $plural := $page.Data.Plural -}}
+  {{- if eq $plural "authors" -}}
+    {{- $authorPage := $page.Site.GetPage (printf "authors/%s" $page.Data.Term) -}}
+    {{- if $authorPage -}}
+      {{- $label = $authorPage.Params.name | default $authorPage.Title -}}
+    {{- else -}}
+      {{- $label = humanize $page.Data.Term -}}
+    {{- end -}}
+  {{- else -}}
+    {{- $label = humanize $page.Data.Term -}}
+  {{- end -}}
+{{- else -}}
+  {{- $label = $page.LinkTitle -}}
+{{- end -}}
+{{- $label -}}

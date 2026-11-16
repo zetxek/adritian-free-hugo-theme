@@ -15,9 +15,105 @@
     {{- $formMethod = hugo.Data.homepage.newsletter.form.method -}}
 {{ end }}
 
+{{- /* Display strings.
+     Resolved once here rather than branching on $isShortcode at each use site.
+
+     The three prose strings are marked safe so they can carry inline markup —
+     most commonly a link to a privacy policy in the note, which the GDPR
+     expects at the point where an address is collected. Without this they
+     render as literal "<a href=...>" text on the page.
+
+     Not marked safe: the placeholder, which is interpolated into an HTML
+     attribute, and the button label, which is a control label rather than
+     prose. Both are plain text by nature.
+
+     These values come from the site's own shortcode parameters and i18n files,
+     never from visitor input.
+
+     Each shortcode parameter falls back to its i18n value when omitted, which
+     is what the shortcode documentation already promises but the template did
+     not do — an omitted parameter previously rendered as empty text. */ -}}
+{{- $title := "" -}}
+{{- $placeholder := "" -}}
+{{- $button := "" -}}
+{{- $successMessage := "" -}}
+{{- $errorMessage := "" -}}
+{{- $note := "" -}}
+{{- if $isShortcode -}}
+  {{- $title = .Get "newsletter_title" | default (i18n "newsletter_title") -}}
+  {{- $placeholder = .Get "newsletter_placeholder" | default (i18n "newsletter_placeholder") -}}
+  {{- $button = .Get "newsletter_button" | default (i18n "newsletter_button") -}}
+  {{- $successMessage = .Get "newsletter_success_message" | default (i18n "newsletter_success_message") | safeHTML -}}
+  {{- $errorMessage = .Get "newsletter_error_message" | default (i18n "newsletter_error_message") | safeHTML -}}
+  {{- $note = .Get "newsletter_note" | default (i18n "newsletter_note") | safeHTML -}}
+{{- else -}}
+  {{- $title = i18n "newsletter_title" -}}
+  {{- $placeholder = i18n "newsletter_placeholder" -}}
+  {{- $button = i18n "newsletter_button" -}}
+  {{- $successMessage = i18n "newsletter_success_message" | safeHTML -}}
+  {{- $errorMessage = i18n "newsletter_error_message" | safeHTML -}}
+  {{- $note = i18n "newsletter_note" | safeHTML -}}
+{{- end -}}
+
+{{- /* idSuffix: appended to every other id below (form, inputs, button,
+     panels, help text) so that two instances of this partial rendered into
+     the same document — the documented setup is the page's own
+     {{< newsletter-section >}} plus the footer's, which the footer partial
+     includes on every page — never emit the same id twice.
+
+     The footer's own copy is rendered while Hugo builds the *footer* page
+     (exampleSite/content/footer/footer.md, type "footer"), a different Page
+     than whatever page is embedding it, and that render is cached and reused
+     verbatim on every page that includes the footer. A page-scoped counter
+     can't see both instances (the footer's render never re-runs per page),
+     and a global counter would be non-deterministic across pages built in
+     parallel. Keying the suffix off the calling page's type plus what the
+     footer actually contains is deterministic instead, and it is chosen so
+     that a site rendering the newsletter block only once anywhere — the
+     common case, and every theme site's behaviour before this file existed —
+     keeps exactly its old, unsuffixed ids:
+
+       - A footer-page instance (type "footer") always keeps the legacy,
+         unsuffixed ids. Existing sites already style and script against
+         those ids, and changing them would break every site with a footer
+         newsletter block on what is meant to be a patch release.
+       - A content-page instance is suffixed "-content", but only when the
+         site's footer content (for the calling page's language) *also*
+         renders a newsletter-section shortcode — detected with
+         .HasShortcode, mirroring how layouts/partials/footer.html selects
+         footer pages. A page whose site has no other newsletter block stays
+         unsuffixed too, since there is nothing for it to collide with.
+
+     The calling page is .Page when this partial is invoked as a shortcode,
+     or . when it's invoked directly as a partial with a page context.
+
+     An explicit id_suffix shortcode param always wins over both defaults,
+     including id_suffix="" — e.g. to force the legacy ids back onto a
+     content-page instance. .Get only tells us the resolved value, not
+     whether the param was passed, so isset against the shortcode's own
+     Params is used to distinguish "not given" from "given as empty". */ -}}
+{{ $idSuffix := "" }}
+{{ $callingPage := . }}
+{{ if $isShortcode }}
+  {{ $callingPage = .Page }}
+{{ end }}
+{{ if ne $callingPage.Type "footer" }}
+  {{ $footerPages := where (where $callingPage.Site.Pages "Type" "footer") "Lang" $callingPage.Lang }}
+  {{ range $footerPages }}
+    {{ if .HasShortcode "newsletter-section" }}
+      {{ $idSuffix = "-content" }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+{{ if $isShortcode }}
+  {{ if isset .Params "id_suffix" }}
+    {{ $idSuffix = .Get "id_suffix" }}
+  {{ end }}
+{{ end }}
+
 {{/*
-  sectionId: Optional argument to override the default HTML id for this section. If not provided, the default id is used. */}}
-{{ $sectionId := "newsletter" }}
+  sectionId: Optional argument to override the default HTML id for this section. If not provided, the default id (including the suffix above) is used. */}}
+{{ $sectionId := printf "newsletter%s" $idSuffix }}
 {{ with .Get "sectionId" }}
   {{ $sectionId = . }}
 {{ end }}
@@ -26,62 +122,39 @@
   <div class="container d-flex justify-content-center align-items-center">
     <div class="row">
       <div class="col-12 text-center">
-        <h2>
-          {{ if $isShortcode }} 
-            {{ .Get "newsletter_title" }} 
-          {{ else }} 
-            {{ i18n "newsletter_title" }}
-          {{ end }}
-        </h2>
+        <h2>{{ $title }}</h2>
         <div class="rad-subscription-group">
           <form
-            id="rad-subscription"
+            id="rad-subscription{{ $idSuffix }}"
             action="{{ $formAction }}"
             method="{{ $formMethod }}"
           >
             <input
-              id="rad-subscription-email"
+              id="rad-subscription{{ $idSuffix }}-email"
+              name="email"
               type="email"
               class="form-control"
-              aria-describedby="emailHelp"
-              placeholder='{{ if $isShortcode }} {{ .Get "newsletter_placeholder" }} {{ else }} {{ i18n "newsletter_placeholder" }} {{ end }}'
-              aria-label='{{ if $isShortcode }} {{ .Get "newsletter_placeholder" }} {{ else }} {{ i18n "newsletter_placeholder" }} {{ end }}'
+              aria-describedby="emailHelp{{ $idSuffix }}"
+              placeholder="{{ $placeholder }}"
+              aria-label="{{ $placeholder }}"
+              autocomplete="email"
+              required
             >
-            <button type="submit" id="rad-subscription-submit" class="btn btn-light btn-rounded">
-              {{ if $isShortcode }} 
-                {{ .Get "newsletter_button" }} 
-              {{ else }} 
-                {{ i18n "newsletter_button" }} 
-              {{ end }}
-            </button>
+            <button type="submit" id="rad-subscription{{ $idSuffix }}-submit" class="btn btn-light btn-rounded">{{ $button }}</button>
           </form>
-          <div id="rad-subscription-success" class="d-none">
-            <p class="lead">
-              {{ if $isShortcode }} 
-                {{ .Get "newsletter_success_message" }} 
-              {{ else }} 
-                {{ i18n "newsletter_success_message" }} 
-              {{ end }}
-            </p>
+          {{- /* These panels are revealed by JavaScript after the form is
+                 submitted. Without live-region roles the outcome is never
+                 announced to assistive technology: status for the confirmation,
+                 alert for the failure, which is the more urgent of the two. */ -}}
+          <div id="rad-subscription{{ $idSuffix }}-success" class="d-none" role="status" aria-live="polite">
+            <p class="lead">{{ $successMessage }}</p>
           </div>
-          <div id="rad-subscription-fail" class="d-none">
-            <p>
-              {{ if $isShortcode }} 
-                {{ .Get "newsletter_error_message" }} 
-              {{ else }} 
-                {{ i18n "newsletter_error_message" }} 
-              {{ end }}
-            </p>
+          <div id="rad-subscription{{ $idSuffix }}-fail" class="d-none" role="alert" aria-live="assertive">
+            <p>{{ $errorMessage }}</p>
           </div>
-          <script src='{{ "js/subscription.js" | absURL }}'></script>
+          <script defer src='{{ "js/subscription.js" | absURL }}'></script>
         </div>
-        <small id="emailHelp" class="form-text text-muted">
-          {{ if $isShortcode }} 
-            {{ .Get "newsletter_note" }} 
-          {{ else }} 
-            {{ i18n "newsletter_note" }}
-          {{ end }}
-        </small>
+        <small id="emailHelp{{ $idSuffix }}" class="form-text text-muted">{{ $note }}</small>
       </div>
     </div>
   </div>

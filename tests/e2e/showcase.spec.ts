@@ -64,4 +64,19 @@ test.describe('Showcase page', () => {
     expect(href).toContain('github.com/zetxek/adritian-free-hugo-theme/issues/new');
     expect(href).toContain('showcase-submission');
   });
+
+  test('screenshot links keep an accessible name when the image fails', async ({ page }) => {
+    await page.route('**/*microlink.io/**', route => route.abort());
+    await page.goto(`${BASE_URL}/showcase/`);
+
+    const cardCount = await page.locator('.showcase-item').count();
+    const anchors = page.locator('.showcase-item a:has(> img.card-img-top)');
+    const anchorCount = await anchors.count();
+    expect(anchorCount).toBeGreaterThan(0);
+    expect(anchorCount).toBe(cardCount);
+
+    for (let i = 0; i < anchorCount; i++) {
+      await expect(anchors.nth(i)).toHaveAccessibleName(/Screenshot of /);
+    }
+  });
 });

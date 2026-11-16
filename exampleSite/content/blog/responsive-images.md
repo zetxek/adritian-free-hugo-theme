@@ -12,7 +12,7 @@ description: 'Learn how to use the responsive-image shortcode to serve optimized
 
 The Adritian theme includes a `responsive-image` shortcode that generates optimized `<picture>` elements with WebP conversion, multiple srcset widths, and lazy loading.
 
-### Basic usage
+## Basic usage
 
 Place your images in the `assets/` directory and reference them with the shortcode:
 

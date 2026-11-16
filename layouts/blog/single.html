@@ -88,7 +88,7 @@
 
     {{ partial "related-posts.html" . }}
 
-    <aside class="content-browser light-border-top">
+    <nav class="content-browser light-border-top" aria-label="{{ i18n "continue_reading" }}">
       {{ i18n "continue_reading" }}
       <div>
         {{ with .PrevInSection }}
@@ -99,7 +99,7 @@
         <a class="next" href="{{ .RelPermalink }}"> {{ .LinkTitle }} ↪</a>
         {{ end }}
       </div>
-    </aside>
+    </nav>
 
     {{ partial "comments.html" . }}
   </article>

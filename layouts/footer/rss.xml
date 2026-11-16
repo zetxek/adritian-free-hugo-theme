@@ -1,5 +1,7 @@
-{{/*  
+{{/*
   This is an empty template for footer section RSS feeds.
   It intentionally does not generate any XML output.
   This prevents the generation of index.xml for the footer section.
+  This empty template (together with single.html and list.html in this directory) is the only
+  thing suppressing output for the "footer" section — no hugo.toml config is needed or used.
 */}}

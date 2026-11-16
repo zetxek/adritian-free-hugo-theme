@@ -16,7 +16,7 @@ This article is a guide to help you create your own version of the site using [A
 
 {{< responsive-image src="images/experience/internet-affairs.png" alt="Adritian theme demo" sizes="(max-width: 768px) 100vw, 600px" >}}
 
-### Creating a site
+## Creating a site
 
 This theme is for the content management system [Hugo](https://gohugo.io/), so that will be a pre-requirement.
 Make sure that you install the `extended` version of Hugo, as the theme uses SCSS for styling, as well as image optimization.
@@ -65,8 +65,9 @@ locale = "en"
 
 [module]
 [module.hugoVersion]
-# We use hugo.Deps to list dependencies, which was added in Hugo 0.92.0
-min = "0.92.0"
+# The theme needs Hugo extended 0.163.0+ (for per-format image quality and the locale, direction and label language keys)
+extended = true
+min = "0.163.0"
 
 [[module.imports]]
 path="github.com/zetxek/adritian-free-hugo-theme"

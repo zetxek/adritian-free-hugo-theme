@@ -1,9 +1,12 @@
 # Adritian Free Hugo Theme
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/zetxek/adritian-demo) [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fzetxek%2Fadritian-demo&project-name=my-adritian-site&repository-name=my-adritian-site&env=HUGO_VERSION&envDescription=Hugo%20version%20to%20build%20with%20%280.163.0%20or%20newer%29&envLink=https%3A%2F%2Fgithub.com%2Fgohugoio%2Fhugo%2Freleases) [![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/zetxek/adritian-demo) [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/zetxek/adritian-demo) [![Use this template for GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Use%20this%20template-2ea44f?logo=github)](https://github.com/zetxek/adritian-demo/generate)
+
 A modern, fast and extensible Hugo theme for personal websites and professional landing pages - with blog and portfolio support
 
-[![Hugo](https://img.shields.io/badge/Hugo-%3E%3D0.153-ff4088?logo=hugo)](https://gohugo.io/)
+[![Hugo](https://img.shields.io/badge/Hugo-%3E%3D0.163.0-ff4088?logo=hugo)](https://gohugo.io/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/zetxek/adritian-free-hugo-theme/blob/main/LICENSE)
 [![GitHub stars](https://img.shields.io/github/stars/zetxek/adritian-free-hugo-theme)](https://github.com/zetxek/adritian-free-hugo-theme/stargazers)
+[![GitHub last commit](https://img.shields.io/github/last-commit/zetxek/adritian-free-hugo-theme)](https://github.com/zetxek/adritian-free-hugo-theme/commits/main)
 [![GitHub release](https://img.shields.io/github/v/release/zetxek/adritian-free-hugo-theme)](https://github.com/zetxek/adritian-free-hugo-theme/releases)
 [![Vercel Deploy](https://deploy-badge.vercel.app/vercel/adritian-demo?name=demo)](https://adritian-demo.vercel.app/)
 [![Test example site](https://github.com/zetxek/adritian-free-hugo-theme/actions/workflows/test-example-site.yml/badge.svg)](https://github.com/zetxek/adritian-free-hugo-theme/actions/workflows/test-example-site.yml)
@@ -88,7 +91,7 @@ Another alternative is to use [git submodules](https://gohugo.io/getting-started
 > **Note:** Before proceeding, **Ensure you have Go and Hugo installed** and that you have created a new Hugo project.
 As a pre-requirement, you will need Hugo set up and running. You can follow [the official guide for it](https://gohugo.io/categories/installation/).
 
-The theme requires Hugo version `0.158.0` or newer (extended version). If you get errors regarding missing functionalities, check if you have the latest version of Hugo available.
+The theme requires Hugo version `0.163.0` or newer (extended version). If you get errors regarding missing functionalities, check if you have the latest version of Hugo available.
 
 > **Note:** the multilingual config in `exampleSite/hugo.toml` (`direction`, `label`, `locale` per language) uses key names Hugo introduced in `v0.158.0`. On older Hugo versions these keys are silently ignored rather than raising an error, which shows up as missing language labels and incorrect `dir`/RTL rendering — so if you copy that config, make sure you're on `0.158.0`+.
 
@@ -308,6 +311,31 @@ You can also embed the picker inline on any page or post using the `color-scheme
 > The live switcher requires JavaScript. Theme users who want a static build-time color change
 > with no added JS should use Option 1 or 2 above and leave `colorSchemeSwitcher` disabled (the default).
 
+#### Analytics
+
+The theme supports Vercel (Page Insights, Analytics), Google (Tag Manager, Analytics) and
+Plausible out of the box. All are opt-in and disabled by default. Configure them in your site
+`hugo.toml`:
+
+```toml
+[params.analytics]
+vercelPageInsights = false
+vercelAnalytics = false
+
+[params.analytics.googleAnalytics]
+code = "UA-XXXXX-Y"
+enabled = false
+
+[params.analytics.googleTagManager]
+code = "GTM-XXXXX"
+enabled = false
+
+[params.analytics.plausible]
+enabled = false
+domain = "" # e.g. example.com - defaults to the site's host when empty
+# script = "https://plausible.io/js/script.js" # optional override, e.g. for a self-hosted instance
+```
+
 #### SEO and social metadata
 
 The theme leverages Hugo's embedded templates for Open Graph and Twitter cards, and adds JSON-LD
@@ -358,12 +386,65 @@ authors:
 When `seo.person` or `seo.organization` are not configured at the site level, the theme falls back
 to the page's `author` or `authors` front matter for the BlogPosting schema.
 
+##### Per-page JSON-LD schema
+
+Any page can add its own JSON-LD (e.g. `FAQPage`, `Product`, `Event`) via a `schema` front-matter
+param. It is appended after the theme's own JSON-LD (`WebSite`, `Person`/`Organization`,
+`BlogPosting`) — it does not replace it.
+
+The value **must be a raw JSON string**, not a YAML/TOML map. Use a YAML block scalar (`|`) so the
+JSON is parsed at build time and fails the build if it's invalid:
+
+```yaml
+schema: |
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do I preview content changes before merging?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Open a PR against the theme repo — the preview workflow syncs exampleSite content to a live demo deploy automatically."
+        }
+      }
+    ]
+  }
+```
+
+Why a string and not a map: Hugo lowercases every front-matter param key, including nested and
+quoted ones, so a YAML/TOML map with `mainEntity` or `acceptedAnswer` would be exposed to templates
+as `mainentity` / `acceptedanswer`. schema.org properties are case-sensitive, so that map would
+render invalid JSON-LD. A raw JSON string keeps its casing intact through `transform.Unmarshal`.
+
 Notes:
 - Open Graph/Twitter cards are rendered by Hugo's embedded templates (`opengraph.html`, `twitter_cards.html`).
 - Canonical URLs are emitted automatically from each page permalink.
 - JSON-LD includes `WebSite` metadata for all pages and `BlogPosting` for blog posts.
-- **Meta descriptions** use a per-page fallback chain: page `description` front matter → auto-generated page summary (truncated to 155 characters) → site-wide i18n `head_description`. This ensures each page gets a unique, relevant description for search engines.
+- **Meta descriptions** use a per-page fallback chain: page `description` front matter → auto-generated page summary (truncated to 155 characters) → `params.seo.siteDescription` → `params.description` → i18n `head_description` (now empty). This ensures each page gets a unique, relevant description for search engines.
 - **hreflang alternate links** are automatically generated on multilingual sites for all translated pages, helping search engines serve the correct language version to users.
+
+> [!IMPORTANT]
+> **Title & description i18n migration.** The `head_title` and `head_description` i18n keys are now empty. If you previously relied on i18n yaml files for translated site titles or descriptions, migrate to Hugo's standard per-language config in your `hugo.toml`:
+>
+> ```toml
+> [languages.en]
+> title = "My Site"
+> weight = 1
+>
+> [languages.en.params]
+> description = "My personal portfolio"
+>
+> [languages.de]
+> title = "Meine Website"
+> weight = 2
+>
+> [languages.de.params]
+> description = "Mein persönliches Portfolio"
+> ```
+>
+> This is the standard Hugo approach (used by PaperMod, Stack, geekdoc, and others) and keeps your translations in your own config — safe from theme updates.
 
 #### Responsive Images
 
@@ -389,6 +470,32 @@ Parameters:
 | `sizes` | `sizes` attribute for layout hint | `"100vw"` |
 
 For best results, place blog images in `assets/` (e.g. `assets/images/blog/`) rather than `static/` so Hugo Pipes can process them.
+
+#### Critical CSS
+
+If `assets/css/critical.css` exists and is non-empty, its content is inlined into `<head>` as:
+
+```html
+<style data-generator="critical-css" data-critical>
+  /* ... */
+</style>
+```
+
+The theme ships a placeholder (an empty comment) at that path, so nothing is emitted until you populate it.
+
+The `data-critical` attribute marks the block so the [`critical`](https://github.com/addyosmani/critical) npm package recognises it as its own prior output and skips it when collecting a page's input CSS. That only works for `critical`'s *static* engine — its *render* engine instead walks the stylesheets of the already-loaded page, so it does **not** skip this block. If you regenerate `critical.css` by pointing `critical --engine render` at a built page that still has this block inlined, it re-collects the same rules every time the file grows. Measured on the reference site (issue #524): 29,769 B → 201,935 B over five runs, with ~3,820 of 4,121 rules duplicated and per-page HTML growing from 60 KB to 235 KB.
+
+To regenerate `critical.css` safely, feed `critical` a copy of the built page with the block stripped out first (`npm i -D critical` in your site root; the render engine also needs a browser — `npx playwright install chromium`):
+
+```sh
+hugo build
+cp public/index.html public/index.critical-source.html
+perl -0pe 's/<style data-generator="?critical-css"?[^>]*>.*?<\/style>//s' -i public/index.critical-source.html
+./node_modules/.bin/critical public/index.critical-source.html --engine render --out assets/css/critical.css
+rm public/index.critical-source.html
+```
+
+Keeping the copy inside `public/` (rather than moving it elsewhere) is what lets its relative stylesheet URLs resolve. Running this twice in a row should produce the same `critical.css` both times — if it doesn't, the block wasn't fully stripped.
 
 #### Shortcodes
 
@@ -426,6 +533,12 @@ Animations are automatically disabled when the user has `prefers-reduced-motion:
 _(optional, if you want to use the contact form)_ edit the key `contact` in your `homepage.yml` file, to customize your mail address. Sign up in [formspree](https://formspree.io) to redirect mails to your own.
 
 It can be rendered in any page via the `contact-section` shortcode.
+
+#### Newsletter form
+
+Rendered via the `newsletter-section` shortcode. The theme's own footer includes one copy of this shortcode on every page (see `exampleSite/content/footer/footer.md`), so a page that also adds its own `{{</* newsletter-section */>}}` ends up with two instances in the same document.
+
+To keep every id unique when that happens, the footer's own copy always keeps its original, unsuffixed ids (`rad-subscription`, `rad-subscription-email`, ...), and a content page's own instance is automatically suffixed `-content` (`rad-subscription-content`, ...) whenever the site's footer also renders a newsletter block. If a site only ever renders the newsletter block once — the common case — nothing changes: that single instance keeps the classic unsuffixed ids either way. Pass `id_suffix="something"` on a shortcode call to pick your own suffix, or `id_suffix=""` to force the legacy unsuffixed ids back onto a content-page instance.
 
 #### Blog
 

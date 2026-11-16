@@ -23,13 +23,38 @@ test.describe('Search functionality', () => {
   test('search page loads correctly', async ({ page }) => {
     const response = await page.goto(`${BASE_URL}/search`);
     await expect(page).toHaveTitle(/Search/);
-    await expect(page.locator('h2.mb-4.text-center')).toHaveText('Search the Site');
+    const heading = page.locator('h1');
+    await expect(heading).toHaveCount(1);
+    await expect(heading).toHaveText('Search the Site');
+    await expect(page.locator('#main-content h1')).toHaveText('Search the Site');
     await expect(page.locator('#search-query')).toBeVisible();
     
     // Check that the search page returns HTTP status 200
-  });
+    });
 
-  test('searching for "theme" shows results', async ({ page }) => {
+    test('search form controls have accessible names', async ({ page }) => {
+    await page.goto(`${BASE_URL}/search`);
+
+    // The search form is the page's whole purpose; it holds exactly two
+    // interactive controls (the query input and the icon-only submit button).
+    const form = page.locator('#main-content form');
+    await expect(form).toHaveCount(1);
+
+    const controls = form.locator('input, button');
+    await expect(controls).toHaveCount(2);
+
+    // Both controls must have an accessible name. The submit button only
+    // contains an icon, so an explicit label is what names it.
+    for (const control of await controls.all()) {
+    await expect(control).toHaveAccessibleName(/search/i);
+    }
+
+    // The button has to be reachable by its name, i.e. it is exposed to
+    // assistive technology as "Search" and nothing else claims that name.
+    await expect(page.getByRole('button', { name: 'Search', exact: true })).toHaveCount(1);
+    });
+
+    test('searching for "theme" shows results', async ({ page }) => {
     await page.goto(`${BASE_URL}/search`);
 
     // Wait for the page to be fully loaded
@@ -47,6 +72,10 @@ test.describe('Search functionality', () => {
     // Verify at least one result is shown
     const count = await page.locator('#search-results div[id^="summary-"]').count();
     expect(count).toBeGreaterThanOrEqual(1);
+
+    // The results heading survives the render, and result titles sit one level below it
+    await expect(page.locator('.search-results-wrapper h2.card-title')).toHaveText('Matching pages');
+    await expect(page.locator('#search-results div[id^="summary-"] h3').first()).toBeVisible();
   });
 
   test('search still works when Fuse and DOMPurify scripts are unavailable', async ({ page }) => {

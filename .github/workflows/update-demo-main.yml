@@ -1,5 +1,6 @@
 ## Updates demo site (https://github.com/zetxek/adritian-demo)
 ## triggers the update-hugo-module workflow in adritian-demo
+## triggers the sync-theme-content workflow in adritian-demo (exampleSite -> demo)
 ## and the update-git-submodule workflow in the git-submodule-demo site
 name: Update demo repos
 permissions:
@@ -33,7 +34,20 @@ jobs:
             -H "Accept: application/vnd.github.v3+json" \
             https://api.github.com/repos/zetxek/adritian-demo/actions/workflows/update-hugo-module.yml/dispatches \
             -d '{"ref":"main"}'
-        
+
+      ## exampleSite is the source of truth for the demo's content and config:
+      ## adritian-demo's sync-theme-content workflow opens a PR copying it over.
+      - name: Trigger Sync Theme Content workflow
+        if: github.ref == 'refs/heads/main'
+        env:
+          THEME_REF: ${{ github.sha }}
+        run: |
+          curl --fail-with-body -X POST \
+            -H "Authorization: token ${{ secrets.PRIVATE_TOKEN_GITHUB }}" \
+            -H "Accept: application/vnd.github.v3+json" \
+            https://api.github.com/repos/zetxek/adritian-demo/dispatches \
+            -d "{\"event_type\":\"sync-theme-content\",\"client_payload\":{\"branch\":\"main\",\"theme_ref\":\"$THEME_REF\",\"theme_branch\":\"main\"}}"
+
       - name: Trigger Update Git Submodule workflow
         run: |
           curl -X POST \

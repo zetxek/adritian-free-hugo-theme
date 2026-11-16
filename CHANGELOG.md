@@ -2,6 +2,109 @@
 
 This documentation tracks changes across versions, including new features, improvements, and breaking changes.
 
+## v1.12.1
+
+### Bug fixes
+
+- Replace `resources.PostProcess`, deprecated in Hugo 0.164, with `templates.Defer` when building the CSS bundle. The warning is gone and the bundle is byte-identical; PostCSS/PurgeCSS still sees a complete `hugo_stats.json` (#653, #654)
+- Critical CSS: the `<style data-generator="critical-css">` block is only emitted when there is CSS to inline, instead of an empty element in every page head. The block is now marked `data-critical`, and the README documents how to regenerate critical CSS without re-collecting the inlined block (#647)
+- exampleSite: re-encode `internet-affairs.png` as a real PNG. It held JPEG bytes, which Hugo 0.168 rejects during resize (#660)
+- exampleSite: replace the deprecated `imaging.quality` with per-format keys (#658)
+- exampleSite: remove the duplicated page-level `<h1>` from the icons guide (#659)
+
+### Maintenance
+
+- Tests: commit the navbar RTL snapshot so fresh checkouts have a baseline (#650), and add a guard against duplicated page-level headings in exampleSite content (#659)
+
+## v1.12.0
+
+### Breaking changes
+
+- Minimum Hugo version is now 0.163.0 (was 0.158.0). Older versions ignore the per-format image quality keys below, which would silently lower image quality to the default 75 (#649)
+
+### Bug fixes
+
+- Replace `imaging.quality`, deprecated in Hugo 0.163, with `imaging.jpeg.quality`, `imaging.webp.quality` and `imaging.avif.quality` (all 85, as before) (#648, #649)
+- Social sharing: no longer runs `isset` on a nil map when a site has no `[params.sharing]`, which logged `calling IsSet with unsupported type "invalid"` warnings on every build. Behaviour is unchanged (#648, #649)
+
+## v1.11.0
+
+### New features
+
+- Opt-in Plausible Analytics via `[params.analytics.plausible]` (`enabled`, `domain`, optional `script` for self-hosted instances); `domain` falls back to the site's host (#626)
+- Per-page JSON-LD schema override: set a `schema` front matter param to a raw JSON string (YAML `|` block or TOML `"""`). A raw string is required because Hugo lowercases front matter keys, which would break case-sensitive schema.org properties. Invalid JSON fails the build (#627)
+
+### Bug fixes
+
+- Newsletter: keep element ids unique when a page and the footer both render the block (#635)
+- i18n: add missing homepage section keys to the `es` and `fr` locales (#612)
+
+### Maintenance
+
+- Docs: raise the documented minimum Hugo version to 0.158.0 (#634)
+- CI: sync `exampleSite` into adritian-demo on push to `main`, and open ExampleSite update PRs with a PAT so checks run without approval (#633, #614)
+
+## v1.10.3
+
+### Bug fixes
+
+- Enforce the real minimum Hugo version (0.158.0) in `hugo.toml`, so builds on 0.156/0.157 fail loudly instead of silently rendering the wrong `dir` for RTL languages and empty language-switcher labels
+- Restore the print stylesheet, which was silently dropped from the CSS bundle because `bootstrap-print-css` was never declared as a dependency
+- Replace Hugo template APIs deprecated in 0.156/0.158 (`LanguageDirection`, `LanguageName`, `LanguageCode`, `site.Data`), removing the deprecation warnings from every build
+
+### Maintenance
+
+- Every e2e test file now honours `TEST_BASE_URL` instead of hardcoding port 1313; combined with `PLAYWRIGHT_PORT`, the suite can be pointed at a free port rather than silently reusing an unrelated Hugo server that already occupies 1313
+
+## v1.10.2
+
+### Bug fixes
+
+- Newsletter: render inline markup in note and status messages (#585)
+- CI: grant `contents: write` to the update-example-site workflow (#580)
+
+## v1.10.1
+
+### Bug fixes
+
+- Respect an explicit `false` for `readingProgress` and `viewTransitions` (#576)
+- Set `enableRobotsTXT` so `layouts/robots.txt` actually renders (#563)
+- Restore default archetype scaffolding (#567)
+- Remove inert config for suppressing footer section output (#569)
+- Remove leftover debug `warnf` logging from home/footer templates (#565)
+- Preview workflow: one preview PR per source PR, via a stable demo branch name (#574)
+
+### Maintenance
+
+- Modernize i18n files to a flat key-value format (#573)
+
+## v1.10.0
+
+### Bug fixes
+
+- Meta description fallback chain now checks page params before i18n (#561)
+
+## v1.9.15
+
+### Bug fixes
+
+- Set the minimum Hugo version to 0.156.0 in `hugo.toml` (#558)
+
+## v1.9.14
+
+### New features
+
+- **Korean (ko) translation** (#541)
+
+### Bug fixes
+
+- Fix mobile card image aspect ratio (#523)
+- exampleSite: fix deprecation warnings on Hugo 0.162.1 (#535)
+
+### Maintenance
+
+- Add Filip Vencelides to the showcase (#522)
+
 ## v1.9.13
 
 ### New features

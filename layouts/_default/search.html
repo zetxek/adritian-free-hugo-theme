@@ -8,7 +8,7 @@
 {{ define "main" }}
 <section id="main-content" tabindex="-1" class="search-section p-3 p-lg-5 d-flex flex-column align-items-center bg-light rounded shadow-sm">
   <div class="my-auto w-100" style="max-width: 760px;">
-    <h2 class="mb-4 text-center">{{ i18n "search_title" }}</h2>
+    <h1 class="mb-4 text-center">{{ i18n "search_title" }}</h1>
     
     <noscript>
       <div class="alert alert-warning" role="alert">
@@ -19,19 +19,29 @@
     </noscript>
     
     <div class="mb-5">
-      <form action="{{ "search" | relLangURL }}" data-index-url="{{ "index.json" | relLangURL }}">
-        <div class="input-group">
-          <input id="search-query" name="s" class="form-control form-control-lg" type="search" placeholder="{{ i18n "search_placeholder" }}" autocomplete="off" aria-label="Search" />
-          <button type="submit" class="input-group-text">
-            <i class="icon-circle-arrow-right"></i>
-          </button>
-        </div>
-      </form>
+    {{/* Accessible name for both of the form's controls. The submit button is
+         icon-only, so without an explicit label it is exposed to assistive
+         technology with no name at all. Kept in one place because the theme
+         defines no locale key that reads as a search control label (the
+         `search_*` keys are headings, status messages and the placeholder),
+         and the surrounding strings stay localized either way. */}}
+    {{ $searchLabel := "Search" }}
+    <form action="{{ "search" | relLangURL }}" data-index-url="{{ "index.json" | relLangURL }}">
+    <div class="input-group">
+    <input id="search-query" name="s" class="form-control form-control-lg" type="search" placeholder="{{ i18n "search_placeholder" }}" autocomplete="off" aria-label="{{ $searchLabel }}" />
+    <button type="submit" class="input-group-text" aria-label="{{ $searchLabel }}">
+    <i class="icon-circle-arrow-right"></i>
+    </button>
+    </div>
+    </form>
     </div>
     
-    <div id="search-results" class="card border-0" data-index-url="{{ "index.json" | relLangURL }}">
+    <!-- search.js replaces the contents of #search-results, so the heading lives outside it -->
+    <div class="search-results-wrapper card border-0">
       <div class="card-body">
-        <h3 class="card-title">{{ i18n "search_results_heading" }}</h3>
+        <h2 class="card-title">{{ i18n "search_results_heading" }}</h2>
+      </div>
+      <div id="search-results" data-index-url="{{ "index.json" | relLangURL }}">
         <!-- Results will appear here -->
       </div>
     </div>
@@ -40,7 +50,7 @@
 <!-- this template is sucked in by search.js and appended to the search-results div above. So editing here will adjust style -->
 <script id="search-result-template" type="text/x-js-template">
   <div id="summary-${key}" class="mb-4 p-3 border-bottom" data-tags="${tags}" data-categories="${categories}">
-    <h4 class="mb-1"><a href="${link}" class="text-decoration-none">${title}</a></h4>
+    <h3 class="mb-1"><a href="${link}" class="text-decoration-none">${title}</a></h3>
     <p class="mb-2 text-muted small">${snippet}</p>
   </div>
 </script>

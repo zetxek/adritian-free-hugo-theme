@@ -58,3 +58,60 @@ test.describe('Accessibility polish', () => {
     await expect(page.locator('#blog-post-title')).toBeVisible();
   });
 });
+
+// Regression coverage for the footer copyright line. `.footer__copy` used to be
+// `white-space: nowrap`, so a longer notice could not wrap: at 320px the
+// English notice ran 39px past the viewport and the Spanish one 74px, and
+// because `html { overflow-x: hidden }` / `body { overflow: hidden }` clip
+// rather than scroll, the tail was unreachable (WCAG 2.1 1.4.10 Reflow).
+// Between 992px and ~1150px the same line intruded into the footer navigation
+// column instead (23px English, 58px Spanish).
+test.describe('Footer notice reflow', () => {
+ for (const path of ['/', '/es/']) {
+ test(`footer copyright notice stays inside the viewport at 320px (${path})`, async ({ page }) => {
+ await page.setViewportSize({ width: 320, height: 800 });
+ await page.goto(`${BASE_URL}${path}`);
+
+ const copy = page.locator('footer .footer__copy');
+ await expect(copy).toHaveCount(1);
+
+ const notice = copy.locator('span');
+ // Fixture sanity: a selector that silently matches nothing must not pass.
+ await expect(notice).toContainText('©');
+
+ const { viewportWidth, inkRight } = await notice.evaluate((el: HTMLElement) => {
+ const range = document.createRange();
+ range.selectNodeContents(el);
+ return {
+ viewportWidth: document.documentElement.clientWidth,
+ inkRight: Math.max(...Array.from(range.getClientRects(), (rect) => rect.right)),
+ };
+ });
+
+ expect(inkRight).toBeLessThanOrEqual(viewportWidth);
+ });
+ }
+
+ test('footer copyright notice does not intrude into its column at 992px', async ({ page }) => {
+ await page.setViewportSize({ width: 992, height: 900 });
+ // The Spanish notice is the longest of the bundled translations: worst case.
+ await page.goto(`${BASE_URL}/es/`);
+
+ const measurement = await page.evaluate(() => {
+ const column = document.querySelector<HTMLElement>('footer .footer_left');
+ const span = document.querySelector<HTMLElement>('footer .footer__copy span');
+ if (!column || !span) return null;
+
+ const range = document.createRange();
+ range.selectNodeContents(span);
+ return {
+ inkRight: Math.max(...Array.from(range.getClientRects(), (rect) => rect.right)),
+ columnRight: column.getBoundingClientRect().right,
+ };
+ });
+
+ // A missing footer column or notice must fail loudly, not skip.
+ expect(measurement).not.toBeNull();
+ expect(measurement!.inkRight).toBeLessThanOrEqual(measurement!.columnRight);
+ });
+});

@@ -2,18 +2,21 @@ baseURL = "https://adritian-demo.vercel.app/"
 title = "Adritian Demo"
 locale = "en"
 
+# Required for the theme's layouts/robots.txt to be rendered — Hugo ignores
+# a custom robots.txt template unless this is explicitly enabled.
+# https://gohugo.io/templates/robots/
+enableRobotsTXT = true
+
 [pagination]
 pagerSize = 3
 
 
-# Exclude footer section from generating list pages (index.html and index.xml)
 [outputs]
   page = ["HTML"]
   home = ["HTML", "RSS", "JSON"]
   section = ["HTML", "RSS"]
   taxonomy = ["HTML", "RSS"]
   term = ["HTML", "RSS"]
-  footer = []
 
 [taxonomies]
   tag = "tags"
@@ -21,13 +24,6 @@ pagerSize = 3
   author = "authors"
   series = "series"
   topic = "topics"
-
-# Explicitly prevent the footer section from generating any output
-[outputFormats.footerSection]
-  # Empty configuration to prevent any output
-
-# Specifically disable generation of these kinds for the footer content
-disableKinds = ["footerSection"]
 
 [module]
 [[module.imports]]
@@ -74,10 +70,16 @@ target = "assets/css/bootstrap-print.css"
 
 
 [params]
-title = 'Adritian - a high performance hugo theme by Adrián Moreno'
-description = 'This hugo theme (Adritian) is based on Bootstrap and has features that make it suitable for a personal site, a portfolio or other kind of Single Page Applications.'
+title = 'Adritian Demo'
+description = 'Adritian Demo — a high performance Hugo theme'
 images = ['/img/og-img.png']
 themeColor = '#478079'
+
+# Header logo text. Optional — falls back to .Site.Title when unset.
+# Useful when your SEO/page `title` (long, keyword-rich) should differ
+# from the short brand text shown in the header. See PR #561.
+logo_text1 = 'Adritian'
+logo_text2 = 'Theme'
 
 # Color scheme: default | ocean | forest | rose | slate | midnight | warm
 colorScheme = 'default'
@@ -93,7 +95,7 @@ header = false
 
 [params.seo]
 siteName = 'Adritian'
-siteDescription = 'This hugo theme (Adritian) is based on Bootstrap and has features that make it suitable for a personal site, a portfolio or other kind of Single Page Applications.'
+siteDescription = 'Adritian Demo — a high performance Hugo theme'
 siteImage = '/img/og-img.png'
 
 [params.social]
@@ -134,7 +136,8 @@ source = "icons/favicon.png"
 [params.analytics]
 ## Analytics parameters.
 ### Supported so far: Vercel (Page Insights, Analytics)
-### And Google (Tag Manager, Analytics)
+### Google (Tag Manager, Analytics)
+### And Plausible
 
 # controls vercel page insights - disabled by default
 # to enable, just set to true
@@ -149,6 +152,12 @@ enabled = false
 [params.analytics.googleTagManager]
 code = "GTM-XXXXX"
 enabled = false
+
+# plausible analytics. to enable, set "enabled" to true and set your site's domain
+[params.analytics.plausible]
+enabled = false
+domain = "" # e.g. example.com - defaults to the site's host when empty
+# script = "https://plausible.io/js/script.js" # optional override, e.g. for a self-hosted instance
 
 [build]
 writeStats = true
@@ -172,8 +181,10 @@ disabled = false
 locale = 'en'
 direction = 'ltr'
 label = 'English'
-title = ''
 weight = 0
+
+[languages.en.params.footer]
+notice = '© Adritian. Free Hugo theme by Adrián Moreno Peña.'
 
 [languages.en.menus]
 [[languages.en.menus.header]]
@@ -245,8 +256,11 @@ disabled = false
 locale = 'es'
 direction = 'ltr'
 label = 'Español'
-title = ''
 weight = 0
+
+[languages.es.params.footer]
+notice = '© Adritian. Tema gratuito de Hugo por Adrián Moreno Peña.'
+
 [[languages.es.menus.header]]
 name = "INICIO"
 URL = "/es/"
@@ -257,7 +271,7 @@ URL = '/es/#sobre-mi'
 weight = 2
 [[languages.es.menus.header]]
 name = 'Habilidades'
-URL = '/es/skills'
+URL = '/skills'
 weight = 3
 [[languages.es.menus.header]]
 name = 'Trabajo'
@@ -316,8 +330,10 @@ disabled = false
 locale = 'fr'
 direction = 'ltr'
 label = 'Français'
-title = ''
 weight = 0
+
+[languages.fr.params.footer]
+notice = '© Adritian. Thème gratuit Hugo par Adrián Moreno Peña.'
 
 [languages.fr.menus]
 [[languages.fr.menus.header]]
@@ -330,7 +346,7 @@ URL = '#about'
 weight = 2
 [[languages.fr.menus.header]]
 name = 'Compétences'
-URL = '/fr/skills'
+URL = '/skills'
 weight = 3
 [[languages.fr.menus.header]]
 name = 'Portfolio'
@@ -387,8 +403,10 @@ disabled = false
 locale = 'ar'
 direction = 'rtl'
 label = 'العربية'
-title = ''
 weight = 0
+
+[languages.ar.params.footer]
+notice = '© أدريتيان. قالب هوغو مجاني من إنشاء أدريان مورينو بينيا.'
 
 [languages.ar.menus]
 [[languages.ar.menus.header]]
@@ -401,7 +419,7 @@ URL = '/ar/#عني'
 weight = 2
 [[languages.ar.menus.header]]
 name = 'المهارات'
-URL = '/ar/skills'
+URL = '/skills'
 weight = 3
 [[languages.ar.menus.header]]
 name = 'أعمالي'
@@ -449,8 +467,10 @@ disabled = false
 locale = 'he'
 direction = 'rtl'
 label = 'עברית'
-title = ''
 weight = 0
+
+[languages.he.params.footer]
+notice = '© אדריטיאן. תבנית הוגו חינמית מאת אדריאן מורנו פניה.'
 
 [languages.he.menus]
 [[languages.he.menus.header]]
@@ -463,7 +483,7 @@ URL = '/he/#אודות'
 weight = 2
 [[languages.he.menus.header]]
 name = 'מיומנויות'
-URL = '/he/skills'
+URL = '/skills'
 weight = 3
 [[languages.he.menus.header]]
 name = 'עבודות'
@@ -593,8 +613,13 @@ mode = "dropdown" # "dropdown" moves items to More dropdown, "footer" moves to f
 
 [imaging]
   resampleFilter = "Lanczos"
-  quality = 85
   anchor = "Smart"
+  [imaging.jpeg]
+    quality = 85
+  [imaging.webp]
+    quality = 85
+  [imaging.avif]
+    quality = 85
 
 [minify]
   disableCSS = false

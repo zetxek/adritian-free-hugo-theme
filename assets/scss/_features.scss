@@ -106,6 +106,7 @@
   margin: 2rem 0;
   padding-top: 2rem;
 
+  h2,
   h3 {
     margin-bottom: 1rem;
     font-size: 1.25rem;
@@ -227,6 +228,7 @@
     }
   }
 
+  h2,
   h3 {
     margin-bottom: 1rem;
     font-size: 1.2rem;
@@ -310,6 +312,7 @@
   }
 
   .social-sharing {
+    h2,
     h3 {
       color: var(--bs-white);
     }
@@ -319,6 +322,7 @@
     background: var(--bs-gray-800);
     border-left-color: var(--bs-link-color, var(--bs-primary));
 
+    h2,
     h3 {
       color: var(--bs-white);
     }

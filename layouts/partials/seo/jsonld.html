@@ -20,6 +20,9 @@
 {{- if not $siteDescription -}}
   {{- $siteDescription = i18n "head_description" -}}
 {{- end -}}
+{{- if and .IsHome (not $siteDescription) -}}
+  {{- warnf "No site description set for JSON-LD: add [params] description or [params.seo] siteDescription to your hugo.toml for SEO. See issue #560" -}}
+{{- end -}}
 
 {{- $siteUrl := .Site.BaseURL -}}
 
@@ -77,7 +80,7 @@
 {{- end -}}
 
 {{- $webSite := dict "@context" "https://schema.org" "@type" "WebSite" "name" $siteTitle "url" $siteUrl "description" $siteDescription -}}
-{{- with .Site.LanguageCode -}}
+{{- with .Site.Language.Locale -}}
   {{- $webSite = merge $webSite (dict "inLanguage" .) -}}
 {{- end -}}
 {{- if $siteImage -}}
@@ -195,4 +198,19 @@
   {{- end -}}
 
 <script type="application/ld+json">{{ $blogPosting | jsonify | safeJS }}</script>
+{{- end -}}
+
+{{/* Per-page JSON-LD schema override/addition. See README.md "Per-page JSON-LD schema".
+     The `schema` front-matter param must be a raw JSON string (YAML `|` block scalar or
+     TOML `"""` multiline string), never a YAML/TOML map: Hugo lowercases every front-matter
+     param key, nested keys included, even quoted ones, so a map-valued `mainEntity` would
+     become `mainentity` and produce invalid JSON-LD for schema.org's case-sensitive
+     properties. This is appended after the theme's own JSON-LD above, it never replaces it. */}}
+{{- with .Params.schema -}}
+  {{- if or (reflect.IsMap .) (reflect.IsSlice .) -}}
+    {{- errorf "%s: `schema` front-matter param must be a raw JSON string (e.g. a YAML `|` block scalar), not a map/list — Hugo lowercases front-matter map keys (e.g. `mainEntity` becomes `mainentity`), which breaks schema.org's case-sensitive properties. See README.md \"Per-page JSON-LD schema\"." $.RelPermalink -}}
+  {{- else -}}
+    {{- $schemaOverride := transform.Unmarshal (printf "%v" .) -}}
+<script type="application/ld+json">{{ $schemaOverride | jsonify | safeJS }}</script>
+  {{- end -}}
 {{- end -}}

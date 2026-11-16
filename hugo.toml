@@ -1,8 +1,13 @@
+# Required for layouts/robots.txt to be rendered — Hugo ignores a custom
+# robots.txt template unless this is explicitly enabled.
+# https://gohugo.io/templates/robots/
+enableRobotsTXT = true
+
 [module]
 
   [module.hugoVersion]
     extended = true
-    min = "0.156.0"
+    min = "0.163.0"
 
 # Related content configuration
 [related]
@@ -30,8 +35,13 @@
 
 [imaging]
   resampleFilter = "Lanczos"
-  quality = 85
   anchor = "Smart"
+  [imaging.jpeg]
+    quality = 85
+  [imaging.webp]
+    quality = 85
+  [imaging.avif]
+    quality = 85
 
 [minify]
   disableCSS = false
@@ -51,24 +61,12 @@
       precision = 0
 
 
-# Exclude content with type "footer" from being rendered as HTML pages
-[outputFormats]
-  [outputFormats.footer]
-    mediaType = "text/html"
-    isHTML = true
-    isPlainText = false
-    noUgly = true
-    permalinkable = false
-    path = "footer"
-
-# Disable HTML generation for content with type "footer"
 [outputs]
   page = ["HTML"]
   home = ["HTML", "RSS", "JSON"]
   section = ["HTML", "RSS"]
   taxonomy = ["HTML", "RSS"]
   term = ["HTML", "RSS"]
-  footer = []
 
 # Taxonomies
 [taxonomies]
@@ -78,13 +76,7 @@
   series = "series"
   topic = "topics"
 
-# Disable specific content kinds to prevent footer from being rendered
-disableKinds = ["footer"]
-
-# Configure content by path to prevent footer directory from generating HTML
 [params]
-  [params.disabledContent]
-    paths = ["footer"]
 
   [[module.mounts]]
     source = "archetypes"

@@ -4,14 +4,14 @@
 {{- /* Resolve color scheme from config — defaults to "default" (current theme colors).
        params.primaryColor takes precedence over colorScheme if both are set. */}}
 {{- $schemeName := .Site.Params.colorScheme | default "default" -}}
-{{- $scheme := index site.Data.colorSchemes $schemeName -}}
+{{- $scheme := index hugo.Data.colorSchemes $schemeName -}}
 {{- if and .Site.Params.primaryColor .Site.Params.primaryColor.light -}}
   {{- $scheme = dict "light" .Site.Params.primaryColor.light "dark" (.Site.Params.primaryColor.dark | default .Site.Params.primaryColor.light) "name" "Custom" -}}
   {{- $schemeName = "custom" -}}
 {{- else if not $scheme -}}
   {{- warnf "Color scheme '%s' not found in data/colorSchemes.yaml, falling back to default" $schemeName -}}
   {{- $schemeName = "default" -}}
-  {{- $scheme = index site.Data.colorSchemes "default" -}}
+  {{- $scheme = index hugo.Data.colorSchemes "default" -}}
 {{- end -}}
 {{- $themeColor := .Site.Params.themeColor | default (cond (ne $scheme nil) $scheme.light "#478079") -}}
 <meta name="theme-color" content="{{ $themeColor }}" />
@@ -20,6 +20,16 @@
 {{- if .Site.Params.analytics.googleTagManager.enabled }}
   <link rel="preconnect" href="https://www.googletagmanager.com" />
 {{- end }}
+
+{{- if .Site.Params.analytics.plausible.enabled }}
+  {{- $plausibleDomain := .Site.Params.analytics.plausible.domain -}}
+  {{- if not $plausibleDomain -}}
+    {{- $plausibleDomain = (urls.Parse .Site.BaseURL).Hostname -}}
+  {{- end -}}
+  {{- $plausibleScript := .Site.Params.analytics.plausible.script | default "https://plausible.io/js/script.js" -}}
+  <script defer data-domain="{{ $plausibleDomain }}" src="{{ $plausibleScript }}"></script>
+{{- end }}
+
 {{- if .Site.Params.analytics.googleAnalytics.enabled }}
   {{- if .Site.Params.analytics.googleAnalytics.code }}
     <!-- Google tag (gtag.js) - moved to bottom for non-blocking -->
@@ -36,33 +46,44 @@
 {{- end }}
 
 
-<title>
-  {{ if .IsHome }}
-  {{ else }}
-    {{ if .Title }}{{ .Title }} |{{ end }}
-  {{ end }}
-  {{ i18n "head_title" }}
-</title>
+{{- if and .IsHome (not .Site.Title) -}}
+  {{- warnf "Site title is empty or still at default 'Adritian' — set [params] title or site title in your hugo.toml for proper page titles. See issue #561" -}}
+{{- end -}}
+<title>{{ if .IsHome }}{{ else }}{{ if .Title }}{{ .Title }} | {{ end }}{{ end }}{{ .Site.Title | default .Site.BaseURL | default "Hugo Site" }}</title>
 
 {{- $metaDescription := "" -}}
 {{- if .Description -}}
   {{- $metaDescription = .Description | plainify | truncate 155 -}}
 {{- else if and .IsPage .Summary -}}
   {{- $metaDescription = .Summary | plainify | truncate 155 -}}
+{{- else -}}
+  {{- with .Site.Params.seo -}}
+    {{- with .siteDescription -}}
+      {{- $metaDescription = . | plainify | truncate 155 -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if not $metaDescription -}}
+    {{- with .Site.Params.description -}}
+      {{- $metaDescription = . | plainify | truncate 155 -}}
+    {{- end -}}
+  {{- end -}}
 {{- end -}}
 {{- if not $metaDescription -}}
   {{- $metaDescription = i18n "head_description" -}}
+{{- end -}}
+{{- if and .IsHome (not $metaDescription) -}}
+  {{- warnf "No meta description set: add [params] description or [params.seo] siteDescription to your hugo.toml for SEO. See issue #560" -}}
 {{- end -}}
 <meta name="description" content="{{ $metaDescription }}" />
 <link rel="canonical" href="{{ .Permalink }}" />
 {{/* hreflang alternate links for multilingual sites */}}
 {{- if and hugo.IsMultilingual .IsTranslated }}
   {{- range .AllTranslations }}
-  <link rel="alternate" hreflang="{{ .Language.LanguageCode | default .Lang }}" href="{{ .Permalink }}" />
+  <link rel="alternate" hreflang="{{ .Language.Locale | default .Lang }}" href="{{ .Permalink }}" />
   {{- end }}
 {{- end }}
 {{/* RSS Feed Discovery Links */}}
-{{- $siteTitle := i18n "head_title" | default .Site.Title -}}
+{{- $siteTitle := .Site.Title -}}
 {{- with .Site.Home.OutputFormats.Get "RSS" }}
 <link rel="alternate" type="{{ .MediaType.Type }}" href="{{ .Permalink }}" title="{{ $siteTitle }}" />
 {{- end }}
@@ -72,10 +93,23 @@
   {{- end }}
 {{- end }}
 <meta name="generator-mode" content="{{ hugo.Environment }}" />
-{{- $critical := resources.Get "css/critical.css" | resources.Minify }}
-<style data-generator="critical-css">
-{{- $critical.Content | safeCSS }}
+{{/* The data-critical attribute is how the `critical` npm package recognises this
+     block as its own prior output and skips it when collecting a page's input CSS —
+     but only its *static* engine honours that marker. Its *render* engine walks the
+     stylesheets of the loaded page instead, so it does NOT skip this block: a site
+     that regenerates assets/css/critical.css by pointing `critical` at a built page
+     that still has this block inlined will re-collect these same rules on every run.
+     See the README "Critical CSS" section for the regeneration recipe (strip this
+     block from a copy of the built page before feeding it to `critical`). */}}
+{{- $critical := resources.Get "css/critical.css" }}
+{{- if $critical }}
+  {{- $critical = $critical | resources.Minify }}
+  {{- with $critical.Content }}
+<style data-generator="critical-css" data-critical>
+{{ . | safeCSS }}
 </style>
+  {{- end }}
+{{- end }}
 
 {{- $cssResources := slice }}
 {{- range .Site.Params.plugins.css }}
@@ -89,10 +123,12 @@
 {{- end }}
 
 {{- if gt (len $cssResources) 0 }}
-  {{- $cssBundle := $cssResources | resources.Concat "css/bundle.css" }}
-  {{- $css := $cssBundle }}
+  {{/* templates.Defer runs this block after the whole site is rendered, so
+       a PostCSS/PurgeCSS step in a site's pipeline sees complete hugo_stats.json. */}}
+  {{- with (templates.Defer (dict "key" "adritian-css-bundle" "data" $cssResources)) }}
+  {{- $css := . | resources.Concat "css/bundle.css" }}
   {{- if hugo.IsProduction }}
-    {{- $css = $css | minify | fingerprint | resources.PostProcess }}
+    {{- $css = $css | minify | fingerprint }}
   {{- end }}
   <link
     rel="preload"
@@ -110,6 +146,7 @@
         integrity="{{ $css.Data.Integrity }}" crossorigin="anonymous"
       {{ end }} />
   </noscript>
+  {{- end }}
 {{- end }}
 {{- range .Site.Params.plugins.scss }}
   {{- $scss := resources.Get .URL }}
@@ -134,18 +171,21 @@
       {{ end }} />
   {{- end }}
 {{- end }}
-{{/* Color scheme switcher: generate per-scheme CSS override stylesheets */}}
+{{/* Color scheme switcher: generate per-scheme CSS override stylesheets.
+     All start disabled so none blocks the first paint: the rules are scoped to
+     html[data-color-scheme], which is only set once a scheme is stored, and the
+     inline script below enables the stored scheme's sheet. */}}
 {{- if .Site.Params.colorSchemeSwitcher.enable }}
   {{- $overrideTpl := resources.Get "scss/scheme-override.scss" }}
   {{- if $overrideTpl }}
-    {{- range $name, $schemeData := site.Data.colorSchemes }}
+    {{- range $name, $schemeData := hugo.Data.colorSchemes }}
       {{- $overrideScss := $overrideTpl | resources.ExecuteAsTemplate (printf "scss/scheme-override-%s.scss" $name) (dict "scheme" $schemeData "name" $name) }}
       {{- if not hugo.IsProduction }}
         {{- $overrideCss := $overrideScss | css.Sass }}
-        <link rel="stylesheet" href="{{ $overrideCss.RelPermalink }}" data-color-scheme="{{ $name }}"{{ if ne $name $schemeName }} disabled{{ end }} />
+        <link rel="stylesheet" href="{{ $overrideCss.RelPermalink }}" data-color-scheme="{{ $name }}" disabled />
       {{- else }}
         {{- $overrideCss := $overrideScss | css.Sass | resources.Minify | resources.Fingerprint }}
-        <link rel="stylesheet" href="{{ $overrideCss.RelPermalink }}" data-color-scheme="{{ $name }}"{{ if ne $name $schemeName }} disabled{{ end }} integrity="{{ $overrideCss.Data.Integrity }}" crossorigin="anonymous" />
+        <link rel="stylesheet" href="{{ $overrideCss.RelPermalink }}" data-color-scheme="{{ $name }}" disabled integrity="{{ $overrideCss.Data.Integrity }}" crossorigin="anonymous" />
       {{- end }}
     {{- end }}
   {{- end }}

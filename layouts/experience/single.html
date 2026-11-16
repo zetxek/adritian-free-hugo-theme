@@ -16,13 +16,14 @@
           <a href="{{.Permalink | relURL}}">
             {{/* The context, ".", is now each one of the pages as it goes
             through the loop */}}
+            {{ $company := .Params.company }}
             {{ $img := resources.Get .Params.companyLogo }}
             {{ with $img }}
             {{ $imgWebp := $img.Resize (printf "%dx%d webp q75 Lanczos picture" $img.Width $img.Height) }}  
             <div class="experience__header  with-company-logo">
               <img
                 src="{{ $imgWebp.RelPermalink }}"
-                alt="{{ .Params.company }} logo"
+                alt="{{ $company }} logo"
                 class="experience__company-logo"
                 loading="lazy"
               >
