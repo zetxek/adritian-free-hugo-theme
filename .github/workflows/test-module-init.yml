@@ -74,8 +74,18 @@ jobs:
             - name: Setup Hugo
               uses: peaceiris/actions-hugo@v3
               with:
-                hugo-version: 'latest'
+                hugo-version: ${{ vars.HUGO_VERSION || 'latest' }}
                 extended: true
+
+            - name: Install Dart Sass
+              # Hugo v0.170.0 dropped the extended edition and its built-in LibSass, so
+              # css.Sass needs Dart Sass on PATH (see the README "Requirements" section).
+              run: |
+                DART_SASS_VERSION=1.108.2
+                curl -sSL -o ${{ runner.temp }}/dart-sass.tar.gz "https://github.com/sass/dart-sass/releases/download/${DART_SASS_VERSION}/dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz"
+                tar -xzf ${{ runner.temp }}/dart-sass.tar.gz -C ${{ runner.temp }}
+                echo "${{ runner.temp }}/dart-sass" >> "$GITHUB_PATH"
+                "${{ runner.temp }}/dart-sass/sass" --version
                 
             - name: Download test site
               uses: actions/download-artifact@v8

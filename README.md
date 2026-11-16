@@ -91,7 +91,7 @@ Another alternative is to use [git submodules](https://gohugo.io/getting-started
 > **Note:** Before proceeding, **Ensure you have Go and Hugo installed** and that you have created a new Hugo project.
 As a pre-requirement, you will need Hugo set up and running. You can follow [the official guide for it](https://gohugo.io/categories/installation/).
 
-The theme requires Hugo version `0.163.0` or newer (extended version). If you get errors regarding missing functionalities, check if you have the latest version of Hugo available.
+The theme requires Hugo version `0.163.0` or newer. Up to Hugo `0.169.x` you need the **extended** edition, because the theme compiles SCSS itself; from `v0.170.0` on, Hugo ships a single (non-extended) build and compiles SCSS with [Dart Sass](https://gohugo.io/functions/css/sass/#dart-sass) instead, so Dart Sass has to be installed and on your `PATH` — `brew install sass/sass/sass` (macOS/Linux), `sudo snap install dart-sass` (Ubuntu), or the standalone archive from the [Dart Sass releases](https://github.com/sass/dart-sass/releases). Without it the build stops with `TOCSS-DART: … You need to install Dart Sass`. If you get errors regarding missing functionalities, check if you have the latest version of Hugo available.
 
 > **Note:** the multilingual config in `exampleSite/hugo.toml` (`direction`, `label`, `locale` per language) uses key names Hugo introduced in `v0.158.0`. On older Hugo versions these keys are silently ignored rather than raising an error, which shows up as missing language labels and incorrect `dir`/RTL rendering — so if you copy that config, make sure you're on `0.158.0`+.
 
