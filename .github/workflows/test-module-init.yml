@@ -74,12 +74,15 @@ jobs:
             - name: Setup Hugo
               uses: peaceiris/actions-hugo@v3
               with:
-                hugo-version: ${{ vars.HUGO_VERSION || 'latest' }}
+                hugo-version: 'latest'
                 extended: true
 
             - name: Install Dart Sass
               # Hugo v0.170.0 dropped the extended edition and its built-in LibSass, so
               # css.Sass needs Dart Sass on PATH (see the README "Requirements" section).
+              # This job deliberately follows Hugo 'latest' (not vars.HUGO_VERSION): it is
+              # the only canary for a brand-new Hugo release, and it is what caught the
+              # 0.170 LibSass removal. The step below is what makes that canary build.
               run: |
                 DART_SASS_VERSION=1.108.2
                 curl -sSL -o ${{ runner.temp }}/dart-sass.tar.gz "https://github.com/sass/dart-sass/releases/download/${DART_SASS_VERSION}/dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz"
