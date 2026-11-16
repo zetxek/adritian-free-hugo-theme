@@ -21,6 +21,8 @@ This article is a guide to help you create your own version of the site using [A
 This theme is for the content management system [Hugo](https://gohugo.io/), so that will be a pre-requirement.
 Make sure that you install the `extended` version of Hugo, as the theme uses SCSS for styling, as well as image optimization.
 
+**Hugo 0.170.0 and newer:** Hugo no longer has an `extended` edition and no longer includes LibSass. To compile the theme's SCSS, you must [install Dart Sass](https://gohugo.io/functions/css/sass/#dart-sass) and put the `sass` binary on your `PATH`. On older Hugo versions, the `extended` edition is enough.
+
 A very good place to start is the Quick start guide: [https://gohugo.io/getting-started/quick-start/](https://gohugo.io/getting-started/quick-start/)
 
 _💡Tip:__ keep your repository clean and tidy by creating a [relevant `.gitignore` file](https://github.com/github/gitignore/blob/main/community/Golang/Hugo.gitignore) since the beginning:

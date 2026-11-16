@@ -93,6 +93,8 @@ As a pre-requirement, you will need Hugo set up and running. You can follow [the
 
 The theme requires Hugo version `0.163.0` or newer (extended version). If you get errors regarding missing functionalities, check if you have the latest version of Hugo available.
 
+> **Hugo 0.170.0 and newer need Dart Sass.** Hugo 0.170.0 removed the `extended` edition and LibSass. The theme compiles SCSS with `css.Sass`, so the build fails with `no Dart Sass binary found in $PATH` unless you [install Dart Sass](https://gohugo.io/functions/css/sass/#dart-sass) (for example `brew install sass/sass/sass`, or the release archive in CI). On Hugo 0.163.0–0.169.x, the `extended` edition is still enough.
+
 > **Note:** the multilingual config in `exampleSite/hugo.toml` (`direction`, `label`, `locale` per language) uses key names Hugo introduced in `v0.158.0`. On older Hugo versions these keys are silently ignored rather than raising an error, which shows up as missing language labels and incorrect `dir`/RTL rendering — so if you copy that config, make sure you're on `0.158.0`+.
 
 **Note:** as mentioned, the theme supports both Hugo modules and git submodules. You should use Hugo modules to install the theme in the most maintainable way. If you prefer git submodules you can follow these [older instructions](https://gohugobrasil.netlify.app/themes/installing-and-using-themes/) or the next ones as help:
