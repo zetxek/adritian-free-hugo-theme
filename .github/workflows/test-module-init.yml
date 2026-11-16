@@ -76,7 +76,18 @@ jobs:
               with:
                 hugo-version: 'latest'
                 extended: true
-                
+
+            # Hugo 0.170.0+ dropped LibSass: css.Sass needs a Dart Sass binary on PATH.
+            - name: Install Dart Sass
+              env:
+                DART_SASS_VERSION: 1.108.2
+              run: |
+                curl -sSL -o "${RUNNER_TEMP}/dart-sass.tar.gz" \
+                  "https://github.com/sass/dart-sass/releases/download/${DART_SASS_VERSION}/dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz"
+                tar -C "${RUNNER_TEMP}" -xf "${RUNNER_TEMP}/dart-sass.tar.gz"
+                echo "${RUNNER_TEMP}/dart-sass" >> "${GITHUB_PATH}"
+                "${RUNNER_TEMP}/dart-sass/sass" --version
+
             - name: Download test site
               uses: actions/download-artifact@v8
               with:
