@@ -5,7 +5,7 @@
 This is a **Hugo theme** for personal websites/portfolios, not a standalone site (although a example site is provided, to demonstrate the usage of the theme itself). The theme provides layouts, styling, and functionality that users import via Hugo modules or as a git submodule.
 
 **Technology Stack:**
-- **Static Site Generator:** Hugo (v0.153+ extended version required)
+- **Static Site Generator:** Hugo (v0.163.0+; extended edition up to v0.169.x, Dart Sass required from v0.170.0)
 - **CSS Framework:** Bootstrap 5 (v5.3.8)
 - **CSS Preprocessor:** SCSS/Sass
 - **JavaScript Libraries:** Fuse.js (search), DOMPurify (XSS protection)

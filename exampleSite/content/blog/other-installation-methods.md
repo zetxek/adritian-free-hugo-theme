@@ -22,7 +22,7 @@ locale = "en"
 
 [module]
 [module.hugoVersion]
-# The theme needs Hugo extended 0.163.0+ (for per-format image quality and the locale, direction and label language keys)
+# The theme needs Hugo 0.163.0+ (extended up to 0.169.x; Dart Sass from 0.170.0) — for SCSS, per-format image quality and the locale, direction and label language keys
 extended = true
 min = "0.163.0"
 

@@ -11,7 +11,7 @@ Now it is a reusable theme, that can be used anywhere. It provides layouts, shor
 
 **Technology Stack:**
 
-- Hugo (extended version 0.163.0+)
+- Hugo (0.163.0+; extended edition up to v0.169.x, Dart Sass from v0.170.0)
 - Node.js & npm
 - Go modules
 - PostCSS & Autoprefixer
@@ -22,7 +22,7 @@ Now it is a reusable theme, that can be used anywhere. It provides layouts, shor
 
 - Go (latest version)
 - Node.js and npm
-- Hugo Extended (version 0.163.0 or later, as specified in hugo.toml)
+- Hugo (version 0.163.0 or later, as specified in hugo.toml; the extended edition up to v0.169.x, plus Dart Sass from v0.170.0)
 
 ### Setup Commands
 
