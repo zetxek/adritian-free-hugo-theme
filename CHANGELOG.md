@@ -2,6 +2,53 @@
 
 This documentation tracks changes across versions, including new features, improvements, and breaking changes.
 
+## v1.14.0
+
+### Upgrade notes
+
+- **Hugo 0.170.0 and newer need Dart Sass.** Hugo 0.170.0 removed LibSass, so the theme's `css.Sass` calls fail with `no Dart Sass binary found in $PATH` unless a Dart Sass binary is installed (for example `brew install sass/sass/sass`, or the release archive in CI). This comes from Hugo, not from this release: v1.13.0 fails the same way on Hugo 0.170. Hugo 0.163.0–0.169.x with the `extended` edition still works without Dart Sass. The minimum Hugo version is unchanged at 0.163.0. See the README for details (#693)
+- **`projects` pages get their own layouts.** Sites with `content/projects/` now render `/projects/` and each project page with the new layouts below, instead of `_default`. The homepage portfolio is unchanged, and no front matter change is required. To keep the old rendering, add your own `layouts/projects/list.html` and `layouts/projects/single.html` (#677)
+
+### New features
+
+- Projects section: a `/projects/` list page with cards, grouped by an optional `kind` front matter value (for example `open-source`, `professional`, `side-project`), and a project page with role, status, "Visit website" (`link`) and "Source code" (`repo`) buttons and an optional `related` list. New archetype fields and labels in all 14 languages (#677)
+
+### Bug fixes
+
+- Contact form: the submit button and the phone/email/address headings no longer render empty when the shortcode parameters are not set. They fall back to the translated defaults, and sites that defined the older `contact_button_text` / `contact_*_heading` keys keep their text (#679)
+- Experience: `hideViewAll="true"` now hides the "View all" button even when `button3_text` is set (#678)
+- Taxonomy list pages (`/tags/`, `/categories/`, …) are named in the page's own language (#680)
+- Footer: the copyright notice wraps on narrow screens instead of being clipped (#684)
+
+### Accessibility
+
+- The document outline no longer skips heading levels (widget titles, "Share this post", and similar) (#676)
+- The search form's submit button has an accessible name (#683)
+- The theme switcher's accessible name contains its visible label (WCAG 2.5.3) (#688)
+- Showcase screenshot links have an accessible name, also when the screenshot fails to load (#690)
+- The blog post's "continue reading" block is a named navigation landmark instead of a nested `<aside>` (#692)
+
+### Maintenance
+
+- exampleSite: remove 59 dead internal links from the demo menus and homepages, with a test that fails on any new one (#678)
+- CI: install Dart Sass in the Hugo `latest` build job (#693)
+
+## v1.13.0
+
+### Performance
+
+- Reach 100 Lighthouse scores on mobile and desktop (#670)
+
+### Bug fixes
+
+- RTL: the hidden skip link no longer widens RTL pages (#671)
+
+### Accessibility
+
+- The search page has a page-level `<h1>` (#668)
+- Experience company logos have real alt text (#669)
+- The contact form's controls have accessible names (#672)
+
 ## v1.12.1
 
 ### Bug fixes

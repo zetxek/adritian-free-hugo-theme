@@ -126,3 +126,11 @@
 "view_all_tags": "View all tags"
 "primary_navigation": "Primary navigation"
 "footer_navigation": "Footer navigation"
+
+## Projects
+"projects_visit": "Visit website"
+"projects_source": "Source code"
+"projects_related": "Related links"
+"projects_kind_open_source": "Open source"
+"projects_kind_professional": "Professional"
+"projects_kind_side_project": "Side projects"
