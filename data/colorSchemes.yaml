@@ -1,6 +1,6 @@
 default:
   name: "Default"
-  light: "#478079"
+  light: "#41766f"
   dark: "#66b2a9"
 
 ocean:
