@@ -79,4 +79,16 @@ test.describe('Showcase page', () => {
       await expect(anchors.nth(i)).toHaveAccessibleName(/Screenshot of /);
     }
   });
+
+  test('tag filter buttons do not submit a form', async ({ page }) => {
+    await page.goto(`${BASE_URL}/showcase/`);
+
+    const buttons = page.locator('#showcase-filters button');
+    const count = await buttons.count();
+    expect(count).toBeGreaterThanOrEqual(2);
+
+    for (let i = 0; i < count; i++) {
+      expect(await buttons.nth(i).getAttribute('type')).toBe('button');
+    }
+  });
 });
