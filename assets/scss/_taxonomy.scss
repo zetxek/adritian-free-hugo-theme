@@ -371,6 +371,9 @@
   }
 
   .term-page {
+    // Same selector list as the light rules (incl. the .col-12.col-lg-8 variant),
+    // otherwise their higher specificity + !important beat these overrides.
+    .col-12.col-lg-8 ul.posts-list-simple li.post,
     ul.posts-list-simple li.post {
       border-color: rgba(255, 255, 255, 0.12);
       background-color: rgba(255, 255, 255, 0.03);
@@ -381,15 +384,15 @@
       }
 
       a {
-        color: $dark-primary;
+        color: $dark-primary !important;
 
         &:hover {
-          color: lighten($dark-primary, 10%);
+          color: lighten($dark-primary, 10%) !important;
         }
       }
 
       .meta {
-        color: $gray-500;
+        color: $gray-500 !important;
       }
 
       .post-excerpt {
@@ -398,7 +401,7 @@
 
       .post-tags li a {
         background-color: rgba(255, 255, 255, 0.08);
-        color: $dark-primary;
+        color: $dark-primary !important;
         border-color: rgba(255, 255, 255, 0.12);
 
         &:hover {

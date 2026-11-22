@@ -2,6 +2,16 @@
 
 This documentation tracks changes across versions, including new features, improvements, and breaking changes.
 
+## v1.14.1
+
+### Bug fixes
+
+- Links and secondary text meet WCAG AA contrast in both colour schemes (#689)
+
+### Maintenance
+
+- CI: the exampleSite e2e jobs install Dart Sass, so they run on Hugo 0.170+, which removed LibSass (#696)
+
 ## v1.14.0
 
 ### Upgrade notes
