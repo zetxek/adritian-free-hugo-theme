@@ -187,9 +187,11 @@ jobs:
         with:
           node-version: lts/*
 
-      - name: Cache Node Modules
+      # Restore-only: this job checks out the PR branch with a write token, so it
+      # must not save caches (cache poisoning). The other jobs populate them.
+      - name: Restore Node Modules
         id: cache-node-modules
-        uses: actions/cache@v5
+        uses: actions/cache/restore@v5
         with:
           path: node_modules
           key: modules-${{ hashFiles('package-lock.json') }}
@@ -204,9 +206,9 @@ jobs:
         id: playwright-version
         run: echo "version=$(node -p "require('@playwright/test/package.json').version")" >> "$GITHUB_OUTPUT"
 
-      - name: Cache Playwright Browsers
+      - name: Restore Playwright Browsers
         id: cache-playwright
-        uses: actions/cache@v5
+        uses: actions/cache/restore@v5
         with:
           path: ~/.cache/ms-playwright
           key: playwright-${{ steps.playwright-version.outputs.version }}
