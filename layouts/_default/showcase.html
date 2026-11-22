@@ -48,9 +48,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
   {{/* Tag filter buttons */}}
   <div class="mb-4 d-flex flex-wrap gap-2" id="showcase-filters" role="group" aria-label="Filter sites by tag">
-    <button class="btn btn-sm btn-primary active" data-filter="all" aria-pressed="true">All</button>
+    <button class="btn btn-sm btn-primary active" type="button" data-filter="all" aria-pressed="true">All</button>
     {{ range $tags }}
-    <button class="btn btn-sm btn-outline-secondary" data-filter="{{ . }}" aria-pressed="false">{{ . | title }}</button>
+    <button class="btn btn-sm btn-outline-secondary" type="button" data-filter="{{ . }}" aria-pressed="false">{{ . | title }}</button>
     {{ end }}
   </div>
 
