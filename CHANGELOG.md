@@ -2,6 +2,12 @@
 
 This documentation tracks changes across versions, including new features, improvements, and breaking changes.
 
+## v1.14.2
+
+### Bug fixes
+
+- Showcase: the tag-filter buttons have `type="button"`, so they no longer submit a form when the showcase sits inside one (#697)
+
 ## v1.14.1
 
 ### Bug fixes
