@@ -18,14 +18,15 @@ const testResults = path.join(process.cwd(), 'test-results');
 });
 
 export default defineConfig ({
-    testDir: './tests',
+    // Only e2e specs: tests/scripts/*.test.js are plain node guards (npm run test:scripts).
+    testDir: './tests/e2e',
     // Platform-agnostic snapshot naming (removes -linux, -darwin, -win32 suffixes)
     snapshotPathTemplate: '{testDir}/{testFileDir}/{testFileName}-snapshots/{arg}{ext}',
     use: {
         baseURL,
-        screenshot: 'on',
+        screenshot: 'only-on-failure',
         trace: 'retain-on-failure',
-        video: 'on',
+        video: 'retain-on-failure',
     },
     expect: {
         // Configure screenshot comparison threshold for cross-platform compatibility
@@ -39,6 +40,8 @@ export default defineConfig ({
     },
     // Run all tests in parallel.
     fullyParallel: true,
+    // GitHub-hosted runners have 4 vCPUs; the default would use only half of them.
+    workers: process.env.CI ? 4 : undefined,
     // Fail the build on CI if you accidentally left test.only in the source code.
     forbidOnly: !!process.env.CI,
 
