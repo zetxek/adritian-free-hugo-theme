@@ -77,13 +77,13 @@
       <div class="col-12 col-md-7 pl-md-0 text-right">
 
 
-        {{ partial "lazypicture" (dict "src" .Params.image.src "scale" .Params.image.scale "class" "picture-works even")}}
+        {{ partial "lazypicture" (dict "src" .Params.image.src "scale" .Params.image.scale "class" "picture-works even" "alt" .Params.title)}}
 
       </div>
       {{ else }}
       <div class="col-12 col-md-7 pl-md-0 text-right not-even">
 
-        {{ partial "lazypicture" (dict "src" .Params.image.src "scale" .Params.image.scale "class" "picture-works odd")}}
+        {{ partial "lazypicture" (dict "src" .Params.image.src "scale" .Params.image.scale "class" "picture-works odd" "alt" .Params.title)}}
       </div>
       <div class="col-12 col-md-5 mt-4 mt-md-0 my-md-auto">
         <h3>{{ .Params.title }}</h3>
