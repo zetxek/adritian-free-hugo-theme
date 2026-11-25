@@ -204,4 +204,28 @@ test.describe('Lightbox functionality', () => {
 
     expect(opened).toBe(false);
   });
+
+ test('works-section images have alt text, so the interactive role is not a conflict', async ({ page }) => {
+ await page.goto(`${BASE_URL}/`);
+
+ // lightbox.js turns every .client-works-container img into role="button" + tabindex="0".
+ // An image whose alt is empty is marked presentational for screen readers, so making it
+ // interactive is a conflict (axe: presentation-role-conflict) and the generic
+ // "View image in lightbox" name never says which picture it is.
+ const imgs = page.locator('.client-works-container img.picture-works');
+ await expect(imgs).toHaveCount(3);
+
+ const count = await imgs.count();
+ for (let i = 0; i < count; i++) {
+ const img = imgs.nth(i);
+ await expect(img).toHaveAttribute('role', 'button');
+
+ const alt = (await img.getAttribute('alt')) ?? '';
+ expect(alt.length, `image ${i} has no alt text`).toBeGreaterThan(0);
+
+ const label = (await img.getAttribute('aria-label')) ?? '';
+ expect(label, `image ${i} is announced as "${label}"`).toContain(alt);
+ }
+ });
+
 });
