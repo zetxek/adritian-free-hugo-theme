@@ -124,4 +124,41 @@ test.describe('Newsletter section', () => {
     await expect(fail).toHaveAttribute('role', 'alert');
     await expect(fail).toHaveAttribute('aria-live', 'assertive');
   });
+
+  test('links inside the note meet WCAG AA contrast on the black band', async ({ page }) => {
+    // Pre-fix the anchor kept the primary link colour: #41766f on #000 = 4.04:1.
+    await expect(page.locator('#emailHelp')).toHaveCount(1);
+    await page.evaluate(() => {
+      const a = document.createElement('a');
+      a.href = 'https://example.com/privacy';
+      a.textContent = 'privacy notice';
+      document.querySelector('#emailHelp')!.appendChild(a);
+    });
+
+    const fg = await page.locator('#emailHelp a').evaluate((el) => getComputedStyle(el).color);
+    const bg = await page
+      .locator('.section--cta')
+      .evaluate((el) => getComputedStyle(el).backgroundColor);
+
+    const parse = (c: string): [number, number, number, number] => {
+      const m = c.match(/[\d.]+/g)!.map(Number);
+      return [m[0], m[1], m[2], m.length > 3 ? m[3] : 1];
+    };
+    const [br, bgG, bb] = parse(bg);
+    const [fr, fgG, fb, fa] = parse(fg);
+    // Composite the (possibly translucent) foreground over the opaque background.
+    const mix = (f: number, b: number) => f * fa + b * (1 - fa);
+    const lum = (rgb: number[]) => {
+      const [r, g, b] = rgb.map((v) => {
+        const s = v / 255;
+        return s <= 0.03928 ? s / 12.92 : Math.pow((s + 0.055) / 1.055, 2.4);
+      });
+      return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+    };
+    const l1 = lum([mix(fr, br), mix(fgG, bgG), mix(fb, bb)]);
+    const l2 = lum([br, bgG, bb]);
+    const ratio = (Math.max(l1, l2) + 0.05) / (Math.min(l1, l2) + 0.05);
+
+    expect(ratio, `contrast of ${fg} on ${bg}`).toBeGreaterThanOrEqual(4.5);
+  });
 });
