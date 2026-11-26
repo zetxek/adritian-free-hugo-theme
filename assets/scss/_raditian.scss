@@ -866,6 +866,17 @@ textarea:focus {
  color: rgba(255, 255, 255, 0.75) !important;
 }
 
+// Links inside the band keep Bootstrap's --bs-link-color (the site's $primary),
+// which can land anywhere on the contrast scale against #000 — measured 4.04:1
+// for the default palette at 14px inside the newsletter note, i.e. below the
+// 4.5:1 AA floor. Inherit the band's foreground instead (white, or whatever
+// the note's own muted colour computes to), the same reasoning as the pill's
+// focus ring above. :not(.btn) leaves any button-styled anchor untouched.
+.section--cta a:not(.btn) {
+  color: inherit;
+  text-decoration: underline;
+}
+
 .section--contact {
     padding-bottom: 0;
     background-image: url(../img/contact-bg.png);
