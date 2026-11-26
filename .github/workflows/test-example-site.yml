@@ -22,53 +22,8 @@ env:
   CI: true
 
 jobs:
-  # Prepare dependencies job
-  prepare:
-    runs-on: ubuntu-latest
-    env:
-      HUGO_VERSION: ${{ vars.HUGO_VERSION || '0.163.0' }}
-    steps:
-      - name: Install Hugo CLI
-        run: |
-          wget -O ${{ runner.temp }}/hugo.deb https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb \
-          && sudo dpkg -i ${{ runner.temp }}/hugo.deb
-      
-      - name: Checkout
-        uses: actions/checkout@v6
-        with:
-          submodules: recursive
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v6
-        with:
-          node-version: lts/*
-
-      - name: Cache Node Modules
-        id: cache-node-modules
-        uses: actions/cache@v5
-        with:
-          path: |
-            node_modules
-          key: modules-${{ hashFiles('package-lock.json') }}
-        
-      - name: Cache Playwright Browsers
-        id: cache-playwright
-        uses: actions/cache@v5
-        with:
-          path: |
-            ~/.cache/ms-playwright
-          key: playwright-${{ hashFiles('package-lock.json') }}
-          
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Install Playwright browsers
-        if: steps.cache-playwright.outputs.cache-hit != 'true'
-        run: npx playwright install --with-deps
-
-  # Test with no menus
-  test-no-menus:
-    needs: prepare
+  # Node script guards (tests/scripts). No browser needed.
+  test-scripts:
     runs-on: ubuntu-latest
     env:
       HUGO_VERSION: ${{ vars.HUGO_VERSION || '0.163.0' }}
@@ -99,25 +54,85 @@ jobs:
         with:
           node-version: lts/*
 
-      - name: Restore Node Modules
-        uses: actions/cache/restore@v5
+      - name: Cache Node Modules
+        id: cache-node-modules
+        uses: actions/cache@v5
         with:
-          path: |
-            node_modules
+          path: node_modules
           key: modules-${{ hashFiles('package-lock.json') }}
-          
-      - name: Restore Playwright Browsers
-        uses: actions/cache/restore@v5
+
+      - name: Install dependencies
+        if: steps.cache-node-modules.outputs.cache-hit != 'true'
+        run: npm ci
+
+      - name: Run script guards
+        run: npm run test:scripts
+
+  # Test with no menus
+  test-no-menus:
+    runs-on: ubuntu-latest
+    env:
+      HUGO_VERSION: ${{ vars.HUGO_VERSION || '0.163.0' }}
+    steps:
+      - name: Install Hugo CLI
+        run: |
+          wget -O ${{ runner.temp }}/hugo.deb https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb \
+          && sudo dpkg -i ${{ runner.temp }}/hugo.deb
+
+      # Hugo 0.170.0+ dropped LibSass: css.Sass needs a Dart Sass binary on PATH.
+      - name: Install Dart Sass
+        env:
+          DART_SASS_VERSION: 1.108.2
+        run: |
+          curl -sSL -o "${RUNNER_TEMP}/dart-sass.tar.gz" \
+            "https://github.com/sass/dart-sass/releases/download/${DART_SASS_VERSION}/dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz"
+          tar -C "${RUNNER_TEMP}" -xf "${RUNNER_TEMP}/dart-sass.tar.gz"
+          echo "${RUNNER_TEMP}/dart-sass" >> "${GITHUB_PATH}"
+          "${RUNNER_TEMP}/dart-sass/sass" --version
+      
+      - name: Checkout
+        uses: actions/checkout@v6
         with:
-          path: |
-            ~/.cache/ms-playwright
-          key: playwright-${{ hashFiles('package-lock.json') }}
+          submodules: recursive
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: lts/*
+
+      - name: Cache Node Modules
+        id: cache-node-modules
+        uses: actions/cache@v5
+        with:
+          path: node_modules
+          key: modules-${{ hashFiles('package-lock.json') }}
+
+      - name: Install dependencies
+        if: steps.cache-node-modules.outputs.cache-hit != 'true'
+        run: npm ci
+
+      # Keyed on the Playwright version, not the lockfile, so unrelated
+      # dependency bumps don't force a ~70s browser reinstall.
+      - name: Get Playwright version
+        id: playwright-version
+        run: echo "version=$(node -p "require('@playwright/test/package.json').version")" >> "$GITHUB_OUTPUT"
+
+      - name: Cache Playwright Browsers
+        id: cache-playwright
+        uses: actions/cache@v5
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ steps.playwright-version.outputs.version }}
+
+      - name: Install Playwright browsers
+        if: steps.cache-playwright.outputs.cache-hit != 'true'
+        run: npx playwright install --with-deps chromium
 
       - name: Build site (no menus)
         run: |
           cd exampleSite
           hugo server --themesDir ../.. --buildDrafts --buildFuture --bind 0.0.0.0 --config hugo.toml,hugo.disablemenu.toml &
-          sleep 10
+          timeout 60 bash -c 'until curl -sf http://localhost:1313/ > /dev/null; do sleep 1; done'
 
       - name: Run Playwright tests (no menus)
         run: npm run test:e2e:no-menus
@@ -140,7 +155,6 @@ jobs:
 
   # Test with menus
   test-with-menus:
-    needs: prepare
     runs-on: ubuntu-latest
     env:
       HUGO_VERSION: ${{ vars.HUGO_VERSION || '0.163.0' }}
@@ -173,25 +187,41 @@ jobs:
         with:
           node-version: lts/*
 
+      # Restore-only: this job checks out the PR branch with a write token, so it
+      # must not save caches (cache poisoning). The other jobs populate them.
       - name: Restore Node Modules
+        id: cache-node-modules
         uses: actions/cache/restore@v5
         with:
-          path: |
-            node_modules
+          path: node_modules
           key: modules-${{ hashFiles('package-lock.json') }}
-          
+
+      - name: Install dependencies
+        if: steps.cache-node-modules.outputs.cache-hit != 'true'
+        run: npm ci
+
+      # Keyed on the Playwright version, not the lockfile, so unrelated
+      # dependency bumps don't force a ~70s browser reinstall.
+      - name: Get Playwright version
+        id: playwright-version
+        run: echo "version=$(node -p "require('@playwright/test/package.json').version")" >> "$GITHUB_OUTPUT"
+
       - name: Restore Playwright Browsers
+        id: cache-playwright
         uses: actions/cache/restore@v5
         with:
-          path: |
-            ~/.cache/ms-playwright
-          key: playwright-${{ hashFiles('package-lock.json') }}
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ steps.playwright-version.outputs.version }}
+
+      - name: Install Playwright browsers
+        if: steps.cache-playwright.outputs.cache-hit != 'true'
+        run: npx playwright install --with-deps chromium
 
       - name: Build and serve demo site (with menus)
         run: |
           cd exampleSite
           hugo server --themesDir ../.. --buildDrafts --buildFuture --bind 0.0.0.0 &
-          sleep 10
+          timeout 60 bash -c 'until curl -sf http://localhost:1313/ > /dev/null; do sleep 1; done'
 
       - name: Remove existing visual snapshots (to regenerate on Linux)
         run: rm -rf tests/e2e/rtl-visual.spec.ts-snapshots/
